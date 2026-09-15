@@ -1,0 +1,55 @@
+---
+// DESIGN.md "Control row" grammar reused for Families: mono-free here since
+// family codes aren't Control/Enhancement IDs, but the same row/hover/divider shape.
+import { familyUrl } from '../utils/url';
+
+interface Props {
+  code: string;
+  name: string;
+  controlCount: number;
+  slug: string;
+}
+
+const { code, name, controlCount, slug } = Astro.props;
+---
+
+<a class="family-row" href={familyUrl(slug)}>
+  <span class="family-row__code">{code}</span>
+  <span class="family-row__name">{name}</span>
+  <span class="family-row__count">{controlCount} controls</span>
+</a>
+
+<style>
+  .family-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .family-row:hover {
+    background: var(--color-surface-raised);
+  }
+
+  .family-row__code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-ink-secondary);
+    width: 3ch;
+    flex-shrink: 0;
+  }
+
+  .family-row__name {
+    flex: 1;
+    color: var(--color-ink-primary);
+  }
+
+  .family-row__count {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+</style>

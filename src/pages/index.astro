@@ -1,19 +1,24 @@
 ---
-// Scaffold placeholder. Real Home surface (Family list) is CAP-1 / FR-1,
-// governed by EXPERIENCE.md -> Information Architecture and
-// mockups/key-home.html.
+// Home / FR-1 browse tree root: all 20 Families sorted by catalog order.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FamilyRow from '../components/FamilyRow.astro';
+
+const families = (await getCollection('families')).sort((a, b) => a.data.catalogOrder - b.data.catalogOrder);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NIST 800-53 Browser</title>
-  </head>
-  <body>
-    <main>
-      <h1>NIST 800-53 Browser</h1>
-      <p>Scaffold only — nothing built yet.</p>
-    </main>
-  </body>
-</html>
+<BaseLayout title="NIST 800-53 Browser">
+  <h1>Control Families</h1>
+  <div class="family-list">
+    {
+      families.map((family) => (
+        <FamilyRow
+          code={family.data.code}
+          name={family.data.name}
+          controlCount={family.data.controlCount}
+          slug={family.data.slug}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

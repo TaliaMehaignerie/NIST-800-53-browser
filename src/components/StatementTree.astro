@@ -1,0 +1,51 @@
+---
+// Recursive render of Goal A's `{label, prose, children}` statement shape.
+// Prose renders before children (never flattened/reordered) because 122
+// catalog entries carry prose AND sub-parts on the same node (AD-5).
+interface StatementNode {
+  label: string | null;
+  prose: string | null;
+  children: StatementNode[];
+}
+
+interface Props {
+  nodes: StatementNode[];
+}
+
+const { nodes } = Astro.props;
+---
+
+{
+  nodes.map((n) => (
+    <div class="statement-node">
+      {(n.label || n.prose) && (
+        <p>
+          {n.label && <span class="statement-node__label">{n.label}</span>}
+          {n.prose}
+        </p>
+      )}
+      {n.children.length > 0 && (
+        <div class="statement-node__children">
+          <Astro.self nodes={n.children} />
+        </div>
+      )}
+    </div>
+  ))
+}
+
+<style>
+  .statement-node p {
+    margin: 0 0 12px;
+  }
+
+  .statement-node__label {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-ink-secondary);
+    margin-right: 6px;
+  }
+
+  .statement-node__children {
+    margin-left: 24px;
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+// DESIGN.md "Withdrawn marker": sits where a Baseline badge would (a
+// withdrawn entry has none). On Control Detail, pairs with a successor line
+// resolved from `incorporatedInto` slugs. Checks both `controls` and
+// `families` because of the one `sa-12 -> sr` exception (a whole Family
+// named as successor, not a Control).
+import { getEntry } from 'astro:content';
+import { controlUrl, familyUrl } from '../utils/url';
+
+interface Props {
+  incorporatedInto: string[];
+  /** Show the "Withdrawn — see {label}" successor line (Control Detail only). */
+  showSuccessors?: boolean;
+}
+
+const { incorporatedInto, showSuccessors = false } = Astro.props;
+
+const successors = showSuccessors
+  ? await Promise.all(
+      incorporatedInto.map(async (targetSlug) => {
+        const control = await getEntry('controls', targetSlug);
+        if (control) {
+          return { label: control.data.label, url: controlUrl(targetSlug) };
+        }
+        const family = await getEntry('families', targetSlug);
+        if (family) {
+          return { label: family.data.code, url: familyUrl(targetSlug) };
+        }
+        return null;
+      }),
+    )
+  : [];
+
+const resolvedSuccessors = successors.filter((s): s is { label: string; url: string } => s !== null);
+---
+
+<span class="withdrawn-marker">Withdrawn</span>
+{
+  showSuccessors && (
+    <p class="withdrawn-successor-line">
+      {resolvedSuccessors.length > 0 ? (
+        <>
+          Withdrawn — see{' '}
+          {resolvedSuccessors.map((s, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={s.url}>{s.label}</a>
+            </>
+          ))}
+        </>
+      ) : (
+        'Withdrawn'
+      )}
+    </p>
+  )
+}
+
+<style>
+  .withdrawn-marker {
+    display: inline-block;
+    border-radius: var(--rounded-full);
+    font-family: var(--font-meta);
+    font-size: 13px;
+    line-height: 1.4;
+    padding: 2px 8px;
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-secondary);
+  }
+
+  .withdrawn-successor-line {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: 4px 0 0;
+  }
+
+  .withdrawn-successor-line a {
+    color: var(--color-accent);
+  }
+</style>

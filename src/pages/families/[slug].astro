@@ -1,0 +1,38 @@
+---
+// Family page (AD-1 static): Controls in catalog order via `controlSlugs`.
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ControlRow from '../../components/ControlRow.astro';
+
+export async function getStaticPaths() {
+  const families = await getCollection('families');
+  return families.map((family) => ({
+    params: { slug: family.data.slug },
+    props: { family },
+  }));
+}
+
+const { family } = Astro.props;
+
+const controls = (
+  await Promise.all(family.data.controlSlugs.map((slug: string) => getEntry('controls', slug)))
+).filter((c): c is NonNullable<typeof c> => c !== undefined);
+---
+
+<BaseLayout title={`${family.data.code} — ${family.data.name} — NIST 800-53 Browser`}>
+  <h1>{family.data.code} — {family.data.name}</h1>
+  <div class="control-list">
+    {
+      controls.map((control) => (
+        <ControlRow
+          label={control.data.label}
+          title={control.data.title}
+          slug={control.data.slug}
+          withdrawn={control.data.withdrawn}
+          incorporatedInto={control.data.incorporatedInto}
+          baselines={control.data.baselines}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

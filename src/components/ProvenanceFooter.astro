@@ -1,0 +1,44 @@
+---
+// Architecture spine AD-5: the one render location for provenance and the
+// disclaimer. Every page renders this once via BaseLayout — never per-page.
+import { getEntry } from 'astro:content';
+
+const meta = await getEntry('meta', 'provenance');
+if (!meta) {
+  throw new Error('meta/provenance.json entry is missing — run `npm run ingest`.');
+}
+
+const { catalogTitle, catalogVersion, crosswalkTranscribedAt } = meta.data;
+
+const crosswalkLine = crosswalkTranscribedAt
+  ? `ISO/IEC 27001:2022 crosswalk transcribed ${crosswalkTranscribedAt}.`
+  : 'ISO/IEC 27001:2022 crosswalk not yet transcribed.';
+---
+
+<footer class="provenance-footer">
+  <p>{catalogTitle} — Catalog v{catalogVersion}. {crosswalkLine}</p>
+  <p>
+    This is an unofficial reading tool — not a substitute for the published
+    NIST SP 800-53 Rev 5 document in any audit or compliance context.
+  </p>
+</footer>
+
+<style>
+  .provenance-footer {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-ink-secondary);
+    border-top: 1px solid var(--color-border-hairline);
+    padding: 24px 16px;
+    margin-top: 48px;
+  }
+
+  .provenance-footer p {
+    margin: 0 0 8px;
+  }
+
+  .provenance-footer p:last-child {
+    margin-bottom: 0;
+  }
+</style>

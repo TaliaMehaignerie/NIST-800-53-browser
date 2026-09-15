@@ -1,0 +1,10 @@
+---
+// EXPERIENCE.md "Not found" state — bad slug, not a generic framework 404.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homeUrl } from '../utils/url';
+---
+
+<BaseLayout title="Control not found — NIST 800-53 Browser">
+  <h1>Control not found.</h1>
+  <p><a href={homeUrl()}>Back to Home</a></p>
+</BaseLayout>

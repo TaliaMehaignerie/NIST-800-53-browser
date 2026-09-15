@@ -1,0 +1,96 @@
+---
+// DESIGN.md "Enhancement toggle" — rendered fully expanded/static in this
+// slice (no JS toggle; that's CAP-3). Own Baseline badges/Withdrawn marker,
+// since an Enhancement's baseline membership may differ from its parent
+// Control's (architecture AD-2).
+import BaselineBadge from './BaselineBadge.astro';
+import WithdrawnMarker from './WithdrawnMarker.astro';
+import StatementTree from './StatementTree.astro';
+
+interface StatementNode {
+  label: string | null;
+  prose: string | null;
+  children: StatementNode[];
+}
+
+interface Props {
+  label: string;
+  title: string;
+  withdrawn: boolean;
+  incorporatedInto: string[];
+  baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
+  statement: StatementNode[];
+}
+
+const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astro.props;
+---
+
+<div class="enhancement-item">
+  <div class="enhancement-item__header">
+    <span class="enhancement-item__id">{label}</span>
+    <span class={`enhancement-item__title ${withdrawn ? 'enhancement-item__title--withdrawn' : ''}`}>
+      {title}
+    </span>
+    <span class="enhancement-item__badges">
+      {withdrawn ? (
+        <WithdrawnMarker incorporatedInto={incorporatedInto} showSuccessors />
+      ) : baselines.length > 0 ? (
+        baselines.map((b) => <BaselineBadge baseline={b} />)
+      ) : (
+        <span class="enhancement-item__no-baseline">Not in a baseline</span>
+      )}
+    </span>
+  </div>
+  {statement.length > 0 && (
+    <div class="enhancement-item__statement">
+      <StatementTree nodes={statement} />
+    </div>
+  )}
+</div>
+
+<style>
+  .enhancement-item {
+    border-radius: var(--rounded-sm);
+    background: var(--color-surface-overlay);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+
+  .enhancement-item__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .enhancement-item__id {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-ink-secondary);
+    flex-shrink: 0;
+  }
+
+  .enhancement-item__title {
+    flex: 1;
+    color: var(--color-ink-primary);
+  }
+
+  .enhancement-item__title--withdrawn {
+    color: var(--color-ink-secondary);
+  }
+
+  .enhancement-item__badges {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .enhancement-item__no-baseline {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .enhancement-item__statement {
+    margin-top: 12px;
+  }
+</style>

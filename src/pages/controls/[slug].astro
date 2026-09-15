@@ -1,0 +1,107 @@
+---
+// Control Detail page (AD-1 static, AD-4: enhancements never get their own
+// route — they render as fragments here). ISO Crosswalk always shows the
+// empty-state: no entry currently carries crosswalk data (CAP-4 unbuilt).
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaselineBadge from '../../components/BaselineBadge.astro';
+import WithdrawnMarker from '../../components/WithdrawnMarker.astro';
+import StatementTree from '../../components/StatementTree.astro';
+import EnhancementItem from '../../components/EnhancementItem.astro';
+
+export async function getStaticPaths() {
+  const allEntries = await getCollection('controls');
+  const controls = allEntries.filter((c) => c.data.kind === 'control');
+  return controls.map((control) => ({
+    params: { slug: control.data.slug },
+    props: { control },
+  }));
+}
+
+const { control } = Astro.props;
+const { label, title, withdrawn, incorporatedInto, baselines, statement, enhancementSlugs } = control.data;
+
+const enhancements = (
+  await Promise.all(enhancementSlugs.map((slug: string) => getEntry('controls', slug)))
+).filter((e): e is NonNullable<typeof e> => e !== undefined);
+---
+
+<BaseLayout title={`${label} ${title} — NIST 800-53 Browser`}>
+  <article class="control-detail-card">
+    <h1>{label} {title}</h1>
+    <div class="control-detail-card__badges">
+      {withdrawn ? (
+        <WithdrawnMarker incorporatedInto={incorporatedInto} showSuccessors />
+      ) : baselines.length > 0 ? (
+        baselines.map((b) => <BaselineBadge baseline={b} />)
+      ) : (
+        <span class="control-detail-card__no-baseline">Not in a baseline</span>
+      )}
+    </div>
+
+    {statement.length > 0 && (
+      <div class="control-detail-card__statement">
+        <StatementTree nodes={statement} />
+      </div>
+    )}
+
+    {enhancements.length > 0 && (
+      <section class="control-detail-card__enhancements">
+        <h2>Enhancements</h2>
+        {
+          enhancements.map((e) => (
+            <EnhancementItem
+              label={e.data.label}
+              title={e.data.title}
+              withdrawn={e.data.withdrawn}
+              incorporatedInto={e.data.incorporatedInto}
+              baselines={e.data.baselines}
+              statement={e.data.statement}
+            />
+          ))
+        }
+      </section>
+    )}
+
+    <section class="control-detail-card__crosswalk">
+      <h2>ISO/IEC 27001:2022 Crosswalk</h2>
+      <p class="control-detail-card__crosswalk-empty">No ISO 27001 mapping published for this control.</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .control-detail-card {
+    background: var(--color-surface-raised);
+    border-radius: var(--rounded-md);
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .control-detail-card__badges {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .control-detail-card__statement {
+    margin-bottom: 24px;
+  }
+
+  .control-detail-card__enhancements h2,
+  .control-detail-card__crosswalk h2 {
+    font-size: 1.1em;
+  }
+
+  .control-detail-card__crosswalk-empty {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .control-detail-card__no-baseline {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+</style>
