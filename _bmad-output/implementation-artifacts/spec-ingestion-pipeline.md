@@ -103,3 +103,76 @@ Entry shape (AD-2 pinned; `families` is an addition — see checkpoint note):
 - `node scripts/ingest.mjs --verify` -- expected: all assertions pass (counts, baseline sizes 149/287/370/96, `ac-2.10` withdrawn→`["ac-2"]`, `ac-3.6`→`["mp-4","sc-28"]`, `cp-10.3` withdrawn with statement, no assessment parts present).
 - `npm run build` -- expected: Astro validates all collections, build succeeds.
 - `npm run ingest && git diff --exit-code src/content` -- expected: exit 0 (idempotent).
+
+## Suggested Review Order
+
+**Entry point**
+
+- Start here: the pipeline's contract in one docblock — what it reads, what it must never emit, and why.
+  [`ingest.mjs:1`](../../../scripts/ingest.mjs#L1)
+
+**Slug correctness (AD-4)**
+
+- The actual defect: cross-references were stored as raw OSCAL ids, not slugs — fixed here.
+  [`ingest.mjs:132`](../../../scripts/ingest.mjs#L132)
+
+- The predicate this fix depends on, exported so the id pattern lives in exactly one place.
+  [`slugify.ts:26`](../../../src/utils/slugify.ts#L26)
+
+- The schema comments that were wrong about this exact thing, corrected to match the code.
+  [`content.config.ts:105`](../../../src/content.config.ts#L105)
+
+- Same fix, `related` side — the docstring, not the code, was wrong here.
+  [`content.config.ts:123`](../../../src/content.config.ts#L123)
+
+**Write-path safety**
+
+- Duplicate slugs now throw instead of one entry silently vanishing via `Map.set`.
+  [`ingest.mjs:425`](../../../scripts/ingest.mjs#L425)
+
+- Atomic swap (temp dir, then rename) plus a stale-tmp sweep — proven by an actual crash mid-development.
+  [`ingest.mjs:470`](../../../scripts/ingest.mjs#L470)
+
+**Input robustness**
+
+- Malformed/missing JSON now names the file instead of throwing a bare, unattributed error.
+  [`ingest.mjs:253`](../../../scripts/ingest.mjs#L253)
+
+- A link with no `href` fails loudly instead of crashing three calls downstream.
+  [`ingest.mjs:125`](../../../scripts/ingest.mjs#L125)
+
+- Unrecognized flags (`--verfiy`) are rejected instead of silently triggering the destructive write path.
+  [`ingest.mjs:789`](../../../scripts/ingest.mjs#L789)
+
+**Verification coverage (58 → 93 assertions)**
+
+- Fixture lookups no longer abort the whole run if a future catalog release renames a hardcoded id.
+  [`ingest.mjs:547`](../../../scripts/ingest.mjs#L547)
+
+- `related` never had a resolution check, though it shares the exact transform that had the AD-4 bug.
+  [`ingest.mjs:602`](../../../scripts/ingest.mjs#L602)
+
+- An empty committed collection used to report full success without ever running the byte-reproducibility check.
+  [`ingest.mjs:733`](../../../scripts/ingest.mjs#L733)
+
+- The missing-input guard now compares full contents (not just a count) via a sandboxed, execArgv-matched child.
+  [`ingest.mjs:745`](../../../scripts/ingest.mjs#L745)
+
+**Schema/contract accuracy**
+
+- `meta`'s id-derivation doc was flatly wrong for the one collection it should have called out.
+  [`content.config.ts:20`](../../../src/content.config.ts#L20)
+
+- Families gained an explicit ordering key — FR-1's browse tree had nothing else to sort 20 of them by.
+  [`content.config.ts:138`](../../../src/content.config.ts#L138)
+
+**Peripherals**
+
+- Declares the Node floor the `.ts` import via native type stripping actually requires.
+  [`package.json:6`](../../../package.json#L6)
+
+- Repo-wide LF default, so the byte-reproducibility guarantee holds by construction, not path enumeration.
+  [`.gitattributes:4`](../../../.gitattributes#L4)
+
+- Architecture spine corrected to match reality: Astro 7 rejects the originally-specced config path.
+  [`ARCHITECTURE-SPINE.md:139`](../../planning-artifacts/architecture/architecture-BMad-2026-08-20/ARCHITECTURE-SPINE.md#L139)
