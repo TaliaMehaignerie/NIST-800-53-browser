@@ -61,7 +61,8 @@ flowchart LR
 
 - **Binds:** all pages, FR-1 through FR-5
 - **Rule:** `/families/{slug}`, `/controls/{slug}`, enhancement anchors `#{parent-slug}-{n}`. Slugs are lowercase-hyphenated (`ac-2`, `ac-2-1`), produced by one shared `src/utils/slugify.ts`, always called on the **OSCAL-native id** (`ac-2.1`) — never on the canonical display string (`AC-2(1)`), since the two are not guaranteed to normalize identically (parens vs. dots). Every caller, including `scripts/ingest.mjs` (AD-2), imports this one module. Canonical uppercase form (`AC-2`, `AC-2(1)`) is used for all display text, never the slug.
-- **Prevents:** two routes/components generating different casings, separators, or normalization for the same control id.
+- **Base-path rule:** the site deploys to a GitHub Pages *project* path (`/NIST-800-53-browser`), so the routes above are site-relative, not absolute. Every internal link and asset reference resolves through Astro's `base` (`import.meta.env.BASE_URL`, or a `<a href={...}>` built from it) — never a hardcoded leading-slash path like `/controls/ac-2`, which resolves to the domain root and 404s in production while working fine in `astro dev`.
+- **Prevents:** two routes/components generating different casings, separators, or normalization for the same control id — or one building base-aware links while another hardcodes absolute paths, producing a site where half the deep links work.
 
 ### AD-5 — Content fidelity and provenance, rendered once
 

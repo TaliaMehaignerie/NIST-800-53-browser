@@ -6,9 +6,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   output: 'static',
 
-  // TODO before first deploy: a GitHub Pages *project* site serves from
-  // https://<user>.github.io/<repo>/, so BOTH of these must be set or every
-  // deep link (AD-4) will 404 in production.
-  // site: 'https://<user>.github.io',
-  // base: '/nist-800-53-browser',
+  // GitHub Pages *project* site: served from
+  // https://taliamehaignerie.github.io/NIST-800-53-browser/
+  // `base` must match the repo name EXACTLY (it is case-sensitive in the
+  // served path) or every deep link (AD-4) 404s in production.
+  site: 'https://taliamehaignerie.github.io',
+  base: '/NIST-800-53-browser',
 });
