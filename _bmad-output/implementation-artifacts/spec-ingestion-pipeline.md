@@ -2,7 +2,7 @@
 title: 'Canonical OSCAL ingestion pipeline'
 type: 'feature'
 created: '2026-09-15'
-status: 'in-progress'
+status: 'done'
 baseline_commit: 'c48b9de9dc2be69cacdecf2d174e56edc8e2fd89'
 review_loop_iteration: 0
 context:

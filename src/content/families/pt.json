@@ -1,5 +1,6 @@
 {
   "slug": "pt",
+  "catalogOrder": 14,
   "code": "PT",
   "name": "Personally Identifiable Information Processing and Transparency",
   "controlSlugs": [

@@ -1,5 +1,6 @@
 {
   "slug": "pe",
+  "catalogOrder": 10,
   "code": "PE",
   "name": "Physical and Environmental Protection",
   "controlSlugs": [

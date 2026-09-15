@@ -1,5 +1,6 @@
 {
   "slug": "cm",
+  "catalogOrder": 4,
   "code": "CM",
   "name": "Configuration Management",
   "controlSlugs": [

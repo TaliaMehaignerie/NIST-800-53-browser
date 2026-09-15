@@ -1,5 +1,6 @@
 {
   "slug": "pm",
+  "catalogOrder": 12,
   "code": "PM",
   "name": "Program Management",
   "controlSlugs": [

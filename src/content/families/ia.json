@@ -1,5 +1,6 @@
 {
   "slug": "ia",
+  "catalogOrder": 6,
   "code": "IA",
   "name": "Identification and Authentication",
   "controlSlugs": [

@@ -24,9 +24,17 @@
  *   node scripts/ingest.mjs --verify   # assert the I/O matrix; writes nothing
  */
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,7 +48,12 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RAW_DIR = process.env.INGEST_RAW_DIR
   ? resolve(process.env.INGEST_RAW_DIR)
   : join(ROOT, 'data', 'raw');
-const CONTENT_DIR = join(ROOT, 'src', 'content');
+// `INGEST_CONTENT_DIR` exists for the same reason as `INGEST_RAW_DIR`: so the
+// missing-input child process below is physically unable to touch the real
+// committed collection, even if its logic changes later.
+const CONTENT_DIR = process.env.INGEST_CONTENT_DIR
+  ? resolve(process.env.INGEST_CONTENT_DIR)
+  : join(ROOT, 'src', 'content');
 
 const MASTER_FILE = join(RAW_DIR, 'NIST_SP-800-53_rev5_catalog-min.json');
 
@@ -110,6 +123,9 @@ function isWithdrawn(node) {
  * `#at-2.4` gives `at-2.4`, `#sr` gives `sr` (SA-12 points at a whole family).
  */
 function hrefTarget(href) {
+  if (typeof href !== 'string') {
+    throw new Error(`OSCAL link has no string href: ${JSON.stringify(href)}`);
+  }
   return href.replace(/^#/, '').split('_')[0];
 }
 
@@ -235,7 +251,29 @@ function buildEntry(node, { kind, familyCode, parentSlug, enhancementSlugs }, ba
 // ---------------------------------------------------------------------------
 
 function readJson(file) {
-  return JSON.parse(readFileSync(file, 'utf8'));
+  let text;
+  try {
+    text = readFileSync(file, 'utf8');
+  } catch (e) {
+    throw new Error(`Could not read ${file}: ${e.message}`);
+  }
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    throw new Error(`Invalid JSON in ${file}: ${e.message}`);
+  }
+}
+
+/** Read an OSCAL file and confirm it actually has the shape ingestion assumes. */
+function readCatalog(file) {
+  const catalog = readJson(file).catalog;
+  if (!catalog || typeof catalog !== 'object') {
+    throw new Error(`${file} has no top-level "catalog" -- is this an OSCAL catalog file?`);
+  }
+  if (!catalog.metadata) {
+    throw new Error(`${file}'s catalog has no "metadata" -- is this a valid OSCAL catalog?`);
+  }
+  return catalog;
 }
 
 /**
@@ -275,20 +313,20 @@ function baselineIds(catalog) {
 function ingest({ warn }) {
   assertInputsPresent();
 
-  const catalog = readJson(MASTER_FILE).catalog;
+  const catalog = readCatalog(MASTER_FILE);
 
   // Id sets only: the resolved profiles are a byte-identical copy of the
   // master's content, so ingesting prose from them would be a second, silently
   // diverging source (AD-2).
   const baselineSets = new Map(
-    BASELINES.map((b) => [b.key, baselineIds(readJson(join(RAW_DIR, b.file)).catalog)]),
+    BASELINES.map((b) => [b.key, baselineIds(readCatalog(join(RAW_DIR, b.file)))]),
   );
 
   const controls = [];
   const enhancements = [];
   const families = [];
 
-  for (const group of catalog.groups ?? []) {
+  for (const [groupIndex, group] of (catalog.groups ?? []).entries()) {
     const familyCode = propValue(group, 'label');
     if (!familyCode) throw new Error(`No label prop on group "${group.id}"`);
     if (!/^[a-z]{2}$/.test(group.id)) {
@@ -337,6 +375,7 @@ function ingest({ warn }) {
     controls.push(...familyControls);
     families.push({
       slug: group.id,
+      catalogOrder: groupIndex,
       code: familyCode,
       name: group.title,
       controlSlugs: familyControls.map((c) => c.slug),
@@ -376,17 +415,32 @@ function serialize(entry) {
   return `${JSON.stringify(entry, null, 2)}\n`;
 }
 
-/** Every file this run would write, as `absolute path -> contents`. */
+/**
+ * Every file this run would write, as `absolute path -> contents`.
+ *
+ * Throws on a slug collision rather than letting `Map.set` silently collapse
+ * two entries into one file -- uniqueness must hold on every run, not only
+ * when `--verify` happens to be the command someone typed.
+ */
 function plannedFiles({ controls, enhancements, families, meta }) {
-  const files = new Map();
+  const byPath = new Map();
+  const byDir = new Map(Object.keys(OUT_DIRS).map((key) => [key, []]));
+  const add = (dirKey, filename, contents, sourceId) => {
+    const path = join(OUT_DIRS[dirKey], filename);
+    if (byPath.has(path)) {
+      throw new Error(`Duplicate output path ${path} (from "${sourceId}") -- slug collision`);
+    }
+    byPath.set(path, contents);
+    byDir.get(dirKey).push([filename, contents]);
+  };
   for (const entry of [...controls, ...enhancements]) {
-    files.set(join(OUT_DIRS.controls, `${entry.slug}.json`), serialize(entry));
+    add('controls', `${entry.slug}.json`, serialize(entry), entry.id);
   }
   for (const family of families) {
-    files.set(join(OUT_DIRS.families, `${family.slug}.json`), serialize(family));
+    add('families', `${family.slug}.json`, serialize(family), family.slug);
   }
-  files.set(join(OUT_DIRS.meta, 'provenance.json'), serialize(meta));
-  return files;
+  add('meta', 'provenance.json', serialize(meta), 'provenance');
+  return { byPath, byDir };
 }
 
 /** Existing on-disk output, as `absolute path -> contents`. */
@@ -405,13 +459,38 @@ function existingFiles() {
  * Replace the output directories wholesale rather than merging, so an id that
  * disappears from a future catalog release cannot leave a stale entry behind
  * in the committed collection.
+ *
+ * Atomic per directory: write into a fresh sibling `.tmp-<dir>` first, and
+ * only `rmSync` + `renameSync` over the real directory once every file in it
+ * has been written successfully. A mid-write failure (disk full, a lock,
+ * permissions) then leaves the previously-committed collection untouched
+ * instead of half-deleted -- the exact inconsistency `assertInputsPresent`'s
+ * own doc comment says this pipeline must never produce.
  */
-function writeOutput(files) {
+function writeOutput({ byDir }) {
+  // Sweep any `<dir>.tmp-<pid>` directory a previous run left behind after a
+  // mid-write crash -- harmless litter, but nothing else will ever clean it
+  // up, since each run names its temp dir after its own process id.
   for (const dir of Object.values(OUT_DIRS)) {
-    rmSync(dir, { recursive: true, force: true });
-    mkdirSync(dir, { recursive: true });
+    const parent = dirname(dir);
+    const base = dir.slice(parent.length + 1);
+    for (const name of readdirSync(parent)) {
+      if (name.startsWith(`${base}.tmp-`)) {
+        rmSync(join(parent, name), { recursive: true, force: true });
+      }
+    }
   }
-  for (const [path, contents] of files) writeFileSync(path, contents, 'utf8');
+
+  for (const [key, dir] of Object.entries(OUT_DIRS)) {
+    const tmpDir = `${dir}.tmp-${process.pid}`;
+    rmSync(tmpDir, { recursive: true, force: true });
+    mkdirSync(tmpDir, { recursive: true });
+    for (const [filename, contents] of byDir.get(key)) {
+      writeFileSync(join(tmpDir, filename), contents, 'utf8');
+    }
+    rmSync(dir, { recursive: true, force: true });
+    renameSync(tmpDir, dir);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -454,6 +533,23 @@ function verify(result, warnings) {
     [324, 872],
   );
 
+  /**
+   * Fixture lookup for the hardcoded example ids below. On a miss, records a
+   * FAIL and returns a stand-in with every field null/empty rather than
+   * throwing -- so one renamed id in a future catalog release produces one
+   * readable failure line instead of aborting the entire verify run before
+   * later, unrelated assertions get a chance to report anything.
+   */
+  const STUB = {
+    slug: null, baselines: [], kind: null, enhancementSlugs: [], parentSlug: null,
+    incorporatedInto: [], withdrawn: null, statement: [{ label: null, prose: '', children: [] }], related: [],
+  };
+  const fixture = (id) => {
+    const entry = byId.get(id);
+    check(`fixture "${id}" exists in this catalog release`, entry !== undefined);
+    return entry ?? STUB;
+  };
+
   console.log('Baseline membership (AD-2: computed at both granularities)');
   for (const { key, expected } of BASELINES) {
     eq(`${key} baseline holds ${expected} ids`, baselineSets.get(key).size, expected);
@@ -462,34 +558,34 @@ function verify(result, warnings) {
     const orphans = [...baselineSets.get(key)].filter((id) => !byId.has(id));
     eq(`every ${key} baseline id exists in the master catalog`, orphans, []);
   }
-  eq('ac-2 baselines', byId.get('ac-2').baselines, ['low', 'moderate', 'high']);
-  eq('ac-2 kind', byId.get('ac-2').kind, 'control');
-  eq('ac-2 carries 13 enhancement slugs', byId.get('ac-2').enhancementSlugs.length, 13);
-  eq('ac-2.1 has its own baselines, not the inherited ones', byId.get('ac-2.1').baselines, [
+  eq('ac-2 baselines', fixture('ac-2').baselines, ['low', 'moderate', 'high']);
+  eq('ac-2 kind', fixture('ac-2').kind, 'control');
+  eq('ac-2 carries 13 enhancement slugs', fixture('ac-2').enhancementSlugs.length, 13);
+  eq('ac-2.1 has its own baselines, not the inherited ones', fixture('ac-2.1').baselines, [
     'moderate',
     'high',
   ]);
   check(
     'enhancements do not inherit: some sit in no baseline while their parent does',
     enhancements.some(
-      (e) => e.baselines.length === 0 && bySlug.get(e.parentSlug).baselines.length > 0,
+      (e) => e.baselines.length === 0 && (bySlug.get(e.parentSlug)?.baselines.length ?? 0) > 0,
     ),
   );
 
   console.log('Withdrawn handling');
-  eq('ac-2.10 withdrawn', byId.get('ac-2.10').withdrawn, true);
-  eq('ac-2.10 part-level target stripped to a control id', byId.get('ac-2.10').incorporatedInto, [
+  eq('ac-2.10 withdrawn', fixture('ac-2.10').withdrawn, true);
+  eq('ac-2.10 part-level target stripped to a control id', fixture('ac-2.10').incorporatedInto, [
     'ac-2',
   ]);
-  eq('ac-3.6 keeps both targets in order', byId.get('ac-3.6').incorporatedInto, ['mp-4', 'sc-28']);
-  eq('cp-10.3 withdrawn', byId.get('cp-10.3').withdrawn, true);
-  eq('cp-10.3 has no successor', byId.get('cp-10.3').incorporatedInto, []);
-  check('cp-10.3 keeps its statement', byId.get('cp-10.3').statement.length === 1);
-  eq('sc-19 withdrawn', byId.get('sc-19').withdrawn, true);
-  eq('sc-19 has no successor', byId.get('sc-19').incorporatedInto, []);
-  check('sc-19 keeps its statement', byId.get('sc-19').statement.length === 1);
-  eq('at-3.4 moved-to is treated as withdrawn', byId.get('at-3.4').withdrawn, true);
-  eq('at-3.4 successor is a slug, not a raw id', byId.get('at-3.4').incorporatedInto, ['at-2-4']);
+  eq('ac-3.6 keeps both targets in order', fixture('ac-3.6').incorporatedInto, ['mp-4', 'sc-28']);
+  eq('cp-10.3 withdrawn', fixture('cp-10.3').withdrawn, true);
+  eq('cp-10.3 has no successor', fixture('cp-10.3').incorporatedInto, []);
+  check('cp-10.3 keeps its statement', fixture('cp-10.3').statement.length === 1);
+  eq('sc-19 withdrawn', fixture('sc-19').withdrawn, true);
+  eq('sc-19 has no successor', fixture('sc-19').incorporatedInto, []);
+  check('sc-19 keeps its statement', fixture('sc-19').statement.length === 1);
+  eq('at-3.4 moved-to is treated as withdrawn', fixture('at-3.4').withdrawn, true);
+  eq('at-3.4 successor is a slug, not a raw id', fixture('at-3.4').incorporatedInto, ['at-2-4']);
   eq('182 withdrawn entries in total', entries.filter((e) => e.withdrawn).length, 182);
   const familySlugs = new Set(families.map((f) => f.slug));
   const unresolved = entries
@@ -499,6 +595,18 @@ function verify(result, warnings) {
       return !bySlug.has(to) && !familySlugs.has(to);
     });
   eq('every successor resolves to a Control slug or a Family slug', unresolved, []);
+  // `related` goes through the identical linkTargets()/slugify() transform as
+  // incorporatedInto above -- the same slug-vs-raw-id bug could recur here
+  // undetected without this check, since related targets are always control
+  // slugs (never a family, unlike incorporatedInto's sa-12 exception).
+  const unresolvedRelated = entries
+    .flatMap((e) => e.related.map((t) => `${e.slug} -> ${t}`))
+    .filter((x) => !bySlug.has(x.split(' -> ')[1]));
+  eq('every related target resolves to a Control slug', unresolvedRelated, []);
+  check(
+    'ac-2.1 related targets are slugs, not raw OSCAL ids',
+    fixture('ac-2.1').related.every((t) => !t.includes('.')),
+  );
   check(
     'every withdrawn entry either names a successor or keeps a statement',
     entries
@@ -508,8 +616,8 @@ function verify(result, warnings) {
 
   console.log('Slugs and structure (AD-4)');
   eq('slugs are unique', entries.length - bySlug.size, 0);
-  eq('ac-2.1 slug', byId.get('ac-2.1').slug, 'ac-2-1');
-  eq('ac-2.1 parentSlug', byId.get('ac-2.1').parentSlug, 'ac-2');
+  eq('ac-2.1 slug', fixture('ac-2.1').slug, 'ac-2-1');
+  eq('ac-2.1 parentSlug', fixture('ac-2.1').parentSlug, 'ac-2');
   check(
     'every enhancement points at a real parent Control',
     enhancements.every((e) => bySlug.get(e.parentSlug)?.kind === 'control'),
@@ -550,8 +658,23 @@ function verify(result, warnings) {
   eq('prose is always serialized before children', badKeyOrder, 0);
   check(
     'param placeholders are left raw',
-    byId.get('ac-2.1').statement[0].prose.includes('{{ insert: param, ac-02.01_odp }}'),
+    fixture('ac-2.1').statement[0].prose.includes('{{ insert: param, ac-02.01_odp }}'),
   );
+  // Value spot-checks, not just shape checks: the byte-drift check further
+  // below regenerates the committed collection from this same code, so it
+  // cannot catch a logic regression that changes what ingestParams()/the
+  // guidance extractor produce -- it would just as happily re-commit the
+  // wrong value. Only a hardcoded pin against real content catches that.
+  check(
+    'ac-2 guidance prose is ingested (NIST Discussion text)',
+    (fixture('ac-2').guidance ?? '').startsWith('Examples of system account types'),
+  );
+  const ac1Select = fixture('ac-1').params.find((p) => p.id === 'ac-01_odp.03');
+  check('ac-1 has the expected select param', ac1Select !== undefined);
+  if (ac1Select) {
+    eq('ac-1 select param howMany', ac1Select.select?.howMany, 'one-or-more');
+    eq('ac-1 select param choice count', ac1Select.select?.choice.length, 3);
+  }
   eq(
     'unresolvable param refs warn rather than throw',
     [
@@ -563,6 +686,27 @@ function verify(result, warnings) {
     ].sort(),
     ['ia-13.3', 'sc-42.2', 'si-10.1'],
   );
+
+  console.log('slugify() / isOscalControlId() contract (AD-4)');
+  eq('slugify: base control', slugify('ac-2'), 'ac-2');
+  eq('slugify: enhancement dot becomes hyphen', slugify('ac-2.1'), 'ac-2-1');
+  eq('slugify: multi-digit enhancement', slugify('si-10.1'), 'si-10-1');
+  check(
+    'slugify: throws on a display label, not just accepts it wrongly',
+    (() => {
+      try {
+        slugify('AC-2(1)');
+        return false;
+      } catch (e) {
+        return e instanceof TypeError;
+      }
+    })(),
+  );
+  check('isOscalControlId: accepts a base control id', isOscalControlId('ac-2') === true);
+  check('isOscalControlId: accepts an enhancement id', isOscalControlId('ac-2.1') === true);
+  check('isOscalControlId: rejects a display label', isOscalControlId('AC-2(1)') === false);
+  check('isOscalControlId: rejects a bare family id', isOscalControlId('sr') === false);
+  check('isOscalControlId: rejects a non-string', isOscalControlId(undefined) === false);
 
   console.log('SP 800-53A exclusion (PRD non-goal)');
   const serialized = JSON.stringify([...entries, ...families, meta]);
@@ -576,16 +720,18 @@ function verify(result, warnings) {
   eq(
     'lastModified is the catalog value, verbatim',
     meta.lastModified,
-    readJson(MASTER_FILE).catalog.metadata['last-modified'],
+    readCatalog(MASTER_FILE).metadata['last-modified'],
   );
   eq('crosswalkTranscribedAt is null until CAP-4', meta.crosswalkTranscribedAt, null);
 
   console.log('Committed output (AD-2: the repo is the source of truth)');
-  const planned = plannedFiles(result);
+  const planned = plannedFiles(result).byPath;
   const onDisk = existingFiles();
-  if (onDisk.size === 0) {
-    console.log('  skip  no committed output yet -- run `npm run ingest` first');
-  } else {
+  // No committed output is a FAIL, not a skip: the byte-reproducibility check
+  // below is the entire point of AD-2, and a green "All assertions passed"
+  // that never actually ran it would be worse than no check at all.
+  check('committed output exists to verify against', onDisk.size > 0, 'run `npm run ingest` first');
+  if (onDisk.size > 0) {
     eq('committed file count', onDisk.size, planned.size);
     const drifted = [...planned]
       .filter(([path, contents]) => onDisk.get(path) !== contents)
@@ -597,20 +743,41 @@ function verify(result, warnings) {
   // nothing. Exercised in a child process against an empty directory, because
   // exit code and "wrote nothing" are only observable from outside.
   console.log('Missing input guard');
-  const emptyDir = mkdtempSync(join(tmpdir(), 'ingest-missing-'));
-  const before = existingFiles().size;
-  const child = spawnSync(process.execPath, [fileURLToPath(import.meta.url)], {
-    env: { ...process.env, INGEST_RAW_DIR: emptyDir },
-    encoding: 'utf8',
-  });
-  rmSync(emptyDir, { recursive: true, force: true });
+  const emptyRawDir = mkdtempSync(join(tmpdir(), 'ingest-missing-raw-'));
+  // The child also gets its OWN throwaway CONTENT_DIR: this is a read-only
+  // verify, and it must be physically unable to touch the real committed
+  // collection, not merely rely on assertInputsPresent() exiting first.
+  const childContentDir = mkdtempSync(join(tmpdir(), 'ingest-missing-content-'));
+  const beforeContents = new Map(existingFiles());
+  const child = spawnSync(
+    process.execPath,
+    [...process.execArgv, fileURLToPath(import.meta.url)],
+    {
+      env: {
+        ...process.env,
+        INGEST_RAW_DIR: emptyRawDir,
+        INGEST_CONTENT_DIR: childContentDir,
+      },
+      encoding: 'utf8',
+    },
+  );
+  rmSync(emptyRawDir, { recursive: true, force: true });
+  rmSync(childContentDir, { recursive: true, force: true });
   eq('missing input exits non-zero', child.status, 1);
   check(
     'missing input names the file it could not find',
     /Missing required input: .*NIST_SP-800-53_rev5_catalog-min\.json/.test(child.stderr ?? ''),
     JSON.stringify((child.stderr ?? '').slice(0, 120)),
   );
-  eq('missing input wrote nothing', existingFiles().size, before);
+  // Compare full contents, not just a count -- a count-only check would pass
+  // even if the (real, non-sandboxed) collection had been silently rewritten
+  // with different bytes rather than left untouched.
+  const afterContents = existingFiles();
+  eq(
+    'missing input left the real committed collection byte-for-byte untouched',
+    [...afterContents].filter(([path, contents]) => beforeContents.get(path) !== contents),
+    [],
+  );
 
   return failures;
 }
@@ -619,8 +786,17 @@ function verify(result, warnings) {
 // Entry point
 // ---------------------------------------------------------------------------
 
+const KNOWN_FLAGS = new Set(['--verify']);
+
 function main() {
-  const verifyOnly = process.argv.includes('--verify');
+  const args = process.argv.slice(2);
+  const unknown = args.filter((a) => !KNOWN_FLAGS.has(a));
+  if (unknown.length > 0) {
+    console.error(`Unrecognized argument(s): ${unknown.join(', ')}`);
+    console.error(`Known flags: ${[...KNOWN_FLAGS].join(', ')} (or no flag, to ingest and write).`);
+    process.exit(1);
+  }
+  const verifyOnly = args.includes('--verify');
 
   const warnings = [];
   const warn = (message) => {

@@ -1,5 +1,6 @@
 {
   "slug": "sa",
+  "catalogOrder": 16,
   "code": "SA",
   "name": "System and Services Acquisition",
   "controlSlugs": [

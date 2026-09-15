@@ -1,3 +1,8 @@
+# Repo-wide default: text files normalize to LF regardless of which path a
+# future generated/scripted file lands under, rather than relying on each
+# path being enumerated below.
+* text=auto eol=lf
+
 # `scripts/ingest.mjs` writes LF, and AD-2 requires its output be committed and
 # byte-reproducible ("re-running with unchanged inputs produces byte-identical
 # output"). With Git's default `core.autocrlf=true` on Windows, a fresh checkout

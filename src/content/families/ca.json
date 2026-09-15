@@ -1,5 +1,6 @@
 {
   "slug": "ca",
+  "catalogOrder": 3,
   "code": "CA",
   "name": "Assessment, Authorization, and Monitoring",
   "controlSlugs": [

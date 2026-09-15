@@ -1,5 +1,6 @@
 {
   "slug": "ma",
+  "catalogOrder": 8,
   "code": "MA",
   "name": "Maintenance",
   "controlSlugs": [

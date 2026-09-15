@@ -1,5 +1,6 @@
 {
   "slug": "ir",
+  "catalogOrder": 7,
   "code": "IR",
   "name": "Incident Response",
   "controlSlugs": [

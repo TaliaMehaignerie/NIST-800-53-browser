@@ -1,5 +1,6 @@
 {
   "slug": "pl",
+  "catalogOrder": 11,
   "code": "PL",
   "name": "Planning",
   "controlSlugs": [

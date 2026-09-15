@@ -1,5 +1,6 @@
 {
   "slug": "si",
+  "catalogOrder": 18,
   "code": "SI",
   "name": "System and Information Integrity",
   "controlSlugs": [

@@ -1,5 +1,6 @@
 {
   "slug": "ra",
+  "catalogOrder": 15,
   "code": "RA",
   "name": "Risk Assessment",
   "controlSlugs": [

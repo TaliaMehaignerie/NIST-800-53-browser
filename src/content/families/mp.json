@@ -1,5 +1,6 @@
 {
   "slug": "mp",
+  "catalogOrder": 9,
   "code": "MP",
   "name": "Media Protection",
   "controlSlugs": [

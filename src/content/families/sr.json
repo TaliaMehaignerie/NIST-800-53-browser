@@ -1,5 +1,6 @@
 {
   "slug": "sr",
+  "catalogOrder": 19,
   "code": "SR",
   "name": "Supply Chain Risk Management",
   "controlSlugs": [

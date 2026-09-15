@@ -1,5 +1,6 @@
 {
   "slug": "at",
+  "catalogOrder": 1,
   "code": "AT",
   "name": "Awareness and Training",
   "controlSlugs": [

@@ -1,5 +1,6 @@
 {
   "slug": "ps",
+  "catalogOrder": 13,
   "code": "PS",
   "name": "Personnel Security",
   "controlSlugs": [

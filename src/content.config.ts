@@ -21,6 +21,11 @@ import { glob } from 'astro/loaders';
  * `data.slug`), which `scripts/ingest.mjs` produces via `src/utils/slugify.ts`
  * (AD-4). Filenames match, so `src/content/controls/ac-2-1.json` is entry
  * `ac-2-1` in the `controls` collection.
+ *
+ * Exception: `meta` has no `slug` field (it is a singleton, not a slugged
+ * entity), so its id falls back to the loader's filename convention --
+ * `src/content/meta/provenance.json` is entry `provenance`. Fetch it as
+ * `getEntry('meta', 'provenance')`.
  */
 
 /** The four NIST baselines, in the order the UI presents them. */
@@ -88,9 +93,14 @@ const controls = defineCollection({
     sortId: z.string(),
     withdrawn: z.boolean(),
     /**
-     * Targets a withdrawn entry was folded into, in OSCAL link order, stripped
-     * to their control id (`#ac-2_smt.k` -> `ac-2`). Usually control ids; SA-12
-     * points at the `sr` family. Empty when NIST withdrew without a successor.
+     * Targets a withdrawn entry was folded into, in OSCAL link order, as
+     * SLUGS (AD-4) -- not raw OSCAL ids. `#ac-2_smt.k` strips to `ac-2`;
+     * `#at-2.4` becomes `at-2-4`, never the raw `at-2.4`. Join to a Control's
+     * `slug`, never its `id`. Usually resolves to a Control slug; the one
+     * exception is `sa-12`, whose successor is the `sr` Family (a Family
+     * slug, e.g. `sr`, not a Control slug) -- by design, since OSCAL names a
+     * whole family as its replacement. Empty when NIST withdrew without a
+     * successor.
      */
     incorporatedInto: z.array(z.string()),
     /**
@@ -105,7 +115,11 @@ const controls = defineCollection({
     /** NIST "Discussion" prose. Ingested ahead of any capability that renders it. */
     guidance: z.string().nullable(),
     params: z.array(param),
-    /** OSCAL `links[rel="related"]` targets as OSCAL-native ids, in catalog order. */
+    /**
+     * OSCAL `links[rel="related"]` targets, in catalog order, as SLUGS
+     * (AD-4) -- the same transform as `incorporatedInto` above. Join to a
+     * Control's `slug`, never its `id`.
+     */
     related: z.array(z.string()),
   }),
 });
@@ -116,6 +130,12 @@ const families = defineCollection({
   schema: z.object({
     /** OSCAL group id, already slug-shaped: `ac`. Used as the `/families/{slug}` segment. */
     slug: z.string(),
+    /**
+     * Position in the master catalog's own group order (0-indexed). The
+     * FR-1 browse tree sorts by this, not by glob/loader order, which is an
+     * implementation detail of the filesystem, not a contract.
+     */
+    catalogOrder: z.number().int(),
     /** Uppercase family code: `AC`. */
     code: z.string(),
     /** Family title: "Access Control". */

@@ -1,5 +1,6 @@
 {
   "slug": "sc",
+  "catalogOrder": 17,
   "code": "SC",
   "name": "System and Communications Protection",
   "controlSlugs": [

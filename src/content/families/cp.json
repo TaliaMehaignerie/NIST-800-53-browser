@@ -1,5 +1,6 @@
 {
   "slug": "cp",
+  "catalogOrder": 5,
   "code": "CP",
   "name": "Contingency Planning",
   "controlSlugs": [
