@@ -7,7 +7,7 @@ paradigm: 'Static-first Islands Architecture (Astro) over a single canonical con
 scope: 'NIST 800-53 Browser v1 — FR-1 through FR-5 from the finalized PRD'
 status: final
 created: '2026-08-20'
-updated: '2026-08-20'
+updated: '2026-09-15'
 binds: ['FR-1', 'FR-2', 'FR-3', 'FR-4', 'FR-5']
 sources: ['_bmad-output/planning-artifacts/prds/prd-BMad-2026-08-20/prd.md']
 companions: []
@@ -96,10 +96,10 @@ flowchart LR
 
 | Name | Version |
 | --- | --- |
-| Astro | 7.2.4 (verified current, Aug 2026) |
-| Node.js | ≥22.12.0 (Astro 7's actual `engines` floor — Node 22 is Maintenance LTS, Node 24 is Active LTS; either satisfies the floor) |
-| Pagefind | 1.5.2 (verified current, Rust-based build-time static search index) |
-| astro-pagefind (integration) | 1.8.5 — use for build wiring only; its bundled `Search.astro` UI is in maintenance mode upstream, so `components/SearchBox` is a custom island built against Pagefind's native JS API, not the wrapper's prebuilt UI |
+| Astro | 7.3.2 (installed 2026-09-15; supersedes the 7.2.4 recorded at authoring) |
+| Node.js | ≥22.12.0 (Astro 7's `engines` floor). Dev machine runs 24.14.1 (Active LTS) |
+| Pagefind | 1.5.2 (installed as a devDependency; invoked as a CLI from the `build` script) |
+| ~~astro-pagefind (integration)~~ | **Not used.** It went 1.8.5 → 2.0.1 (major) between authoring and scaffolding, and the spine had already committed `components/SearchBox` to Pagefind's own JS API rather than the wrapper's prebuilt UI — leaving the wrapper doing build wiring only, which `pagefind --site dist` does directly with no integration API to track across majors. |
 | Ingestion script runtime | Node.js (matches the rest of the toolchain; not architecturally binding — local, one-off tool) |
 | Hosting | GitHub Pages, deployed via GitHub Actions |
 
