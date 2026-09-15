@@ -41,3 +41,31 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-browse-ui.md`
   summary: `controls/[slug].astro` and `families/[slug].astro` silently drop any `enhancementSlugs`/`controlSlugs` entry that fails to resolve via `getEntry`, unlike `ProvenanceFooter.astro`'s fail-fast pattern for a missing `meta` entry.
   evidence: Real inconsistency (blind-hunter/verification-gap), but Goal A's `ingest.mjs --verify` already asserts referential integrity of these slug arrays as part of its 93 assertions, so the silent-drop path is currently unreachable dead code, not an active bug. Worth tightening to fail loudly if that guarantee ever changes.
+
+- source_spec: none
+  summary: CAP-3 (Enhancement expand/collapse in place, with per-Enhancement deep-linking via `location.hash`) — split off Goal C to keep the Baseline filter (CAP-2) spec within the token scope target.
+  evidence: CAP-2 and CAP-3 touch almost entirely different files (`BaselineFilter.astro`/`ControlRow.astro` vs. `EnhancementItem.astro`) and share only the small `setUrlState()` helper, which CAP-2 builds generically enough (`search`/`hash` both handled) that CAP-3 can reuse it unmodified — a clean, low-coupling split unlike Goal A/B's ingestion-pipeline/browse-UI dependency.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: No live-region/announcement (e.g. "3 of 12 controls shown") when the Baseline filter changes what's visible, so a screen-reader user gets no feedback beyond the empty-state message when a filter narrows or empties a list.
+  evidence: Real (blind-hunter), but EXPERIENCE.md's Accessibility Floor doesn't require live regions (only landmarks, keyboard operability, color-not-only-signal, and contrast) — an enhancement beyond the stated floor, not a floor violation.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: Clicking the site-title/home logo while a Baseline filter is active does not carry `?baseline=` forward (`updateLinks()` only rewrites `main a[href*="/families/"], main a[href*="/controls/"]`, not the header's home link) — the filter resets on returning home.
+  evidence: Real (blind-hunter), but debatable as a bug: "home = reset" is a defensible default and the spec's resolved ambiguity only committed to Home -> Family persistence (UJ-1), not the reverse. Revisit if user feedback says the reset is surprising.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: `updateLinks()`'s `href*="/families/"` / `href*="/controls/"` substring match could rewrite a link it shouldn't (e.g. one containing that fragment in a query string, or an external URL) as more content is added.
+  evidence: Real (blind-hunter) but zero actual occurrence today — no such links exist anywhere in `main` content currently (checked). Cheap to harden (e.g. also check `new URL(a.href).origin === location.origin`) once a link shape that could trigger it actually exists.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: No `popstate`/`pageshow` handling for browser back/forward via bfcache — `init()` only runs once at load, so a bfcache-restored page could show pill/row state stale relative to the address bar.
+  evidence: Real (blind-hunter), but the site's usage pattern is mostly forward navigation via clicks and deep links (UJ-1/UJ-2), and there's no browser-automation test tool in this environment to verify a fix. Revisit if back/forward becomes a reported pain point.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: No automated test exercises `setUrlState()`, `BaselineFilter`'s filter/pill/link-rewriting logic, or the new empty-state toggle — all verified by hand against real build output (including the confirmed-real PM/PT zero-count cases), not by a repeatable check.
+  evidence: Real (blind-hunter/verification-gap), consistent with the same gap already logged for Goal B — the repo still has no test runner (only `ingest.mjs --verify`, a hand-rolled script for the ingestion layer). Introducing one is a bigger decision than any single slice's scope.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
+  summary: The set of valid Baselines now exists in two places that could drift — `src/content.config.ts`'s `z.enum(['low','moderate','high','privacy'])` schema, and `BaselineFilter.astro`'s server-rendered `BASELINES` list (the client script's own `VALID_BASELINES` was patched during review to derive from the rendered pills, removing the third copy, but the schema-vs-component duplication remains).
+  evidence: Real (verification-gap), but the schema and the UI component are necessarily two different layers (data contract vs. presentation) with no realistic single-source mechanism given the current stack (no shared constants module imported by both a `.ts` schema file and an `.astro` frontmatter today). Worth a shared `src/utils/baselines.ts` constant if a fifth capability ever touches this list.

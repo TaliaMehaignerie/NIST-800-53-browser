@@ -1,10 +1,11 @@
 ---
-// The one page shell (architecture AD-7). Ships branding + the provenance
-// footer only in this slice — no SearchBox/BaselineFilter markup yet
-// (CAP-5/CAP-2 add those as a header island later without restructuring this
+// The one page shell (architecture AD-7). Ships branding, the Baseline
+// filter island (CAP-2), and the provenance footer — no SearchBox markup yet
+// (CAP-5 adds that as a header island later without restructuring this
 // layout). Dark mode only: DESIGN.md is dark-by-default with no light-mode
 // token set, so there is no `prefers-color-scheme` branch.
 import ProvenanceFooter from '../components/ProvenanceFooter.astro';
+import BaselineFilter from '../components/BaselineFilter.astro';
 import { homeUrl } from '../utils/url';
 
 interface Props {
@@ -23,6 +24,7 @@ const { title } = Astro.props;
   <body>
     <header class="site-header">
       <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
+      <BaselineFilter />
     </header>
     <main>
       <slot />
@@ -96,10 +98,12 @@ const { title } = Astro.props;
   }
 
   .site-title {
+    display: block;
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 18px;
     color: var(--color-ink-primary);
     text-decoration: none;
+    margin-bottom: 12px;
   }
 </style>

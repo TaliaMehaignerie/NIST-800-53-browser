@@ -25,7 +25,7 @@ interface Props {
 const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astro.props;
 ---
 
-<div class="enhancement-item">
+<div class="enhancement-item" data-baselines={baselines.join(' ')}>
   <div class="enhancement-item__header">
     <span class="enhancement-item__id">{label}</span>
     <span class={`enhancement-item__title ${withdrawn ? 'enhancement-item__title--withdrawn' : ''}`}>

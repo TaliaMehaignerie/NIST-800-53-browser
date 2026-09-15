@@ -48,18 +48,21 @@ const enhancements = (
     {enhancements.length > 0 && (
       <section class="control-detail-card__enhancements">
         <h2>Enhancements</h2>
-        {
-          enhancements.map((e) => (
-            <EnhancementItem
-              label={e.data.label}
-              title={e.data.title}
-              withdrawn={e.data.withdrawn}
-              incorporatedInto={e.data.incorporatedInto}
-              baselines={e.data.baselines}
-              statement={e.data.statement}
-            />
-          ))
-        }
+        <div class="enhancement-list">
+          {
+            enhancements.map((e) => (
+              <EnhancementItem
+                label={e.data.label}
+                title={e.data.title}
+                withdrawn={e.data.withdrawn}
+                incorporatedInto={e.data.incorporatedInto}
+                baselines={e.data.baselines}
+                statement={e.data.statement}
+              />
+            ))
+          }
+        </div>
+        <p class="baseline-empty-state" hidden>No Enhancements match this Baseline.</p>
       </section>
     )}
 
@@ -100,6 +103,12 @@ const enhancements = (
   }
 
   .control-detail-card__no-baseline {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .baseline-empty-state {
     font-family: var(--font-meta);
     font-size: 13px;
     color: var(--color-ink-secondary);

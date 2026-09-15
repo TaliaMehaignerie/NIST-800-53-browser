@@ -1,0 +1,155 @@
+---
+// DESIGN.md "Baseline filter": single-select toggle group (All / Low /
+// Moderate / High / Privacy) mounted in BaseLayout's header (architecture
+// AD-7). Inactive pills are plain meta text; the active pill gets a
+// surface-overlay pill background — same grammar as a Baseline badge.
+//
+// Renders active (not inert) everywhere it's mounted in this slice (Home,
+// Family Detail, Control Detail) — the spec's resolved ambiguity is that
+// AD-7's data-baselines mechanism only actually narrows rows on Family
+// Detail (ControlRow) and Control Detail (EnhancementItem); Home has no
+// data-baselines rows, so the pill state there is visible/persists across
+// navigation but has nothing to hide. The /search page (out of scope here,
+// CAP-5) is where DESIGN.md's inert/45%-opacity treatment applies, per its
+// explicit carve-out — not built in this slice.
+const BASELINES: { value: string | null; label: string }[] = [
+  { value: null, label: 'All' },
+  { value: 'low', label: 'Low' },
+  { value: 'moderate', label: 'Moderate' },
+  { value: 'high', label: 'High' },
+  { value: 'privacy', label: 'Privacy' },
+];
+---
+
+<div class="baseline-filter" role="group" aria-label="Filter by Baseline">
+  {BASELINES.map(({ value, label }) => (
+    <button type="button" class="filter-pill" data-baseline={value ?? ''} aria-pressed="false">
+      {label}
+    </button>
+  ))}
+</div>
+
+<style>
+  .baseline-filter {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .filter-pill {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--rounded-full);
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+
+  .filter-pill:hover {
+    background: var(--color-surface-overlay);
+  }
+
+  .filter-pill.active {
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-primary);
+  }
+
+  .filter-pill:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  import { setUrlState } from '../utils/urlState';
+
+  // Derived from the rendered pills rather than a second hardcoded list, so
+  // there's exactly one source of truth for "which baselines exist" (the
+  // server-rendered BASELINES array in this same file's frontmatter).
+  const VALID_BASELINES = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-pill'))
+    .map((pill) => pill.dataset.baseline)
+    .filter((v): v is string => Boolean(v));
+
+  function currentBaseline(): string | null {
+    const value = new URLSearchParams(window.location.search).get('baseline');
+    return value && VALID_BASELINES.includes(value) ? value : null;
+  }
+
+  // Pre-hydration paint is always the full unfiltered list (EXPERIENCE.md
+  // "Pre-hydration filter flash" -- accepted as-is for v1); this is the
+  // client-side effect that narrows it once the script runs. Also toggles a
+  // sibling `.baseline-empty-state` message per row-group when a filter
+  // matches zero rows in that group (e.g. a Family with no Low-baseline
+  // Controls) -- confirmed a real case (PM/PT families have zero Low/
+  // Moderate/High controls), not just theoretical.
+  function applyFilter(baseline: string | null) {
+    const groups = new Map<Element, { total: number; visible: number }>();
+    document.querySelectorAll<HTMLElement>('[data-baselines]').forEach((el) => {
+      const values = (el.dataset.baselines ?? '').split(' ').filter(Boolean);
+      const visible = !baseline || values.includes(baseline);
+      el.style.display = visible ? '' : 'none';
+      const parent = el.parentElement;
+      if (parent) {
+        const g = groups.get(parent) ?? { total: 0, visible: 0 };
+        g.total += 1;
+        if (visible) g.visible += 1;
+        groups.set(parent, g);
+      }
+    });
+    groups.forEach((g, parent) => {
+      const emptyState = parent.nextElementSibling;
+      if (emptyState?.classList.contains('baseline-empty-state')) {
+        (emptyState as HTMLElement).hidden = !(g.total > 0 && g.visible === 0);
+      }
+    });
+  }
+
+  function markActivePill(baseline: string | null) {
+    document.querySelectorAll<HTMLButtonElement>('.filter-pill').forEach((pill) => {
+      const value = pill.dataset.baseline || null;
+      const active = value === baseline;
+      pill.classList.toggle('active', active);
+      pill.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  // Carries the active filter across a full navigation (UJ-1: filter on
+  // Home, land on a Family page still filtered) by appending it to
+  // same-content internal links found on the current page -- the only way
+  // state survives a full MPA navigation with no client router (AD-1).
+  function updateLinks(baseline: string | null) {
+    document
+      .querySelectorAll<HTMLAnchorElement>('main a[href*="/families/"], main a[href*="/controls/"]')
+      .forEach((a) => {
+        const url = new URL(a.href);
+        if (baseline) url.searchParams.set('baseline', baseline);
+        else url.searchParams.delete('baseline');
+        a.href = url.toString();
+      });
+  }
+
+  function init() {
+    const baseline = currentBaseline();
+    markActivePill(baseline);
+    applyFilter(baseline);
+    updateLinks(baseline);
+
+    document.querySelectorAll<HTMLButtonElement>('.filter-pill').forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const value = pill.dataset.baseline || null;
+        const active = currentBaseline();
+        // Clicking "All" (value === null) always clears. Clicking the
+        // currently-active specific pill again also clears.
+        const next = value === active ? null : value;
+        setUrlState({ search: { baseline: next } });
+        markActivePill(next);
+        applyFilter(next);
+        updateLinks(next);
+      });
+    });
+  }
+
+  init();
+</script>

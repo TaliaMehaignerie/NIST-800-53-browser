@@ -18,7 +18,7 @@ interface Props {
 const { label, title, slug, withdrawn, incorporatedInto, baselines } = Astro.props;
 ---
 
-<a class="control-row" href={controlUrl(slug)}>
+<a class="control-row" href={controlUrl(slug)} data-baselines={baselines.join(' ')}>
   <span class="control-row__id">{label}</span>
   <span class={`control-row__title ${withdrawn ? 'control-row__title--withdrawn' : ''}`}>{title}</span>
   <span class="control-row__badges">
