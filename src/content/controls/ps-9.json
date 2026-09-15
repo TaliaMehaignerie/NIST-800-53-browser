@@ -1,0 +1,28 @@
+{
+  "id": "ps-9",
+  "slug": "ps-9",
+  "label": "PS-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Position Descriptions",
+  "familyCode": "PS",
+  "sortId": "ps-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Incorporate security and privacy roles and responsibilities into organizational position descriptions.",
+      "children": []
+    }
+  ],
+  "guidance": "Specification of security and privacy roles in individual organizational position descriptions facilitates clarity in understanding the security or privacy responsibilities associated with the roles and the role-based security and privacy training requirements for the roles.",
+  "params": [],
+  "related": []
+}

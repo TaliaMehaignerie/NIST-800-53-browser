@@ -1,0 +1,52 @@
+{
+  "id": "sa-2",
+  "slug": "sa-2",
+  "label": "SA-2",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Allocation of Resources",
+  "familyCode": "SA",
+  "sortId": "sa-02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Determine the high-level information security and privacy requirements for the system or system service in mission and business process planning;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Determine, document, and allocate the resources required to protect the system or system service as part of the organizational capital planning and investment control process; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Establish a discrete line item for information security and privacy in organizational programming and budgeting documentation.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Resource allocation for information security and privacy includes funding for system and services acquisition, sustainment, and supply chain-related risks throughout the system development life cycle.",
+  "params": [],
+  "related": [
+    "pl-7",
+    "pm-3",
+    "pm-11",
+    "sa-9",
+    "sr-3",
+    "sr-5"
+  ]
+}

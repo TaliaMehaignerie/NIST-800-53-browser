@@ -1,0 +1,24 @@
+{
+  "id": "cp-7.6",
+  "slug": "cp-7-6",
+  "label": "CP-7(6)",
+  "kind": "enhancement",
+  "parentSlug": "cp-7",
+  "enhancementSlugs": [],
+  "title": "Inability to Return to Primary Site",
+  "familyCode": "CP",
+  "sortId": "cp-07.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Plan and prepare for circumstances that preclude returning to the primary processing site.",
+      "children": []
+    }
+  ],
+  "guidance": "There may be situations that preclude an organization from returning to the primary processing site such as if a natural disaster (e.g., flood or a hurricane) damaged or destroyed a facility and it was determined that rebuilding in the same location was not prudent.",
+  "params": [],
+  "related": []
+}

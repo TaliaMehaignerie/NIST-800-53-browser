@@ -1,0 +1,20 @@
+{
+  "id": "au-8.2",
+  "slug": "au-8-2",
+  "label": "AU-8(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-8",
+  "enhancementSlugs": [],
+  "title": "Secondary Authoritative Time Source",
+  "familyCode": "AU",
+  "sortId": "au-08.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-45.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

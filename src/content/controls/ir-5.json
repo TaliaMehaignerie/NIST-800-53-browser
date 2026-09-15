@@ -1,0 +1,44 @@
+{
+  "id": "ir-5",
+  "slug": "ir-5",
+  "label": "IR-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-5-1"
+  ],
+  "title": "Incident Monitoring",
+  "familyCode": "IR",
+  "sortId": "ir-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Track and document incidents.",
+      "children": []
+    }
+  ],
+  "guidance": "Documenting incidents includes maintaining records about each incident, the status of the incident, and other pertinent information necessary for forensics as well as evaluating incident details, trends, and handling. Incident information can be obtained from a variety of sources, including network monitoring, incident reports, incident response teams, user complaints, supply chain partners, audit monitoring, physical access monitoring, and user and administrator reports. [IR-4](#ir-4) provides information on the types of incidents that are appropriate for monitoring.",
+  "params": [],
+  "related": [
+    "au-6",
+    "au-7",
+    "ir-4",
+    "ir-6",
+    "ir-8",
+    "pe-6",
+    "pm-5",
+    "sc-5",
+    "sc-7",
+    "si-3",
+    "si-4",
+    "si-7"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "pt-4.2",
+  "slug": "pt-4-2",
+  "label": "PT-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "pt-4",
+  "enhancementSlugs": [],
+  "title": "Just-in-time Consent",
+  "familyCode": "PT",
+  "sortId": "pt-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Present {{ insert: param, pt-04.02_odp.01 }} to individuals at {{ insert: param, pt-04.02_odp.02 }} and in conjunction with {{ insert: param, pt-04.02_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Just-in-time consent enables individuals to participate in how their personally identifiable information is being processed at the time or in conjunction with specific types of data processing when such participation may be most useful to the individual. Individual assumptions about how personally identifiable information is being processed might not be accurate or reliable if time has passed since the individual last gave consent or the type of processing creates significant privacy risk. Organizations use discretion to determine when to use just-in-time consent and may use supporting information on demographics, focus groups, or surveys to learn more about individuals’ privacy interests and concerns.",
+  "params": [
+    {
+      "id": "pt-04.02_odp.01",
+      "label": "consent mechanisms",
+      "select": null,
+      "guidelines": [
+        "consent mechanisms to be presented to individuals are defined;"
+      ]
+    },
+    {
+      "id": "pt-04.02_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to present consent mechanisms to individuals is defined;"
+      ]
+    },
+    {
+      "id": "pt-04.02_odp.03",
+      "label": "personally identifiable information processing",
+      "select": null,
+      "guidelines": [
+        "personally identifiable information processing to be presented in conjunction with organization-defined consent mechanisms is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pt-2"
+  ]
+}

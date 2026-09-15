@@ -1,0 +1,41 @@
+{
+  "id": "at-6",
+  "slug": "at-6",
+  "label": "AT-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Training Feedback",
+  "familyCode": "AT",
+  "sortId": "at-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide feedback on organizational training results to the following personnel {{ insert: param, at-06_odp.01 }}: {{ insert: param, at-06_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Training feedback includes awareness training results and role-based training results. Training results, especially failures of personnel in critical roles, can be indicative of a potentially serious problem. Therefore, it is important that senior managers are made aware of such situations so that they can take appropriate response actions. Training feedback supports the evaluation and update of organizational training described in [AT-2b](#at-2_smt.b) and [AT-3b](#at-3_smt.b).",
+  "params": [
+    {
+      "id": "at-06_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to provide feedback on organizational training results is defined;"
+      ]
+    },
+    {
+      "id": "at-06_odp.02",
+      "label": "personnel",
+      "select": null,
+      "guidelines": [
+        "personnel to whom feedback on organizational training results will be provided is/are assigned;"
+      ]
+    }
+  ],
+  "related": []
+}

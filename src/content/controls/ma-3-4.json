@@ -1,0 +1,28 @@
+{
+  "id": "ma-3.4",
+  "slug": "ma-3-4",
+  "label": "MA-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "ma-3",
+  "enhancementSlugs": [],
+  "title": "Restricted Tool Use",
+  "familyCode": "MA",
+  "sortId": "ma-03.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict the use of maintenance tools to authorized personnel only.",
+      "children": []
+    }
+  ],
+  "guidance": "Restricting the use of maintenance tools to only authorized personnel applies to systems that are used to carry out maintenance functions.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-5",
+    "ac-6"
+  ]
+}

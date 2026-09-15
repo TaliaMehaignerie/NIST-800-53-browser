@@ -1,0 +1,20 @@
+{
+  "id": "sa-18.2",
+  "slug": "sa-18-2",
+  "label": "SA-18(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-18",
+  "enhancementSlugs": [],
+  "title": "Inspection of Systems or Components",
+  "familyCode": "SA",
+  "sortId": "sa-18.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

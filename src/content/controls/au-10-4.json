@@ -1,0 +1,55 @@
+{
+  "id": "au-10.4",
+  "slug": "au-10-4",
+  "label": "AU-10(4)",
+  "kind": "enhancement",
+  "parentSlug": "au-10",
+  "enhancementSlugs": [],
+  "title": "Validate Binding of Information Reviewer Identity",
+  "familyCode": "AU",
+  "sortId": "au-10.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Validate the binding of the information reviewer identity to the information at the transfer or release points prior to release or transfer between {{ insert: param, au-10.04_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Perform {{ insert: param, au-10.04_odp.02 }} in the event of a validation error.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Validating the binding of the information reviewer identity to the information at transfer or release points prevents the unauthorized modification of information between review and the transfer or release. The validation of bindings can be achieved by using cryptographic checksums. Organizations determine if validations are in response to user requests or generated automatically.",
+  "params": [
+    {
+      "id": "au-10.04_odp.01",
+      "label": "security domains",
+      "select": null,
+      "guidelines": [
+        "security domains for which the binding of the information reviewer identity to the information is to be validated at transfer or release are defined;"
+      ]
+    },
+    {
+      "id": "au-10.04_odp.02",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to be performed in the event of a validation error are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-4",
+    "ac-16"
+  ]
+}

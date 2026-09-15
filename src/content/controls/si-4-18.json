@@ -1,0 +1,33 @@
+{
+  "id": "si-4.18",
+  "slug": "si-4-18",
+  "label": "SI-4(18)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Analyze Traffic and Covert Exfiltration",
+  "familyCode": "SI",
+  "sortId": "si-04.18",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Analyze outbound communications traffic at external interfaces to the system and at the following interior points to detect covert exfiltration of information: {{ insert: param, si-04.18_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organization-defined interior points include subnetworks and subsystems. Covert means that can be used to exfiltrate information include steganography.",
+  "params": [
+    {
+      "id": "si-04.18_odp",
+      "label": "interior points",
+      "select": null,
+      "guidelines": [
+        "interior points within the system where communications traffic is to be analyzed are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

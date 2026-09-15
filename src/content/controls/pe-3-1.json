@@ -1,0 +1,35 @@
+{
+  "id": "pe-3.1",
+  "slug": "pe-3-1",
+  "label": "PE-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "System Access",
+  "familyCode": "PE",
+  "sortId": "pe-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce physical access authorizations to the system in addition to the physical access controls for the facility at {{ insert: param, pe-03.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Control of physical access to the system provides additional physical security for those areas within facilities where there is a concentration of system components.",
+  "params": [
+    {
+      "id": "pe-03.01_odp",
+      "label": "physical spaces",
+      "select": null,
+      "guidelines": [
+        "physical spaces containing one or more components of the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

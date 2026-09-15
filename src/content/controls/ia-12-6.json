@@ -1,0 +1,38 @@
+{
+  "id": "ia-12.6",
+  "slug": "ia-12-6",
+  "label": "IA-12(6)",
+  "kind": "enhancement",
+  "parentSlug": "ia-12",
+  "enhancementSlugs": [],
+  "title": "Accept Externally-proofed Identities",
+  "familyCode": "IA",
+  "sortId": "ia-12.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Accept externally-proofed identities at {{ insert: param, ia-12.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "To limit unnecessary re-proofing of identities, particularly of non-PIV users, organizations accept proofing conducted at a commensurate level of assurance by other agencies or organizations. Proofing is consistent with organizational security policy and the identity assurance level appropriate for the system, application, or information accessed. Accepting externally-proofed identities is a fundamental component of managing federated identities across agencies and organizations.",
+  "params": [
+    {
+      "id": "ia-12.06_odp",
+      "label": "identity assurance level",
+      "select": null,
+      "guidelines": [
+        "an identity assurance level for accepting externally proofed identities is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-3",
+    "ia-4",
+    "ia-5",
+    "ia-8"
+  ]
+}

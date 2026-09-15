@@ -1,0 +1,42 @@
+{
+  "id": "ir-7",
+  "slug": "ir-7",
+  "label": "IR-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-7-1",
+    "ir-7-2"
+  ],
+  "title": "Incident Response Assistance",
+  "familyCode": "IR",
+  "sortId": "ir-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an incident response support resource, integral to the organizational incident response capability, that offers advice and assistance to users of the system for the handling and reporting of incidents.",
+      "children": []
+    }
+  ],
+  "guidance": "Incident response support resources provided by organizations include help desks, assistance groups, automated ticketing systems to open and track incident response tickets, and access to forensics services or consumer redress services, when required.",
+  "params": [],
+  "related": [
+    "at-2",
+    "at-3",
+    "ir-4",
+    "ir-6",
+    "ir-8",
+    "pm-22",
+    "pm-26",
+    "sa-9",
+    "si-18"
+  ]
+}

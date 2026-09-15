@@ -1,0 +1,24 @@
+{
+  "id": "pe-19.1",
+  "slug": "pe-19-1",
+  "label": "PE-19(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-19",
+  "enhancementSlugs": [],
+  "title": "National Emissions Policies and Procedures",
+  "familyCode": "PE",
+  "sortId": "pe-19.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect system components, associated data communications, and networks in accordance with national Emissions Security policies and procedures based on the security category or classification of the information.",
+      "children": []
+    }
+  ],
+  "guidance": "Emissions Security (EMSEC) policies include the former TEMPEST policies.",
+  "params": [],
+  "related": []
+}

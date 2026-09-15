@@ -1,0 +1,51 @@
+{
+  "id": "au-5.2",
+  "slug": "au-5-2",
+  "label": "AU-5(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-5",
+  "enhancementSlugs": [],
+  "title": "Real-time Alerts",
+  "familyCode": "AU",
+  "sortId": "au-05.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an alert within {{ insert: param, au-05.02_odp.01 }} to {{ insert: param, au-05.02_odp.02 }} when the following audit failure events occur: {{ insert: param, au-05.02_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Alerts provide organizations with urgent messages. Real-time alerts provide these messages at information technology speed (i.e., the time from event detection to alert occurs in seconds or less).",
+  "params": [
+    {
+      "id": "au-05.02_odp.01",
+      "label": "real-time period",
+      "select": null,
+      "guidelines": [
+        "real-time period requiring alerts when audit failure events (defined in AU-05(02)_ODP[03]) occur is defined;"
+      ]
+    },
+    {
+      "id": "au-05.02_odp.02",
+      "label": "personnel, roles, and/or locations",
+      "select": null,
+      "guidelines": [
+        "personnel, roles, and/or locations to be alerted in real time when audit failure events (defined in AU-05(02)_ODP[03]) occur is/are defined;"
+      ]
+    },
+    {
+      "id": "au-05.02_odp.03",
+      "label": "audit logging failure events requiring real-time alerts",
+      "select": null,
+      "guidelines": [
+        "audit logging failure events requiring real-time alerts are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

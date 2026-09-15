@@ -1,0 +1,36 @@
+{
+  "id": "pe-3.2",
+  "slug": "pe-3-2",
+  "label": "PE-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "Facility and Systems",
+  "familyCode": "PE",
+  "sortId": "pe-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Perform security checks {{ insert: param, pe-03.02_odp }} at the physical perimeter of the facility or system for exfiltration of information or removal of system components.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations determine the extent, frequency, and/or randomness of security checks to adequately mitigate risk associated with exfiltration.",
+  "params": [
+    {
+      "id": "pe-03.02_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to perform security checks at the physical perimeter of the facility or system for exfiltration of information or removal of system components is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-4",
+    "sc-7"
+  ]
+}

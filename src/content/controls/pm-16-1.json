@@ -1,0 +1,24 @@
+{
+  "id": "pm-16.1",
+  "slug": "pm-16-1",
+  "label": "PM-16(1)",
+  "kind": "enhancement",
+  "parentSlug": "pm-16",
+  "enhancementSlugs": [],
+  "title": "Automated Means for Sharing Threat Intelligence",
+  "familyCode": "PM",
+  "sortId": "pm-16.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ automated mechanisms to maximize the effectiveness of sharing threat intelligence information.",
+      "children": []
+    }
+  ],
+  "guidance": "To maximize the effectiveness of monitoring, it is important to know what threat observables and indicators the sensors need to be searching for. By using well-established frameworks, services, and automated tools, organizations improve their ability to rapidly share and feed the relevant threat detection signatures into monitoring tools.",
+  "params": [],
+  "related": []
+}

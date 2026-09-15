@@ -1,0 +1,24 @@
+{
+  "id": "ac-12.2",
+  "slug": "ac-12-2",
+  "label": "AC-12(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-12",
+  "enhancementSlugs": [],
+  "title": "Termination Message",
+  "familyCode": "AC",
+  "sortId": "ac-12.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Display an explicit logout message to users indicating the termination of authenticated communications sessions.",
+      "children": []
+    }
+  ],
+  "guidance": "Logout messages for web access can be displayed after authenticated sessions have been terminated. However, for certain types of sessions, including file transfer protocol (FTP) sessions, systems typically send logout messages as final messages prior to terminating sessions.",
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "ir",
+  "code": "IR",
+  "name": "Incident Response",
+  "controlSlugs": [
+    "ir-1",
+    "ir-2",
+    "ir-3",
+    "ir-4",
+    "ir-5",
+    "ir-6",
+    "ir-7",
+    "ir-8",
+    "ir-9",
+    "ir-10"
+  ],
+  "controlCount": 10,
+  "enhancementCount": 32
+}

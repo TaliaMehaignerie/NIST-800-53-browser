@@ -1,0 +1,101 @@
+{
+  "id": "si-5",
+  "slug": "si-5",
+  "label": "SI-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "si-5-1"
+  ],
+  "title": "Security Alerts, Advisories, and Directives",
+  "familyCode": "SI",
+  "sortId": "si-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Receive system security alerts, advisories, and directives from {{ insert: param, si-05_odp.01 }} on an ongoing basis;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Generate internal security alerts, advisories, and directives as deemed necessary;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Disseminate security alerts, advisories, and directives to: {{ insert: param, si-05_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Implement security directives in accordance with established time frames, or notify the issuing organization of the degree of noncompliance.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The Cybersecurity and Infrastructure Security Agency (CISA) generates security alerts and advisories to maintain situational awareness throughout the Federal Government. Security directives are issued by OMB or other designated organizations with the responsibility and authority to issue such directives. Compliance with security directives is essential due to the critical nature of many of these directives and the potential (immediate) adverse effects on organizational operations and assets, individuals, other organizations, and the Nation should the directives not be implemented in a timely manner. External organizations include supply chain partners, external mission or business partners, external service providers, and other peer or supporting organizations.",
+  "params": [
+    {
+      "id": "si-05_odp.01",
+      "label": "external organizations",
+      "select": null,
+      "guidelines": [
+        "external organizations from whom system security alerts, advisories, and directives are to be received on an ongoing basis are defined;"
+      ]
+    },
+    {
+      "id": "si-05_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "{{ insert: param, si-05_odp.03 }} ",
+          "{{ insert: param, si-05_odp.04 }} ",
+          "{{ insert: param, si-05_odp.05 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-05_odp.03",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom security alerts, advisories, and directives are to be disseminated is/are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-05_odp.04",
+      "label": "elements",
+      "select": null,
+      "guidelines": [
+        "elements within the organization to whom security alerts, advisories, and directives are to be disseminated are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-05_odp.05",
+      "label": "external organizations",
+      "select": null,
+      "guidelines": [
+        "external organizations to whom security alerts, advisories, and directives are to be disseminated are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "pm-15",
+    "ra-5",
+    "si-2"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "at-5",
+  "slug": "at-5",
+  "label": "AT-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Contacts with Security Groups and Associations",
+  "familyCode": "AT",
+  "sortId": "at-05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pm-15"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

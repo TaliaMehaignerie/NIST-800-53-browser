@@ -1,0 +1,20 @@
+{
+  "id": "sa-5.4",
+  "slug": "sa-5-4",
+  "label": "SA-5(4)",
+  "kind": "enhancement",
+  "parentSlug": "sa-5",
+  "enhancementSlugs": [],
+  "title": "Low-level Design",
+  "familyCode": "SA",
+  "sortId": "sa-05.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sa-4.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

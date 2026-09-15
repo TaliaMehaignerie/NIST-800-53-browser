@@ -1,0 +1,33 @@
+{
+  "id": "ia-2.10",
+  "slug": "ia-2-10",
+  "label": "IA-2(10)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Single Sign-on",
+  "familyCode": "IA",
+  "sortId": "ia-02.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide a single sign-on capability for {{ insert: param, ia-02.10_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Single sign-on enables users to log in once and gain access to multiple system resources. Organizations consider the operational efficiencies provided by single sign-on capabilities with the risk introduced by allowing access to multiple systems via a single authentication event. Single sign-on can present opportunities to improve system security, for example by providing the ability to add multi-factor authentication for applications and systems (existing and new) that may not be able to natively support multi-factor authentication.",
+  "params": [
+    {
+      "id": "ia-02.10_odp",
+      "label": "system accounts and services",
+      "select": null,
+      "guidelines": [
+        "system accounts and services for which a single sign-on capability must be provided are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

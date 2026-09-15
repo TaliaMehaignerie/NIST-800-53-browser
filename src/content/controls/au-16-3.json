@@ -1,0 +1,33 @@
+{
+  "id": "au-16.3",
+  "slug": "au-16-3",
+  "label": "AU-16(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-16",
+  "enhancementSlugs": [],
+  "title": "Disassociability",
+  "familyCode": "AU",
+  "sortId": "au-16.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, au-16.03_odp }} to disassociate individuals from audit information transmitted across organizational boundaries.",
+      "children": []
+    }
+  ],
+  "guidance": "Preserving identities in audit trails could have privacy ramifications, such as enabling the tracking and profiling of individuals, but may not be operationally necessary. These risks could be further amplified when transmitting information across organizational boundaries. Implementing privacy-enhancing cryptographic techniques can disassociate individuals from audit information and reduce privacy risk while maintaining accountability.",
+  "params": [
+    {
+      "id": "au-16.03_odp",
+      "label": "measures",
+      "select": null,
+      "guidelines": [
+        "measures to disassociate individuals from audit information transmitted across organizational boundaries are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

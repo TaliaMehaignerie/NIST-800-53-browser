@@ -1,0 +1,36 @@
+{
+  "id": "si-8.2",
+  "slug": "si-8-2",
+  "label": "SI-8(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-8",
+  "enhancementSlugs": [],
+  "title": "Automatic Updates",
+  "familyCode": "SI",
+  "sortId": "si-08.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Automatically update spam protection mechanisms {{ insert: param, si-08.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Using automated mechanisms to update spam protection mechanisms helps to ensure that updates occur on a regular basis and provide the latest content and protection capabilities.",
+  "params": [
+    {
+      "id": "si-08.02_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to automatically update spam protection mechanisms is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,43 @@
+{
+  "id": "si-4.21",
+  "slug": "si-4-21",
+  "label": "SI-4(21)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Probationary Periods",
+  "familyCode": "SI",
+  "sortId": "si-04.21",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following additional monitoring of individuals during {{ insert: param, si-04.21_odp.02 }}: {{ insert: param, si-04.21_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "During probationary periods, employees do not have permanent employment status within organizations. Without such status or access to information that is resident on the system, additional monitoring can help identify any potentially malicious activity or inappropriate behavior.",
+  "params": [
+    {
+      "id": "si-04.21_odp.01",
+      "label": "additional monitoring",
+      "select": null,
+      "guidelines": [
+        "additional monitoring to be implemented on individuals during probationary periods is defined;"
+      ]
+    },
+    {
+      "id": "si-04.21_odp.02",
+      "label": "probationary period",
+      "select": null,
+      "guidelines": [
+        "the probationary period of individuals is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-18"
+  ]
+}

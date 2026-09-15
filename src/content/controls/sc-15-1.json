@@ -1,0 +1,37 @@
+{
+  "id": "sc-15.1",
+  "slug": "sc-15-1",
+  "label": "SC-15(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-15",
+  "enhancementSlugs": [],
+  "title": "Physical or Logical Disconnect",
+  "familyCode": "SC",
+  "sortId": "sc-15.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide {{ insert: param, sc-15.01_odp }} disconnect of collaborative computing devices in a manner that supports ease of use.",
+      "children": []
+    }
+  ],
+  "guidance": "Failing to disconnect from collaborative computing devices can result in subsequent compromises of organizational information. Providing easy methods to disconnect from such devices after a collaborative computing session ensures that participants carry out the disconnect activity without having to go through complex and tedious procedures. Disconnect from collaborative computing devices can be manual or automatic.",
+  "params": [
+    {
+      "id": "sc-15.01_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "physical",
+          "logical"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

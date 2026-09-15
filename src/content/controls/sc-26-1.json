@@ -1,0 +1,20 @@
+{
+  "id": "sc-26.1",
+  "slug": "sc-26-1",
+  "label": "SC-26(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-26",
+  "enhancementSlugs": [],
+  "title": "Detection of Malicious Code",
+  "familyCode": "SC",
+  "sortId": "sc-26.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-35"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

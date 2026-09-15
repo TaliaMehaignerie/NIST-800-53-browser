@@ -1,0 +1,45 @@
+{
+  "id": "sc-7.29",
+  "slug": "sc-7-29",
+  "label": "SC-7(29)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Separate Subnets to Isolate Functions",
+  "familyCode": "SC",
+  "sortId": "sc-07.29",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, sc-07.29_odp.01 }} separate subnetworks to isolate the following critical system components and functions: {{ insert: param, sc-07.29_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Separating critical system components and functions from other noncritical system components and functions through separate subnetworks may be necessary to reduce susceptibility to a catastrophic or debilitating breach or compromise that results in system failure. For example, physically separating the command and control function from the in-flight entertainment function through separate subnetworks in a commercial aircraft provides an increased level of assurance in the trustworthiness of critical system functions.",
+  "params": [
+    {
+      "id": "sc-07.29_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physically",
+          "logically"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-07.29_odp.02",
+      "label": "critical system components and functions",
+      "select": null,
+      "guidelines": [
+        "critical system components and functions to be isolated are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

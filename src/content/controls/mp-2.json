@@ -1,0 +1,91 @@
+{
+  "id": "mp-2",
+  "slug": "mp-2",
+  "label": "MP-2",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "mp-2-1",
+    "mp-2-2"
+  ],
+  "title": "Media Access",
+  "familyCode": "MP",
+  "sortId": "mp-02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict access to {{ insert: param, mp-2_prm_1 }} to {{ insert: param, mp-2_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System media includes digital and non-digital media. Digital media includes flash drives, diskettes, magnetic tapes, external or removable hard disk drives (e.g., solid state, magnetic), compact discs, and digital versatile discs. Non-digital media includes paper and microfilm. Denying access to patient medical records in a community hospital unless the individuals seeking access to such records are authorized healthcare providers is an example of restricting access to non-digital media. Limiting access to the design specifications stored on compact discs in the media library to individuals on the system development team is an example of restricting access to digital media.",
+  "params": [
+    {
+      "id": "mp-2_prm_1",
+      "label": "organization-defined types of digital and/or non-digital media",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-2_prm_2",
+      "label": "organization-defined personnel or roles",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-02_odp.01",
+      "label": "types of digital media",
+      "select": null,
+      "guidelines": [
+        "types of digital media to which access is restricted are defined;"
+      ]
+    },
+    {
+      "id": "mp-02_odp.02",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles authorized to access digital media is/are defined;"
+      ]
+    },
+    {
+      "id": "mp-02_odp.03",
+      "label": "types of non-digital media",
+      "select": null,
+      "guidelines": [
+        "types of non-digital media to which access is restricted are defined;"
+      ]
+    },
+    {
+      "id": "mp-02_odp.04",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles authorized to access non-digital media is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "au-9",
+    "cp-2",
+    "cp-9",
+    "cp-10",
+    "ma-5",
+    "mp-4",
+    "mp-6",
+    "pe-2",
+    "pe-3",
+    "sc-12",
+    "sc-13",
+    "sc-34",
+    "si-12"
+  ]
+}

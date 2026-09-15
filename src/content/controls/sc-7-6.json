@@ -1,0 +1,20 @@
+{
+  "id": "sc-7.6",
+  "slug": "sc-7-6",
+  "label": "SC-7(6)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Response to Recognized Failures",
+  "familyCode": "SC",
+  "sortId": "sc-07.06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-7.18"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

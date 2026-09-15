@@ -1,0 +1,24 @@
+{
+  "id": "pe-12.1",
+  "slug": "pe-12-1",
+  "label": "PE-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-12",
+  "enhancementSlugs": [],
+  "title": "Essential Mission and Business Functions",
+  "familyCode": "PE",
+  "sortId": "pe-12.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide emergency lighting for all areas within the facility supporting essential mission and business functions.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations define their essential missions and functions.",
+  "params": [],
+  "related": []
+}

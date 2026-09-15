@@ -1,0 +1,36 @@
+{
+  "id": "ac-4.6",
+  "slug": "ac-4-6",
+  "label": "AC-4(6)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Metadata",
+  "familyCode": "AC",
+  "sortId": "ac-04.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce information flow control based on {{ insert: param, ac-04.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Metadata is information that describes the characteristics of data. Metadata can include structural metadata describing data structures or descriptive metadata describing data content. Enforcement of allowed information flows based on metadata enables simpler and more effective flow control. Organizations consider the trustworthiness of metadata regarding data accuracy (i.e., knowledge that the metadata values are correct with respect to the data), data integrity (i.e., protecting against unauthorized changes to metadata tags), and the binding of metadata to the data payload (i.e., employing sufficiently strong binding techniques with appropriate assurance).",
+  "params": [
+    {
+      "id": "ac-04.06_odp",
+      "label": "metadata",
+      "select": null,
+      "guidelines": [
+        "metadata on which to base enforcement of information flow control is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-16",
+    "si-7"
+  ]
+}

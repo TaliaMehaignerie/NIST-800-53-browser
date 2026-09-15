@@ -1,0 +1,60 @@
+{
+  "id": "sc-45.1",
+  "slug": "sc-45-1",
+  "label": "SC-45(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-45",
+  "enhancementSlugs": [],
+  "title": "Synchronization with Authoritative Time Source",
+  "familyCode": "SC",
+  "sortId": "sc-45.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Compare the internal system clocks {{ insert: param, sc-45.01_odp.01 }} with {{ insert: param, sc-45.01_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Synchronize the internal system clocks to the authoritative time source when the time difference is greater than {{ insert: param, sc-45.01_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Synchronization of internal system clocks with an authoritative source provides uniformity of time stamps for systems with multiple system clocks and systems connected over a network.",
+  "params": [
+    {
+      "id": "sc-45.01_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to compare the internal system clocks with the authoritative time source is defined;"
+      ]
+    },
+    {
+      "id": "sc-45.01_odp.02",
+      "label": "authoritative time source",
+      "select": null,
+      "guidelines": [
+        "the authoritative time source to which internal system clocks are to be compared is defined;"
+      ]
+    },
+    {
+      "id": "sc-45.01_odp.03",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period to compare the internal system clocks with the authoritative time source is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

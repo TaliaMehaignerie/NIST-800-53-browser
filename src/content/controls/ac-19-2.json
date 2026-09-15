@@ -1,0 +1,20 @@
+{
+  "id": "ac-19.2",
+  "slug": "ac-19-2",
+  "label": "AC-19(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-19",
+  "enhancementSlugs": [],
+  "title": "Use of Personally Owned Portable Storage Devices",
+  "familyCode": "AC",
+  "sortId": "ac-19.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

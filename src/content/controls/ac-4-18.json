@@ -1,0 +1,20 @@
+{
+  "id": "ac-4.18",
+  "slug": "ac-4-18",
+  "label": "AC-4(18)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Security Attribute Binding",
+  "familyCode": "AC",
+  "sortId": "ac-04.18",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-16"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

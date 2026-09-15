@@ -1,0 +1,22 @@
+{
+  "id": "sa-14",
+  "slug": "sa-14",
+  "label": "SA-14",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-14-1"
+  ],
+  "title": "Criticality Analysis",
+  "familyCode": "SA",
+  "sortId": "sa-14",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ra-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

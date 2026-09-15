@@ -1,0 +1,20 @@
+{
+  "id": "si-3.2",
+  "slug": "si-3-2",
+  "label": "SI-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Automatic Updates",
+  "familyCode": "SI",
+  "sortId": "si-03.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

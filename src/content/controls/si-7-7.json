@@ -1,0 +1,42 @@
+{
+  "id": "si-7.7",
+  "slug": "si-7-7",
+  "label": "SI-7(7)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Integration of Detection and Response",
+  "familyCode": "SI",
+  "sortId": "si-07.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Incorporate the detection of the following unauthorized changes into the organizational incident response capability: {{ insert: param, si-07.07_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Integrating detection and response helps to ensure that detected events are tracked, monitored, corrected, and available for historical purposes. Maintaining historical records is important for being able to identify and discern adversary actions over an extended time period and for possible legal actions. Security-relevant changes include unauthorized changes to established configuration settings or the unauthorized elevation of system privileges.",
+  "params": [
+    {
+      "id": "si-07.07_odp",
+      "label": "changes",
+      "select": null,
+      "guidelines": [
+        "security-relevant changes to the system are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "ir-4",
+    "ir-5",
+    "si-4"
+  ]
+}

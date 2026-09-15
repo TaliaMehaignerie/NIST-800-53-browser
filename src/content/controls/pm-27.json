@@ -1,0 +1,84 @@
+{
+  "id": "pm-27",
+  "slug": "pm-27",
+  "label": "PM-27",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Privacy Reporting",
+  "familyCode": "PM",
+  "sortId": "pm-27",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop {{ insert: param, pm-27_odp.01 }} and disseminate to:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "{{ insert: param, pm-27_odp.02 }} to demonstrate accountability with statutory, regulatory, and policy privacy mandates; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "{{ insert: param, pm-27_odp.03 }} and other personnel with responsibility for monitoring privacy program compliance; and",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Review and update privacy reports {{ insert: param, pm-27_odp.04 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Through internal and external reporting, organizations promote accountability and transparency in organizational privacy operations. Reporting can also help organizations to determine progress in meeting privacy compliance requirements and privacy controls, compare performance across the federal government, discover vulnerabilities, identify gaps in policy and implementation, and identify models for success. For federal agencies, privacy reports include annual senior agency official for privacy reports to OMB, reports to Congress required by Implementing Regulations of the 9/11 Commission Act, and other public reports required by law, regulation, or policy, including internal policies of organizations. The senior agency official for privacy consults with legal counsel, where appropriate, to ensure that organizations meet all applicable privacy reporting requirements.",
+  "params": [
+    {
+      "id": "pm-27_odp.01",
+      "label": "privacy reports",
+      "select": null,
+      "guidelines": [
+        "privacy reports are defined;"
+      ]
+    },
+    {
+      "id": "pm-27_odp.02",
+      "label": "oversight bodies",
+      "select": null,
+      "guidelines": [
+        "privacy oversight bodies are defined;"
+      ]
+    },
+    {
+      "id": "pm-27_odp.03",
+      "label": "officials",
+      "select": null,
+      "guidelines": [
+        "officials responsible for monitoring privacy program compliance are defined;"
+      ]
+    },
+    {
+      "id": "pm-27_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for reviewing and updating privacy reports is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ir-9",
+    "pm-19"
+  ]
+}

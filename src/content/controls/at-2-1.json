@@ -1,0 +1,29 @@
+{
+  "id": "at-2.1",
+  "slug": "at-2-1",
+  "label": "AT-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "at-2",
+  "enhancementSlugs": [],
+  "title": "Practical Exercises",
+  "familyCode": "AT",
+  "sortId": "at-02.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide practical exercises in literacy training that simulate events and incidents.",
+      "children": []
+    }
+  ],
+  "guidance": "Practical exercises include no-notice social engineering attempts to collect information, gain unauthorized access, or simulate the adverse impact of opening malicious email attachments or invoking, via spear phishing attacks, malicious web links.",
+  "params": [],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "cp-4",
+    "ir-3"
+  ]
+}

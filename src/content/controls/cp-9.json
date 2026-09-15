@@ -1,0 +1,102 @@
+{
+  "id": "cp-9",
+  "slug": "cp-9",
+  "label": "CP-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cp-9-1",
+    "cp-9-2",
+    "cp-9-3",
+    "cp-9-4",
+    "cp-9-5",
+    "cp-9-6",
+    "cp-9-7",
+    "cp-9-8"
+  ],
+  "title": "System Backup",
+  "familyCode": "CP",
+  "sortId": "cp-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Conduct backups of user-level information contained in {{ insert: param, cp-09_odp.01 }} {{ insert: param, cp-09_odp.02 }};",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Conduct backups of system-level information contained in the system {{ insert: param, cp-09_odp.03 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Conduct backups of system documentation, including security- and privacy-related documentation {{ insert: param, cp-09_odp.04 }} ; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Protect the confidentiality, integrity, and availability of backup information.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System-level information includes system state information, operating system software, middleware, application software, and licenses. User-level information includes information other than system-level information. Mechanisms employed to protect the integrity of system backups include digital signatures and cryptographic hashes. Protection of system backup information while in transit is addressed by [MP-5](#mp-5) and [SC-8](#sc-8) . System backups reflect the requirements in contingency plans as well as other organizational requirements for backing up information. Organizations may be subject to laws, executive orders, directives, regulations, or policies with requirements regarding specific categories of information (e.g., personal health information). Organizational personnel consult with the senior agency official for privacy and legal counsel regarding such requirements.",
+  "params": [
+    {
+      "id": "cp-09_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components for which to conduct backups of user-level information is defined;"
+      ]
+    },
+    {
+      "id": "cp-09_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to conduct backups of user-level information consistent with recovery time and recovery point objectives is defined;"
+      ]
+    },
+    {
+      "id": "cp-09_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to conduct backups of system-level information consistent with recovery time and recovery point objectives is defined;"
+      ]
+    },
+    {
+      "id": "cp-09_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to conduct backups of system documentation consistent with recovery time and recovery point objectives is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "cp-6",
+    "cp-10",
+    "mp-4",
+    "mp-5",
+    "sc-8",
+    "sc-12",
+    "sc-13",
+    "si-4",
+    "si-13"
+  ]
+}

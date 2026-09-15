@@ -1,0 +1,28 @@
+{
+  "id": "sc-14",
+  "slug": "sc-14",
+  "label": "SC-14",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Public Access Protections",
+  "familyCode": "SC",
+  "sortId": "sc-14",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-2",
+    "ac-3",
+    "ac-5",
+    "ac-6",
+    "si-3",
+    "si-4",
+    "si-5",
+    "si-7",
+    "si-10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

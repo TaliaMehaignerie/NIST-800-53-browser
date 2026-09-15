@@ -1,0 +1,27 @@
+{
+  "id": "si-4.3",
+  "slug": "si-4-3",
+  "label": "SI-4(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Automated Tool and Mechanism Integration",
+  "familyCode": "SI",
+  "sortId": "si-04.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ automated tools and mechanisms to integrate intrusion detection tools and mechanisms into access control and flow control mechanisms.",
+      "children": []
+    }
+  ],
+  "guidance": "Using automated tools and mechanisms to integrate intrusion detection tools and mechanisms into access and flow control mechanisms facilitates a rapid response to attacks by enabling the reconfiguration of mechanisms in support of attack isolation and elimination.",
+  "params": [],
+  "related": [
+    "pm-23",
+    "pm-25"
+  ]
+}

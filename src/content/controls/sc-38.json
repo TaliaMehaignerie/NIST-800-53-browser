@@ -1,0 +1,45 @@
+{
+  "id": "sc-38",
+  "slug": "sc-38",
+  "label": "SC-38",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Operations Security",
+  "familyCode": "SC",
+  "sortId": "sc-38",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following operations security controls to protect key organizational information throughout the system development life cycle: {{ insert: param, sc-38_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Operations security (OPSEC) is a systematic process by which potential adversaries can be denied information about the capabilities and intentions of organizations by identifying, controlling, and protecting generally unclassified information that specifically relates to the planning and execution of sensitive organizational activities. The OPSEC process involves five steps: identification of critical information, analysis of threats, analysis of vulnerabilities, assessment of risks, and the application of appropriate countermeasures. OPSEC controls are applied to organizational systems and the environments in which those systems operate. OPSEC controls protect the confidentiality of information, including limiting the sharing of information with suppliers, potential suppliers, and other non-organizational elements and individuals. Information critical to organizational mission and business functions includes user identities, element uses, suppliers, supply chain processes, functional requirements, security requirements, system design specifications, testing and evaluation protocols, and security control implementation details.",
+  "params": [
+    {
+      "id": "sc-38_odp",
+      "label": "operations security controls",
+      "select": null,
+      "guidelines": [
+        "operations security controls to be employed to protect key organizational information throughout the system development life cycle are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "pl-1",
+    "pm-9",
+    "pm-12",
+    "ra-2",
+    "ra-3",
+    "ra-5",
+    "sc-7",
+    "sr-3",
+    "sr-7"
+  ]
+}

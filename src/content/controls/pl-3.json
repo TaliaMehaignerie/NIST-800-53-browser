@@ -1,0 +1,20 @@
+{
+  "id": "pl-3",
+  "slug": "pl-3",
+  "label": "PL-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "System Security Plan Update",
+  "familyCode": "PL",
+  "sortId": "pl-03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pl-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,37 @@
+{
+  "id": "si-12.1",
+  "slug": "si-12-1",
+  "label": "SI-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-12",
+  "enhancementSlugs": [],
+  "title": "Limit Personally Identifiable Information Elements",
+  "familyCode": "SI",
+  "sortId": "si-12.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit personally identifiable information being processed in the information life cycle to the following elements of personally identifiable information: {{ insert: param, si-12.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Limiting the use of personally identifiable information throughout the information life cycle when the information is not needed for operational purposes helps to reduce the level of privacy risk created by a system. The information life cycle includes information creation, collection, use, processing, storage, maintenance, dissemination, disclosure, and disposition. Risk assessments as well as applicable laws, regulations, and policies can provide useful inputs to determining which elements of personally identifiable information may create risk.",
+  "params": [
+    {
+      "id": "si-12.01_odp",
+      "label": "elements of personally identifiable information",
+      "select": null,
+      "guidelines": [
+        "elements of personally identifiable information being processed in the information life cycle are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pm-25"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "pm-10",
+  "slug": "pm-10",
+  "label": "PM-10",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Authorization Process",
+  "familyCode": "PM",
+  "sortId": "pm-10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Manage the security and privacy state of organizational systems and the environments in which those systems operate through authorization processes;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Designate individuals to fulfill specific roles and responsibilities within the organizational risk management process; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Integrate the authorization processes into an organization-wide risk management program.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Authorization processes for organizational systems and environments of operation require the implementation of an organization-wide risk management process and associated security and privacy standards and guidelines. Specific roles for risk management processes include a risk executive (function) and designated authorizing officials for each organizational system and common control provider. The authorization processes for the organization are integrated with continuous monitoring processes to facilitate ongoing understanding and acceptance of security and privacy risks to organizational operations, organizational assets, individuals, other organizations, and the Nation.",
+  "params": [],
+  "related": [
+    "ca-6",
+    "ca-7",
+    "pl-2"
+  ]
+}

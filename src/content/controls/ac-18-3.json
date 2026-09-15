@@ -1,0 +1,27 @@
+{
+  "id": "ac-18.3",
+  "slug": "ac-18-3",
+  "label": "AC-18(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-18",
+  "enhancementSlugs": [],
+  "title": "Disable Wireless Networking",
+  "familyCode": "AC",
+  "sortId": "ac-18.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Disable, when not intended for use, wireless networking capabilities embedded within system components prior to issuance and deployment.",
+      "children": []
+    }
+  ],
+  "guidance": "Wireless networking capabilities that are embedded within system components represent a significant potential vulnerability that can be exploited by adversaries. Disabling wireless capabilities when not needed for essential organizational missions or functions can reduce susceptibility to threats by adversaries involving wireless technologies.",
+  "params": [],
+  "related": []
+}

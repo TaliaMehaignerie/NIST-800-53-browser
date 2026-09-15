@@ -1,0 +1,63 @@
+{
+  "id": "cm-7.4",
+  "slug": "cm-7-4",
+  "label": "CM-7(4)",
+  "kind": "enhancement",
+  "parentSlug": "cm-7",
+  "enhancementSlugs": [],
+  "title": "Unauthorized Software — Deny-by-exception",
+  "familyCode": "CM",
+  "sortId": "cm-07.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Identify {{ insert: param, cm-07.04_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Employ an allow-all, deny-by-exception policy to prohibit the execution of unauthorized software programs on the system; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Review and update the list of unauthorized software programs {{ insert: param, cm-07.04_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Unauthorized software programs can be limited to specific versions or from a specific source. The concept of prohibiting the execution of unauthorized software may also be applied to user actions, system ports and protocols, IP addresses/ranges, websites, and MAC addresses.",
+  "params": [
+    {
+      "id": "cm-07.04_odp.01",
+      "label": "software programs",
+      "select": null,
+      "guidelines": [
+        "software programs not authorized to execute on the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-07.04_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to review and update the list of unauthorized software programs is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-6",
+    "cm-8",
+    "cm-10",
+    "pl-9",
+    "pm-5"
+  ]
+}

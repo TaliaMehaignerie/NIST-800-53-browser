@@ -1,0 +1,53 @@
+{
+  "id": "si-10.1",
+  "slug": "si-10-1",
+  "label": "SI-10(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-10",
+  "enhancementSlugs": [],
+  "title": "Manual Override Capability",
+  "familyCode": "SI",
+  "sortId": "si-10.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Provide a manual override capability for input validation of the following information inputs: {{ insert: param, si-10_odp }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Restrict the use of the manual override capability to only {{ insert: param, si-10.01_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Audit the use of the manual override capability.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "In certain situations, such as during events that are defined in contingency plans, a manual override capability for input validation may be needed. Manual overrides are used only in limited circumstances and with the inputs defined by the organization.",
+  "params": [
+    {
+      "id": "si-10.01_odp",
+      "label": "authorized individuals",
+      "select": null,
+      "guidelines": [
+        "authorized individuals who can use the manual override capability are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "au-2",
+    "au-12"
+  ]
+}

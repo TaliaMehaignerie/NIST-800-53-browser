@@ -1,0 +1,69 @@
+{
+  "id": "ac-4.10",
+  "slug": "ac-4-10",
+  "label": "AC-4(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Enable and Disable Security or Privacy Policy Filters",
+  "familyCode": "AC",
+  "sortId": "ac-04.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability for privileged administrators to enable and disable {{ insert: param, ac-4.10_prm_1 }} under the following conditions: {{ insert: param, ac-4.10_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "For example, as allowed by the system authorization, administrators can enable security or privacy policy filters to accommodate approved data types. Administrators also have the capability to select the filters that are executed on a specific data flow based on the type of data that is being transferred, the source and destination security domains, and other security or privacy relevant features, as needed.",
+  "params": [
+    {
+      "id": "ac-4.10_prm_1",
+      "label": "organization-defined security or privacy policy filters",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-4.10_prm_2",
+      "label": "organization-defined conditions",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.10_odp.01",
+      "label": "security filters",
+      "select": null,
+      "guidelines": [
+        "security policy filters that privileged administrators have the capability to enable and disable are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.10_odp.02",
+      "label": "privacy filters",
+      "select": null,
+      "guidelines": [
+        "privacy policy filters that privileged administrators have the capability to enable and disable are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.10_odp.03",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions under which privileged administrators have the capability to enable and disable security policy filters are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.10_odp.04",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions under which privileged administrators have the capability to enable and disable privacy policy filters are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

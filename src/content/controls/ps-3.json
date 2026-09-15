@@ -1,0 +1,77 @@
+{
+  "id": "ps-3",
+  "slug": "ps-3",
+  "label": "PS-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ps-3-1",
+    "ps-3-2",
+    "ps-3-3",
+    "ps-3-4"
+  ],
+  "title": "Personnel Screening",
+  "familyCode": "PS",
+  "sortId": "ps-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Screen individuals prior to authorizing access to the system; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Rescreen individuals in accordance with {{ insert: param, ps-3_prm_1 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Personnel screening and rescreening activities reflect applicable laws, executive orders, directives, regulations, policies, standards, guidelines, and specific criteria established for the risk designations of assigned positions. Examples of personnel screening include background investigations and agency checks. Organizations may define different rescreening conditions and frequencies for personnel accessing systems based on types of information processed, stored, or transmitted by the systems.",
+  "params": [
+    {
+      "id": "ps-3_prm_1",
+      "label": "organization-defined conditions requiring rescreening and, where rescreening is so indicated, the frequency of rescreening",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ps-03_odp.01",
+      "label": "conditions requiring rescreening",
+      "select": null,
+      "guidelines": [
+        "conditions requiring rescreening of individuals are defined;"
+      ]
+    },
+    {
+      "id": "ps-03_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency of rescreening individuals where it is so indicated is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "ia-4",
+    "ma-5",
+    "pe-2",
+    "pm-12",
+    "ps-2",
+    "ps-6",
+    "ps-7",
+    "sa-21"
+  ]
+}

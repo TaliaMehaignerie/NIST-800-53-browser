@@ -1,0 +1,20 @@
+{
+  "id": "ra-5.1",
+  "slug": "ra-5-1",
+  "label": "RA-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Update Tool Capability",
+  "familyCode": "RA",
+  "sortId": "ra-05.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ra-5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

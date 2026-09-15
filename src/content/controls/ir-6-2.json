@@ -1,0 +1,33 @@
+{
+  "id": "ir-6.2",
+  "slug": "ir-6-2",
+  "label": "IR-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "ir-6",
+  "enhancementSlugs": [],
+  "title": "Vulnerabilities Related to Incidents",
+  "familyCode": "IR",
+  "sortId": "ir-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Report system vulnerabilities associated with reported incidents to {{ insert: param, ir-06.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Reported incidents that uncover system vulnerabilities are analyzed by organizational personnel including system owners, mission and business owners, senior agency information security officers, senior agency officials for privacy, authorizing officials, and the risk executive (function). The analysis can serve to prioritize and initiate mitigation actions to address the discovered system vulnerability.",
+  "params": [
+    {
+      "id": "ir-06.02_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom system vulnerabilities associated with reported incidents are reported to is/are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "au-6.4",
+  "slug": "au-6-4",
+  "label": "AU-6(4)",
+  "kind": "enhancement",
+  "parentSlug": "au-6",
+  "enhancementSlugs": [],
+  "title": "Central Review and Analysis",
+  "familyCode": "AU",
+  "sortId": "au-06.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide and implement the capability to centrally review and analyze audit records from multiple components within the system.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms for centralized reviews and analyses include Security Information and Event Management products.",
+  "params": [],
+  "related": [
+    "au-2",
+    "au-12"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "sc-33",
+  "slug": "sc-33",
+  "label": "SC-33",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Transmission Preparation Integrity",
+  "familyCode": "SC",
+  "sortId": "sc-33",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

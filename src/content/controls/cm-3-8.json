@@ -1,0 +1,33 @@
+{
+  "id": "cm-3.8",
+  "slug": "cm-3-8",
+  "label": "CM-3(8)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Prevent or Restrict Configuration Changes",
+  "familyCode": "CM",
+  "sortId": "cm-03.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent or restrict changes to the configuration of the system under the following circumstances: {{ insert: param, cm-03.08_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System configuration changes can adversely affect critical system security and privacy functionality. Change restrictions can be enforced through automated mechanisms.",
+  "params": [
+    {
+      "id": "cm-03.08_odp",
+      "label": "circumstances",
+      "select": null,
+      "guidelines": [
+        "the circumstances under which changes are to be prevented or restricted are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

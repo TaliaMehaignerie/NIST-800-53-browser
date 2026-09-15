@@ -1,0 +1,73 @@
+{
+  "id": "au-3",
+  "slug": "au-3",
+  "label": "AU-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-3-1",
+    "au-3-2",
+    "au-3-3"
+  ],
+  "title": "Content of Audit Records",
+  "familyCode": "AU",
+  "sortId": "au-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure that audit records contain information that establishes the following:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "What type of event occurred;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "When the event occurred;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Where the event occurred;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Source of the event;",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Outcome of the event; and",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Identity of any individuals, subjects, or objects/entities associated with the event.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Audit record content that may be necessary to support the auditing function includes event descriptions (item a), time stamps (item b), source and destination addresses (item c), user or process identifiers (items d and f), success or fail indications (item e), and filenames involved (items a, c, e, and f) . Event outcomes include indicators of event success or failure and event-specific results, such as the system security and privacy posture after the event occurred. Organizations consider how audit records can reveal information about individuals that may give rise to privacy risks and how best to mitigate such risks. For example, there is the potential to reveal personally identifiable information in the audit trail, especially if the trail records inputs or is based on patterns or time of usage.",
+  "params": [],
+  "related": [
+    "au-2",
+    "au-8",
+    "au-12",
+    "au-14",
+    "ma-4",
+    "pl-9",
+    "sa-8",
+    "si-7",
+    "si-11"
+  ]
+}

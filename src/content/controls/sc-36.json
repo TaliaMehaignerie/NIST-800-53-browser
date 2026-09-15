@@ -1,0 +1,91 @@
+{
+  "id": "sc-36",
+  "slug": "sc-36",
+  "label": "SC-36",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-36-1",
+    "sc-36-2"
+  ],
+  "title": "Distributed Processing and Storage",
+  "familyCode": "SC",
+  "sortId": "sc-36",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Distribute the following processing and storage components across multiple {{ insert: param, sc-36_prm_1 }}: {{ insert: param, sc-36_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Distributing processing and storage across multiple physical locations or logical domains provides a degree of redundancy or overlap for organizations. The redundancy and overlap increase the work factor of adversaries to adversely impact organizational operations, assets, and individuals. The use of distributed processing and storage does not assume a single primary processing or storage location. Therefore, it allows for parallel processing and storage.",
+  "params": [
+    {
+      "id": "sc-36_prm_1",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physical locations",
+          "logical domains"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-36_prm_2",
+      "label": "organization-defined processing and storage components",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sc-36_odp.01",
+      "label": "processing components",
+      "select": null,
+      "guidelines": [
+        "processing components to be distributed across multiple locations/domains are defined;"
+      ]
+    },
+    {
+      "id": "sc-36_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physical locations",
+          "logical domains"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-36_odp.03",
+      "label": "storage components",
+      "select": null,
+      "guidelines": [
+        "storage components to be distributed across multiple locations/domains are defined;"
+      ]
+    },
+    {
+      "id": "sc-36_odp.04",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physical locations",
+          "logical domains"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "cp-6",
+    "cp-7",
+    "pl-8",
+    "sc-32"
+  ]
+}

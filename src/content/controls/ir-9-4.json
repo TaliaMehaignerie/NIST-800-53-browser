@@ -1,0 +1,33 @@
+{
+  "id": "ir-9.4",
+  "slug": "ir-9-4",
+  "label": "IR-9(4)",
+  "kind": "enhancement",
+  "parentSlug": "ir-9",
+  "enhancementSlugs": [],
+  "title": "Exposure to Unauthorized Personnel",
+  "familyCode": "IR",
+  "sortId": "ir-09.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following controls for personnel exposed to information not within assigned access authorizations: {{ insert: param, ir-09.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Controls include ensuring that personnel who are exposed to spilled information are made aware of the laws, executive orders, directives, regulations, policies, standards, and guidelines regarding the information and the restrictions imposed based on exposure to such information.",
+  "params": [
+    {
+      "id": "ir-09.04_odp",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls employed for personnel exposed to information not within assigned access authorizations are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

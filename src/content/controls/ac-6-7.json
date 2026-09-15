@@ -1,0 +1,57 @@
+{
+  "id": "ac-6.7",
+  "slug": "ac-6-7",
+  "label": "AC-6(7)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Review of User Privileges",
+  "familyCode": "AC",
+  "sortId": "ac-06.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Review {{ insert: param, ac-06.07_odp.01 }} the privileges assigned to {{ insert: param, ac-06.07_odp.02 }} to validate the need for such privileges; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Reassign or remove privileges, if necessary, to correctly reflect organizational mission and business needs.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The need for certain assigned user privileges may change over time to reflect changes in organizational mission and business functions, environments of operation, technologies, or threats. A periodic review of assigned user privileges is necessary to determine if the rationale for assigning such privileges remains valid. If the need cannot be revalidated, organizations take appropriate corrective actions.",
+  "params": [
+    {
+      "id": "ac-06.07_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review the privileges assigned to roles or classes of users is defined;"
+      ]
+    },
+    {
+      "id": "ac-06.07_odp.02",
+      "label": "roles and classes",
+      "select": null,
+      "guidelines": [
+        "roles or classes of users to which privileges are assigned are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7"
+  ]
+}

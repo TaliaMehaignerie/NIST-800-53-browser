@@ -1,0 +1,20 @@
+{
+  "id": "si-13.2",
+  "slug": "si-13-2",
+  "label": "SI-13(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-13",
+  "enhancementSlugs": [],
+  "title": "Time Limit on Process Execution Without Supervision",
+  "familyCode": "SI",
+  "sortId": "si-13.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-7.16"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

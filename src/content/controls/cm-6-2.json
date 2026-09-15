@@ -1,0 +1,47 @@
+{
+  "id": "cm-6.2",
+  "slug": "cm-6-2",
+  "label": "CM-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "cm-6",
+  "enhancementSlugs": [],
+  "title": "Respond to Unauthorized Changes",
+  "familyCode": "CM",
+  "sortId": "cm-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Take the following actions in response to unauthorized changes to {{ insert: param, cm-06.02_odp.02 }}: {{ insert: param, cm-06.02_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Responses to unauthorized changes to configuration settings include alerting designated organizational personnel, restoring established configuration settings, or—in extreme cases—halting affected system processing.",
+  "params": [
+    {
+      "id": "cm-06.02_odp.01",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to be taken upon an unauthorized change are defined;"
+      ]
+    },
+    {
+      "id": "cm-06.02_odp.02",
+      "label": "configuration settings",
+      "select": null,
+      "guidelines": [
+        "configuration settings requiring action upon an unauthorized change are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ir-4",
+    "ir-6",
+    "si-7"
+  ]
+}

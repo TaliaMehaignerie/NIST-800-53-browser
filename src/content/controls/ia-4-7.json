@@ -1,0 +1,20 @@
+{
+  "id": "ia-4.7",
+  "slug": "ia-4-7",
+  "label": "IA-4(7)",
+  "kind": "enhancement",
+  "parentSlug": "ia-4",
+  "enhancementSlugs": [],
+  "title": "In-person Registration",
+  "familyCode": "IA",
+  "sortId": "ia-04.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-12.4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

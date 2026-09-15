@@ -1,0 +1,51 @@
+{
+  "id": "pe-6.2",
+  "slug": "pe-6-2",
+  "label": "PE-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-6",
+  "enhancementSlugs": [],
+  "title": "Automated Intrusion Recognition and Responses",
+  "familyCode": "PE",
+  "sortId": "pe-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Recognize {{ insert: param, pe-06.02_odp.01 }} and initiate {{ insert: param, pe-06.02_odp.02 }} using {{ insert: param, pe-06.02_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Response actions can include notifying selected organizational personnel or law enforcement personnel. Automated mechanisms implemented to initiate response actions include system alert notifications, email and text messages, and activating door locking mechanisms. Physical access monitoring can be coordinated with intrusion detection systems and system monitoring capabilities to provide integrated threat coverage for the organization.",
+  "params": [
+    {
+      "id": "pe-06.02_odp.01",
+      "label": "classes or types of intrusions",
+      "select": null,
+      "guidelines": [
+        "classes or types of intrusions to be recognized by automated mechanisms are defined;"
+      ]
+    },
+    {
+      "id": "pe-06.02_odp.02",
+      "label": "response actions",
+      "select": null,
+      "guidelines": [
+        "response actions to be initiated by automated mechanisms when organization-defined classes or types of intrusions are recognized are defined;"
+      ]
+    },
+    {
+      "id": "pe-06.02_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to recognize classes or types of intrusions and initiate response actions (defined in [PE-06(02)_ODP](#pe-06.02_odp.02)) are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-4"
+  ]
+}

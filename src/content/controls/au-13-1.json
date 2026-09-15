@@ -1,0 +1,33 @@
+{
+  "id": "au-13.1",
+  "slug": "au-13-1",
+  "label": "AU-13(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-13",
+  "enhancementSlugs": [],
+  "title": "Use of Automated Tools",
+  "familyCode": "AU",
+  "sortId": "au-13.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Monitor open-source information and information sites using {{ insert: param, au-13.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms include commercial services that provide notifications and alerts to organizations and automated scripts to monitor new posts on websites.",
+  "params": [
+    {
+      "id": "au-13.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms for monitoring open-source information and information sites are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

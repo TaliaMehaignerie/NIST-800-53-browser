@@ -1,0 +1,33 @@
+{
+  "id": "ac-21.2",
+  "slug": "ac-21-2",
+  "label": "AC-21(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-21",
+  "enhancementSlugs": [],
+  "title": "Information Search and Retrieval",
+  "familyCode": "AC",
+  "sortId": "ac-21.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement information search and retrieval services that enforce {{ insert: param, ac-21.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information search and retrieval services identify information system resources relevant to an information need.",
+  "params": [
+    {
+      "id": "ac-21.02_odp",
+      "label": "information-sharing restrictions",
+      "select": null,
+      "guidelines": [
+        "information-sharing restrictions to be enforced by information search and retrieval services are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

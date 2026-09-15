@@ -1,0 +1,27 @@
+{
+  "id": "ia-12.2",
+  "slug": "ia-12-2",
+  "label": "IA-12(2)",
+  "kind": "enhancement",
+  "parentSlug": "ia-12",
+  "enhancementSlugs": [],
+  "title": "Identity Evidence",
+  "familyCode": "IA",
+  "sortId": "ia-12.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require evidence of individual identification be presented to the registration authority.",
+      "children": []
+    }
+  ],
+  "guidance": "Identity evidence, such as documentary evidence or a combination of documents and biometrics, reduces the likelihood of individuals using fraudulent identification to establish an identity or at least increases the work factor of potential adversaries. The forms of acceptable evidence are consistent with the risks to the systems, roles, and privileges associated with the user’s account.",
+  "params": [],
+  "related": []
+}

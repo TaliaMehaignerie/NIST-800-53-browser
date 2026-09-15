@@ -1,0 +1,36 @@
+{
+  "id": "ac-3.2",
+  "slug": "ac-3-2",
+  "label": "AC-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Dual Authorization",
+  "familyCode": "AC",
+  "sortId": "ac-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce dual authorization for {{ insert: param, ac-03.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Dual authorization, also known as two-person control, reduces risk related to insider threats. Dual authorization mechanisms require the approval of two authorized individuals to execute. To reduce the risk of collusion, organizations consider rotating dual authorization duties. Organizations consider the risk associated with implementing dual authorization mechanisms when immediate responses are necessary to ensure public and environmental safety.",
+  "params": [
+    {
+      "id": "ac-03.02_odp",
+      "label": "privileged commands and/or other actions",
+      "select": null,
+      "guidelines": [
+        "privileged commands and/or other actions requiring dual authorization are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-9",
+    "mp-6"
+  ]
+}

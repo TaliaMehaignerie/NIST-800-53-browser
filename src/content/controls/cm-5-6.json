@@ -1,0 +1,26 @@
+{
+  "id": "cm-5.6",
+  "slug": "cm-5-6",
+  "label": "CM-5(6)",
+  "kind": "enhancement",
+  "parentSlug": "cm-5",
+  "enhancementSlugs": [],
+  "title": "Limit Library Privileges",
+  "familyCode": "CM",
+  "sortId": "cm-05.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit privileges to change software resident within software libraries.",
+      "children": []
+    }
+  ],
+  "guidance": "Software libraries include privileged programs.",
+  "params": [],
+  "related": [
+    "ac-2"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "cp-9.7",
+  "slug": "cp-9-7",
+  "label": "CP-9(7)",
+  "kind": "enhancement",
+  "parentSlug": "cp-9",
+  "enhancementSlugs": [],
+  "title": "Dual Authorization for Deletion or Destruction",
+  "familyCode": "CP",
+  "sortId": "cp-09.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce dual authorization for the deletion or destruction of {{ insert: param, cp-09.07_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Dual authorization ensures that deletion or destruction of backup information cannot occur unless two qualified individuals carry out the task. Individuals deleting or destroying backup information possess the skills or expertise to determine if the proposed deletion or destruction of information reflects organizational policies and procedures. Dual authorization may also be known as two-person control. To reduce the risk of collusion, organizations consider rotating dual authorization duties to other individuals.",
+  "params": [
+    {
+      "id": "cp-09.07_odp",
+      "label": "backup information",
+      "select": null,
+      "guidelines": [
+        "backup information for which to enforce dual authorization in order to delete or destroy is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-5",
+    "mp-2"
+  ]
+}

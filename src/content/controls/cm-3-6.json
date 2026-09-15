@@ -1,0 +1,37 @@
+{
+  "id": "cm-3.6",
+  "slug": "cm-3-6",
+  "label": "CM-3(6)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Cryptography Management",
+  "familyCode": "CM",
+  "sortId": "cm-03.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure that cryptographic mechanisms used to provide the following controls are under configuration management: {{ insert: param, cm-03.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The controls referenced in the control enhancement refer to security and privacy controls from the control catalog. Regardless of the cryptographic mechanisms employed, processes and procedures are in place to manage those mechanisms. For example, if system components use certificates for identification and authentication, a process is implemented to address the expiration of those certificates.",
+  "params": [
+    {
+      "id": "cm-03.06_odp",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls provided by cryptographic mechanisms that are to be under configuration management are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12"
+  ]
+}

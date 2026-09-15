@@ -1,0 +1,20 @@
+{
+  "id": "si-3.3",
+  "slug": "si-3-3",
+  "label": "SI-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Non-privileged Users",
+  "familyCode": "SI",
+  "sortId": "si-03.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-6.10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

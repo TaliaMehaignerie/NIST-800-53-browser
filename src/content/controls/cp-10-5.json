@@ -1,0 +1,20 @@
+{
+  "id": "cp-10.5",
+  "slug": "cp-10-5",
+  "label": "CP-10(5)",
+  "kind": "enhancement",
+  "parentSlug": "cp-10",
+  "enhancementSlugs": [],
+  "title": "Failover Capability",
+  "familyCode": "CP",
+  "sortId": "cp-10.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-13"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

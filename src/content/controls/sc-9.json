@@ -1,0 +1,20 @@
+{
+  "id": "sc-9",
+  "slug": "sc-9",
+  "label": "SC-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Transmission Confidentiality",
+  "familyCode": "SC",
+  "sortId": "sc-09",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

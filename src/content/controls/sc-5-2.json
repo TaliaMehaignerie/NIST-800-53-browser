@@ -1,0 +1,24 @@
+{
+  "id": "sc-5.2",
+  "slug": "sc-5-2",
+  "label": "SC-5(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-5",
+  "enhancementSlugs": [],
+  "title": "Capacity, Bandwidth, and Redundancy",
+  "familyCode": "SC",
+  "sortId": "sc-05.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manage capacity, bandwidth, or other redundancy to limit the effects of information flooding denial-of-service attacks.",
+      "children": []
+    }
+  ],
+  "guidance": "Managing capacity ensures that sufficient capacity is available to counter flooding attacks. Managing capacity includes establishing selected usage priorities, quotas, partitioning, or load balancing.",
+  "params": [],
+  "related": []
+}

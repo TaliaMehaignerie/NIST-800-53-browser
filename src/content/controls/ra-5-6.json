@@ -1,0 +1,33 @@
+{
+  "id": "ra-5.6",
+  "slug": "ra-5-6",
+  "label": "RA-5(6)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Automated Trend Analyses",
+  "familyCode": "RA",
+  "sortId": "ra-05.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Compare the results of multiple vulnerability scans using {{ insert: param, ra-05.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Using automated mechanisms to analyze multiple vulnerability scans over time can help determine trends in system vulnerabilities and identify patterns of attack.",
+  "params": [
+    {
+      "id": "ra-05.06_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to compare the results of multiple vulnerability scans are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

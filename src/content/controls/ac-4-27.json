@@ -1,0 +1,24 @@
+{
+  "id": "ac-4.27",
+  "slug": "ac-4-27",
+  "label": "AC-4(27)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Redundant/Independent Filtering Mechanisms",
+  "familyCode": "AC",
+  "sortId": "ac-04.27",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, implement content filtering solutions that provide redundant and independent filtering mechanisms for each data type.",
+      "children": []
+    }
+  ],
+  "guidance": "Content filtering is the process of inspecting information as it traverses a cross-domain solution and determines if the information meets a predefined policy. Redundant and independent content filtering eliminates a single point of failure filtering system. Independence is defined as the implementation of a content filter that uses a different code base and supporting libraries (e.g., two JPEG filters using different vendors’ JPEG libraries) and multiple, independent system processes.",
+  "params": [],
+  "related": []
+}

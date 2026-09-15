@@ -1,0 +1,41 @@
+{
+  "id": "sc-18.1",
+  "slug": "sc-18-1",
+  "label": "SC-18(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-18",
+  "enhancementSlugs": [],
+  "title": "Identify Unacceptable Code and Take Corrective Actions",
+  "familyCode": "SC",
+  "sortId": "sc-18.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Identify {{ insert: param, sc-18.01_odp.01 }} and take {{ insert: param, sc-18.01_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Corrective actions when unacceptable mobile code is detected include blocking, quarantine, or alerting administrators. Blocking includes preventing the transmission of word processing files with embedded macros when such macros have been determined to be unacceptable mobile code.",
+  "params": [
+    {
+      "id": "sc-18.01_odp.01",
+      "label": "unacceptable mobile code",
+      "select": null,
+      "guidelines": [
+        "unacceptable mobile code to be identified is defined;"
+      ]
+    },
+    {
+      "id": "sc-18.01_odp.02",
+      "label": "corrective actions",
+      "select": null,
+      "guidelines": [
+        "corrective actions to be taken when unacceptable mobile code is identified are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,48 @@
+{
+  "id": "si-3.6",
+  "slug": "si-3-6",
+  "label": "SI-3(6)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Testing and Verification",
+  "familyCode": "SI",
+  "sortId": "si-03.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Test malicious code protection mechanisms {{ insert: param, si-03.06_odp }} by introducing known benign code into the system; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Verify that the detection of the code and the associated incident reporting occur.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "si-03.06_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to test malicious code protection mechanisms is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "ra-5"
+  ]
+}

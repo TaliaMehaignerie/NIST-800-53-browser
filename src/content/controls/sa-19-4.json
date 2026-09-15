@@ -1,0 +1,20 @@
+{
+  "id": "sa-19.4",
+  "slug": "sa-19-4",
+  "label": "SA-19(4)",
+  "kind": "enhancement",
+  "parentSlug": "sa-19",
+  "enhancementSlugs": [],
+  "title": "Anti-counterfeit Scanning",
+  "familyCode": "SA",
+  "sortId": "sa-19.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-11.3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

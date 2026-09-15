@@ -1,0 +1,56 @@
+{
+  "id": "at-4",
+  "slug": "at-4",
+  "label": "AT-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Training Records",
+  "familyCode": "AT",
+  "sortId": "at-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Document and monitor information security and privacy training activities, including security and privacy awareness training and specific role-based security and privacy training; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Retain individual training records for {{ insert: param, at-04_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Documentation for specialized training may be maintained by individual supervisors at the discretion of the organization. The National Archives and Records Administration provides guidance on records retention for federal agencies.",
+  "params": [
+    {
+      "id": "at-04_odp",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for retaining individual training records is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-2",
+    "at-3",
+    "cp-3",
+    "ir-2",
+    "pm-14",
+    "si-12"
+  ]
+}

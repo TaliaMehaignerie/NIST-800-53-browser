@@ -1,0 +1,45 @@
+{
+  "id": "ac-17.10",
+  "slug": "ac-17-10",
+  "label": "AC-17(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Authenticate Remote Commands",
+  "familyCode": "AC",
+  "sortId": "ac-17.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, ac-17.10_odp.01 }} to authenticate {{ insert: param, ac-17.10_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Authenticating remote commands protects against unauthorized commands and the replay of authorized commands. The ability to authenticate remote commands is important for remote systems for which loss, malfunction, misdirection, or exploitation would have immediate or serious consequences, such as injury, death, property damage, loss of high value assets, failure of mission or business functions, or compromise of classified or controlled unclassified information. Authentication mechanisms for remote commands ensure that systems accept and execute commands in the order intended, execute only authorized commands, and reject unauthorized commands. Cryptographic mechanisms can be used, for example, to authenticate remote commands.",
+  "params": [
+    {
+      "id": "ac-17.10_odp.01",
+      "label": "mechanisms",
+      "select": null,
+      "guidelines": [
+        "mechanisms implemented to authenticate remote commands are defined;"
+      ]
+    },
+    {
+      "id": "ac-17.10_odp.02",
+      "label": "remote commands",
+      "select": null,
+      "guidelines": [
+        "remote commands to be authenticated by mechanisms are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13",
+    "sc-23"
+  ]
+}

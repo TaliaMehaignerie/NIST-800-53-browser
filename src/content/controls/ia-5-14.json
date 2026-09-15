@@ -1,0 +1,24 @@
+{
+  "id": "ia-5.14",
+  "slug": "ia-5-14",
+  "label": "IA-5(14)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Managing Content of PKI Trust Stores",
+  "familyCode": "IA",
+  "sortId": "ia-05.14",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "For PKI-based authentication, employ an organization-wide methodology for managing the content of PKI trust stores installed across all platforms, including networks, operating systems, browsers, and applications.",
+      "children": []
+    }
+  ],
+  "guidance": "An organization-wide methodology for managing the content of PKI trust stores helps improve the accuracy and currency of PKI-based authentication credentials across the organization.",
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,168 @@
+{
+  "id": "sa-24",
+  "slug": "sa-24",
+  "label": "SA-24",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Design For Cyber Resiliency",
+  "familyCode": "SA",
+  "sortId": "sa-24",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Design organizational systems, system components, or system services to achieve cyber resiliency by:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Defining the following cyber resiliency goals: {{ insert: param, sa-24_odp.01 }}.",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Defining the following cyber resiliency objectives: {{ insert: param, sa-24_odp.02 }}.",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Defining the following cyber resiliency techniques: {{ insert: param, sa-24_odp.03 }}.",
+              "children": []
+            },
+            {
+              "label": "4.",
+              "prose": "Defining the following cyber resiliency implementation approaches: {{ insert: param, sa-24_odp.04 }}.",
+              "children": []
+            },
+            {
+              "label": "5.",
+              "prose": "Defining the following cyber resiliency design principles: {{ insert: param, sa-24_odp.05 }}.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Implement the selected cyber resiliency goals, objectives, techniques, implementation approaches, and design principles as part of an organizational risk management process or systems security engineering process.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Cyber resiliency is critical to ensuring the survivability of mission critical systems and high value assets. Cyber resiliency focuses on limiting the damage from adversity or the conditions that can cause a loss of assets. Damage can affect: (1) organizations (e.g., loss of reputation, increased existential risk); (2) missions or business functions (e.g., decreased capability to complete current missions and to accomplish future missions); (3) security (e.g., decreased capability to achieve security objectives or to prevent, detect, and respond to cyber incidents); (4) systems (e.g., unauthorized use of system resources or decreased capability to meet system requirements); or (5) specific system elements (e.g., physical destruction; corruption, modification, or fabrication of information).\n\nCyber resiliency goals are intended to help organizations maintain a state of informed preparedness for adversity, continue essential mission or business functions despite adversity, restore mission or business functions during and after adversity, and modify mission or business functions and their supporting capabilities in response to predicted changes in technical, operational, or threat environments.\n\nNIST SP 800-160, Volume 2 provides additional information on the Cyber Resiliency Engineering Framework to include detailed descriptions of cyber resiliency goals, objectives, techniques, implementation approaches, and design principles. NIST SP 800-160, Vol 1 provides additional information on achieving cyber resiliency as an emergent property of an engineered system.",
+  "params": [
+    {
+      "id": "sa-24_odp.01",
+      "label": "cyber resiliency goals",
+      "select": null,
+      "guidelines": [
+        "cyber resiliency goals are defined;"
+      ]
+    },
+    {
+      "id": "sa-24_odp.02",
+      "label": "cyber resiliency objectives",
+      "select": null,
+      "guidelines": [
+        "cyber resiliency objectives are defined;"
+      ]
+    },
+    {
+      "id": "sa-24_odp.03",
+      "label": "cyber resiliency techniques",
+      "select": null,
+      "guidelines": [
+        "cyber resiliency techniques are defined;"
+      ]
+    },
+    {
+      "id": "sa-24_odp.04",
+      "label": "cyber resiliency implementation approaches",
+      "select": null,
+      "guidelines": [
+        "cyber resiliency implementation approaches are defined;"
+      ]
+    },
+    {
+      "id": "sa-24_odp.05",
+      "label": "cyber resiliency design principles",
+      "select": null,
+      "guidelines": [
+        "cyber resiliency design principles are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7",
+    "cp-2",
+    "cp-4",
+    "cp-9",
+    "cp-10",
+    "cp-11",
+    "cp-12",
+    "cp-13",
+    "ia-10",
+    "ir-4",
+    "ir-5",
+    "pe-11",
+    "pe-17",
+    "pl-8",
+    "pm-7",
+    "pm-16",
+    "pm-30",
+    "pm-31",
+    "ra-3",
+    "ra-5",
+    "ra-9",
+    "ra-10",
+    "sa-3",
+    "sa-8",
+    "sa-9",
+    "sa-17",
+    "sc-3",
+    "sc-5",
+    "sc-7",
+    "sc-10",
+    "sc-11",
+    "sc-29",
+    "sc-30",
+    "sc-34",
+    "sc-35",
+    "sc-36",
+    "sc-37",
+    "sc-39",
+    "sc-44",
+    "sc-47",
+    "sc-48",
+    "sc-49",
+    "sc-50",
+    "sc-51",
+    "si-3",
+    "si-4",
+    "si-6",
+    "si-7",
+    "si-10",
+    "si-14",
+    "si-15",
+    "si-16",
+    "si-19",
+    "si-20",
+    "si-21",
+    "si-22",
+    "si-23",
+    "sr-3",
+    "sr-4",
+    "sr-5",
+    "sr-6",
+    "sr-7",
+    "sr-9",
+    "sr-10",
+    "sr-11"
+  ]
+}

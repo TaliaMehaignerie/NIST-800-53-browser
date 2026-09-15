@@ -1,0 +1,14 @@
+# `scripts/ingest.mjs` writes LF, and AD-2 requires its output be committed and
+# byte-reproducible ("re-running with unchanged inputs produces byte-identical
+# output"). With Git's default `core.autocrlf=true` on Windows, a fresh checkout
+# would materialise the generated collection as CRLF while the next ingest run
+# rewrites it as LF — every one of the 1217 entries would show as touched on
+# disk. Pinning eol=lf keeps the committed bytes and the produced bytes the same
+# on every platform.
+src/content/**/*.json text eol=lf
+
+# Same reasoning for the pipeline and its sole slug dependency, so the scripts
+# that produce that output are themselves stable across platforms.
+scripts/*.mjs text eol=lf
+src/utils/*.ts text eol=lf
+src/content.config.ts text eol=lf

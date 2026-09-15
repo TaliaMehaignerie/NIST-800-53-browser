@@ -1,0 +1,35 @@
+{
+  "id": "ac-4.3",
+  "slug": "ac-4-3",
+  "label": "AC-4(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Dynamic Information Flow Control",
+  "familyCode": "AC",
+  "sortId": "ac-04.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce {{ insert: param, ac-04.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizational policies regarding dynamic information flow control include allowing or disallowing information flows based on changing conditions or mission or operational considerations. Changing conditions include changes in risk tolerance due to changes in the immediacy of mission or business needs, changes in the threat environment, and detection of potentially harmful or adverse events.",
+  "params": [
+    {
+      "id": "ac-04.03_odp",
+      "label": "information flow control policies",
+      "select": null,
+      "guidelines": [
+        "information flow control policies to be enforced are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-4"
+  ]
+}

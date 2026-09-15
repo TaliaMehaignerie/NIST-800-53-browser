@@ -1,0 +1,20 @@
+{
+  "id": "pe-13.3",
+  "slug": "pe-13-3",
+  "label": "PE-13(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-13",
+  "enhancementSlugs": [],
+  "title": "Automatic Fire Suppression",
+  "familyCode": "PE",
+  "sortId": "pe-13.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-13.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

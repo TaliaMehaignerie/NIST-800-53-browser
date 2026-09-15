@@ -1,0 +1,63 @@
+{
+  "id": "sc-32",
+  "slug": "sc-32",
+  "label": "SC-32",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-32-1"
+  ],
+  "title": "System Partitioning",
+  "familyCode": "SC",
+  "sortId": "sc-32",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Partition the system into {{ insert: param, sc-32_odp.01 }} residing in separate {{ insert: param, sc-32_odp.02 }} domains or environments based on {{ insert: param, sc-32_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System partitioning is part of a defense-in-depth protection strategy. Organizations determine the degree of physical separation of system components. Physical separation options include physically distinct components in separate racks in the same room, critical components in separate rooms, and geographical separation of critical components. Security categorization can guide the selection of candidates for domain partitioning. Managed interfaces restrict or prohibit network access and information flow among partitioned system components.",
+  "params": [
+    {
+      "id": "sc-32_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to reside in separate physical or logical domains or environments based on circumstances for the physical or logical separation of components are defined;"
+      ]
+    },
+    {
+      "id": "sc-32_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physical",
+          "logical"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-32_odp.03",
+      "label": "circumstances for the physical or logical separation of components",
+      "select": null,
+      "guidelines": [
+        "circumstances for the physical or logical separation of components are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-4",
+    "ac-6",
+    "sa-8",
+    "sc-2",
+    "sc-3",
+    "sc-7",
+    "sc-36"
+  ]
+}

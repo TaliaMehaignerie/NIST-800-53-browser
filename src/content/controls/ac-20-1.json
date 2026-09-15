@@ -1,0 +1,40 @@
+{
+  "id": "ac-20.1",
+  "slug": "ac-20-1",
+  "label": "AC-20(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-20",
+  "enhancementSlugs": [],
+  "title": "Limits on Authorized Use",
+  "familyCode": "AC",
+  "sortId": "ac-20.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Permit authorized individuals to use an external system to access the system or to process, store, or transmit organization-controlled information only after:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Verification of the implementation of controls on the external system as specified in the organization’s security and privacy policies and security and privacy plans; or",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Retention of approved system connection or processing agreements with the organizational entity hosting the external system.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Limiting authorized use recognizes circumstances where individuals using external systems may need to access organizational systems. Organizations need assurance that the external systems contain the necessary controls so as not to compromise, damage, or otherwise harm organizational systems. Verification that the required controls have been implemented can be achieved by external, independent assessments, attestations, or other means, depending on the confidence level required by organizations.",
+  "params": [],
+  "related": [
+    "ca-2"
+  ]
+}

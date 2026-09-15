@@ -1,0 +1,33 @@
+{
+  "id": "cm-8.8",
+  "slug": "cm-8-8",
+  "label": "CM-8(8)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Automated Location Tracking",
+  "familyCode": "CM",
+  "sortId": "cm-08.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Support the tracking of system components by geographic location using {{ insert: param, cm-08.08_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The use of automated mechanisms to track the location of system components can increase the accuracy of component inventories. Such capability may help organizations rapidly identify the location and responsible individuals of system components that have been compromised, breached, or are otherwise in need of mitigation actions. The use of tracking mechanisms can be coordinated with senior agency officials for privacy if there are implications that affect individual privacy.",
+  "params": [
+    {
+      "id": "cm-08.08_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms for tracking components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

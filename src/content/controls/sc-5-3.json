@@ -1,0 +1,55 @@
+{
+  "id": "sc-5.3",
+  "slug": "sc-5-3",
+  "label": "SC-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-5",
+  "enhancementSlugs": [],
+  "title": "Detection and Monitoring",
+  "familyCode": "SC",
+  "sortId": "sc-05.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Employ the following monitoring tools to detect indicators of denial-of-service attacks against, or launched from, the system: {{ insert: param, sc-05.03_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Monitor the following system resources to determine if sufficient resources exist to prevent effective denial-of-service attacks: {{ insert: param, sc-05.03_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations consider the utilization and capacity of system resources when managing risk associated with a denial of service due to malicious attacks. Denial-of-service attacks can originate from external or internal sources. System resources that are sensitive to denial of service include physical disk storage, memory, and CPU cycles. Techniques used to prevent denial-of-service attacks related to storage utilization and capacity include instituting disk quotas, configuring systems to automatically alert administrators when specific storage capacity thresholds are reached, using file compression technologies to maximize available storage space, and imposing separate partitions for system and user data.",
+  "params": [
+    {
+      "id": "sc-05.03_odp.01",
+      "label": "monitoring tools",
+      "select": null,
+      "guidelines": [
+        "monitoring tools for detecting indicators of denial-of-service attacks are defined;"
+      ]
+    },
+    {
+      "id": "sc-05.03_odp.02",
+      "label": "system resources",
+      "select": null,
+      "guidelines": [
+        "system resources to be monitored to determine if sufficient resources exist to prevent effective denial-of-service attacks are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7",
+    "si-4"
+  ]
+}

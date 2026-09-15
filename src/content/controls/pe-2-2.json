@@ -1,0 +1,37 @@
+{
+  "id": "pe-2.2",
+  "slug": "pe-2-2",
+  "label": "PE-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-2",
+  "enhancementSlugs": [],
+  "title": "Two Forms of Identification",
+  "familyCode": "PE",
+  "sortId": "pe-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require two forms of identification from the following forms of identification for visitor access to the facility where the system resides: {{ insert: param, pe-02.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Acceptable forms of identification include passports, REAL ID-compliant drivers’ licenses, and Personal Identity Verification (PIV) cards. For gaining access to facilities using automated mechanisms, organizations may use PIV cards, key cards, PINs, and biometrics.",
+  "params": [
+    {
+      "id": "pe-02.02_odp",
+      "label": "list of acceptable forms of identification",
+      "select": null,
+      "guidelines": [
+        "a list of acceptable forms of identification for visitor access to the facility where the system resides is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-2",
+    "ia-4",
+    "ia-5"
+  ]
+}

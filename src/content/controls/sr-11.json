@@ -1,0 +1,79 @@
+{
+  "id": "sr-11",
+  "slug": "sr-11",
+  "label": "SR-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sr-11-1",
+    "sr-11-2",
+    "sr-11-3"
+  ],
+  "title": "Component Authenticity",
+  "familyCode": "SR",
+  "sortId": "sr-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop and implement anti-counterfeit policy and procedures that include the means to detect and prevent counterfeit components from entering the system; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Report counterfeit system components to {{ insert: param, sr-11_odp.01 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Sources of counterfeit components include manufacturers, developers, vendors, and contractors. Anti-counterfeiting policies and procedures support tamper resistance and provide a level of protection against the introduction of malicious code. External reporting organizations include CISA.",
+  "params": [
+    {
+      "id": "sr-11_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "source of counterfeit component",
+          "{{ insert: param, sr-11_odp.02 }} ",
+          "{{ insert: param, sr-11_odp.03 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sr-11_odp.02",
+      "label": "external reporting organizations",
+      "select": null,
+      "guidelines": [
+        "external reporting organizations to whom counterfeit system components are to be reported is/are defined (if selected);"
+      ]
+    },
+    {
+      "id": "sr-11_odp.03",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom counterfeit system components are to be reported is/are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "pe-3",
+    "sa-4",
+    "si-7",
+    "sr-9",
+    "sr-10"
+  ]
+}

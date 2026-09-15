@@ -1,0 +1,41 @@
+{
+  "id": "si-2.5",
+  "slug": "si-2-5",
+  "label": "SI-2(5)",
+  "kind": "enhancement",
+  "parentSlug": "si-2",
+  "enhancementSlugs": [],
+  "title": "Automatic Software and Firmware Updates",
+  "familyCode": "SI",
+  "sortId": "si-02.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Install {{ insert: param, si-02.05_odp.01 }} automatically to {{ insert: param, si-02.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Due to system integrity and availability concerns, organizations consider the methodology used to carry out automatic updates. Organizations balance the need to ensure that the updates are installed as soon as possible with the need to maintain configuration management and control with any mission or operational impacts that automatic updates might impose (i.e., implementing a staggered deployment strategy).",
+  "params": [
+    {
+      "id": "si-02.05_odp.01",
+      "label": "security-relevant software and firmware updates",
+      "select": null,
+      "guidelines": [
+        "security-relevant software and firmware updates to be automatically installed to system components are defined;"
+      ]
+    },
+    {
+      "id": "si-02.05_odp.02",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components requiring security-relevant software updates to be automatically installed are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

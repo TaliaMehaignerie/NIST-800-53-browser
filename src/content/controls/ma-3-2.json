@@ -1,0 +1,29 @@
+{
+  "id": "ma-3.2",
+  "slug": "ma-3-2",
+  "label": "MA-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "ma-3",
+  "enhancementSlugs": [],
+  "title": "Inspect Media",
+  "familyCode": "MA",
+  "sortId": "ma-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Check media containing diagnostic and test programs for malicious code before the media are used in the system.",
+      "children": []
+    }
+  ],
+  "guidance": "If, upon inspection of media containing maintenance, diagnostic, and test programs, organizations determine that the media contains malicious code, the incident is handled consistent with organizational incident handling policies and procedures.",
+  "params": [],
+  "related": [
+    "si-3"
+  ]
+}

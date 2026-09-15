@@ -1,0 +1,41 @@
+{
+  "id": "sc-15.3",
+  "slug": "sc-15-3",
+  "label": "SC-15(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-15",
+  "enhancementSlugs": [],
+  "title": "Disabling and Removal in Secure Work Areas",
+  "familyCode": "SC",
+  "sortId": "sc-15.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Disable or remove collaborative computing devices and applications from {{ insert: param, sc-15.03_odp.01 }} in {{ insert: param, sc-15.03_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Failing to disable or remove collaborative computing devices and applications from systems or system components can result in compromises of information, including eavesdropping on conversations. A Sensitive Compartmented Information Facility (SCIF) is an example of a secure work area.",
+  "params": [
+    {
+      "id": "sc-15.03_odp.01",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "systems or system components from which collaborative computing devices are to be disabled or removed are defined;"
+      ]
+    },
+    {
+      "id": "sc-15.03_odp.02",
+      "label": "secure work areas",
+      "select": null,
+      "guidelines": [
+        "secure work areas where collaborative computing devices are to be disabled or removed from systems or system components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

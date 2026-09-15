@@ -1,0 +1,33 @@
+{
+  "id": "si-2.6",
+  "slug": "si-2-6",
+  "label": "SI-2(6)",
+  "kind": "enhancement",
+  "parentSlug": "si-2",
+  "enhancementSlugs": [],
+  "title": "Removal of Previous Versions of Software and Firmware",
+  "familyCode": "SI",
+  "sortId": "si-02.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Remove previous versions of {{ insert: param, si-02.06_odp }} after updated versions have been installed.",
+      "children": []
+    }
+  ],
+  "guidance": "Previous versions of software or firmware components that are not removed from the system after updates have been installed may be exploited by adversaries. Some products may automatically remove previous versions of software and firmware from the system.",
+  "params": [
+    {
+      "id": "si-02.06_odp",
+      "label": "software and firmware components",
+      "select": null,
+      "guidelines": [
+        "software and firmware components to be removed after updated versions have been installed are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

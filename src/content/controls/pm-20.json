@@ -1,0 +1,51 @@
+{
+  "id": "pm-20",
+  "slug": "pm-20",
+  "label": "PM-20",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pm-20-1"
+  ],
+  "title": "Dissemination of Privacy Program Information",
+  "familyCode": "PM",
+  "sortId": "pm-20",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain a central resource webpage on the organization’s principal public website that serves as a central source of information about the organization’s privacy program and that:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Ensures that the public has access to information about organizational privacy activities and can communicate with its senior agency official for privacy;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Ensures that organizational privacy practices and reports are publicly available; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Employs publicly facing email addresses and/or phone lines to enable the public to provide feedback and/or direct questions to privacy offices regarding privacy practices.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "For federal agencies, the webpage is located at www.[agency].gov/privacy. Federal agencies include public privacy impact assessments, system of records notices, computer matching notices and agreements, [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) exemption and implementation rules, privacy reports, privacy policies, instructions for individuals making an access or amendment request, email addresses for questions/complaints, blogs, and periodic publications.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "pm-19",
+    "pt-5",
+    "pt-6",
+    "pt-7",
+    "ra-8"
+  ]
+}

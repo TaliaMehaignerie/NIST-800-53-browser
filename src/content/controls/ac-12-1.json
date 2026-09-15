@@ -1,0 +1,33 @@
+{
+  "id": "ac-12.1",
+  "slug": "ac-12-1",
+  "label": "AC-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-12",
+  "enhancementSlugs": [],
+  "title": "User-initiated Logouts",
+  "familyCode": "AC",
+  "sortId": "ac-12.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide a logout capability for user-initiated communications sessions whenever authentication is used to gain access to {{ insert: param, ac-12.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information resources to which users gain access via authentication include local workstations, databases, and password-protected websites or web-based services.",
+  "params": [
+    {
+      "id": "ac-12.01_odp",
+      "label": "information resources",
+      "select": null,
+      "guidelines": [
+        "information resources for which a logout capability for user-initiated communications sessions is required are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

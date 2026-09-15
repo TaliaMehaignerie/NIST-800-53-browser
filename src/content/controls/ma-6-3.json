@@ -1,0 +1,33 @@
+{
+  "id": "ma-6.3",
+  "slug": "ma-6-3",
+  "label": "MA-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "ma-6",
+  "enhancementSlugs": [],
+  "title": "Automated Support for Predictive Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-06.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Transfer predictive maintenance data to a maintenance management system using {{ insert: param, ma-06.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "A computerized maintenance management system maintains a database of information about the maintenance operations of organizations and automates the processing of equipment condition data to trigger maintenance planning, execution, and reporting.",
+  "params": [
+    {
+      "id": "ma-06.03_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to transfer predictive maintenance data to a maintenance management system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,26 @@
+{
+  "id": "ia-5.17",
+  "slug": "ia-5-17",
+  "label": "IA-5(17)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Presentation Attack Detection for Biometric Authenticators",
+  "familyCode": "IA",
+  "sortId": "ia-05.17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ presentation attack detection mechanisms for biometric-based authentication.",
+      "children": []
+    }
+  ],
+  "guidance": "Biometric characteristics do not constitute secrets. Such characteristics can be obtained by online web accesses, taking a picture of someone with a camera phone to obtain facial images with or without their knowledge, lifting from objects that someone has touched (e.g., a latent fingerprint), or capturing a high-resolution image (e.g., an iris pattern). Presentation attack detection technologies including liveness detection, can mitigate the risk of these types of attacks by making it difficult to produce artifacts intended to defeat the biometric sensor.",
+  "params": [],
+  "related": [
+    "ac-7"
+  ]
+}

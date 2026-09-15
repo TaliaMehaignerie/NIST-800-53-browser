@@ -1,0 +1,45 @@
+{
+  "id": "pe-5",
+  "slug": "pe-5",
+  "label": "PE-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-5-1",
+    "pe-5-2",
+    "pe-5-3"
+  ],
+  "title": "Access Control for Output Devices",
+  "familyCode": "PE",
+  "sortId": "pe-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Control physical access to output from {{ insert: param, pe-05_odp }} to prevent unauthorized individuals from obtaining the output.",
+      "children": []
+    }
+  ],
+  "guidance": "Controlling physical access to output devices includes placing output devices in locked rooms or other secured areas with keypad or card reader access controls and allowing access to authorized individuals only, placing output devices in locations that can be monitored by personnel, installing monitor or screen filters, and using headphones. Examples of output devices include monitors, printers, scanners, audio devices, facsimile machines, and copiers.",
+  "params": [
+    {
+      "id": "pe-05_odp",
+      "label": "output devices",
+      "select": null,
+      "guidelines": [
+        "output devices that require physical access control to output are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-2",
+    "pe-3",
+    "pe-4",
+    "pe-18"
+  ]
+}

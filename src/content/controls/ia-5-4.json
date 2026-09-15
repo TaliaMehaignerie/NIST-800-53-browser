@@ -1,0 +1,20 @@
+{
+  "id": "ia-5.4",
+  "slug": "ia-5-4",
+  "label": "IA-5(4)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Automated Support for Password Strength Determination",
+  "familyCode": "IA",
+  "sortId": "ia-05.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-5.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

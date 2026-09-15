@@ -1,0 +1,20 @@
+{
+  "id": "pl-6",
+  "slug": "pl-6",
+  "label": "PL-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Security-related Activity Planning",
+  "familyCode": "PL",
+  "sortId": "pl-06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pl-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

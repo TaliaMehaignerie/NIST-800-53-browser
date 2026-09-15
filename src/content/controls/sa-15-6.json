@@ -1,0 +1,24 @@
+{
+  "id": "sa-15.6",
+  "slug": "sa-15-6",
+  "label": "SA-15(6)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Continuous Improvement",
+  "familyCode": "SA",
+  "sortId": "sa-15.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to implement an explicit process to continuously improve the development process.",
+      "children": []
+    }
+  ],
+  "guidance": "Developers of systems, system components, and system services consider the effectiveness and efficiency of their development processes for meeting quality objectives and addressing the security and privacy capabilities in current threat environments.",
+  "params": [],
+  "related": []
+}

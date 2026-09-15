@@ -1,0 +1,41 @@
+{
+  "id": "sc-30.5",
+  "slug": "sc-30-5",
+  "label": "SC-30(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-30",
+  "enhancementSlugs": [],
+  "title": "Concealment of System Components",
+  "familyCode": "SC",
+  "sortId": "sc-30.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following techniques to hide or conceal {{ insert: param, sc-30.05_odp.02 }}: {{ insert: param, sc-30.05_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "By hiding, disguising, or concealing critical system components, organizations may be able to decrease the probability that adversaries target and successfully compromise those assets. Potential means to hide, disguise, or conceal system components include the configuration of routers or the use of encryption or virtualization techniques.",
+  "params": [
+    {
+      "id": "sc-30.05_odp.01",
+      "label": "techniques",
+      "select": null,
+      "guidelines": [
+        "techniques to be employed to hide or conceal system components are defined;"
+      ]
+    },
+    {
+      "id": "sc-30.05_odp.02",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to be hidden or concealed using techniques (defined in SC-30(05)_ODP[01]) are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

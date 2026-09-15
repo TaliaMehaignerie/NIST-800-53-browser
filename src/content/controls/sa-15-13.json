@@ -1,0 +1,55 @@
+{
+  "id": "sa-15.13",
+  "slug": "sa-15-13",
+  "label": "SA-15(13)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Logging Syntax",
+  "familyCode": "SA",
+  "sortId": "sa-15.13",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system or system component to minimize the use of personally identifiable information in development and test environments.",
+      "children": []
+    }
+  ],
+  "guidance": "In support of better incident response and the ability to more quickly reconstruct security-related actions, identifying specific requirements for secure logging facilitates the ability to connect application-produced audit event logs with operational data. Event types are consistent with the event types defined in [AU-02](#au-2).",
+  "params": [
+    {
+      "id": "sa-15.13_odp.01",
+      "label": "secure logging format(s)",
+      "select": null,
+      "guidelines": [
+        "secure logging format(s) are defined;"
+      ]
+    },
+    {
+      "id": "sa-15.13_odp.02",
+      "label": "events types to log",
+      "select": null,
+      "guidelines": [
+        "events types to log are defined;"
+      ]
+    },
+    {
+      "id": "sa-15.13_odp.03",
+      "label": "level of detail to log",
+      "select": null,
+      "guidelines": [
+        "level of detail to log is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-3",
+    "ir-4",
+    "ir-8",
+    "sa-5"
+  ]
+}

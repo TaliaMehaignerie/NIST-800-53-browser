@@ -1,0 +1,22 @@
+{
+  "slug": "ia",
+  "code": "IA",
+  "name": "Identification and Authentication",
+  "controlSlugs": [
+    "ia-1",
+    "ia-2",
+    "ia-3",
+    "ia-4",
+    "ia-5",
+    "ia-6",
+    "ia-7",
+    "ia-8",
+    "ia-9",
+    "ia-10",
+    "ia-11",
+    "ia-12",
+    "ia-13"
+  ],
+  "controlCount": 13,
+  "enhancementCount": 61
+}

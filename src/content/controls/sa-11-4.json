@@ -1,0 +1,41 @@
+{
+  "id": "sa-11.4",
+  "slug": "sa-11-4",
+  "label": "SA-11(4)",
+  "kind": "enhancement",
+  "parentSlug": "sa-11",
+  "enhancementSlugs": [],
+  "title": "Manual Code Reviews",
+  "familyCode": "SA",
+  "sortId": "sa-11.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to perform a manual code review of {{ insert: param, sa-11.04_odp.01 }} using the following processes, procedures, and/or techniques: {{ insert: param, sa-11.04_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Manual code reviews are usually reserved for the critical software and firmware components of systems. Manual code reviews are effective at identifying weaknesses that require knowledge of the application’s requirements or context that, in most cases, is unavailable to automated analytic tools and techniques, such as static and dynamic analysis. The benefits of manual code review include the ability to verify access control matrices against application controls and review detailed aspects of cryptographic implementations and controls.",
+  "params": [
+    {
+      "id": "sa-11.04_odp.01",
+      "label": "specific code",
+      "select": null,
+      "guidelines": [
+        "specific code requiring manual code review is defined;"
+      ]
+    },
+    {
+      "id": "sa-11.04_odp.02",
+      "label": "processes, procedures, and/or techniques",
+      "select": null,
+      "guidelines": [
+        "processes, procedures, and/or techniques used for manual code reviews are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

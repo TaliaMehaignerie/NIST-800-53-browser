@@ -1,0 +1,38 @@
+{
+  "id": "ra-5.4",
+  "slug": "ra-5-4",
+  "label": "RA-5(4)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Discoverable Information",
+  "familyCode": "RA",
+  "sortId": "ra-05.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Determine information about the system that is discoverable and take {{ insert: param, ra-05.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Discoverable information includes information that adversaries could obtain without compromising or breaching the system, such as by collecting information that the system is exposing or by conducting extensive web searches. Corrective actions include notifying appropriate organizational personnel, removing designated information, or changing the system to make the designated information less relevant or attractive to adversaries. This enhancement excludes intentionally discoverable information that may be part of a decoy capability (e.g., honeypots, honeynets, or deception nets) deployed by the organization.",
+  "params": [
+    {
+      "id": "ra-05.04_odp",
+      "label": "corrective actions",
+      "select": null,
+      "guidelines": [
+        "corrective actions to be taken if information about the system is discoverable are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-13",
+    "sc-26"
+  ]
+}

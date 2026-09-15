@@ -1,0 +1,52 @@
+{
+  "id": "ac-19.5",
+  "slug": "ac-19-5",
+  "label": "AC-19(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-19",
+  "enhancementSlugs": [],
+  "title": "Full Device or Container-based Encryption",
+  "familyCode": "AC",
+  "sortId": "ac-19.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, ac-19.05_odp.01 }} to protect the confidentiality and integrity of information on {{ insert: param, ac-19.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Container-based encryption provides a more fine-grained approach to data and information encryption on mobile devices, including encrypting selected data structures such as files, records, or fields.",
+  "params": [
+    {
+      "id": "ac-19.05_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "full-device encryption",
+          "container-based encryption"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-19.05_odp.02",
+      "label": "mobile devices",
+      "select": null,
+      "guidelines": [
+        "mobile devices on which to employ encryption are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13",
+    "sc-28"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pe-2.1",
+  "slug": "pe-2-1",
+  "label": "PE-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-2",
+  "enhancementSlugs": [],
+  "title": "Access by Position or Role",
+  "familyCode": "PE",
+  "sortId": "pe-02.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Authorize physical access to the facility where the system resides based on position or role.",
+      "children": []
+    }
+  ],
+  "guidance": "Role-based facility access includes access by authorized permanent and regular/routine maintenance personnel, duty officers, and emergency medical staff.",
+  "params": [],
+  "related": [
+    "ac-2",
+    "ac-3",
+    "ac-6"
+  ]
+}

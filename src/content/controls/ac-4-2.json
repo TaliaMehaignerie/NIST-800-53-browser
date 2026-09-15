@@ -1,0 +1,35 @@
+{
+  "id": "ac-4.2",
+  "slug": "ac-4-2",
+  "label": "AC-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Processing Domains",
+  "familyCode": "AC",
+  "sortId": "ac-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use protected processing domains to enforce {{ insert: param, ac-04.02_odp }} as a basis for flow control decisions.",
+      "children": []
+    }
+  ],
+  "guidance": "Protected processing domains within systems are processing spaces that have controlled interactions with other processing spaces, enabling control of information flows between these spaces and to/from information objects. A protected processing domain can be provided, for example, by implementing domain and type enforcement. In domain and type enforcement, system processes are assigned to domains, information is identified by types, and information flows are controlled based on allowed information accesses (i.e., determined by domain and type), allowed signaling among domains, and allowed process transitions to other domains.",
+  "params": [
+    {
+      "id": "ac-04.02_odp",
+      "label": "information flow control policies",
+      "select": null,
+      "guidelines": [
+        "information flow control policies to be enforced by use of protected processing domains are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-39"
+  ]
+}

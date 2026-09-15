@@ -1,0 +1,116 @@
+{
+  "id": "ac-4.8",
+  "slug": "ac-4-8",
+  "label": "AC-4(8)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Security and Privacy Policy Filters",
+  "familyCode": "AC",
+  "sortId": "ac-04.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Enforce information flow control using {{ insert: param, ac-4.8_prm_1 }} as a basis for flow control decisions for {{ insert: param, ac-4.8_prm_2 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "{{ insert: param, ac-04.08_odp.05 }} data after a filter processing failure in accordance with {{ insert: param, ac-4.8_prm_4 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organization-defined security or privacy policy filters can address data structures and content. For example, security or privacy policy filters for data structures can check for maximum file lengths, maximum field sizes, and data/file types (for structured and unstructured data). Security or privacy policy filters for data content can check for specific words, enumerated values or data value ranges, and hidden content. Structured data permits the interpretation of data content by applications. Unstructured data refers to digital information without a data structure or with a data structure that does not facilitate the development of rule sets to address the impact or classification level of the information conveyed by the data or the flow enforcement decisions. Unstructured data consists of bitmap objects that are inherently non-language-based (i.e., image, video, or audio files) and textual objects that are based on written or printed languages. Organizations can implement more than one security or privacy policy filter to meet information flow control objectives.",
+  "params": [
+    {
+      "id": "ac-4.8_prm_1",
+      "label": "organization-defined security or privacy policy filters",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-4.8_prm_2",
+      "label": "organization-defined information flows",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-4.8_prm_4",
+      "label": "organization-defined security or privacy policy",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.08_odp.01",
+      "label": "security policy filter",
+      "select": null,
+      "guidelines": [
+        "security policy filters to be used as a basis for enforcing information flow control are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.08_odp.02",
+      "label": "privacy policy filter",
+      "select": null,
+      "guidelines": [
+        "privacy policy filters to be used as a basis for enforcing information flow control are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.08_odp.03",
+      "label": "information flows",
+      "select": null,
+      "guidelines": [
+        "information flows for which information flow control is enforced by security filters are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.08_odp.04",
+      "label": "information flows",
+      "select": null,
+      "guidelines": [
+        "information flows for which information flow control is enforced by privacy filters are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.08_odp.05",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "block",
+          "strip",
+          "modify",
+          "quarantine"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.08_odp.06",
+      "label": "security policy",
+      "select": null,
+      "guidelines": [
+        "security policy identifying actions to be taken after a filter processing failure are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.08_odp.07",
+      "label": "privacy policy",
+      "select": null,
+      "guidelines": [
+        "privacy policy identifying actions to be taken after a filter processing failure are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

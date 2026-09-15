@@ -1,0 +1,20 @@
+{
+  "id": "au-15",
+  "slug": "au-15",
+  "label": "AU-15",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Alternate Audit Logging Capability",
+  "familyCode": "AU",
+  "sortId": "au-15",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "au-5.5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

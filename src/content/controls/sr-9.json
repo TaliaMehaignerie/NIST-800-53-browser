@@ -1,0 +1,39 @@
+{
+  "id": "sr-9",
+  "slug": "sr-9",
+  "label": "SR-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sr-9-1"
+  ],
+  "title": "Tamper Resistance and Detection",
+  "familyCode": "SR",
+  "sortId": "sr-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement a tamper protection program for the system, system component, or system service.",
+      "children": []
+    }
+  ],
+  "guidance": "Anti-tamper technologies, tools, and techniques provide a level of protection for systems, system components, and services against many threats, including reverse engineering, modification, and substitution. Strong identification combined with tamper resistance and/or tamper detection is essential to protecting systems and components during distribution and when in use.",
+  "params": [],
+  "related": [
+    "pe-3",
+    "pm-30",
+    "sa-15",
+    "si-4",
+    "si-7",
+    "sr-3",
+    "sr-4",
+    "sr-5",
+    "sr-10",
+    "sr-11"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "cm-5",
+  "slug": "cm-5",
+  "label": "CM-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cm-5-1",
+    "cm-5-2",
+    "cm-5-3",
+    "cm-5-4",
+    "cm-5-5",
+    "cm-5-6",
+    "cm-5-7"
+  ],
+  "title": "Access Restrictions for Change",
+  "familyCode": "CM",
+  "sortId": "cm-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Define, document, approve, and enforce physical and logical access restrictions associated with changes to the system.",
+      "children": []
+    }
+  ],
+  "guidance": "Changes to the hardware, software, or firmware components of systems or the operational procedures related to the system can potentially have significant effects on the security of the systems or individuals’ privacy. Therefore, organizations permit only qualified and authorized individuals to access systems for purposes of initiating changes. Access restrictions include physical and logical access controls (see [AC-3](#ac-3) and [PE-3](#pe-3) ), software libraries, workflow automation, media libraries, abstract layers (i.e., changes implemented into external interfaces rather than directly into systems), and change windows (i.e., changes occur only during specified times).",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-5",
+    "ac-6",
+    "cm-9",
+    "pe-3",
+    "sc-28",
+    "sc-34",
+    "sc-37",
+    "si-2",
+    "si-10"
+  ]
+}

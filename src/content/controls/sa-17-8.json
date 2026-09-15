@@ -1,0 +1,41 @@
+{
+  "id": "sa-17.8",
+  "slug": "sa-17-8",
+  "label": "SA-17(8)",
+  "kind": "enhancement",
+  "parentSlug": "sa-17",
+  "enhancementSlugs": [],
+  "title": "Orchestration",
+  "familyCode": "SA",
+  "sortId": "sa-17.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Design {{ insert: param, sa-17.08_odp.01 }} with coordinated behavior to implement the following capabilities: {{ insert: param, sa-17.08_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Security resources that are distributed, located at different layers or in different system elements, or are implemented to support different aspects of trustworthiness can interact in unforeseen or incorrect ways. Adverse consequences can include cascading failures, interference, or coverage gaps. Coordination of the behavior of security resources (e.g., by ensuring that one patch is installed across all resources before making a configuration change that assumes that the patch is propagated) can avert such negative interactions.",
+  "params": [
+    {
+      "id": "sa-17.08_odp.01",
+      "label": "critical systems",
+      "select": null,
+      "guidelines": [
+        "critical systems or system components are defined;"
+      ]
+    },
+    {
+      "id": "sa-17.08_odp.02",
+      "label": "capabilities",
+      "select": null,
+      "guidelines": [
+        "capabilities to be implemented by systems or components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

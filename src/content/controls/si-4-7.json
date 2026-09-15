@@ -1,0 +1,52 @@
+{
+  "id": "si-4.7",
+  "slug": "si-4-7",
+  "label": "SI-4(7)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Automated Response to Suspicious Events",
+  "familyCode": "SI",
+  "sortId": "si-04.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Notify {{ insert: param, si-04.07_odp.01 }} of detected suspicious events; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Take the following actions upon detection: {{ insert: param, si-04.07_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Least-disruptive actions include initiating requests for human responses.",
+  "params": [
+    {
+      "id": "si-04.07_odp.01",
+      "label": "incident response personnel",
+      "select": null,
+      "guidelines": [
+        "incident response personnel (identified by name and/or by role) to be notified of detected suspicious events is/are defined;"
+      ]
+    },
+    {
+      "id": "si-04.07_odp.02",
+      "label": "least-disruptive actions",
+      "select": null,
+      "guidelines": [
+        "least-disruptive actions to terminate suspicious events are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

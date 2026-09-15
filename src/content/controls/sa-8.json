@@ -1,0 +1,104 @@
+{
+  "id": "sa-8",
+  "slug": "sa-8",
+  "label": "SA-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-8-1",
+    "sa-8-2",
+    "sa-8-3",
+    "sa-8-4",
+    "sa-8-5",
+    "sa-8-6",
+    "sa-8-7",
+    "sa-8-8",
+    "sa-8-9",
+    "sa-8-10",
+    "sa-8-11",
+    "sa-8-12",
+    "sa-8-13",
+    "sa-8-14",
+    "sa-8-15",
+    "sa-8-16",
+    "sa-8-17",
+    "sa-8-18",
+    "sa-8-19",
+    "sa-8-20",
+    "sa-8-21",
+    "sa-8-22",
+    "sa-8-23",
+    "sa-8-24",
+    "sa-8-25",
+    "sa-8-26",
+    "sa-8-27",
+    "sa-8-28",
+    "sa-8-29",
+    "sa-8-30",
+    "sa-8-31",
+    "sa-8-32",
+    "sa-8-33"
+  ],
+  "title": "Security and Privacy Engineering Principles",
+  "familyCode": "SA",
+  "sortId": "sa-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Apply the following systems security and privacy engineering principles in the specification, design, development, implementation, and modification of the system and system components: {{ insert: param, sa-8_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Systems security and privacy engineering principles are closely related to and implemented throughout the system development life cycle (see [SA-3](#sa-3) ). Organizations can apply systems security and privacy engineering principles to new systems under development or to systems undergoing upgrades. For existing systems, organizations apply systems security and privacy engineering principles to system upgrades and modifications to the extent feasible, given the current state of hardware, software, and firmware components within those systems.\n\nThe application of systems security and privacy engineering principles helps organizations develop trustworthy, secure, and resilient systems and reduces the susceptibility to disruptions, hazards, threats, and the creation of privacy problems for individuals. Examples of system security engineering principles include: developing layered protections; establishing security and privacy policies, architecture, and controls as the foundation for design and development; incorporating security and privacy requirements into the system development life cycle; delineating physical and logical security boundaries; ensuring that developers are trained on how to build secure software; tailoring controls to meet organizational needs; and performing threat modeling to identify use cases, threat agents, attack vectors and patterns, design patterns, and compensating controls needed to mitigate risk.\n\nOrganizations that apply systems security and privacy engineering concepts and principles can facilitate the development of trustworthy, secure systems, system components, and system services; reduce risk to acceptable levels; and make informed risk management decisions. System security engineering principles can also be used to protect against certain supply chain risks, including incorporating tamper-resistant hardware into a design.",
+  "params": [
+    {
+      "id": "sa-8_prm_1",
+      "label": "organization-defined systems security and privacy engineering principles",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-08_odp.01",
+      "label": "systems security engineering principles",
+      "select": null,
+      "guidelines": [
+        "systems security engineering principles are defined;"
+      ]
+    },
+    {
+      "id": "sa-08_odp.02",
+      "label": "privacy engineering principles",
+      "select": null,
+      "guidelines": [
+        "privacy engineering principles are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pl-8",
+    "pm-7",
+    "ra-2",
+    "ra-3",
+    "ra-9",
+    "sa-3",
+    "sa-4",
+    "sa-15",
+    "sa-17",
+    "sa-20",
+    "sc-2",
+    "sc-3",
+    "sc-32",
+    "sc-39",
+    "sr-2",
+    "sr-3",
+    "sr-4",
+    "sr-5"
+  ]
+}

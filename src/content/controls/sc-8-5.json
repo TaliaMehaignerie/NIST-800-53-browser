@@ -1,0 +1,45 @@
+{
+  "id": "sc-8.5",
+  "slug": "sc-8-5",
+  "label": "SC-8(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-8",
+  "enhancementSlugs": [],
+  "title": "Protected Distribution System",
+  "familyCode": "SC",
+  "sortId": "sc-08.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, sc-08.05_odp.01 }} to {{ insert: param, sc-08.05_odp.02 }} during transmission.",
+      "children": []
+    }
+  ],
+  "guidance": "The purpose of a protected distribution system is to deter, detect, and/or make difficult physical access to the communication lines that carry national security information.",
+  "params": [
+    {
+      "id": "sc-08.05_odp.01",
+      "label": "protected distribution system",
+      "select": null,
+      "guidelines": [
+        "the protected distribution system is defined;"
+      ]
+    },
+    {
+      "id": "sc-08.05_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "prevent unauthorized disclosure of information",
+          "detect changes to information"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

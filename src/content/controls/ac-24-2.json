@@ -1,0 +1,47 @@
+{
+  "id": "ac-24.2",
+  "slug": "ac-24-2",
+  "label": "AC-24(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-24",
+  "enhancementSlugs": [],
+  "title": "No User or Process Identity",
+  "familyCode": "AC",
+  "sortId": "ac-24.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce access control decisions based on {{ insert: param, ac-24.2_prm_1 }} that do not include the identity of the user or process acting on behalf of the user.",
+      "children": []
+    }
+  ],
+  "guidance": "In certain situations, it is important that access control decisions can be made without information regarding the identity of the users issuing the requests. These are generally instances where preserving individual privacy is of paramount importance. In other situations, user identification information is simply not needed for access control decisions, and especially in the case of distributed systems, transmitting such information with the needed degree of assurance may be very expensive or difficult to accomplish. MAC, RBAC, ABAC, and label-based control policies, for example, might not include user identity as an attribute.",
+  "params": [
+    {
+      "id": "ac-24.2_prm_1",
+      "label": "organization-defined security or privacy attributes",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-24.02_odp.01",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes that do not include the identity of the user or process acting on behalf of the user are defined (if selected);"
+      ]
+    },
+    {
+      "id": "ac-24.02_odp.02",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes that do not include the identity of the user or process acting on behalf of the user are defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

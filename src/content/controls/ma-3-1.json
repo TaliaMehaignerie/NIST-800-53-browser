@@ -1,0 +1,29 @@
+{
+  "id": "ma-3.1",
+  "slug": "ma-3-1",
+  "label": "MA-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "ma-3",
+  "enhancementSlugs": [],
+  "title": "Inspect Tools",
+  "familyCode": "MA",
+  "sortId": "ma-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Inspect the maintenance tools used by maintenance personnel for improper or unauthorized modifications.",
+      "children": []
+    }
+  ],
+  "guidance": "Maintenance tools can be directly brought into a facility by maintenance personnel or downloaded from a vendor’s website. If, upon inspection of the maintenance tools, organizations determine that the tools have been modified in an improper manner or the tools contain malicious code, the incident is handled consistent with organizational policies and procedures for incident handling.",
+  "params": [],
+  "related": [
+    "si-7"
+  ]
+}

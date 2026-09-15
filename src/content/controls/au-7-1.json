@@ -1,0 +1,36 @@
+{
+  "id": "au-7.1",
+  "slug": "au-7-1",
+  "label": "AU-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-7",
+  "enhancementSlugs": [],
+  "title": "Automatic Processing",
+  "familyCode": "AU",
+  "sortId": "au-07.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide and implement the capability to process, sort, and search audit records for events of interest based on the following content: {{ insert: param, au-07.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Events of interest can be identified by the content of audit records, including system resources involved, information objects accessed, identities of individuals, event types, event locations, event dates and times, Internet Protocol addresses involved, or event success or failure. Organizations may define event criteria to any degree of granularity required, such as locations selectable by a general networking location or by specific system component.",
+  "params": [
+    {
+      "id": "au-07.01_odp",
+      "label": "fields within audit records",
+      "select": null,
+      "guidelines": [
+        "fields within audit records that can be processed, sorted, or searched are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "cm-5.3",
+  "slug": "cm-5-3",
+  "label": "CM-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-5",
+  "enhancementSlugs": [],
+  "title": "Signed Components",
+  "familyCode": "CM",
+  "sortId": "cm-05.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-14"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

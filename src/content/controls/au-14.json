@@ -1,0 +1,81 @@
+{
+  "id": "au-14",
+  "slug": "au-14",
+  "label": "AU-14",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-14-1",
+    "au-14-2",
+    "au-14-3"
+  ],
+  "title": "Session Audit",
+  "familyCode": "AU",
+  "sortId": "au-14",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Provide and implement the capability for {{ insert: param, au-14_odp.01 }} to {{ insert: param, au-14_odp.02 }} the content of a user session under {{ insert: param, au-14_odp.03 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Develop, integrate, and use session auditing activities in consultation with legal counsel and in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Session audits can include monitoring keystrokes, tracking websites visited, and recording information and/or file transfers. Session audit capability is implemented in addition to event logging and may involve implementation of specialized session capture technology. Organizations consider how session auditing can reveal information about individuals that may give rise to privacy risk as well as how to mitigate those risks. Because session auditing can impact system and network performance, organizations activate the capability under well-defined situations (e.g., the organization is suspicious of a specific individual). Organizations consult with legal counsel, civil liberties officials, and privacy officials to ensure that any legal, privacy, civil rights, or civil liberties issues, including the use of personally identifiable information, are appropriately addressed.",
+  "params": [
+    {
+      "id": "au-14_odp.01",
+      "label": "users or roles",
+      "select": null,
+      "guidelines": [
+        "users or roles who can audit the content of a user session are defined;"
+      ]
+    },
+    {
+      "id": "au-14_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "record",
+          "view",
+          "hear",
+          "log"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "au-14_odp.03",
+      "label": "circumstances",
+      "select": null,
+      "guidelines": [
+        "circumstances under which the content of a user session can be audited are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-8",
+    "au-2",
+    "au-3",
+    "au-4",
+    "au-5",
+    "au-8",
+    "au-9",
+    "au-11",
+    "au-12"
+  ]
+}

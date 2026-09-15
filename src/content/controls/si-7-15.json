@@ -1,0 +1,39 @@
+{
+  "id": "si-7.15",
+  "slug": "si-7-15",
+  "label": "SI-7(15)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Code Authentication",
+  "familyCode": "SI",
+  "sortId": "si-07.15",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to authenticate the following software or firmware components prior to installation: {{ insert: param, si-07.15_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Cryptographic authentication includes verifying that software or firmware components have been digitally signed using certificates recognized and approved by organizations. Code signing is an effective method to protect against malicious code. Organizations that employ cryptographic mechanisms also consider cryptographic key management solutions.",
+  "params": [
+    {
+      "id": "si-07.15_odp",
+      "label": "software or firmware components",
+      "select": null,
+      "guidelines": [
+        "software or firmware components to be authenticated by cryptographic mechanisms prior to installation are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-5",
+    "sc-12",
+    "sc-13"
+  ]
+}

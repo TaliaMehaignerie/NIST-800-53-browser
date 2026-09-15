@@ -1,0 +1,108 @@
+{
+  "id": "cm-8.3",
+  "slug": "cm-8-3",
+  "label": "CM-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Automated Unauthorized Component Detection",
+  "familyCode": "CM",
+  "sortId": "cm-08.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Detect the presence of unauthorized hardware, software, and firmware components within the system using {{ insert: param, cm-8.3_prm_1 }} {{ insert: param, cm-08.03_odp.04 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Take the following actions when unauthorized components are detected: {{ insert: param, cm-08.03_odp.05 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Automated unauthorized component detection is applied in addition to the monitoring for unauthorized remote connections and mobile devices. Monitoring for unauthorized system components may be accomplished on an ongoing basis or by the periodic scanning of systems for that purpose. Automated mechanisms may also be used to prevent the connection of unauthorized components (see [CM-7(9)](#cm-7.9) ). Automated mechanisms can be implemented in systems or in separate system components. When acquiring and implementing automated mechanisms, organizations consider whether such mechanisms depend on the ability of the system component to support an agent or supplicant in order to be detected since some types of components do not have or cannot support agents (e.g., IoT devices, sensors). Isolation can be achieved , for example, by placing unauthorized system components in separate domains or subnets or quarantining such components. This type of component isolation is commonly referred to as \"sandboxing.\" ",
+  "params": [
+    {
+      "id": "cm-8.3_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-08.03_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to detect the presence of unauthorized hardware within the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-08.03_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to detect the presence of unauthorized software within the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-08.03_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to detect the presence of unauthorized firmware within the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-08.03_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which automated mechanisms are used to detect the presence of unauthorized system components within the system is defined;"
+      ]
+    },
+    {
+      "id": "cm-08.03_odp.05",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "disable network access by unauthorized components",
+          "isolate unauthorized components",
+          "notify {{ insert: param, cm-08.03_odp.06 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "cm-08.03_odp.06",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified when unauthorized components are detected is/are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "ca-7",
+    "ra-5",
+    "sc-3",
+    "sc-39",
+    "sc-44",
+    "si-3",
+    "si-4",
+    "si-7"
+  ]
+}

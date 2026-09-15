@@ -1,0 +1,35 @@
+{
+  "id": "ra-3.3",
+  "slug": "ra-3-3",
+  "label": "RA-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ra-3",
+  "enhancementSlugs": [],
+  "title": "Dynamic Threat Awareness",
+  "familyCode": "RA",
+  "sortId": "ra-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Determine the current cyber threat environment on an ongoing basis using {{ insert: param, ra-03.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The threat awareness information that is gathered feeds into the organization’s information security operations to ensure that procedures are updated in response to the changing threat environment. For example, at higher threat levels, organizations may change the privilege or authentication thresholds required to perform certain operations.",
+  "params": [
+    {
+      "id": "ra-03.03_odp",
+      "label": "means",
+      "select": null,
+      "guidelines": [
+        "means to determine the current cyber threat environment on an ongoing basis;"
+      ]
+    }
+  ],
+  "related": [
+    "at-2"
+  ]
+}

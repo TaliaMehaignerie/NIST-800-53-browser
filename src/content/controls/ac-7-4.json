@@ -1,0 +1,62 @@
+{
+  "id": "ac-7.4",
+  "slug": "ac-7-4",
+  "label": "AC-7(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-7",
+  "enhancementSlugs": [],
+  "title": "Use of Alternate Authentication Factor",
+  "familyCode": "AC",
+  "sortId": "ac-07.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Allow the use of {{ insert: param, ac-07.04_odp.01 }} that are different from the primary authentication factors after the number of organization-defined consecutive invalid logon attempts have been exceeded; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Enforce a limit of {{ insert: param, ac-07.04_odp.02 }} consecutive invalid logon attempts through use of the alternative factors by a user during a {{ insert: param, ac-07.04_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The use of alternate authentication factors supports the objective of availability and allows a user who has inadvertently been locked out to use additional authentication factors to bypass the lockout.",
+  "params": [
+    {
+      "id": "ac-07.04_odp.01",
+      "label": "authentication factors",
+      "select": null,
+      "guidelines": [
+        "authentication factors allowed to be used that are different from the primary authentication factors are defined;"
+      ]
+    },
+    {
+      "id": "ac-07.04_odp.02",
+      "label": "number",
+      "select": null,
+      "guidelines": [
+        "the number of consecutive, invalid logon attempts through the use of alternative factors for which to enforce a limit by a user is defined;"
+      ]
+    },
+    {
+      "id": "ac-07.04_odp.03",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period during which a user can attempt logons through alternative factors is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-3"
+  ]
+}

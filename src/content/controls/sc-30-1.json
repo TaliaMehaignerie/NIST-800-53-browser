@@ -1,0 +1,20 @@
+{
+  "id": "sc-30.1",
+  "slug": "sc-30-1",
+  "label": "SC-30(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-30",
+  "enhancementSlugs": [],
+  "title": "Virtualization Techniques",
+  "familyCode": "SC",
+  "sortId": "sc-30.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-29.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

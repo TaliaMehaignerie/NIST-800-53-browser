@@ -1,0 +1,45 @@
+{
+  "id": "pm-3",
+  "slug": "pm-3",
+  "label": "PM-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Information Security and Privacy Resources",
+  "familyCode": "PM",
+  "sortId": "pm-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Include the resources needed to implement the information security and privacy programs in capital planning and investment requests and document all exceptions to this requirement;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Prepare documentation required for addressing information security and privacy programs in capital planning and investment requests in accordance with applicable laws, executive orders, directives, policies, regulations, standards; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Make available for expenditure, the planned information security and privacy resources.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations consider establishing champions for information security and privacy and, as part of including the necessary resources, assign specialized expertise and resources as needed. Organizations may designate and empower an Investment Review Board or similar group to manage and provide oversight for the information security and privacy aspects of the capital planning and investment control process.",
+  "params": [],
+  "related": [
+    "pm-4",
+    "sa-2"
+  ]
+}

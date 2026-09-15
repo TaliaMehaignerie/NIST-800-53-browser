@@ -1,0 +1,39 @@
+{
+  "id": "ac-20.2",
+  "slug": "ac-20-2",
+  "label": "AC-20(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-20",
+  "enhancementSlugs": [],
+  "title": "Portable Storage Devices — Restricted Use",
+  "familyCode": "AC",
+  "sortId": "ac-20.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict the use of organization-controlled portable storage devices by authorized individuals on external systems using {{ insert: param, ac-20.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Limits on the use of organization-controlled portable storage devices in external systems include restrictions on how the devices may be used and under what conditions the devices may be used.",
+  "params": [
+    {
+      "id": "ac-20.02_odp",
+      "label": "restrictions",
+      "select": null,
+      "guidelines": [
+        "restrictions on the use of organization-controlled portable storage devices by authorized individuals on external systems are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-7",
+    "sc-41"
+  ]
+}

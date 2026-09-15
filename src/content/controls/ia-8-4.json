@@ -1,0 +1,37 @@
+{
+  "id": "ia-8.4",
+  "slug": "ia-8-4",
+  "label": "IA-8(4)",
+  "kind": "enhancement",
+  "parentSlug": "ia-8",
+  "enhancementSlugs": [],
+  "title": "Use of Defined Profiles",
+  "familyCode": "IA",
+  "sortId": "ia-08.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Conform to the following profiles for identity management {{ insert: param, ia-08.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations define profiles for identity management based on open identity management standards. To ensure that open identity management standards are viable, robust, reliable, sustainable, and interoperable as documented, the Federal Government assesses and scopes the standards and technology implementations against applicable laws, executive orders, directives, policies, regulations, standards, and guidelines.",
+  "params": [
+    {
+      "id": "ia-08.04_odp",
+      "label": "identity management profiles",
+      "select": null,
+      "guidelines": [
+        "identity management profiles are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

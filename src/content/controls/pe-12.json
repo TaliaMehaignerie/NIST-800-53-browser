@@ -1,0 +1,33 @@
+{
+  "id": "pe-12",
+  "slug": "pe-12",
+  "label": "PE-12",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-12-1"
+  ],
+  "title": "Emergency Lighting",
+  "familyCode": "PE",
+  "sortId": "pe-12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ and maintain automatic emergency lighting for the system that activates in the event of a power outage or disruption and that covers emergency exits and evacuation routes within the facility.",
+      "children": []
+    }
+  ],
+  "guidance": "The provision of emergency lighting applies primarily to organizational facilities that contain concentrations of system resources, including data centers, server rooms, and mainframe computer rooms. Emergency lighting provisions for the system are described in the contingency plan for the organization. If emergency lighting for the system fails or cannot be provided, organizations consider alternate processing sites for power-related contingencies.",
+  "params": [],
+  "related": [
+    "cp-2",
+    "cp-7"
+  ]
+}

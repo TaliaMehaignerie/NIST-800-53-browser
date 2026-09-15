@@ -1,0 +1,27 @@
+{
+  "id": "ma-3.5",
+  "slug": "ma-3-5",
+  "label": "MA-3(5)",
+  "kind": "enhancement",
+  "parentSlug": "ma-3",
+  "enhancementSlugs": [],
+  "title": "Execution with Privilege",
+  "familyCode": "MA",
+  "sortId": "ma-03.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Monitor the use of maintenance tools that execute with increased privilege.",
+      "children": []
+    }
+  ],
+  "guidance": "Maintenance tools that execute with increased system privilege can result in unauthorized access to organizational information and assets that would otherwise be inaccessible.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-6"
+  ]
+}

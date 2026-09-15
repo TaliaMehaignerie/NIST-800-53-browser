@@ -1,0 +1,20 @@
+{
+  "id": "sa-21.1",
+  "slug": "sa-21-1",
+  "label": "SA-21(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-21",
+  "enhancementSlugs": [],
+  "title": "Validation of Screening",
+  "familyCode": "SA",
+  "sortId": "sa-21.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sa-21"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

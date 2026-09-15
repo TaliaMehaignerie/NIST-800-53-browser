@@ -1,0 +1,42 @@
+{
+  "id": "sr-11.2",
+  "slug": "sr-11-2",
+  "label": "SR-11(2)",
+  "kind": "enhancement",
+  "parentSlug": "sr-11",
+  "enhancementSlugs": [],
+  "title": "Configuration Control for Component Service and Repair",
+  "familyCode": "SR",
+  "sortId": "sr-11.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain configuration control over the following system components awaiting service or repair and serviced or repaired components awaiting return to service: {{ insert: param, sr-11.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sr-11.02_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components requiring configuration control are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-3",
+    "ma-2",
+    "ma-4",
+    "sa-10"
+  ]
+}

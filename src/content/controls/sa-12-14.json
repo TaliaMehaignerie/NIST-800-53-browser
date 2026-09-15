@@ -1,0 +1,21 @@
+{
+  "id": "sa-12.14",
+  "slug": "sa-12-14",
+  "label": "SA-12(14)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Identity and Traceability",
+  "familyCode": "SA",
+  "sortId": "sa-12.14",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-4.1",
+    "sr-4.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

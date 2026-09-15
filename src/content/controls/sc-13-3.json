@@ -1,0 +1,20 @@
+{
+  "id": "sc-13.3",
+  "slug": "sc-13-3",
+  "label": "SC-13(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-13",
+  "enhancementSlugs": [],
+  "title": "Individuals Without Formal Access Approvals",
+  "familyCode": "SC",
+  "sortId": "sc-13.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-13"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

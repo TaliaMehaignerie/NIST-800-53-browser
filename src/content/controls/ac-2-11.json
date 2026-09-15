@@ -1,0 +1,43 @@
+{
+  "id": "ac-2.11",
+  "slug": "ac-2-11",
+  "label": "AC-2(11)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Usage Conditions",
+  "familyCode": "AC",
+  "sortId": "ac-02.11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce {{ insert: param, ac-02.11_odp.01 }} for {{ insert: param, ac-02.11_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Specifying and enforcing usage conditions helps to enforce the principle of least privilege, increase user accountability, and enable effective account monitoring. Account monitoring includes alerts generated if the account is used in violation of organizational parameters. Organizations can describe specific conditions or circumstances under which system accounts can be used, such as by restricting usage to certain days of the week, time of day, or specific durations of time.",
+  "params": [
+    {
+      "id": "ac-02.11_odp.01",
+      "label": "circumstances and/or usage conditions",
+      "select": null,
+      "guidelines": [
+        "circumstances and/or usage conditions to be enforced for system accounts are defined;"
+      ]
+    },
+    {
+      "id": "ac-02.11_odp.02",
+      "label": "system accounts",
+      "select": null,
+      "guidelines": [
+        "system accounts subject to enforcement of circumstances and/or usage conditions are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,52 @@
+{
+  "id": "cm-14",
+  "slug": "cm-14",
+  "label": "CM-14",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Signed Components",
+  "familyCode": "CM",
+  "sortId": "cm-14",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent the installation of {{ insert: param, cm-14_prm_1 }} without verification that the component has been digitally signed using a certificate that is recognized and approved by the organization.",
+      "children": []
+    }
+  ],
+  "guidance": "Software and firmware components prevented from installation unless signed with recognized and approved certificates include software and firmware version updates, patches, service packs, device drivers, and basic input/output system updates. Organizations can identify applicable software and firmware components by type, by specific items, or a combination of both. Digital signatures and organizational verification of such signatures is a method of code authentication.",
+  "params": [
+    {
+      "id": "cm-14_prm_1",
+      "label": "organization-defined software and firmware components",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-14_odp.01",
+      "label": "software components",
+      "select": null,
+      "guidelines": [
+        "software components requiring verification of a digitally signed certificate before installation are defined;"
+      ]
+    },
+    {
+      "id": "cm-14_odp.02",
+      "label": "firmware components",
+      "select": null,
+      "guidelines": [
+        "firmware components requiring verification of a digitally signed certificate before installation are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-7",
+    "sc-12",
+    "sc-13",
+    "si-7"
+  ]
+}

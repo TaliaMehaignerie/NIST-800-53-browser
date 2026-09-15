@@ -1,0 +1,36 @@
+{
+  "id": "sc-42.5",
+  "slug": "sc-42-5",
+  "label": "SC-42(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-42",
+  "enhancementSlugs": [],
+  "title": "Collection Minimization",
+  "familyCode": "SC",
+  "sortId": "sc-42.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, sc-42.05_odp }} that are configured to minimize the collection of information about individuals that is not needed.",
+      "children": []
+    }
+  ],
+  "guidance": "Although policies to control for authorized use can be applied to information once it is collected, minimizing the collection of information that is not needed mitigates privacy risk at the system entry point and mitigates the risk of policy control failures. Sensor configurations include the obscuring of human features, such as blurring or pixelating flesh tones.",
+  "params": [
+    {
+      "id": "sc-42.05_odp",
+      "label": "sensors",
+      "select": null,
+      "guidelines": [
+        "the sensors that are configured to minimize the collection of unneeded information about individuals are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sa-8",
+    "si-12"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "pe-14.2",
+  "slug": "pe-14-2",
+  "label": "PE-14(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-14",
+  "enhancementSlugs": [],
+  "title": "Monitoring with Alarms and Notifications",
+  "familyCode": "PE",
+  "sortId": "pe-14.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ environmental control monitoring that provides an alarm or notification of changes potentially harmful to personnel or equipment to {{ insert: param, pe-14.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The alarm or notification may be an audible alarm or a visual message in real time to personnel or roles defined by the organization. Such alarms and notifications can help minimize harm to individuals and damage to organizational assets by facilitating a timely incident response.",
+  "params": [
+    {
+      "id": "pe-14.02_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified by environmental control monitoring when environmental changes are potentially harmful to personnel or equipment is/are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

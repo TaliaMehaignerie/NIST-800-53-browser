@@ -1,0 +1,33 @@
+{
+  "id": "sc-15.4",
+  "slug": "sc-15-4",
+  "label": "SC-15(4)",
+  "kind": "enhancement",
+  "parentSlug": "sc-15",
+  "enhancementSlugs": [],
+  "title": "Explicitly Indicate Current Participants",
+  "familyCode": "SC",
+  "sortId": "sc-15.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an explicit indication of current participants in {{ insert: param, sc-15.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Explicitly indicating current participants prevents unauthorized individuals from participating in collaborative computing sessions without the explicit knowledge of other participants.",
+  "params": [
+    {
+      "id": "sc-15.04_odp",
+      "label": "online meetings and teleconferences",
+      "select": null,
+      "guidelines": [
+        "online meetings and teleconferences for which an explicit indication of current participants is to be provided are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

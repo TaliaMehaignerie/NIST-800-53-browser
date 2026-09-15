@@ -1,0 +1,72 @@
+{
+  "id": "sc-28",
+  "slug": "sc-28",
+  "label": "SC-28",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-28-1",
+    "sc-28-2",
+    "sc-28-3"
+  ],
+  "title": "Protection of Information at Rest",
+  "familyCode": "SC",
+  "sortId": "sc-28",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect the {{ insert: param, sc-28_odp.01 }} of the following information at rest: {{ insert: param, sc-28_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information at rest refers to the state of information when it is not in process or in transit and is located on system components. Such components include internal or external hard disk drives, storage area network devices, or databases. However, the focus of protecting information at rest is not on the type of storage device or frequency of access but rather on the state of the information. Information at rest addresses the confidentiality and integrity of information and covers user information and system information. System-related information that requires protection includes configurations or rule sets for firewalls, intrusion detection and prevention systems, filtering routers, and authentication information. Organizations may employ different mechanisms to achieve confidentiality and integrity protections, including the use of cryptographic mechanisms and file share scanning. Integrity protection can be achieved, for example, by implementing write-once-read-many (WORM) technologies. When adequate protection of information at rest cannot otherwise be achieved, organizations may employ other controls, including frequent scanning to identify malicious code at rest and secure offline storage in lieu of online storage.",
+  "params": [
+    {
+      "id": "sc-28_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "confidentiality",
+          "integrity"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-28_odp.02",
+      "label": "information at rest",
+      "select": null,
+      "guidelines": [
+        "information at rest requiring protection is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "ac-6",
+    "ac-19",
+    "ca-7",
+    "cm-3",
+    "cm-5",
+    "cm-6",
+    "cp-9",
+    "mp-4",
+    "mp-5",
+    "pe-3",
+    "sc-8",
+    "sc-12",
+    "sc-13",
+    "sc-34",
+    "si-3",
+    "si-7",
+    "si-16"
+  ]
+}

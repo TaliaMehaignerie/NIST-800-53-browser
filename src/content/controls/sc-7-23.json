@@ -1,0 +1,24 @@
+{
+  "id": "sc-7.23",
+  "slug": "sc-7-23",
+  "label": "SC-7(23)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Disable Sender Feedback on Protocol Validation Failure",
+  "familyCode": "SC",
+  "sortId": "sc-07.23",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Disable feedback to senders on protocol format validation failure.",
+      "children": []
+    }
+  ],
+  "guidance": "Disabling feedback to senders when there is a failure in protocol validation format prevents adversaries from obtaining information that would otherwise be unavailable.",
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,33 @@
+{
+  "id": "sc-30.4",
+  "slug": "sc-30-4",
+  "label": "SC-30(4)",
+  "kind": "enhancement",
+  "parentSlug": "sc-30",
+  "enhancementSlugs": [],
+  "title": "Misleading Information",
+  "familyCode": "SC",
+  "sortId": "sc-30.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ realistic, but misleading information in {{ insert: param, sc-30.04_odp }} about its security state or posture.",
+      "children": []
+    }
+  ],
+  "guidance": "Employing misleading information is intended to confuse potential adversaries regarding the nature and extent of controls deployed by organizations. Thus, adversaries may employ incorrect and ineffective attack techniques. One technique for misleading adversaries is for organizations to place misleading information regarding the specific controls deployed in external systems that are known to be targeted by adversaries. Another technique is the use of deception nets that mimic actual aspects of organizational systems but use, for example, out-of-date software configurations.",
+  "params": [
+    {
+      "id": "sc-30.04_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components for which realistic but misleading information about their security state or posture is employed are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

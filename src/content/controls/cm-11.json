@@ -1,0 +1,85 @@
+{
+  "id": "cm-11",
+  "slug": "cm-11",
+  "label": "CM-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cm-11-1",
+    "cm-11-2",
+    "cm-11-3"
+  ],
+  "title": "User-installed Software",
+  "familyCode": "CM",
+  "sortId": "cm-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Establish {{ insert: param, cm-11_odp.01 }} governing the installation of software by users;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Enforce software installation policies through the following methods: {{ insert: param, cm-11_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Monitor policy compliance {{ insert: param, cm-11_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "If provided the necessary privileges, users can install software in organizational systems. To maintain control over the software installed, organizations identify permitted and prohibited actions regarding software installation. Permitted software installations include updates and security patches to existing software and downloading new applications from organization-approved \"app stores.\" Prohibited software installations include software with unknown or suspect pedigrees or software that organizations consider potentially malicious. Policies selected for governing user-installed software are organization-developed or provided by some external entity. Policy enforcement methods can include procedural methods and automated methods.",
+  "params": [
+    {
+      "id": "cm-11_odp.01",
+      "label": "policies",
+      "select": null,
+      "guidelines": [
+        "policies governing the installation of software by users are defined;"
+      ]
+    },
+    {
+      "id": "cm-11_odp.02",
+      "label": "methods",
+      "select": null,
+      "guidelines": [
+        "methods used to enforce software installation policies are defined;"
+      ]
+    },
+    {
+      "id": "cm-11_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency with which to monitor compliance is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "au-6",
+    "cm-2",
+    "cm-3",
+    "cm-5",
+    "cm-6",
+    "cm-7",
+    "cm-8",
+    "pl-4",
+    "si-4",
+    "si-7"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "au-10",
+  "slug": "au-10",
+  "label": "AU-10",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-10-1",
+    "au-10-2",
+    "au-10-3",
+    "au-10-4",
+    "au-10-5"
+  ],
+  "title": "Non-repudiation",
+  "familyCode": "AU",
+  "sortId": "au-10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide irrefutable evidence that an individual (or process acting on behalf of an individual) has performed {{ insert: param, au-10_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Types of individual actions covered by non-repudiation include creating information, sending and receiving messages, and approving information. Non-repudiation protects against claims by authors of not having authored certain documents, senders of not having transmitted messages, receivers of not having received messages, and signatories of not having signed documents. Non-repudiation services can be used to determine if information originated from an individual or if an individual took specific actions (e.g., sending an email, signing a contract, approving a procurement request, or receiving specific information). Organizations obtain non-repudiation services by employing various techniques or mechanisms, including digital signatures and digital message receipts.",
+  "params": [
+    {
+      "id": "au-10_odp",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to be covered by non-repudiation are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-9",
+    "pm-12",
+    "sa-8",
+    "sc-8",
+    "sc-12",
+    "sc-13",
+    "sc-16",
+    "sc-17",
+    "sc-23"
+  ]
+}

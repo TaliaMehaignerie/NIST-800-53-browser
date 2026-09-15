@@ -1,0 +1,57 @@
+{
+  "id": "ac-4.21",
+  "slug": "ac-4-21",
+  "label": "AC-4(21)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Physical or Logical Separation of Information Flows",
+  "familyCode": "AC",
+  "sortId": "ac-04.21",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Separate information flows logically or physically using {{ insert: param, ac-4.21_prm_1 }} to accomplish {{ insert: param, ac-04.21_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Enforcing the separation of information flows associated with defined types of data can enhance protection by ensuring that information is not commingled while in transit and by enabling flow control by transmission paths that are not otherwise achievable. Types of separable information include inbound and outbound communications traffic, service requests and responses, and information of differing security impact or classification levels.",
+  "params": [
+    {
+      "id": "ac-4.21_prm_1",
+      "label": "organization-defined mechanisms and/or techniques",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.21_odp.01",
+      "label": "mechanisms and/or techniques",
+      "select": null,
+      "guidelines": [
+        "mechanisms and/or techniques used to logically separate information flows are defined (if selected);"
+      ]
+    },
+    {
+      "id": "ac-04.21_odp.02",
+      "label": "mechanisms and/or techniques",
+      "select": null,
+      "guidelines": [
+        "mechanisms and/or techniques used to physically separate information flows are defined (if selected);"
+      ]
+    },
+    {
+      "id": "ac-04.21_odp.03",
+      "label": "required separations",
+      "select": null,
+      "guidelines": [
+        "required separations by types of information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-32"
+  ]
+}

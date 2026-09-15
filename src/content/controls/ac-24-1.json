@@ -1,0 +1,51 @@
+{
+  "id": "ac-24.1",
+  "slug": "ac-24-1",
+  "label": "AC-24(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-24",
+  "enhancementSlugs": [],
+  "title": "Transmit Access Authorization Information",
+  "familyCode": "AC",
+  "sortId": "ac-24.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Transmit {{ insert: param, ac-24.01_odp.01 }} using {{ insert: param, ac-24.01_odp.02 }} to {{ insert: param, ac-24.01_odp.03 }} that enforce access control decisions.",
+      "children": []
+    }
+  ],
+  "guidance": "Authorization processes and access control decisions may occur in separate parts of systems or in separate systems. In such instances, authorization information is transmitted securely (e.g., using cryptographic mechanisms) so that timely access control decisions can be enforced at the appropriate locations. To support the access control decisions, it may be necessary to transmit as part of the access authorization information supporting security and privacy attributes. This is because in distributed systems, there are various access control decisions that need to be made, and different entities make these decisions in a serial fashion, each requiring those attributes to make the decisions. Protecting access authorization information ensures that such information cannot be altered, spoofed, or compromised during transmission.",
+  "params": [
+    {
+      "id": "ac-24.01_odp.01",
+      "label": "access authorization information",
+      "select": null,
+      "guidelines": [
+        "access authorization information transmitted to systems that enforce access control decisions is defined;"
+      ]
+    },
+    {
+      "id": "ac-24.01_odp.02",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to be used when authorization information is transmitted to systems that enforce access control decisions are defined;"
+      ]
+    },
+    {
+      "id": "ac-24.01_odp.03",
+      "label": "systems",
+      "select": null,
+      "guidelines": [
+        "systems that enforce access control decisions are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-10"
+  ]
+}

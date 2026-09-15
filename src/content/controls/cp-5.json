@@ -1,0 +1,20 @@
+{
+  "id": "cp-5",
+  "slug": "cp-5",
+  "label": "CP-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Contingency Plan Update",
+  "familyCode": "CP",
+  "sortId": "cp-05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cp-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

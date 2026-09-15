@@ -1,0 +1,36 @@
+{
+  "id": "sc-7.14",
+  "slug": "sc-7-14",
+  "label": "SC-7(14)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Protect Against Unauthorized Physical Connections",
+  "familyCode": "SC",
+  "sortId": "sc-07.14",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect against unauthorized physical connections at {{ insert: param, sc-07.14_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Systems that operate at different security categories or classification levels may share common physical and environmental controls, since the systems may share space within the same facilities. In practice, it is possible that these separate systems may share common equipment rooms, wiring closets, and cable distribution paths. Protection against unauthorized physical connections can be achieved by using clearly identified and physically separated cable trays, connection frames, and patch panels for each side of managed interfaces with physical access controls that enforce limited authorized access to these items.",
+  "params": [
+    {
+      "id": "sc-07.14_odp",
+      "label": "managed interfaces",
+      "select": null,
+      "guidelines": [
+        "managed interfaces to be protected against unauthorized physical connections are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-4",
+    "pe-19"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "sc-35",
+  "slug": "sc-35",
+  "label": "SC-35",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "External Malicious Code Identification",
+  "familyCode": "SC",
+  "sortId": "sc-35",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Include system components that proactively seek to identify network-based malicious code or malicious websites.",
+      "children": []
+    }
+  ],
+  "guidance": "External malicious code identification differs from decoys in [SC-26](#sc-26) in that the components actively probe networks, including the Internet, in search of malicious code contained on external websites. Like decoys, the use of external malicious code identification techniques requires some supporting isolation measures to ensure that any malicious code discovered during the search and subsequently executed does not infect organizational systems. Virtualization is a common technique for achieving such isolation.",
+  "params": [],
+  "related": [
+    "sc-7",
+    "sc-26",
+    "sc-44",
+    "si-3",
+    "si-4"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "au-10.5",
+  "slug": "au-10-5",
+  "label": "AU-10(5)",
+  "kind": "enhancement",
+  "parentSlug": "au-10",
+  "enhancementSlugs": [],
+  "title": "Digital Signatures",
+  "familyCode": "AU",
+  "sortId": "au-10.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,39 @@
+{
+  "id": "sr-11.1",
+  "slug": "sr-11-1",
+  "label": "SR-11(1)",
+  "kind": "enhancement",
+  "parentSlug": "sr-11",
+  "enhancementSlugs": [],
+  "title": "Anti-counterfeit Training",
+  "familyCode": "SR",
+  "sortId": "sr-11.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Train {{ insert: param, sr-11.01_odp }} to detect counterfeit system components (including hardware, software, and firmware).",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sr-11.01_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles requiring training to detect counterfeit system components (including hardware, software, and firmware) is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3"
+  ]
+}

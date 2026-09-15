@@ -1,0 +1,20 @@
+{
+  "id": "ac-14.1",
+  "slug": "ac-14-1",
+  "label": "AC-14(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-14",
+  "enhancementSlugs": [],
+  "title": "Necessary Uses",
+  "familyCode": "AC",
+  "sortId": "ac-14.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-14"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

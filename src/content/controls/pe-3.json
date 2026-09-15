@@ -1,0 +1,199 @@
+{
+  "id": "pe-3",
+  "slug": "pe-3",
+  "label": "PE-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-3-1",
+    "pe-3-2",
+    "pe-3-3",
+    "pe-3-4",
+    "pe-3-5",
+    "pe-3-6",
+    "pe-3-7",
+    "pe-3-8"
+  ],
+  "title": "Physical Access Control",
+  "familyCode": "PE",
+  "sortId": "pe-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Enforce physical access authorizations at {{ insert: param, pe-03_odp.01 }} by:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Verifying individual access authorizations before granting access to the facility; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Controlling ingress and egress to the facility using {{ insert: param, pe-03_odp.02 }};",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Maintain physical access audit logs for {{ insert: param, pe-03_odp.04 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Control access to areas within the facility designated as publicly accessible by implementing the following controls: {{ insert: param, pe-03_odp.05 }};",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Escort visitors and control visitor activity {{ insert: param, pe-03_odp.06 }};",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Secure keys, combinations, and other physical access devices;",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Inventory {{ insert: param, pe-03_odp.07 }} every {{ insert: param, pe-03_odp.08 }} ; and",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Change combinations and keys {{ insert: param, pe-3_prm_9 }} and/or when keys are lost, combinations are compromised, or when individuals possessing the keys or combinations are transferred or terminated.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Physical access control applies to employees and visitors. Individuals with permanent physical access authorizations are not considered visitors. Physical access controls for publicly accessible areas may include physical access control logs/records, guards, or physical access devices and barriers to prevent movement from publicly accessible areas to non-public areas. Organizations determine the types of guards needed, including professional security staff, system users, or administrative staff. Physical access devices include keys, locks, combinations, biometric readers, and card readers. Physical access control systems comply with applicable laws, executive orders, directives, policies, regulations, standards, and guidelines. Organizations have flexibility in the types of audit logs employed. Audit logs can be procedural, automated, or some combination thereof. Physical access points can include facility access points, interior access points to systems that require supplemental access controls, or both. Components of systems may be in areas designated as publicly accessible with organizations controlling access to the components.",
+  "params": [
+    {
+      "id": "pe-3_prm_9",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pe-03_odp.01",
+      "label": "entry and exit points",
+      "select": null,
+      "guidelines": [
+        "entry and exit points to the facility in which the system resides are defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "{{ insert: param, pe-03_odp.03 }} ",
+          "guards"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-03_odp.03",
+      "label": "systems or devices",
+      "select": null,
+      "guidelines": [
+        "physical access control systems or devices used to control ingress and egress to the facility are defined (if selected);"
+      ]
+    },
+    {
+      "id": "pe-03_odp.04",
+      "label": "entry or exit points",
+      "select": null,
+      "guidelines": [
+        "entry or exit points for which physical access logs are maintained are defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.05",
+      "label": "physical access controls",
+      "select": null,
+      "guidelines": [
+        "physical access controls to control access to areas within the facility designated as publicly accessible are defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.06",
+      "label": "circumstances",
+      "select": null,
+      "guidelines": [
+        "circumstances requiring visitor escorts and control of visitor activity are defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.07",
+      "label": "physical access devices",
+      "select": null,
+      "guidelines": [
+        "physical access devices to be inventoried are defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.08",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to inventory physical access devices is defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.09",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to change combinations is defined;"
+      ]
+    },
+    {
+      "id": "pe-03_odp.10",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to change keys is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3",
+    "au-2",
+    "au-6",
+    "au-9",
+    "au-13",
+    "cp-10",
+    "ia-3",
+    "ia-8",
+    "ma-5",
+    "mp-2",
+    "mp-4",
+    "pe-2",
+    "pe-4",
+    "pe-5",
+    "pe-8",
+    "ps-2",
+    "ps-3",
+    "ps-6",
+    "ps-7",
+    "ra-3",
+    "sc-28",
+    "si-4",
+    "sr-3"
+  ]
+}

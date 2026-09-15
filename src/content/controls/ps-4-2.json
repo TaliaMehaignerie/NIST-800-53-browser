@@ -1,0 +1,55 @@
+{
+  "id": "ps-4.2",
+  "slug": "ps-4-2",
+  "label": "PS-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "ps-4",
+  "enhancementSlugs": [],
+  "title": "Automated Actions",
+  "familyCode": "PS",
+  "sortId": "ps-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use {{ insert: param, ps-04.02_odp.01 }} to {{ insert: param, ps-04.02_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In organizations with many employees, not all personnel who need to know about termination actions receive the appropriate notifications, or if such notifications are received, they may not occur in a timely manner. Automated mechanisms can be used to send automatic alerts or notifications to organizational personnel or roles when individuals are terminated. Such automatic alerts or notifications can be conveyed in a variety of ways, including via telephone, electronic mail, text message, or websites. Automated mechanisms can also be employed to quickly and thoroughly disable access to system resources after an employee is terminated.",
+  "params": [
+    {
+      "id": "ps-04.02_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to notify personnel or roles of individual termination actions and/or to disable access to system resources are defined;"
+      ]
+    },
+    {
+      "id": "ps-04.02_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "notify {{ insert: param, ps-04.02_odp.03 }} of individual termination actions",
+          "disable access to system resources"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ps-04.02_odp.03",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified upon termination of an individual is/are defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

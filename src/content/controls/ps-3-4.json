@@ -1,0 +1,41 @@
+{
+  "id": "ps-3.4",
+  "slug": "ps-3-4",
+  "label": "PS-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "ps-3",
+  "enhancementSlugs": [],
+  "title": "Citizenship Requirements",
+  "familyCode": "PS",
+  "sortId": "ps-03.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that individuals accessing a system processing, storing, or transmitting {{ insert: param, ps-03.04_odp.01 }} meet {{ insert: param, ps-03.04_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "ps-03.04_odp.01",
+      "label": "information types",
+      "select": null,
+      "guidelines": [
+        "information types that are processed, stored, or transmitted by a system that require individuals accessing the system to meet {{ insert: param, ps-03.04_odp.02 }} are defined;"
+      ]
+    },
+    {
+      "id": "ps-03.04_odp.02",
+      "label": "citizenship requirements",
+      "select": null,
+      "guidelines": [
+        "citizenship requirements to be met by individuals to access a system processing, storing, or transmitting information are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

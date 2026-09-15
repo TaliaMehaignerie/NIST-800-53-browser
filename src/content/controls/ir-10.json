@@ -1,0 +1,20 @@
+{
+  "id": "ir-10",
+  "slug": "ir-10",
+  "label": "IR-10",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Integrated Information Security Analysis Team",
+  "familyCode": "IR",
+  "sortId": "ir-10",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ir-4.11"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

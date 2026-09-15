@@ -1,0 +1,26 @@
+{
+  "id": "ia-2.5",
+  "slug": "ia-2-5",
+  "label": "IA-2(5)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Individual Authentication with Group Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-02.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When shared accounts or authenticators are employed, require users to be individually authenticated before granting access to the shared accounts or resources.",
+      "children": []
+    }
+  ],
+  "guidance": "Individual authentication prior to shared group authentication mitigates the risk of using group accounts or authenticators.",
+  "params": [],
+  "related": []
+}

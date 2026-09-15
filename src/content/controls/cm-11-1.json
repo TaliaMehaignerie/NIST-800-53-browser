@@ -1,0 +1,20 @@
+{
+  "id": "cm-11.1",
+  "slug": "cm-11-1",
+  "label": "CM-11(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-11",
+  "enhancementSlugs": [],
+  "title": "Alerts for Unauthorized Installations",
+  "familyCode": "CM",
+  "sortId": "cm-11.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-8.3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

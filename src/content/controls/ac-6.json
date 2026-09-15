@@ -1,0 +1,51 @@
+{
+  "id": "ac-6",
+  "slug": "ac-6",
+  "label": "AC-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-6-1",
+    "ac-6-2",
+    "ac-6-3",
+    "ac-6-4",
+    "ac-6-5",
+    "ac-6-6",
+    "ac-6-7",
+    "ac-6-8",
+    "ac-6-9",
+    "ac-6-10"
+  ],
+  "title": "Least Privilege",
+  "familyCode": "AC",
+  "sortId": "ac-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the principle of least privilege, allowing only authorized accesses for users (or processes acting on behalf of users) that are necessary to accomplish assigned organizational tasks.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations employ least privilege for specific duties and systems. The principle of least privilege is also applied to system processes, ensuring that the processes have access to systems and operate at privilege levels no higher than necessary to accomplish organizational missions or business functions. Organizations consider the creation of additional processes, roles, and accounts as necessary to achieve least privilege. Organizations apply least privilege to the development, implementation, and operation of organizational systems.",
+  "params": [],
+  "related": [
+    "ac-2",
+    "ac-3",
+    "ac-5",
+    "ac-16",
+    "cm-5",
+    "cm-11",
+    "pl-2",
+    "pm-12",
+    "sa-8",
+    "sa-15",
+    "sa-17",
+    "sc-38"
+  ]
+}

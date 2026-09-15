@@ -1,0 +1,20 @@
+{
+  "id": "cm-2.4",
+  "slug": "cm-2-4",
+  "label": "CM-2(4)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Unauthorized Software",
+  "familyCode": "CM",
+  "sortId": "cm-02.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-7.4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pe-5.2",
+  "slug": "pe-5-2",
+  "label": "PE-5(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-5",
+  "enhancementSlugs": [],
+  "title": "Link to Individual Identity",
+  "familyCode": "PE",
+  "sortId": "pe-05.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Link individual identity to receipt of output from output devices.",
+      "children": []
+    }
+  ],
+  "guidance": "Methods for linking individual identity to the receipt of output from output devices include installing security functionality on facsimile machines, copiers, and printers. Such functionality allows organizations to implement authentication on output devices prior to the release of output to individuals.",
+  "params": [],
+  "related": []
+}

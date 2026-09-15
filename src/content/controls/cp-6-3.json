@@ -1,0 +1,29 @@
+{
+  "id": "cp-6.3",
+  "slug": "cp-6-3",
+  "label": "CP-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "cp-6",
+  "enhancementSlugs": [],
+  "title": "Accessibility",
+  "familyCode": "CP",
+  "sortId": "cp-06.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Identify potential accessibility problems to the alternate storage site in the event of an area-wide disruption or disaster and outline explicit mitigation actions.",
+      "children": []
+    }
+  ],
+  "guidance": "Area-wide disruptions refer to those types of disruptions that are broad in geographic scope with such determinations made by organizations based on organizational assessments of risk. Explicit mitigation actions include duplicating backup information at other alternate storage sites if access problems occur at originally designated alternate sites or planning for physical access to retrieve backup information if electronic accessibility to the alternate site is disrupted.",
+  "params": [],
+  "related": [
+    "ra-3"
+  ]
+}

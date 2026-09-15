@@ -1,0 +1,18 @@
+{
+  "catalogTitle": "Electronic (OSCAL) Version of NIST SP 800-53 Rev 5.2.0 Controls and SP 800-53A Rev 5.2.0 Assessment Procedures",
+  "catalogVersion": "5.2.0",
+  "oscalVersion": "1.2.2",
+  "lastModified": "2026-05-11T16:01:09.00000-00:00",
+  "crosswalkTranscribedAt": null,
+  "counts": {
+    "families": 20,
+    "controls": 324,
+    "enhancements": 872
+  },
+  "baselineCounts": {
+    "low": 149,
+    "moderate": 287,
+    "high": 370,
+    "privacy": 96
+  }
+}

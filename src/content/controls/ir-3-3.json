@@ -1,0 +1,40 @@
+{
+  "id": "ir-3.3",
+  "slug": "ir-3-3",
+  "label": "IR-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ir-3",
+  "enhancementSlugs": [],
+  "title": "Continuous Improvement",
+  "familyCode": "IR",
+  "sortId": "ir-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use qualitative and quantitative data from testing to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Determine the effectiveness of incident response processes;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Continuously improve incident response processes; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Provide incident response measures and metrics that are accurate, consistent, and in a reproducible format.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "To help incident response activities function as intended, organizations may use metrics and evaluation criteria to assess incident response programs as part of an effort to continually improve response performance. These efforts facilitate improvement in incident response efficacy and lessen the impact of incidents.",
+  "params": [],
+  "related": []
+}

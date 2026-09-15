@@ -1,0 +1,38 @@
+{
+  "id": "ac-2.5",
+  "slug": "ac-2-5",
+  "label": "AC-2(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Inactivity Logout",
+  "familyCode": "AC",
+  "sortId": "ac-02.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require that users log out when {{ insert: param, ac-02.05_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Inactivity logout is behavior- or policy-based and requires users to take physical action to log out when they are expecting inactivity longer than the defined period. Automatic enforcement of inactivity logout is addressed by [AC-11](#ac-11).",
+  "params": [
+    {
+      "id": "ac-02.05_odp",
+      "label": "time period of expected inactivity or description of when to log out",
+      "select": null,
+      "guidelines": [
+        "the time period of expected inactivity or description of when to log out is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-11"
+  ]
+}

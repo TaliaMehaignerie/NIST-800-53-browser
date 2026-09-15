@@ -1,0 +1,69 @@
+{
+  "id": "sa-10.7",
+  "slug": "sa-10-7",
+  "label": "SA-10(7)",
+  "kind": "enhancement",
+  "parentSlug": "sa-10",
+  "enhancementSlugs": [],
+  "title": "Security and Privacy Representatives",
+  "familyCode": "SA",
+  "sortId": "sa-10.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require {{ insert: param, sa-10.7_prm_1 }} to be included in the {{ insert: param, sa-10.7_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information security and privacy representatives can include system security officers, senior agency information security officers, senior agency officials for privacy, and system privacy officers. Representation by personnel with information security and privacy expertise is important because changes to system configurations can have unintended side effects, some of which may be security- or privacy-relevant. Detecting such changes early in the process can help avoid unintended, negative consequences that could ultimately affect the security and privacy posture of systems. The configuration change management and control process in this control enhancement refers to the change management and control process defined by organizations in [SA-10b](#sa-10_smt.b).",
+  "params": [
+    {
+      "id": "sa-10.7_prm_1",
+      "label": "organization-defined security and privacy representatives",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-10.7_prm_2",
+      "label": "organization-defined configuration change management and control process",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-10.07_odp.01",
+      "label": "security representatives",
+      "select": null,
+      "guidelines": [
+        "security representatives to be included in the configuration change management and control process are defined;"
+      ]
+    },
+    {
+      "id": "sa-10.07_odp.02",
+      "label": "privacy representatives",
+      "select": null,
+      "guidelines": [
+        "privacy representatives to be included in the configuration change management and control process are defined;"
+      ]
+    },
+    {
+      "id": "sa-10.07_odp.03",
+      "label": "configuration change management and control processes",
+      "select": null,
+      "guidelines": [
+        "configuration change management and control processes in which security representatives are required to be included are defined;"
+      ]
+    },
+    {
+      "id": "sa-10.07_odp.04",
+      "label": "configuration change management and control processes",
+      "select": null,
+      "guidelines": [
+        "configuration change management and control processes in which privacy representatives are required to be included are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

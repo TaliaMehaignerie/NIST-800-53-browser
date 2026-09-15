@@ -1,0 +1,26 @@
+{
+  "id": "sc-2.1",
+  "slug": "sc-2-1",
+  "label": "SC-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-2",
+  "enhancementSlugs": [],
+  "title": "Interfaces for Non-privileged Users",
+  "familyCode": "SC",
+  "sortId": "sc-02.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent the presentation of system management functionality at interfaces to non-privileged users.",
+      "children": []
+    }
+  ],
+  "guidance": "Preventing the presentation of system management functionality at interfaces to non-privileged users ensures that system administration options, including administrator privileges, are not available to the general user population. Restricting user access also prohibits the use of the grey-out option commonly used to eliminate accessibility to such information. One potential solution is to withhold system administration options until users establish sessions with administrator privileges.",
+  "params": [],
+  "related": [
+    "ac-3"
+  ]
+}

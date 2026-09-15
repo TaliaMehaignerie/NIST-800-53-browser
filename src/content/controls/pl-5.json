@@ -1,0 +1,20 @@
+{
+  "id": "pl-5",
+  "slug": "pl-5",
+  "label": "PL-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Privacy Impact Assessment",
+  "familyCode": "PL",
+  "sortId": "pl-05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ra-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

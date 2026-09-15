@@ -1,0 +1,28 @@
+{
+  "id": "sa-9.6",
+  "slug": "sa-9-6",
+  "label": "SA-9(6)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Organization-controlled Cryptographic Keys",
+  "familyCode": "SA",
+  "sortId": "sa-09.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain exclusive control of cryptographic keys for encrypted material stored or transmitted through an external system.",
+      "children": []
+    }
+  ],
+  "guidance": "Maintaining exclusive control of cryptographic keys in an external system prevents decryption of organizational data by external system staff. Organizational control of cryptographic keys can be implemented by encrypting and decrypting data inside the organization as data is sent to and received from the external system or by employing a component that permits encryption and decryption functions to be local to the external system but allows exclusive organizational access to the encryption keys.",
+  "params": [],
+  "related": [
+    "sc-12",
+    "sc-13",
+    "si-4"
+  ]
+}

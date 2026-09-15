@@ -1,0 +1,33 @@
+{
+  "id": "sc-18.3",
+  "slug": "sc-18-3",
+  "label": "SC-18(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-18",
+  "enhancementSlugs": [],
+  "title": "Prevent Downloading and Execution",
+  "familyCode": "SC",
+  "sortId": "sc-18.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent the download and execution of {{ insert: param, sc-18.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sc-18.03_odp",
+      "label": "unacceptable mobile code",
+      "select": null,
+      "guidelines": [
+        "unacceptable mobile code to be prevented from downloading and executing is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

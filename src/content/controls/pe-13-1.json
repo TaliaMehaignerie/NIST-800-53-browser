@@ -1,0 +1,44 @@
+{
+  "id": "pe-13.1",
+  "slug": "pe-13-1",
+  "label": "PE-13(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-13",
+  "enhancementSlugs": [],
+  "title": "Detection Systems — Automatic Activation and Notification",
+  "familyCode": "PE",
+  "sortId": "pe-13.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ fire detection systems that activate automatically and notify {{ insert: param, pe-13.01_odp.01 }} and {{ insert: param, pe-13.01_odp.02 }} in the event of a fire.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can identify personnel, roles, and emergency responders if individuals on the notification list need to have access authorizations or clearances (e.g., to enter to facilities where access is restricted due to the classification or impact level of information within the facility). Notification mechanisms may require independent energy sources to ensure that the notification capability is not adversely affected by the fire.",
+  "params": [
+    {
+      "id": "pe-13.01_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified in the event of a fire is/are defined;"
+      ]
+    },
+    {
+      "id": "pe-13.01_odp.02",
+      "label": "emergency responders",
+      "select": null,
+      "guidelines": [
+        "emergency responders to be notified in the event of a fire are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

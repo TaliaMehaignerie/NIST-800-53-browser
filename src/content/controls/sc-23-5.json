@@ -1,0 +1,36 @@
+{
+  "id": "sc-23.5",
+  "slug": "sc-23-5",
+  "label": "SC-23(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-23",
+  "enhancementSlugs": [],
+  "title": "Allowed Certificate Authorities",
+  "familyCode": "SC",
+  "sortId": "sc-23.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Only allow the use of {{ insert: param, sc-23.05_odp }} for verification of the establishment of protected sessions.",
+      "children": []
+    }
+  ],
+  "guidance": "Reliance on certificate authorities for the establishment of secure sessions includes the use of Transport Layer Security (TLS) certificates. These certificates, after verification by their respective certificate authorities, facilitate the establishment of protected sessions between web clients and web servers.",
+  "params": [
+    {
+      "id": "sc-23.05_odp",
+      "label": "certificated authorities",
+      "select": null,
+      "guidelines": [
+        "certificate authorities to be allowed for verification of the establishment of protected sessions are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

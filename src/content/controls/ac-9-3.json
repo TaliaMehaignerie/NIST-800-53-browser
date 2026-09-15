@@ -1,0 +1,41 @@
+{
+  "id": "ac-9.3",
+  "slug": "ac-9-3",
+  "label": "AC-9(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-9",
+  "enhancementSlugs": [],
+  "title": "Notification of Account Changes",
+  "familyCode": "AC",
+  "sortId": "ac-09.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Notify the user, upon successful logon, of changes to {{ insert: param, ac-09.03_odp.01 }} during {{ insert: param, ac-09.03_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information about changes to security-related account characteristics within a specified time period allows users to recognize if changes were made without their knowledge.",
+  "params": [
+    {
+      "id": "ac-09.03_odp.01",
+      "label": "security-related characteristics or parameters",
+      "select": null,
+      "guidelines": [
+        "changes to security-related characteristics or parameters of the user’s account that require notification are defined;"
+      ]
+    },
+    {
+      "id": "ac-09.03_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period for which the system notifies the user of changes to security-related characteristics or parameters of the user’s account is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

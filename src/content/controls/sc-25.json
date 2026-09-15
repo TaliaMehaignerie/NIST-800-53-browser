@@ -1,0 +1,36 @@
+{
+  "id": "sc-25",
+  "slug": "sc-25",
+  "label": "SC-25",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Thin Nodes",
+  "familyCode": "SC",
+  "sortId": "sc-25",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ minimal functionality and information storage on the following system components: {{ insert: param, sc-25_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The deployment of system components with minimal functionality reduces the need to secure every endpoint and may reduce the exposure of information, systems, and services to attacks. Reduced or minimal functionality includes diskless nodes and thin client technologies.",
+  "params": [
+    {
+      "id": "sc-25_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to be employed with minimal functionality and information storage are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-30",
+    "sc-44"
+  ]
+}

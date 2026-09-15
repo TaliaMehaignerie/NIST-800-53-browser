@@ -1,0 +1,97 @@
+{
+  "id": "mp-5",
+  "slug": "mp-5",
+  "label": "MP-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "mp-5-1",
+    "mp-5-2",
+    "mp-5-3",
+    "mp-5-4"
+  ],
+  "title": "Media Transport",
+  "familyCode": "MP",
+  "sortId": "mp-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Protect and control {{ insert: param, mp-05_odp.01 }} during transport outside of controlled areas using {{ insert: param, mp-5_prm_2 }};",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Maintain accountability for system media during transport outside of controlled areas;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Document activities associated with the transport of system media; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Restrict the activities associated with the transport of system media to authorized personnel.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System media includes digital and non-digital media. Digital media includes flash drives, diskettes, magnetic tapes, external or removable hard disk drives (e.g., solid state and magnetic), compact discs, and digital versatile discs. Non-digital media includes microfilm and paper. Controlled areas are spaces for which organizations provide physical or procedural controls to meet requirements established for protecting information and systems. Controls to protect media during transport include cryptography and locked containers. Cryptographic mechanisms can provide confidentiality and integrity protections depending on the mechanisms implemented. Activities associated with media transport include releasing media for transport, ensuring that media enters the appropriate transport processes, and the actual transport. Authorized transport and courier personnel may include individuals external to the organization. Maintaining accountability of media during transport includes restricting transport activities to authorized personnel and tracking and/or obtaining records of transport activities as the media moves through the transportation system to prevent and detect loss, destruction, or tampering. Organizations establish documentation requirements for activities associated with the transport of system media in accordance with organizational assessments of risk. Organizations maintain the flexibility to define record-keeping methods for the different types of media transport as part of a system of transport-related records.",
+  "params": [
+    {
+      "id": "mp-5_prm_2",
+      "label": "organization-defined controls",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-05_odp.01",
+      "label": "types of system media",
+      "select": null,
+      "guidelines": [
+        "types of system media to protect and control during transport outside of controlled areas are defined;"
+      ]
+    },
+    {
+      "id": "mp-05_odp.02",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls used to protect system media outside of controlled areas are defined;"
+      ]
+    },
+    {
+      "id": "mp-05_odp.03",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls used to control system media outside of controlled areas are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-7",
+    "ac-19",
+    "cp-2",
+    "cp-9",
+    "mp-3",
+    "mp-4",
+    "pe-16",
+    "pl-2",
+    "sc-12",
+    "sc-13",
+    "sc-28",
+    "sc-34"
+  ]
+}

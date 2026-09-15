@@ -1,0 +1,26 @@
+{
+  "id": "sa-9.7",
+  "slug": "sa-9-7",
+  "label": "SA-9(7)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Organization-controlled Integrity Checking",
+  "familyCode": "SA",
+  "sortId": "sa-09.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability to check the integrity of information while it resides in the external system.",
+      "children": []
+    }
+  ],
+  "guidance": "Storage of organizational information in an external system could limit visibility into the security status of its data. The ability of the organization to verify and validate the integrity of its stored data without transferring it out of the external system provides such visibility.",
+  "params": [],
+  "related": [
+    "si-7"
+  ]
+}

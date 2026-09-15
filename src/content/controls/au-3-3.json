@@ -1,0 +1,37 @@
+{
+  "id": "au-3.3",
+  "slug": "au-3-3",
+  "label": "AU-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-3",
+  "enhancementSlugs": [],
+  "title": "Limit Personally Identifiable Information Elements",
+  "familyCode": "AU",
+  "sortId": "au-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit personally identifiable information contained in audit records to the following elements identified in the privacy risk assessment: {{ insert: param, au-03.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Limiting personally identifiable information in audit records when such information is not needed for operational purposes helps reduce the level of privacy risk created by a system.",
+  "params": [
+    {
+      "id": "au-03.03_odp",
+      "label": "elements",
+      "select": null,
+      "guidelines": [
+        "elements identified in the privacy risk assessment are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ra-3"
+  ]
+}

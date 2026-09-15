@@ -1,0 +1,20 @@
+{
+  "id": "cm-2.5",
+  "slug": "cm-2-5",
+  "label": "CM-2(5)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Authorized Software",
+  "familyCode": "CM",
+  "sortId": "cm-02.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-7.5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

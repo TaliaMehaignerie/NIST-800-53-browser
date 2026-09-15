@@ -1,0 +1,43 @@
+{
+  "id": "pt-3.2",
+  "slug": "pt-3-2",
+  "label": "PT-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "pt-3",
+  "enhancementSlugs": [],
+  "title": "Automation",
+  "familyCode": "PT",
+  "sortId": "pt-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Track processing purposes of personally identifiable information using {{ insert: param, pt-03.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms augment tracking of the processing purposes.",
+  "params": [
+    {
+      "id": "pt-03.02_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms for tracking the processing purposes of personally identifiable information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-6",
+    "cm-12",
+    "pm-5",
+    "pm-22",
+    "sc-16",
+    "sc-43",
+    "si-10",
+    "si-15",
+    "si-19"
+  ]
+}

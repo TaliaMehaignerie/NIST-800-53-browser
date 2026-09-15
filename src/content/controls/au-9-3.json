@@ -1,0 +1,30 @@
+{
+  "id": "au-9.3",
+  "slug": "au-9-3",
+  "label": "AU-9(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-9",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Protection",
+  "familyCode": "AU",
+  "sortId": "au-09.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to protect the integrity of audit information and audit tools.",
+      "children": []
+    }
+  ],
+  "guidance": "Cryptographic mechanisms used for protecting the integrity of audit information include signed hash functions using asymmetric cryptography. This enables the distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.",
+  "params": [],
+  "related": [
+    "au-10",
+    "sc-12",
+    "sc-13"
+  ]
+}

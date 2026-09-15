@@ -1,0 +1,47 @@
+{
+  "id": "ac-4.11",
+  "slug": "ac-4-11",
+  "label": "AC-4(11)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Configuration of Security or Privacy Policy Filters",
+  "familyCode": "AC",
+  "sortId": "ac-04.11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability for privileged administrators to configure {{ insert: param, ac-4.11_prm_1 }} to support different security or privacy policies.",
+      "children": []
+    }
+  ],
+  "guidance": "Documentation contains detailed information for configuring security or privacy policy filters. For example, administrators can configure security or privacy policy filters to include the list of inappropriate words that security or privacy policy mechanisms check in accordance with the definitions provided by organizations.",
+  "params": [
+    {
+      "id": "ac-4.11_prm_1",
+      "label": "organization-defined security or privacy policy filters",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.11_odp.01",
+      "label": "security policy filters",
+      "select": null,
+      "guidelines": [
+        "security policy filters that privileged administrators have the capability to configure to support different security and privacy policies are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.11_odp.02",
+      "label": "privacy policy filters",
+      "select": null,
+      "guidelines": [
+        "privacy policy filters that privileged administrators have the capability to configure to support different security and privacy policies are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

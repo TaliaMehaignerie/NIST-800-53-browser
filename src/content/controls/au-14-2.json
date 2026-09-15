@@ -1,0 +1,20 @@
+{
+  "id": "au-14.2",
+  "slug": "au-14-2",
+  "label": "AU-14(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-14",
+  "enhancementSlugs": [],
+  "title": "Capture and Record Content",
+  "familyCode": "AU",
+  "sortId": "au-14.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "au-14"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

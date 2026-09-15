@@ -1,0 +1,20 @@
+{
+  "id": "mp-5.2",
+  "slug": "mp-5-2",
+  "label": "MP-5(2)",
+  "kind": "enhancement",
+  "parentSlug": "mp-5",
+  "enhancementSlugs": [],
+  "title": "Documentation of Activities",
+  "familyCode": "MP",
+  "sortId": "mp-05.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

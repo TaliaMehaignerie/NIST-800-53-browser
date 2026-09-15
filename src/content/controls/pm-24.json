@@ -1,0 +1,43 @@
+{
+  "id": "pm-24",
+  "slug": "pm-24",
+  "label": "PM-24",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Data Integrity Board",
+  "familyCode": "PM",
+  "sortId": "pm-24",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish a Data Integrity Board to:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Review proposals to conduct or participate in a matching program; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Conduct an annual review of all matching programs in which the agency has participated.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "A Data Integrity Board is the board of senior officials designated by the head of a federal agency and is responsible for, among other things, reviewing the agency’s proposals to conduct or participate in a matching program and conducting an annual review of all matching programs in which the agency has participated. As a general matter, a matching program is a computerized comparison of records from two or more automated [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) systems of records or an automated system of records and automated records maintained by a non-federal agency (or agent thereof). A matching program either pertains to Federal benefit programs or Federal personnel or payroll records. At a minimum, the Data Integrity Board includes the Inspector General of the agency, if any, and the senior agency official for privacy.",
+  "params": [],
+  "related": [
+    "ac-4",
+    "pm-19",
+    "pm-23",
+    "pt-2",
+    "pt-8"
+  ]
+}

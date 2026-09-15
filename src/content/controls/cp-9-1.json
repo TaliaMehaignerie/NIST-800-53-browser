@@ -1,0 +1,52 @@
+{
+  "id": "cp-9.1",
+  "slug": "cp-9-1",
+  "label": "CP-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "cp-9",
+  "enhancementSlugs": [],
+  "title": "Testing for Reliability and Integrity",
+  "familyCode": "CP",
+  "sortId": "cp-09.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test backup information {{ insert: param, cp-9.1_prm_1 }} to verify media reliability and information integrity.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations need assurance that backup information can be reliably retrieved. Reliability pertains to the systems and system components where the backup information is stored, the operations used to retrieve the information, and the integrity of the information being retrieved. Independent and specialized tests can be used for each of the aspects of reliability. For example, decrypting and transporting (or transmitting) a random sample of backup files from the alternate storage or backup site and comparing the information to the same information at the primary processing site can provide such assurance.",
+  "params": [
+    {
+      "id": "cp-9.1_prm_1",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cp-09.01_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to test backup information for media reliability is defined;"
+      ]
+    },
+    {
+      "id": "cp-09.01_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to test backup information for information integrity is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-4"
+  ]
+}

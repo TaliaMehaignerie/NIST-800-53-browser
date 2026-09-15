@@ -1,0 +1,20 @@
+{
+  "id": "cm-2.1",
+  "slug": "cm-2-1",
+  "label": "CM-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Reviews and Updates",
+  "familyCode": "CM",
+  "sortId": "cm-02.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

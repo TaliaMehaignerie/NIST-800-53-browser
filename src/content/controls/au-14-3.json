@@ -1,0 +1,26 @@
+{
+  "id": "au-14.3",
+  "slug": "au-14-3",
+  "label": "AU-14(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-14",
+  "enhancementSlugs": [],
+  "title": "Remote Viewing and Listening",
+  "familyCode": "AU",
+  "sortId": "au-14.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide and implement the capability for authorized users to remotely view and hear content related to an established user session in real time.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [],
+  "related": [
+    "ac-17"
+  ]
+}

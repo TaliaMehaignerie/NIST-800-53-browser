@@ -1,0 +1,24 @@
+{
+  "id": "mp-8.3",
+  "slug": "mp-8-3",
+  "label": "MP-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "mp-8",
+  "enhancementSlugs": [],
+  "title": "Controlled Unclassified Information",
+  "familyCode": "MP",
+  "sortId": "mp-08.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Downgrade system media containing controlled unclassified information prior to public release.",
+      "children": []
+    }
+  ],
+  "guidance": "The downgrading of controlled unclassified information uses approved sanitization tools, techniques, and procedures.",
+  "params": [],
+  "related": []
+}

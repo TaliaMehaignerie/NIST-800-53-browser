@@ -1,0 +1,29 @@
+{
+  "id": "ir-4.10",
+  "slug": "ir-4-10",
+  "label": "IR-4(10)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Supply Chain Coordination",
+  "familyCode": "IR",
+  "sortId": "ir-04.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Coordinate incident handling activities involving supply chain events with other organizations involved in the supply chain.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations involved in supply chain activities include product developers, system integrators, manufacturers, packagers, assemblers, distributors, vendors, and resellers. Supply chain incidents can occur anywhere through or to the supply chain and include compromises or breaches that involve primary or sub-tier providers, information technology products, system components, development processes or personnel, and distribution processes or warehousing facilities. Organizations consider including processes for protecting and sharing incident information in information exchange agreements and their obligations for reporting incidents to government oversight bodies (e.g., Federal Acquisition Security Council).",
+  "params": [],
+  "related": [
+    "ca-3",
+    "ma-2",
+    "sa-9",
+    "sr-8"
+  ]
+}

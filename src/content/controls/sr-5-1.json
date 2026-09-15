@@ -1,0 +1,43 @@
+{
+  "id": "sr-5.1",
+  "slug": "sr-5-1",
+  "label": "SR-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "sr-5",
+  "enhancementSlugs": [],
+  "title": "Adequate Supply",
+  "familyCode": "SR",
+  "sortId": "sr-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following controls to ensure an adequate supply of {{ insert: param, sr-05.01_odp.02 }}: {{ insert: param, sr-05.01_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Adversaries can attempt to impede organizational operations by disrupting the supply of critical system components or corrupting supplier operations. Organizations may track systems and component mean time to failure to mitigate the loss of temporary or permanent system function. Controls to ensure that adequate supplies of critical system components include the use of multiple suppliers throughout the supply chain for the identified critical components, stockpiling spare components to ensure operation during mission-critical times, and the identification of functionally identical or similar components that may be used, if necessary.",
+  "params": [
+    {
+      "id": "sr-05.01_odp.01",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to ensure an adequate supply of critical system components are defined;"
+      ]
+    },
+    {
+      "id": "sr-05.01_odp.02",
+      "label": "critical system components",
+      "select": null,
+      "guidelines": [
+        "critical system components of which an adequate supply is required are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ra-9"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "si-7.8",
+  "slug": "si-7-8",
+  "label": "SI-7(8)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Auditing Capability for Significant Events",
+  "familyCode": "SI",
+  "sortId": "si-07.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Upon detection of a potential integrity violation, provide the capability to audit the event and initiate the following actions: {{ insert: param, si-07.08_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations select response actions based on types of software, specific software, or information for which there are potential integrity violations.",
+  "params": [
+    {
+      "id": "si-07.08_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "generate an audit record",
+          "alert current user",
+          "alert {{ insert: param, si-07.08_odp.02 }} ",
+          "{{ insert: param, si-07.08_odp.03 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-07.08_odp.02",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be alerted upon the detection of a potential integrity violation is/are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.08_odp.03",
+      "label": "other actions",
+      "select": null,
+      "guidelines": [
+        "other actions to be taken upon the detection of a potential integrity violation are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-12"
+  ]
+}

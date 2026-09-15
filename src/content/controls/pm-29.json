@@ -1,0 +1,38 @@
+{
+  "id": "pm-29",
+  "slug": "pm-29",
+  "label": "PM-29",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Risk Management Program Leadership Roles",
+  "familyCode": "PM",
+  "sortId": "pm-29",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Appoint a Senior Accountable Official for Risk Management to align organizational information security and privacy management processes with strategic, operational, and budgetary planning processes; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Establish a Risk Executive (function) to view and analyze risk from an organization-wide perspective and ensure management of risk is consistent across the organization.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The senior accountable official for risk management leads the risk executive (function) in organization-wide risk management activities.",
+  "params": [],
+  "related": [
+    "pm-2",
+    "pm-19"
+  ]
+}

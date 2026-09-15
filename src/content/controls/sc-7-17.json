@@ -1,0 +1,26 @@
+{
+  "id": "sc-7.17",
+  "slug": "sc-7-17",
+  "label": "SC-7(17)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Automated Enforcement of Protocol Formats",
+  "familyCode": "SC",
+  "sortId": "sc-07.17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce adherence to protocol formats.",
+      "children": []
+    }
+  ],
+  "guidance": "System components that enforce protocol formats include deep packet inspection firewalls and XML gateways. The components verify adherence to protocol formats and specifications at the application layer and identify vulnerabilities that cannot be detected by devices operating at the network or transport layers.",
+  "params": [],
+  "related": [
+    "sc-4"
+  ]
+}

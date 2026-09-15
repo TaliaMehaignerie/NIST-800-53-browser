@@ -1,0 +1,20 @@
+{
+  "id": "ca-3.5",
+  "slug": "ca-3-5",
+  "label": "CA-3(5)",
+  "kind": "enhancement",
+  "parentSlug": "ca-3",
+  "enhancementSlugs": [],
+  "title": "Restrictions on External System Connections",
+  "familyCode": "CA",
+  "sortId": "ca-03.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-7.5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

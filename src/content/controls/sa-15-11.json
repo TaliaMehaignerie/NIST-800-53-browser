@@ -1,0 +1,26 @@
+{
+  "id": "sa-15.11",
+  "slug": "sa-15-11",
+  "label": "SA-15(11)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Archive System or Component",
+  "familyCode": "SA",
+  "sortId": "sa-15.11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system or system component to archive the system or component to be released or delivered together with the corresponding evidence supporting the final security and privacy review.",
+      "children": []
+    }
+  ],
+  "guidance": "Archiving system or system components requires the developer to retain key development artifacts, including hardware specifications, source code, object code, and relevant documentation from the development process that can provide a readily available configuration baseline for system and component upgrades or modifications.",
+  "params": [],
+  "related": [
+    "cm-2"
+  ]
+}

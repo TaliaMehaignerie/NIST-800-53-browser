@@ -1,0 +1,20 @@
+{
+  "id": "ac-17.7",
+  "slug": "ac-17-7",
+  "label": "AC-17(7)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Additional Protection for Security Function Access",
+  "familyCode": "AC",
+  "sortId": "ac-17.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-3.10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,38 @@
+{
+  "id": "sa-15.5",
+  "slug": "sa-15-5",
+  "label": "SA-15(5)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Attack Surface Reduction",
+  "familyCode": "SA",
+  "sortId": "sa-15.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to reduce attack surfaces to {{ insert: param, sa-15.05_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Attack surface reduction is closely aligned with threat and vulnerability analyses and system architecture and design. Attack surface reduction is a means of reducing risk to organizations by giving attackers less opportunity to exploit weaknesses or deficiencies (i.e., potential vulnerabilities) within systems, system components, and system services. Attack surface reduction includes implementing the concept of layered defenses, applying the principles of least privilege and least functionality, applying secure software development practices, deprecating unsafe functions, reducing entry points available to unauthorized users, reducing the amount of code that executes, and eliminating application programming interfaces (APIs) that are vulnerable to attacks.",
+  "params": [
+    {
+      "id": "sa-15.05_odp",
+      "label": "thresholds",
+      "select": null,
+      "guidelines": [
+        "thresholds to which attack surfaces are to be reduced are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-6",
+    "cm-7",
+    "ra-3",
+    "sa-11"
+  ]
+}

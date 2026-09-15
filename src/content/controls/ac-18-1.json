@@ -1,0 +1,44 @@
+{
+  "id": "ac-18.1",
+  "slug": "ac-18-1",
+  "label": "AC-18(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-18",
+  "enhancementSlugs": [],
+  "title": "Authentication and Encryption",
+  "familyCode": "AC",
+  "sortId": "ac-18.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect wireless access to the system using authentication of {{ insert: param, ac-18.01_odp }} and encryption.",
+      "children": []
+    }
+  ],
+  "guidance": "Wireless networking capabilities represent a significant potential vulnerability that can be exploited by adversaries. To protect systems with wireless access points, strong authentication of users and devices along with strong encryption can reduce susceptibility to threats by adversaries involving wireless technologies.",
+  "params": [
+    {
+      "id": "ac-18.01_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "users",
+          "devices"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "sc-8",
+    "sc-12",
+    "sc-13"
+  ]
+}

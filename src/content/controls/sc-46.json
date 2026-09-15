@@ -1,0 +1,40 @@
+{
+  "id": "sc-46",
+  "slug": "sc-46",
+  "label": "SC-46",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Cross Domain Policy Enforcement",
+  "familyCode": "SC",
+  "sortId": "sc-46",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement a policy enforcement mechanism {{ insert: param, sc-46_odp }} between the physical and/or network interfaces for the connecting security domains.",
+      "children": []
+    }
+  ],
+  "guidance": "For logical policy enforcement mechanisms, organizations avoid creating a logical path between interfaces to prevent the ability to bypass the policy enforcement mechanism. For physical policy enforcement mechanisms, the robustness of physical isolation afforded by the physical implementation of policy enforcement to preclude the presence of logical covert channels penetrating the security domain may be needed. Contact [ncdsmo@nsa.gov](mailto:ncdsmo@nsa.gov) for more information.",
+  "params": [
+    {
+      "id": "sc-46_odp",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physically",
+          "logically"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "ac-4",
+    "sc-7"
+  ]
+}

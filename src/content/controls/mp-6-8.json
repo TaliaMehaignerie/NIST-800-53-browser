@@ -1,0 +1,53 @@
+{
+  "id": "mp-6.8",
+  "slug": "mp-6-8",
+  "label": "MP-6(8)",
+  "kind": "enhancement",
+  "parentSlug": "mp-6",
+  "enhancementSlugs": [],
+  "title": "Remote Purging or Wiping of Information",
+  "familyCode": "MP",
+  "sortId": "mp-06.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability to purge or wipe information from {{ insert: param, mp-06.08_odp.01 }} {{ insert: param, mp-06.08_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Remote purging or wiping of information protects information on organizational systems and system components if systems or components are obtained by unauthorized individuals. Remote purge or wipe commands require strong authentication to help mitigate the risk of unauthorized individuals purging or wiping the system, component, or device. The purge or wipe function can be implemented in a variety of ways, including by overwriting data or information multiple times or by destroying the key necessary to decrypt encrypted data.",
+  "params": [
+    {
+      "id": "mp-06.08_odp.01",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "systems or system components to purge or wipe information either remotely or under specific conditions are defined;"
+      ]
+    },
+    {
+      "id": "mp-06.08_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "remotely",
+          "under {{ insert: param, mp-06.08_odp.03 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "mp-06.08_odp.03",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions under which information is to be purged or wiped are defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

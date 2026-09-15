@@ -1,0 +1,17 @@
+{
+  "slug": "mp",
+  "code": "MP",
+  "name": "Media Protection",
+  "controlSlugs": [
+    "mp-1",
+    "mp-2",
+    "mp-3",
+    "mp-4",
+    "mp-5",
+    "mp-6",
+    "mp-7",
+    "mp-8"
+  ],
+  "controlCount": 8,
+  "enhancementCount": 22
+}

@@ -1,0 +1,36 @@
+{
+  "id": "sc-40.2",
+  "slug": "sc-40-2",
+  "label": "SC-40(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-40",
+  "enhancementSlugs": [],
+  "title": "Reduce Detection Potential",
+  "familyCode": "SC",
+  "sortId": "sc-40.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to reduce the detection potential of wireless links to {{ insert: param, sc-40.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The implementation of cryptographic mechanisms to reduce detection potential is used for covert communications and to protect wireless transmitters from geo-location. It also ensures that the spread spectrum waveforms used to achieve a low probability of detection are not predictable by unauthorized individuals. Mission requirements, projected threats, concept of operations, and applicable laws, executive orders, directives, regulations, policies, and standards determine the levels to which wireless links are undetectable.",
+  "params": [
+    {
+      "id": "sc-40.02_odp",
+      "label": "level of reduction",
+      "select": null,
+      "guidelines": [
+        "the level of reduction to be achieved to reduce the detection potential of wireless links is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

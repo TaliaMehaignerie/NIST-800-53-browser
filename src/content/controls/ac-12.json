@@ -1,0 +1,44 @@
+{
+  "id": "ac-12",
+  "slug": "ac-12",
+  "label": "AC-12",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-12-1",
+    "ac-12-2",
+    "ac-12-3"
+  ],
+  "title": "Session Termination",
+  "familyCode": "AC",
+  "sortId": "ac-12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Automatically terminate a user session after {{ insert: param, ac-12_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Session termination addresses the termination of user-initiated logical sessions (in contrast to [SC-10](#sc-10) , which addresses the termination of network connections associated with communications sessions (i.e., network disconnect)). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational system. Such user sessions can be terminated without terminating network sessions. Session termination ends all processes associated with a user’s logical session except for those processes that are specifically created by the user (i.e., session owner) to continue after the session is terminated. Conditions or trigger events that require automatic termination of the session include organization-defined periods of user inactivity, targeted responses to certain types of incidents, or time-of-day restrictions on system use.",
+  "params": [
+    {
+      "id": "ac-12_odp",
+      "label": "conditions or trigger events",
+      "select": null,
+      "guidelines": [
+        "conditions or trigger events requiring session disconnect are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ma-4",
+    "sc-10",
+    "sc-23"
+  ]
+}

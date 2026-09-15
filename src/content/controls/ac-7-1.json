@@ -1,0 +1,20 @@
+{
+  "id": "ac-7.1",
+  "slug": "ac-7-1",
+  "label": "AC-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-7",
+  "enhancementSlugs": [],
+  "title": "Automatic Account Lock",
+  "familyCode": "AC",
+  "sortId": "ac-07.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

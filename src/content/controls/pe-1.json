@@ -1,0 +1,158 @@
+{
+  "id": "pe-1",
+  "slug": "pe-1",
+  "label": "PE-1",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Policy and Procedures",
+  "familyCode": "PE",
+  "sortId": "pe-01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop, document, and disseminate to {{ insert: param, pe-1_prm_1 }}:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "{{ insert: param, pe-01_odp.03 }} physical and environmental protection policy that:",
+              "children": [
+                {
+                  "label": "(a)",
+                  "prose": "Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and",
+                  "children": []
+                },
+                {
+                  "label": "(b)",
+                  "prose": "Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "2.",
+              "prose": "Procedures to facilitate the implementation of the physical and environmental protection policy and the associated physical and environmental protection controls;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Designate an {{ insert: param, pe-01_odp.04 }} to manage the development, documentation, and dissemination of the physical and environmental protection policy and procedures; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Review and update the current physical and environmental protection:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Policy {{ insert: param, pe-01_odp.05 }} and following {{ insert: param, pe-01_odp.06 }} ; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Procedures {{ insert: param, pe-01_odp.07 }} and following {{ insert: param, pe-01_odp.08 }}.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "guidance": "Physical and environmental protection policy and procedures address the controls in the PE family that are implemented within systems and organizations. The risk management strategy is an important factor in establishing such policies and procedures. Policies and procedures contribute to security and privacy assurance. Therefore, it is important that security and privacy programs collaborate on the development of physical and environmental protection policy and procedures. Security and privacy program policies and procedures at the organization level are preferable, in general, and may obviate the need for mission- or system-specific policies and procedures. The policy can be included as part of the general security and privacy policy or be represented by multiple policies that reflect the complex nature of organizations. Procedures can be established for security and privacy programs, for mission or business processes, and for systems, if needed. Procedures describe how the policies or controls are implemented and can be directed at the individual or role that is the object of the procedure. Procedures can be documented in system security and privacy plans or in one or more separate documents. Events that may precipitate an update to physical and environmental protection policy and procedures include assessment or audit findings, security incidents or breaches, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Simply restating controls does not constitute an organizational policy or procedure.",
+  "params": [
+    {
+      "id": "pe-1_prm_1",
+      "label": "organization-defined personnel or roles",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pe-01_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom the physical and environmental protection policy is to be disseminated is/are defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.02",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom the physical and environmental protection procedures are to be disseminated is/are defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.03",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "organization-level",
+          "mission/business process-level",
+          "system-level"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-01_odp.04",
+      "label": "official",
+      "select": null,
+      "guidelines": [
+        "an official to manage the physical and environmental protection policy and procedures is defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.05",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which the current physical and environmental protection policy is reviewed and updated is defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.06",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that would require the current physical and environmental protection policy to be reviewed and updated are defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.07",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which the current physical and environmental protection procedures are reviewed and updated is defined;"
+      ]
+    },
+    {
+      "id": "pe-01_odp.08",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that would require the physical and environmental protection procedures to be reviewed and updated are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3",
+    "pm-9",
+    "ps-8",
+    "si-12"
+  ]
+}

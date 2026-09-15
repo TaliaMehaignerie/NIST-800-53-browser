@@ -1,0 +1,44 @@
+{
+  "id": "ra-5.8",
+  "slug": "ra-5-8",
+  "label": "RA-5(8)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Review Historic Audit Logs",
+  "familyCode": "RA",
+  "sortId": "ra-05.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Review historic audit logs to determine if a vulnerability identified in a {{ insert: param, ra-05.08_odp.01 }} has been previously exploited within an {{ insert: param, ra-05.08_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Reviewing historic audit logs to determine if a recently detected vulnerability in a system has been previously exploited by an adversary can provide important information for forensic analyses. Such analyses can help identify, for example, the extent of a previous intrusion, the trade craft employed during the attack, organizational information exfiltrated or modified, mission or business capabilities affected, and the duration of the attack.",
+  "params": [
+    {
+      "id": "ra-05.08_odp.01",
+      "label": "system",
+      "select": null,
+      "guidelines": [
+        "a system whose historic audit logs are to be reviewed is defined;"
+      ]
+    },
+    {
+      "id": "ra-05.08_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "a time period for a potential previous exploit of a system is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-6",
+    "au-11"
+  ]
+}

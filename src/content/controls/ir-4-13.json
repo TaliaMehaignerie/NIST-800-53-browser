@@ -1,0 +1,33 @@
+{
+  "id": "ir-4.13",
+  "slug": "ir-4-13",
+  "label": "IR-4(13)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Behavior Analysis",
+  "familyCode": "IR",
+  "sortId": "ir-04.13",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Analyze anomalous or suspected adversarial behavior in or related to {{ insert: param, ir-04.13_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "If the organization maintains a deception environment, an analysis of behaviors in that environment, including resources targeted by the adversary and timing of the incident or event, can provide insight into adversarial tactics, techniques, and procedures. External to a deception environment, the analysis of anomalous adversarial behavior (e.g., changes in system performance or usage patterns) or suspected behavior (e.g., changes in searches for the location of specific resources) can give the organization such insight.",
+  "params": [
+    {
+      "id": "ir-04.13_odp",
+      "label": "environments or resources",
+      "select": null,
+      "guidelines": [
+        "environments or resources which may contain or may be related to anomalous or suspected adversarial behavior are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

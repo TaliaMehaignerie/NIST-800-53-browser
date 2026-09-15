@@ -1,0 +1,24 @@
+{
+  "id": "ma-5.5",
+  "slug": "ma-5-5",
+  "label": "MA-5(5)",
+  "kind": "enhancement",
+  "parentSlug": "ma-5",
+  "enhancementSlugs": [],
+  "title": "Non-system Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-05.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure that non-escorted personnel performing maintenance activities not directly associated with the system but in the physical proximity of the system, have required access authorizations.",
+      "children": []
+    }
+  ],
+  "guidance": "Personnel who perform maintenance activities in other capacities not directly related to the system include physical plant personnel and custodial personnel.",
+  "params": [],
+  "related": []
+}

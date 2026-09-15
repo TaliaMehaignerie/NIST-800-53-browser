@@ -1,0 +1,41 @@
+{
+  "id": "ac-16.5",
+  "slug": "ac-16-5",
+  "label": "AC-16(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Attribute Displays on Objects to Be Output",
+  "familyCode": "AC",
+  "sortId": "ac-16.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Display security and privacy attributes in human-readable form on each object that the system transmits to output devices to identify {{ insert: param, ac-16.05_odp.01 }} using {{ insert: param, ac-16.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System outputs include printed pages, screens, or equivalent items. System output devices include printers, notebook computers, video displays, smart phones, and tablets. To mitigate the risk of unauthorized exposure of information (e.g., shoulder surfing), the outputs display full attribute values when unmasked by the subscriber.",
+  "params": [
+    {
+      "id": "ac-16.05_odp.01",
+      "label": "instructions",
+      "select": null,
+      "guidelines": [
+        "special dissemination, handling, or distribution instructions to be used for each object that the system transmits to output devices are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.05_odp.02",
+      "label": "naming conventions",
+      "select": null,
+      "guidelines": [
+        "human-readable, standard naming conventions for the security and privacy attributes to be displayed in human-readable form on each object that the system transmits to output devices are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

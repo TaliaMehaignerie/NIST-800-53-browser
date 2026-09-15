@@ -1,0 +1,20 @@
+{
+  "id": "si-7.11",
+  "slug": "si-7-11",
+  "label": "SI-7(11)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Confined Environments with Limited Privileges",
+  "familyCode": "SI",
+  "sortId": "si-07.11",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-7.6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

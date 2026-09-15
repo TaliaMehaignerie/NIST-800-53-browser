@@ -1,0 +1,26 @@
+{
+  "id": "ir-4.4",
+  "slug": "ir-4-4",
+  "label": "IR-4(4)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Information Correlation",
+  "familyCode": "IR",
+  "sortId": "ir-04.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Correlate incident information and individual incident responses to achieve an organization-wide perspective on incident awareness and response.",
+      "children": []
+    }
+  ],
+  "guidance": "Sometimes, a threat event, such as a hostile cyber-attack, can only be observed by bringing together information from different sources, including various reports and reporting procedures established by organizations.",
+  "params": [],
+  "related": []
+}

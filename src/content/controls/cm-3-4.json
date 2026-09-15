@@ -1,0 +1,58 @@
+{
+  "id": "cm-3.4",
+  "slug": "cm-3-4",
+  "label": "CM-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Security and Privacy Representatives",
+  "familyCode": "CM",
+  "sortId": "cm-03.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require {{ insert: param, cm-3.4_prm_1 }} to be members of the {{ insert: param, cm-03.04_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information security and privacy representatives include system security officers, senior agency information security officers, senior agency officials for privacy, or system privacy officers. Representation by personnel with information security and privacy expertise is important because changes to system configurations can have unintended side effects, some of which may be security- or privacy-relevant. Detecting such changes early in the process can help avoid unintended, negative consequences that could ultimately affect the security and privacy posture of systems. The configuration change control element referred to in the second organization-defined parameter reflects the change control elements defined by organizations in [CM-3g](#cm-3_smt.g).",
+  "params": [
+    {
+      "id": "cm-3.4_prm_1",
+      "label": "organization-defined security and privacy representatives",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-03.04_odp.01",
+      "label": "security representatives",
+      "select": null,
+      "guidelines": [
+        "security representatives required to be members of the change control element are defined;"
+      ]
+    },
+    {
+      "id": "cm-03.04_odp.02",
+      "label": "privacy representatives",
+      "select": null,
+      "guidelines": [
+        "privacy representatives required to be members of the change control element are defined;"
+      ]
+    },
+    {
+      "id": "cm-03.04_odp.03",
+      "label": "configuration change control element",
+      "select": null,
+      "guidelines": [
+        "the configuration change control element of which the security and privacy representatives are to be members is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

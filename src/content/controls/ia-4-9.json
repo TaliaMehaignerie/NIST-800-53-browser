@@ -1,0 +1,33 @@
+{
+  "id": "ia-4.9",
+  "slug": "ia-4-9",
+  "label": "IA-4(9)",
+  "kind": "enhancement",
+  "parentSlug": "ia-4",
+  "enhancementSlugs": [],
+  "title": "Attribute Maintenance and Protection",
+  "familyCode": "IA",
+  "sortId": "ia-04.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain the attributes for each uniquely identified individual, device, or service in {{ insert: param, ia-04.09_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "For each of the entities covered in [IA-2](#ia-2), [IA-3](#ia-3), [IA-8](#ia-8) , and [IA-9](#ia-9) , it is important to maintain the attributes for each authenticated entity on an ongoing basis in a central (protected) store.",
+  "params": [
+    {
+      "id": "ia-04.09_odp",
+      "label": "protected central storage",
+      "select": null,
+      "guidelines": [
+        "protected central storage used to maintain the attributes for each uniquely identified individual, device, or service is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

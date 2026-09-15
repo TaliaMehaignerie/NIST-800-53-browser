@@ -1,0 +1,20 @@
+{
+  "id": "pe-8.2",
+  "slug": "pe-8-2",
+  "label": "PE-8(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-8",
+  "enhancementSlugs": [],
+  "title": "Physical Access Records",
+  "familyCode": "PE",
+  "sortId": "pe-08.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

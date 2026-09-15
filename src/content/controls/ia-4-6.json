@@ -1,0 +1,37 @@
+{
+  "id": "ia-4.6",
+  "slug": "ia-4-6",
+  "label": "IA-4(6)",
+  "kind": "enhancement",
+  "parentSlug": "ia-4",
+  "enhancementSlugs": [],
+  "title": "Cross-organization Management",
+  "familyCode": "IA",
+  "sortId": "ia-04.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Coordinate with the following external organizations for cross-organization management of identifiers: {{ insert: param, ia-04.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Cross-organization identifier management provides the capability to identify individuals, groups, roles, or devices when conducting cross-organization activities involving the processing, storage, or transmission of information.",
+  "params": [
+    {
+      "id": "ia-04.06_odp",
+      "label": "external organizations",
+      "select": null,
+      "guidelines": [
+        "external organizations with whom to coordinate the cross-organization management of identifiers are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-16",
+    "ia-2",
+    "ia-5"
+  ]
+}

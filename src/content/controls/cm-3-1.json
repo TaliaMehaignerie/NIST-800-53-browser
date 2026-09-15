@@ -1,0 +1,90 @@
+{
+  "id": "cm-3.1",
+  "slug": "cm-3-1",
+  "label": "CM-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Automated Documentation, Notification, and Prohibition of Changes",
+  "familyCode": "CM",
+  "sortId": "cm-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use {{ insert: param, cm-03.01_odp.01 }} to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Document proposed changes to the system;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Notify {{ insert: param, cm-03.01_odp.02 }} of proposed changes to the system and request change approval;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Highlight proposed changes to the system that have not been approved or disapproved within {{ insert: param, cm-03.01_odp.03 }};",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Prohibit changes to the system until designated approvals are received;",
+          "children": []
+        },
+        {
+          "label": "(e)",
+          "prose": "Document all changes to the system; and",
+          "children": []
+        },
+        {
+          "label": "(f)",
+          "prose": "Notify {{ insert: param, cm-03.01_odp.04 }} when approved changes to the system are completed.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "cm-03.01_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "mechanisms used to automate configuration change control are defined;"
+      ]
+    },
+    {
+      "id": "cm-03.01_odp.02",
+      "label": "approval authorities",
+      "select": null,
+      "guidelines": [
+        "approval authorities to be notified of and request approval for proposed changes to the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-03.01_odp.03",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period after which to highlight changes that have not been approved or disapproved is defined;"
+      ]
+    },
+    {
+      "id": "cm-03.01_odp.04",
+      "label": "personnel",
+      "select": null,
+      "guidelines": [
+        "personnel to be notified when approved changes are complete is/are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

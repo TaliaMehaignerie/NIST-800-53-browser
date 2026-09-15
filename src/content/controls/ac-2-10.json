@@ -1,0 +1,20 @@
+{
+  "id": "ac-2.10",
+  "slug": "ac-2-10",
+  "label": "AC-2(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Shared and Group Account Credential Change",
+  "familyCode": "AC",
+  "sortId": "ac-02.10",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

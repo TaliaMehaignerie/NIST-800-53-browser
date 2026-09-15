@@ -1,0 +1,30 @@
+{
+  "id": "ca-3.6",
+  "slug": "ca-3-6",
+  "label": "CA-3(6)",
+  "kind": "enhancement",
+  "parentSlug": "ca-3",
+  "enhancementSlugs": [],
+  "title": "Transfer Authorizations",
+  "familyCode": "CA",
+  "sortId": "ca-03.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that individuals or systems transferring data between interconnecting systems have the requisite authorizations (i.e., write permissions or privileges) prior to accepting such data.",
+      "children": []
+    }
+  ],
+  "guidance": "To prevent unauthorized individuals and systems from making information transfers to protected systems, the protected system verifies—via independent means— whether the individual or system attempting to transfer information is authorized to do so. Verification of the authorization to transfer information also applies to control plane traffic (e.g., routing and DNS) and services (e.g., authenticated SMTP relays).",
+  "params": [],
+  "related": [
+    "ac-2",
+    "ac-3",
+    "ac-4"
+  ]
+}

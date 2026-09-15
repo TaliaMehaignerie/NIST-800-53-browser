@@ -1,0 +1,20 @@
+{
+  "id": "pe-5.1",
+  "slug": "pe-5-1",
+  "label": "PE-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-5",
+  "enhancementSlugs": [],
+  "title": "Access to Output by Authorized Individuals",
+  "familyCode": "PE",
+  "sortId": "pe-05.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,57 @@
+{
+  "id": "sa-9.5",
+  "slug": "sa-9-5",
+  "label": "SA-9(5)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Processing, Storage, and Service Location",
+  "familyCode": "SA",
+  "sortId": "sa-09.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict the location of {{ insert: param, sa-09.05_odp.01 }} to {{ insert: param, sa-09.05_odp.02 }} based on {{ insert: param, sa-09.05_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The location of information processing, information and data storage, or system services can have a direct impact on the ability of organizations to successfully execute their mission and business functions. The impact occurs when external providers control the location of processing, storage, or services. The criteria that external providers use for the selection of processing, storage, or service locations may be different from the criteria that organizations use. For example, organizations may desire that data or information storage locations be restricted to certain locations to help facilitate incident response activities in case of information security incidents or breaches. Incident response activities, including forensic analyses and after-the-fact investigations, may be adversely affected by the governing laws, policies, or protocols in the locations where processing and storage occur and/or the locations from which system services emanate.",
+  "params": [
+    {
+      "id": "sa-09.05_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "information processing",
+          "information or data",
+          "system services"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sa-09.05_odp.02",
+      "label": "locations",
+      "select": null,
+      "guidelines": [
+        "locations where {{ insert: param, sa-09.05_odp.01 }} is/are to be restricted are defined;"
+      ]
+    },
+    {
+      "id": "sa-09.05_odp.03",
+      "label": "requirements",
+      "select": null,
+      "guidelines": [
+        "requirements or conditions for restricting the location of {{ insert: param, sa-09.05_odp.01 }} are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sa-5",
+    "sr-4"
+  ]
+}

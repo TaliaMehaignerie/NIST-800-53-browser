@@ -1,0 +1,43 @@
+{
+  "id": "pe-15.1",
+  "slug": "pe-15-1",
+  "label": "PE-15(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-15",
+  "enhancementSlugs": [],
+  "title": "Automation Support",
+  "familyCode": "PE",
+  "sortId": "pe-15.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Detect the presence of water near the system and alert {{ insert: param, pe-15.01_odp.01 }} using {{ insert: param, pe-15.01_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms include notification systems, water detection sensors, and alarms.",
+  "params": [
+    {
+      "id": "pe-15.01_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be alerted when the presence of water is detected near the system is/are defined;"
+      ]
+    },
+    {
+      "id": "pe-15.01_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to detect the presence of water near the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

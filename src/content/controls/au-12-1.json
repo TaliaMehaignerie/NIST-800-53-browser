@@ -1,0 +1,46 @@
+{
+  "id": "au-12.1",
+  "slug": "au-12-1",
+  "label": "AU-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-12",
+  "enhancementSlugs": [],
+  "title": "System-wide and Time-correlated Audit Trail",
+  "familyCode": "AU",
+  "sortId": "au-12.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Compile audit records from {{ insert: param, au-12.01_odp.01 }} into a system-wide (logical or physical) audit trail that is time-correlated to within {{ insert: param, au-12.01_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Audit trails are time-correlated if the time stamps in the individual audit records can be reliably related to the time stamps in other audit records to achieve a time ordering of the records within organizational tolerances.",
+  "params": [
+    {
+      "id": "au-12.01_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components from which audit records are to be compiled into a system-wide (logical or physical) audit trail are defined;"
+      ]
+    },
+    {
+      "id": "au-12.01_odp.02",
+      "label": "level of tolerance",
+      "select": null,
+      "guidelines": [
+        "level of tolerance for the relationship between timestamps of individual records in the audit trail is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-8",
+    "sc-45"
+  ]
+}

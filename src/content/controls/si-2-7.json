@@ -1,0 +1,70 @@
+{
+  "id": "si-2.7",
+  "slug": "si-2-7",
+  "label": "SI-2(7)",
+  "kind": "enhancement",
+  "parentSlug": "si-2",
+  "enhancementSlugs": [],
+  "title": "Root Cause Analysis",
+  "familyCode": "SI",
+  "sortId": "si-02.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Conduct root cause analysis to identify underlying causes of issues or failures.",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Develop actions to address the root cause of the issue or failure.",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Implement the actions and monitor the implementation for effectiveness.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Root cause analysis includes a wide range of approaches, tools, and techniques to systematically identify the underlying cause of issues or failures to systems and systems components (hardware, software, and firmware). Organizations consider the severity of the incident to determine what root cause analysis method is used and how quickly implementation of the remediation actions. The root cause analysis includes a timeline, missed warning signs, key decisions, gaps, mitigations, and verification of effectiveness. The actions identified to address the source of the issue are implemented and integrated into applicable organizational policy, procedures, and control implementation.",
+  "params": [],
+  "related": [
+    "ac-1",
+    "at-1",
+    "au-1",
+    "ca-1",
+    "cm-1",
+    "cp-1",
+    "ia-1",
+    "ir-1",
+    "ma-1",
+    "mp-1",
+    "pe-1",
+    "pl-1",
+    "pm-1",
+    "ps-1",
+    "pt-1",
+    "ra-1",
+    "sa-1",
+    "sc-1",
+    "si-1",
+    "sr-1",
+    "au-2",
+    "ca-7",
+    "ir-6",
+    "ir-8",
+    "ma-3",
+    "ra-5",
+    "sa-11",
+    "sa-15",
+    "sr-8"
+  ]
+}

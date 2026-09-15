@@ -1,0 +1,61 @@
+{
+  "id": "ps-8",
+  "slug": "ps-8",
+  "label": "PS-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Personnel Sanctions",
+  "familyCode": "PS",
+  "sortId": "ps-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Employ a formal sanctions process for individuals failing to comply with established information security and privacy policies and procedures; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Notify {{ insert: param, ps-08_odp.01 }} within {{ insert: param, ps-08_odp.02 }} when a formal employee sanctions process is initiated, identifying the individual sanctioned and the reason for the sanction.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizational sanctions reflect applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Sanctions processes are described in access agreements and can be included as part of general personnel policies for organizations and/or specified in security and privacy policies. Organizations consult with the Office of the General Counsel regarding matters of employee sanctions.",
+  "params": [
+    {
+      "id": "ps-08_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified when a formal employee sanctions process is initiated is/are defined;"
+      ]
+    },
+    {
+      "id": "ps-08_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period within which organization-defined personnel or roles must be notified when a formal employee sanctions process is initiated is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pl-4",
+    "pm-12",
+    "ps-6",
+    "pt-1"
+  ]
+}

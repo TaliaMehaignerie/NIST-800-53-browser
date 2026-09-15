@@ -1,0 +1,27 @@
+{
+  "id": "ps-3.2",
+  "slug": "ps-3-2",
+  "label": "PS-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "ps-3",
+  "enhancementSlugs": [],
+  "title": "Formal Indoctrination",
+  "familyCode": "PS",
+  "sortId": "ps-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that individuals accessing a system processing, storing, or transmitting types of classified information that require formal indoctrination, are formally indoctrinated for all the relevant types of information to which they have access on the system.",
+      "children": []
+    }
+  ],
+  "guidance": "Types of classified information that require formal indoctrination include Special Access Program (SAP), Restricted Data (RD), and Sensitive Compartmented Information (SCI).",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-4"
+  ]
+}

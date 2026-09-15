@@ -1,0 +1,20 @@
+{
+  "id": "ia-9.1",
+  "slug": "ia-9-1",
+  "label": "IA-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "ia-9",
+  "enhancementSlugs": [],
+  "title": "Information Exchange",
+  "familyCode": "IA",
+  "sortId": "ia-09.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

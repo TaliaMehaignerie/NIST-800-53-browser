@@ -1,0 +1,61 @@
+{
+  "id": "ma-4.1",
+  "slug": "ma-4-1",
+  "label": "MA-4(1)",
+  "kind": "enhancement",
+  "parentSlug": "ma-4",
+  "enhancementSlugs": [],
+  "title": "Logging and Review",
+  "familyCode": "MA",
+  "sortId": "ma-04.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Log {{ insert: param, ma-4.1_prm_1 }} for nonlocal maintenance and diagnostic sessions; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Review the audit records of the maintenance and diagnostic sessions to detect anomalous behavior.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Audit logging for nonlocal maintenance is enforced by [AU-2](#au-2) . Audit events are defined in [AU-2a](#au-2_smt.a).",
+  "params": [
+    {
+      "id": "ma-4.1_prm_1",
+      "label": "organization-defined audit events",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ma-04.01_odp.01",
+      "label": "audit events",
+      "select": null,
+      "guidelines": [
+        "audit events to be logged for nonlocal maintenance are defined;"
+      ]
+    },
+    {
+      "id": "ma-04.01_odp.02",
+      "label": "audit events",
+      "select": null,
+      "guidelines": [
+        "audit events to be logged for diagnostic sessions are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-6",
+    "au-12"
+  ]
+}

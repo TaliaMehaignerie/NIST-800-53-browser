@@ -1,0 +1,20 @@
+{
+  "id": "si-3.5",
+  "slug": "si-3-5",
+  "label": "SI-3(5)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Portable Storage Devices",
+  "familyCode": "SI",
+  "sortId": "si-03.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

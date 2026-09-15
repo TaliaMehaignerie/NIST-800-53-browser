@@ -1,0 +1,85 @@
+{
+  "id": "pe-14",
+  "slug": "pe-14",
+  "label": "PE-14",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-14-1",
+    "pe-14-2"
+  ],
+  "title": "Environmental Controls",
+  "familyCode": "PE",
+  "sortId": "pe-14",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Maintain {{ insert: param, pe-14_odp.01 }} levels within the facility where the system resides at {{ insert: param, pe-14_odp.03 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Monitor environmental control levels {{ insert: param, pe-14_odp.04 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The provision of environmental controls applies primarily to organizational facilities that contain concentrations of system resources (e.g., data centers, mainframe computer rooms, and server rooms). Insufficient environmental controls, especially in very harsh environments, can have a significant adverse impact on the availability of systems and system components that are needed to support organizational mission and business functions.",
+  "params": [
+    {
+      "id": "pe-14_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "temperature",
+          "humidity",
+          "pressure",
+          "radiation",
+          "{{ insert: param, pe-14_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-14_odp.02",
+      "label": "environmental control",
+      "select": null,
+      "guidelines": [
+        "environmental control(s) for which to maintain a specified level in the facility where the system resides are defined (if selected);"
+      ]
+    },
+    {
+      "id": "pe-14_odp.03",
+      "label": "acceptable levels",
+      "select": null,
+      "guidelines": [
+        "acceptable levels for environmental controls are defined;"
+      ]
+    },
+    {
+      "id": "pe-14_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to monitor environmental control levels is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3",
+    "cp-2"
+  ]
+}

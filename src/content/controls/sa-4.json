@@ -1,0 +1,123 @@
+{
+  "id": "sa-4",
+  "slug": "sa-4",
+  "label": "SA-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-4-1",
+    "sa-4-2",
+    "sa-4-3",
+    "sa-4-4",
+    "sa-4-5",
+    "sa-4-6",
+    "sa-4-7",
+    "sa-4-8",
+    "sa-4-9",
+    "sa-4-10",
+    "sa-4-11",
+    "sa-4-12"
+  ],
+  "title": "Acquisition Process",
+  "familyCode": "SA",
+  "sortId": "sa-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Include the following requirements, descriptions, and criteria, explicitly or by reference, using {{ insert: param, sa-04_odp.01 }} in the acquisition contract for the system, system component, or system service:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Security and privacy functional requirements;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Strength of mechanism requirements;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Security and privacy assurance requirements;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Controls needed to satisfy the security and privacy requirements.",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Security and privacy documentation requirements;",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Requirements for protecting security and privacy documentation;",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Description of the system development environment and environment in which the system is intended to operate;",
+          "children": []
+        },
+        {
+          "label": "h.",
+          "prose": "Allocation of responsibility or identification of parties responsible for information security, privacy, and supply chain risk management; and",
+          "children": []
+        },
+        {
+          "label": "i.",
+          "prose": "Acceptance criteria.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Security and privacy functional requirements are typically derived from the high-level security and privacy requirements described in [SA-2](#sa-2) . The derived requirements include security and privacy capabilities, functions, and mechanisms. Strength requirements associated with such capabilities, functions, and mechanisms include degree of correctness, completeness, resistance to tampering or bypass, and resistance to direct attack. Assurance requirements include development processes, procedures, and methodologies as well as the evidence from development and assessment activities that provide grounds for confidence that the required functionality is implemented and possesses the required strength of mechanism. [SP 800-160-1](#e3cc0520-a366-4fc9-abc2-5272db7e3564) describes the process of requirements engineering as part of the system development life cycle.\n\nControls can be viewed as descriptions of the safeguards and protection capabilities appropriate for achieving the particular security and privacy objectives of the organization and for reflecting the security and privacy requirements of stakeholders. Controls are selected and implemented in order to satisfy system requirements and include developer and organizational responsibilities. Controls can include technical, administrative, and physical aspects. In some cases, the selection and implementation of a control may necessitate additional specification by the organization in the form of derived requirements or instantiated control parameter values. The derived requirements and control parameter values may be necessary to provide the appropriate level of implementation detail for controls within the system development life cycle.\n\nSecurity and privacy documentation requirements address all stages of the system development life cycle. Documentation provides user and administrator guidance for the implementation and operation of controls. The level of detail required in such documentation is based on the security categorization or classification level of the system and the degree to which organizations depend on the capabilities, functions, or mechanisms to meet risk response expectations. Requirements can include mandated configuration settings that specify allowed functions, ports, protocols, and services. Acceptance criteria for systems, system components, and system services are defined in the same manner as the criteria for any organizational acquisition or procurement.\n\nOrganizations can determine other requirements that support security and operations, to include responsibilities for the organization and developer, and notification and timing requirements for support, maintenance and updates.",
+  "params": [
+    {
+      "id": "sa-04_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "standardized contract language",
+          "{{ insert: param, sa-04_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sa-04_odp.02",
+      "label": "contract language",
+      "select": null,
+      "guidelines": [
+        "contract language is defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "cm-6",
+    "cm-8",
+    "ps-7",
+    "sa-3",
+    "sa-5",
+    "sa-8",
+    "sa-11",
+    "sa-15",
+    "sa-16",
+    "sa-17",
+    "sa-21",
+    "sr-3",
+    "sr-5"
+  ]
+}

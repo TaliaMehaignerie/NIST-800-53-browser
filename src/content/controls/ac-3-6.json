@@ -1,0 +1,21 @@
+{
+  "id": "ac-3.6",
+  "slug": "ac-3-6",
+  "label": "AC-3(6)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Protection of User and System Information",
+  "familyCode": "AC",
+  "sortId": "ac-03.06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-4",
+    "sc-28"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

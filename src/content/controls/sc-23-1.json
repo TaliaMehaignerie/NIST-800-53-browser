@@ -1,0 +1,24 @@
+{
+  "id": "sc-23.1",
+  "slug": "sc-23-1",
+  "label": "SC-23(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-23",
+  "enhancementSlugs": [],
+  "title": "Invalidate Session Identifiers at Logout",
+  "familyCode": "SC",
+  "sortId": "sc-23.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Invalidate session identifiers upon user logout or other session termination.",
+      "children": []
+    }
+  ],
+  "guidance": "Invalidating session identifiers at logout curtails the ability of adversaries to capture and continue to employ previously valid session IDs.",
+  "params": [],
+  "related": []
+}

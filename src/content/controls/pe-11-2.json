@@ -1,0 +1,65 @@
+{
+  "id": "pe-11.2",
+  "slug": "pe-11-2",
+  "label": "PE-11(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-11",
+  "enhancementSlugs": [],
+  "title": "Alternate Power Supply — Self-contained",
+  "familyCode": "PE",
+  "sortId": "pe-11.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an alternate power supply for the system that is activated {{ insert: param, pe-11.02_odp.01 }} and that is:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Self-contained;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Not reliant on external power generation; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Capable of maintaining {{ insert: param, pe-11.02_odp.02 }} in the event of an extended loss of the primary power source.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The provision of a long-term, self-contained power supply can be satisfied by using one or more generators with sufficient capacity to meet the needs of the organization.",
+  "params": [
+    {
+      "id": "pe-11.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "manually",
+          "automatically"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-11.02_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "minimally required operational capability",
+          "full operational capability"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

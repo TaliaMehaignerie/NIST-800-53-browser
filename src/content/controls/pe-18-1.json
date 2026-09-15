@@ -1,0 +1,20 @@
+{
+  "id": "pe-18.1",
+  "slug": "pe-18-1",
+  "label": "PE-18(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-18",
+  "enhancementSlugs": [],
+  "title": "Facility Site",
+  "familyCode": "PE",
+  "sortId": "pe-18.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-23"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,33 @@
+{
+  "id": "ac-6.8",
+  "slug": "ac-6-8",
+  "label": "AC-6(8)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Privilege Levels for Code Execution",
+  "familyCode": "AC",
+  "sortId": "ac-06.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent the following software from executing at higher privilege levels than users executing the software: {{ insert: param, ac-06.08_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In certain situations, software applications or programs need to execute with elevated privileges to perform required functions. However, depending on the software functionality and configuration, if the privileges required for execution are at a higher level than the privileges assigned to organizational users invoking such applications or programs, those users may indirectly be provided with greater privileges than assigned.",
+  "params": [
+    {
+      "id": "ac-06.08_odp",
+      "label": "software",
+      "select": null,
+      "guidelines": [
+        "software to be prevented from executing at higher privilege levels than users executing the software is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

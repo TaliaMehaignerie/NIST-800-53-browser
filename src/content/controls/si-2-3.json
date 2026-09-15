@@ -1,0 +1,44 @@
+{
+  "id": "si-2.3",
+  "slug": "si-2-3",
+  "label": "SI-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-2",
+  "enhancementSlugs": [],
+  "title": "Time to Remediate Flaws and Benchmarks for Corrective Actions",
+  "familyCode": "SI",
+  "sortId": "si-02.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Measure the time between flaw identification and flaw remediation; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Establish the following benchmarks for taking corrective actions: {{ insert: param, si-02.03_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations determine the time it takes on average to correct system flaws after such flaws have been identified and subsequently establish organizational benchmarks (i.e., time frames) for taking corrective actions. Benchmarks can be established by the type of flaw or the severity of the potential vulnerability if the flaw can be exploited.",
+  "params": [
+    {
+      "id": "si-02.03_odp",
+      "label": "benchmarks",
+      "select": null,
+      "guidelines": [
+        "the benchmarks for taking corrective actions are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

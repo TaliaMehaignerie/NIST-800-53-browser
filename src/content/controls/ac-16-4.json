@@ -1,0 +1,101 @@
+{
+  "id": "ac-16.4",
+  "slug": "ac-16-4",
+  "label": "AC-16(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Association of Attributes by Authorized Individuals",
+  "familyCode": "AC",
+  "sortId": "ac-16.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability to associate {{ insert: param, ac-16.4_prm_1 }} with {{ insert: param, ac-16.4_prm_2 }} by authorized individuals (or processes acting on behalf of individuals).",
+      "children": []
+    }
+  ],
+  "guidance": "Systems, in general, provide the capability for privileged users to assign security and privacy attributes to system-defined subjects (e.g., users) and objects (e.g., directories, files, and ports). Some systems provide additional capability for general users to assign security and privacy attributes to additional objects (e.g., files, emails). The association of attributes by authorized individuals is described in the design documentation. The support provided by systems can include prompting users to select security and privacy attributes to be associated with information objects, employing automated mechanisms to categorize information with attributes based on defined policies, or ensuring that the combination of the security or privacy attributes selected is valid. Organizations consider the creation, deletion, or modification of attributes when defining auditable events.",
+  "params": [
+    {
+      "id": "ac-16.4_prm_1",
+      "label": "organization-defined security and privacy attributes",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.4_prm_2",
+      "label": "organization-defined subjects and objects",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.04_odp.01",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes to be associated with subjects by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.02",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes to be associated with objects by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.03",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes to be associated with subjects by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.04",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes to be associated with objects by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.05",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects requiring the association of security attributes by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.06",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects requiring the association of security attributes by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.07",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects requiring the association of privacy attributes by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.04_odp.08",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects requiring the association of privacy attributes by authorized individuals (or processes acting on behalf of individuals) are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

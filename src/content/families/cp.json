@@ -1,0 +1,22 @@
+{
+  "slug": "cp",
+  "code": "CP",
+  "name": "Contingency Planning",
+  "controlSlugs": [
+    "cp-1",
+    "cp-2",
+    "cp-3",
+    "cp-4",
+    "cp-5",
+    "cp-6",
+    "cp-7",
+    "cp-8",
+    "cp-9",
+    "cp-10",
+    "cp-11",
+    "cp-12",
+    "cp-13"
+  ],
+  "controlCount": 13,
+  "enhancementCount": 43
+}

@@ -1,0 +1,24 @@
+{
+  "id": "sc-20.2",
+  "slug": "sc-20-2",
+  "label": "SC-20(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-20",
+  "enhancementSlugs": [],
+  "title": "Data Origin and Integrity",
+  "familyCode": "SC",
+  "sortId": "sc-20.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide data origin and integrity protection artifacts for internal name/address resolution queries.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [],
+  "related": []
+}

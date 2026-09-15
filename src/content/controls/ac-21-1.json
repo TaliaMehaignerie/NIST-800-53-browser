@@ -1,0 +1,33 @@
+{
+  "id": "ac-21.1",
+  "slug": "ac-21-1",
+  "label": "AC-21(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-21",
+  "enhancementSlugs": [],
+  "title": "Automated Decision Support",
+  "familyCode": "AC",
+  "sortId": "ac-21.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, ac-21.01_odp }} to enforce information-sharing decisions by authorized users based on access authorizations of sharing partners and access restrictions on information to be shared.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms are used to enforce information sharing decisions.",
+  "params": [
+    {
+      "id": "ac-21.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms employed to enforce information-sharing decisions by authorized users are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

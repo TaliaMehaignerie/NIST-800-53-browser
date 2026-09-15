@@ -1,0 +1,20 @@
+{
+  "id": "sa-19.2",
+  "slug": "sa-19-2",
+  "label": "SA-19(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-19",
+  "enhancementSlugs": [],
+  "title": "Configuration Control for Component Service and Repair",
+  "familyCode": "SA",
+  "sortId": "sa-19.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-11.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

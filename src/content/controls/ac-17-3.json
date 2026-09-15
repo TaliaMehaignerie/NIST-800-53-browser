@@ -1,0 +1,29 @@
+{
+  "id": "ac-17.3",
+  "slug": "ac-17-3",
+  "label": "AC-17(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Managed Access Control Points",
+  "familyCode": "AC",
+  "sortId": "ac-17.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Route remote accesses through authorized and managed network access control points.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations consider the Trusted Internet Connections (TIC) initiative [DHS TIC](#4f42ee6e-86cc-403b-a51f-76c2b4f81b54) requirements for external network connections since limiting the number of access control points for remote access reduces attack surfaces.",
+  "params": [],
+  "related": [
+    "sc-7"
+  ]
+}

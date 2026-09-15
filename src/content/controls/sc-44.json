@@ -1,0 +1,43 @@
+{
+  "id": "sc-44",
+  "slug": "sc-44",
+  "label": "SC-44",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Detonation Chambers",
+  "familyCode": "SC",
+  "sortId": "sc-44",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ a detonation chamber capability within {{ insert: param, sc-44_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Detonation chambers, also known as dynamic execution environments, allow organizations to open email attachments, execute untrusted or suspicious applications, and execute Universal Resource Locator requests in the safety of an isolated environment or a virtualized sandbox. Protected and isolated execution environments provide a means of determining whether the associated attachments or applications contain malicious code. While related to the concept of deception nets, the employment of detonation chambers is not intended to maintain a long-term environment in which adversaries can operate and their actions can be observed. Rather, detonation chambers are intended to quickly identify malicious code and either reduce the likelihood that the code is propagated to user environments of operation or prevent such propagation completely.",
+  "params": [
+    {
+      "id": "sc-44_odp",
+      "label": "system, system component, or location",
+      "select": null,
+      "guidelines": [
+        "the system, system component, or location where a detonation chamber capability is to be employed is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-7",
+    "sc-18",
+    "sc-25",
+    "sc-26",
+    "sc-30",
+    "sc-35",
+    "sc-39",
+    "si-3",
+    "si-7"
+  ]
+}

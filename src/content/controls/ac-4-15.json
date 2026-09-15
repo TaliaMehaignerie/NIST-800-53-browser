@@ -1,0 +1,57 @@
+{
+  "id": "ac-4.15",
+  "slug": "ac-4-15",
+  "label": "AC-4(15)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Detection of Unsanctioned Information",
+  "familyCode": "AC",
+  "sortId": "ac-04.15",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, examine the information for the presence of {{ insert: param, ac-04.15_odp.01 }} and prohibit the transfer of such information in accordance with the {{ insert: param, ac-4.15_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Unsanctioned information includes malicious code, information that is inappropriate for release from the source network, or executable code that could disrupt or harm the services or systems on the destination network.",
+  "params": [
+    {
+      "id": "ac-4.15_prm_2",
+      "label": "organization-defined security or privacy policy",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.15_odp.01",
+      "label": "unsanctioned information",
+      "select": null,
+      "guidelines": [
+        "unsanctioned information to be detected is defined;"
+      ]
+    },
+    {
+      "id": "ac-04.15_odp.02",
+      "label": "security policy",
+      "select": null,
+      "guidelines": [
+        "security policy that requires the transfer of unsanctioned information between different security domains to be prohibited is defined (if selected);"
+      ]
+    },
+    {
+      "id": "ac-04.15_odp.03",
+      "label": "privacy policy",
+      "select": null,
+      "guidelines": [
+        "privacy policy that requires the transfer of organization-defined unsanctioned information between different security domains to be prohibited is defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "si-3"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "sa-12.13",
+  "slug": "sa-12-13",
+  "label": "SA-12(13)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Critical Information System Components",
+  "familyCode": "SA",
+  "sortId": "sa-12.13",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ma-6",
+    "ra-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

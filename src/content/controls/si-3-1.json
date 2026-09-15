@@ -1,0 +1,20 @@
+{
+  "id": "si-3.1",
+  "slug": "si-3-1",
+  "label": "SI-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Central Management",
+  "familyCode": "SI",
+  "sortId": "si-03.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pl-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

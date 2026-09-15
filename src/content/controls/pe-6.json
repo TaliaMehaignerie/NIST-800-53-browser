@@ -1,0 +1,75 @@
+{
+  "id": "pe-6",
+  "slug": "pe-6",
+  "label": "PE-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-6-1",
+    "pe-6-2",
+    "pe-6-3",
+    "pe-6-4"
+  ],
+  "title": "Monitoring Physical Access",
+  "familyCode": "PE",
+  "sortId": "pe-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Monitor physical access to the facility where the system resides to detect and respond to physical security incidents;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Review physical access logs {{ insert: param, pe-06_odp.01 }} and upon occurrence of {{ insert: param, pe-06_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Coordinate results of reviews and investigations with the organizational incident response capability.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Physical access monitoring includes publicly accessible areas within organizational facilities. Examples of physical access monitoring include the employment of guards, video surveillance equipment (i.e., cameras), and sensor devices. Reviewing physical access logs can help identify suspicious activity, anomalous events, or potential threats. The reviews can be supported by audit logging controls, such as [AU-2](#au-2) , if the access logs are part of an automated system. Organizational incident response capabilities include investigations of physical security incidents and responses to the incidents. Incidents include security violations or suspicious physical access activities. Suspicious physical access activities include accesses outside of normal work hours, repeated accesses to areas not normally accessed, accesses for unusual lengths of time, and out-of-sequence accesses.",
+  "params": [
+    {
+      "id": "pe-06_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review physical access logs is defined;"
+      ]
+    },
+    {
+      "id": "pe-06_odp.02",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events or potential indication of events requiring physical access logs to be reviewed are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-9",
+    "au-12",
+    "ca-7",
+    "cp-10",
+    "ir-4",
+    "ir-8"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "si-6.2",
+  "slug": "si-6-2",
+  "label": "SI-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-6",
+  "enhancementSlugs": [],
+  "title": "Automation Support for Distributed Testing",
+  "familyCode": "SI",
+  "sortId": "si-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement automated mechanisms to support the management of distributed security and privacy function testing.",
+      "children": []
+    }
+  ],
+  "guidance": "The use of automated mechanisms to support the management of distributed function testing helps to ensure the integrity, timeliness, completeness, and efficacy of such testing.",
+  "params": [],
+  "related": [
+    "si-2"
+  ]
+}

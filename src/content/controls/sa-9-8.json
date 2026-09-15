@@ -1,0 +1,27 @@
+{
+  "id": "sa-9.8",
+  "slug": "sa-9-8",
+  "label": "SA-9(8)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Processing and Storage Location — U.S. Jurisdiction",
+  "familyCode": "SA",
+  "sortId": "sa-09.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict the geographic location of information processing and data storage to facilities located within in the legal jurisdictional boundary of the United States.",
+      "children": []
+    }
+  ],
+  "guidance": "The geographic location of information processing and data storage can have a direct impact on the ability of organizations to successfully execute their mission and business functions. A compromise or breach of high impact information and systems can have severe or catastrophic adverse impacts on organizational assets and operations, individuals, other organizations, and the Nation. Restricting the processing and storage of high-impact information to facilities within the legal jurisdictional boundary of the United States provides greater control over such processing and storage.",
+  "params": [],
+  "related": [
+    "sa-5",
+    "sr-4"
+  ]
+}

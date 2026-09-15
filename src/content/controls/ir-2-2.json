@@ -1,0 +1,35 @@
+{
+  "id": "ir-2.2",
+  "slug": "ir-2-2",
+  "label": "IR-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "ir-2",
+  "enhancementSlugs": [],
+  "title": "Automated Training Environments",
+  "familyCode": "IR",
+  "sortId": "ir-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an incident response training environment using {{ insert: param, ir-02.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms can provide a more thorough and realistic incident response training environment. This can be accomplished, for example, by providing more complete coverage of incident response issues, selecting more realistic training scenarios and environments, and stressing the response capability.",
+  "params": [
+    {
+      "id": "ir-02.02_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used in an incident response training environment are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

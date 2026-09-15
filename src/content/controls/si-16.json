@@ -1,0 +1,40 @@
+{
+  "id": "si-16",
+  "slug": "si-16",
+  "label": "SI-16",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Memory Protection",
+  "familyCode": "SI",
+  "sortId": "si-16",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following controls to protect the system memory from unauthorized code execution: {{ insert: param, si-16_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Controls employed to protect memory include data execution prevention and address space layout randomization. Data execution prevention controls can either be hardware-enforced or software-enforced with hardware enforcement providing the greater strength of mechanism.",
+  "params": [
+    {
+      "id": "si-16_odp",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to be implemented to protect the system memory from unauthorized code execution are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-25",
+    "sc-3",
+    "si-7"
+  ]
+}

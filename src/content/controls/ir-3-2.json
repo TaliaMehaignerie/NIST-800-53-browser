@@ -1,0 +1,27 @@
+{
+  "id": "ir-3.2",
+  "slug": "ir-3-2",
+  "label": "IR-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "ir-3",
+  "enhancementSlugs": [],
+  "title": "Coordination with Related Plans",
+  "familyCode": "IR",
+  "sortId": "ir-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Coordinate incident response testing with organizational elements responsible for related plans.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizational plans related to incident response testing include business continuity plans, disaster recovery plans, continuity of operations plans, contingency plans, crisis communications plans, critical infrastructure plans, and occupant emergency plans.",
+  "params": [],
+  "related": []
+}

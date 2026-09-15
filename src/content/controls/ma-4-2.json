@@ -1,0 +1,21 @@
+{
+  "id": "ma-4.2",
+  "slug": "ma-4-2",
+  "label": "MA-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "ma-4",
+  "enhancementSlugs": [],
+  "title": "Document Nonlocal Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-04.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ma-1",
+    "ma-4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

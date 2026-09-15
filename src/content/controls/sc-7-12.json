@@ -1,0 +1,41 @@
+{
+  "id": "sc-7.12",
+  "slug": "sc-7-12",
+  "label": "SC-7(12)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Host-based Protection",
+  "familyCode": "SC",
+  "sortId": "sc-07.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, sc-07.12_odp.01 }} at {{ insert: param, sc-07.12_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Host-based boundary protection mechanisms include host-based firewalls. System components that employ host-based boundary protection mechanisms include servers, workstations, notebook computers, and mobile devices.",
+  "params": [
+    {
+      "id": "sc-07.12_odp.01",
+      "label": "host-based boundary protection mechanisms",
+      "select": null,
+      "guidelines": [
+        "host-based boundary protection mechanisms to be implemented are defined;"
+      ]
+    },
+    {
+      "id": "sc-07.12_odp.02",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components where host-based boundary protection mechanisms are to be implemented are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

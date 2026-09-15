@@ -1,0 +1,20 @@
+{
+  "id": "cm-5.7",
+  "slug": "cm-5-7",
+  "label": "CM-5(7)",
+  "kind": "enhancement",
+  "parentSlug": "cm-5",
+  "enhancementSlugs": [],
+  "title": "Automatic Implementation of Security Safeguards",
+  "familyCode": "CM",
+  "sortId": "cm-05.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

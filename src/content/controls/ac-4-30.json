@@ -1,0 +1,24 @@
+{
+  "id": "ac-4.30",
+  "slug": "ac-4-30",
+  "label": "AC-4(30)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Filter Mechanisms Using Multiple Processes",
+  "familyCode": "AC",
+  "sortId": "ac-04.30",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, implement content filtering mechanisms using multiple processes.",
+      "children": []
+    }
+  ],
+  "guidance": "The use of multiple processes to implement content filtering mechanisms reduces the likelihood of a single point of failure.",
+  "params": [],
+  "related": []
+}

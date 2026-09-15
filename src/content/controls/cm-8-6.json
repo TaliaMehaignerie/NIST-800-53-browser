@@ -1,0 +1,24 @@
+{
+  "id": "cm-8.6",
+  "slug": "cm-8-6",
+  "label": "CM-8(6)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Assessed Configurations and Approved Deviations",
+  "familyCode": "CM",
+  "sortId": "cm-08.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Include assessed component configurations and any approved deviations to current deployed configurations in the system component inventory.",
+      "children": []
+    }
+  ],
+  "guidance": "Assessed configurations and approved deviations focus on configuration settings established by organizations for system components, the specific components that have been assessed to determine compliance with the required configuration settings, and any approved deviations from established configuration settings.",
+  "params": [],
+  "related": []
+}

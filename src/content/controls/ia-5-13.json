@@ -1,0 +1,33 @@
+{
+  "id": "ia-5.13",
+  "slug": "ia-5-13",
+  "label": "IA-5(13)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Expiration of Cached Authenticators",
+  "familyCode": "IA",
+  "sortId": "ia-05.13",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prohibit the use of cached authenticators after {{ insert: param, ia-05.13_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Cached authenticators are used to authenticate to the local machine when the network is not available. If cached authentication information is out of date, the validity of the authentication information may be questionable.",
+  "params": [
+    {
+      "id": "ia-05.13_odp",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period after which the use of cached authenticators is prohibited is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

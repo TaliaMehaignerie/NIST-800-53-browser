@@ -1,0 +1,17 @@
+{
+  "slug": "pt",
+  "code": "PT",
+  "name": "Personally Identifiable Information Processing and Transparency",
+  "controlSlugs": [
+    "pt-1",
+    "pt-2",
+    "pt-3",
+    "pt-4",
+    "pt-5",
+    "pt-6",
+    "pt-7",
+    "pt-8"
+  ],
+  "controlCount": 8,
+  "enhancementCount": 13
+}

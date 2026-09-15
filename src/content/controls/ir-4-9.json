@@ -1,0 +1,33 @@
+{
+  "id": "ir-4.9",
+  "slug": "ir-4-9",
+  "label": "IR-4(9)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Dynamic Response Capability",
+  "familyCode": "IR",
+  "sortId": "ir-04.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, ir-04.09_odp }} to respond to incidents.",
+      "children": []
+    }
+  ],
+  "guidance": "The dynamic response capability addresses the timely deployment of new or replacement organizational capabilities in response to incidents. This includes capabilities implemented at the mission and business process level and at the system level.",
+  "params": [
+    {
+      "id": "ir-04.09_odp",
+      "label": "dynamic response capabilities",
+      "select": null,
+      "guidelines": [
+        "dynamic response capabilities to be employed to respond to incidents are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

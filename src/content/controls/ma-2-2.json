@@ -1,0 +1,70 @@
+{
+  "id": "ma-2.2",
+  "slug": "ma-2-2",
+  "label": "MA-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "ma-2",
+  "enhancementSlugs": [],
+  "title": "Automated Maintenance Activities",
+  "familyCode": "MA",
+  "sortId": "ma-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Schedule, conduct, and document maintenance, repair, and replacement actions for the system using {{ insert: param, ma-2.2_prm_1 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Produce up-to date, accurate, and complete records of all maintenance, repair, and replacement actions requested, scheduled, in process, and completed.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The use of automated mechanisms to manage and control system maintenance programs and activities helps to ensure the generation of timely, accurate, complete, and consistent maintenance records.",
+  "params": [
+    {
+      "id": "ma-2.2_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ma-02.02_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to schedule maintenance, repair, and replacement actions for the system are defined;"
+      ]
+    },
+    {
+      "id": "ma-02.02_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to conduct maintenance, repair, and replacement actions for the system are defined;"
+      ]
+    },
+    {
+      "id": "ma-02.02_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to document maintenance, repair, and replacement actions for the system are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ma-3"
+  ]
+}

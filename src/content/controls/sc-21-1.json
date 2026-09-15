@@ -1,0 +1,20 @@
+{
+  "id": "sc-21.1",
+  "slug": "sc-21-1",
+  "label": "SC-21(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-21",
+  "enhancementSlugs": [],
+  "title": "Data Origin and Integrity",
+  "familyCode": "SC",
+  "sortId": "sc-21.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-21"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

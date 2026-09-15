@@ -1,0 +1,33 @@
+{
+  "slug": "sa",
+  "code": "SA",
+  "name": "System and Services Acquisition",
+  "controlSlugs": [
+    "sa-1",
+    "sa-2",
+    "sa-3",
+    "sa-4",
+    "sa-5",
+    "sa-6",
+    "sa-7",
+    "sa-8",
+    "sa-9",
+    "sa-10",
+    "sa-11",
+    "sa-12",
+    "sa-13",
+    "sa-14",
+    "sa-15",
+    "sa-16",
+    "sa-17",
+    "sa-18",
+    "sa-19",
+    "sa-20",
+    "sa-21",
+    "sa-22",
+    "sa-23",
+    "sa-24"
+  ],
+  "controlCount": 24,
+  "enhancementCount": 123
+}

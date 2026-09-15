@@ -1,0 +1,20 @@
+{
+  "id": "sa-19.1",
+  "slug": "sa-19-1",
+  "label": "SA-19(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-19",
+  "enhancementSlugs": [],
+  "title": "Anti-counterfeit Training",
+  "familyCode": "SA",
+  "sortId": "sa-19.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-11.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

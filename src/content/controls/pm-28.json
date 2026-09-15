@@ -1,0 +1,85 @@
+{
+  "id": "pm-28",
+  "slug": "pm-28",
+  "label": "PM-28",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Risk Framing",
+  "familyCode": "PM",
+  "sortId": "pm-28",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Identify and document:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Assumptions affecting risk assessments, risk responses, and risk monitoring;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Constraints affecting risk assessments, risk responses, and risk monitoring;",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Priorities and trade-offs considered by the organization for managing risk; and",
+              "children": []
+            },
+            {
+              "label": "4.",
+              "prose": "Organizational risk tolerance;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Distribute the results of risk framing activities to {{ insert: param, pm-28_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Review and update risk framing considerations {{ insert: param, pm-28_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Risk framing is most effective when conducted at the organization level and in consultation with stakeholders throughout the organization including mission, business, and system owners. The assumptions, constraints, risk tolerance, priorities, and trade-offs identified as part of the risk framing process inform the risk management strategy, which in turn informs the conduct of risk assessment, risk response, and risk monitoring activities. Risk framing results are shared with organizational personnel, including mission and business owners, information owners or stewards, system owners, authorizing officials, senior agency information security officer, senior agency official for privacy, and senior accountable official for risk management.",
+  "params": [
+    {
+      "id": "pm-28_odp.01",
+      "label": "personnel",
+      "select": null,
+      "guidelines": [
+        "the personnel to receive the results of risk framing activities is/are defined;"
+      ]
+    },
+    {
+      "id": "pm-28_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for reviewing and updating risk framing considerations is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7",
+    "pm-9",
+    "ra-3",
+    "ra-7"
+  ]
+}

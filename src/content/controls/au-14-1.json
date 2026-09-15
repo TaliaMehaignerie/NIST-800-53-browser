@@ -1,0 +1,24 @@
+{
+  "id": "au-14.1",
+  "slug": "au-14-1",
+  "label": "AU-14(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-14",
+  "enhancementSlugs": [],
+  "title": "System Start-up",
+  "familyCode": "AU",
+  "sortId": "au-14.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Initiate session audits automatically at system start-up.",
+      "children": []
+    }
+  ],
+  "guidance": "The automatic initiation of session audits at startup helps to ensure that the information being captured on selected individuals is complete and not subject to compromise through tampering by malicious threat actors.",
+  "params": [],
+  "related": []
+}

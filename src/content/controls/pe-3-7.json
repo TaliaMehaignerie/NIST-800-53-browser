@@ -1,0 +1,24 @@
+{
+  "id": "pe-3.7",
+  "slug": "pe-3-7",
+  "label": "PE-3(7)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "Physical Barriers",
+  "familyCode": "PE",
+  "sortId": "pe-03.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit access using physical barriers.",
+      "children": []
+    }
+  ],
+  "guidance": "Physical barriers include bollards, concrete slabs, jersey walls, and hydraulic active vehicle barriers.",
+  "params": [],
+  "related": []
+}

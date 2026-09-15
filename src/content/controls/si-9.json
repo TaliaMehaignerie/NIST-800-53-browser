@@ -1,0 +1,23 @@
+{
+  "id": "si-9",
+  "slug": "si-9",
+  "label": "SI-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Information Input Restrictions",
+  "familyCode": "SI",
+  "sortId": "si-09",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-2",
+    "ac-3",
+    "ac-5",
+    "ac-6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

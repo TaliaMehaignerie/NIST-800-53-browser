@@ -1,0 +1,20 @@
+{
+  "id": "au-8.1",
+  "slug": "au-8-1",
+  "label": "AU-8(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-8",
+  "enhancementSlugs": [],
+  "title": "Synchronization with Authoritative Time Source",
+  "familyCode": "AU",
+  "sortId": "au-08.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-45.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

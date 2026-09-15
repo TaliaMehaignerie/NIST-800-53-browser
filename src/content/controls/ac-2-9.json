@@ -1,0 +1,33 @@
+{
+  "id": "ac-2.9",
+  "slug": "ac-2-9",
+  "label": "AC-2(9)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Restrictions on Use of Shared and Group Accounts",
+  "familyCode": "AC",
+  "sortId": "ac-02.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Only permit the use of shared and group accounts that meet {{ insert: param, ac-02.09_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Before permitting the use of shared or group accounts, organizations consider the increased risk due to the lack of accountability with such accounts.",
+  "params": [
+    {
+      "id": "ac-02.09_odp",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions for establishing shared and group accounts are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

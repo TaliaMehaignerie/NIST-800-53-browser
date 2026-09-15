@@ -1,0 +1,33 @@
+{
+  "id": "si-14.1",
+  "slug": "si-14-1",
+  "label": "SI-14(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-14",
+  "enhancementSlugs": [],
+  "title": "Refresh from Trusted Sources",
+  "familyCode": "SI",
+  "sortId": "si-14.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Obtain software and data employed during system component and service refreshes from the following trusted sources: {{ insert: param, si-14.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Trusted sources include software and data from write-once, read-only media or from selected offline secure storage facilities.",
+  "params": [
+    {
+      "id": "si-14.01_odp",
+      "label": "trusted sources",
+      "select": null,
+      "guidelines": [
+        "trusted sources to obtain software and data for system component and service refreshes are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

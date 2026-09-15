@@ -1,0 +1,73 @@
+{
+  "id": "pe-16",
+  "slug": "pe-16",
+  "label": "PE-16",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Delivery and Removal",
+  "familyCode": "PE",
+  "sortId": "pe-16",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Authorize and control {{ insert: param, pe-16_prm_1 }} entering and exiting the facility; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Maintain records of the system components.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Enforcing authorizations for entry and exit of system components may require restricting access to delivery areas and isolating the areas from the system and media libraries.",
+  "params": [
+    {
+      "id": "pe-16_prm_1",
+      "label": "organization-defined types of system components",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pe-16_odp.01",
+      "label": "types of system components",
+      "select": null,
+      "guidelines": [
+        "types of system components to be authorized and controlled when entering the facility are defined;"
+      ]
+    },
+    {
+      "id": "pe-16_odp.02",
+      "label": "types of system components",
+      "select": null,
+      "guidelines": [
+        "types of system components to be authorized and controlled when exiting the facility are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-3",
+    "cm-8",
+    "ma-2",
+    "ma-3",
+    "mp-5",
+    "pe-20",
+    "sr-2",
+    "sr-3",
+    "sr-4",
+    "sr-6"
+  ]
+}

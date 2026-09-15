@@ -1,0 +1,66 @@
+{
+  "id": "cm-2.7",
+  "slug": "cm-2-7",
+  "label": "CM-2(7)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Configure Systems and Components for High-risk Areas",
+  "familyCode": "CM",
+  "sortId": "cm-02.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Issue {{ insert: param, cm-02.07_odp.01 }} with {{ insert: param, cm-02.07_odp.02 }} to individuals traveling to locations that the organization deems to be of significant risk; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Apply the following controls to the systems or components when the individuals return from travel: {{ insert: param, cm-02.07_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "When it is known that systems or system components will be in high-risk areas external to the organization, additional controls may be implemented to counter the increased threat in such areas. For example, organizations can take actions for notebook computers used by individuals departing on and returning from travel. Actions include determining the locations that are of concern, defining the required configurations for the components, ensuring that components are configured as intended before travel is initiated, and applying controls to the components after travel is completed. Specially configured notebook computers include computers with sanitized hard drives, limited applications, and more stringent configuration settings. Controls applied to mobile devices upon return from travel include examining the mobile device for signs of physical tampering and purging and reimaging disk drives. Protecting information that resides on mobile devices is addressed in the [MP](#mp) (Media Protection) family.",
+  "params": [
+    {
+      "id": "cm-02.07_odp.01",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "the systems or system components to be issued when individuals travel to high-risk areas are defined;"
+      ]
+    },
+    {
+      "id": "cm-02.07_odp.02",
+      "label": "configurations",
+      "select": null,
+      "guidelines": [
+        "configurations for systems or system components to be issued when individuals travel to high-risk areas are defined;"
+      ]
+    },
+    {
+      "id": "cm-02.07_odp.03",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "the controls to be applied when the individuals return from travel are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-4",
+    "mp-5"
+  ]
+}

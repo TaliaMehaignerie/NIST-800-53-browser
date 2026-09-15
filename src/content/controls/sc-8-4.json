@@ -1,0 +1,36 @@
+{
+  "id": "sc-8.4",
+  "slug": "sc-8-4",
+  "label": "SC-8(4)",
+  "kind": "enhancement",
+  "parentSlug": "sc-8",
+  "enhancementSlugs": [],
+  "title": "Conceal or Randomize Communications",
+  "familyCode": "SC",
+  "sortId": "sc-08.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to conceal or randomize communication patterns unless otherwise protected by {{ insert: param, sc-08.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Concealing or randomizing communication patterns addresses protection from unauthorized disclosure of information. Communication patterns include frequency, periods, predictability, and amount. Changes to communications patterns can reveal information with intelligence value, especially when combined with other available information related to the mission and business functions of the organization. Concealing or randomizing communications prevents the derivation of intelligence based on communications patterns and applies to both internal and external networks or links that may be visible to individuals who are not authorized users. Encrypting the links and transmitting in continuous, fixed, or random patterns prevents the derivation of intelligence from the system communications patterns. Alternative physical controls include protected distribution systems.",
+  "params": [
+    {
+      "id": "sc-08.04_odp",
+      "label": "alternative physical controls",
+      "select": null,
+      "guidelines": [
+        "alternative physical controls to protect against unauthorized disclosure of communication patterns are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

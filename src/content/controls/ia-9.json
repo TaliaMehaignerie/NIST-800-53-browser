@@ -1,0 +1,42 @@
+{
+  "id": "ia-9",
+  "slug": "ia-9",
+  "label": "IA-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ia-9-1",
+    "ia-9-2"
+  ],
+  "title": "Service Identification and Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Uniquely identify and authenticate {{ insert: param, ia-09_odp }} before establishing communications with devices, users, or other services or applications.",
+      "children": []
+    }
+  ],
+  "guidance": "Services that may require identification and authentication include web applications using digital certificates or services or applications that query a database. Identification and authentication methods for system services and applications include information or code signing, provenance graphs, and electronic signatures that indicate the sources of services. Decisions regarding the validity of identification and authentication claims can be made by services separate from the services acting on those decisions. This can occur in distributed system architectures. In such situations, the identification and authentication decisions (instead of actual identifiers and authentication data) are provided to the services that need to act on those decisions.",
+  "params": [
+    {
+      "id": "ia-09_odp",
+      "label": "system services and applications",
+      "select": null,
+      "guidelines": [
+        "system services and applications to be uniquely identified and authenticated are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-3",
+    "ia-4",
+    "ia-5",
+    "ia-13",
+    "sc-8"
+  ]
+}

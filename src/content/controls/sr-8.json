@@ -1,0 +1,53 @@
+{
+  "id": "sr-8",
+  "slug": "sr-8",
+  "label": "SR-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Notification Agreements",
+  "familyCode": "SR",
+  "sortId": "sr-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish agreements and procedures with entities involved in the supply chain for the system, system component, or system service for the {{ insert: param, sr-08_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The establishment of agreements and procedures facilitates communications among supply chain entities. Early notification of compromises and potential compromises in the supply chain that can potentially adversely affect or have adversely affected organizational systems or system components is essential for organizations to effectively respond to such incidents. The results of assessments or audits may include open-source information that contributed to a decision or result and could be used to help the supply chain entity resolve a concern or improve its processes.",
+  "params": [
+    {
+      "id": "sr-08_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "notification of supply chain compromises",
+          "{{ insert: param, sr-08_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sr-08_odp.02",
+      "label": "results of assessments or audits",
+      "select": null,
+      "guidelines": [
+        "information for which agreements and procedures are to be established are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ir-4",
+    "ir-6",
+    "ir-8"
+  ]
+}

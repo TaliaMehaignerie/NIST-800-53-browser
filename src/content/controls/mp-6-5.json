@@ -1,0 +1,20 @@
+{
+  "id": "mp-6.5",
+  "slug": "mp-6-5",
+  "label": "MP-6(5)",
+  "kind": "enhancement",
+  "parentSlug": "mp-6",
+  "enhancementSlugs": [],
+  "title": "Classified Information",
+  "familyCode": "MP",
+  "sortId": "mp-06.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

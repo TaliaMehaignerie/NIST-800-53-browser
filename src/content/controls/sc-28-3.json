@@ -1,0 +1,48 @@
+{
+  "id": "sc-28.3",
+  "slug": "sc-28-3",
+  "label": "SC-28(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-28",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Keys",
+  "familyCode": "SC",
+  "sortId": "sc-28.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide protected storage for cryptographic keys {{ insert: param, sc-28.03_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "A Trusted Platform Module (TPM) is an example of a hardware-protected data store that can be used to protect cryptographic keys.",
+  "params": [
+    {
+      "id": "sc-28.03_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "{{ insert: param, sc-28.03_odp.02 }} ",
+          "hardware-protected key store"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-28.03_odp.02",
+      "label": "safeguards",
+      "select": null,
+      "guidelines": [
+        "safeguards for protecting the storage of cryptographic keys are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ia-4.5",
+  "slug": "ia-4-5",
+  "label": "IA-4(5)",
+  "kind": "enhancement",
+  "parentSlug": "ia-4",
+  "enhancementSlugs": [],
+  "title": "Dynamic Management",
+  "familyCode": "IA",
+  "sortId": "ia-04.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manage individual identifiers dynamically in accordance with {{ insert: param, ia-04.05_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In contrast to conventional approaches to identification that presume static accounts for preregistered users, many distributed systems establish identifiers at runtime for entities that were previously unknown. When identifiers are established at runtime for previously unknown entities, organizations can anticipate and provision for the dynamic establishment of identifiers. Pre-established trust relationships and mechanisms with appropriate authorities to validate credentials and related identifiers are essential.",
+  "params": [
+    {
+      "id": "ia-04.05_odp",
+      "label": "dynamic identifier policy",
+      "select": null,
+      "guidelines": [
+        "a dynamic identifier policy for managing individual identifiers is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-16"
+  ]
+}

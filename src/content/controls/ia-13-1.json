@@ -1,0 +1,27 @@
+{
+  "id": "ia-13.1",
+  "slug": "ia-13-1",
+  "label": "IA-13(1)",
+  "kind": "enhancement",
+  "parentSlug": "ia-13",
+  "enhancementSlugs": [],
+  "title": "Protection of Cryptographic Keys",
+  "familyCode": "IA",
+  "sortId": "ia-13.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Cryptographic keys that protect access tokens are generated, managed, and protected from disclosure and misuse.",
+      "children": []
+    }
+  ],
+  "guidance": "Identity assertions and access tokens are typically digitally signed. The private keys used to sign these assertions and tokens are protected commensurate with the impact of the system and information resources that can be accessed. ",
+  "params": [],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

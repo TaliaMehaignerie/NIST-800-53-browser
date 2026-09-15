@@ -1,0 +1,37 @@
+{
+  "id": "ia-3.4",
+  "slug": "ia-3-4",
+  "label": "IA-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "ia-3",
+  "enhancementSlugs": [],
+  "title": "Device Attestation",
+  "familyCode": "IA",
+  "sortId": "ia-03.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Handle device identification and authentication based on attestation by {{ insert: param, ia-03.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Device attestation refers to the identification and authentication of a device based on its configuration and known operating state. Device attestation can be determined via a cryptographic hash of the device. If device attestation is the means of identification and authentication, then it is important that patches and updates to the device are handled via a configuration management process such that the patches and updates are done securely and do not disrupt identification and authentication to other devices.",
+  "params": [
+    {
+      "id": "ia-03.04_odp",
+      "label": "configuration management process",
+      "select": null,
+      "guidelines": [
+        "configuration management process to be employed to handle device identification and authentication based on attestation is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "cm-3",
+    "cm-6"
+  ]
+}

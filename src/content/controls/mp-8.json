@@ -1,0 +1,67 @@
+{
+  "id": "mp-8",
+  "slug": "mp-8",
+  "label": "MP-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "mp-8-1",
+    "mp-8-2",
+    "mp-8-3",
+    "mp-8-4"
+  ],
+  "title": "Media Downgrading",
+  "familyCode": "MP",
+  "sortId": "mp-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Establish {{ insert: param, mp-08_odp.01 }} that includes employing downgrading mechanisms with strength and integrity commensurate with the security category or classification of the information;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Verify that the system media downgrading process is commensurate with the security category and/or classification level of the information to be removed and the access authorizations of the potential recipients of the downgraded information;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Identify {{ insert: param, mp-08_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Downgrade the identified system media using the established process.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Media downgrading applies to digital and non-digital media subject to release outside of the organization, whether the media is considered removable or not. When applied to system media, the downgrading process removes information from the media, typically by security category or classification level, such that the information cannot be retrieved or reconstructed. Downgrading of media includes redacting information to enable wider release and distribution. Downgrading ensures that empty space on the media is devoid of information.",
+  "params": [
+    {
+      "id": "mp-08_odp.01",
+      "label": "system media downgrading process",
+      "select": null,
+      "guidelines": [
+        "a system media downgrading process is defined;"
+      ]
+    },
+    {
+      "id": "mp-08_odp.02",
+      "label": "system media requiring downgrading",
+      "select": null,
+      "guidelines": [
+        "system media requiring downgrading is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

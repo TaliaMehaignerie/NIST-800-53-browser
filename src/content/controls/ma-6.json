@@ -1,0 +1,58 @@
+{
+  "id": "ma-6",
+  "slug": "ma-6",
+  "label": "MA-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ma-6-1",
+    "ma-6-2",
+    "ma-6-3"
+  ],
+  "title": "Timely Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Obtain maintenance support and/or spare parts for {{ insert: param, ma-06_odp.01 }} within {{ insert: param, ma-06_odp.02 }} of failure.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations specify the system components that result in increased risk to organizational operations and assets, individuals, other organizations, or the Nation when the functionality provided by those components is not operational. Organizational actions to obtain maintenance support include having appropriate contracts in place.",
+  "params": [
+    {
+      "id": "ma-06_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components for which maintenance support and/or spare parts are obtained are defined;"
+      ]
+    },
+    {
+      "id": "ma-06_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which maintenance support and/or spare parts are to be obtained after a failure are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-8",
+    "cp-2",
+    "cp-7",
+    "ra-7",
+    "sa-15",
+    "si-13",
+    "sr-2",
+    "sr-3",
+    "sr-4"
+  ]
+}

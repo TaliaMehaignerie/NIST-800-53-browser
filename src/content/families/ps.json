@@ -1,0 +1,18 @@
+{
+  "slug": "ps",
+  "code": "PS",
+  "name": "Personnel Security",
+  "controlSlugs": [
+    "ps-1",
+    "ps-2",
+    "ps-3",
+    "ps-4",
+    "ps-5",
+    "ps-6",
+    "ps-7",
+    "ps-8",
+    "ps-9"
+  ],
+  "controlCount": 9,
+  "enhancementCount": 9
+}

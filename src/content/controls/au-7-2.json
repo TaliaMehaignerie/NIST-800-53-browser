@@ -1,0 +1,20 @@
+{
+  "id": "au-7.2",
+  "slug": "au-7-2",
+  "label": "AU-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-7",
+  "enhancementSlugs": [],
+  "title": "Automatic Sort and Search",
+  "familyCode": "AU",
+  "sortId": "au-07.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "au-7.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

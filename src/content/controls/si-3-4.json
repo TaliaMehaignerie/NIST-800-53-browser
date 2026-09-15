@@ -1,0 +1,26 @@
+{
+  "id": "si-3.4",
+  "slug": "si-3-4",
+  "label": "SI-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Updates Only by Privileged Users",
+  "familyCode": "SI",
+  "sortId": "si-03.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Update malicious code protection mechanisms only when directed by a privileged user.",
+      "children": []
+    }
+  ],
+  "guidance": "Protection mechanisms for malicious code are typically categorized as security-related software and, as such, are only updated by organizational personnel with appropriate access privileges.",
+  "params": [],
+  "related": [
+    "cm-5"
+  ]
+}

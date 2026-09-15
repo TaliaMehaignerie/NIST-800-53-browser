@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.12",
+  "slug": "sa-12-12",
+  "label": "SA-12(12)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Inter-organizational Agreements",
+  "familyCode": "SA",
+  "sortId": "sa-12.12",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "ca-7.2",
+  "slug": "ca-7-2",
+  "label": "CA-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "ca-7",
+  "enhancementSlugs": [],
+  "title": "Types of Assessments",
+  "familyCode": "CA",
+  "sortId": "ca-07.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ca-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

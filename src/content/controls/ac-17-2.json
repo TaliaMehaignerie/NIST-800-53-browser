@@ -1,0 +1,31 @@
+{
+  "id": "ac-17.2",
+  "slug": "ac-17-2",
+  "label": "AC-17(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Protection of Confidentiality and Integrity Using Encryption",
+  "familyCode": "AC",
+  "sortId": "ac-17.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to protect the confidentiality and integrity of remote access sessions.",
+      "children": []
+    }
+  ],
+  "guidance": "Virtual private networks can be used to protect the confidentiality and integrity of remote access sessions. Transport Layer Security (TLS) is an example of a cryptographic protocol that provides end-to-end communications security over networks and is used for Internet communications and online transactions.",
+  "params": [],
+  "related": [
+    "sc-8",
+    "sc-12",
+    "sc-13"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "id": "sa-15",
+  "slug": "sa-15",
+  "label": "SA-15",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-15-1",
+    "sa-15-2",
+    "sa-15-3",
+    "sa-15-4",
+    "sa-15-5",
+    "sa-15-6",
+    "sa-15-7",
+    "sa-15-8",
+    "sa-15-9",
+    "sa-15-10",
+    "sa-15-11",
+    "sa-15-12",
+    "sa-15-13"
+  ],
+  "title": "Development Process, Standards, and Tools",
+  "familyCode": "SA",
+  "sortId": "sa-15",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Require the developer of the system, system component, or system service to follow a documented development process that:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Explicitly addresses security and privacy requirements;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Identifies the standards and tools used in the development process;",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Documents the specific tool options and tool configurations used in the development process; and",
+              "children": []
+            },
+            {
+              "label": "4.",
+              "prose": "Documents, manages, and ensures the integrity of changes to the process and/or tools used in development; and",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Review the development process, standards, tools, tool options, and tool configurations {{ insert: param, sa-15_odp.01 }} to determine if the process, standards, tools, tool options and tool configurations selected and employed can satisfy the following security and privacy requirements: {{ insert: param, sa-15_prm_2 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Development tools include programming languages and computer-aided design systems. Reviews of development processes include the use of maturity models to determine the potential effectiveness of such processes. Maintaining the integrity of changes to tools and processes facilitates effective supply chain risk assessment and mitigation. Such integrity requires configuration control throughout the system development life cycle to track authorized changes and prevent unauthorized changes.",
+  "params": [
+    {
+      "id": "sa-15_prm_2",
+      "label": "organization-defined security and privacy requirements",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-15_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to review the development process, standards, tools, tool options, and tool configurations is defined;"
+      ]
+    },
+    {
+      "id": "sa-15_odp.02",
+      "label": "security requirements",
+      "select": null,
+      "guidelines": [
+        "security requirements to be satisfied by the process, standards, tools, tool options, and tool configurations are defined;"
+      ]
+    },
+    {
+      "id": "sa-15_odp.03",
+      "label": "privacy requirements",
+      "select": null,
+      "guidelines": [
+        "privacy requirements to be satisfied by the process, standards, tools, tool options, and tool configurations are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ma-6",
+    "sa-3",
+    "sa-4",
+    "sa-8",
+    "sa-10",
+    "sa-11",
+    "sr-3",
+    "sr-4",
+    "sr-5",
+    "sr-6",
+    "sr-9"
+  ]
+}

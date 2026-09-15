@@ -1,0 +1,62 @@
+{
+  "id": "mp-4.2",
+  "slug": "mp-4-2",
+  "label": "MP-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "mp-4",
+  "enhancementSlugs": [],
+  "title": "Automated Restricted Access",
+  "familyCode": "MP",
+  "sortId": "mp-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict access to media storage areas and log access attempts and access granted using {{ insert: param, mp-4.2_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms include keypads, biometric readers, or card readers on the external entries to media storage areas.",
+  "params": [
+    {
+      "id": "mp-4.2_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-04.02_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to restrict access to media storage areas are defined;"
+      ]
+    },
+    {
+      "id": "mp-04.02_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to log access attempts to media storage areas are defined;"
+      ]
+    },
+    {
+      "id": "mp-04.02_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to log access granted to media storage areas are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "au-2",
+    "au-6",
+    "au-9",
+    "au-12",
+    "pe-3"
+  ]
+}

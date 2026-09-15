@@ -1,0 +1,20 @@
+{
+  "id": "cp-2.4",
+  "slug": "cp-2-4",
+  "label": "CP-2(4)",
+  "kind": "enhancement",
+  "parentSlug": "cp-2",
+  "enhancementSlugs": [],
+  "title": "Resume All Mission and Business Functions",
+  "familyCode": "CP",
+  "sortId": "cp-02.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cp-2.3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

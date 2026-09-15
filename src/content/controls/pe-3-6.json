@@ -1,0 +1,20 @@
+{
+  "id": "pe-3.6",
+  "slug": "pe-3-6",
+  "label": "PE-3(6)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "Facility Penetration Testing",
+  "familyCode": "PE",
+  "sortId": "pe-03.06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ca-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

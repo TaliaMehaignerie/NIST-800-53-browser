@@ -1,0 +1,38 @@
+{
+  "id": "ir-6.1",
+  "slug": "ir-6-1",
+  "label": "IR-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-6",
+  "enhancementSlugs": [],
+  "title": "Automated Reporting",
+  "familyCode": "IR",
+  "sortId": "ir-06.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Report incidents using {{ insert: param, ir-06.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The recipients of incident reports are specified in [IR-6b](#ir-6_smt.b) . Automated reporting mechanisms include email, posting on websites (with automatic updates), and automated incident response tools and programs.",
+  "params": [
+    {
+      "id": "ir-06.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used for reporting incidents are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ir-7"
+  ]
+}

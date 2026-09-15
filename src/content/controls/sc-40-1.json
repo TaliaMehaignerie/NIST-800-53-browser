@@ -1,0 +1,37 @@
+{
+  "id": "sc-40.1",
+  "slug": "sc-40-1",
+  "label": "SC-40(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-40",
+  "enhancementSlugs": [],
+  "title": "Electromagnetic Interference",
+  "familyCode": "SC",
+  "sortId": "sc-40.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms that achieve {{ insert: param, sc-40.01_odp }} against the effects of intentional electromagnetic interference.",
+      "children": []
+    }
+  ],
+  "guidance": "The implementation of cryptographic mechanisms for electromagnetic interference protects systems against intentional jamming that might deny or impair communications by ensuring that wireless spread spectrum waveforms used to provide anti-jam protection are not predictable by unauthorized individuals. The implementation of cryptographic mechanisms may also coincidentally mitigate the effects of unintentional jamming due to interference from legitimate transmitters that share the same spectrum. Mission requirements, projected threats, concept of operations, and laws, executive orders, directives, regulations, policies, and standards determine levels of wireless link availability, cryptography needed, and performance.",
+  "params": [
+    {
+      "id": "sc-40.01_odp",
+      "label": "level of protection",
+      "select": null,
+      "guidelines": [
+        "level of protection to be employed against the effects of intentional electromagnetic interference is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-21",
+    "sc-12",
+    "sc-13"
+  ]
+}

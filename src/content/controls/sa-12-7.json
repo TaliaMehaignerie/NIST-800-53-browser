@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.7",
+  "slug": "sa-12-7",
+  "label": "SA-12(7)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Assessments Prior to Selection / Acceptance / Update",
+  "familyCode": "SA",
+  "sortId": "sa-12.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-5.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

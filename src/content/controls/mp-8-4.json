@@ -1,0 +1,24 @@
+{
+  "id": "mp-8.4",
+  "slug": "mp-8-4",
+  "label": "MP-8(4)",
+  "kind": "enhancement",
+  "parentSlug": "mp-8",
+  "enhancementSlugs": [],
+  "title": "Classified Information",
+  "familyCode": "MP",
+  "sortId": "mp-08.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Downgrade system media containing classified information prior to release to individuals without required access authorizations.",
+      "children": []
+    }
+  ],
+  "guidance": "Downgrading of classified information uses approved sanitization tools, techniques, and procedures to transfer information confirmed to be unclassified from classified systems to unclassified media.",
+  "params": [],
+  "related": []
+}

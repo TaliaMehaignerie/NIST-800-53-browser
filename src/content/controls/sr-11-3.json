@@ -1,0 +1,35 @@
+{
+  "id": "sr-11.3",
+  "slug": "sr-11-3",
+  "label": "SR-11(3)",
+  "kind": "enhancement",
+  "parentSlug": "sr-11",
+  "enhancementSlugs": [],
+  "title": "Anti-counterfeit Scanning",
+  "familyCode": "SR",
+  "sortId": "sr-11.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Scan for counterfeit system components {{ insert: param, sr-11.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The type of component determines the type of scanning to be conducted (e.g., web application scanning if the component is a web application).",
+  "params": [
+    {
+      "id": "sr-11.03_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to scan for counterfeit system components is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ra-5"
+  ]
+}

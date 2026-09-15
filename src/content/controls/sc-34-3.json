@@ -1,0 +1,20 @@
+{
+  "id": "sc-34.3",
+  "slug": "sc-34-3",
+  "label": "SC-34(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-34",
+  "enhancementSlugs": [],
+  "title": "Hardware-based Protection",
+  "familyCode": "SC",
+  "sortId": "sc-34.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-51"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

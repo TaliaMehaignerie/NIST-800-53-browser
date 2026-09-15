@@ -1,0 +1,44 @@
+{
+  "id": "ia-11",
+  "slug": "ia-11",
+  "label": "IA-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Re-authentication",
+  "familyCode": "IA",
+  "sortId": "ia-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require users to re-authenticate when {{ insert: param, ia-11_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In addition to the re-authentication requirements associated with device locks, organizations may require re-authentication of individuals in certain situations, including when roles, authenticators or credentials change, when security categories of systems change, when the execution of privileged functions occurs, after a fixed time period, or periodically.",
+  "params": [
+    {
+      "id": "ia-11_odp",
+      "label": "circumstances or situations",
+      "select": null,
+      "guidelines": [
+        "circumstances or situations requiring re-authentication are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-11",
+    "ia-2",
+    "ia-3",
+    "ia-4",
+    "ia-8"
+  ]
+}

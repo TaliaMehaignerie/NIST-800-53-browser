@@ -1,0 +1,20 @@
+{
+  "id": "sc-13.2",
+  "slug": "sc-13-2",
+  "label": "SC-13(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-13",
+  "enhancementSlugs": [],
+  "title": "NSA-approved Cryptography",
+  "familyCode": "SC",
+  "sortId": "sc-13.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-13"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

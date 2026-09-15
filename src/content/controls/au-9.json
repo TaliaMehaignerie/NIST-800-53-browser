@@ -1,0 +1,71 @@
+{
+  "id": "au-9",
+  "slug": "au-9",
+  "label": "AU-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-9-1",
+    "au-9-2",
+    "au-9-3",
+    "au-9-4",
+    "au-9-5",
+    "au-9-6",
+    "au-9-7"
+  ],
+  "title": "Protection of Audit Information",
+  "familyCode": "AU",
+  "sortId": "au-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Alert {{ insert: param, au-09_odp }} upon detection of unauthorized access, modification, or deletion of audit information.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Audit information includes all information needed to successfully audit system activity, such as audit records, audit log settings, audit reports, and personally identifiable information. Audit logging tools are those programs and devices used to conduct system audit and logging activities. Protection of audit information focuses on technical protection and limits the ability to access and execute audit logging tools to authorized individuals. Physical protection of audit information is addressed by both media protection controls and physical and environmental protection controls.",
+  "params": [
+    {
+      "id": "au-09_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be alerted upon detection of unauthorized access, modification, or deletion of audit information is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-6",
+    "au-6",
+    "au-11",
+    "au-14",
+    "au-15",
+    "mp-2",
+    "mp-4",
+    "pe-2",
+    "pe-3",
+    "pe-6",
+    "sa-8",
+    "sc-8",
+    "si-4"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "ir-9.3",
+  "slug": "ir-9-3",
+  "label": "IR-9(3)",
+  "kind": "enhancement",
+  "parentSlug": "ir-9",
+  "enhancementSlugs": [],
+  "title": "Post-spill Operations",
+  "familyCode": "IR",
+  "sortId": "ir-09.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following procedures to ensure that organizational personnel impacted by information spills can continue to carry out assigned tasks while contaminated systems are undergoing corrective actions: {{ insert: param, ir-09.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Corrective actions for systems contaminated due to information spillages may be time-consuming. Personnel may not have access to the contaminated systems while corrective actions are being taken, which may potentially affect their ability to conduct organizational business.",
+  "params": [
+    {
+      "id": "ir-09.03_odp",
+      "label": "procedures",
+      "select": null,
+      "guidelines": [
+        "procedures to be implemented to ensure that organizational personnel impacted by information spills can continue to carry out assigned tasks while contaminated systems are undergoing corrective actions are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

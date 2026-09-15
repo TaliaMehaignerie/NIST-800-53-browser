@@ -1,0 +1,20 @@
+{
+  "id": "au-2.4",
+  "slug": "au-2-4",
+  "label": "AU-2(4)",
+  "kind": "enhancement",
+  "parentSlug": "au-2",
+  "enhancementSlugs": [],
+  "title": "Privileged Functions",
+  "familyCode": "AU",
+  "sortId": "au-02.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-6.9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

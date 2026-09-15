@@ -1,0 +1,20 @@
+{
+  "id": "ac-19.3",
+  "slug": "ac-19-3",
+  "label": "AC-19(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-19",
+  "enhancementSlugs": [],
+  "title": "Use of Portable Storage Devices with No Identifiable Owner",
+  "familyCode": "AC",
+  "sortId": "ac-19.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

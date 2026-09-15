@@ -1,0 +1,20 @@
+{
+  "id": "ac-15",
+  "slug": "ac-15",
+  "label": "AC-15",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Automated Marking",
+  "familyCode": "AC",
+  "sortId": "ac-15",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

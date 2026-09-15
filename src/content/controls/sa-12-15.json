@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.15",
+  "slug": "sa-12-15",
+  "label": "SA-12(15)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Processes to Address Weaknesses or Deficiencies",
+  "familyCode": "SA",
+  "sortId": "sa-12.15",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

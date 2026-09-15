@@ -1,0 +1,33 @@
+{
+  "id": "pe-9.2",
+  "slug": "pe-9-2",
+  "label": "PE-9(2)",
+  "kind": "enhancement",
+  "parentSlug": "pe-9",
+  "enhancementSlugs": [],
+  "title": "Automatic Voltage Controls",
+  "familyCode": "PE",
+  "sortId": "pe-09.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ automatic voltage controls for {{ insert: param, pe-09.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automatic voltage controls can monitor and control voltage. Such controls include voltage regulators, voltage conditioners, and voltage stabilizers.",
+  "params": [
+    {
+      "id": "pe-09.02_odp",
+      "label": "critical system components",
+      "select": null,
+      "guidelines": [
+        "the critical system components that require automatic voltage controls are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,57 @@
+{
+  "id": "sc-31",
+  "slug": "sc-31",
+  "label": "SC-31",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-31-1",
+    "sc-31-2",
+    "sc-31-3"
+  ],
+  "title": "Covert Channel Analysis",
+  "familyCode": "SC",
+  "sortId": "sc-31",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Perform a covert channel analysis to identify those aspects of communications within the system that are potential avenues for covert {{ insert: param, sc-31_odp }} channels; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Estimate the maximum bandwidth of those channels.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Developers are in the best position to identify potential areas within systems that might lead to covert channels. Covert channel analysis is a meaningful activity when there is the potential for unauthorized information flows across security domains, such as in the case of systems that contain export-controlled information and have connections to external networks (i.e., networks that are not controlled by organizations). Covert channel analysis is also useful for multilevel secure systems, multiple security level systems, and cross-domain systems.",
+  "params": [
+    {
+      "id": "sc-31_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "storage",
+          "timing"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "sa-8",
+    "si-11"
+  ]
+}

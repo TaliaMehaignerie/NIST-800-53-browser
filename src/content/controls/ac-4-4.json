@@ -1,0 +1,59 @@
+{
+  "id": "ac-4.4",
+  "slug": "ac-4-4",
+  "label": "AC-4(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Flow Control of Encrypted Information",
+  "familyCode": "AC",
+  "sortId": "ac-04.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent encrypted information from bypassing {{ insert: param, ac-04.04_odp.01 }} by {{ insert: param, ac-04.04_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Flow control mechanisms include content checking, security policy filters, and data type identifiers. The term encryption is extended to cover encoded data not recognized by filtering mechanisms.",
+  "params": [
+    {
+      "id": "ac-04.04_odp.01",
+      "label": "information flow control mechanisms",
+      "select": null,
+      "guidelines": [
+        "information flow control mechanisms that encrypted information is prevented from bypassing are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.04_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "decrypting the information",
+          "blocking the flow of the encrypted information",
+          "terminating communications sessions attempting to pass encrypted information",
+          "{{ insert: param, ac-04.04_odp.03 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.04_odp.03",
+      "label": "organization-defined procedure or method",
+      "select": null,
+      "guidelines": [
+        "the organization-defined procedure or method used to prevent encrypted information from bypassing information flow control mechanisms is defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "si-4"
+  ]
+}

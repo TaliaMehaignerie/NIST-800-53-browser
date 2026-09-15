@@ -1,0 +1,38 @@
+{
+  "id": "au-9.4",
+  "slug": "au-9-4",
+  "label": "AU-9(4)",
+  "kind": "enhancement",
+  "parentSlug": "au-9",
+  "enhancementSlugs": [],
+  "title": "Access by Subset of Privileged Users",
+  "familyCode": "AU",
+  "sortId": "au-09.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Authorize access to management of audit logging functionality to only {{ insert: param, au-09.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Individuals or roles with privileged access to a system and who are also the subject of an audit by that system may affect the reliability of the audit information by inhibiting audit activities or modifying audit records. Requiring privileged access to be further defined between audit-related privileges and other privileges limits the number of users or roles with audit-related privileges.",
+  "params": [
+    {
+      "id": "au-09.04_odp",
+      "label": "subset of privileged users or roles",
+      "select": null,
+      "guidelines": [
+        "a subset of privileged users or roles authorized to access management of audit logging functionality is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-5"
+  ]
+}

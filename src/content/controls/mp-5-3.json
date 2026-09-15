@@ -1,0 +1,24 @@
+{
+  "id": "mp-5.3",
+  "slug": "mp-5-3",
+  "label": "MP-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "mp-5",
+  "enhancementSlugs": [],
+  "title": "Custodians",
+  "familyCode": "MP",
+  "sortId": "mp-05.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ an identified custodian during transport of system media outside of controlled areas.",
+      "children": []
+    }
+  ],
+  "guidance": "Identified custodians provide organizations with specific points of contact during the media transport process and facilitate individual accountability. Custodial responsibilities can be transferred from one individual to another if an unambiguous custodian is identified.",
+  "params": [],
+  "related": []
+}

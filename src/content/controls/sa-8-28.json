@@ -1,0 +1,33 @@
+{
+  "id": "sa-8.28",
+  "slug": "sa-8-28",
+  "label": "SA-8(28)",
+  "kind": "enhancement",
+  "parentSlug": "sa-8",
+  "enhancementSlugs": [],
+  "title": "Acceptable Security",
+  "familyCode": "SA",
+  "sortId": "sa-08.28",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the security design principle of acceptable security in {{ insert: param, sa-08.28_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The principle of acceptable security requires that the level of privacy and performance that the system provides is consistent with the users’ expectations. The perception of personal privacy may affect user behavior, morale, and effectiveness. Based on the organizational privacy policy and the system design, users should be able to restrict their actions to protect their privacy. When systems fail to provide intuitive interfaces or meet privacy and performance expectations, users may either choose to completely avoid the system or use it in ways that may be inefficient or even insecure.",
+  "params": [
+    {
+      "id": "sa-08.28_odp",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "systems or system components that implement the security design principle of acceptable security are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

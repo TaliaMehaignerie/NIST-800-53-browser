@@ -1,0 +1,51 @@
+{
+  "id": "au-16",
+  "slug": "au-16",
+  "label": "AU-16",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-16-1",
+    "au-16-2",
+    "au-16-3"
+  ],
+  "title": "Cross-organizational Audit Logging",
+  "familyCode": "AU",
+  "sortId": "au-16",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, au-16_odp.01 }} for coordinating {{ insert: param, au-16_odp.02 }} among external organizations when audit information is transmitted across organizational boundaries.",
+      "children": []
+    }
+  ],
+  "guidance": "When organizations use systems or services of external organizations, the audit logging capability necessitates a coordinated, cross-organization approach. For example, maintaining the identity of individuals who request specific services across organizational boundaries may often be difficult, and doing so may prove to have significant performance and privacy ramifications. Therefore, it is often the case that cross-organizational audit logging simply captures the identity of individuals who issue requests at the initial system, and subsequent systems record that the requests originated from authorized individuals. Organizations consider including processes for coordinating audit information requirements and protection of audit information in information exchange agreements.",
+  "params": [
+    {
+      "id": "au-16_odp.01",
+      "label": "methods",
+      "select": null,
+      "guidelines": [
+        "methods for coordinating audit information among external organizations when audit information is transmitted across organizational boundaries are defined;"
+      ]
+    },
+    {
+      "id": "au-16_odp.02",
+      "label": "audit information",
+      "select": null,
+      "guidelines": [
+        "audit information to be coordinated among external organizations when audit information is transmitted across organizational boundaries is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-3",
+    "au-6",
+    "au-7",
+    "ca-3",
+    "pt-7"
+  ]
+}

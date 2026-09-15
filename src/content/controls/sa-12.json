@@ -1,0 +1,36 @@
+{
+  "id": "sa-12",
+  "slug": "sa-12",
+  "label": "SA-12",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-12-1",
+    "sa-12-2",
+    "sa-12-3",
+    "sa-12-4",
+    "sa-12-5",
+    "sa-12-6",
+    "sa-12-7",
+    "sa-12-8",
+    "sa-12-9",
+    "sa-12-10",
+    "sa-12-11",
+    "sa-12-12",
+    "sa-12-13",
+    "sa-12-14",
+    "sa-12-15"
+  ],
+  "title": "Supply Chain Protection",
+  "familyCode": "SA",
+  "sortId": "sa-12",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

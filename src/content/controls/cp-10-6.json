@@ -1,0 +1,31 @@
+{
+  "id": "cp-10.6",
+  "slug": "cp-10-6",
+  "label": "CP-10(6)",
+  "kind": "enhancement",
+  "parentSlug": "cp-10",
+  "enhancementSlugs": [],
+  "title": "Component Protection",
+  "familyCode": "CP",
+  "sortId": "cp-10.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect system components used for recovery and reconstitution.",
+      "children": []
+    }
+  ],
+  "guidance": "Protection of system recovery and reconstitution components (i.e., hardware, firmware, and software) includes physical and technical controls. Backup and restoration components used for recovery and reconstitution include router tables, compilers, and other system software.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-6",
+    "mp-2",
+    "mp-4",
+    "pe-3",
+    "pe-6"
+  ]
+}

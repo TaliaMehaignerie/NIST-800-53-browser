@@ -1,0 +1,24 @@
+{
+  "id": "at-3.3",
+  "slug": "at-3-3",
+  "label": "AT-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "at-3",
+  "enhancementSlugs": [],
+  "title": "Practical Exercises",
+  "familyCode": "AT",
+  "sortId": "at-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide practical exercises in security and privacy training that reinforce training objectives.",
+      "children": []
+    }
+  ],
+  "guidance": "Practical exercises for security include training for software developers that addresses simulated attacks that exploit common software vulnerabilities or spear or whale phishing attacks targeted at senior leaders or executives. Practical exercises for privacy include modules with quizzes on identifying and processing personally identifiable information in various scenarios or scenarios on conducting privacy impact assessments.",
+  "params": [],
+  "related": []
+}

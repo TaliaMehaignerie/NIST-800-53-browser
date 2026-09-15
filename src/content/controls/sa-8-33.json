@@ -1,0 +1,40 @@
+{
+  "id": "sa-8.33",
+  "slug": "sa-8-33",
+  "label": "SA-8(33)",
+  "kind": "enhancement",
+  "parentSlug": "sa-8",
+  "enhancementSlugs": [],
+  "title": "Minimization",
+  "familyCode": "SA",
+  "sortId": "sa-08.33",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the privacy principle of minimization using {{ insert: param, sa-08.33_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The principle of minimization states that organizations should only process personally identifiable information that is directly relevant and necessary to accomplish an authorized purpose and should only maintain personally identifiable information for as long as is necessary to accomplish the purpose. Organizations have processes in place, consistent with applicable laws and policies, to implement the principle of minimization.",
+  "params": [
+    {
+      "id": "sa-08.33_odp",
+      "label": "processes",
+      "select": null,
+      "guidelines": [
+        "processes that implement the privacy principle of minimization are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-8",
+    "pm-25",
+    "sc-42",
+    "si-12"
+  ]
+}

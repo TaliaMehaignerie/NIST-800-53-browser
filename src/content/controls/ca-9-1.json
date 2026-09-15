@@ -1,0 +1,26 @@
+{
+  "id": "ca-9.1",
+  "slug": "ca-9-1",
+  "label": "CA-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "ca-9",
+  "enhancementSlugs": [],
+  "title": "Compliance Checks",
+  "familyCode": "CA",
+  "sortId": "ca-09.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Perform security and privacy compliance checks on constituent system components prior to the establishment of the internal connection.",
+      "children": []
+    }
+  ],
+  "guidance": "Compliance checks include verification of the relevant baseline configuration.",
+  "params": [],
+  "related": [
+    "cm-6"
+  ]
+}

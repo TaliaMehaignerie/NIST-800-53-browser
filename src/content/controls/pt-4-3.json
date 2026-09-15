@@ -1,0 +1,35 @@
+{
+  "id": "pt-4.3",
+  "slug": "pt-4-3",
+  "label": "PT-4(3)",
+  "kind": "enhancement",
+  "parentSlug": "pt-4",
+  "enhancementSlugs": [],
+  "title": "Revocation",
+  "familyCode": "PT",
+  "sortId": "pt-04.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, pt-04.03_odp }} for individuals to revoke consent to the processing of their personally identifiable information.",
+      "children": []
+    }
+  ],
+  "guidance": "Revocation of consent enables individuals to exercise control over their initial consent decision when circumstances change. Organizations consider usability factors in enabling easy-to-use revocation capabilities.",
+  "params": [
+    {
+      "id": "pt-04.03_odp",
+      "label": "tools or mechanisms",
+      "select": null,
+      "guidelines": [
+        "the tools or mechanisms to be implemented for revoking consent to the processing of personally identifiable information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pt-2"
+  ]
+}

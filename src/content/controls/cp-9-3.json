@@ -1,0 +1,39 @@
+{
+  "id": "cp-9.3",
+  "slug": "cp-9-3",
+  "label": "CP-9(3)",
+  "kind": "enhancement",
+  "parentSlug": "cp-9",
+  "enhancementSlugs": [],
+  "title": "Separate Storage for Critical Information",
+  "familyCode": "CP",
+  "sortId": "cp-09.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Store backup copies of {{ insert: param, cp-09.03_odp }} in a separate facility or in a fire rated container that is not collocated with the operational system.",
+      "children": []
+    }
+  ],
+  "guidance": "Separate storage for critical information applies to all critical information regardless of the type of backup storage media. Critical system software includes operating systems, middleware, cryptographic key management systems, and intrusion detection systems. Security-related information includes inventories of system hardware, software, and firmware components. Alternate storage sites, including geographically distributed architectures, serve as separate storage facilities for organizations. Organizations may provide separate storage by implementing automated backup processes at alternative storage sites (e.g., data centers). The General Services Administration (GSA) establishes standards and specifications for security and fire rated containers.",
+  "params": [
+    {
+      "id": "cp-09.03_odp",
+      "label": "critical system software and other security-related information",
+      "select": null,
+      "guidelines": [
+        "critical system software and other security-related information backups to be stored in a separate facility are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "cm-6",
+    "cm-8"
+  ]
+}

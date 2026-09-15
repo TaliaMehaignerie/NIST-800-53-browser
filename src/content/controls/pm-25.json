@@ -1,0 +1,92 @@
+{
+  "id": "pm-25",
+  "slug": "pm-25",
+  "label": "PM-25",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research",
+  "familyCode": "PM",
+  "sortId": "pm-25",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop, document, and implement policies and procedures that address the use of personally identifiable information for internal testing, training, and research;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Limit or minimize the amount of personally identifiable information used for internal testing, training, and research purposes;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Authorize the use of personally identifiable information when such information is required for internal testing, training, and research; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Review and update policies and procedures {{ insert: param, pm-25_prm_1 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The use of personally identifiable information in testing, research, and training increases the risk of unauthorized disclosure or misuse of such information. Organizations consult with the senior agency official for privacy and/or legal counsel to ensure that the use of personally identifiable information in testing, training, and research is compatible with the original purpose for which it was collected. When possible, organizations use placeholder data to avoid exposure of personally identifiable information when conducting testing, training, and research.",
+  "params": [
+    {
+      "id": "pm-25_prm_1",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pm-25_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for reviewing policies that address the use of personally identifiable information for internal testing, training, and research is defined;"
+      ]
+    },
+    {
+      "id": "pm-25_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for updating policies that address the use of personally identifiable information for internal testing, training, and research is defined;"
+      ]
+    },
+    {
+      "id": "pm-25_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for reviewing procedures that address the use of personally identifiable information for internal testing, training, and research is defined;"
+      ]
+    },
+    {
+      "id": "pm-25_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency for updating procedures that address the use of personally identifiable information for internal testing, training, and research is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pm-23",
+    "pt-3",
+    "sa-3",
+    "sa-8",
+    "si-12"
+  ]
+}

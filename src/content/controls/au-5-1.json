@@ -1,0 +1,51 @@
+{
+  "id": "au-5.1",
+  "slug": "au-5-1",
+  "label": "AU-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-5",
+  "enhancementSlugs": [],
+  "title": "Storage Capacity Warning",
+  "familyCode": "AU",
+  "sortId": "au-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide a warning to {{ insert: param, au-05.01_odp.01 }} within {{ insert: param, au-05.01_odp.02 }} when allocated audit log storage volume reaches {{ insert: param, au-05.01_odp.03 }} of repository maximum audit log storage capacity.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may have multiple audit log storage repositories distributed across multiple system components with each repository having different storage volume capacities.",
+  "params": [
+    {
+      "id": "au-05.01_odp.01",
+      "label": "personnel, roles, and/or locations",
+      "select": null,
+      "guidelines": [
+        "personnel, roles, and/or locations to be warned when allocated audit log storage volume reaches a percentage of repository maximum audit log storage capacity."
+      ]
+    },
+    {
+      "id": "au-05.01_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for defined personnel, roles, and/or locations to be warned when allocated audit log storage volume reaches a percentage of repository maximum audit log storage capacity is defined;"
+      ]
+    },
+    {
+      "id": "au-05.01_odp.03",
+      "label": "percentage",
+      "select": null,
+      "guidelines": [
+        "percentage of repository maximum audit log storage capacity is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

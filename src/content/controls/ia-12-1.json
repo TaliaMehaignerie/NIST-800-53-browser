@@ -1,0 +1,24 @@
+{
+  "id": "ia-12.1",
+  "slug": "ia-12-1",
+  "label": "IA-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "ia-12",
+  "enhancementSlugs": [],
+  "title": "Supervisor Authorization",
+  "familyCode": "IA",
+  "sortId": "ia-12.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require that the registration process to receive an account for logical access includes supervisor or sponsor authorization.",
+      "children": []
+    }
+  ],
+  "guidance": "Including supervisor or sponsor authorization as part of the registration process provides an additional level of scrutiny to ensure that the user’s management chain is aware of the account, the account is essential to carry out organizational missions and functions, and the user’s privileges are appropriate for the anticipated responsibilities and authorities within the organization.",
+  "params": [],
+  "related": []
+}

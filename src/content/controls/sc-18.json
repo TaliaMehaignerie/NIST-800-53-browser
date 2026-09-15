@@ -1,0 +1,50 @@
+{
+  "id": "sc-18",
+  "slug": "sc-18",
+  "label": "SC-18",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-18-1",
+    "sc-18-2",
+    "sc-18-3",
+    "sc-18-4",
+    "sc-18-5"
+  ],
+  "title": "Mobile Code",
+  "familyCode": "SC",
+  "sortId": "sc-18",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Define acceptable and unacceptable mobile code and mobile code technologies; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Authorize, monitor, and control the use of mobile code within the system.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Mobile code includes any program, application, or content that can be transmitted across a network (e.g., embedded in an email, document, or website) and executed on a remote system. Decisions regarding the use of mobile code within organizational systems are based on the potential for the code to cause damage to the systems if used maliciously. Mobile code technologies include Java applets, JavaScript, HTML5, WebGL, and VBScript. Usage restrictions and implementation guidelines apply to both the selection and use of mobile code installed on servers and mobile code downloaded and executed on individual workstations and devices, including notebook computers and smart phones. Mobile code policy and procedures address specific actions taken to prevent the development, acquisition, and introduction of unacceptable mobile code within organizational systems, including requiring mobile code to be digitally signed by a trusted source.",
+  "params": [],
+  "related": [
+    "au-2",
+    "au-12",
+    "cm-2",
+    "cm-6",
+    "si-3"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "ra-5.9",
+  "slug": "ra-5-9",
+  "label": "RA-5(9)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Penetration Testing and Analyses",
+  "familyCode": "RA",
+  "sortId": "ra-05.09",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ca-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

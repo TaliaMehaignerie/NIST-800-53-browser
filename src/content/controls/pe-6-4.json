@@ -1,0 +1,35 @@
+{
+  "id": "pe-6.4",
+  "slug": "pe-6-4",
+  "label": "PE-6(4)",
+  "kind": "enhancement",
+  "parentSlug": "pe-6",
+  "enhancementSlugs": [],
+  "title": "Monitoring Physical Access to Systems",
+  "familyCode": "PE",
+  "sortId": "pe-06.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Monitor physical access to the system in addition to the physical access monitoring of the facility at {{ insert: param, pe-06.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Monitoring physical access to systems provides additional monitoring for those areas within facilities where there is a concentration of system components, including server rooms, media storage areas, and communications centers. Physical access monitoring can be coordinated with intrusion detection systems and system monitoring capabilities to provide comprehensive and integrated threat coverage for the organization.",
+  "params": [
+    {
+      "id": "pe-06.04_odp",
+      "label": "physical spaces",
+      "select": null,
+      "guidelines": [
+        "physical spaces containing one or more components of the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

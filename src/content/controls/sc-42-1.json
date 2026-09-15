@@ -1,0 +1,33 @@
+{
+  "id": "sc-42.1",
+  "slug": "sc-42-1",
+  "label": "SC-42(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-42",
+  "enhancementSlugs": [],
+  "title": "Reporting to Authorized Individuals or Roles",
+  "familyCode": "SC",
+  "sortId": "sc-42.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that the system is configured so that data or information collected by the {{ insert: param, sc-42.01_odp }} is only reported to authorized individuals or roles.",
+      "children": []
+    }
+  ],
+  "guidance": "In situations where sensors are activated by authorized individuals, it is still possible that the data or information collected by the sensors will be sent to unauthorized entities.",
+  "params": [
+    {
+      "id": "sc-42.01_odp",
+      "label": "sensors",
+      "select": null,
+      "guidelines": [
+        "sensors to be used to collect data or information are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

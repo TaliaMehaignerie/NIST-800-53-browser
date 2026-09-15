@@ -1,0 +1,33 @@
+{
+  "id": "ca-5.1",
+  "slug": "ca-5-1",
+  "label": "CA-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "ca-5",
+  "enhancementSlugs": [],
+  "title": "Automation Support for Accuracy and Currency",
+  "familyCode": "CA",
+  "sortId": "ca-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure the accuracy, currency, and availability of the plan of action and milestones for the system using {{ insert: param, ca-05.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Using automated tools helps maintain the accuracy, currency, and availability of the plan of action and milestones and facilitates the coordination and sharing of security and privacy information throughout the organization. Such coordination and information sharing help to identify systemic weaknesses or deficiencies in organizational systems and ensure that appropriate resources are directed at the most critical system vulnerabilities in a timely manner.",
+  "params": [
+    {
+      "id": "ca-05.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to ensure the accuracy, currency, and availability of the plan of action and milestones for the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

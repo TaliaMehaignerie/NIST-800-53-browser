@@ -1,0 +1,20 @@
+{
+  "id": "sc-7.1",
+  "slug": "sc-7-1",
+  "label": "SC-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Physically Separated Subnetworks",
+  "familyCode": "SC",
+  "sortId": "sc-07.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

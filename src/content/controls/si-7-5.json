@@ -1,0 +1,48 @@
+{
+  "id": "si-7.5",
+  "slug": "si-7-5",
+  "label": "SI-7(5)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Automated Response to Integrity Violations",
+  "familyCode": "SI",
+  "sortId": "si-07.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Automatically {{ insert: param, si-07.05_odp.01 }} when integrity violations are discovered.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may define different integrity-checking responses by type of information, specific information, or a combination of both. Types of information include firmware, software, and user data. Specific information includes boot firmware for certain types of machines. The automatic implementation of controls within organizational systems includes reversing the changes, halting the system, or triggering audit alerts when unauthorized modifications to critical security files occur.",
+  "params": [
+    {
+      "id": "si-07.05_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "shut down the system",
+          "restart the system",
+          "implement {{ insert: param, si-07.05_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-07.05_odp.02",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to be implemented automatically when integrity violations are discovered are defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

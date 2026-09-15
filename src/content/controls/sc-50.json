@@ -1,0 +1,40 @@
+{
+  "id": "sc-50",
+  "slug": "sc-50",
+  "label": "SC-50",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Software-enforced Separation and Policy Enforcement",
+  "familyCode": "SC",
+  "sortId": "sc-50",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement software-enforced separation and policy enforcement mechanisms between {{ insert: param, sc-50_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System owners may require additional strength of mechanism to ensure domain separation and policy enforcement for specific types of threats and environments of operation.",
+  "params": [
+    {
+      "id": "sc-50_odp",
+      "label": "security domains",
+      "select": null,
+      "guidelines": [
+        "security domains requiring software-enforced separation and policy enforcement mechanisms are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "sa-8",
+    "sc-2",
+    "sc-3",
+    "sc-49"
+  ]
+}

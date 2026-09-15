@@ -1,0 +1,29 @@
+{
+  "id": "pm-6",
+  "slug": "pm-6",
+  "label": "PM-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Measures of Performance",
+  "familyCode": "PM",
+  "sortId": "pm-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Develop, monitor, and report on the results of information security and privacy measures of performance.",
+      "children": []
+    }
+  ],
+  "guidance": "Measures of performance are outcome-based metrics used by an organization to measure the effectiveness or efficiency of the information security and privacy programs and the controls employed in support of the program. To facilitate security and privacy risk management, organizations consider aligning measures of performance with the organizational risk tolerance as defined in the risk management strategy.",
+  "params": [],
+  "related": [
+    "ca-7",
+    "pm-9"
+  ]
+}

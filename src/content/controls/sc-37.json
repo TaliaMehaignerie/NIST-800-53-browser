@@ -1,0 +1,64 @@
+{
+  "id": "sc-37",
+  "slug": "sc-37",
+  "label": "SC-37",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-37-1"
+  ],
+  "title": "Out-of-band Channels",
+  "familyCode": "SC",
+  "sortId": "sc-37",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following out-of-band channels for the physical delivery or electronic transmission of {{ insert: param, sc-37_odp.02 }} to {{ insert: param, sc-37_odp.03 }}: {{ insert: param, sc-37_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Out-of-band channels include local, non-network accesses to systems; network paths physically separate from network paths used for operational traffic; or non-electronic paths, such as the U.S. Postal Service. The use of out-of-band channels is contrasted with the use of in-band channels (i.e., the same channels) that carry routine operational traffic. Out-of-band channels do not have the same vulnerability or exposure as in-band channels. Therefore, the confidentiality, integrity, or availability compromises of in-band channels will not compromise or adversely affect the out-of-band channels. Organizations may employ out-of-band channels in the delivery or transmission of organizational items, including authenticators and credentials; cryptographic key management information; system and data backups; configuration management changes for hardware, firmware, or software; security updates; maintenance information; and malicious code protection updates. For example, cryptographic keys for encrypted files are delivered using a different channel than the file.",
+  "params": [
+    {
+      "id": "sc-37_odp.01",
+      "label": "out-of-band channels",
+      "select": null,
+      "guidelines": [
+        "out-of-band channels to be employed for the physical delivery or electronic transmission of information, system components, or devices to individuals or the system are defined;"
+      ]
+    },
+    {
+      "id": "sc-37_odp.02",
+      "label": "information, system components, or devices",
+      "select": null,
+      "guidelines": [
+        "information, system components, or devices to employ out-of-band-channels for physical delivery or electronic transmission are defined;"
+      ]
+    },
+    {
+      "id": "sc-37_odp.03",
+      "label": "individuals or systems",
+      "select": null,
+      "guidelines": [
+        "individuals or systems to which physical delivery or electronic transmission of information, system components, or devices is to be achieved via the employment of out-of-band channels are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "cm-3",
+    "cm-5",
+    "cm-7",
+    "ia-2",
+    "ia-4",
+    "ia-5",
+    "ma-4",
+    "sc-12",
+    "si-3",
+    "si-4",
+    "si-7"
+  ]
+}

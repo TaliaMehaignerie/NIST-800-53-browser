@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.2",
+  "slug": "sa-12-2",
+  "label": "SA-12(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Supplier Reviews",
+  "familyCode": "SA",
+  "sortId": "sa-12.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

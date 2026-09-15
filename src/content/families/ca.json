@@ -1,0 +1,18 @@
+{
+  "slug": "ca",
+  "code": "CA",
+  "name": "Assessment, Authorization, and Monitoring",
+  "controlSlugs": [
+    "ca-1",
+    "ca-2",
+    "ca-3",
+    "ca-4",
+    "ca-5",
+    "ca-6",
+    "ca-7",
+    "ca-8",
+    "ca-9"
+  ],
+  "controlCount": 9,
+  "enhancementCount": 23
+}

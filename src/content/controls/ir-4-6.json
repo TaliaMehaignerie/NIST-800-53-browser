@@ -1,0 +1,24 @@
+{
+  "id": "ir-4.6",
+  "slug": "ir-4-6",
+  "label": "IR-4(6)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Insider Threats",
+  "familyCode": "IR",
+  "sortId": "ir-04.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement an incident handling capability for incidents involving insider threats.",
+      "children": []
+    }
+  ],
+  "guidance": "Explicit focus on handling incidents involving insider threats provides additional emphasis on this type of threat and the need for specific incident handling capabilities to provide appropriate and timely responses.",
+  "params": [],
+  "related": []
+}

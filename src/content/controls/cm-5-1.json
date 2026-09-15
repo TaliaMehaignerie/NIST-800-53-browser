@@ -1,0 +1,54 @@
+{
+  "id": "cm-5.1",
+  "slug": "cm-5-1",
+  "label": "CM-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-5",
+  "enhancementSlugs": [],
+  "title": "Automated Access Enforcement and Audit Records",
+  "familyCode": "CM",
+  "sortId": "cm-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Enforce access restrictions using {{ insert: param, cm-05.01_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Automatically generate audit records of the enforcement actions.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations log system accesses associated with applying configuration changes to ensure that configuration change control is implemented and to support after-the-fact actions should organizations discover any unauthorized changes.",
+  "params": [
+    {
+      "id": "cm-05.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "mechanisms used to automate the enforcement of access restrictions are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-7",
+    "au-12",
+    "cm-6",
+    "cm-11",
+    "si-12"
+  ]
+}

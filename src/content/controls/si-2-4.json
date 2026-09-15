@@ -1,0 +1,33 @@
+{
+  "id": "si-2.4",
+  "slug": "si-2-4",
+  "label": "SI-2(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-2",
+  "enhancementSlugs": [],
+  "title": "Automated Patch Management Tools",
+  "familyCode": "SI",
+  "sortId": "si-02.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ automated patch management tools to facilitate flaw remediation to the following system components: {{ insert: param, si-02.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Using automated tools to support patch management helps to ensure the timeliness and completeness of system patching operations.",
+  "params": [
+    {
+      "id": "si-02.04_odp",
+      "label": "components",
+      "select": null,
+      "guidelines": [
+        "the system components requiring automated patch management tools to facilitate flaw remediation are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

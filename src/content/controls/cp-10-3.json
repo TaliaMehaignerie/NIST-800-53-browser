@@ -1,0 +1,24 @@
+{
+  "id": "cp-10.3",
+  "slug": "cp-10-3",
+  "label": "CP-10(3)",
+  "kind": "enhancement",
+  "parentSlug": "cp-10",
+  "enhancementSlugs": [],
+  "title": "Compensating Security Controls",
+  "familyCode": "CP",
+  "sortId": "cp-10.03",
+  "withdrawn": true,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Addressed through tailoring.",
+      "children": []
+    }
+  ],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

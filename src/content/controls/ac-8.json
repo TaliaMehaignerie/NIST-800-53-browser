@@ -1,0 +1,102 @@
+{
+  "id": "ac-8",
+  "slug": "ac-8",
+  "label": "AC-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "System Use Notification",
+  "familyCode": "AC",
+  "sortId": "ac-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Display {{ insert: param, ac-08_odp.01 }} to users before granting access to the system that provides privacy and security notices consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines and state that:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Users are accessing a U.S. Government system;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "System usage may be monitored, recorded, and subject to audit;",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Unauthorized use of the system is prohibited and subject to criminal and civil penalties; and",
+              "children": []
+            },
+            {
+              "label": "4.",
+              "prose": "Use of the system indicates consent to monitoring and recording;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Retain the notification message or banner on the screen until users acknowledge the usage conditions and take explicit actions to log on to or further access the system; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "For publicly accessible systems:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Display system use information {{ insert: param, ac-08_odp.02 }} , before granting further access to the publicly accessible system;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Display references, if any, to monitoring, recording, or auditing that are consistent with privacy accommodations for such systems that generally prohibit those activities; and",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Include a description of the authorized uses of the system.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "guidance": "System use notifications can be implemented using messages or warning banners displayed before individuals log in to systems. System use notifications are used only for access via logon interfaces with human users. Notifications are not required when human interfaces do not exist. Based on an assessment of risk, organizations consider whether or not a secondary system use notification is needed to access applications or other system resources after the initial network logon. Organizations consider system use notification messages or banners displayed in multiple languages based on organizational needs and the demographics of system users. Organizations consult with the privacy office for input regarding privacy messaging and the Office of the General Counsel or organizational equivalent for legal review and approval of warning banner content.",
+  "params": [
+    {
+      "id": "ac-08_odp.01",
+      "label": "system use notification",
+      "select": null,
+      "guidelines": [
+        "system use notification message or banner to be displayed by the system to users before granting access to the system is defined;"
+      ]
+    },
+    {
+      "id": "ac-08_odp.02",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions for system use to be displayed by the system before granting further access are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-14",
+    "pl-4",
+    "si-4"
+  ]
+}

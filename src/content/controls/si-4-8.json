@@ -1,0 +1,20 @@
+{
+  "id": "si-4.8",
+  "slug": "si-4-8",
+  "label": "SI-4(8)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Protection of Monitoring Information",
+  "familyCode": "SI",
+  "sortId": "si-04.08",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

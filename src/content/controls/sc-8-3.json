@@ -1,0 +1,36 @@
+{
+  "id": "sc-8.3",
+  "slug": "sc-8-3",
+  "label": "SC-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-8",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Protection for Message Externals",
+  "familyCode": "SC",
+  "sortId": "sc-08.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to protect message externals unless otherwise protected by {{ insert: param, sc-08.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Cryptographic protection for message externals addresses protection from the unauthorized disclosure of information. Message externals include message headers and routing information. Cryptographic protection prevents the exploitation of message externals and applies to internal and external networks or links that may be visible to individuals who are not authorized users. Header and routing information is sometimes transmitted in clear text (i.e., unencrypted) because the information is not identified by organizations as having significant value or because encrypting the information can result in lower network performance or higher costs. Alternative physical controls include protected distribution systems.",
+  "params": [
+    {
+      "id": "sc-08.03_odp",
+      "label": "alternative physical controls",
+      "select": null,
+      "guidelines": [
+        "alternative physical controls to protect message externals are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

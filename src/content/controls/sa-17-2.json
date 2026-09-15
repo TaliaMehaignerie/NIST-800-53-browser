@@ -1,0 +1,38 @@
+{
+  "id": "sa-17.2",
+  "slug": "sa-17-2",
+  "label": "SA-17(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-17",
+  "enhancementSlugs": [],
+  "title": "Security-relevant Components",
+  "familyCode": "SA",
+  "sortId": "sa-17.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Define security-relevant hardware, software, and firmware; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Provide a rationale that the definition for security-relevant hardware, software, and firmware is complete.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The security-relevant hardware, software, and firmware represent the portion of the system, component, or service that is trusted to perform correctly to maintain required security properties.",
+  "params": [],
+  "related": [
+    "ac-25",
+    "sa-5"
+  ]
+}

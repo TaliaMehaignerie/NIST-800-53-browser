@@ -1,0 +1,45 @@
+{
+  "id": "ma-7",
+  "slug": "ma-7",
+  "label": "MA-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Field Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict or prohibit field maintenance on {{ insert: param, ma-07_odp.01 }} to {{ insert: param, ma-07_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Field maintenance is the type of maintenance conducted on a system or system component after the system or component has been deployed to a specific site (i.e., operational environment). In certain instances, field maintenance (i.e., local maintenance at the site) may not be executed with the same degree of rigor or with the same quality control checks as depot maintenance. For critical systems designated as such by the organization, it may be necessary to restrict or prohibit field maintenance at the local site and require that such maintenance be conducted in trusted facilities with additional controls.",
+  "params": [
+    {
+      "id": "ma-07_odp.01",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "systems or system components on which field maintenance is restricted or prohibited to trusted maintenance facilities are defined;"
+      ]
+    },
+    {
+      "id": "ma-07_odp.02",
+      "label": "trusted maintenance facilities",
+      "select": null,
+      "guidelines": [
+        "trusted maintenance facilities that are not restricted or prohibited from conducting field maintenance are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ma-2",
+    "ma-4",
+    "ma-5"
+  ]
+}

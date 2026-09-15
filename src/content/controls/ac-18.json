@@ -1,0 +1,59 @@
+{
+  "id": "ac-18",
+  "slug": "ac-18",
+  "label": "AC-18",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-18-1",
+    "ac-18-2",
+    "ac-18-3",
+    "ac-18-4",
+    "ac-18-5"
+  ],
+  "title": "Wireless Access",
+  "familyCode": "AC",
+  "sortId": "ac-18",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Establish configuration requirements, connection requirements, and implementation guidance for each type of wireless access; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Authorize each type of wireless access to the system prior to allowing such connections.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Wireless technologies include microwave, packet radio (ultra-high frequency or very high frequency), 802.11x, and Bluetooth. Wireless networks use authentication protocols that provide authenticator protection and mutual authentication.",
+  "params": [],
+  "related": [
+    "ac-2",
+    "ac-3",
+    "ac-17",
+    "ac-19",
+    "ca-9",
+    "cm-7",
+    "ia-2",
+    "ia-3",
+    "ia-8",
+    "pl-4",
+    "sc-40",
+    "sc-43",
+    "si-4"
+  ]
+}

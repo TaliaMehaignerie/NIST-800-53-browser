@@ -1,0 +1,29 @@
+{
+  "id": "ac-20.5",
+  "slug": "ac-20-5",
+  "label": "AC-20(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-20",
+  "enhancementSlugs": [],
+  "title": "Portable Storage Devices — Prohibited Use",
+  "familyCode": "AC",
+  "sortId": "ac-20.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prohibit the use of organization-controlled portable storage devices by authorized individuals on external systems.",
+      "children": []
+    }
+  ],
+  "guidance": "Limits on the use of organization-controlled portable storage devices in external systems include a complete prohibition of the use of such devices. Prohibiting such use is enforced using technical methods and/or nontechnical (i.e., process-based) methods.",
+  "params": [],
+  "related": [
+    "mp-7",
+    "pl-4",
+    "ps-6",
+    "sc-41"
+  ]
+}

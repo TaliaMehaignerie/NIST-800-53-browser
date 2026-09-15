@@ -1,0 +1,20 @@
+{
+  "id": "cp-7.5",
+  "slug": "cp-7-5",
+  "label": "CP-7(5)",
+  "kind": "enhancement",
+  "parentSlug": "cp-7",
+  "enhancementSlugs": [],
+  "title": "Equivalent Information Security Safeguards",
+  "familyCode": "CP",
+  "sortId": "cp-07.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cp-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

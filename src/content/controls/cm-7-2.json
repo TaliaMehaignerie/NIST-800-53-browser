@@ -1,0 +1,54 @@
+{
+  "id": "cm-7.2",
+  "slug": "cm-7-2",
+  "label": "CM-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "cm-7",
+  "enhancementSlugs": [],
+  "title": "Prevent Program Execution",
+  "familyCode": "CM",
+  "sortId": "cm-07.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent program execution in accordance with {{ insert: param, cm-07.02_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Prevention of program execution addresses organizational policies, rules of behavior, and/or access agreements that restrict software usage and the terms and conditions imposed by the developer or manufacturer, including software licensing and copyrights. Restrictions include prohibiting auto-execute features, restricting roles allowed to approve program execution, permitting or prohibiting specific software programs, or restricting the number of program instances executed at the same time.",
+  "params": [
+    {
+      "id": "cm-07.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "{{ insert: param, cm-07.02_odp.02 }} ",
+          "rules authorizing the terms and conditions of software program usage"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "cm-07.02_odp.02",
+      "label": "policies, rules of behavior, and/or access agreements regarding software program usage and restrictions",
+      "select": null,
+      "guidelines": [
+        "policies, rules of behavior, and/or access agreements regarding software program usage and restrictions are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "cm-8",
+    "pl-4",
+    "pl-9",
+    "pm-5",
+    "ps-6"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "si-10.6",
+  "slug": "si-10-6",
+  "label": "SI-10(6)",
+  "kind": "enhancement",
+  "parentSlug": "si-10",
+  "enhancementSlugs": [],
+  "title": "Injection Prevention",
+  "familyCode": "SI",
+  "sortId": "si-10.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent untrusted data injections.",
+      "children": []
+    }
+  ],
+  "guidance": "Untrusted data injections may be prevented using a parameterized interface or output escaping (output encoding). Parameterized interfaces separate data from code so that injections of malicious or unintended data cannot change the semantics of commands being sent. Output escaping uses specified characters to inform the interpreter’s parser whether data is trusted. Prevention of untrusted data injections are with respect to the information inputs defined by the organization in the base control ( [SI-10](#si-10)).",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ac-6"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "si-4.13",
+  "slug": "si-4-13",
+  "label": "SI-4(13)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Analyze Traffic and Event Patterns",
+  "familyCode": "SI",
+  "sortId": "si-04.13",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Analyze communications traffic and event patterns for the system;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Develop profiles representing common traffic and event patterns; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Use the traffic and event profiles in tuning system-monitoring devices.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Identifying and understanding common communications traffic and event patterns help organizations provide useful information to system monitoring devices to more effectively identify suspicious or anomalous traffic and events when they occur. Such information can help reduce the number of false positives and false negatives during system monitoring.",
+  "params": [],
+  "related": []
+}

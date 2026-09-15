@@ -1,0 +1,33 @@
+{
+  "id": "pe-14.1",
+  "slug": "pe-14-1",
+  "label": "PE-14(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-14",
+  "enhancementSlugs": [],
+  "title": "Automatic Controls",
+  "familyCode": "PE",
+  "sortId": "pe-14.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following automatic environmental controls in the facility to prevent fluctuations potentially harmful to the system: {{ insert: param, pe-14.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The implementation of automatic environmental controls provides an immediate response to environmental conditions that can damage, degrade, or destroy organizational systems or systems components.",
+  "params": [
+    {
+      "id": "pe-14.01_odp",
+      "label": "automatic environmental controls",
+      "select": null,
+      "guidelines": [
+        "automatic environmental controls to prevent fluctuations that are potentially harmful to the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

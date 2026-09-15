@@ -1,0 +1,27 @@
+{
+  "id": "cm-11.2",
+  "slug": "cm-11-2",
+  "label": "CM-11(2)",
+  "kind": "enhancement",
+  "parentSlug": "cm-11",
+  "enhancementSlugs": [],
+  "title": "Software Installation with Privileged Status",
+  "familyCode": "CM",
+  "sortId": "cm-11.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Allow user installation of software only with explicit privileged status.",
+      "children": []
+    }
+  ],
+  "guidance": "Privileged status can be obtained, for example, by serving in the role of system administrator.",
+  "params": [],
+  "related": [
+    "ac-5",
+    "ac-6"
+  ]
+}

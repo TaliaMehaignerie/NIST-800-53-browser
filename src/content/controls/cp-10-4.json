@@ -1,0 +1,38 @@
+{
+  "id": "cp-10.4",
+  "slug": "cp-10-4",
+  "label": "CP-10(4)",
+  "kind": "enhancement",
+  "parentSlug": "cp-10",
+  "enhancementSlugs": [],
+  "title": "Restore Within Time Period",
+  "familyCode": "CP",
+  "sortId": "cp-10.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability to restore system components within {{ insert: param, cp-10.04_odp }} from configuration-controlled and integrity-protected information representing a known, operational state for the components.",
+      "children": []
+    }
+  ],
+  "guidance": "Restoration of system components includes reimaging, which restores the components to known, operational states.",
+  "params": [
+    {
+      "id": "cp-10.04_odp",
+      "label": "restoration time periods",
+      "select": null,
+      "guidelines": [
+        "restoration time period within which to restore system components to a known, operational state is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "cm-6"
+  ]
+}

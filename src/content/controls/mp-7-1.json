@@ -1,0 +1,20 @@
+{
+  "id": "mp-7.1",
+  "slug": "mp-7-1",
+  "label": "MP-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "mp-7",
+  "enhancementSlugs": [],
+  "title": "Prohibit Use Without Owner",
+  "familyCode": "MP",
+  "sortId": "mp-07.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "mp-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

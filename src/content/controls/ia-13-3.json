@@ -1,0 +1,55 @@
+{
+  "id": "ia-13.3",
+  "slug": "ia-13-3",
+  "label": "IA-13(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-13",
+  "enhancementSlugs": [],
+  "title": "Token Management",
+  "familyCode": "IA",
+  "sortId": "ia-13.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "In accordance with {{ insert: param, ia-13_odp.01 }}, assertions and access tokens are:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "generated;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "issued;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "refreshed;",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "revoked;",
+          "children": []
+        },
+        {
+          "label": "(e)",
+          "prose": "time-restricted; and",
+          "children": []
+        },
+        {
+          "label": "(f)",
+          "prose": "audience-restricted.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "An access token is a piece of data that represents the authorization granted to a user or NPE to access specific systems or information resources. Access tokens enable controlled access to services and resources. Properly managing the lifecycle of access tokens, including their issuance, validation, and revocation, is crucial to maintaining confidentiality of data and systems. Restricting token validity to a specific audience, e.g., an application or security domain, and restricting token validity lifetimes are important practices. Access tokens are revoked or invalidated if they are compromised, lost, or are no longer needed to mitigate the risks associated with stolen or misused tokens.",
+  "params": [],
+  "related": []
+}

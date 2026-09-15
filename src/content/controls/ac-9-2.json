@@ -1,0 +1,46 @@
+{
+  "id": "ac-9.2",
+  "slug": "ac-9-2",
+  "label": "AC-9(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-9",
+  "enhancementSlugs": [],
+  "title": "Successful and Unsuccessful Logons",
+  "familyCode": "AC",
+  "sortId": "ac-09.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Notify the user, upon successful logon, of the number of {{ insert: param, ac-09.02_odp.01 }} during {{ insert: param, ac-09.02_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information about the number of successful and unsuccessful logon attempts within a specified time period allows the user to recognize if the number and type of logon attempts are consistent with the user’s actual logon attempts.",
+  "params": [
+    {
+      "id": "ac-09.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "successful logons",
+          "unsuccessful logon attempts",
+          "both"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-09.02_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period for which the system notifies the user of the number of successful logons, unsuccessful logon attempts, or both is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

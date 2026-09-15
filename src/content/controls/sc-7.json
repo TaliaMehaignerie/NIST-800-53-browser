@@ -1,0 +1,113 @@
+{
+  "id": "sc-7",
+  "slug": "sc-7",
+  "label": "SC-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-7-1",
+    "sc-7-2",
+    "sc-7-3",
+    "sc-7-4",
+    "sc-7-5",
+    "sc-7-6",
+    "sc-7-7",
+    "sc-7-8",
+    "sc-7-9",
+    "sc-7-10",
+    "sc-7-11",
+    "sc-7-12",
+    "sc-7-13",
+    "sc-7-14",
+    "sc-7-15",
+    "sc-7-16",
+    "sc-7-17",
+    "sc-7-18",
+    "sc-7-19",
+    "sc-7-20",
+    "sc-7-21",
+    "sc-7-22",
+    "sc-7-23",
+    "sc-7-24",
+    "sc-7-25",
+    "sc-7-26",
+    "sc-7-27",
+    "sc-7-28",
+    "sc-7-29"
+  ],
+  "title": "Boundary Protection",
+  "familyCode": "SC",
+  "sortId": "sc-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Implement subnetworks for publicly accessible system components that are {{ insert: param, sc-07_odp }} separated from internal organizational networks; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Managed interfaces include gateways, routers, firewalls, guards, network-based malicious code analysis, virtualization systems, or encrypted tunnels implemented within a security architecture. Subnetworks that are physically or logically separated from internal networks are referred to as demilitarized zones or DMZs. Restricting or prohibiting interfaces within organizational systems includes restricting external web traffic to designated web servers within managed interfaces, prohibiting external traffic that appears to be spoofing internal addresses, and prohibiting internal traffic that appears to be spoofing external addresses. [SP 800-189](#f5edfe51-d1f2-422e-9b27-5d0e90b49c72) provides additional information on source address validation techniques to prevent ingress and egress of traffic with spoofed addresses. Commercial telecommunications services are provided by network components and consolidated management systems shared by customers. These services may also include third party-provided access lines and other service elements. Such services may represent sources of increased risk despite contract security provisions. Boundary protection may be implemented as a common control for all or part of an organizational network such that the boundary to be protected is greater than a system-specific boundary (i.e., an authorization boundary).",
+  "params": [
+    {
+      "id": "sc-07_odp",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "physically",
+          "logically"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "ac-4",
+    "ac-17",
+    "ac-18",
+    "ac-19",
+    "ac-20",
+    "au-13",
+    "ca-3",
+    "cm-2",
+    "cm-4",
+    "cm-7",
+    "cm-10",
+    "cp-8",
+    "cp-10",
+    "ir-4",
+    "ma-4",
+    "pe-3",
+    "pl-8",
+    "pm-12",
+    "sa-8",
+    "sa-17",
+    "sc-5",
+    "sc-26",
+    "sc-32",
+    "sc-35",
+    "sc-43"
+  ]
+}

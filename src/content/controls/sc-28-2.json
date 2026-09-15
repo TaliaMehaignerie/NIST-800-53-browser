@@ -1,0 +1,33 @@
+{
+  "id": "sc-28.2",
+  "slug": "sc-28-2",
+  "label": "SC-28(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-28",
+  "enhancementSlugs": [],
+  "title": "Offline Storage",
+  "familyCode": "SC",
+  "sortId": "sc-28.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Remove the following information from online storage and store offline in a secure location: {{ insert: param, sc-28.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Removing organizational information from online storage to offline storage eliminates the possibility of individuals gaining unauthorized access to the information through a network. Therefore, organizations may choose to move information to offline storage in lieu of protecting such information in online storage.",
+  "params": [
+    {
+      "id": "sc-28.02_odp",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information to be removed from online storage and stored offline in a secure location is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

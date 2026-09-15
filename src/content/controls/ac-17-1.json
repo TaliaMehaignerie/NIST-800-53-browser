@@ -1,0 +1,32 @@
+{
+  "id": "ac-17.1",
+  "slug": "ac-17-1",
+  "label": "AC-17(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Monitoring and Control",
+  "familyCode": "AC",
+  "sortId": "ac-17.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ automated mechanisms to monitor and control remote access methods.",
+      "children": []
+    }
+  ],
+  "guidance": "Monitoring and control of remote access methods allows organizations to detect attacks and help ensure compliance with remote access policies by auditing the connection activities of remote users on a variety of system components, including servers, notebook computers, workstations, smart phones, and tablets. Audit logging for remote access is enforced by [AU-2](#au-2) . Audit events are defined in [AU-2a](#au-2_smt.a).",
+  "params": [],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-12",
+    "au-14"
+  ]
+}

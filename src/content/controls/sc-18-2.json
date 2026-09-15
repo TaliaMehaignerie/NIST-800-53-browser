@@ -1,0 +1,33 @@
+{
+  "id": "sc-18.2",
+  "slug": "sc-18-2",
+  "label": "SC-18(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-18",
+  "enhancementSlugs": [],
+  "title": "Acquisition, Development, and Use",
+  "familyCode": "SC",
+  "sortId": "sc-18.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that the acquisition, development, and use of mobile code to be deployed in the system meets {{ insert: param, sc-18.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sc-18.02_odp",
+      "label": "mobile code requirements",
+      "select": null,
+      "guidelines": [
+        "mobile code requirements for the acquisition, development, and use of mobile code to be deployed in the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

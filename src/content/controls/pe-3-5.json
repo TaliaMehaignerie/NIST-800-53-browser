@@ -1,0 +1,57 @@
+{
+  "id": "pe-3.5",
+  "slug": "pe-3-5",
+  "label": "PE-3(5)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "Tamper Protection",
+  "familyCode": "PE",
+  "sortId": "pe-03.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, pe-03.05_odp.01 }} to {{ insert: param, pe-03.05_odp.02 }} physical tampering or alteration of {{ insert: param, pe-03.05_odp.03 }} within the system.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can implement tamper detection and prevention at selected hardware components or implement tamper detection at some components and tamper prevention at other components. Detection and prevention activities can employ many types of anti-tamper technologies, including tamper-detection seals and anti-tamper coatings. Anti-tamper programs help to detect hardware alterations through counterfeiting and other supply chain-related risks.",
+  "params": [
+    {
+      "id": "pe-03.05_odp.01",
+      "label": "anti-tamper technologies",
+      "select": null,
+      "guidelines": [
+        "anti-tamper technologies to be employed are defined;"
+      ]
+    },
+    {
+      "id": "pe-03.05_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "detect",
+          "prevent"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-03.05_odp.03",
+      "label": "hardware components",
+      "select": null,
+      "guidelines": [
+        "hardware components to be protected from physical tampering or alteration are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sa-16",
+    "sr-9",
+    "sr-11"
+  ]
+}

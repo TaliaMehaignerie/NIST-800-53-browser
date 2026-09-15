@@ -1,0 +1,24 @@
+{
+  "id": "sc-2.2",
+  "slug": "sc-2-2",
+  "label": "SC-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-2",
+  "enhancementSlugs": [],
+  "title": "Disassociability",
+  "familyCode": "SC",
+  "sortId": "sc-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Store state information from applications and software separately.",
+      "children": []
+    }
+  ],
+  "guidance": "If a system is compromised, storing applications and software separately from state information about users’ interactions with an application may better protect individuals’ privacy.",
+  "params": [],
+  "related": []
+}

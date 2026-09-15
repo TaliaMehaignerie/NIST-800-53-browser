@@ -1,0 +1,20 @@
+{
+  "id": "pe-10.1",
+  "slug": "pe-10-1",
+  "label": "PE-10(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-10",
+  "enhancementSlugs": [],
+  "title": "Accidental and Unauthorized Activation",
+  "familyCode": "PE",
+  "sortId": "pe-10.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

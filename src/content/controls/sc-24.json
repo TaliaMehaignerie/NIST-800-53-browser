@@ -1,0 +1,60 @@
+{
+  "id": "sc-24",
+  "slug": "sc-24",
+  "label": "SC-24",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Fail in Known State",
+  "familyCode": "SC",
+  "sortId": "sc-24",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Fail to a {{ insert: param, sc-24_odp.02 }} for the following failures on the indicated components while preserving {{ insert: param, sc-24_odp.03 }} in failure: {{ insert: param, sc-24_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Failure in a known state addresses security concerns in accordance with the mission and business needs of organizations. Failure in a known state prevents the loss of confidentiality, integrity, or availability of information in the event of failures of organizational systems or system components. Failure in a known safe state helps to prevent systems from failing to a state that may cause injury to individuals or destruction to property. Preserving system state information facilitates system restart and return to the operational mode with less disruption of mission and business processes.",
+  "params": [
+    {
+      "id": "sc-24_odp.01",
+      "label": "types of system failures on system components",
+      "select": null,
+      "guidelines": [
+        "types of system failures for which the system components fail to a known state are defined;"
+      ]
+    },
+    {
+      "id": "sc-24_odp.02",
+      "label": "known system state",
+      "select": null,
+      "guidelines": [
+        "known system state to which system components fail in the event of a system failure is defined;"
+      ]
+    },
+    {
+      "id": "sc-24_odp.03",
+      "label": "system state information",
+      "select": null,
+      "guidelines": [
+        "system state information to be preserved in the event of a system failure is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "cp-4",
+    "cp-10",
+    "cp-12",
+    "sa-8",
+    "sc-7",
+    "sc-22",
+    "si-13"
+  ]
+}

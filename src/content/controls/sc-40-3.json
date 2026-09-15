@@ -1,0 +1,28 @@
+{
+  "id": "sc-40.3",
+  "slug": "sc-40-3",
+  "label": "SC-40(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-40",
+  "enhancementSlugs": [],
+  "title": "Imitative or Manipulative Communications Deception",
+  "familyCode": "SC",
+  "sortId": "sc-40.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to identify and reject wireless transmissions that are deliberate attempts to achieve imitative or manipulative communications deception based on signal parameters.",
+      "children": []
+    }
+  ],
+  "guidance": "The implementation of cryptographic mechanisms to identify and reject imitative or manipulative communications ensures that the signal parameters of wireless transmissions are not predictable by unauthorized individuals. Such unpredictability reduces the probability of imitative or manipulative communications deception based on signal parameters alone.",
+  "params": [],
+  "related": [
+    "sc-12",
+    "sc-13",
+    "si-4"
+  ]
+}

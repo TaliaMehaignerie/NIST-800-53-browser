@@ -1,0 +1,37 @@
+{
+  "id": "sc-8.2",
+  "slug": "sc-8-2",
+  "label": "SC-8(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-8",
+  "enhancementSlugs": [],
+  "title": "Pre- and Post-transmission Handling",
+  "familyCode": "SC",
+  "sortId": "sc-08.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain the {{ insert: param, sc-08.02_odp }} of information during preparation for transmission and during reception.",
+      "children": []
+    }
+  ],
+  "guidance": "Information can be unintentionally or maliciously disclosed or modified during preparation for transmission or during reception, including during aggregation, at protocol transformation points, and during packing and unpacking. Such unauthorized disclosures or modifications compromise the confidentiality or integrity of the information.",
+  "params": [
+    {
+      "id": "sc-08.02_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "confidentiality",
+          "integrity"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

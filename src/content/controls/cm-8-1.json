@@ -1,0 +1,29 @@
+{
+  "id": "cm-8.1",
+  "slug": "cm-8-1",
+  "label": "CM-8(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Updates During Installation and Removal",
+  "familyCode": "CM",
+  "sortId": "cm-08.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Update the inventory of system components as part of component installations, removals, and system updates.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can improve the accuracy, completeness, and consistency of system component inventories if the inventories are updated as part of component installations or removals or during general system updates. If inventories are not updated at these key times, there is a greater likelihood that the information will not be appropriately captured and documented. System updates include hardware, software, and firmware components.",
+  "params": [],
+  "related": [
+    "pm-16"
+  ]
+}

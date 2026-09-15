@@ -1,0 +1,20 @@
+{
+  "id": "at-3.4",
+  "slug": "at-3-4",
+  "label": "AT-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "at-3",
+  "enhancementSlugs": [],
+  "title": "Suspicious Communications and Anomalous System Behavior",
+  "familyCode": "AT",
+  "sortId": "at-03.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "at-2.4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

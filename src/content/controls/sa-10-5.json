@@ -1,0 +1,24 @@
+{
+  "id": "sa-10.5",
+  "slug": "sa-10-5",
+  "label": "SA-10(5)",
+  "kind": "enhancement",
+  "parentSlug": "sa-10",
+  "enhancementSlugs": [],
+  "title": "Mapping Integrity for Version Control",
+  "familyCode": "SA",
+  "sortId": "sa-10.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to maintain the integrity of the mapping between the master build data describing the current version of security-relevant hardware, software, and firmware and the on-site master copy of the data for the current version.",
+      "children": []
+    }
+  ],
+  "guidance": "Mapping integrity for version control addresses changes to hardware, software, and firmware components during both initial development and system development life cycle updates. Maintaining the integrity between the master copies of security-relevant hardware, software, and firmware (including designs, hardware drawings, source code) and the equivalent data in master copies in operational environments is essential to ensuring the availability of organizational systems that support critical mission and business functions.",
+  "params": [],
+  "related": []
+}

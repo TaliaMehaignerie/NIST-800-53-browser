@@ -1,0 +1,47 @@
+{
+  "id": "si-10.2",
+  "slug": "si-10-2",
+  "label": "SI-10(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-10",
+  "enhancementSlugs": [],
+  "title": "Review and Resolve Errors",
+  "familyCode": "SI",
+  "sortId": "si-10.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Review and resolve input validation errors within {{ insert: param, si-10.2_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Resolution of input validation errors includes correcting systemic causes of errors and resubmitting transactions with corrected input. Input validation errors are those related to the information inputs defined by the organization in the base control ( [SI-10](#si-10)).",
+  "params": [
+    {
+      "id": "si-10.2_prm_1",
+      "label": "organization-defined time period",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-10.02_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period within which input validation errors are to be reviewed is defined;"
+      ]
+    },
+    {
+      "id": "si-10.02_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period within which input validation errors are to be resolved is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

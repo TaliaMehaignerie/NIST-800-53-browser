@@ -1,0 +1,44 @@
+{
+  "id": "ra-5.5",
+  "slug": "ra-5-5",
+  "label": "RA-5(5)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Privileged Access",
+  "familyCode": "RA",
+  "sortId": "ra-05.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement privileged access authorization to {{ insert: param, ra-05.05_odp.01 }} for {{ insert: param, ra-05.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In certain situations, the nature of the vulnerability scanning may be more intrusive, or the system component that is the subject of the scanning may contain classified or controlled unclassified information, such as personally identifiable information. Privileged access authorization to selected system components facilitates more thorough vulnerability scanning and protects the sensitive nature of such scanning.",
+  "params": [
+    {
+      "id": "ra-05.05_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to which privileged access is authorized for selected vulnerability scanning activities are defined;"
+      ]
+    },
+    {
+      "id": "ra-05.05_odp.02",
+      "label": "vulnerability scanning activities",
+      "select": null,
+      "guidelines": [
+        "vulnerability scanning activities selected for privileged access authorization to system components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

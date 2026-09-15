@@ -1,0 +1,122 @@
+{
+  "id": "cm-7",
+  "slug": "cm-7",
+  "label": "CM-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cm-7-1",
+    "cm-7-2",
+    "cm-7-3",
+    "cm-7-4",
+    "cm-7-5",
+    "cm-7-6",
+    "cm-7-7",
+    "cm-7-8",
+    "cm-7-9"
+  ],
+  "title": "Least Functionality",
+  "familyCode": "CM",
+  "sortId": "cm-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Configure the system to provide only {{ insert: param, cm-07_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Prohibit or restrict the use of the following functions, ports, protocols, software, and/or services: {{ insert: param, cm-7_prm_2 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Systems provide a wide variety of functions and services. Some of the functions and services routinely provided by default may not be necessary to support essential organizational missions, functions, or operations. Additionally, it is sometimes convenient to provide multiple services from a single system component, but doing so increases risk over limiting the services provided by that single component. Where feasible, organizations limit component functionality to a single function per component. Organizations consider removing unused or unnecessary software and disabling unused or unnecessary physical and logical ports and protocols to prevent unauthorized connection of components, transfer of information, and tunneling. Organizations employ network scanning tools, intrusion detection and prevention systems, and end-point protection technologies, such as firewalls and host-based intrusion detection systems, to identify and prevent the use of prohibited functions, protocols, ports, and services. Least functionality can also be achieved as part of the fundamental design and development of the system (see [SA-8](#sa-8), [SC-2](#sc-2) , and [SC-3](#sc-3)).",
+  "params": [
+    {
+      "id": "cm-7_prm_2",
+      "label": "organization-defined prohibited or restricted functions, system ports, protocols, software, and/or services",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-07_odp.01",
+      "label": "mission-essential capabilities",
+      "select": null,
+      "guidelines": [
+        "mission-essential capabilities for the system are defined;"
+      ]
+    },
+    {
+      "id": "cm-07_odp.02",
+      "label": "functions",
+      "select": null,
+      "guidelines": [
+        "functions to be prohibited or restricted are defined;"
+      ]
+    },
+    {
+      "id": "cm-07_odp.03",
+      "label": "ports",
+      "select": null,
+      "guidelines": [
+        "ports to be prohibited or restricted are defined;"
+      ]
+    },
+    {
+      "id": "cm-07_odp.04",
+      "label": "protocols",
+      "select": null,
+      "guidelines": [
+        "protocols to be prohibited or restricted are defined;"
+      ]
+    },
+    {
+      "id": "cm-07_odp.05",
+      "label": "software",
+      "select": null,
+      "guidelines": [
+        "software to be prohibited or restricted is defined;"
+      ]
+    },
+    {
+      "id": "cm-07_odp.06",
+      "label": "services",
+      "select": null,
+      "guidelines": [
+        "services to be prohibited or restricted are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "cm-2",
+    "cm-5",
+    "cm-6",
+    "cm-11",
+    "ra-5",
+    "sa-4",
+    "sa-5",
+    "sa-8",
+    "sa-9",
+    "sa-15",
+    "sc-2",
+    "sc-3",
+    "sc-7",
+    "sc-37",
+    "si-4"
+  ]
+}

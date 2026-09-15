@@ -1,0 +1,24 @@
+{
+  "id": "ac-16.10",
+  "slug": "ac-16-10",
+  "label": "AC-16(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Attribute Configuration by Authorized Individuals",
+  "familyCode": "AC",
+  "sortId": "ac-16.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide authorized individuals the capability to define or change the type and value of security and privacy attributes available for association with subjects and objects.",
+      "children": []
+    }
+  ],
+  "guidance": "The content or assigned values of security and privacy attributes can directly affect the ability of individuals to access organizational information. Thus, it is important for systems to be able to limit the ability to create or modify the type and value of attributes available for association with subjects and objects to authorized individuals only.",
+  "params": [],
+  "related": []
+}

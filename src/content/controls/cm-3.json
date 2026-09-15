@@ -1,0 +1,141 @@
+{
+  "id": "cm-3",
+  "slug": "cm-3",
+  "label": "CM-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cm-3-1",
+    "cm-3-2",
+    "cm-3-3",
+    "cm-3-4",
+    "cm-3-5",
+    "cm-3-6",
+    "cm-3-7",
+    "cm-3-8"
+  ],
+  "title": "Configuration Change Control",
+  "familyCode": "CM",
+  "sortId": "cm-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Determine and document the types of changes to the system that are configuration-controlled;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Review proposed configuration-controlled changes to the system and approve or disapprove such changes with explicit consideration for security and privacy impact analyses;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Document configuration change decisions associated with the system;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Implement approved configuration-controlled changes to the system;",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Retain records of configuration-controlled changes to the system for {{ insert: param, cm-03_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Monitor and review activities associated with configuration-controlled changes to the system; and",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Coordinate and provide oversight for configuration change control activities through {{ insert: param, cm-03_odp.02 }} that convenes {{ insert: param, cm-03_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Configuration change control for organizational systems involves the systematic proposal, justification, implementation, testing, review, and disposition of system changes, including system upgrades and modifications. Configuration change control includes changes to baseline configurations, configuration items of systems, operational procedures, configuration settings for system components, remediate vulnerabilities, and unscheduled or unauthorized changes. Processes for managing configuration changes to systems include Configuration Control Boards or Change Advisory Boards that review and approve proposed changes. For changes that impact privacy risk, the senior agency official for privacy updates privacy impact assessments and system of records notices. For new systems or major upgrades, organizations consider including representatives from the development organizations on the Configuration Control Boards or Change Advisory Boards. Auditing of changes includes activities before and after changes are made to systems and the auditing activities required to implement such changes. See also [SA-10](#sa-10).",
+  "params": [
+    {
+      "id": "cm-03_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period to retain records of configuration-controlled changes is defined;"
+      ]
+    },
+    {
+      "id": "cm-03_odp.02",
+      "label": "configuration change control element",
+      "select": null,
+      "guidelines": [
+        "the configuration change control element responsible for coordinating and overseeing change control activities is defined;"
+      ]
+    },
+    {
+      "id": "cm-03_odp.03",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "{{ insert: param, cm-03_odp.04 }} ",
+          "when {{ insert: param, cm-03_odp.05 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "cm-03_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which the configuration control element convenes is defined (if selected);"
+      ]
+    },
+    {
+      "id": "cm-03_odp.05",
+      "label": "configuration change conditions",
+      "select": null,
+      "guidelines": [
+        "configuration change conditions that prompt the configuration control element to convene are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7",
+    "cm-2",
+    "cm-4",
+    "cm-5",
+    "cm-6",
+    "cm-9",
+    "cm-11",
+    "ia-3",
+    "ma-2",
+    "pe-16",
+    "pt-6",
+    "ra-8",
+    "sa-8",
+    "sa-10",
+    "sc-28",
+    "sc-34",
+    "sc-37",
+    "si-2",
+    "si-3",
+    "si-4",
+    "si-7",
+    "si-10",
+    "sr-11"
+  ]
+}

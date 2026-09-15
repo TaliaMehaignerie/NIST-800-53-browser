@@ -1,0 +1,70 @@
+{
+  "id": "si-19",
+  "slug": "si-19",
+  "label": "SI-19",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "si-19-1",
+    "si-19-2",
+    "si-19-3",
+    "si-19-4",
+    "si-19-5",
+    "si-19-6",
+    "si-19-7",
+    "si-19-8"
+  ],
+  "title": "De-identification",
+  "familyCode": "SI",
+  "sortId": "si-19",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Remove the following elements of personally identifiable information from datasets: {{ insert: param, si-19_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Evaluate {{ insert: param, si-19_odp.02 }} for effectiveness of de-identification.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "De-identification is the general term for the process of removing the association between a set of identifying data and the data subject. Many datasets contain information about individuals that can be used to distinguish or trace an individual’s identity, such as name, social security number, date and place of birth, mother’s maiden name, or biometric records. Datasets may also contain other information that is linked or linkable to an individual, such as medical, educational, financial, and employment information. Personally identifiable information is removed from datasets by trained individuals when such information is not (or no longer) necessary to satisfy the requirements envisioned for the data. For example, if the dataset is only used to produce aggregate statistics, the identifiers that are not needed for producing those statistics are removed. Removing identifiers improves privacy protection since information that is removed cannot be inadvertently disclosed or improperly used. Organizations may be subject to specific de-identification definitions or methods under applicable laws, regulations, or policies. Re-identification is a residual risk with de-identified data. Re-identification attacks can vary, including combining new datasets or other improvements in data analytics. Maintaining awareness of potential attacks and evaluating for the effectiveness of the de-identification over time support the management of this residual risk.",
+  "params": [
+    {
+      "id": "si-19_odp.01",
+      "label": "elements",
+      "select": null,
+      "guidelines": [
+        "elements of personally identifiable information to be removed from datasets are defined;"
+      ]
+    },
+    {
+      "id": "si-19_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to evaluate the effectiveness of de-identification is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-6",
+    "pm-22",
+    "pm-23",
+    "pm-24",
+    "ra-2",
+    "si-12"
+  ]
+}

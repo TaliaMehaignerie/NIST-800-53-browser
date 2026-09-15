@@ -1,0 +1,66 @@
+{
+  "id": "ac-11",
+  "slug": "ac-11",
+  "label": "AC-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-11-1"
+  ],
+  "title": "Device Lock",
+  "familyCode": "AC",
+  "sortId": "ac-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Prevent further access to the system by {{ insert: param, ac-11_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Retain the device lock until the user reestablishes access using established identification and authentication procedures.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Device locks are temporary actions taken to prevent logical access to organizational systems when users stop work and move away from the immediate vicinity of those systems but do not want to log out because of the temporary nature of their absences. Device locks can be implemented at the operating system level or at the application level. A proximity lock may be used to initiate the device lock (e.g., via a Bluetooth-enabled device or dongle). User-initiated device locking is behavior or policy-based and, as such, requires users to take physical action to initiate the device lock. Device locks are not an acceptable substitute for logging out of systems, such as when organizations require users to log out at the end of workdays.",
+  "params": [
+    {
+      "id": "ac-11_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "initiating a device lock after {{ insert: param, ac-11_odp.02 }} of inactivity",
+          "requiring the user to initiate a device lock before leaving the system unattended"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-11_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period of inactivity after which a device lock is initiated is defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "ac-7",
+    "ia-11",
+    "pl-4"
+  ]
+}

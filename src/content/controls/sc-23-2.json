@@ -1,0 +1,20 @@
+{
+  "id": "sc-23.2",
+  "slug": "sc-23-2",
+  "label": "SC-23(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-23",
+  "enhancementSlugs": [],
+  "title": "User-initiated Logouts and Message Displays",
+  "familyCode": "SC",
+  "sortId": "sc-23.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-12.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,59 @@
+{
+  "id": "sc-7.24",
+  "slug": "sc-7-24",
+  "label": "SC-7(24)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Personally Identifiable Information",
+  "familyCode": "SC",
+  "sortId": "sc-07.24",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "For systems that process personally identifiable information:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Apply the following processing rules to data elements of personally identifiable information: {{ insert: param, sc-07.24_odp }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Monitor for permitted processing at the external interfaces to the system and at key internal boundaries within the system;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Document each processing exception; and",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Review and remove exceptions that are no longer supported.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Managing the processing of personally identifiable information is an important aspect of protecting an individual’s privacy. Applying, monitoring for, and documenting exceptions to processing rules ensure that personally identifiable information is processed only in accordance with established privacy requirements.",
+  "params": [
+    {
+      "id": "sc-07.24_odp",
+      "label": "processing rules",
+      "select": null,
+      "guidelines": [
+        "processing rules for systems that process personally identifiable information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pt-2",
+    "si-15"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "au-12.3",
+  "slug": "au-12-3",
+  "label": "AU-12(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-12",
+  "enhancementSlugs": [],
+  "title": "Changes by Authorized Individuals",
+  "familyCode": "AU",
+  "sortId": "au-12.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide and implement the capability for {{ insert: param, au-12.03_odp.01 }} to change the logging to be performed on {{ insert: param, au-12.03_odp.02 }} based on {{ insert: param, au-12.03_odp.03 }} within {{ insert: param, au-12.03_odp.04 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Permitting authorized individuals to make changes to system logging enables organizations to extend or limit logging as necessary to meet organizational requirements. Logging that is limited to conserve system resources may be extended (either temporarily or permanently) to address certain threat situations. In addition, logging may be limited to a specific set of event types to facilitate audit reduction, analysis, and reporting. Organizations can establish time thresholds in which logging actions are changed (e.g., near real-time, within minutes, or within hours).",
+  "params": [
+    {
+      "id": "au-12.03_odp.01",
+      "label": "individuals or roles",
+      "select": null,
+      "guidelines": [
+        "individuals or roles authorized to change the logging on system components are defined;"
+      ]
+    },
+    {
+      "id": "au-12.03_odp.02",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components on which logging is to be performed are defined;"
+      ]
+    },
+    {
+      "id": "au-12.03_odp.03",
+      "label": "selectable event criteria",
+      "select": null,
+      "guidelines": [
+        "selectable event criteria with which change logging is to be performed are defined;"
+      ]
+    },
+    {
+      "id": "au-12.03_odp.04",
+      "label": "time thresholds",
+      "select": null,
+      "guidelines": [
+        "time thresholds in which logging actions are to change is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3"
+  ]
+}

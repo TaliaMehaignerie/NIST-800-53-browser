@@ -1,0 +1,38 @@
+{
+  "id": "ir-9.2",
+  "slug": "ir-9-2",
+  "label": "IR-9(2)",
+  "kind": "enhancement",
+  "parentSlug": "ir-9",
+  "enhancementSlugs": [],
+  "title": "Training",
+  "familyCode": "IR",
+  "sortId": "ir-09.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide information spillage response training {{ insert: param, ir-09.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations establish requirements for responding to information spillage incidents in incident response plans. Incident response training on a regular basis helps to ensure that organizational personnel understand their individual responsibilities and what specific actions to take when spillage incidents occur.",
+  "params": [
+    {
+      "id": "ir-09.02_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to provide information spillage response training is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-2",
+    "at-3",
+    "cp-3",
+    "ir-2"
+  ]
+}

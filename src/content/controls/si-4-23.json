@@ -1,0 +1,44 @@
+{
+  "id": "si-4.23",
+  "slug": "si-4-23",
+  "label": "SI-4(23)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Host-based Devices",
+  "familyCode": "SI",
+  "sortId": "si-04.23",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following host-based monitoring mechanisms at {{ insert: param, si-04.23_odp.02 }}: {{ insert: param, si-04.23_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Host-based monitoring collects information about the host (or system in which it resides). System components in which host-based monitoring can be implemented include servers, notebook computers, and mobile devices. Organizations may consider employing host-based monitoring mechanisms from multiple product developers or vendors.",
+  "params": [
+    {
+      "id": "si-04.23_odp.01",
+      "label": "host-based monitoring mechanisms",
+      "select": null,
+      "guidelines": [
+        "host-based monitoring mechanisms to be implemented on system components are defined;"
+      ]
+    },
+    {
+      "id": "si-04.23_odp.02",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components where host-based monitoring is to be implemented are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-18",
+    "ac-19"
+  ]
+}

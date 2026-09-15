@@ -1,0 +1,24 @@
+{
+  "id": "ac-9.1",
+  "slug": "ac-9-1",
+  "label": "AC-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-9",
+  "enhancementSlugs": [],
+  "title": "Unsuccessful Logons",
+  "familyCode": "AC",
+  "sortId": "ac-09.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Notify the user, upon successful logon, of the number of unsuccessful logon attempts since the last successful logon.",
+      "children": []
+    }
+  ],
+  "guidance": "Information about the number of unsuccessful logon attempts since the last successful logon allows the user to recognize if the number of unsuccessful logon attempts is consistent with the user’s actual logon attempts.",
+  "params": [],
+  "related": []
+}

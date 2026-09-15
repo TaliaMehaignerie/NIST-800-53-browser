@@ -1,0 +1,29 @@
+{
+  "id": "ac-18.4",
+  "slug": "ac-18-4",
+  "label": "AC-18(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-18",
+  "enhancementSlugs": [],
+  "title": "Restrict Configurations by Users",
+  "familyCode": "AC",
+  "sortId": "ac-18.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Identify and explicitly authorize users allowed to independently configure wireless networking capabilities.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizational authorizations to allow selected users to configure wireless networking capabilities are enforced, in part, by the access enforcement mechanisms employed within organizational systems.",
+  "params": [],
+  "related": [
+    "sc-7",
+    "sc-15"
+  ]
+}

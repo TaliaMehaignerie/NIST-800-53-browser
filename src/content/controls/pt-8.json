@@ -1,0 +1,54 @@
+{
+  "id": "pt-8",
+  "slug": "pt-8",
+  "label": "PT-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Computer Matching Requirements",
+  "familyCode": "PT",
+  "sortId": "pt-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When a system or organization processes information for the purpose of conducting a matching program:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Obtain approval from the Data Integrity Board to conduct the matching program;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Develop and enter into a computer matching agreement;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Publish a matching notice in the Federal Register;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Independently verify the information produced by the matching program before taking adverse action against an individual, if required; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Provide individuals with notice and an opportunity to contest the findings before taking adverse action against an individual.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) establishes requirements for federal and non-federal agencies if they engage in a matching program. In general, a matching program is a computerized comparison of records from two or more automated [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) systems of records or an automated system of records and automated records maintained by a non-federal agency (or agent thereof). A matching program either pertains to federal benefit programs or federal personnel or payroll records. A federal benefit match is performed to determine or verify eligibility for payments under federal benefit programs or to recoup payments or delinquent debts under federal benefit programs. A matching program involves not just the matching activity itself but also the investigative follow-up and ultimate action, if any.",
+  "params": [],
+  "related": [
+    "pm-24"
+  ]
+}

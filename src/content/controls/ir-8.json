@@ -1,0 +1,183 @@
+{
+  "id": "ir-8",
+  "slug": "ir-8",
+  "label": "IR-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-8-1"
+  ],
+  "title": "Incident Response Plan",
+  "familyCode": "IR",
+  "sortId": "ir-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop an incident response plan that:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Provides the organization with a roadmap for implementing its incident response capability;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Describes the structure and organization of the incident response capability;",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Provides a high-level approach for how the incident response capability fits into the overall organization;",
+              "children": []
+            },
+            {
+              "label": "4.",
+              "prose": "Meets the unique requirements of the organization, which relate to mission, size, structure, and functions;",
+              "children": []
+            },
+            {
+              "label": "5.",
+              "prose": "Defines reportable incidents;",
+              "children": []
+            },
+            {
+              "label": "6.",
+              "prose": "Provides metrics for measuring the incident response capability within the organization;",
+              "children": []
+            },
+            {
+              "label": "7.",
+              "prose": "Defines the resources and management support needed to effectively maintain and mature an incident response capability;",
+              "children": []
+            },
+            {
+              "label": "8.",
+              "prose": "Addresses the sharing of incident information;",
+              "children": []
+            },
+            {
+              "label": "9.",
+              "prose": "Is reviewed and approved by {{ insert: param, ir-08_odp.01 }} {{ insert: param, ir-08_odp.02 }} ; and",
+              "children": []
+            },
+            {
+              "label": "10.",
+              "prose": "Explicitly designates responsibility for incident response to {{ insert: param, ir-08_odp.03 }}.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Distribute copies of the incident response plan to {{ insert: param, ir-08_odp.04 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Update the incident response plan to address system and organizational changes or problems encountered during plan implementation, execution, or testing;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Communicate incident response plan changes to {{ insert: param, ir-8_prm_5 }} ; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Protect the incident response plan from unauthorized disclosure and modification.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "It is important that organizations develop and implement a coordinated approach to incident response. Organizational mission and business functions determine the structure of incident response capabilities. As part of the incident response capabilities, organizations consider the coordination and sharing of information with external organizations, including external service providers and other organizations involved in the supply chain. For incidents involving personally identifiable information (i.e., breaches), include a process to determine whether notice to oversight organizations or affected individuals is appropriate and provide that notice accordingly.",
+  "params": [
+    {
+      "id": "ir-8_prm_5",
+      "label": "organization-defined incident response personnel (identified by name and/or by role) and organizational elements",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ir-08_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles that review and approve the incident response plan is/are identified;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review and approve the incident response plan is defined;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.03",
+      "label": "entities, personnel, or roles",
+      "select": null,
+      "guidelines": [
+        "entities, personnel, or roles with designated responsibility for incident response are defined;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.04",
+      "label": "incident response personnel",
+      "select": null,
+      "guidelines": [
+        "incident response personnel (identified by name and/or by role) to whom copies of the incident response plan are to be distributed is/are defined;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.05",
+      "label": "organizational elements",
+      "select": null,
+      "guidelines": [
+        "organizational elements to which copies of the incident response plan are to be distributed are defined;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.06",
+      "label": "incident response personnel",
+      "select": null,
+      "guidelines": [
+        "incident response personnel (identified by name and/or by role) to whom changes to the incident response plan is/are communicated are defined;"
+      ]
+    },
+    {
+      "id": "ir-08_odp.07",
+      "label": "organizational elements",
+      "select": null,
+      "guidelines": [
+        "organizational elements to which changes to the incident response plan are communicated are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "cp-2",
+    "cp-4",
+    "ir-4",
+    "ir-7",
+    "ir-9",
+    "pe-6",
+    "pl-2",
+    "sa-15",
+    "si-12",
+    "sr-8"
+  ]
+}

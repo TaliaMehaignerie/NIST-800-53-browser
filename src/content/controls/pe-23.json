@@ -1,0 +1,42 @@
+{
+  "id": "pe-23",
+  "slug": "pe-23",
+  "label": "PE-23",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Facility Location",
+  "familyCode": "PE",
+  "sortId": "pe-23",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Plan the location or site of the facility where the system resides considering physical and environmental hazards; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "For existing facilities, consider the physical and environmental hazards in the organizational risk management strategy.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Physical and environmental hazards include floods, fires, tornadoes, earthquakes, hurricanes, terrorism, vandalism, an electromagnetic pulse, electrical interference, and other forms of incoming electromagnetic radiation. The location of system components within the facility is addressed in [PE-18](#pe-18).",
+  "params": [],
+  "related": [
+    "cp-2",
+    "pe-18",
+    "pe-19",
+    "pm-8",
+    "pm-9",
+    "ra-3"
+  ]
+}

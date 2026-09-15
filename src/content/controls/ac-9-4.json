@@ -1,0 +1,33 @@
+{
+  "id": "ac-9.4",
+  "slug": "ac-9-4",
+  "label": "AC-9(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-9",
+  "enhancementSlugs": [],
+  "title": "Additional Logon Information",
+  "familyCode": "AC",
+  "sortId": "ac-09.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Notify the user, upon successful logon, of the following additional information: {{ insert: param, ac-09.04_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can specify additional information to be provided to users upon logon, including the location of the last logon. User location is defined as information that can be determined by systems, such as Internet Protocol (IP) addresses from which network logons occurred, notifications of local logons, or device identifiers.",
+  "params": [
+    {
+      "id": "ac-09.04_odp",
+      "label": "additional information",
+      "select": null,
+      "guidelines": [
+        "additional information about which to notify the user is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

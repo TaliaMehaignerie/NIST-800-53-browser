@@ -1,0 +1,33 @@
+{
+  "id": "au-13.2",
+  "slug": "au-13-2",
+  "label": "AU-13(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-13",
+  "enhancementSlugs": [],
+  "title": "Review of Monitored Sites",
+  "familyCode": "AU",
+  "sortId": "au-13.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Review the list of open-source information sites being monitored {{ insert: param, au-13.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Reviewing the current list of open-source information sites being monitored on a regular basis helps to ensure that the selected sites remain relevant. The review also provides the opportunity to add new open-source information sites with the potential to provide evidence of unauthorized disclosure of organizational information. The list of sites monitored can be guided and informed by threat intelligence of other credible sources of information.",
+  "params": [
+    {
+      "id": "au-13.02_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review the open-source information sites being monitored is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

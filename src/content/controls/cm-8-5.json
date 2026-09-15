@@ -1,0 +1,20 @@
+{
+  "id": "cm-8.5",
+  "slug": "cm-8-5",
+  "label": "CM-8(5)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "No Duplicate Accounting of Components",
+  "familyCode": "CM",
+  "sortId": "cm-08.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

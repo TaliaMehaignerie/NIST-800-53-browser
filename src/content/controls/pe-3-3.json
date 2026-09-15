@@ -1,0 +1,37 @@
+{
+  "id": "pe-3.3",
+  "slug": "pe-3-3",
+  "label": "PE-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-3",
+  "enhancementSlugs": [],
+  "title": "Continuous Guards",
+  "familyCode": "PE",
+  "sortId": "pe-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ guards to control {{ insert: param, pe-03.03_odp }} to the facility where the system resides 24 hours per day, 7 days per week.",
+      "children": []
+    }
+  ],
+  "guidance": "Employing guards at selected physical access points to the facility provides a more rapid response capability for organizations. Guards also provide the opportunity for human surveillance in areas of the facility not covered by video surveillance.",
+  "params": [
+    {
+      "id": "pe-03.03_odp",
+      "label": "physical access points",
+      "select": null,
+      "guidelines": [
+        "physical access points to the facility where the system resides are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-6",
+    "cp-7",
+    "pe-6"
+  ]
+}

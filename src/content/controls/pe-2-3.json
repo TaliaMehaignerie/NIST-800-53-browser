@@ -1,0 +1,50 @@
+{
+  "id": "pe-2.3",
+  "slug": "pe-2-3",
+  "label": "PE-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-2",
+  "enhancementSlugs": [],
+  "title": "Restrict Unescorted Access",
+  "familyCode": "PE",
+  "sortId": "pe-02.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict unescorted access to the facility where the system resides to personnel with {{ insert: param, pe-02.03_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Individuals without required security clearances, access approvals, or need to know are escorted by individuals with appropriate physical access authorizations to ensure that information is not exposed or otherwise compromised.",
+  "params": [
+    {
+      "id": "pe-02.03_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "security clearances for all information contained within the system",
+          "formal access authorizations for all information contained within the system",
+          "need for access to all information contained within the system",
+          "{{ insert: param, pe-02.03_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "pe-02.03_odp.02",
+      "label": "physical access authorizations",
+      "select": null,
+      "guidelines": [
+        "physical access authorizations for unescorted access to the facility where the system resides are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ps-2",
+    "ps-6"
+  ]
+}

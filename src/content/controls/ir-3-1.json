@@ -1,0 +1,33 @@
+{
+  "id": "ir-3.1",
+  "slug": "ir-3-1",
+  "label": "IR-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-3",
+  "enhancementSlugs": [],
+  "title": "Automated Testing",
+  "familyCode": "IR",
+  "sortId": "ir-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test the incident response capability using {{ insert: param, ir-03.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations use automated mechanisms to more thoroughly and effectively test incident response capabilities. This can be accomplished by providing more complete coverage of incident response issues, selecting realistic test scenarios and environments, and stressing the response capability.",
+  "params": [
+    {
+      "id": "ir-03.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to test the incident response capability are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

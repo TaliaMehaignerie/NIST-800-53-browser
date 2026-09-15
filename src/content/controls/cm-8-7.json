@@ -1,0 +1,24 @@
+{
+  "id": "cm-8.7",
+  "slug": "cm-8-7",
+  "label": "CM-8(7)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Centralized Repository",
+  "familyCode": "CM",
+  "sortId": "cm-08.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide a centralized repository for the inventory of system components.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may implement centralized system component inventories that include components from all organizational systems. Centralized repositories of component inventories provide opportunities for efficiencies in accounting for organizational hardware, software, and firmware assets. Such repositories may also help organizations rapidly identify the location and responsible individuals of components that have been compromised, breached, or are otherwise in need of mitigation actions. Organizations ensure that the resulting centralized inventories include system-specific information required for proper component accountability.",
+  "params": [],
+  "related": []
+}

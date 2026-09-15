@@ -1,0 +1,20 @@
+{
+  "id": "si-3.7",
+  "slug": "si-3-7",
+  "label": "SI-3(7)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Nonsignature-based Detection",
+  "familyCode": "SI",
+  "sortId": "si-03.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

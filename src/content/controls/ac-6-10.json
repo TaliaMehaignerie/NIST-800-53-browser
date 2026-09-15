@@ -1,0 +1,27 @@
+{
+  "id": "ac-6.10",
+  "slug": "ac-6-10",
+  "label": "AC-6(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Prohibit Non-privileged Users from Executing Privileged Functions",
+  "familyCode": "AC",
+  "sortId": "ac-06.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent non-privileged users from executing privileged functions.",
+      "children": []
+    }
+  ],
+  "guidance": "Privileged functions include disabling, circumventing, or altering implemented security or privacy controls, establishing system accounts, performing system integrity checks, and administering cryptographic key management activities. Non-privileged users are individuals who do not possess appropriate authorizations. Privileged functions that require protection from non-privileged users include circumventing intrusion detection and prevention mechanisms or malicious code protection mechanisms. Preventing non-privileged users from executing privileged functions is enforced by [AC-3](#ac-3).",
+  "params": [],
+  "related": []
+}

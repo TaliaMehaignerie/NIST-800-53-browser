@@ -1,0 +1,95 @@
+{
+  "id": "cm-7.1",
+  "slug": "cm-7-1",
+  "label": "CM-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-7",
+  "enhancementSlugs": [],
+  "title": "Periodic Review",
+  "familyCode": "CM",
+  "sortId": "cm-07.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Review the system {{ insert: param, cm-07.01_odp.01 }} to identify unnecessary and/or nonsecure functions, ports, protocols, software, and services; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Disable or remove {{ insert: param, cm-7.1_prm_2 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations review functions, ports, protocols, and services provided by systems or system components to determine the functions and services that are candidates for elimination. Such reviews are especially important during transition periods from older technologies to newer technologies (e.g., transition from IPv4 to IPv6). These technology transitions may require implementing the older and newer technologies simultaneously during the transition period and returning to minimum essential functions, ports, protocols, and services at the earliest opportunity. Organizations can either decide the relative security of the function, port, protocol, and/or service or base the security decision on the assessment of other entities. Unsecure protocols include Bluetooth, FTP, and peer-to-peer networking.",
+  "params": [
+    {
+      "id": "cm-7.1_prm_2",
+      "label": "organization-defined functions, ports, protocols, software, and services within the system deemed to be unnecessary and/or nonsecure",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-07.01_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review the system to identify unnecessary and/or non-secure functions, ports, protocols, software, and/or services is defined;"
+      ]
+    },
+    {
+      "id": "cm-07.01_odp.02",
+      "label": "functions",
+      "select": null,
+      "guidelines": [
+        "functions to be disabled or removed when deemed unnecessary or non-secure are defined;"
+      ]
+    },
+    {
+      "id": "cm-07.01_odp.03",
+      "label": "ports",
+      "select": null,
+      "guidelines": [
+        "ports to be disabled or removed when deemed unnecessary or non-secure are defined;"
+      ]
+    },
+    {
+      "id": "cm-07.01_odp.04",
+      "label": "protocols",
+      "select": null,
+      "guidelines": [
+        "protocols to be disabled or removed when deemed unnecessary or non-secure are defined;"
+      ]
+    },
+    {
+      "id": "cm-07.01_odp.05",
+      "label": "software",
+      "select": null,
+      "guidelines": [
+        "software to be disabled or removed when deemed unnecessary or non-secure is defined;"
+      ]
+    },
+    {
+      "id": "cm-07.01_odp.06",
+      "label": "services",
+      "select": null,
+      "guidelines": [
+        "services to be disabled or removed when deemed unnecessary or non-secure are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-18"
+  ]
+}

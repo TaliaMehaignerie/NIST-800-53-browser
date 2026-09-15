@@ -1,0 +1,35 @@
+{
+  "id": "ac-7.3",
+  "slug": "ac-7-3",
+  "label": "AC-7(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-7",
+  "enhancementSlugs": [],
+  "title": "Biometric Attempt Limiting",
+  "familyCode": "AC",
+  "sortId": "ac-07.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit the number of unsuccessful biometric logon attempts to {{ insert: param, ac-07.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Biometrics are probabilistic in nature. The ability to successfully authenticate can be impacted by many factors, including matching performance and presentation attack detection mechanisms. Organizations select the appropriate number of attempts for users based on organizationally-defined factors.",
+  "params": [
+    {
+      "id": "ac-07.03_odp",
+      "label": "number",
+      "select": null,
+      "guidelines": [
+        "the number of unsuccessful biometric logon attempts is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-3"
+  ]
+}

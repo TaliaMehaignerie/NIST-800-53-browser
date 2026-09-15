@@ -1,0 +1,20 @@
+{
+  "id": "sc-20.1",
+  "slug": "sc-20-1",
+  "label": "SC-20(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-20",
+  "enhancementSlugs": [],
+  "title": "Child Subspaces",
+  "familyCode": "SC",
+  "sortId": "sc-20.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-20"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

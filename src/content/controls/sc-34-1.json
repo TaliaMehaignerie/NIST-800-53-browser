@@ -1,0 +1,36 @@
+{
+  "id": "sc-34.1",
+  "slug": "sc-34-1",
+  "label": "SC-34(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-34",
+  "enhancementSlugs": [],
+  "title": "No Writable Storage",
+  "familyCode": "SC",
+  "sortId": "sc-34.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, sc-34.01_odp }} with no writeable storage that is persistent across component restart or power on/off.",
+      "children": []
+    }
+  ],
+  "guidance": "Disallowing writeable storage eliminates the possibility of malicious code insertion via persistent, writeable storage within the designated system components. The restriction applies to fixed and removable storage, with the latter being addressed either directly or as specific restrictions imposed through access controls for mobile devices.",
+  "params": [
+    {
+      "id": "sc-34.01_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to be employed with no writeable storage are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "mp-7"
+  ]
+}

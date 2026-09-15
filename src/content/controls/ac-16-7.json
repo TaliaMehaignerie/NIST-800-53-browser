@@ -1,0 +1,24 @@
+{
+  "id": "ac-16.7",
+  "slug": "ac-16-7",
+  "label": "AC-16(7)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Consistent Attribute Interpretation",
+  "familyCode": "AC",
+  "sortId": "ac-16.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide a consistent interpretation of security and privacy attributes transmitted between distributed system components.",
+      "children": []
+    }
+  ],
+  "guidance": "To enforce security and privacy policies across multiple system components in distributed systems, organizations provide a consistent interpretation of security and privacy attributes employed in access enforcement and flow enforcement decisions. Organizations can establish agreements and processes to help ensure that distributed system components implement attributes with consistent interpretations in automated access enforcement and flow enforcement actions.",
+  "params": [],
+  "related": []
+}

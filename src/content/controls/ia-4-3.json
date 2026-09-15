@@ -1,0 +1,20 @@
+{
+  "id": "ia-4.3",
+  "slug": "ia-4-3",
+  "label": "IA-4(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-4",
+  "enhancementSlugs": [],
+  "title": "Multiple Forms of Certification",
+  "familyCode": "IA",
+  "sortId": "ia-04.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-12.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

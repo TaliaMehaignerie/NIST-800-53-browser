@@ -1,0 +1,41 @@
+{
+  "id": "ac-4.9",
+  "slug": "ac-4-9",
+  "label": "AC-4(9)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Human Reviews",
+  "familyCode": "AC",
+  "sortId": "ac-04.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce the use of human reviews for {{ insert: param, ac-04.09_odp.01 }} under the following conditions: {{ insert: param, ac-04.09_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations define security or privacy policy filters for all situations where automated flow control decisions are possible. When a fully automated flow control decision is not possible, then a human review may be employed in lieu of or as a complement to automated security or privacy policy filtering. Human reviews may also be employed as deemed necessary by organizations.",
+  "params": [
+    {
+      "id": "ac-04.09_odp.01",
+      "label": "information flows",
+      "select": null,
+      "guidelines": [
+        "information flows requiring the use of human reviews are defined;"
+      ]
+    },
+    {
+      "id": "ac-04.09_odp.02",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions under which the use of human reviews for information flows are to be enforced are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

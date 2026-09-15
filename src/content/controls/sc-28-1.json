@@ -1,0 +1,48 @@
+{
+  "id": "sc-28.1",
+  "slug": "sc-28-1",
+  "label": "SC-28(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-28",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Protection",
+  "familyCode": "SC",
+  "sortId": "sc-28.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to prevent unauthorized disclosure and modification of the following information at rest on {{ insert: param, sc-28.01_odp.02 }}: {{ insert: param, sc-28.01_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The selection of cryptographic mechanisms is based on the need to protect the confidentiality and integrity of organizational information. The strength of mechanism is commensurate with the security category or classification of the information. Organizations have the flexibility to encrypt information on system components or media or encrypt data structures, including files, records, or fields.",
+  "params": [
+    {
+      "id": "sc-28.01_odp.01",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information requiring cryptographic protection is defined;"
+      ]
+    },
+    {
+      "id": "sc-28.01_odp.02",
+      "label": "system components or media",
+      "select": null,
+      "guidelines": [
+        "system components or media requiring cryptographic protection is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "sc-12",
+    "sc-13"
+  ]
+}

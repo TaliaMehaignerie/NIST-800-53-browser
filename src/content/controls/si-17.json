@@ -1,0 +1,52 @@
+{
+  "id": "si-17",
+  "slug": "si-17",
+  "label": "SI-17",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Fail-safe Procedures",
+  "familyCode": "SI",
+  "sortId": "si-17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the indicated fail-safe procedures when the indicated failures occur: {{ insert: param, si-17_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Failure conditions include the loss of communications among critical system components or between system components and operational facilities. Fail-safe procedures include alerting operator personnel and providing specific instructions on subsequent steps to take. Subsequent steps may include doing nothing, reestablishing system settings, shutting down processes, restarting the system, or contacting designated organizational personnel.",
+  "params": [
+    {
+      "id": "si-17_prm_1",
+      "label": "organization-defined list of failure conditions and associated fail-safe procedures",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-17_odp.01",
+      "label": "fail-safe procedures",
+      "select": null,
+      "guidelines": [
+        "fail-safe procedures associated with failure conditions are defined;"
+      ]
+    },
+    {
+      "id": "si-17_odp.02",
+      "label": "list of failure conditions",
+      "select": null,
+      "guidelines": [
+        "a list of failure conditions requiring fail-safe procedures is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-12",
+    "cp-13",
+    "sc-24",
+    "si-13"
+  ]
+}

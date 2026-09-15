@@ -1,0 +1,20 @@
+{
+  "id": "sa-13",
+  "slug": "sa-13",
+  "label": "SA-13",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Trustworthiness",
+  "familyCode": "SA",
+  "sortId": "sa-13",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sa-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

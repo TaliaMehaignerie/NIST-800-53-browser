@@ -1,0 +1,30 @@
+{
+  "id": "pe-19",
+  "slug": "pe-19",
+  "label": "PE-19",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-19-1"
+  ],
+  "title": "Information Leakage",
+  "familyCode": "PE",
+  "sortId": "pe-19",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect the system from information leakage due to electromagnetic signals emanations.",
+      "children": []
+    }
+  ],
+  "guidance": "Information leakage is the intentional or unintentional release of data or information to an untrusted environment from electromagnetic signals emanations. The security categories or classifications of systems (with respect to confidentiality), organizational security policies, and risk tolerance guide the selection of controls employed to protect systems against information leakage due to electromagnetic signals emanations.",
+  "params": [],
+  "related": [
+    "ac-18",
+    "pe-18",
+    "pe-20"
+  ]
+}

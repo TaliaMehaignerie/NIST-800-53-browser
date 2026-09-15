@@ -1,0 +1,23 @@
+{
+  "id": "sa-18",
+  "slug": "sa-18",
+  "label": "SA-18",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-18-1",
+    "sa-18-2"
+  ],
+  "title": "Tamper Resistance and Detection",
+  "familyCode": "SA",
+  "sortId": "sa-18",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

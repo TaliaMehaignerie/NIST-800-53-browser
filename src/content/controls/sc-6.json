@@ -1,0 +1,56 @@
+{
+  "id": "sc-6",
+  "slug": "sc-6",
+  "label": "SC-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Resource Availability",
+  "familyCode": "SC",
+  "sortId": "sc-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect the availability of resources by allocating {{ insert: param, sc-06_odp.01 }} by {{ insert: param, sc-06_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Priority protection prevents lower-priority processes from delaying or interfering with the system that services higher-priority processes. Quotas prevent users or processes from obtaining more than predetermined amounts of resources.",
+  "params": [
+    {
+      "id": "sc-06_odp.01",
+      "label": "resources",
+      "select": null,
+      "guidelines": [
+        "resources to be allocated to protect the availability of resources are defined;"
+      ]
+    },
+    {
+      "id": "sc-06_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "priority",
+          "quota",
+          "{{ insert: param, sc-06_odp.03 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-06_odp.03",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to protect the availability of resources are defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "sc-5"
+  ]
+}

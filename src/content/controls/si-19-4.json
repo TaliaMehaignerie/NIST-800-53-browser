@@ -1,0 +1,27 @@
+{
+  "id": "si-19.4",
+  "slug": "si-19-4",
+  "label": "SI-19(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-19",
+  "enhancementSlugs": [],
+  "title": "Removal, Masking, Encryption, Hashing, or Replacement of Direct Identifiers",
+  "familyCode": "SI",
+  "sortId": "si-19.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Remove, mask, encrypt, hash, or replace direct identifiers in a dataset.",
+      "children": []
+    }
+  ],
+  "guidance": "There are many possible processes for removing direct identifiers from a dataset. Columns in a dataset that contain a direct identifier can be removed. In masking, the direct identifier is transformed into a repeating character, such as XXXXXX or 999999. Identifiers can be encrypted or hashed so that the linked records remain linked. In the case of encryption or hashing, algorithms are employed that require the use of a key, including the Advanced Encryption Standard or a Hash-based Message Authentication Code. Implementations may use the same key for all identifiers or use a different key for each identifier. Using a different key for each identifier provides a higher degree of security and privacy. Identifiers can alternatively be replaced with a keyword, including transforming \"George Washington\" to \"PATIENT\" or replacing it with a surrogate value, such as transforming \"George Washington\" to \"Abraham Polk.\" ",
+  "params": [],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

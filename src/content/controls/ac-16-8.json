@@ -1,0 +1,50 @@
+{
+  "id": "ac-16.8",
+  "slug": "ac-16-8",
+  "label": "AC-16(8)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Association Techniques and Technologies",
+  "familyCode": "AC",
+  "sortId": "ac-16.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, ac-16.8_prm_1 }} in associating security and privacy attributes to information.",
+      "children": []
+    }
+  ],
+  "guidance": "The association of security and privacy attributes to information within systems is important for conducting automated access enforcement and flow enforcement actions. The association of such attributes to information (i.e., binding) can be accomplished with technologies and techniques that provide different levels of assurance. For example, systems can cryptographically bind attributes to information using digital signatures that support cryptographic keys protected by hardware devices (sometimes known as hardware roots of trust).",
+  "params": [
+    {
+      "id": "ac-16.8_prm_1",
+      "label": "organization-defined techniques and technologies",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.08_odp.01",
+      "label": "techniques and technologies",
+      "select": null,
+      "guidelines": [
+        "techniques and technologies to be implemented in associating security attributes to information are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.08_odp.02",
+      "label": "techniques and technologies",
+      "select": null,
+      "guidelines": [
+        "techniques and technologies to be implemented in associating privacy attributes to information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

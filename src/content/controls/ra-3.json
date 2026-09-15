@@ -1,0 +1,154 @@
+{
+  "id": "ra-3",
+  "slug": "ra-3",
+  "label": "RA-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ra-3-1",
+    "ra-3-2",
+    "ra-3-3",
+    "ra-3-4"
+  ],
+  "title": "Risk Assessment",
+  "familyCode": "RA",
+  "sortId": "ra-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Conduct a risk assessment, including:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Identifying threats to and vulnerabilities in the system;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Determining the likelihood and magnitude of harm from unauthorized access, use, disclosure, disruption, modification, or destruction of the system, the information it processes, stores, or transmits, and any related information; and",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Determining the likelihood and impact of adverse effects on individuals arising from the processing of personally identifiable information;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Integrate risk assessment results and risk management decisions from the organization and mission or business process perspectives with system-level risk assessments;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Document risk assessment results in {{ insert: param, ra-03_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Review risk assessment results {{ insert: param, ra-03_odp.03 }};",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Disseminate risk assessment results to {{ insert: param, ra-03_odp.04 }} ; and",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Update the risk assessment {{ insert: param, ra-03_odp.05 }} or when there are significant changes to the system, its environment of operation, or other conditions that may impact the security or privacy state of the system.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Risk assessments consider threats, vulnerabilities, likelihood, and impact to organizational operations and assets, individuals, other organizations, and the Nation. Risk assessments also consider risk from external parties, including contractors who operate systems on behalf of the organization, individuals who access organizational systems, service providers, and outsourcing entities.\n\nOrganizations can conduct risk assessments at all three levels in the risk management hierarchy (i.e., organization level, mission/business process level, or information system level) and at any stage in the system development life cycle. Risk assessments can also be conducted at various steps in the Risk Management Framework, including preparation, categorization, control selection, control implementation, control assessment, authorization, and control monitoring. Risk assessment is an ongoing activity carried out throughout the system development life cycle.\n\nRisk assessments can also address information related to the system, including system design, the intended use of the system, testing results, and supply chain-related information or artifacts. Risk assessments can play an important role in control selection processes, particularly during the application of tailoring guidance and in the earliest phases of capability determination.",
+  "params": [
+    {
+      "id": "ra-03_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "security and privacy plans",
+          "risk assessment report",
+          "{{ insert: param, ra-03_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ra-03_odp.02",
+      "label": "document",
+      "select": null,
+      "guidelines": [
+        "a document in which risk assessment results are to be documented (if not documented in the security and privacy plans or risk assessment report) is defined (if selected);"
+      ]
+    },
+    {
+      "id": "ra-03_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency to review risk assessment results is defined;"
+      ]
+    },
+    {
+      "id": "ra-03_odp.04",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom risk assessment results are to be disseminated is/are defined;"
+      ]
+    },
+    {
+      "id": "ra-03_odp.05",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency to update the risk assessment is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-3",
+    "ca-6",
+    "cm-4",
+    "cm-13",
+    "cp-6",
+    "cp-7",
+    "ia-8",
+    "ma-5",
+    "pe-3",
+    "pe-8",
+    "pe-18",
+    "pl-2",
+    "pl-10",
+    "pl-11",
+    "pm-8",
+    "pm-9",
+    "pm-28",
+    "pt-2",
+    "pt-7",
+    "ra-2",
+    "ra-5",
+    "ra-7",
+    "sa-8",
+    "sa-9",
+    "sc-38",
+    "si-12"
+  ]
+}

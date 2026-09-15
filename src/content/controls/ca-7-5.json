@@ -1,0 +1,47 @@
+{
+  "id": "ca-7.5",
+  "slug": "ca-7-5",
+  "label": "CA-7(5)",
+  "kind": "enhancement",
+  "parentSlug": "ca-7",
+  "enhancementSlugs": [],
+  "title": "Consistency Analysis",
+  "familyCode": "CA",
+  "sortId": "ca-07.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following actions to validate that policies are established and implemented controls are operating in a consistent manner: {{ insert: param, ca-7.5_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Security and privacy controls are often added incrementally to a system. As a result, policies for selecting and implementing controls may be inconsistent, and the controls could fail to work together in a consistent or coordinated manner. At a minimum, the lack of consistency and coordination could mean that there are unacceptable security and privacy gaps in the system. At worst, it could mean that some of the controls implemented in one location or by one component are actually impeding the functionality of other controls (e.g., encrypting internal network traffic can impede monitoring). In other situations, failing to consistently monitor all implemented network protocols (e.g., a dual stack of IPv4 and IPv6) may create unintended vulnerabilities in the system that could be exploited by adversaries. It is important to validate—through testing, monitoring, and analysis—that the implemented controls are operating in a consistent, coordinated, non-interfering manner.",
+  "params": [
+    {
+      "id": "ca-7.5_prm_1",
+      "label": "organization-defined actions",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ca-07.05_odp.01",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to validate that policies are established are defined;"
+      ]
+    },
+    {
+      "id": "ca-07.05_odp.02",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to validate that implemented controls are operating in a consistent manner are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

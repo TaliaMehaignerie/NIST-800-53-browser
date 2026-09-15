@@ -1,0 +1,46 @@
+{
+  "id": "sa-4.5",
+  "slug": "sa-4-5",
+  "label": "SA-4(5)",
+  "kind": "enhancement",
+  "parentSlug": "sa-4",
+  "enhancementSlugs": [],
+  "title": "System, Component, and Service Configurations",
+  "familyCode": "SA",
+  "sortId": "sa-04.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Deliver the system, component, or service with {{ insert: param, sa-04.05_odp }} implemented; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Use the configurations as the default for any subsequent system, component, or service reinstallation or upgrade.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Examples of security configurations include the U.S. Government Configuration Baseline (USGCB), Security Technical Implementation Guides (STIGs), and any limitations on functions, ports, protocols, and services. Security characteristics can include requiring that default passwords have been changed.",
+  "params": [
+    {
+      "id": "sa-04.05_odp",
+      "label": "security configurations",
+      "select": null,
+      "guidelines": [
+        "security configurations for the system, component, or service are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

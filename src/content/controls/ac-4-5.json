@@ -1,0 +1,33 @@
+{
+  "id": "ac-4.5",
+  "slug": "ac-4-5",
+  "label": "AC-4(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Embedded Data Types",
+  "familyCode": "AC",
+  "sortId": "ac-04.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce {{ insert: param, ac-04.05_odp }} on embedding data types within other data types.",
+      "children": []
+    }
+  ],
+  "guidance": "Embedding data types within other data types may result in reduced flow control effectiveness. Data type embedding includes inserting files as objects within other files and using compressed or archived data types that may include multiple embedded data types. Limitations on data type embedding consider the levels of embedding and prohibit levels of data type embedding that are beyond the capability of the inspection tools.",
+  "params": [
+    {
+      "id": "ac-04.05_odp",
+      "label": "limitations",
+      "select": null,
+      "guidelines": [
+        "limitations on embedding data types within other data types are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

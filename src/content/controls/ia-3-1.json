@@ -1,0 +1,50 @@
+{
+  "id": "ia-3.1",
+  "slug": "ia-3-1",
+  "label": "IA-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "ia-3",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Bidirectional Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Authenticate {{ insert: param, ia-03.01_odp.01 }} before establishing {{ insert: param, ia-03.01_odp.02 }} connection using bidirectional authentication that is cryptographically based.",
+      "children": []
+    }
+  ],
+  "guidance": "A local connection is a connection with a device that communicates without the use of a network. A network connection is a connection with a device that communicates through a network. A remote connection is a connection with a device that communicates through an external network. Bidirectional authentication provides stronger protection to validate the identity of other devices for connections that are of greater risk.",
+  "params": [
+    {
+      "id": "ia-03.01_odp.01",
+      "label": "devices and/or types of devices",
+      "select": null,
+      "guidelines": [
+        "devices and/or types of devices requiring use of cryptographically based, bidirectional authentication to authenticate before establishing one or more connections are defined;"
+      ]
+    },
+    {
+      "id": "ia-03.01_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "local",
+          "remote",
+          "network"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "sc-8",
+    "sc-12",
+    "sc-13"
+  ]
+}

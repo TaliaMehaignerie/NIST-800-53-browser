@@ -1,0 +1,35 @@
+{
+  "id": "au-5.5",
+  "slug": "au-5-5",
+  "label": "AU-5(5)",
+  "kind": "enhancement",
+  "parentSlug": "au-5",
+  "enhancementSlugs": [],
+  "title": "Alternate Audit Logging Capability",
+  "familyCode": "AU",
+  "sortId": "au-05.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an alternate audit logging capability in the event of a failure in primary audit logging capability that implements {{ insert: param, au-05.05_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Since an alternate audit logging capability may be a short-term protection solution employed until the failure in the primary audit logging capability is corrected, organizations may determine that the alternate audit logging capability need only provide a subset of the primary audit logging functionality that is impacted by the failure.",
+  "params": [
+    {
+      "id": "au-05.05_odp",
+      "label": "alternate audit logging functionality",
+      "select": null,
+      "guidelines": [
+        "an alternate audit logging functionality in the event of a failure in primary audit logging capability is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-9"
+  ]
+}

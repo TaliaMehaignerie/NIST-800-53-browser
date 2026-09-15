@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.1",
+  "slug": "sa-12-1",
+  "label": "SA-12(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Acquisition Strategies / Tools / Methods",
+  "familyCode": "SA",
+  "sortId": "sa-12.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-5"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

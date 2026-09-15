@@ -1,0 +1,30 @@
+{
+  "id": "sa-3.1",
+  "slug": "sa-3-1",
+  "label": "SA-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-3",
+  "enhancementSlugs": [],
+  "title": "Manage Preproduction Environment",
+  "familyCode": "SA",
+  "sortId": "sa-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect system preproduction environments commensurate with risk throughout the system development life cycle for the system, system component, or system service.",
+      "children": []
+    }
+  ],
+  "guidance": "The preproduction environment includes development, test, and integration environments. The program protection planning processes established by the Department of Defense are examples of managing the preproduction environment for defense contractors. Criticality analysis and the application of controls on developers also contribute to a more secure system development environment.",
+  "params": [],
+  "related": [
+    "cm-2",
+    "cm-4",
+    "ra-3",
+    "ra-9",
+    "sa-4"
+  ]
+}

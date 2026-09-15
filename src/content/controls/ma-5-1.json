@@ -1,0 +1,60 @@
+{
+  "id": "ma-5.1",
+  "slug": "ma-5-1",
+  "label": "MA-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "ma-5",
+  "enhancementSlugs": [],
+  "title": "Individuals Without Appropriate Access",
+  "familyCode": "MA",
+  "sortId": "ma-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Implement procedures for the use of maintenance personnel that lack appropriate security clearances or are not U.S. citizens, that include the following requirements:",
+          "children": [
+            {
+              "label": "(1)",
+              "prose": "Maintenance personnel who do not have needed access authorizations, clearances, or formal access approvals are escorted and supervised during the performance of maintenance and diagnostic activities on the system by approved organizational personnel who are fully cleared, have appropriate access authorizations, and are technically qualified; and",
+              "children": []
+            },
+            {
+              "label": "(2)",
+              "prose": "Prior to initiating maintenance or diagnostic activities by personnel who do not have needed access authorizations, clearances or formal access approvals, all volatile information storage components within the system are sanitized and all nonvolatile storage media are removed or physically disconnected from the system and secured; and",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "(b)",
+          "prose": "Develop and implement {{ insert: param, ma-05.01_odp }} in the event a system component cannot be sanitized, removed, or disconnected from the system.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Procedures for individuals who lack appropriate security clearances or who are not U.S. citizens are intended to deny visual and electronic access to classified or controlled unclassified information contained on organizational systems. Procedures for the use of maintenance personnel can be documented in security plans for the systems.",
+  "params": [
+    {
+      "id": "ma-05.01_odp",
+      "label": "alternate controls",
+      "select": null,
+      "guidelines": [
+        "alternate controls to be developed and implemented in the event that a system component cannot be sanitized, removed, or disconnected from the system are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-6",
+    "pl-2"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ac-4.32",
+  "slug": "ac-4-32",
+  "label": "AC-4(32)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Process Requirements for Information Transfer",
+  "familyCode": "AC",
+  "sortId": "ac-04.32",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, the process that transfers information between filter pipelines:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Does not filter message content;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Validates filtering metadata;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Ensures the content associated with the filtering metadata has successfully completed filtering; and",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Transfers the content to the destination filter pipeline.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The processes transferring information between filter pipelines have minimum complexity and functionality to provide assurance that the processes operate correctly.",
+  "params": [],
+  "related": []
+}

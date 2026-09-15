@@ -1,0 +1,28 @@
+{
+  "id": "cm-2.6",
+  "slug": "cm-2-6",
+  "label": "CM-2(6)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Development and Test Environments",
+  "familyCode": "CM",
+  "sortId": "cm-02.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain a baseline configuration for system development and test environments that is managed separately from the operational baseline configuration.",
+      "children": []
+    }
+  ],
+  "guidance": "Establishing separate baseline configurations for development, testing, and operational environments protects systems from unplanned or unexpected events related to development and testing activities. Separate baseline configurations allow organizations to apply the configuration management that is most appropriate for each type of configuration. For example, the management of operational configurations typically emphasizes the need for stability, while the management of development or test configurations requires greater flexibility. Configurations in the test environment mirror configurations in the operational environment to the extent practicable so that the results of the testing are representative of the proposed changes to the operational systems. Separate baseline configurations do not necessarily require separate physical environments.",
+  "params": [],
+  "related": [
+    "cm-4",
+    "sc-3",
+    "sc-7"
+  ]
+}

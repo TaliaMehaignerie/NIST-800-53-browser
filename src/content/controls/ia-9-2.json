@@ -1,0 +1,20 @@
+{
+  "id": "ia-9.2",
+  "slug": "ia-9-2",
+  "label": "IA-9(2)",
+  "kind": "enhancement",
+  "parentSlug": "ia-9",
+  "enhancementSlugs": [],
+  "title": "Transmission of Decisions",
+  "familyCode": "IA",
+  "sortId": "ia-09.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

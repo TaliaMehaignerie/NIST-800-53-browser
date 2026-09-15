@@ -1,0 +1,48 @@
+{
+  "id": "sa-9.1",
+  "slug": "sa-9-1",
+  "label": "SA-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Risk Assessments and Organizational Approvals",
+  "familyCode": "SA",
+  "sortId": "sa-09.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Conduct an organizational assessment of risk prior to the acquisition or outsourcing of information security services; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Verify that the acquisition or outsourcing of dedicated information security services is approved by {{ insert: param, sa-09.01_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Information security services include the operation of security devices, such as firewalls or key management services as well as incident monitoring, analysis, and response. Risks assessed can include system, mission or business, security, privacy, or supply chain risks.",
+  "params": [
+    {
+      "id": "sa-09.01_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles that approve the acquisition or outsourcing of dedicated information security services is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-6",
+    "ra-3",
+    "ra-8"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "sr",
+  "code": "SR",
+  "name": "Supply Chain Risk Management",
+  "controlSlugs": [
+    "sr-1",
+    "sr-2",
+    "sr-3",
+    "sr-4",
+    "sr-5",
+    "sr-6",
+    "sr-7",
+    "sr-8",
+    "sr-9",
+    "sr-10",
+    "sr-11",
+    "sr-12"
+  ],
+  "controlCount": 12,
+  "enhancementCount": 15
+}

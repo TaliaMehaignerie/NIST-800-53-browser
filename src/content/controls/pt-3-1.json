@@ -1,0 +1,51 @@
+{
+  "id": "pt-3.1",
+  "slug": "pt-3-1",
+  "label": "PT-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "pt-3",
+  "enhancementSlugs": [],
+  "title": "Data Tagging",
+  "familyCode": "PT",
+  "sortId": "pt-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Attach data tags containing the following purposes to {{ insert: param, pt-03.01_odp.02 }}: {{ insert: param, pt-03.01_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Data tags support the tracking of processing purposes by conveying the purposes along with the relevant elements of personally identifiable information throughout the system. By conveying the processing purposes in a data tag along with the personally identifiable information as the information transits a system, a system owner or operator can identify whether a change in processing would be compatible with the identified and documented purposes. Data tags may also support the use of automated tools.",
+  "params": [
+    {
+      "id": "pt-03.01_odp.01",
+      "label": "processing purposes",
+      "select": null,
+      "guidelines": [
+        "processing purposes to be contained in data tags are defined;"
+      ]
+    },
+    {
+      "id": "pt-03.01_odp.02",
+      "label": "elements of personally identifiable information",
+      "select": null,
+      "guidelines": [
+        "elements of personally identifiable information to be tagged are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-6",
+    "cm-12",
+    "pm-5",
+    "pm-22",
+    "sc-16",
+    "sc-43",
+    "si-10",
+    "si-15",
+    "si-19"
+  ]
+}

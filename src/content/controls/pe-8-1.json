@@ -1,0 +1,49 @@
+{
+  "id": "pe-8.1",
+  "slug": "pe-8-1",
+  "label": "PE-8(1)",
+  "kind": "enhancement",
+  "parentSlug": "pe-8",
+  "enhancementSlugs": [],
+  "title": "Automated Records Maintenance and Review",
+  "familyCode": "PE",
+  "sortId": "pe-08.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain and review visitor access records using {{ insert: param, pe-8.1_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Visitor access records may be stored and maintained in a database management system that is accessible by organizational personnel. Automated access to such records facilitates record reviews on a regular basis to determine if access authorizations are current and still required to support organizational mission and business functions.",
+  "params": [
+    {
+      "id": "pe-8.1_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pe-08.01_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to maintain visitor access records are defined;"
+      ]
+    },
+    {
+      "id": "pe-08.01_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to review visitor access records are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

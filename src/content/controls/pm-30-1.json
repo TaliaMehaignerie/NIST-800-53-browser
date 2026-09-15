@@ -1,0 +1,27 @@
+{
+  "id": "pm-30.1",
+  "slug": "pm-30-1",
+  "label": "PM-30(1)",
+  "kind": "enhancement",
+  "parentSlug": "pm-30",
+  "enhancementSlugs": [],
+  "title": "Suppliers of Critical or Mission-essential Items",
+  "familyCode": "PM",
+  "sortId": "pm-30.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Identify, prioritize, and assess suppliers of critical or mission-essential technologies, products, and services.",
+      "children": []
+    }
+  ],
+  "guidance": "The identification and prioritization of suppliers of critical or mission-essential technologies, products, and services is paramount to the mission/business success of organizations. The assessment of suppliers is conducted using supplier reviews (see [SR-6](#sr-6) ) and supply chain risk assessment processes (see [RA-3(1)](#ra-3.1) ). An analysis of supply chain risk can help an organization identify systems or components for which additional supply chain risk mitigations are required.",
+  "params": [],
+  "related": [
+    "ra-3",
+    "sr-6"
+  ]
+}

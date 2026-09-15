@@ -1,0 +1,20 @@
+{
+  "id": "ra-4",
+  "slug": "ra-4",
+  "label": "RA-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Risk Assessment Update",
+  "familyCode": "RA",
+  "sortId": "ra-04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ra-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

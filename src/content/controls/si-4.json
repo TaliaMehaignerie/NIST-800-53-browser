@@ -1,0 +1,205 @@
+{
+  "id": "si-4",
+  "slug": "si-4",
+  "label": "SI-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "si-4-1",
+    "si-4-2",
+    "si-4-3",
+    "si-4-4",
+    "si-4-5",
+    "si-4-6",
+    "si-4-7",
+    "si-4-8",
+    "si-4-9",
+    "si-4-10",
+    "si-4-11",
+    "si-4-12",
+    "si-4-13",
+    "si-4-14",
+    "si-4-15",
+    "si-4-16",
+    "si-4-17",
+    "si-4-18",
+    "si-4-19",
+    "si-4-20",
+    "si-4-21",
+    "si-4-22",
+    "si-4-23",
+    "si-4-24",
+    "si-4-25"
+  ],
+  "title": "System Monitoring",
+  "familyCode": "SI",
+  "sortId": "si-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Monitor the system to detect:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Attacks and indicators of potential attacks in accordance with the following monitoring objectives: {{ insert: param, si-04_odp.01 }} ; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Unauthorized local, network, and remote connections;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Identify unauthorized use of the system through the following techniques and methods: {{ insert: param, si-04_odp.02 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Invoke internal monitoring capabilities or deploy monitoring devices:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Strategically within the system to collect organization-determined essential information; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "At ad hoc locations within the system to track specific types of transactions of interest to the organization;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "d.",
+          "prose": "Analyze detected events and anomalies;",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Adjust the level of system monitoring activity when there is a change in risk to organizational operations and assets, individuals, other organizations, or the Nation;",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Obtain legal opinion regarding system monitoring activities; and",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Provide {{ insert: param, si-04_odp.03 }} to {{ insert: param, si-04_odp.04 }} {{ insert: param, si-04_odp.05 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at external interfaces to the system. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems by observing audit activities in real time or by observing other system aspects such as access patterns, characteristics of access, and other actions. The monitoring objectives guide and inform the determination of the events. System monitoring capabilities are achieved through a variety of tools and techniques, including intrusion detection and prevention systems, malicious code protection software, scanning tools, audit record monitoring software, and network monitoring software.\n\nDepending on the security architecture, the distribution and configuration of monitoring devices may impact throughput at key internal and external boundaries as well as at other locations across a network due to the introduction of network throughput latency. If throughput management is needed, such devices are strategically located and deployed as part of an established organization-wide security architecture. Strategic locations for monitoring devices include selected perimeter locations and near key servers and server farms that support critical applications. Monitoring devices are typically employed at the managed interfaces associated with controls [SC-7](#sc-7) and [AC-17](#ac-17) . The information collected is a function of the organizational monitoring objectives and the capability of systems to support such objectives. Specific types of transactions of interest include Hypertext Transfer Protocol (HTTP) traffic that bypasses HTTP proxies. System monitoring is an integral part of organizational continuous monitoring and incident response programs, and output from system monitoring serves as input to those programs. System monitoring requirements, including the need for specific types of system monitoring, may be referenced in other controls (e.g., [AC-2g](#ac-2_smt.g), [AC-2(7)](#ac-2.7), [AC-2(12)(a)](#ac-2.12_smt.a), [AC-17(1)](#ac-17.1), [AU-13](#au-13), [AU-13(1)](#au-13.1), [AU-13(2)](#au-13.2), [CM-3f](#cm-3_smt.f), [CM-6d](#cm-6_smt.d), [MA-3a](#ma-3_smt.a), [MA-4a](#ma-4_smt.a), [SC-5(3)(b)](#sc-5.3_smt.b), [SC-7a](#sc-7_smt.a), [SC-7(24)(b)](#sc-7.24_smt.b), [SC-18b](#sc-18_smt.b), [SC-43b](#sc-43_smt.b) ). Adjustments to levels of system monitoring are based on law enforcement information, intelligence information, or other sources of information. The legality of system monitoring activities is based on applicable laws, executive orders, directives, regulations, policies, standards, and guidelines.",
+  "params": [
+    {
+      "id": "si-04_odp.01",
+      "label": "monitoring objectives",
+      "select": null,
+      "guidelines": [
+        "monitoring objectives to detect attacks and indicators of potential attacks on the system are defined;"
+      ]
+    },
+    {
+      "id": "si-04_odp.02",
+      "label": "techniques and methods",
+      "select": null,
+      "guidelines": [
+        "techniques and methods used to identify unauthorized use of the system are defined;"
+      ]
+    },
+    {
+      "id": "si-04_odp.03",
+      "label": "system monitoring information",
+      "select": null,
+      "guidelines": [
+        "system monitoring information to be provided to personnel or roles is defined;"
+      ]
+    },
+    {
+      "id": "si-04_odp.04",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom system monitoring information is to be provided is/are defined;"
+      ]
+    },
+    {
+      "id": "si-04_odp.05",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "as needed",
+          "{{ insert: param, si-04_odp.06 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-04_odp.06",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "a frequency for providing system monitoring to personnel or roles is defined (if selected);"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "ac-3",
+    "ac-4",
+    "ac-8",
+    "ac-17",
+    "au-2",
+    "au-6",
+    "au-7",
+    "au-9",
+    "au-12",
+    "au-13",
+    "au-14",
+    "ca-7",
+    "cm-3",
+    "cm-6",
+    "cm-8",
+    "cm-11",
+    "ia-10",
+    "ir-4",
+    "ma-3",
+    "ma-4",
+    "pl-9",
+    "pm-12",
+    "ra-5",
+    "ra-10",
+    "sc-5",
+    "sc-7",
+    "sc-18",
+    "sc-26",
+    "sc-31",
+    "sc-35",
+    "sc-36",
+    "sc-37",
+    "sc-43",
+    "si-3",
+    "si-6",
+    "si-7",
+    "sr-9",
+    "sr-10"
+  ]
+}

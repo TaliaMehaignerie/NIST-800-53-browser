@@ -1,0 +1,57 @@
+{
+  "id": "cm-7.9",
+  "slug": "cm-7-9",
+  "label": "CM-7(9)",
+  "kind": "enhancement",
+  "parentSlug": "cm-7",
+  "enhancementSlugs": [],
+  "title": "Prohibiting The Use of Unauthorized Hardware",
+  "familyCode": "CM",
+  "sortId": "cm-07.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Identify {{ insert: param, cm-07.09_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Prohibit the use or connection of unauthorized hardware components;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Review and update the list of authorized hardware components {{ insert: param, cm-07.09_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Hardware components provide the foundation for organizational systems and the platform for the execution of authorized software programs. Managing the inventory of hardware components and controlling which hardware components are permitted to be installed or connected to organizational systems is essential in order to provide adequate security.",
+  "params": [
+    {
+      "id": "cm-07.09_odp.01",
+      "label": "hardware components",
+      "select": null,
+      "guidelines": [
+        "hardware components authorized for system use are defined;"
+      ]
+    },
+    {
+      "id": "cm-07.09_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to review and update the list of authorized hardware components is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

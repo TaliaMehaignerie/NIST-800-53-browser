@@ -1,0 +1,44 @@
+{
+  "id": "si-10.5",
+  "slug": "si-10-5",
+  "label": "SI-10(5)",
+  "kind": "enhancement",
+  "parentSlug": "si-10",
+  "enhancementSlugs": [],
+  "title": "Restrict Inputs to Trusted Sources and Approved Formats",
+  "familyCode": "SI",
+  "sortId": "si-10.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Restrict the use of information inputs to {{ insert: param, si-10.05_odp.01 }} and/or {{ insert: param, si-10.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Restricting the use of inputs to trusted sources and in trusted formats applies the concept of authorized or permitted software to information inputs. Specifying known trusted sources for information inputs and acceptable formats for such inputs can reduce the probability of malicious activity. The information inputs are those defined by the organization in the base control ( [SI-10](#si-10)).",
+  "params": [
+    {
+      "id": "si-10.05_odp.01",
+      "label": "trusted sources",
+      "select": null,
+      "guidelines": [
+        "trusted sources to which the use of information inputs is to be restricted are defined;"
+      ]
+    },
+    {
+      "id": "si-10.05_odp.02",
+      "label": "formats",
+      "select": null,
+      "guidelines": [
+        "formats to which the use of information inputs is to be restricted are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-6"
+  ]
+}

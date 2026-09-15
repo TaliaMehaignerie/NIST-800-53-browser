@@ -1,0 +1,24 @@
+{
+  "id": "ac-16.2",
+  "slug": "ac-16-2",
+  "label": "AC-16(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Attribute Value Changes by Authorized Individuals",
+  "familyCode": "AC",
+  "sortId": "ac-16.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide authorized individuals (or processes acting on behalf of individuals) the capability to define or change the value of associated security and privacy attributes.",
+      "children": []
+    }
+  ],
+  "guidance": "The content or assigned values of attributes can directly affect the ability of individuals to access organizational information. Therefore, it is important for systems to be able to limit the ability to create or modify attributes to authorized individuals.",
+  "params": [],
+  "related": []
+}

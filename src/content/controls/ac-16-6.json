@@ -1,0 +1,123 @@
+{
+  "id": "ac-16.6",
+  "slug": "ac-16-6",
+  "label": "AC-16(6)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Maintenance of Attribute Association",
+  "familyCode": "AC",
+  "sortId": "ac-16.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require personnel to associate and maintain the association of {{ insert: param, ac-16.6_prm_1 }} with {{ insert: param, ac-16.6_prm_2 }} in accordance with {{ insert: param, ac-16.6_prm_3 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Maintaining attribute association requires individual users (as opposed to the system) to maintain associations of defined security and privacy attributes with subjects and objects.",
+  "params": [
+    {
+      "id": "ac-16.6_prm_1",
+      "label": "organization-defined security and privacy attributes",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.6_prm_2",
+      "label": "organization-defined subjects and objects",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.6_prm_3",
+      "label": "organization-defined security and privacy policies",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.06_odp.01",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes to be associated with subjects are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.02",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes to be associated with objects are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.03",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes to be associated with subjects are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.04",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes to be associated with objects are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.05",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects to be associated with information security attributes are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.06",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects to be associated with information security attributes are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.07",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects to be associated with privacy attributes are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.08",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects to be associated with privacy attributes are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.09",
+      "label": "security policies",
+      "select": null,
+      "guidelines": [
+        "security policies that require personnel to associate and maintain the association of security and privacy attributes with subjects and objects;"
+      ]
+    },
+    {
+      "id": "ac-16.06_odp.10",
+      "label": "privacy policies",
+      "select": null,
+      "guidelines": [
+        "privacy policies that require personnel to associate and maintain the association of security and privacy attributes with subjects and objects;"
+      ]
+    }
+  ],
+  "related": []
+}

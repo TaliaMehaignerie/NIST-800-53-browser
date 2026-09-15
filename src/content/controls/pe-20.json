@@ -1,0 +1,53 @@
+{
+  "id": "pe-20",
+  "slug": "pe-20",
+  "label": "PE-20",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Asset Monitoring and Tracking",
+  "familyCode": "PE",
+  "sortId": "pe-20",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ {{ insert: param, pe-20_odp.01 }} to track and monitor the location and movement of {{ insert: param, pe-20_odp.02 }} within {{ insert: param, pe-20_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Asset location technologies can help ensure that critical assets—including vehicles, equipment, and system components—remain in authorized locations. Organizations consult with the Office of the General Counsel and senior agency official for privacy regarding the deployment and use of asset location technologies to address potential privacy concerns.",
+  "params": [
+    {
+      "id": "pe-20_odp.01",
+      "label": "asset location technologies",
+      "select": null,
+      "guidelines": [
+        "asset location technologies to be employed to track and monitor the location and movement of assets is defined;"
+      ]
+    },
+    {
+      "id": "pe-20_odp.02",
+      "label": "assets",
+      "select": null,
+      "guidelines": [
+        "assets whose location and movement are to be tracked and monitored are defined;"
+      ]
+    },
+    {
+      "id": "pe-20_odp.03",
+      "label": "controlled areas",
+      "select": null,
+      "guidelines": [
+        "controlled areas within which asset location and movement are to be tracked and monitored are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-8",
+    "pe-16",
+    "pm-8"
+  ]
+}

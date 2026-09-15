@@ -1,0 +1,20 @@
+{
+  "id": "ca-3.4",
+  "slug": "ca-3-4",
+  "label": "CA-3(4)",
+  "kind": "enhancement",
+  "parentSlug": "ca-3",
+  "enhancementSlugs": [],
+  "title": "Connections to Public Networks",
+  "familyCode": "CA",
+  "sortId": "ca-03.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-7.28"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

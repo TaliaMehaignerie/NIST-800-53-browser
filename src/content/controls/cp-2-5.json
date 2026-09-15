@@ -1,0 +1,39 @@
+{
+  "id": "cp-2.5",
+  "slug": "cp-2-5",
+  "label": "CP-2(5)",
+  "kind": "enhancement",
+  "parentSlug": "cp-2",
+  "enhancementSlugs": [],
+  "title": "Continue Mission and Business Functions",
+  "familyCode": "CP",
+  "sortId": "cp-02.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Plan for the continuance of {{ insert: param, cp-02.05_odp }} mission and business functions with minimal or no loss of operational continuity and sustains that continuity until full system restoration at primary processing and/or storage sites.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may choose to conduct the contingency planning activities to continue mission and business functions as part of business continuity planning or business impact analyses. Primary processing and/or storage sites defined by organizations as part of contingency planning may change depending on the circumstances associated with the contingency.",
+  "params": [
+    {
+      "id": "cp-02.05_odp",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "all",
+          "essential"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

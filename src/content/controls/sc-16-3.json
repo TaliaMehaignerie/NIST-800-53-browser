@@ -1,0 +1,37 @@
+{
+  "id": "sc-16.3",
+  "slug": "sc-16-3",
+  "label": "SC-16(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-16",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Binding",
+  "familyCode": "SC",
+  "sortId": "sc-16.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement {{ insert: param, sc-16.03_odp }} to bind security and privacy attributes to transmitted information.",
+      "children": []
+    }
+  ],
+  "guidance": "Cryptographic mechanisms and techniques can provide strong security and privacy attribute binding to transmitted information to help ensure the integrity of such information.",
+  "params": [
+    {
+      "id": "sc-16.03_odp",
+      "label": "mechanisms or techniques",
+      "select": null,
+      "guidelines": [
+        "mechanisms or techniques to bind security and privacy attributes to transmitted information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-16",
+    "sc-12",
+    "sc-13"
+  ]
+}

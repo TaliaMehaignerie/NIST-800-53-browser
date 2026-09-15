@@ -1,0 +1,64 @@
+{
+  "id": "pe-10",
+  "slug": "pe-10",
+  "label": "PE-10",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-10-1"
+  ],
+  "title": "Emergency Shutoff",
+  "familyCode": "PE",
+  "sortId": "pe-10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Provide the capability of shutting off power to {{ insert: param, pe-10_odp.01 }} in emergency situations;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Place emergency shutoff switches or devices in {{ insert: param, pe-10_odp.02 }} to facilitate access for authorized personnel; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Protect emergency power shutoff capability from unauthorized activation.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Emergency power shutoff primarily applies to organizational facilities that contain concentrations of system resources, including data centers, mainframe computer rooms, server rooms, and areas with computer-controlled machinery.",
+  "params": [
+    {
+      "id": "pe-10_odp.01",
+      "label": "system or individual system components",
+      "select": null,
+      "guidelines": [
+        "system or individual system components that require the capability to shut off power in emergency situations is/are defined;"
+      ]
+    },
+    {
+      "id": "pe-10_odp.02",
+      "label": "location",
+      "select": null,
+      "guidelines": [
+        "location of emergency shutoff switches or devices by system or system component is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-15"
+  ]
+}

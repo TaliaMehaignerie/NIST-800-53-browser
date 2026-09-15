@@ -1,0 +1,21 @@
+{
+  "id": "ac-13",
+  "slug": "ac-13",
+  "label": "AC-13",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Supervision and Review — Access Control",
+  "familyCode": "AC",
+  "sortId": "ac-13",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-2",
+    "au-6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

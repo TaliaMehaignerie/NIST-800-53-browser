@@ -1,0 +1,32 @@
+{
+  "slug": "pe",
+  "code": "PE",
+  "name": "Physical and Environmental Protection",
+  "controlSlugs": [
+    "pe-1",
+    "pe-2",
+    "pe-3",
+    "pe-4",
+    "pe-5",
+    "pe-6",
+    "pe-7",
+    "pe-8",
+    "pe-9",
+    "pe-10",
+    "pe-11",
+    "pe-12",
+    "pe-13",
+    "pe-14",
+    "pe-15",
+    "pe-16",
+    "pe-17",
+    "pe-18",
+    "pe-19",
+    "pe-20",
+    "pe-21",
+    "pe-22",
+    "pe-23"
+  ],
+  "controlCount": 23,
+  "enhancementCount": 36
+}

@@ -1,0 +1,63 @@
+{
+  "id": "ia-5.16",
+  "slug": "ia-5-16",
+  "label": "IA-5(16)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "In-person or Trusted External Party Authenticator Issuance",
+  "familyCode": "IA",
+  "sortId": "ia-05.16",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require that the issuance of {{ insert: param, ia-05.16_odp.01 }} be conducted {{ insert: param, ia-05.16_odp.02 }} before {{ insert: param, ia-05.16_odp.03 }} with authorization by {{ insert: param, ia-05.16_odp.04 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Issuing authenticators in person or by a trusted external party enhances and reinforces the trustworthiness of the identity proofing process.",
+  "params": [
+    {
+      "id": "ia-05.16_odp.01",
+      "label": "types of and/or specific authenticators",
+      "select": null,
+      "guidelines": [
+        "types of and/or specific authenticators to be issued are defined;"
+      ]
+    },
+    {
+      "id": "ia-05.16_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "in person",
+          "by a trusted external party"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ia-05.16_odp.03",
+      "label": "registration authority",
+      "select": null,
+      "guidelines": [
+        "the registration authority that issues authenticators is defined;"
+      ]
+    },
+    {
+      "id": "ia-05.16_odp.04",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "the personnel or roles who authorize the issuance of authenticators are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-12"
+  ]
+}

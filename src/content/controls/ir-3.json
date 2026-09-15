@@ -1,0 +1,56 @@
+{
+  "id": "ir-3",
+  "slug": "ir-3",
+  "label": "IR-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-3-1",
+    "ir-3-2",
+    "ir-3-3"
+  ],
+  "title": "Incident Response Testing",
+  "familyCode": "IR",
+  "sortId": "ir-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test the effectiveness of the incident response capability for the system {{ insert: param, ir-03_odp.01 }} using the following tests: {{ insert: param, ir-03_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations test incident response capabilities to determine their effectiveness and identify potential weaknesses or deficiencies. Incident response testing includes the use of checklists, walk-through or tabletop exercises, and simulations (parallel or full interrupt). Incident response testing can include a determination of the effects on organizational operations and assets and individuals due to incident response. The use of qualitative and quantitative data aids in determining the effectiveness of incident response processes.",
+  "params": [
+    {
+      "id": "ir-03_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to test the effectiveness of the incident response capability for the system is defined;"
+      ]
+    },
+    {
+      "id": "ir-03_odp.02",
+      "label": "tests",
+      "select": null,
+      "guidelines": [
+        "tests used to test the effectiveness of the incident response capability for the system are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-3",
+    "cp-4",
+    "ir-2",
+    "ir-4",
+    "ir-8",
+    "pm-14"
+  ]
+}

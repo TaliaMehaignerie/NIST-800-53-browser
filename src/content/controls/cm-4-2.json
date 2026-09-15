@@ -1,0 +1,31 @@
+{
+  "id": "cm-4.2",
+  "slug": "cm-4-2",
+  "label": "CM-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "cm-4",
+  "enhancementSlugs": [],
+  "title": "Verification of Controls",
+  "familyCode": "CM",
+  "sortId": "cm-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "After system changes, verify that the impacted controls are implemented correctly, operating as intended, and producing the desired outcome with regard to meeting the security and privacy requirements for the system.",
+      "children": []
+    }
+  ],
+  "guidance": "Implementation in this context refers to installing changed code in the operational system that may have an impact on security or privacy controls.",
+  "params": [],
+  "related": [
+    "sa-11",
+    "sc-3",
+    "si-6"
+  ]
+}

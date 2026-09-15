@@ -1,0 +1,44 @@
+{
+  "id": "ps-3.3",
+  "slug": "ps-3-3",
+  "label": "PS-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ps-3",
+  "enhancementSlugs": [],
+  "title": "Information Requiring Special Protective Measures",
+  "familyCode": "PS",
+  "sortId": "ps-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify that individuals accessing a system processing, storing, or transmitting information requiring special protection:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Have valid access authorizations that are demonstrated by assigned official government duties; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Satisfy {{ insert: param, ps-03.03_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizational information that requires special protection includes controlled unclassified information. Personnel security criteria include position sensitivity background screening requirements.",
+  "params": [
+    {
+      "id": "ps-03.03_odp",
+      "label": "additional personnel screening criteria",
+      "select": null,
+      "guidelines": [
+        "additional personnel screening criteria to be satisfied for individuals accessing a system processing, storing, or transmitting information requiring special protection are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

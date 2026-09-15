@@ -1,0 +1,48 @@
+{
+  "id": "cp-2.3",
+  "slug": "cp-2-3",
+  "label": "CP-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "cp-2",
+  "enhancementSlugs": [],
+  "title": "Resume Mission and Business Functions",
+  "familyCode": "CP",
+  "sortId": "cp-02.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Plan for the resumption of {{ insert: param, cp-02.03_odp.01 }} mission and business functions within {{ insert: param, cp-02.03_odp.02 }} of contingency plan activation.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may choose to conduct contingency planning activities to resume mission and business functions as part of business continuity planning or as part of business impact analyses. Organizations prioritize the resumption of mission and business functions. The time period for resuming mission and business functions may be dependent on the severity and extent of the disruptions to the system and its supporting infrastructure.",
+  "params": [
+    {
+      "id": "cp-02.03_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "all",
+          "essential"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "cp-02.03_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the contingency plan activation time period within which to resume mission and business functions is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

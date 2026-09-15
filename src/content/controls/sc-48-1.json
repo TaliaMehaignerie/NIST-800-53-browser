@@ -1,0 +1,49 @@
+{
+  "id": "sc-48.1",
+  "slug": "sc-48-1",
+  "label": "SC-48(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-48",
+  "enhancementSlugs": [],
+  "title": "Dynamic Relocation of Sensors or Monitoring Capabilities",
+  "familyCode": "SC",
+  "sortId": "sc-48.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Dynamically relocate {{ insert: param, sc-48.01_odp.01 }} to {{ insert: param, sc-48.01_odp.02 }} under the following conditions or circumstances: {{ insert: param, sc-48.01_odp.03 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sc-48.01_odp.01",
+      "label": "sensors and monitoring capabilities",
+      "select": null,
+      "guidelines": [
+        "sensors and monitoring capabilities to be dynamically relocated are defined;"
+      ]
+    },
+    {
+      "id": "sc-48.01_odp.02",
+      "label": "locations",
+      "select": null,
+      "guidelines": [
+        "locations to where sensors and monitoring capabilities are to be dynamically relocated are defined;"
+      ]
+    },
+    {
+      "id": "sc-48.01_odp.03",
+      "label": "conditions or circumstances",
+      "select": null,
+      "guidelines": [
+        "conditions or circumstances for dynamically relocating sensors and monitoring capabilities are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

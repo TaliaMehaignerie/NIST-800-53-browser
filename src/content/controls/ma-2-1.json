@@ -1,0 +1,20 @@
+{
+  "id": "ma-2.1",
+  "slug": "ma-2-1",
+  "label": "MA-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "ma-2",
+  "enhancementSlugs": [],
+  "title": "Record Content",
+  "familyCode": "MA",
+  "sortId": "ma-02.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ma-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

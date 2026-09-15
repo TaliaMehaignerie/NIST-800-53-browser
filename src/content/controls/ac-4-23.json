@@ -1,0 +1,33 @@
+{
+  "id": "ac-4.23",
+  "slug": "ac-4-23",
+  "label": "AC-4(23)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Modify Non-releasable Information",
+  "familyCode": "AC",
+  "sortId": "ac-04.23",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, modify non-releasable information by implementing {{ insert: param, ac-04.23_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Modifying non-releasable information can help prevent a data spill or attack when information is transferred across security domains. Modification actions include masking, permutation, alteration, removal, or redaction.",
+  "params": [
+    {
+      "id": "ac-04.23_odp",
+      "label": "modification action",
+      "select": null,
+      "guidelines": [
+        "modification action implemented on non-releasable information is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

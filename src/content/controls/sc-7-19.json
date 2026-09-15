@@ -1,0 +1,33 @@
+{
+  "id": "sc-7.19",
+  "slug": "sc-7-19",
+  "label": "SC-7(19)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Block Communication from Non-organizationally Configured Hosts",
+  "familyCode": "SC",
+  "sortId": "sc-07.19",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Block inbound and outbound communications traffic between {{ insert: param, sc-07.19_odp }} that are independently configured by end users and external service providers.",
+      "children": []
+    }
+  ],
+  "guidance": "Communication clients independently configured by end users and external service providers include instant messaging clients and video conferencing software and applications. Traffic blocking does not apply to communication clients that are configured by organizations to perform authorized functions.",
+  "params": [
+    {
+      "id": "sc-07.19_odp",
+      "label": "communication clients",
+      "select": null,
+      "guidelines": [
+        "communication clients that are independently configured by end users and external service providers are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

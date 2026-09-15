@@ -1,0 +1,47 @@
+{
+  "id": "sr-3.1",
+  "slug": "sr-3-1",
+  "label": "SR-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "sr-3",
+  "enhancementSlugs": [],
+  "title": "Diverse Supply Base",
+  "familyCode": "SR",
+  "sortId": "sr-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ a diverse set of sources for the following system components and services: {{ insert: param, sr-3.1_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Diversifying the supply of systems, system components, and services can reduce the probability that adversaries will successfully identify and target the supply chain and can reduce the impact of a supply chain event or compromise. Identifying multiple suppliers for replacement components can reduce the probability that the replacement component will become unavailable. Employing a diverse set of developers or logistics service providers can reduce the impact of a natural disaster or other supply chain event. Organizations consider designing the system to include diverse materials and components.",
+  "params": [
+    {
+      "id": "sr-3.1_prm_1",
+      "label": "organization-defined system components and services",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sr-03.01_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components with a diverse set of sources are defined;"
+      ]
+    },
+    {
+      "id": "sr-03.01_odp.02",
+      "label": "services",
+      "select": null,
+      "guidelines": [
+        "services with a diverse set of sources are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,51 @@
+{
+  "id": "sc-17",
+  "slug": "sc-17",
+  "label": "SC-17",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Public Key Infrastructure Certificates",
+  "familyCode": "SC",
+  "sortId": "sc-17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Issue public key certificates under an {{ insert: param, sc-17_odp }} or obtain public key certificates from an approved service provider; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Include only approved trust anchors in trust stores or certificate stores managed by the organization.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Public key infrastructure (PKI) certificates are certificates with visibility external to organizational systems and certificates related to the internal operations of systems, such as application-specific time services. In cryptographic systems with a hierarchical structure, a trust anchor is an authoritative source (i.e., a certificate authority) for which trust is assumed and not derived. A root certificate for a PKI system is an example of a trust anchor. A trust store or certificate store maintains a list of trusted root certificates.",
+  "params": [
+    {
+      "id": "sc-17_odp",
+      "label": "certificate policy",
+      "select": null,
+      "guidelines": [
+        "a certificate policy for issuing public key certificates is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-10",
+    "ia-5",
+    "sc-12"
+  ]
+}

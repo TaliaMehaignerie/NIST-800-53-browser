@@ -1,0 +1,26 @@
+{
+  "id": "cp-6.2",
+  "slug": "cp-6-2",
+  "label": "CP-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "cp-6",
+  "enhancementSlugs": [],
+  "title": "Recovery Time and Recovery Point Objectives",
+  "familyCode": "CP",
+  "sortId": "cp-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Configure the alternate storage site to facilitate recovery operations in accordance with recovery time and recovery point objectives.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations establish recovery time and recovery point objectives as part of contingency planning. Configuration of the alternate storage site includes physical facilities and the systems supporting recovery operations that ensure accessibility and correct execution.",
+  "params": [],
+  "related": []
+}

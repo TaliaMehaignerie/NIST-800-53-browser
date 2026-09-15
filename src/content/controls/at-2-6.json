@@ -1,0 +1,37 @@
+{
+  "id": "at-2.6",
+  "slug": "at-2-6",
+  "label": "AT-2(6)",
+  "kind": "enhancement",
+  "parentSlug": "at-2",
+  "enhancementSlugs": [],
+  "title": "Cyber Threat Environment",
+  "familyCode": "AT",
+  "sortId": "at-02.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Provide literacy training on the cyber threat environment; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Reflect current cyber threat information in system operations.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Since threats continue to change over time, threat literacy training by the organization is dynamic. Moreover, threat literacy training is not performed in isolation from the system operations that support organizational mission and business functions.",
+  "params": [],
+  "related": [
+    "ra-3"
+  ]
+}

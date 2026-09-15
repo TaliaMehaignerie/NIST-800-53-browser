@@ -1,0 +1,44 @@
+{
+  "id": "sc-11.1",
+  "slug": "sc-11-1",
+  "label": "SC-11(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-11",
+  "enhancementSlugs": [],
+  "title": "Irrefutable Communications Path",
+  "familyCode": "SC",
+  "sortId": "sc-11.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Provide a trusted communications path that is irrefutably distinguishable from other communications paths; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Initiate the trusted communications path for communications between the {{ insert: param, sc-11.01_odp }} of the system and the user.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "An irrefutable communications path permits the system to initiate a trusted path, which necessitates that the user can unmistakably recognize the source of the communication as a trusted system component. For example, the trusted path may appear in an area of the display that other applications cannot access or be based on the presence of an identifier that cannot be spoofed.",
+  "params": [
+    {
+      "id": "sc-11.01_odp",
+      "label": "security functions",
+      "select": null,
+      "guidelines": [
+        "security functions of the system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

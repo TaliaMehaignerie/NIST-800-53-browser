@@ -1,0 +1,20 @@
+{
+  "id": "ia-8.3",
+  "slug": "ia-8-3",
+  "label": "IA-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-8",
+  "enhancementSlugs": [],
+  "title": "Use of FICAM-approved Products",
+  "familyCode": "IA",
+  "sortId": "ia-08.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-8.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

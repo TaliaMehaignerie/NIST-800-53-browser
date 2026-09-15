@@ -1,0 +1,20 @@
+{
+  "id": "si-7.4",
+  "slug": "si-7-4",
+  "label": "SI-7(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Tamper-evident Packaging",
+  "familyCode": "SI",
+  "sortId": "si-07.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

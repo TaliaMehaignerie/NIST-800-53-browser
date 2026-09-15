@@ -1,0 +1,44 @@
+{
+  "id": "cm-8.9",
+  "slug": "cm-8-9",
+  "label": "CM-8(9)",
+  "kind": "enhancement",
+  "parentSlug": "cm-8",
+  "enhancementSlugs": [],
+  "title": "Assignment of Components to Systems",
+  "familyCode": "CM",
+  "sortId": "cm-08.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Assign system components to a system; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Receive an acknowledgement from {{ insert: param, cm-08.09_odp }} of this assignment.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System components that are not assigned to a system may be unmanaged, lack the required protection, and become an organizational vulnerability.",
+  "params": [
+    {
+      "id": "cm-08.09_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles from which to receive an acknowledgement is/are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

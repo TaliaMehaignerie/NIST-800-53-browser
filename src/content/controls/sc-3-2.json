@@ -1,0 +1,24 @@
+{
+  "id": "sc-3.2",
+  "slug": "sc-3-2",
+  "label": "SC-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-3",
+  "enhancementSlugs": [],
+  "title": "Access and Flow Control Functions",
+  "familyCode": "SC",
+  "sortId": "sc-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Isolate security functions enforcing access and information flow control from nonsecurity functions and from other security functions.",
+      "children": []
+    }
+  ],
+  "guidance": "Security function isolation occurs because of implementation. The functions can still be scanned and monitored. Security functions that are potentially isolated from access and flow control enforcement functions include auditing, intrusion detection, and malicious code protection functions.",
+  "params": [],
+  "related": []
+}

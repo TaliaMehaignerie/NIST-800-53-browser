@@ -1,0 +1,21 @@
+{
+  "id": "sa-7",
+  "slug": "sa-7",
+  "label": "SA-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "User-installed Software",
+  "familyCode": "SA",
+  "sortId": "sa-07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-11",
+    "si-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

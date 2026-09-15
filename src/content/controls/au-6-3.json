@@ -1,0 +1,30 @@
+{
+  "id": "au-6.3",
+  "slug": "au-6-3",
+  "label": "AU-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-6",
+  "enhancementSlugs": [],
+  "title": "Correlate Audit Record Repositories",
+  "familyCode": "AU",
+  "sortId": "au-06.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Analyze and correlate audit records across different repositories to gain organization-wide situational awareness.",
+      "children": []
+    }
+  ],
+  "guidance": "Organization-wide situational awareness includes awareness across all three levels of risk management (i.e., organizational level, mission/business process level, and information system level) and supports cross-organization awareness.",
+  "params": [],
+  "related": [
+    "au-12",
+    "ir-4"
+  ]
+}

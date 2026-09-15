@@ -1,0 +1,77 @@
+{
+  "id": "sc-40",
+  "slug": "sc-40",
+  "label": "SC-40",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-40-1",
+    "sc-40-2",
+    "sc-40-3",
+    "sc-40-4"
+  ],
+  "title": "Wireless Link Protection",
+  "familyCode": "SC",
+  "sortId": "sc-40",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect external and internal {{ insert: param, sc-40_prm_1 }} from the following signal parameter attacks: {{ insert: param, sc-40_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Wireless link protection applies to internal and external wireless communication links that may be visible to individuals who are not authorized system users. Adversaries can exploit the signal parameters of wireless links if such links are not adequately protected. There are many ways to exploit the signal parameters of wireless links to gain intelligence, deny service, or spoof system users. Protection of wireless links reduces the impact of attacks that are unique to wireless systems. If organizations rely on commercial service providers for transmission services as commodity items rather than as fully dedicated services, it may not be possible to implement wireless link protections to the extent necessary to meet organizational security requirements.",
+  "params": [
+    {
+      "id": "sc-40_prm_1",
+      "label": "organization-defined wireless links",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sc-40_prm_2",
+      "label": "organization-defined types of signal parameter attacks or references to sources for such attacks",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sc-40_odp.01",
+      "label": "wireless links",
+      "select": null,
+      "guidelines": [
+        "external wireless links to be protected from particular types of signal parameter attacks are defined;"
+      ]
+    },
+    {
+      "id": "sc-40_odp.02",
+      "label": "types of signal parameter attacks or references to sources for such attacks",
+      "select": null,
+      "guidelines": [
+        "types of signal parameter attacks or references to sources for such attacks from which to protect external wireless links are defined;"
+      ]
+    },
+    {
+      "id": "sc-40_odp.03",
+      "label": "wireless links",
+      "select": null,
+      "guidelines": [
+        "internal wireless links to be protected from particular types of signal parameter attacks are defined;"
+      ]
+    },
+    {
+      "id": "sc-40_odp.04",
+      "label": "types of signal parameter attacks or references to sources for such attacks",
+      "select": null,
+      "guidelines": [
+        "types of signal parameter attacks or references to sources for such attacks from which to protect internal wireless links are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-18",
+    "sc-5"
+  ]
+}

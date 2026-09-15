@@ -1,0 +1,65 @@
+{
+  "id": "ac-17.4",
+  "slug": "ac-17-4",
+  "label": "AC-17(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Privileged Commands and Access",
+  "familyCode": "AC",
+  "sortId": "ac-17.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Authorize the execution of privileged commands and access to security-relevant information via remote access only in a format that provides assessable evidence and for the following needs: {{ insert: param, ac-17.4_prm_1 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Document the rationale for remote access in the security plan for the system.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Remote access to systems represents a significant potential vulnerability that can be exploited by adversaries. As such, restricting the execution of privileged commands and access to security-relevant information via remote access reduces the exposure of the organization and the susceptibility to threats by adversaries to the remote access capability.",
+  "params": [
+    {
+      "id": "ac-17.4_prm_1",
+      "label": "organization-defined needs",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-17.04_odp.01",
+      "label": "needs requiring remote access",
+      "select": null,
+      "guidelines": [
+        "needs requiring execution of privileged commands via remote access are defined;"
+      ]
+    },
+    {
+      "id": "ac-17.04_odp.02",
+      "label": "needs requiring remote access",
+      "select": null,
+      "guidelines": [
+        "needs requiring access to security-relevant information via remote access are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-6",
+    "sc-12",
+    "sc-13"
+  ]
+}

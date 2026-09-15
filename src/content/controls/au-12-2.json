@@ -1,0 +1,24 @@
+{
+  "id": "au-12.2",
+  "slug": "au-12-2",
+  "label": "AU-12(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-12",
+  "enhancementSlugs": [],
+  "title": "Standardized Formats",
+  "familyCode": "AU",
+  "sortId": "au-12.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Produce a system-wide (logical or physical) audit trail composed of audit records in a standardized format.",
+      "children": []
+    }
+  ],
+  "guidance": "Audit records that follow common standards promote interoperability and information exchange between devices and systems. Promoting interoperability and information exchange facilitates the production of event information that can be readily analyzed and correlated. If logging mechanisms do not conform to standardized formats, systems may convert individual audit records into standardized formats when compiling system-wide audit trails.",
+  "params": [],
+  "related": []
+}

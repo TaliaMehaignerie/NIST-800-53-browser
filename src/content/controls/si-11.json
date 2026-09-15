@@ -1,0 +1,53 @@
+{
+  "id": "si-11",
+  "slug": "si-11",
+  "label": "SI-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Error Handling",
+  "familyCode": "SI",
+  "sortId": "si-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Generate error messages that provide information necessary for corrective actions without revealing information that could be exploited; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Reveal error messages only to {{ insert: param, si-11_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations consider the structure and content of error messages. The extent to which systems can handle error conditions is guided and informed by organizational policy and operational requirements. Exploitable information includes stack traces and implementation details; erroneous logon attempts with passwords mistakenly entered as the username; mission or business information that can be derived from, if not stated explicitly by, the information recorded; and personally identifiable information, such as account numbers, social security numbers, and credit card numbers. Error messages may also provide a covert channel for transmitting information.",
+  "params": [
+    {
+      "id": "si-11_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to whom error messages are to be revealed is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-3",
+    "sc-31",
+    "si-2",
+    "si-15"
+  ]
+}

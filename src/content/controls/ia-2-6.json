@@ -1,0 +1,71 @@
+{
+  "id": "ia-2.6",
+  "slug": "ia-2-6",
+  "label": "IA-2(6)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Access to Accounts —separate Device",
+  "familyCode": "IA",
+  "sortId": "ia-02.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement multi-factor authentication for {{ insert: param, ia-02.06_odp.01 }} access to {{ insert: param, ia-02.06_odp.02 }} such that:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "One of the factors is provided by a device separate from the system gaining access; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "The device meets {{ insert: param, ia-02.06_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The purpose of requiring a device that is separate from the system to which the user is attempting to gain access for one of the factors during multi-factor authentication is to reduce the likelihood of compromising authenticators or credentials stored on the system. Adversaries may be able to compromise such authenticators or credentials and subsequently impersonate authorized users. Implementing one of the factors on a separate device (e.g., a hardware token), provides a greater strength of mechanism and an increased level of assurance in the authentication process.",
+  "params": [
+    {
+      "id": "ia-02.06_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "local",
+          "network",
+          "remote"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ia-02.06_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "privileged accounts",
+          "non-privileged accounts"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ia-02.06_odp.03",
+      "label": "strength of mechanism requirements",
+      "select": null,
+      "guidelines": [
+        "the strength of mechanism requirements to be enforced by a device separate from the system gaining access to accounts is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-6"
+  ]
+}

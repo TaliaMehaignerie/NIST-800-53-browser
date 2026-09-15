@@ -1,0 +1,20 @@
+{
+  "id": "sc-12.5",
+  "slug": "sc-12-5",
+  "label": "SC-12(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-12",
+  "enhancementSlugs": [],
+  "title": "PKI Certificates / Hardware Tokens",
+  "familyCode": "SC",
+  "sortId": "sc-12.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-12.3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

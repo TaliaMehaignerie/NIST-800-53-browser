@@ -1,0 +1,80 @@
+{
+  "id": "au-5",
+  "slug": "au-5",
+  "label": "AU-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-5-1",
+    "au-5-2",
+    "au-5-3",
+    "au-5-4",
+    "au-5-5"
+  ],
+  "title": "Response to Audit Logging Process Failures",
+  "familyCode": "AU",
+  "sortId": "au-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Alert {{ insert: param, au-05_odp.01 }} within {{ insert: param, au-05_odp.02 }} in the event of an audit logging process failure; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Take the following additional actions: {{ insert: param, au-05_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Audit logging process failures include software and hardware errors, failures in audit log capturing mechanisms, and reaching or exceeding audit log storage capacity. Organization-defined actions include overwriting oldest audit records, shutting down the system, and stopping the generation of audit records. Organizations may choose to define additional actions for audit logging process failures based on the type of failure, the location of the failure, the severity of the failure, or a combination of such factors. When the audit logging process failure is related to storage, the response is carried out for the audit log storage repository (i.e., the distinct system component where the audit logs are stored), the system on which the audit logs reside, the total audit log storage capacity of the organization (i.e., all audit log storage repositories combined), or all three. Organizations may decide to take no additional actions after alerting designated roles or personnel.",
+  "params": [
+    {
+      "id": "au-05_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles receiving audit logging process failure alerts are defined;"
+      ]
+    },
+    {
+      "id": "au-05_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for personnel or roles receiving audit logging process failure alerts is defined;"
+      ]
+    },
+    {
+      "id": "au-05_odp.03",
+      "label": "additional actions",
+      "select": null,
+      "guidelines": [
+        "additional actions to be taken in the event of an audit logging process failure are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-4",
+    "au-7",
+    "au-9",
+    "au-11",
+    "au-12",
+    "au-14",
+    "si-4",
+    "si-12"
+  ]
+}

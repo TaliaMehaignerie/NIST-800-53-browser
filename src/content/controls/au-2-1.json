@@ -1,0 +1,20 @@
+{
+  "id": "au-2.1",
+  "slug": "au-2-1",
+  "label": "AU-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-2",
+  "enhancementSlugs": [],
+  "title": "Compilation of Audit Records from Multiple Sources",
+  "familyCode": "AU",
+  "sortId": "au-02.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "au-12"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

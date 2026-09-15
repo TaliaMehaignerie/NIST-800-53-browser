@@ -1,0 +1,67 @@
+{
+  "id": "cm-6.1",
+  "slug": "cm-6-1",
+  "label": "CM-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-6",
+  "enhancementSlugs": [],
+  "title": "Automated Management, Application, and Verification",
+  "familyCode": "CM",
+  "sortId": "cm-06.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manage, apply, and verify configuration settings for {{ insert: param, cm-06.01_odp.01 }} using {{ insert: param, cm-6.1_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated tools (e.g., hardening tools, baseline configuration tools) can improve the accuracy, consistency, and availability of configuration settings information. Automation can also provide data aggregation and data correlation capabilities, alerting mechanisms, and dashboards to support risk-based decision-making within the organization.",
+  "params": [
+    {
+      "id": "cm-6.1_prm_2",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-06.01_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components for which to manage, apply, and verify configuration settings are defined;"
+      ]
+    },
+    {
+      "id": "cm-06.01_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to manage configuration settings are defined;"
+      ]
+    },
+    {
+      "id": "cm-06.01_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to apply configuration settings are defined;"
+      ]
+    },
+    {
+      "id": "cm-06.01_odp.04",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms to verify configuration settings are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-7"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "si-7.12",
+  "slug": "si-7-12",
+  "label": "SI-7(12)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Integrity Verification",
+  "familyCode": "SI",
+  "sortId": "si-07.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require that the integrity of the following user-installed software be verified prior to execution: {{ insert: param, si-07.12_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations verify the integrity of user-installed software prior to execution to reduce the likelihood of executing malicious code or programs that contains errors from unauthorized modifications. Organizations consider the source of the software, ensuring the software and updates come from authorized sources and/or sites, and the practicality of approaches to verifying software integrity, including the availability of trustworthy checksums from software developers and vendors.",
+  "params": [
+    {
+      "id": "si-07.12_odp",
+      "label": "user-installed software",
+      "select": null,
+      "guidelines": [
+        "user-installed software requiring integrity verification prior to execution is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-2",
+    "cm-11"
+  ]
+}

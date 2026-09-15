@@ -1,0 +1,25 @@
+{
+  "id": "sa-19",
+  "slug": "sa-19",
+  "label": "SA-19",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-19-1",
+    "sa-19-2",
+    "sa-19-3",
+    "sa-19-4"
+  ],
+  "title": "Component Authenticity",
+  "familyCode": "SA",
+  "sortId": "sa-19",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-11"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

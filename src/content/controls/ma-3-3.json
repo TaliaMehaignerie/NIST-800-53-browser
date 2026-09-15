@@ -1,0 +1,59 @@
+{
+  "id": "ma-3.3",
+  "slug": "ma-3-3",
+  "label": "MA-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ma-3",
+  "enhancementSlugs": [],
+  "title": "Prevent Unauthorized Removal",
+  "familyCode": "MA",
+  "sortId": "ma-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent the removal of maintenance equipment containing organizational information by:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Verifying that there is no organizational information contained on the equipment;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Sanitizing or destroying the equipment;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Retaining the equipment within the facility; or",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Obtaining an exemption from {{ insert: param, ma-03.03_odp }} explicitly authorizing removal of the equipment from the facility.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizational information includes all information owned by organizations and any information provided to organizations for which the organizations serve as information stewards.",
+  "params": [
+    {
+      "id": "ma-03.03_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles who can authorize removal of equipment from the facility is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-6"
+  ]
+}

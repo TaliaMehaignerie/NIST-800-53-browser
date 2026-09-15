@@ -1,0 +1,33 @@
+{
+  "id": "si-13.1",
+  "slug": "si-13-1",
+  "label": "SI-13(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-13",
+  "enhancementSlugs": [],
+  "title": "Transferring Component Responsibilities",
+  "familyCode": "SI",
+  "sortId": "si-13.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Take system components out of service by transferring component responsibilities to substitute components no later than {{ insert: param, si-13.01_odp }} of mean time to failure.",
+      "children": []
+    }
+  ],
+  "guidance": "Transferring primary system component responsibilities to other substitute components prior to primary component failure is important to reduce the risk of degraded or debilitated mission or business functions. Making such transfers based on a percentage of mean time to failure allows organizations to be proactive based on their risk tolerance. However, the premature replacement of system components can result in the increased cost of system operations.",
+  "params": [
+    {
+      "id": "si-13.01_odp",
+      "label": "fraction or percentage",
+      "select": null,
+      "guidelines": [
+        "the fraction or percentage of mean time to failure within which to transfer the responsibilities of a system component to a substitute component is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

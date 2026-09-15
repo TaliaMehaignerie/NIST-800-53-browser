@@ -1,0 +1,117 @@
+{
+  "id": "mp-4",
+  "slug": "mp-4",
+  "label": "MP-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "mp-4-1",
+    "mp-4-2"
+  ],
+  "title": "Media Storage",
+  "familyCode": "MP",
+  "sortId": "mp-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Physically control and securely store {{ insert: param, mp-4_prm_1 }} within {{ insert: param, mp-4_prm_2 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Protect system media types defined in MP-4a until the media are destroyed or sanitized using approved equipment, techniques, and procedures.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System media includes digital and non-digital media. Digital media includes flash drives, diskettes, magnetic tapes, external or removable hard disk drives (e.g., solid state, magnetic), compact discs, and digital versatile discs. Non-digital media includes paper and microfilm. Physically controlling stored media includes conducting inventories, ensuring procedures are in place to allow individuals to check out and return media to the library, and maintaining accountability for stored media. Secure storage includes a locked drawer, desk, or cabinet or a controlled media library. The type of media storage is commensurate with the security category or classification of the information on the media. Controlled areas are spaces that provide physical and procedural controls to meet the requirements established for protecting information and systems. Fewer controls may be needed for media that contains information determined to be in the public domain, publicly releasable, or have limited adverse impacts on organizations, operations, or individuals if accessed by other than authorized personnel. In these situations, physical access controls provide adequate protection.",
+  "params": [
+    {
+      "id": "mp-4_prm_1",
+      "label": "organization-defined types of digital and/or non-digital media",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-4_prm_2",
+      "label": "organization-defined controlled areas",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-04_odp.01",
+      "label": "types of digital media",
+      "select": null,
+      "guidelines": [
+        "types of digital media to be physically controlled are defined (if selected);"
+      ]
+    },
+    {
+      "id": "mp-04_odp.02",
+      "label": "types of non-digital media",
+      "select": null,
+      "guidelines": [
+        "types of non-digital media to be physically controlled are defined (if selected);"
+      ]
+    },
+    {
+      "id": "mp-04_odp.03",
+      "label": "types of digital media",
+      "select": null,
+      "guidelines": [
+        "types of digital media to be securely stored are defined (if selected);"
+      ]
+    },
+    {
+      "id": "mp-04_odp.04",
+      "label": "types of non-digital media",
+      "select": null,
+      "guidelines": [
+        "types of non-digital media to be securely stored are defined (if selected);"
+      ]
+    },
+    {
+      "id": "mp-04_odp.05",
+      "label": "controlled areas",
+      "select": null,
+      "guidelines": [
+        "controlled areas within which to securely store digital media are defined;"
+      ]
+    },
+    {
+      "id": "mp-04_odp.06",
+      "label": "controlled areas",
+      "select": null,
+      "guidelines": [
+        "controlled areas within which to securely store non-digital media are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "cp-2",
+    "cp-6",
+    "cp-9",
+    "cp-10",
+    "mp-2",
+    "mp-7",
+    "pe-3",
+    "pl-2",
+    "sc-12",
+    "sc-13",
+    "sc-28",
+    "sc-34",
+    "si-12"
+  ]
+}

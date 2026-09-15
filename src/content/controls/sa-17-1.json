@@ -1,0 +1,62 @@
+{
+  "id": "sa-17.1",
+  "slug": "sa-17-1",
+  "label": "SA-17(1)",
+  "kind": "enhancement",
+  "parentSlug": "sa-17",
+  "enhancementSlugs": [],
+  "title": "Formal Policy Model",
+  "familyCode": "SA",
+  "sortId": "sa-17.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Produce, as an integral part of the development process, a formal policy model describing the {{ insert: param, sa-17.1_prm_1 }} to be enforced; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Prove that the formal policy model is internally consistent and sufficient to enforce the defined elements of the organizational security and privacy policy when implemented.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Formal models describe specific behaviors or security and privacy policies using formal languages, thus enabling the correctness of those behaviors and policies to be formally proven. Not all components of systems can be modeled. Generally, formal specifications are scoped to the behaviors or policies of interest, such as nondiscretionary access control policies. Organizations choose the formal modeling language and approach based on the nature of the behaviors and policies to be described and the available tools.",
+  "params": [
+    {
+      "id": "sa-17.1_prm_1",
+      "label": "organization-defined elements of organizational security and privacy policy",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-17.01_odp.01",
+      "label": "organizational security policy",
+      "select": null,
+      "guidelines": [
+        "organizational security policy to be enforced is defined;"
+      ]
+    },
+    {
+      "id": "sa-17.01_odp.02",
+      "label": "organizational privacy policy",
+      "select": null,
+      "guidelines": [
+        "organizational privacy policy to be enforced is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "ac-25"
+  ]
+}

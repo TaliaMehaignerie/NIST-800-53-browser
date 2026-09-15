@@ -1,0 +1,91 @@
+{
+  "id": "ac-6.1",
+  "slug": "ac-6-1",
+  "label": "AC-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Authorize Access to Security Functions",
+  "familyCode": "AC",
+  "sortId": "ac-06.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Authorize access for {{ insert: param, ac-06.01_odp.01 }} to:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "{{ insert: param, ac-6.1_prm_2 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "{{ insert: param, ac-06.01_odp.05 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Security functions include establishing system accounts, configuring access authorizations (i.e., permissions, privileges), configuring settings for events to be audited, and establishing intrusion detection parameters. Security-relevant information includes filtering rules for routers or firewalls, configuration parameters for security services, cryptographic key management information, and access control lists. Authorized personnel include security administrators, system administrators, system security officers, system programmers, and other privileged users.",
+  "params": [
+    {
+      "id": "ac-6.1_prm_2",
+      "label": "organization-defined security functions (deployed in hardware, software, and firmware)",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-06.01_odp.01",
+      "label": "individuals and roles",
+      "select": null,
+      "guidelines": [
+        "individuals and roles with authorized access to security functions and security-relevant information are defined;"
+      ]
+    },
+    {
+      "id": "ac-06.01_odp.02",
+      "label": "security functions (deployed in hardware)",
+      "select": null,
+      "guidelines": [
+        "security functions (deployed in hardware) for authorized access are defined;"
+      ]
+    },
+    {
+      "id": "ac-06.01_odp.03",
+      "label": "security functions (deployed in software)",
+      "select": null,
+      "guidelines": [
+        "security functions (deployed in software) for authorized access are defined;"
+      ]
+    },
+    {
+      "id": "ac-06.01_odp.04",
+      "label": "security functions (deployed in firmware)",
+      "select": null,
+      "guidelines": [
+        "security functions (deployed in firmware) for authorized access are defined;"
+      ]
+    },
+    {
+      "id": "ac-06.01_odp.05",
+      "label": "security-relevant information",
+      "select": null,
+      "guidelines": [
+        "security-relevant information for authorized access is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-17",
+    "ac-18",
+    "ac-19",
+    "au-9",
+    "pe-2"
+  ]
+}

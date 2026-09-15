@@ -1,0 +1,20 @@
+{
+  "id": "cp-9.4",
+  "slug": "cp-9-4",
+  "label": "CP-9(4)",
+  "kind": "enhancement",
+  "parentSlug": "cp-9",
+  "enhancementSlugs": [],
+  "title": "Protection from Unauthorized Modification",
+  "familyCode": "CP",
+  "sortId": "cp-09.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cp-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

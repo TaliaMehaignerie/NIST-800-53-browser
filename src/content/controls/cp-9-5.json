@@ -1,0 +1,54 @@
+{
+  "id": "cp-9.5",
+  "slug": "cp-9-5",
+  "label": "CP-9(5)",
+  "kind": "enhancement",
+  "parentSlug": "cp-9",
+  "enhancementSlugs": [],
+  "title": "Transfer to Alternate Storage Site",
+  "familyCode": "CP",
+  "sortId": "cp-09.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Transfer system backup information to the alternate storage site {{ insert: param, cp-9.5_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System backup information can be transferred to alternate storage sites either electronically or by the physical shipment of storage media.",
+  "params": [
+    {
+      "id": "cp-9.5_prm_1",
+      "label": "organization-defined time period and transfer rate consistent with the recovery time and recovery point objectives",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cp-09.05_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period consistent with recovery time and recovery point objectives is defined;"
+      ]
+    },
+    {
+      "id": "cp-09.05_odp.02",
+      "label": "transfer rate",
+      "select": null,
+      "guidelines": [
+        "transfer rate consistent with recovery time and recovery point objectives is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-7",
+    "mp-3",
+    "mp-4",
+    "mp-5"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "cm-6.4",
+  "slug": "cm-6-4",
+  "label": "CM-6(4)",
+  "kind": "enhancement",
+  "parentSlug": "cm-6",
+  "enhancementSlugs": [],
+  "title": "Conformance Demonstration",
+  "familyCode": "CM",
+  "sortId": "cm-06.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

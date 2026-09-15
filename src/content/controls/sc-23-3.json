@@ -1,0 +1,37 @@
+{
+  "id": "sc-23.3",
+  "slug": "sc-23-3",
+  "label": "SC-23(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-23",
+  "enhancementSlugs": [],
+  "title": "Unique System-generated Session Identifiers",
+  "familyCode": "SC",
+  "sortId": "sc-23.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Generate a unique session identifier for each session with {{ insert: param, sc-23.03_odp }} and recognize only session identifiers that are system-generated.",
+      "children": []
+    }
+  ],
+  "guidance": "Generating unique session identifiers curtails the ability of adversaries to reuse previously valid session IDs. Employing the concept of randomness in the generation of unique session identifiers protects against brute-force attacks to determine future session identifiers.",
+  "params": [
+    {
+      "id": "sc-23.03_odp",
+      "label": "randomness requirements",
+      "select": null,
+      "guidelines": [
+        "randomness requirements for generating a unique session identifier for each session are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-10",
+    "sc-12",
+    "sc-13"
+  ]
+}

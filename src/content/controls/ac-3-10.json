@@ -1,0 +1,47 @@
+{
+  "id": "ac-3.10",
+  "slug": "ac-3-10",
+  "label": "AC-3(10)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Audited Override of Access Control Mechanisms",
+  "familyCode": "AC",
+  "sortId": "ac-03.10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ an audited override of automated access control mechanisms under {{ insert: param, ac-03.10_odp.01 }} by {{ insert: param, ac-03.10_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "In certain situations, such as when there is a threat to human life or an event that threatens the organization’s ability to carry out critical missions or business functions, an override capability for access control mechanisms may be needed. Override conditions are defined by organizations and used only in those limited circumstances. Audit events are defined in [AU-2](#au-2) . Audit records are generated in [AU-12](#au-12).",
+  "params": [
+    {
+      "id": "ac-03.10_odp.01",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions under which to employ an audited override of automated access control mechanisms are defined;"
+      ]
+    },
+    {
+      "id": "ac-03.10_odp.02",
+      "label": "roles",
+      "select": null,
+      "guidelines": [
+        "roles allowed to employ an audited override of automated access control mechanisms are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-10",
+    "au-12",
+    "au-14"
+  ]
+}

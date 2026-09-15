@@ -1,0 +1,33 @@
+{
+  "id": "sc-4.2",
+  "slug": "sc-4-2",
+  "label": "SC-4(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-4",
+  "enhancementSlugs": [],
+  "title": "Multilevel or Periods Processing",
+  "familyCode": "SC",
+  "sortId": "sc-04.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prevent unauthorized information transfer via shared resources in accordance with {{ insert: param, sc-04.02_odp }} when system processing explicitly switches between different information classification levels or security categories.",
+      "children": []
+    }
+  ],
+  "guidance": "Changes in processing levels can occur during multilevel or periods processing with information at different classification levels or security categories. It can also occur during serial reuse of hardware components at different classification levels. Organization-defined procedures can include approved sanitization processes for electronically stored information.",
+  "params": [
+    {
+      "id": "sc-04.02_odp",
+      "label": "procedures",
+      "select": null,
+      "guidelines": [
+        "procedures to prevent unauthorized information transfer via shared resources are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

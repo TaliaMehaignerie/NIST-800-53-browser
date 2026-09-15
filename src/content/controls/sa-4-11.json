@@ -1,0 +1,35 @@
+{
+  "id": "sa-4.11",
+  "slug": "sa-4-11",
+  "label": "SA-4(11)",
+  "kind": "enhancement",
+  "parentSlug": "sa-4",
+  "enhancementSlugs": [],
+  "title": "System of Records",
+  "familyCode": "SA",
+  "sortId": "sa-04.11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Include {{ insert: param, sa-04.11_odp }} in the acquisition contract for the operation of a system of records on behalf of an organization to accomplish an organizational mission or function.",
+      "children": []
+    }
+  ],
+  "guidance": "When, by contract, an organization provides for the operation of a system of records to accomplish an organizational mission or function, the organization, consistent with its authority, causes the requirements of the [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) to be applied to the system of records.",
+  "params": [
+    {
+      "id": "sa-04.11_odp",
+      "label": "Privacy Act requirements",
+      "select": null,
+      "guidelines": [
+        "Privacy Act requirements for the operation of a system of records are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pt-6"
+  ]
+}

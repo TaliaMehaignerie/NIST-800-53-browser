@@ -1,0 +1,35 @@
+{
+  "id": "sc-27",
+  "slug": "sc-27",
+  "label": "SC-27",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Platform-independent Applications",
+  "familyCode": "SC",
+  "sortId": "sc-27",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Include within organizational systems the following platform independent applications: {{ insert: param, sc-27_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Platforms are combinations of hardware, firmware, and software components used to execute software applications. Platforms include operating systems, the underlying computer architectures, or both. Platform-independent applications are applications with the capability to execute on multiple platforms. Such applications promote portability and reconstitution on different platforms. Application portability and the ability to reconstitute on different platforms increase the availability of mission-essential functions within organizations in situations where systems with specific operating systems are under attack.",
+  "params": [
+    {
+      "id": "sc-27_odp",
+      "label": "platform-independent applications",
+      "select": null,
+      "guidelines": [
+        "platform-independent applications to be included within organizational systems are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-29"
+  ]
+}

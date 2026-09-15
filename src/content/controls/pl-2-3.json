@@ -1,0 +1,20 @@
+{
+  "id": "pl-2.3",
+  "slug": "pl-2-3",
+  "label": "PL-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "pl-2",
+  "enhancementSlugs": [],
+  "title": "Plan and Coordinate with Other Organizational Entities",
+  "familyCode": "PL",
+  "sortId": "pl-02.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pl-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

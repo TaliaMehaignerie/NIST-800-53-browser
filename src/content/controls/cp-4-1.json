@@ -1,0 +1,30 @@
+{
+  "id": "cp-4.1",
+  "slug": "cp-4-1",
+  "label": "CP-4(1)",
+  "kind": "enhancement",
+  "parentSlug": "cp-4",
+  "enhancementSlugs": [],
+  "title": "Coordinate with Related Plans",
+  "familyCode": "CP",
+  "sortId": "cp-04.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Coordinate contingency plan testing with organizational elements responsible for related plans.",
+      "children": []
+    }
+  ],
+  "guidance": "Plans related to contingency planning for organizational systems include Business Continuity Plans, Disaster Recovery Plans, Continuity of Operations Plans, Crisis Communications Plans, Critical Infrastructure Plans, Cyber Incident Response Plans, and Occupant Emergency Plans. Coordination of contingency plan testing does not require organizations to create organizational elements to handle related plans or to align such elements with specific plans. However, it does require that if such organizational elements are responsible for related plans, organizations coordinate with those elements.",
+  "params": [],
+  "related": [
+    "ir-8",
+    "pm-8"
+  ]
+}

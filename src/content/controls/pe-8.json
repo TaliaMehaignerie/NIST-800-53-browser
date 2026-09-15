@@ -1,0 +1,77 @@
+{
+  "id": "pe-8",
+  "slug": "pe-8",
+  "label": "PE-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-8-1",
+    "pe-8-2",
+    "pe-8-3"
+  ],
+  "title": "Visitor Access Records",
+  "familyCode": "PE",
+  "sortId": "pe-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Maintain visitor access records to the facility where the system resides for {{ insert: param, pe-08_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Review visitor access records {{ insert: param, pe-08_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Report anomalies in visitor access records to {{ insert: param, pe-08_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Visitor access records include the names and organizations of individuals visiting, visitor signatures, forms of identification, dates of access, entry and departure times, purpose of visits, and the names and organizations of individuals visited. Access record reviews determine if access authorizations are current and are still required to support organizational mission and business functions. Access records are not required for publicly accessible areas.",
+  "params": [
+    {
+      "id": "pe-08_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for which to maintain visitor access records for the facility where the system resides is defined;"
+      ]
+    },
+    {
+      "id": "pe-08_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to review visitor access records is defined;"
+      ]
+    },
+    {
+      "id": "pe-08_odp.03",
+      "label": "personnel",
+      "select": null,
+      "guidelines": [
+        "personnel to whom visitor access records anomalies are reported to is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-2",
+    "pe-3",
+    "pe-6"
+  ]
+}

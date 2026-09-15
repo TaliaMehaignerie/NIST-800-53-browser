@@ -1,0 +1,57 @@
+{
+  "id": "ir-5.1",
+  "slug": "ir-5-1",
+  "label": "IR-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-5",
+  "enhancementSlugs": [],
+  "title": "Automated Tracking, Data Collection, and Analysis",
+  "familyCode": "IR",
+  "sortId": "ir-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Track incidents and collect and analyze incident information using {{ insert: param, ir-5.1_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms for tracking incidents and collecting and analyzing incident information include Computer Incident Response Centers or other electronic databases of incidents and network monitoring devices.",
+  "params": [
+    {
+      "id": "ir-5.1_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ir-05.01_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to track incidents are defined;"
+      ]
+    },
+    {
+      "id": "ir-05.01_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to collect incident information are defined;"
+      ]
+    },
+    {
+      "id": "ir-05.01_odp.03",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to analyze incident information are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

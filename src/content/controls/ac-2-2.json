@@ -1,0 +1,48 @@
+{
+  "id": "ac-2.2",
+  "slug": "ac-2-2",
+  "label": "AC-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Automated Temporary and Emergency Account Management",
+  "familyCode": "AC",
+  "sortId": "ac-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Automatically {{ insert: param, ac-02.02_odp.01 }} temporary and emergency accounts after {{ insert: param, ac-02.02_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Management of temporary and emergency accounts includes the removal or disabling of such accounts automatically after a predefined time period rather than at the convenience of the system administrator. Automatic removal or disabling of accounts provides a more consistent implementation.",
+  "params": [
+    {
+      "id": "ac-02.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "remove",
+          "disable"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-02.02_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period after which to automatically remove or disable temporary or emergency accounts is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

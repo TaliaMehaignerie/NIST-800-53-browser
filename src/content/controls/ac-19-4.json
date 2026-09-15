@@ -1,0 +1,81 @@
+{
+  "id": "ac-19.4",
+  "slug": "ac-19-4",
+  "label": "AC-19(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-19",
+  "enhancementSlugs": [],
+  "title": "Restrictions for Classified Information",
+  "familyCode": "AC",
+  "sortId": "ac-19.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Prohibit the use of unclassified mobile devices in facilities containing systems processing, storing, or transmitting classified information unless specifically permitted by the authorizing official; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Enforce the following restrictions on individuals permitted by the authorizing official to use unclassified mobile devices in facilities containing systems processing, storing, or transmitting classified information:",
+          "children": [
+            {
+              "label": "(1)",
+              "prose": "Connection of unclassified mobile devices to classified systems is prohibited;",
+              "children": []
+            },
+            {
+              "label": "(2)",
+              "prose": "Connection of unclassified mobile devices to unclassified systems requires approval from the authorizing official;",
+              "children": []
+            },
+            {
+              "label": "(3)",
+              "prose": "Use of internal or external modems or wireless interfaces within the unclassified mobile devices is prohibited; and",
+              "children": []
+            },
+            {
+              "label": "(4)",
+              "prose": "Unclassified mobile devices and the information stored on those devices are subject to random reviews and inspections by {{ insert: param, ac-19.04_odp.01 }} , and if classified information is found, the incident handling policy is followed.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "(c)",
+          "prose": "Restrict the connection of classified mobile devices to classified systems in accordance with {{ insert: param, ac-19.04_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "ac-19.04_odp.01",
+      "label": "security officials",
+      "select": null,
+      "guidelines": [
+        "security officials responsible for the review and inspection of unclassified mobile devices and the information stored on those devices are defined;"
+      ]
+    },
+    {
+      "id": "ac-19.04_odp.02",
+      "label": "security policies",
+      "select": null,
+      "guidelines": [
+        "security policies restricting the connection of classified mobile devices to classified systems are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-8",
+    "ir-4"
+  ]
+}

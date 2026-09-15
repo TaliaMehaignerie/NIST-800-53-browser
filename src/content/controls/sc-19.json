@@ -1,0 +1,24 @@
+{
+  "id": "sc-19",
+  "slug": "sc-19",
+  "label": "SC-19",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Voice Over Internet Protocol",
+  "familyCode": "SC",
+  "sortId": "sc-19",
+  "withdrawn": true,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Technology-specific; addressed as any other technology or protocol.",
+      "children": []
+    }
+  ],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,38 @@
+{
+  "id": "au-6.1",
+  "slug": "au-6-1",
+  "label": "AU-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-6",
+  "enhancementSlugs": [],
+  "title": "Automated Process Integration",
+  "familyCode": "AU",
+  "sortId": "au-06.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Integrate audit record review, analysis, and reporting processes using {{ insert: param, au-06.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizational processes that benefit from integrated audit record review, analysis, and reporting include incident response, continuous monitoring, contingency planning, investigation and response to suspicious activities, and Inspector General audits.",
+  "params": [
+    {
+      "id": "au-06.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used for integrating audit record review, analysis, and reporting processes are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pm-7"
+  ]
+}

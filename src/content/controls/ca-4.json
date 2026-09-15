@@ -1,0 +1,20 @@
+{
+  "id": "ca-4",
+  "slug": "ca-4",
+  "label": "CA-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Security Certification",
+  "familyCode": "CA",
+  "sortId": "ca-04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ca-2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

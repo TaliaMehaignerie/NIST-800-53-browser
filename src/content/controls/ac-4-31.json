@@ -1,0 +1,24 @@
+{
+  "id": "ac-4.31",
+  "slug": "ac-4-31",
+  "label": "AC-4(31)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Failed Content Transfer Prevention",
+  "familyCode": "AC",
+  "sortId": "ac-04.31",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, prevent the transfer of failed content to the receiving domain.",
+      "children": []
+    }
+  ],
+  "guidance": "Content that failed filtering checks can corrupt the system if transferred to the receiving domain.",
+  "params": [],
+  "related": []
+}

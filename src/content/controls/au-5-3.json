@@ -1,0 +1,37 @@
+{
+  "id": "au-5.3",
+  "slug": "au-5-3",
+  "label": "AU-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "au-5",
+  "enhancementSlugs": [],
+  "title": "Configurable Traffic Volume Thresholds",
+  "familyCode": "AU",
+  "sortId": "au-05.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce configurable network communications traffic volume thresholds reflecting limits on audit log storage capacity and {{ insert: param, au-05.03_odp }} network traffic above those thresholds.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations have the capability to reject or delay the processing of network communications traffic if audit logging information about such traffic is determined to exceed the storage capacity of the system audit logging function. The rejection or delay response is triggered by the established organizational traffic volume thresholds that can be adjusted based on changes to audit log storage capacity.",
+  "params": [
+    {
+      "id": "au-05.03_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "reject",
+          "delay"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

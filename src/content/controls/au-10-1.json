@@ -1,0 +1,47 @@
+{
+  "id": "au-10.1",
+  "slug": "au-10-1",
+  "label": "AU-10(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-10",
+  "enhancementSlugs": [],
+  "title": "Association of Identities",
+  "familyCode": "AU",
+  "sortId": "au-10.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Bind the identity of the information producer with the information to {{ insert: param, au-10.01_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Provide the means for authorized individuals to determine the identity of the producer of the information.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Binding identities to the information supports audit requirements that provide organizational personnel with the means to identify who produced specific information in the event of an information transfer. Organizations determine and approve the strength of attribute binding between the information producer and the information based on the security category of the information and other relevant risk factors.",
+  "params": [
+    {
+      "id": "au-10.01_odp",
+      "label": "strength of binding",
+      "select": null,
+      "guidelines": [
+        "the strength of binding between the identity of the information producer and the information is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-4",
+    "ac-16"
+  ]
+}

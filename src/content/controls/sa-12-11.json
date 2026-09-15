@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.11",
+  "slug": "sa-12-11",
+  "label": "SA-12(11)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Penetration Testing / Analysis of Elements, Processes, and Actors",
+  "familyCode": "SA",
+  "sortId": "sa-12.11",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-6.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

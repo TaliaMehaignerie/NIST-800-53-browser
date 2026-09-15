@@ -1,0 +1,33 @@
+{
+  "id": "cp-4.3",
+  "slug": "cp-4-3",
+  "label": "CP-4(3)",
+  "kind": "enhancement",
+  "parentSlug": "cp-4",
+  "enhancementSlugs": [],
+  "title": "Automated Testing",
+  "familyCode": "CP",
+  "sortId": "cp-04.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test the contingency plan using {{ insert: param, cp-04.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms facilitate thorough and effective testing of contingency plans by providing more complete coverage of contingency issues, selecting more realistic test scenarios and environments, and effectively stressing the system and supported mission and business functions.",
+  "params": [
+    {
+      "id": "cp-04.03_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms for contingency plan testing are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

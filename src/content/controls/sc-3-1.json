@@ -1,0 +1,24 @@
+{
+  "id": "sc-3.1",
+  "slug": "sc-3-1",
+  "label": "SC-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-3",
+  "enhancementSlugs": [],
+  "title": "Hardware Separation",
+  "familyCode": "SC",
+  "sortId": "sc-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ hardware separation mechanisms to implement security function isolation.",
+      "children": []
+    }
+  ],
+  "guidance": "Hardware separation mechanisms include hardware ring architectures that are implemented within microprocessors and hardware-enforced address segmentation used to support logically distinct storage objects with separate attributes (i.e., readable, writeable).",
+  "params": [],
+  "related": []
+}

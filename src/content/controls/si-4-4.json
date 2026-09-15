@@ -1,0 +1,83 @@
+{
+  "id": "si-4.4",
+  "slug": "si-4-4",
+  "label": "SI-4(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Inbound and Outbound Communications Traffic",
+  "familyCode": "SI",
+  "sortId": "si-04.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Determine criteria for unusual or unauthorized activities or conditions for inbound and outbound communications traffic;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Monitor inbound and outbound communications traffic {{ insert: param, si-4.4_prm_1 }} for {{ insert: param, si-4.4_prm_2 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Unusual or unauthorized activities or conditions related to system inbound and outbound communications traffic includes internal traffic that indicates the presence of malicious code or unauthorized use of legitimate code or credentials within organizational systems or propagating among system components, signaling to external systems, and the unauthorized exporting of information. Evidence of malicious code or unauthorized use of legitimate code or credentials is used to identify potentially compromised systems or system components.",
+  "params": [
+    {
+      "id": "si-4.4_prm_1",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-4.4_prm_2",
+      "label": "organization-defined unusual or unauthorized activities or conditions",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-04.04_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to monitor inbound communications traffic for unusual or unauthorized activities or conditions is defined;"
+      ]
+    },
+    {
+      "id": "si-04.04_odp.02",
+      "label": "unusual or unauthorized activities or conditions",
+      "select": null,
+      "guidelines": [
+        "unusual or unauthorized activities or conditions that are to be monitored in inbound communications traffic are defined;"
+      ]
+    },
+    {
+      "id": "si-04.04_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to monitor outbound communications traffic for unusual or unauthorized activities or conditions is defined;"
+      ]
+    },
+    {
+      "id": "si-04.04_odp.04",
+      "label": "unusual or unauthorized activities or conditions",
+      "select": null,
+      "guidelines": [
+        "unusual or unauthorized activities or conditions that are to be monitored in outbound communications traffic are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

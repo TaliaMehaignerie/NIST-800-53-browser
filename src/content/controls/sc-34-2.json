@@ -1,0 +1,33 @@
+{
+  "id": "sc-34.2",
+  "slug": "sc-34-2",
+  "label": "SC-34(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-34",
+  "enhancementSlugs": [],
+  "title": "Integrity Protection on Read-only Media",
+  "familyCode": "SC",
+  "sortId": "sc-34.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect the integrity of information prior to storage on read-only media and control the media after such information has been recorded onto the media.",
+      "children": []
+    }
+  ],
+  "guidance": "Controls prevent the substitution of media into systems or the reprogramming of programmable read-only media prior to installation into the systems. Integrity protection controls include a combination of prevention, detection, and response.",
+  "params": [],
+  "related": [
+    "cm-3",
+    "cm-5",
+    "cm-9",
+    "mp-2",
+    "mp-4",
+    "mp-5",
+    "sc-28",
+    "si-3"
+  ]
+}

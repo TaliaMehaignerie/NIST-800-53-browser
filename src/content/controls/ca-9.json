@@ -1,0 +1,85 @@
+{
+  "id": "ca-9",
+  "slug": "ca-9",
+  "label": "CA-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ca-9-1"
+  ],
+  "title": "Internal System Connections",
+  "familyCode": "CA",
+  "sortId": "ca-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Authorize internal connections of {{ insert: param, ca-09_odp.01 }} to the system;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Document, for each internal connection, the interface characteristics, security and privacy requirements, and the nature of the information communicated;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Terminate internal system connections after {{ insert: param, ca-09_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Review {{ insert: param, ca-09_odp.03 }} the continued need for each internal connection.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Internal system connections are connections between organizational systems and separate constituent system components (i.e., connections between components that are part of the same system) including components used for system development. Intra-system connections include connections with mobile devices, notebook and desktop computers, tablets, printers, copiers, facsimile machines, scanners, sensors, and servers. Instead of authorizing each internal system connection individually, organizations can authorize internal connections for a class of system components with common characteristics and/or configurations, including printers, scanners, and copiers with a specified processing, transmission, and storage capability or smart phones and tablets with a specific baseline configuration. The continued need for an internal system connection is reviewed from the perspective of whether it provides support for organizational missions or business functions.",
+  "params": [
+    {
+      "id": "ca-09_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components or classes of components requiring internal connections to the system are defined;"
+      ]
+    },
+    {
+      "id": "ca-09_odp.02",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions requiring termination of internal connections are defined;"
+      ]
+    },
+    {
+      "id": "ca-09_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to review the continued need for each internal connection is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-4",
+    "ac-18",
+    "ac-19",
+    "cm-2",
+    "ia-3",
+    "sc-7",
+    "si-12"
+  ]
+}

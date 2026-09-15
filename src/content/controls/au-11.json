@@ -1,0 +1,50 @@
+{
+  "id": "au-11",
+  "slug": "au-11",
+  "label": "AU-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "au-11-1"
+  ],
+  "title": "Audit Record Retention",
+  "familyCode": "AU",
+  "sortId": "au-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Retain audit records for {{ insert: param, au-11_odp }} to provide support for after-the-fact investigations of incidents and to meet regulatory and organizational information retention requirements.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations retain audit records until it is determined that the records are no longer needed for administrative, legal, audit, or other operational purposes. This includes the retention and availability of audit records relative to Freedom of Information Act (FOIA) requests, subpoenas, and law enforcement actions. Organizations develop standard categories of audit records relative to such types of actions and standard response processes for each type of action. The National Archives and Records Administration (NARA) General Records Schedules provide federal policy on records retention.",
+  "params": [
+    {
+      "id": "au-11_odp",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "a time period to retain audit records that is consistent with the records retention policy is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-4",
+    "au-5",
+    "au-6",
+    "au-9",
+    "au-14",
+    "mp-6",
+    "ra-5",
+    "si-12"
+  ]
+}

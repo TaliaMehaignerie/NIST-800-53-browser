@@ -1,0 +1,37 @@
+{
+  "id": "cp-2.6",
+  "slug": "cp-2-6",
+  "label": "CP-2(6)",
+  "kind": "enhancement",
+  "parentSlug": "cp-2",
+  "enhancementSlugs": [],
+  "title": "Alternate Processing and Storage Sites",
+  "familyCode": "CP",
+  "sortId": "cp-02.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Plan for the transfer of {{ insert: param, cp-02.06_odp }} mission and business functions to alternate processing and/or storage sites with minimal or no loss of operational continuity and sustain that continuity through system restoration to primary processing and/or storage sites.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may choose to conduct contingency planning activities for alternate processing and storage sites as part of business continuity planning or business impact analyses. Primary processing and/or storage sites defined by organizations as part of contingency planning may change depending on the circumstances associated with the contingency.",
+  "params": [
+    {
+      "id": "cp-02.06_odp",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "all",
+          "essential"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

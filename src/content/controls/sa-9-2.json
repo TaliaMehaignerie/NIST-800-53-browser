@@ -1,0 +1,39 @@
+{
+  "id": "sa-9.2",
+  "slug": "sa-9-2",
+  "label": "SA-9(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-9",
+  "enhancementSlugs": [],
+  "title": "Identification of Functions, Ports, Protocols, and Services",
+  "familyCode": "SA",
+  "sortId": "sa-09.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require providers of the following external system services to identify the functions, ports, protocols, and other services required for the use of such services: {{ insert: param, sa-09.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Information from external service providers regarding the specific functions, ports, protocols, and services used in the provision of such services can be useful when the need arises to understand the trade-offs involved in restricting certain functions and services or blocking certain ports and protocols.",
+  "params": [
+    {
+      "id": "sa-09.02_odp",
+      "label": "external system services",
+      "select": null,
+      "guidelines": [
+        "external system services that require the identification of functions, ports, protocols, and other services are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-6",
+    "cm-7"
+  ]
+}

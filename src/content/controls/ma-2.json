@@ -1,0 +1,100 @@
+{
+  "id": "ma-2",
+  "slug": "ma-2",
+  "label": "MA-2",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ma-2-1",
+    "ma-2-2"
+  ],
+  "title": "Controlled Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Schedule, document, and review records of maintenance, repair, and replacement on system components in accordance with manufacturer or vendor specifications and/or organizational requirements;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Approve and monitor all maintenance activities, whether performed on site or remotely and whether the system or system components are serviced on site or removed to another location;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Require that {{ insert: param, ma-02_odp.01 }} explicitly approve the removal of the system or system components from organizational facilities for off-site maintenance, repair, or replacement;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Sanitize equipment to remove the following information from associated media prior to removal from organizational facilities for off-site maintenance, repair, or replacement: {{ insert: param, ma-02_odp.02 }};",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Check all potentially impacted controls to verify that the controls are still functioning properly following maintenance, repair, or replacement actions; and",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Include the following information in organizational maintenance records: {{ insert: param, ma-02_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Controlling system maintenance addresses the information security aspects of the system maintenance program and applies to all types of maintenance to system components conducted by local or nonlocal entities. Maintenance includes peripherals such as scanners, copiers, and printers. Information necessary for creating effective maintenance records includes the date and time of maintenance, a description of the maintenance performed, names of the individuals or group performing the maintenance, name of the escort, and system components or equipment that are removed or replaced. Organizations consider supply chain-related risks associated with replacement components for systems.",
+  "params": [
+    {
+      "id": "ma-02_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles required to explicitly approve the removal of the system or system components from organizational facilities for off-site maintenance or repairs is/are defined;"
+      ]
+    },
+    {
+      "id": "ma-02_odp.02",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information to be removed from associated media prior to removal from organizational facilities for off-site maintenance, repair, or replacement is defined;"
+      ]
+    },
+    {
+      "id": "ma-02_odp.03",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information to be included in organizational maintenance records is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "cm-3",
+    "cm-4",
+    "cm-5",
+    "cm-8",
+    "ma-4",
+    "mp-6",
+    "pe-16",
+    "si-2",
+    "sr-3",
+    "sr-4",
+    "sr-11"
+  ]
+}

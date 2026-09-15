@@ -1,0 +1,32 @@
+{
+  "id": "pe-9",
+  "slug": "pe-9",
+  "label": "PE-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pe-9-1",
+    "pe-9-2"
+  ],
+  "title": "Power Equipment and Cabling",
+  "familyCode": "PE",
+  "sortId": "pe-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect power equipment and power cabling for the system from damage and destruction.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations determine the types of protection necessary for the power equipment and cabling employed at different locations that are both internal and external to organizational facilities and environments of operation. Types of power equipment and cabling include internal cabling and uninterruptable power sources in offices or data centers, generators and power cabling outside of buildings, and power sources for self-contained components such as satellites, vehicles, and other deployable systems.",
+  "params": [],
+  "related": [
+    "pe-4"
+  ]
+}

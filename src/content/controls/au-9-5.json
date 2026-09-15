@@ -1,0 +1,47 @@
+{
+  "id": "au-9.5",
+  "slug": "au-9-5",
+  "label": "AU-9(5)",
+  "kind": "enhancement",
+  "parentSlug": "au-9",
+  "enhancementSlugs": [],
+  "title": "Dual Authorization",
+  "familyCode": "AU",
+  "sortId": "au-09.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce dual authorization for {{ insert: param, au-09.05_odp.01 }} of {{ insert: param, au-09.05_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may choose different selection options for different types of audit information. Dual authorization mechanisms (also known as two-person control) require the approval of two authorized individuals to execute audit functions. To reduce the risk of collusion, organizations consider rotating dual authorization duties to other individuals. Organizations do not require dual authorization mechanisms when immediate responses are necessary to ensure public and environmental safety.",
+  "params": [
+    {
+      "id": "au-09.05_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "movement",
+          "deletion"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "au-09.05_odp.02",
+      "label": "audit information",
+      "select": null,
+      "guidelines": [
+        "audit information for which dual authorization is to be enforced is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3"
+  ]
+}

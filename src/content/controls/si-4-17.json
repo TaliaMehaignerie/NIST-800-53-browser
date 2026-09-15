@@ -1,0 +1,30 @@
+{
+  "id": "si-4.17",
+  "slug": "si-4-17",
+  "label": "SI-4(17)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "Integrated Situational Awareness",
+  "familyCode": "SI",
+  "sortId": "si-04.17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Correlate information from monitoring physical, cyber, and supply chain activities to achieve integrated, organization-wide situational awareness.",
+      "children": []
+    }
+  ],
+  "guidance": "Correlating monitoring information from a more diverse set of information sources helps to achieve integrated situational awareness. Integrated situational awareness from a combination of physical, cyber, and supply chain monitoring activities enhances the capability of organizations to more quickly detect sophisticated attacks and investigate the methods and techniques employed to carry out such attacks. In contrast to [SI-4(16)](#si-4.16) , which correlates the various cyber monitoring information, integrated situational awareness is intended to correlate monitoring beyond the cyber domain. Correlation of monitoring information from multiple activities may help reveal attacks on organizations that are operating across multiple attack vectors.",
+  "params": [],
+  "related": [
+    "au-16",
+    "pe-6",
+    "sr-2",
+    "sr-4",
+    "sr-6"
+  ]
+}

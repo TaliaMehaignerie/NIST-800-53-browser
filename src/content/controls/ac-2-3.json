@@ -1,0 +1,65 @@
+{
+  "id": "ac-2.3",
+  "slug": "ac-2-3",
+  "label": "AC-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Disable Accounts",
+  "familyCode": "AC",
+  "sortId": "ac-02.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Disable accounts within {{ insert: param, ac-02.03_odp.01 }} when the accounts:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Have expired;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Are no longer associated with a user or individual;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Are in violation of organizational policy; or",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Have been inactive for {{ insert: param, ac-02.03_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Disabling expired, inactive, or otherwise anomalous accounts supports the concepts of least privilege and least functionality which reduce the attack surface of the system.",
+  "params": [
+    {
+      "id": "ac-02.03_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which to disable accounts is defined;"
+      ]
+    },
+    {
+      "id": "ac-02.03_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for account inactivity before disabling is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

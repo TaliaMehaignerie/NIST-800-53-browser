@@ -1,0 +1,68 @@
+{
+  "id": "ir-6",
+  "slug": "ir-6",
+  "label": "IR-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-6-1",
+    "ir-6-2",
+    "ir-6-3"
+  ],
+  "title": "Incident Reporting",
+  "familyCode": "IR",
+  "sortId": "ir-06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Require personnel to report suspected incidents to the organizational incident response capability within {{ insert: param, ir-06_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Report incident information to {{ insert: param, ir-06_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The types of incidents reported, the content and timeliness of the reports, and the designated reporting authorities reflect applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Incident information can inform risk assessments, control effectiveness assessments, security requirements for acquisitions, and selection criteria for technology products.",
+  "params": [
+    {
+      "id": "ir-06_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for personnel to report suspected incidents to the organizational incident response capability is defined;"
+      ]
+    },
+    {
+      "id": "ir-06_odp.02",
+      "label": "authorities",
+      "select": null,
+      "guidelines": [
+        "authorities to whom incident information is to be reported are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-6",
+    "cp-2",
+    "ir-4",
+    "ir-5",
+    "ir-8",
+    "ir-9"
+  ]
+}

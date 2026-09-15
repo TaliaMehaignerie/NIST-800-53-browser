@@ -1,0 +1,41 @@
+{
+  "id": "sc-7.27",
+  "slug": "sc-7-27",
+  "label": "SC-7(27)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Unclassified Non-national Security System Connections",
+  "familyCode": "SC",
+  "sortId": "sc-07.27",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prohibit the direct connection of {{ insert: param, sc-07.27_odp.01 }} to an external network without the use of {{ insert: param, sc-07.27_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "A direct connection is a dedicated physical or virtual connection between two or more systems. Organizations typically do not have complete control over external networks, including the Internet. Boundary protection devices (e.g., firewalls, gateways, and routers) mediate communications and information flows between unclassified non-national security systems and external networks.",
+  "params": [
+    {
+      "id": "sc-07.27_odp.01",
+      "label": "unclassified, non-national security system",
+      "select": null,
+      "guidelines": [
+        "the unclassified, non-national security system prohibited from directly connecting to an external network is defined;"
+      ]
+    },
+    {
+      "id": "sc-07.27_odp.02",
+      "label": "boundary protection device",
+      "select": null,
+      "guidelines": [
+        "the boundary protection device required for a direct connection of unclassified, non-national security system to an external network is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

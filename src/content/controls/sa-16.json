@@ -1,0 +1,41 @@
+{
+  "id": "sa-16",
+  "slug": "sa-16",
+  "label": "SA-16",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Developer-provided Training",
+  "familyCode": "SA",
+  "sortId": "sa-16",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to provide the following training on the correct use and operation of the implemented security and privacy functions, controls, and/or mechanisms: {{ insert: param, sa-16_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Developer-provided training applies to external and internal (in-house) developers. Training personnel is essential to ensuring the effectiveness of the controls implemented within organizational systems. Types of training include web-based and computer-based training, classroom-style training, and hands-on training (including micro-training). Organizations can also request training materials from developers to conduct in-house training or offer self-training to organizational personnel. Organizations determine the type of training necessary and may require different types of training for different security and privacy functions, controls, and mechanisms.",
+  "params": [
+    {
+      "id": "sa-16_odp",
+      "label": "training",
+      "select": null,
+      "guidelines": [
+        "training on the correct use and operation of the implemented security and privacy functions, controls, and/or mechanisms provided by the developer of the system, system component, or system service is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-2",
+    "at-3",
+    "pe-3",
+    "sa-4",
+    "sa-5"
+  ]
+}

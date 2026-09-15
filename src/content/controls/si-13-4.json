@@ -1,0 +1,73 @@
+{
+  "id": "si-13.4",
+  "slug": "si-13-4",
+  "label": "SI-13(4)",
+  "kind": "enhancement",
+  "parentSlug": "si-13",
+  "enhancementSlugs": [],
+  "title": "Standby Component Installation and Notification",
+  "familyCode": "SI",
+  "sortId": "si-13.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "If system component failures are detected:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Ensure that the standby components are successfully and transparently installed within {{ insert: param, si-13.04_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "{{ insert: param, si-13.04_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Automatic or manual transfer of components from standby to active mode can occur upon the detection of component failures.",
+  "params": [
+    {
+      "id": "si-13.04_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for standby components to be installed is defined;"
+      ]
+    },
+    {
+      "id": "si-13.04_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "activate {{ insert: param, si-13.04_odp.03 }} ",
+          "automatically shut down the system",
+          "{{ insert: param, si-13.04_odp.04 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-13.04_odp.03",
+      "label": "alarm",
+      "select": null,
+      "guidelines": [
+        "alarm to be activated when system component failures are detected is defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-13.04_odp.04",
+      "label": "action",
+      "select": null,
+      "guidelines": [
+        "action to be taken when system component failures are detected is defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,88 @@
+{
+  "id": "ia-5.1",
+  "slug": "ia-5-1",
+  "label": "IA-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Password-based Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "For password-based authentication:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Maintain a list of commonly-used, expected, or compromised passwords and update the list {{ insert: param, ia-05.01_odp.01 }} and when organizational passwords are suspected to have been compromised directly or indirectly;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Verify, when users create or update passwords, that the passwords are not found on the list of commonly-used, expected, or compromised passwords in IA-5(1)(a);",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Transmit passwords only over cryptographically-protected channels;",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Store passwords using an approved salted key derivation function, preferably using a keyed hash;",
+          "children": []
+        },
+        {
+          "label": "(e)",
+          "prose": "Require immediate selection of a new password upon account recovery;",
+          "children": []
+        },
+        {
+          "label": "(f)",
+          "prose": "Allow user selection of long passwords and passphrases, including spaces and all printable characters;",
+          "children": []
+        },
+        {
+          "label": "(g)",
+          "prose": "Employ automated tools to assist the user in selecting strong password authenticators; and",
+          "children": []
+        },
+        {
+          "label": "(h)",
+          "prose": "Enforce the following composition and complexity rules: {{ insert: param, ia-05.01_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Password-based authentication applies to passwords regardless of whether they are used in single-factor or multi-factor authentication. Long passwords or passphrases are preferable over shorter passwords. Enforced composition rules provide marginal security benefits while decreasing usability. However, organizations may choose to establish certain rules for password generation (e.g., minimum character length for long passwords) under certain circumstances and can enforce this requirement in IA-5(1)(h). Account recovery can occur, for example, in situations when a password is forgotten. Cryptographically protected passwords include salted one-way cryptographic hashes of passwords. The list of commonly used, compromised, or expected passwords includes passwords obtained from previous breach corpuses, dictionary words, and repetitive or sequential characters. The list includes context-specific words, such as the name of the service, username, and derivatives thereof.",
+  "params": [
+    {
+      "id": "ia-05.01_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to update the list of commonly used, expected, or compromised passwords is defined;"
+      ]
+    },
+    {
+      "id": "ia-05.01_odp.02",
+      "label": "composition and complexity rules",
+      "select": null,
+      "guidelines": [
+        "authenticator composition and complexity rules are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ia-6"
+  ]
+}

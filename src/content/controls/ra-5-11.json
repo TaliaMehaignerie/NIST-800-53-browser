@@ -1,0 +1,28 @@
+{
+  "id": "ra-5.11",
+  "slug": "ra-5-11",
+  "label": "RA-5(11)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Public Disclosure Program",
+  "familyCode": "RA",
+  "sortId": "ra-05.11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish a public reporting channel for receiving reports of vulnerabilities in organizational systems and system components.",
+      "children": []
+    }
+  ],
+  "guidance": "The reporting channel is publicly discoverable and contains clear language authorizing good-faith research and the disclosure of vulnerabilities to the organization. The organization does not condition its authorization on an expectation of indefinite non-disclosure to the public by the reporting entity but may request a specific time period to properly remediate the vulnerability.",
+  "params": [],
+  "related": []
+}

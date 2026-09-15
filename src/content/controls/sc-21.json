@@ -1,0 +1,33 @@
+{
+  "id": "sc-21",
+  "slug": "sc-21",
+  "label": "SC-21",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-21-1"
+  ],
+  "title": "Secure Name/Address Resolution Service (Recursive or Caching Resolver)",
+  "familyCode": "SC",
+  "sortId": "sc-21",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Request and perform data origin authentication and data integrity verification on the name/address resolution responses the system receives from authoritative sources.",
+      "children": []
+    }
+  ],
+  "guidance": "Each client of name resolution services either performs this validation on its own or has authenticated channels to trusted validation providers. Systems that provide name and address resolution services for local clients include recursive resolving or caching domain name system (DNS) servers. DNS client resolvers either perform validation of DNSSEC signatures, or clients use authenticated channels to recursive resolvers that perform such validations. Systems that use technologies other than the DNS to map between host and service names and network addresses provide some other means to enable clients to verify the authenticity and integrity of response data.",
+  "params": [],
+  "related": [
+    "sc-20",
+    "sc-22"
+  ]
+}

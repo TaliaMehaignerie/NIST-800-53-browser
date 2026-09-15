@@ -1,0 +1,55 @@
+{
+  "id": "pe-4",
+  "slug": "pe-4",
+  "label": "PE-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Access Control for Transmission",
+  "familyCode": "PE",
+  "sortId": "pe-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Control physical access to {{ insert: param, pe-04_odp.01 }} within organizational facilities using {{ insert: param, pe-04_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Security controls applied to system distribution and transmission lines prevent accidental damage, disruption, and physical tampering. Such controls may also be necessary to prevent eavesdropping or modification of unencrypted transmissions. Security controls used to control physical access to system distribution and transmission lines include disconnected or locked spare jacks, locked wiring closets, protection of cabling by conduit or cable trays, and wiretapping sensors.",
+  "params": [
+    {
+      "id": "pe-04_odp.01",
+      "label": "system distribution and transmission lines",
+      "select": null,
+      "guidelines": [
+        "system distribution and transmission lines requiring physical access controls are defined;"
+      ]
+    },
+    {
+      "id": "pe-04_odp.02",
+      "label": "security controls",
+      "select": null,
+      "guidelines": [
+        "security controls to be implemented to control physical access to system distribution and transmission lines within the organizational facility are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3",
+    "ia-4",
+    "mp-2",
+    "mp-4",
+    "pe-2",
+    "pe-3",
+    "pe-5",
+    "pe-9",
+    "sc-7",
+    "sc-8"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "ir-9",
+  "slug": "ir-9",
+  "label": "IR-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-9-1",
+    "ir-9-2",
+    "ir-9-3",
+    "ir-9-4"
+  ],
+  "title": "Information Spillage Response",
+  "familyCode": "IR",
+  "sortId": "ir-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Respond to information spills by:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Assigning {{ insert: param, ir-09_odp.01 }} with responsibility for responding to information spills;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Identifying the specific information involved in the system contamination;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Alerting {{ insert: param, ir-09_odp.02 }} of the information spill using a method of communication not associated with the spill;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Isolating the contaminated system or system component;",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Eradicating the information from the contaminated system or component;",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Identifying other systems or system components that may have been subsequently contaminated; and",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Performing the following additional actions: {{ insert: param, ir-09_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Information spillage refers to instances where information is placed on systems that are not authorized to process such information. Information spills occur when information that is thought to be a certain classification or impact level is transmitted to a system and subsequently is determined to be of a higher classification or impact level. At that point, corrective action is required. The nature of the response is based on the classification or impact level of the spilled information, the security capabilities of the system, the specific nature of the contaminated storage media, and the access authorizations of individuals with authorized access to the contaminated system. The methods used to communicate information about the spill after the fact do not involve methods directly associated with the actual spill to minimize the risk of further spreading the contamination before such contamination is isolated and eradicated.",
+  "params": [
+    {
+      "id": "ir-09_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles assigned the responsibility for responding to information spills is/are defined;"
+      ]
+    },
+    {
+      "id": "ir-09_odp.02",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be alerted of the information spill using a method of communication not associated with the spill is/are defined;"
+      ]
+    },
+    {
+      "id": "ir-09_odp.03",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to be performed are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "ir-6",
+    "pm-26",
+    "pm-27",
+    "pt-2",
+    "pt-3",
+    "pt-7",
+    "ra-7"
+  ]
+}

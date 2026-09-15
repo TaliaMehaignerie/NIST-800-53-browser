@@ -1,0 +1,33 @@
+{
+  "id": "si-13.3",
+  "slug": "si-13-3",
+  "label": "SI-13(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-13",
+  "enhancementSlugs": [],
+  "title": "Manual Transfer Between Components",
+  "familyCode": "SI",
+  "sortId": "si-13.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manually initiate transfers between active and standby system components when the use of the active component reaches {{ insert: param, si-13.03_odp }} of the mean time to failure.",
+      "children": []
+    }
+  ],
+  "guidance": "For example, if the MTTF for a system component is 100 days and the MTTF percentage defined by the organization is 90 percent, the manual transfer would occur after 90 days.",
+  "params": [
+    {
+      "id": "si-13.03_odp",
+      "label": "percentage",
+      "select": null,
+      "guidelines": [
+        "the percentage of the mean time to failure for transfers to be manually initiated is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

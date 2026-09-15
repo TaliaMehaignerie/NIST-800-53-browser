@@ -1,0 +1,33 @@
+{
+  "id": "sa-8.12",
+  "slug": "sa-8-12",
+  "label": "SA-8(12)",
+  "kind": "enhancement",
+  "parentSlug": "sa-8",
+  "enhancementSlugs": [],
+  "title": "Hierarchical Protection",
+  "familyCode": "SA",
+  "sortId": "sa-08.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the security design principle of hierarchical protection in {{ insert: param, sa-08.12_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The principle of hierarchical protection states that a component need not be protected from more trustworthy components. In the degenerate case of the most trusted component, it protects itself from all other components. For example, if an operating system kernel is deemed the most trustworthy component in a system, then it protects itself from all untrusted applications it supports, but the applications, conversely, do not need to protect themselves from the kernel. The trustworthiness of users is a consideration for applying the principle of hierarchical protection. A trusted system need not protect itself from an equally trustworthy user, reflecting use of untrusted systems in \"system high\" environments where users are highly trustworthy and where other protections are put in place to bound and protect the \"system high\" execution environment.",
+  "params": [
+    {
+      "id": "sa-08.12_odp",
+      "label": "systems or system components",
+      "select": null,
+      "guidelines": [
+        "systems or system components that implement the security design principle of hierarchical protection are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

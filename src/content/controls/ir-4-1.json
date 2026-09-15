@@ -1,0 +1,36 @@
+{
+  "id": "ir-4.1",
+  "slug": "ir-4-1",
+  "label": "IR-4(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Automated Incident Handling Processes",
+  "familyCode": "IR",
+  "sortId": "ir-04.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Support the incident handling process using {{ insert: param, ir-04.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms that support incident handling processes include online incident management systems and tools that support the collection of live response data, full network packet capture, and forensic analysis.",
+  "params": [
+    {
+      "id": "ir-04.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to support the incident handling process are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,37 @@
+{
+  "id": "sc-49",
+  "slug": "sc-49",
+  "label": "SC-49",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Hardware-enforced Separation and Policy Enforcement",
+  "familyCode": "SC",
+  "sortId": "sc-49",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement hardware-enforced separation and policy enforcement mechanisms between {{ insert: param, sc-49_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "System owners may require additional strength of mechanism and robustness to ensure domain separation and policy enforcement for specific types of threats and environments of operation. Hardware-enforced separation and policy enforcement provide greater strength of mechanism than software-enforced separation and policy enforcement.",
+  "params": [
+    {
+      "id": "sc-49_odp",
+      "label": "security domains",
+      "select": null,
+      "guidelines": [
+        "security domains requiring hardware-enforced separation and policy enforcement mechanisms are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-4",
+    "sa-8",
+    "sc-50"
+  ]
+}

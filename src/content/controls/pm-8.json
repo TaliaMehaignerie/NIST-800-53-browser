@@ -1,0 +1,36 @@
+{
+  "id": "pm-8",
+  "slug": "pm-8",
+  "label": "PM-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Critical Infrastructure Plan",
+  "familyCode": "PM",
+  "sortId": "pm-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Address information security and privacy issues in the development, documentation, and updating of a critical infrastructure and key resources protection plan.",
+      "children": []
+    }
+  ],
+  "guidance": "Protection strategies are based on the prioritization of critical assets and resources. The requirement and guidance for defining critical infrastructure and key resources and for preparing an associated critical infrastructure protection plan are found in applicable laws, executive orders, directives, policies, regulations, standards, and guidelines.",
+  "params": [],
+  "related": [
+    "cp-2",
+    "cp-4",
+    "pe-18",
+    "pl-2",
+    "pm-9",
+    "pm-11",
+    "pm-18",
+    "ra-3",
+    "si-12"
+  ]
+}

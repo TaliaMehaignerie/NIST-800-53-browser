@@ -1,0 +1,33 @@
+{
+  "id": "cm-3.5",
+  "slug": "cm-3-5",
+  "label": "CM-3(5)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Automated Security Response",
+  "familyCode": "CM",
+  "sortId": "cm-03.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following security responses automatically if baseline configurations are changed in an unauthorized manner: {{ insert: param, cm-03.05_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated security responses include halting selected system functions, halting system processing, and issuing alerts or notifications to organizational personnel when there is an unauthorized modification of a configuration item.",
+  "params": [
+    {
+      "id": "cm-03.05_odp",
+      "label": "security responses",
+      "select": null,
+      "guidelines": [
+        "security responses to be automatically implemented are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

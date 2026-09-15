@@ -1,0 +1,96 @@
+{
+  "id": "pm-26",
+  "slug": "pm-26",
+  "label": "PM-26",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Complaint Management",
+  "familyCode": "PM",
+  "sortId": "pm-26",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement a process for receiving and responding to complaints, concerns, or questions from individuals about the organizational security and privacy practices that includes:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Mechanisms that are easy to use and readily accessible by the public;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "All information necessary for successfully filing complaints;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Tracking mechanisms to ensure all complaints received are reviewed and addressed within {{ insert: param, pm-26_prm_1 }};",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Acknowledgement of receipt of complaints, concerns, or questions from individuals within {{ insert: param, pm-26_odp.03 }} ; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Response to complaints, concerns, or questions from individuals within {{ insert: param, pm-26_odp.04 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Complaints, concerns, and questions from individuals can serve as valuable sources of input to organizations and ultimately improve operational models, uses of technology, data collection practices, and controls. Mechanisms that can be used by the public include telephone hotline, email, or web-based forms. The information necessary for successfully filing complaints includes contact information for the senior agency official for privacy or other official designated to receive complaints. Privacy complaints may also include personally identifiable information which is handled in accordance with relevant policies and processes.",
+  "params": [
+    {
+      "id": "pm-26_prm_1",
+      "label": "organization-defined time period",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "pm-26_odp.01",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period in which complaints (including concerns or questions) from individuals are to be reviewed is defined;"
+      ]
+    },
+    {
+      "id": "pm-26_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period in which complaints (including concerns or questions) from individuals are to be addressed is defined;"
+      ]
+    },
+    {
+      "id": "pm-26_odp.03",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period for acknowledging the receipt of complaints is defined;"
+      ]
+    },
+    {
+      "id": "pm-26_odp.04",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "the time period for responding to complaints is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ir-7",
+    "ir-9",
+    "pm-22",
+    "si-18"
+  ]
+}

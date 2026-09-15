@@ -1,0 +1,20 @@
+{
+  "id": "sa-4.4",
+  "slug": "sa-4-4",
+  "label": "SA-4(4)",
+  "kind": "enhancement",
+  "parentSlug": "sa-4",
+  "enhancementSlugs": [],
+  "title": "Assignment of Components to Systems",
+  "familyCode": "SA",
+  "sortId": "sa-04.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-8.9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

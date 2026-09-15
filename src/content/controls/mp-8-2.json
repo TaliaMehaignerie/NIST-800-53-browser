@@ -1,0 +1,47 @@
+{
+  "id": "mp-8.2",
+  "slug": "mp-8-2",
+  "label": "MP-8(2)",
+  "kind": "enhancement",
+  "parentSlug": "mp-8",
+  "enhancementSlugs": [],
+  "title": "Equipment Testing",
+  "familyCode": "MP",
+  "sortId": "mp-08.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test downgrading equipment and procedures {{ insert: param, mp-8.2_prm_1 }} to ensure that downgrading actions are being achieved.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "mp-8.2_prm_1",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "mp-08.02_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency with which to test downgrading equipment is defined;"
+      ]
+    },
+    {
+      "id": "mp-08.02_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency with which to test downgrading procedures is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "cp-7.4",
+  "slug": "cp-7-4",
+  "label": "CP-7(4)",
+  "kind": "enhancement",
+  "parentSlug": "cp-7",
+  "enhancementSlugs": [],
+  "title": "Preparation for Use",
+  "familyCode": "CP",
+  "sortId": "cp-07.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prepare the alternate processing site so that the site can serve as the operational site supporting essential mission and business functions.",
+      "children": []
+    }
+  ],
+  "guidance": "Site preparation includes establishing configuration settings for systems at the alternate processing site consistent with the requirements for such settings at the primary site and ensuring that essential supplies and logistical considerations are in place.",
+  "params": [],
+  "related": [
+    "cm-2",
+    "cm-6",
+    "cp-4"
+  ]
+}

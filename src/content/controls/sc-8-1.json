@@ -1,0 +1,43 @@
+{
+  "id": "sc-8.1",
+  "slug": "sc-8-1",
+  "label": "SC-8(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-8",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Protection",
+  "familyCode": "SC",
+  "sortId": "sc-08.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to {{ insert: param, sc-08.01_odp }} during transmission.",
+      "children": []
+    }
+  ],
+  "guidance": "Encryption protects information from unauthorized disclosure and modification during transmission. Cryptographic mechanisms that protect the confidentiality and integrity of information during transmission include TLS and IPSec. Cryptographic mechanisms used to protect information integrity include cryptographic hash functions that have applications in digital signatures, checksums, and message authentication codes.",
+  "params": [
+    {
+      "id": "sc-08.01_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "prevent unauthorized disclosure of information",
+          "detect changes to information"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

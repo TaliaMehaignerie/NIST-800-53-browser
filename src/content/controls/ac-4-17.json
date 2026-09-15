@@ -1,0 +1,40 @@
+{
+  "id": "ac-4.17",
+  "slug": "ac-4-17",
+  "label": "AC-4(17)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Domain Authentication",
+  "familyCode": "AC",
+  "sortId": "ac-04.17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Uniquely identify and authenticate source and destination points by {{ insert: param, ac-04.17_odp }} for information transfer.",
+      "children": []
+    }
+  ],
+  "guidance": "Attribution is a critical component of a security and privacy concept of operations. The ability to identify source and destination points for information flowing within systems allows the forensic reconstruction of events and encourages policy compliance by attributing policy violations to specific organizations or individuals. Successful domain authentication requires that system labels distinguish among systems, organizations, and individuals involved in preparing, sending, receiving, or disseminating information. Attribution also allows organizations to better maintain the lineage of personally identifiable information processing as it flows through systems and can facilitate consent tracking, as well as correction, deletion, or access requests from individuals.",
+  "params": [
+    {
+      "id": "ac-04.17_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "organization, system, application, service, individual"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "ia-2",
+    "ia-3",
+    "ia-9"
+  ]
+}

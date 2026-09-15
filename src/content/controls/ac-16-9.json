@@ -1,0 +1,47 @@
+{
+  "id": "ac-16.9",
+  "slug": "ac-16-9",
+  "label": "AC-16(9)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Attribute Reassignment — Regrading Mechanisms",
+  "familyCode": "AC",
+  "sortId": "ac-16.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Change security and privacy attributes associated with information only via regrading mechanisms validated using {{ insert: param, ac-16.9_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "A regrading mechanism is a trusted process authorized to re-classify and re-label data in accordance with a defined policy exception. Validated regrading mechanisms are used by organizations to provide the requisite levels of assurance for attribute reassignment activities. The validation is facilitated by ensuring that regrading mechanisms are single purpose and of limited function. Since security and privacy attribute changes can directly affect policy enforcement actions, implementing trustworthy regrading mechanisms is necessary to help ensure that such mechanisms perform in a consistent and correct mode of operation.",
+  "params": [
+    {
+      "id": "ac-16.9_prm_1",
+      "label": "organization-defined techniques or procedures",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.09_odp.01",
+      "label": "techniques or procedures",
+      "select": null,
+      "guidelines": [
+        "techniques or procedures used to validate regrading mechanisms for security attributes are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.09_odp.02",
+      "label": "techniques or procedures",
+      "select": null,
+      "guidelines": [
+        "techniques or procedures used to validate regrading mechanisms for privacy attributes are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

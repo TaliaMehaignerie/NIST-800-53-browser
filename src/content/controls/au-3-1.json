@@ -1,0 +1,36 @@
+{
+  "id": "au-3.1",
+  "slug": "au-3-1",
+  "label": "AU-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "au-3",
+  "enhancementSlugs": [],
+  "title": "Additional Audit Information",
+  "familyCode": "AU",
+  "sortId": "au-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Generate audit records containing the following additional information: {{ insert: param, au-03.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The ability to add information generated in audit records is dependent on system functionality to configure the audit record content. Organizations may consider additional information in audit records including, but not limited to, access control or flow control rules invoked and individual identities of group account users. Organizations may also consider limiting additional audit record information to only information that is explicitly needed for audit requirements. This facilitates the use of audit trails and audit logs by not including information in audit records that could potentially be misleading, make it more difficult to locate information of interest, or increase the risk to individuals' privacy.",
+  "params": [
+    {
+      "id": "au-03.01_odp",
+      "label": "additional information",
+      "select": null,
+      "guidelines": [
+        "additional information to be included in audit records is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,69 @@
+{
+  "id": "pe-17",
+  "slug": "pe-17",
+  "label": "PE-17",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Alternate Work Site",
+  "familyCode": "PE",
+  "sortId": "pe-17",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Determine and document the {{ insert: param, pe-17_odp.01 }} allowed for use by employees;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Employ the following controls at alternate work sites: {{ insert: param, pe-17_odp.02 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Assess the effectiveness of controls at alternate work sites; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Provide a means for employees to communicate with information security and privacy personnel in case of incidents.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Alternate work sites include government facilities or the private residences of employees. While distinct from alternative processing sites, alternate work sites can provide readily available alternate locations during contingency operations. Organizations can define different sets of controls for specific alternate work sites or types of sites depending on the work-related activities conducted at the sites. Implementing and assessing the effectiveness of organization-defined controls and providing a means to communicate incidents at alternate work sites supports the contingency planning activities of organizations.",
+  "params": [
+    {
+      "id": "pe-17_odp.01",
+      "label": "alternate work sites",
+      "select": null,
+      "guidelines": [
+        "alternate work sites allowed for use by employees are defined;"
+      ]
+    },
+    {
+      "id": "pe-17_odp.02",
+      "label": "controls",
+      "select": null,
+      "guidelines": [
+        "controls to be employed at alternate work sites are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-17",
+    "ac-18",
+    "cp-7"
+  ]
+}

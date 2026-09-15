@@ -1,0 +1,20 @@
+{
+  "id": "ac-17.5",
+  "slug": "ac-17-5",
+  "label": "AC-17(5)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Monitoring for Unauthorized Connections",
+  "familyCode": "AC",
+  "sortId": "ac-17.05",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,71 @@
+{
+  "id": "sa-15.3",
+  "slug": "sa-15-3",
+  "label": "SA-15(3)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Criticality Analysis",
+  "familyCode": "SA",
+  "sortId": "sa-15.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service to perform a criticality analysis:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "At the following decision points in the system development life cycle: {{ insert: param, sa-15.03_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "At the following level of rigor: {{ insert: param, sa-15.3_prm_2 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Criticality analysis performed by the developer provides input to the criticality analysis performed by organizations. Developer input is essential to organizational criticality analysis because organizations may not have access to detailed design documentation for system components that are developed as commercial off-the-shelf products. Such design documentation includes functional specifications, high-level designs, low-level designs, source code, and hardware schematics. Criticality analysis is important for organizational systems that are designated as high value assets. High value assets can be moderate- or high-impact systems due to heightened adversarial interest or potential adverse effects on the federal enterprise. Developer input is especially important when organizations conduct supply chain criticality analyses.",
+  "params": [
+    {
+      "id": "sa-15.3_prm_2",
+      "label": "organization-defined breadth and depth of criticality analysis",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "sa-15.03_odp.01",
+      "label": "decision points",
+      "select": null,
+      "guidelines": [
+        "decision points in the system development life cycle are defined;"
+      ]
+    },
+    {
+      "id": "sa-15.03_odp.02",
+      "label": "breadth",
+      "select": null,
+      "guidelines": [
+        "the breadth of criticality analysis is defined;"
+      ]
+    },
+    {
+      "id": "sa-15.03_odp.03",
+      "label": "depth",
+      "select": null,
+      "guidelines": [
+        "the depth of criticality analysis is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ra-9"
+  ]
+}

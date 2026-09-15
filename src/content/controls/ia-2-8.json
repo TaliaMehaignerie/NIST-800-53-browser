@@ -1,0 +1,41 @@
+{
+  "id": "ia-2.8",
+  "slug": "ia-2-8",
+  "label": "IA-2(8)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Access to Accounts — Replay Resistant",
+  "familyCode": "IA",
+  "sortId": "ia-02.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement replay-resistant authentication mechanisms for access to {{ insert: param, ia-02.08_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Authentication processes resist replay attacks if it is impractical to achieve successful authentications by replaying previous authentication messages. Replay-resistant techniques include protocols that use nonces or challenges such as time synchronous or cryptographic authenticators.",
+  "params": [
+    {
+      "id": "ia-02.08_odp",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "privileged accounts",
+          "non-privileged accounts"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "au-3.2",
+  "slug": "au-3-2",
+  "label": "AU-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-3",
+  "enhancementSlugs": [],
+  "title": "Centralized Management of Planned Audit Record Content",
+  "familyCode": "AU",
+  "sortId": "au-03.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pl-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

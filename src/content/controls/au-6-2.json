@@ -1,0 +1,20 @@
+{
+  "id": "au-6.2",
+  "slug": "au-6-2",
+  "label": "AU-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "au-6",
+  "enhancementSlugs": [],
+  "title": "Automated Security Alerts",
+  "familyCode": "AU",
+  "sortId": "au-06.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

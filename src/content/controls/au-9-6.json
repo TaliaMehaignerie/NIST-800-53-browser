@@ -1,0 +1,33 @@
+{
+  "id": "au-9.6",
+  "slug": "au-9-6",
+  "label": "AU-9(6)",
+  "kind": "enhancement",
+  "parentSlug": "au-9",
+  "enhancementSlugs": [],
+  "title": "Read-only Access",
+  "familyCode": "AU",
+  "sortId": "au-09.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Authorize read-only access to audit information to {{ insert: param, au-09.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Restricting privileged user or role authorizations to read-only helps to limit the potential damage to organizations that could be initiated by such users or roles, such as deleting audit records to cover up malicious activity.",
+  "params": [
+    {
+      "id": "au-09.06_odp",
+      "label": "subset of privileged users or roles",
+      "select": null,
+      "guidelines": [
+        "a subset of privileged users or roles with authorized read-only access to audit information is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

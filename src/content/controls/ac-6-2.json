@@ -1,0 +1,41 @@
+{
+  "id": "ac-6.2",
+  "slug": "ac-6-2",
+  "label": "AC-6(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Non-privileged Access for Nonsecurity Functions",
+  "familyCode": "AC",
+  "sortId": "ac-06.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require that users of system accounts (or roles) with access to {{ insert: param, ac-06.02_odp }} use non-privileged accounts or roles, when accessing nonsecurity functions.",
+      "children": []
+    }
+  ],
+  "guidance": "Requiring the use of non-privileged accounts when accessing nonsecurity functions limits exposure when operating from within privileged accounts or roles. The inclusion of roles addresses situations where organizations implement access control policies, such as role-based access control, and where a change of role provides the same degree of assurance in the change of access authorizations for the user and the processes acting on behalf of the user as would be provided by a change between a privileged and non-privileged account.",
+  "params": [
+    {
+      "id": "ac-06.02_odp",
+      "label": "security functions or security-relevant information",
+      "select": null,
+      "guidelines": [
+        "security functions or security-relevant information, the access to which requires users to use non-privileged accounts to access non-security functions, are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-17",
+    "ac-18",
+    "ac-19",
+    "pl-4"
+  ]
+}

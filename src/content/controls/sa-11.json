@@ -1,0 +1,109 @@
+{
+  "id": "sa-11",
+  "slug": "sa-11",
+  "label": "SA-11",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sa-11-1",
+    "sa-11-2",
+    "sa-11-3",
+    "sa-11-4",
+    "sa-11-5",
+    "sa-11-6",
+    "sa-11-7",
+    "sa-11-8",
+    "sa-11-9"
+  ],
+  "title": "Developer Testing and Evaluation",
+  "familyCode": "SA",
+  "sortId": "sa-11",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system, system component, or system service, at all post-design stages of the system development life cycle, to:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop and implement a plan for ongoing security and privacy control assessments;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Perform {{ insert: param, sa-11_odp.01 }} testing/evaluation {{ insert: param, sa-11_odp.02 }} at {{ insert: param, sa-11_odp.03 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Produce evidence of the execution of the assessment plan and the results of the testing and evaluation;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Implement a verifiable flaw remediation process; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Correct flaws identified during testing and evaluation.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Developmental testing and evaluation confirms that the required controls are implemented correctly, operating as intended, enforcing the desired security and privacy policies, and meeting established security and privacy requirements. Security properties of systems and the privacy of individuals may be affected by the interconnection of system components or changes to those components. The interconnections or changes—including upgrading or replacing applications, operating systems, and firmware—may adversely affect previously implemented controls. Ongoing assessment during development allows for additional types of testing and evaluation that developers can conduct to reduce or eliminate potential flaws. Testing custom software applications may require approaches such as manual code review, security architecture review, and penetration testing, as well as and static analysis, dynamic analysis, binary analysis, or a hybrid of the three analysis approaches.\n\nDevelopers can use the analysis approaches, along with security instrumentation and fuzzing, in a variety of tools and in source code reviews. The security and privacy assessment plans include the specific activities that developers plan to carry out, including the types of analyses, testing, evaluation, and reviews of software and firmware components; the degree of rigor to be applied; the frequency of the ongoing testing and evaluation; and the types of artifacts produced during those processes. The depth of testing and evaluation refers to the rigor and level of detail associated with the assessment process. The coverage of testing and evaluation refers to the scope (i.e., number and type) of the artifacts included in the assessment process. Contracts specify the acceptance criteria for security and privacy assessment plans, flaw remediation processes, and the evidence that the plans and processes have been diligently applied. Methods for reviewing and protecting assessment plans, evidence, and documentation are commensurate with the security category or classification level of the system. Contracts may specify protection requirements for documentation.",
+  "params": [
+    {
+      "id": "sa-11_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "unit",
+          "integration",
+          "system",
+          "regression"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sa-11_odp.02",
+      "label": "frequency to conduct",
+      "select": null,
+      "guidelines": [
+        "frequency at which to conduct {{ insert: param, sa-11_odp.01 }} testing/evaluation is defined;"
+      ]
+    },
+    {
+      "id": "sa-11_odp.03",
+      "label": "depth and coverage",
+      "select": null,
+      "guidelines": [
+        "depth and coverage of {{ insert: param, sa-11_odp.01 }} testing/evaluation is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "cm-4",
+    "sa-3",
+    "sa-4",
+    "sa-5",
+    "sa-8",
+    "sa-15",
+    "sa-17",
+    "si-2",
+    "sr-5",
+    "sr-6",
+    "sr-7"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "sc-39.2",
+  "slug": "sc-39-2",
+  "label": "SC-39(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-39",
+  "enhancementSlugs": [],
+  "title": "Separate Execution Domain Per Thread",
+  "familyCode": "SC",
+  "sortId": "sc-39.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain a separate execution domain for each thread in {{ insert: param, sc-39.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sc-39.02_odp",
+      "label": "multi-threaded processing",
+      "select": null,
+      "guidelines": [
+        "multi-thread processing for which a separate execution domain is to be maintained for each thread is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

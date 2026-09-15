@@ -1,0 +1,53 @@
+{
+  "id": "pt-2.1",
+  "slug": "pt-2-1",
+  "label": "PT-2(1)",
+  "kind": "enhancement",
+  "parentSlug": "pt-2",
+  "enhancementSlugs": [],
+  "title": "Data Tagging",
+  "familyCode": "PT",
+  "sortId": "pt-02.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Attach data tags containing {{ insert: param, pt-02.01_odp.01 }} to {{ insert: param, pt-02.01_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Data tags support the tracking and enforcement of authorized processing by conveying the types of processing that are authorized along with the relevant elements of personally identifiable information throughout the system. Data tags may also support the use of automated tools.",
+  "params": [
+    {
+      "id": "pt-02.01_odp.01",
+      "label": "authorized processing",
+      "select": null,
+      "guidelines": [
+        "the authorized processing of personally identifiable information is defined;"
+      ]
+    },
+    {
+      "id": "pt-02.01_odp.02",
+      "label": "elements of personally identifiable information",
+      "select": null,
+      "guidelines": [
+        "elements of personally identifiable information to be tagged are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-16",
+    "ca-6",
+    "cm-12",
+    "pm-5",
+    "pm-22",
+    "pt-4",
+    "sc-16",
+    "sc-43",
+    "si-10",
+    "si-15",
+    "si-19"
+  ]
+}

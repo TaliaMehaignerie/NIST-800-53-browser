@@ -1,0 +1,62 @@
+{
+  "id": "sc-30",
+  "slug": "sc-30",
+  "label": "SC-30",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-30-1",
+    "sc-30-2",
+    "sc-30-3",
+    "sc-30-4",
+    "sc-30-5"
+  ],
+  "title": "Concealment and Misdirection",
+  "familyCode": "SC",
+  "sortId": "sc-30",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ the following concealment and misdirection techniques for {{ insert: param, sc-30_odp.02 }} at {{ insert: param, sc-30_odp.03 }} to confuse and mislead adversaries: {{ insert: param, sc-30_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Concealment and misdirection techniques can significantly reduce the targeting capabilities of adversaries (i.e., window of opportunity and available attack surface) to initiate and complete attacks. For example, virtualization techniques provide organizations with the ability to disguise systems, potentially reducing the likelihood of successful attacks without the cost of having multiple platforms. The increased use of concealment and misdirection techniques and methods—including randomness, uncertainty, and virtualization—may sufficiently confuse and mislead adversaries and subsequently increase the risk of discovery and/or exposing tradecraft. Concealment and misdirection techniques may provide additional time to perform core mission and business functions. The implementation of concealment and misdirection techniques may add to the complexity and management overhead required for the system.",
+  "params": [
+    {
+      "id": "sc-30_odp.01",
+      "label": "concealment and misdirection techniques",
+      "select": null,
+      "guidelines": [
+        "concealment and misdirection techniques to be employed to confuse and mislead adversaries potentially targeting systems are defined;"
+      ]
+    },
+    {
+      "id": "sc-30_odp.02",
+      "label": "systems",
+      "select": null,
+      "guidelines": [
+        "systems for which concealment and misdirection techniques are to be employed are defined;"
+      ]
+    },
+    {
+      "id": "sc-30_odp.03",
+      "label": "time periods",
+      "select": null,
+      "guidelines": [
+        "time periods to employ concealment and misdirection techniques for systems are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-6",
+    "sc-25",
+    "sc-26",
+    "sc-29",
+    "sc-44",
+    "si-14"
+  ]
+}

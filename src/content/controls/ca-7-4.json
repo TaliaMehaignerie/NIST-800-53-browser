@@ -1,0 +1,45 @@
+{
+  "id": "ca-7.4",
+  "slug": "ca-7-4",
+  "label": "CA-7(4)",
+  "kind": "enhancement",
+  "parentSlug": "ca-7",
+  "enhancementSlugs": [],
+  "title": "Risk Monitoring",
+  "familyCode": "CA",
+  "sortId": "ca-07.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure risk monitoring is an integral part of the continuous monitoring strategy that includes the following:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Effectiveness monitoring;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Compliance monitoring; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Change monitoring.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Risk monitoring is informed by the established organizational risk tolerance. Effectiveness monitoring determines the ongoing effectiveness of the implemented risk response measures. Compliance monitoring verifies that required risk response measures are implemented. It also verifies that security and privacy requirements are satisfied. Change monitoring identifies changes to organizational systems and environments of operation that may affect security and privacy risk.",
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,59 @@
+{
+  "id": "ca-5",
+  "slug": "ca-5",
+  "label": "CA-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ca-5-1"
+  ],
+  "title": "Plan of Action and Milestones",
+  "familyCode": "CA",
+  "sortId": "ca-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop a plan of action and milestones for the system to document the planned remediation actions of the organization to correct weaknesses or deficiencies noted during the assessment of the controls and to reduce or eliminate known vulnerabilities in the system; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Update existing plan of action and milestones {{ insert: param, ca-05_odp }} based on the findings from control assessments, independent audits or reviews, and continuous monitoring activities.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Plans of action and milestones are useful for any type of organization to track planned remedial actions. Plans of action and milestones are required in authorization packages and subject to federal reporting requirements established by OMB.",
+  "params": [
+    {
+      "id": "ca-05_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to update an existing plan of action and milestones based on the findings from control assessments, independent audits or reviews, and continuous monitoring activities is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "pm-4",
+    "pm-9",
+    "ra-7",
+    "si-2",
+    "si-12"
+  ]
+}

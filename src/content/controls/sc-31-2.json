@@ -1,0 +1,45 @@
+{
+  "id": "sc-31.2",
+  "slug": "sc-31-2",
+  "label": "SC-31(2)",
+  "kind": "enhancement",
+  "parentSlug": "sc-31",
+  "enhancementSlugs": [],
+  "title": "Maximum Bandwidth",
+  "familyCode": "SC",
+  "sortId": "sc-31.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Reduce the maximum bandwidth for identified covert {{ insert: param, sc-31.02_odp.01 }} channels to {{ insert: param, sc-31.02_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The complete elimination of covert channels, especially covert timing channels, is usually not possible without significant performance impacts.",
+  "params": [
+    {
+      "id": "sc-31.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "storage",
+          "timing"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-31.02_odp.02",
+      "label": "values",
+      "select": null,
+      "guidelines": [
+        "values for the maximum bandwidth for identified covert channels are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

@@ -1,0 +1,34 @@
+{
+  "id": "ia-7",
+  "slug": "ia-7",
+  "label": "IA-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Cryptographic Module Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement mechanisms for authentication to a cryptographic module that meet the requirements of applicable laws, executive orders, directives, policies, regulations, standards, and guidelines for such authentication.",
+      "children": []
+    }
+  ],
+  "guidance": "Authentication mechanisms may be required within a cryptographic module to authenticate an operator accessing the module and to verify that the operator is authorized to assume the requested role and perform services within that role.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "ia-5",
+    "sa-4",
+    "sc-12",
+    "sc-13"
+  ]
+}

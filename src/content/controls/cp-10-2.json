@@ -1,0 +1,27 @@
+{
+  "id": "cp-10.2",
+  "slug": "cp-10-2",
+  "label": "CP-10(2)",
+  "kind": "enhancement",
+  "parentSlug": "cp-10",
+  "enhancementSlugs": [],
+  "title": "Transaction Recovery",
+  "familyCode": "CP",
+  "sortId": "cp-10.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement transaction recovery for systems that are transaction-based.",
+      "children": []
+    }
+  ],
+  "guidance": "Transaction-based systems include database management systems and transaction processing systems. Mechanisms supporting transaction recovery include transaction rollback and transaction journaling.",
+  "params": [],
+  "related": []
+}

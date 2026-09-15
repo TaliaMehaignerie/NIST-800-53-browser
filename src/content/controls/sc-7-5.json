@@ -1,0 +1,48 @@
+{
+  "id": "sc-7.5",
+  "slug": "sc-7-5",
+  "label": "SC-7(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Deny by Default — Allow by Exception",
+  "familyCode": "SC",
+  "sortId": "sc-07.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Deny network communications traffic by default and allow network communications traffic by exception {{ insert: param, sc-07.05_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Denying by default and allowing by exception applies to inbound and outbound network communications traffic. A deny-all, permit-by-exception network communications traffic policy ensures that only those system connections that are essential and approved are allowed. Deny by default, allow by exception also applies to a system that is connected to an external system.",
+  "params": [
+    {
+      "id": "sc-07.05_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "at managed interfaces",
+          "for {{ insert: param, sc-07.05_odp.02 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-07.05_odp.02",
+      "label": "systems",
+      "select": null,
+      "guidelines": [
+        "systems for which network communications traffic is denied by default and network communications traffic is allowed by exception are defined (if selected)."
+      ]
+    }
+  ],
+  "related": []
+}

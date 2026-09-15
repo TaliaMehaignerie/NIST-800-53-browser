@@ -1,0 +1,20 @@
+{
+  "id": "ia-2.3",
+  "slug": "ia-2-3",
+  "label": "IA-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Local Access to Privileged Accounts",
+  "familyCode": "IA",
+  "sortId": "ia-02.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-2.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,44 @@
+{
+  "id": "sa-4.12",
+  "slug": "sa-4-12",
+  "label": "SA-4(12)",
+  "kind": "enhancement",
+  "parentSlug": "sa-4",
+  "enhancementSlugs": [],
+  "title": "Data Ownership",
+  "familyCode": "SA",
+  "sortId": "sa-04.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Include organizational data ownership requirements in the acquisition contract; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Require all data to be removed from the contractor’s system and returned to the organization within {{ insert: param, sa-04.12_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Contractors who operate a system that contains data owned by an organization initiating the contract have policies and procedures in place to remove the data from their systems and/or return the data in a time frame defined by the contract.",
+  "params": [
+    {
+      "id": "sa-04.12_odp",
+      "label": "time frame",
+      "select": null,
+      "guidelines": [
+        "time frame to remove data from a contractor system and return it to the organization is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

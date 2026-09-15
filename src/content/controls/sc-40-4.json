@@ -1,0 +1,36 @@
+{
+  "id": "sc-40.4",
+  "slug": "sc-40-4",
+  "label": "SC-40(4)",
+  "kind": "enhancement",
+  "parentSlug": "sc-40",
+  "enhancementSlugs": [],
+  "title": "Signal Parameter Identification",
+  "familyCode": "SC",
+  "sortId": "sc-40.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement cryptographic mechanisms to prevent the identification of {{ insert: param, sc-40.04_odp }} by using the transmitter signal parameters.",
+      "children": []
+    }
+  ],
+  "guidance": "The implementation of cryptographic mechanisms to prevent the identification of wireless transmitters protects against the unique identification of wireless transmitters for the purposes of intelligence exploitation by ensuring that anti-fingerprinting alterations to signal parameters are not predictable by unauthorized individuals. It also provides anonymity when required. Radio fingerprinting techniques identify the unique signal parameters of transmitters to fingerprint such transmitters for purposes of tracking and mission or user identification.",
+  "params": [
+    {
+      "id": "sc-40.04_odp",
+      "label": "wireless transmitters",
+      "select": null,
+      "guidelines": [
+        "wireless transmitters for which cryptographic mechanisms are to be implemented are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-12",
+    "sc-13"
+  ]
+}

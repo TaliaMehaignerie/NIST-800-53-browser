@@ -1,0 +1,20 @@
+{
+  "id": "ia-2.11",
+  "slug": "ia-2-11",
+  "label": "IA-2(11)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Remote Access — Separate Device",
+  "familyCode": "IA",
+  "sortId": "ia-02.11",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-2.6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

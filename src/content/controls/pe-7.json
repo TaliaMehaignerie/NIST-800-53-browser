@@ -1,0 +1,21 @@
+{
+  "id": "pe-7",
+  "slug": "pe-7",
+  "label": "PE-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Visitor Control",
+  "familyCode": "PE",
+  "sortId": "pe-07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-2",
+    "pe-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "ia-3.2",
+  "slug": "ia-3-2",
+  "label": "IA-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "ia-3",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Bidirectional Network Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-03.02",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-3.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

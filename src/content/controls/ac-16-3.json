@@ -1,0 +1,85 @@
+{
+  "id": "ac-16.3",
+  "slug": "ac-16-3",
+  "label": "AC-16(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-16",
+  "enhancementSlugs": [],
+  "title": "Maintenance of Attribute Associations by System",
+  "familyCode": "AC",
+  "sortId": "ac-16.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain the association and integrity of {{ insert: param, ac-16.3_prm_1 }} to {{ insert: param, ac-16.3_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Maintaining the association and integrity of security and privacy attributes to subjects and objects with sufficient assurance helps to ensure that the attribute associations can be used as the basis of automated policy actions. The integrity of specific items, such as security configuration files, may be maintained through the use of an integrity monitoring mechanism that detects anomalies and changes that deviate from \"known good\" baselines. Automated policy actions include retention date expirations, access control decisions, information flow control decisions, and information disclosure decisions.",
+  "params": [
+    {
+      "id": "ac-16.3_prm_1",
+      "label": "organization-defined security and privacy attributes",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.3_prm_2",
+      "label": "organization-defined subjects and objects",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-16.03_odp.01",
+      "label": "security attributes",
+      "select": null,
+      "guidelines": [
+        "security attributes that require association and integrity maintenance are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.03_odp.02",
+      "label": "privacy attributes",
+      "select": null,
+      "guidelines": [
+        "privacy attributes that require association and integrity maintenance are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.03_odp.03",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects requiring the association and integrity of security attributes to such subjects to be maintained are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.03_odp.04",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects requiring the association and integrity of security attributes to such objects to be maintained are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.03_odp.05",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects requiring the association and integrity of privacy attributes to such subjects to be maintained are defined;"
+      ]
+    },
+    {
+      "id": "ac-16.03_odp.06",
+      "label": "objects",
+      "select": null,
+      "guidelines": [
+        "objects requiring the association and integrity of privacy attributes to such objects to be maintained are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

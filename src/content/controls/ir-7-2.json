@@ -1,0 +1,35 @@
+{
+  "id": "ir-7.2",
+  "slug": "ir-7-2",
+  "label": "IR-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "ir-7",
+  "enhancementSlugs": [],
+  "title": "Coordination with External Providers",
+  "familyCode": "IR",
+  "sortId": "ir-07.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Establish a direct, cooperative relationship between its incident response capability and external providers of system protection capability; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Identify organizational incident response team members to the external providers.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "External providers of a system protection capability include the Computer Network Defense program within the U.S. Department of Defense. External providers help to protect, monitor, analyze, detect, and respond to unauthorized activity within organizational information systems and networks. It may be beneficial to have agreements in place with external providers to clarify the roles and responsibilities of each party before an incident occurs.",
+  "params": [],
+  "related": []
+}

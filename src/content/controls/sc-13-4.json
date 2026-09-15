@@ -1,0 +1,20 @@
+{
+  "id": "sc-13.4",
+  "slug": "sc-13-4",
+  "label": "SC-13(4)",
+  "kind": "enhancement",
+  "parentSlug": "sc-13",
+  "enhancementSlugs": [],
+  "title": "Digital Signatures",
+  "familyCode": "SC",
+  "sortId": "sc-13.04",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-13"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

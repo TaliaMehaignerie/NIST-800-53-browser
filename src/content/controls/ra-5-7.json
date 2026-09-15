@@ -1,0 +1,20 @@
+{
+  "id": "ra-5.7",
+  "slug": "ra-5-7",
+  "label": "RA-5(7)",
+  "kind": "enhancement",
+  "parentSlug": "ra-5",
+  "enhancementSlugs": [],
+  "title": "Automated Detection and Notification of Unauthorized Components",
+  "familyCode": "RA",
+  "sortId": "ra-05.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-8"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

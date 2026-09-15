@@ -1,0 +1,47 @@
+{
+  "id": "at-3.1",
+  "slug": "at-3-1",
+  "label": "AT-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "at-3",
+  "enhancementSlugs": [],
+  "title": "Environmental Controls",
+  "familyCode": "AT",
+  "sortId": "at-03.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide {{ insert: param, at-03.01_odp.01 }} with initial and {{ insert: param, at-03.01_odp.02 }} training in the employment and operation of environmental controls.",
+      "children": []
+    }
+  ],
+  "guidance": "Environmental controls include fire suppression and detection devices or systems, sprinkler systems, handheld fire extinguishers, fixed fire hoses, smoke detectors, temperature or humidity, heating, ventilation, air conditioning, and power within the facility.",
+  "params": [
+    {
+      "id": "at-03.01_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be provided with initial and refresher training in the employment and operation of environmental controls are defined;"
+      ]
+    },
+    {
+      "id": "at-03.01_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to provide refresher training in the employment and operation of environmental controls is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-1",
+    "pe-11",
+    "pe-13",
+    "pe-14",
+    "pe-15"
+  ]
+}

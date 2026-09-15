@@ -1,0 +1,49 @@
+{
+  "id": "si-8",
+  "slug": "si-8",
+  "label": "SI-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "si-8-1",
+    "si-8-2",
+    "si-8-3"
+  ],
+  "title": "Spam Protection",
+  "familyCode": "SI",
+  "sortId": "si-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Employ spam protection mechanisms at system entry and exit points to detect and act on unsolicited messages; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Update spam protection mechanisms when new releases are available in accordance with organizational configuration management policy and procedures.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "System entry and exit points include firewalls, remote-access servers, electronic mail servers, web servers, proxy servers, workstations, notebook computers, and mobile devices. Spam can be transported by different means, including email, email attachments, and web accesses. Spam protection mechanisms include signature definitions.",
+  "params": [],
+  "related": [
+    "pl-9",
+    "sc-5",
+    "sc-7",
+    "sc-38",
+    "si-3",
+    "si-4"
+  ]
+}

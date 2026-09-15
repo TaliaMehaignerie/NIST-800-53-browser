@@ -1,0 +1,88 @@
+{
+  "id": "ir-4",
+  "slug": "ir-4",
+  "label": "IR-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ir-4-1",
+    "ir-4-2",
+    "ir-4-3",
+    "ir-4-4",
+    "ir-4-5",
+    "ir-4-6",
+    "ir-4-7",
+    "ir-4-8",
+    "ir-4-9",
+    "ir-4-10",
+    "ir-4-11",
+    "ir-4-12",
+    "ir-4-13",
+    "ir-4-14",
+    "ir-4-15"
+  ],
+  "title": "Incident Handling",
+  "familyCode": "IR",
+  "sortId": "ir-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Implement an incident handling capability for incidents that is consistent with the incident response plan and includes preparation, detection and analysis, containment, eradication, and recovery;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Coordinate incident handling activities with contingency planning activities;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Incorporate lessons learned from ongoing incident handling activities into incident response procedures, training, and testing, and implement the resulting changes accordingly; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Ensure the rigor, intensity, scope, and results of incident handling activities are comparable and predictable across the organization.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations recognize that incident response capabilities are dependent on the capabilities of organizational systems and the mission and business processes being supported by those systems. Organizations consider incident response as part of the definition, design, and development of mission and business processes and systems. Incident-related information can be obtained from a variety of sources, including audit monitoring, physical access monitoring, and network monitoring; user or administrator reports; and reported supply chain events. An effective incident handling capability includes coordination among many organizational entities (e.g., mission or business owners, system owners, authorizing officials, human resources offices, physical security offices, personnel security offices, legal departments, risk executive [function], operations personnel, procurement offices). Suspected security incidents include the receipt of suspicious email communications that can contain malicious code. Suspected supply chain incidents include the insertion of counterfeit hardware or malicious code into organizational systems or system components. For federal agencies, an incident that involves personally identifiable information is considered a breach. A breach results in unauthorized disclosure, the loss of control, unauthorized acquisition, compromise, or a similar occurrence where a person other than an authorized user accesses or potentially accesses personally identifiable information or an authorized user accesses or potentially accesses such information for other than authorized purposes.",
+  "params": [],
+  "related": [
+    "ac-19",
+    "au-6",
+    "au-7",
+    "cm-6",
+    "cp-2",
+    "cp-3",
+    "cp-4",
+    "ir-2",
+    "ir-3",
+    "ir-5",
+    "ir-6",
+    "ir-8",
+    "pe-6",
+    "pl-2",
+    "pm-12",
+    "sa-8",
+    "sc-5",
+    "sc-7",
+    "si-3",
+    "si-4",
+    "si-7"
+  ]
+}

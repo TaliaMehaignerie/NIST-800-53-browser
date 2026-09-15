@@ -1,0 +1,155 @@
+{
+  "id": "at-2",
+  "slug": "at-2",
+  "label": "AT-2",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "at-2-1",
+    "at-2-2",
+    "at-2-3",
+    "at-2-4",
+    "at-2-5",
+    "at-2-6"
+  ],
+  "title": "Literacy Training and Awareness",
+  "familyCode": "AT",
+  "sortId": "at-02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Provide security and privacy literacy training to system users (including managers, senior executives, and contractors):",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "As part of initial training for new users and {{ insert: param, at-2_prm_1 }} thereafter; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "When required by system changes or following {{ insert: param, at-2_prm_2 }};",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Employ the following techniques to increase the security and privacy awareness of system users {{ insert: param, at-02_odp.05 }};",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Update literacy training and awareness content {{ insert: param, at-02_odp.06 }} and following {{ insert: param, at-02_odp.07 }} ; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Incorporate lessons learned from internal or external security incidents or breaches into literacy training and awareness techniques.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations provide basic and advanced levels of literacy training to system users, including measures to test the knowledge level of users. Organizations determine the content of literacy training and awareness based on specific organizational requirements, the systems to which personnel have authorized access, and work environments (e.g., telework). The content includes an understanding of the need for security and privacy as well as actions by users to maintain security and personal privacy and to respond to suspected incidents. The content addresses the need for operations security and the handling of personally identifiable information.\n\nAwareness techniques include displaying posters, offering supplies inscribed with security and privacy reminders, displaying logon screen messages, generating email advisories or notices from organizational officials, and conducting awareness events. Literacy training after the initial training described in [AT-2a.1](#at-2_smt.a.1) is conducted at a minimum frequency consistent with applicable laws, directives, regulations, and policies. Subsequent literacy training may be satisfied by one or more short ad hoc sessions and include topical information on recent attack schemes, changes to organizational security and privacy policies, revised security and privacy expectations, or a subset of topics from the initial training. Updating literacy training and awareness content on a regular basis helps to ensure that the content remains relevant. Events that may precipitate an update to literacy training and awareness content include, but are not limited to, assessment or audit findings, security incidents or breaches, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines.",
+  "params": [
+    {
+      "id": "at-2_prm_1",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "at-2_prm_2",
+      "label": "organization-defined events",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "at-02_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to provide security literacy training to system users (including managers, senior executives, and contractors) after initial training is defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to provide privacy literacy training to system users (including managers, senior executives, and contractors) after initial training is defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.03",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that require security literacy training for system users are defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.04",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that require privacy literacy training for system users are defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.05",
+      "label": "awareness techniques",
+      "select": null,
+      "guidelines": [
+        "techniques to be employed to increase the security and privacy awareness of system users are defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.06",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to update literacy training and awareness content is defined;"
+      ]
+    },
+    {
+      "id": "at-02_odp.07",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that would require literacy training and awareness content to be updated are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-17",
+    "ac-22",
+    "at-3",
+    "at-4",
+    "cp-3",
+    "ia-4",
+    "ir-2",
+    "ir-7",
+    "ir-9",
+    "pl-4",
+    "pm-13",
+    "pm-21",
+    "ps-7",
+    "pt-2",
+    "sa-8",
+    "sa-16"
+  ]
+}

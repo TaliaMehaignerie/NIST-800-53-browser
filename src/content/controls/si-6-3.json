@@ -1,0 +1,37 @@
+{
+  "id": "si-6.3",
+  "slug": "si-6-3",
+  "label": "SI-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-6",
+  "enhancementSlugs": [],
+  "title": "Report Verification Results",
+  "familyCode": "SI",
+  "sortId": "si-06.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Report the results of security and privacy function verification to {{ insert: param, si-06.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizational personnel with potential interest in the results of the verification of security and privacy functions include systems security officers, senior agency information security officers, and senior agency officials for privacy.",
+  "params": [
+    {
+      "id": "si-06.03_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles designated to receive the results of security and privacy function verification is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-4",
+    "sr-4",
+    "sr-5"
+  ]
+}

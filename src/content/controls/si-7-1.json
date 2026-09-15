@@ -1,0 +1,170 @@
+{
+  "id": "si-7.1",
+  "slug": "si-7-1",
+  "label": "SI-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-7",
+  "enhancementSlugs": [],
+  "title": "Integrity Checks",
+  "familyCode": "SI",
+  "sortId": "si-07.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Perform an integrity check of {{ insert: param, si-7.1_prm_1 }} {{ insert: param, si-7.1_prm_2 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Security-relevant events include the identification of new threats to which organizational systems are susceptible and the installation of new hardware, software, or firmware. Transitional states include system startup, restart, shutdown, and abort.",
+  "params": [
+    {
+      "id": "si-7.1_prm_1",
+      "label": "organization-defined software, firmware, and information",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-7.1_prm_2",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "at startup",
+          "at {{ insert: param, si-7.1_prm_3 }} ",
+          "{{ insert: param, si-7.1_prm_4 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-7.1_prm_3",
+      "label": "organization-defined transitional states or security-relevant events",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-7.1_prm_4",
+      "label": "organization-defined frequency",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-07.01_odp.01",
+      "label": "software",
+      "select": null,
+      "guidelines": [
+        "software on which an integrity check is to be performed is defined;"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.02",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "at startup",
+          "at {{ insert: param, si-07.01_odp.03 }} ",
+          "{{ insert: param, si-07.01_odp.04 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-07.01_odp.03",
+      "label": "transitional states or security-relevant events",
+      "select": null,
+      "guidelines": [
+        "transitional states or security-relevant events requiring integrity checks (on software) are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency with which to perform an integrity check (on software) is defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.05",
+      "label": "firmware",
+      "select": null,
+      "guidelines": [
+        "firmware on which an integrity check is to be performed is defined;"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.06",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "at startup",
+          "at {{ insert: param, si-07.01_odp.07 }} ",
+          "{{ insert: param, si-07.01_odp.08 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-07.01_odp.07",
+      "label": "transitional states or security-relevant events",
+      "select": null,
+      "guidelines": [
+        "transitional states or security-relevant events requiring integrity checks (on firmware) are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.08",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency with which to perform an integrity check (on firmware) is defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.09",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information on which an integrity check is to be performed is defined;"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.10",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "at startup",
+          "at {{ insert: param, si-07.01_odp.11 }} ",
+          "{{ insert: param, si-07.01_odp.12 }} "
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-07.01_odp.11",
+      "label": "transitional states or security-relevant events",
+      "select": null,
+      "guidelines": [
+        "transitional states or security-relevant events requiring integrity checks (of information) are defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-07.01_odp.12",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency with which to perform an integrity check (of information) is defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

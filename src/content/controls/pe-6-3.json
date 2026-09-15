@@ -1,0 +1,65 @@
+{
+  "id": "pe-6.3",
+  "slug": "pe-6-3",
+  "label": "PE-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-6",
+  "enhancementSlugs": [],
+  "title": "Video Surveillance",
+  "familyCode": "PE",
+  "sortId": "pe-06.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Employ video surveillance of {{ insert: param, pe-06.03_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Review video recordings {{ insert: param, pe-06.03_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Retain video recordings for {{ insert: param, pe-06.03_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Video surveillance focuses on recording activity in specified areas for the purposes of subsequent review, if circumstances so warrant. Video recordings are typically reviewed to detect anomalous events or incidents. Monitoring the surveillance video is not required, although organizations may choose to do so. There may be legal considerations when performing and retaining video surveillance, especially if such surveillance is in a public location.",
+  "params": [
+    {
+      "id": "pe-06.03_odp.01",
+      "label": "operational areas",
+      "select": null,
+      "guidelines": [
+        "operational areas where video surveillance is to be employed are defined;"
+      ]
+    },
+    {
+      "id": "pe-06.03_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency at which to review video recordings is defined;"
+      ]
+    },
+    {
+      "id": "pe-06.03_odp.03",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period for which to retain video recordings is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

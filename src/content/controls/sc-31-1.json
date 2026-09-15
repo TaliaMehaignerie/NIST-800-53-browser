@@ -1,0 +1,24 @@
+{
+  "id": "sc-31.1",
+  "slug": "sc-31-1",
+  "label": "SC-31(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-31",
+  "enhancementSlugs": [],
+  "title": "Test Covert Channels for Exploitability",
+  "familyCode": "SC",
+  "sortId": "sc-31.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Test a subset of the identified covert channels to determine the channels that are exploitable.",
+      "children": []
+    }
+  ],
+  "guidance": "None.",
+  "params": [],
+  "related": []
+}

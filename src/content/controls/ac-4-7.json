@@ -1,0 +1,24 @@
+{
+  "id": "ac-4.7",
+  "slug": "ac-4-7",
+  "label": "AC-4(7)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "One-way Flow Mechanisms",
+  "familyCode": "AC",
+  "sortId": "ac-04.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce one-way information flows through hardware-based flow control mechanisms.",
+      "children": []
+    }
+  ],
+  "guidance": "One-way flow mechanisms may also be referred to as a unidirectional network, unidirectional security gateway, or data diode. One-way flow mechanisms can be used to prevent data from being exported from a higher impact or classified domain or system while permitting data from a lower impact or unclassified domain or system to be imported.",
+  "params": [],
+  "related": []
+}

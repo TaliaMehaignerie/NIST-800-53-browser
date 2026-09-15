@@ -1,0 +1,55 @@
+{
+  "id": "ma-4.4",
+  "slug": "ma-4-4",
+  "label": "MA-4(4)",
+  "kind": "enhancement",
+  "parentSlug": "ma-4",
+  "enhancementSlugs": [],
+  "title": "Authentication and Separation of Maintenance Sessions",
+  "familyCode": "MA",
+  "sortId": "ma-04.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect nonlocal maintenance sessions by:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Employing {{ insert: param, ma-04.04_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Separating the maintenance sessions from other network sessions with the system by either:",
+          "children": [
+            {
+              "label": "(1)",
+              "prose": "Physically separated communications paths; or",
+              "children": []
+            },
+            {
+              "label": "(2)",
+              "prose": "Logically separated communications paths.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "guidance": "Communications paths can be logically separated using encryption.",
+  "params": [
+    {
+      "id": "ma-04.04_odp",
+      "label": "authenticators that are replay resistant",
+      "select": null,
+      "guidelines": [
+        "authenticators that are replay resistant are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

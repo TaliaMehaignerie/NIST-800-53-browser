@@ -1,0 +1,43 @@
+{
+  "id": "si-21",
+  "slug": "si-21",
+  "label": "SI-21",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Information Refresh",
+  "familyCode": "SI",
+  "sortId": "si-21",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Refresh {{ insert: param, si-21_odp.01 }} at {{ insert: param, si-21_odp.02 }} or generate the information on demand and delete the information when no longer needed.",
+      "children": []
+    }
+  ],
+  "guidance": "Retaining information for longer than it is needed makes it an increasingly valuable and enticing target for adversaries. Keeping information available for the minimum period of time needed to support organizational missions or business functions reduces the opportunity for adversaries to compromise, capture, and exfiltrate that information.",
+  "params": [
+    {
+      "id": "si-21_odp.01",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "the information to be refreshed is defined;"
+      ]
+    },
+    {
+      "id": "si-21_odp.02",
+      "label": "frequencies",
+      "select": null,
+      "guidelines": [
+        "the frequencies at which to refresh information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-14"
+  ]
+}

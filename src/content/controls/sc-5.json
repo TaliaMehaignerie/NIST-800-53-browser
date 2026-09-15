@@ -1,0 +1,78 @@
+{
+  "id": "sc-5",
+  "slug": "sc-5",
+  "label": "SC-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-5-1",
+    "sc-5-2",
+    "sc-5-3"
+  ],
+  "title": "Denial-of-service Protection",
+  "familyCode": "SC",
+  "sortId": "sc-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "{{ insert: param, sc-05_odp.02 }} the effects of the following types of denial-of-service events: {{ insert: param, sc-05_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Employ the following controls to achieve the denial-of-service objective: {{ insert: param, sc-05_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Denial-of-service events may occur due to a variety of internal and external causes, such as an attack by an adversary or a lack of planning to support organizational needs with respect to capacity and bandwidth. Such attacks can occur across a wide range of network protocols (e.g., IPv4, IPv6). A variety of technologies are available to limit or eliminate the origination and effects of denial-of-service events. For example, boundary protection devices can filter certain types of packets to protect system components on internal networks from being directly affected by or the source of denial-of-service attacks. Employing increased network capacity and bandwidth combined with service redundancy also reduces the susceptibility to denial-of-service events.",
+  "params": [
+    {
+      "id": "sc-05_odp.01",
+      "label": "types of denial-of-service events",
+      "select": null,
+      "guidelines": [
+        "types of denial-of-service events to be protected against or limited are defined;"
+      ]
+    },
+    {
+      "id": "sc-05_odp.02",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "protect against",
+          "limit"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "sc-05_odp.03",
+      "label": "controls by type of denial-of-service event",
+      "select": null,
+      "guidelines": [
+        "controls to achieve the denial-of-service objective by type of denial-of-service event are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "ir-4",
+    "sc-6",
+    "sc-7",
+    "sc-40"
+  ]
+}

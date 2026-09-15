@@ -1,0 +1,35 @@
+{
+  "id": "cm-10.1",
+  "slug": "cm-10-1",
+  "label": "CM-10(1)",
+  "kind": "enhancement",
+  "parentSlug": "cm-10",
+  "enhancementSlugs": [],
+  "title": "Open-source Software",
+  "familyCode": "CM",
+  "sortId": "cm-10.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish the following restrictions on the use of open-source software: {{ insert: param, cm-10.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Open-source software refers to software that is available in source code form. Certain software rights normally reserved for copyright holders are routinely provided under software license agreements that permit individuals to study, change, and improve the software. From a security perspective, the major advantage of open-source software is that it provides organizations with the ability to examine the source code. In some cases, there is an online community associated with the software that inspects, tests, updates, and reports on issues found in software on an ongoing basis. However, remediating vulnerabilities in open-source software may be problematic. There may also be licensing issues associated with open-source software, including the constraints on derivative use of such software. Open-source software that is available only in binary form may increase the level of risk in using such software.",
+  "params": [
+    {
+      "id": "cm-10.01_odp",
+      "label": "restrictions",
+      "select": null,
+      "guidelines": [
+        "restrictions on the use of open-source software are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-7"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "cp-4",
+  "slug": "cp-4",
+  "label": "CP-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cp-4-1",
+    "cp-4-2",
+    "cp-4-3",
+    "cp-4-4",
+    "cp-4-5"
+  ],
+  "title": "Contingency Plan Testing",
+  "familyCode": "CP",
+  "sortId": "cp-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Test the contingency plan for the system {{ insert: param, cp-04_odp.01 }} using the following tests to determine the effectiveness of the plan and the readiness to execute the plan: {{ insert: param, cp-4_prm_2 }}.",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Review the contingency plan test results; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Initiate corrective actions, if needed.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Methods for testing contingency plans to determine the effectiveness of the plans and identify potential weaknesses include checklists, walk-through and tabletop exercises, simulations (parallel or full interrupt), and comprehensive exercises. Organizations conduct testing based on the requirements in contingency plans and include a determination of the effects on organizational operations, assets, and individuals due to contingency operations. Organizations have flexibility and discretion in the breadth, depth, and timelines of corrective actions.",
+  "params": [
+    {
+      "id": "cp-4_prm_2",
+      "label": "organization-defined tests",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cp-04_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "frequency of testing the contingency plan for the system is defined;"
+      ]
+    },
+    {
+      "id": "cp-04_odp.02",
+      "label": "tests",
+      "select": null,
+      "guidelines": [
+        "tests for determining the effectiveness of the contingency plan are defined;"
+      ]
+    },
+    {
+      "id": "cp-04_odp.03",
+      "label": "tests",
+      "select": null,
+      "guidelines": [
+        "tests for determining readiness to execute the contingency plan are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-3",
+    "cp-2",
+    "cp-3",
+    "cp-8",
+    "cp-9",
+    "ir-3",
+    "ir-4",
+    "pl-2",
+    "pm-14",
+    "sr-2"
+  ]
+}

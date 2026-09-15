@@ -1,0 +1,94 @@
+{
+  "id": "ia-4",
+  "slug": "ia-4",
+  "label": "IA-4",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ia-4-1",
+    "ia-4-2",
+    "ia-4-3",
+    "ia-4-4",
+    "ia-4-5",
+    "ia-4-6",
+    "ia-4-7",
+    "ia-4-8",
+    "ia-4-9"
+  ],
+  "title": "Identifier Management",
+  "familyCode": "IA",
+  "sortId": "ia-04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manage system identifiers by:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Receiving authorization from {{ insert: param, ia-04_odp.01 }} to assign an individual, group, role, service, or device identifier;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Selecting an identifier that identifies an individual, group, role, service, or device;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Assigning the identifier to the intended individual, group, role, service, or device; and",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Preventing reuse of identifiers for {{ insert: param, ia-04_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Common device identifiers include Media Access Control (MAC) addresses, Internet Protocol (IP) addresses, or device-unique token identifiers. The management of individual identifiers is not applicable to shared system accounts. Typically, individual identifiers are the usernames of the system accounts assigned to those individuals. In such instances, the account management activities of [AC-2](#ac-2) use account names provided by [IA-4](#ia-4) . Identifier management also addresses individual identifiers not necessarily associated with system accounts. Preventing the reuse of identifiers implies preventing the assignment of previously used individual, group, role, service, or device identifiers to different individuals, groups, roles, services, or devices.",
+  "params": [
+    {
+      "id": "ia-04_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles from whom authorization must be received to assign an identifier are defined;"
+      ]
+    },
+    {
+      "id": "ia-04_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "a time period for preventing reuse of identifiers is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-5",
+    "ia-2",
+    "ia-3",
+    "ia-5",
+    "ia-8",
+    "ia-9",
+    "ia-12",
+    "ma-4",
+    "pe-2",
+    "pe-3",
+    "pe-4",
+    "pl-4",
+    "pm-12",
+    "ps-3",
+    "ps-4",
+    "ps-5",
+    "sc-37"
+  ]
+}

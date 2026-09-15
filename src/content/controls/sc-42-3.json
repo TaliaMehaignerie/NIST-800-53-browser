@@ -1,0 +1,20 @@
+{
+  "id": "sc-42.3",
+  "slug": "sc-42-3",
+  "label": "SC-42(3)",
+  "kind": "enhancement",
+  "parentSlug": "sc-42",
+  "enhancementSlugs": [],
+  "title": "Prohibit Use of Devices",
+  "familyCode": "SC",
+  "sortId": "sc-42.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-42"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,20 @@
+{
+  "id": "mp-4.1",
+  "slug": "mp-4-1",
+  "label": "MP-4(1)",
+  "kind": "enhancement",
+  "parentSlug": "mp-4",
+  "enhancementSlugs": [],
+  "title": "Cryptographic Protection",
+  "familyCode": "MP",
+  "sortId": "mp-04.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-28.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

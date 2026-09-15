@@ -1,0 +1,60 @@
+{
+  "id": "ac-2.12",
+  "slug": "ac-2-12",
+  "label": "AC-2(12)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Account Monitoring for Atypical Usage",
+  "familyCode": "AC",
+  "sortId": "ac-02.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Monitor system accounts for {{ insert: param, ac-02.12_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Report atypical usage of system accounts to {{ insert: param, ac-02.12_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Atypical usage includes accessing systems at certain times of the day or from locations that are not consistent with the normal usage patterns of individuals. Monitoring for atypical usage may reveal rogue behavior by individuals or an attack in progress. Account monitoring may inadvertently create privacy risks since data collected to identify atypical usage may reveal previously unknown information about the behavior of individuals. Organizations assess and document privacy risks from monitoring accounts for atypical usage in their privacy impact assessment and make determinations that are in alignment with their privacy program plan.",
+  "params": [
+    {
+      "id": "ac-02.12_odp.01",
+      "label": "atypical usage",
+      "select": null,
+      "guidelines": [
+        "atypical usage for which to monitor system accounts is defined;"
+      ]
+    },
+    {
+      "id": "ac-02.12_odp.02",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to report atypical usage is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-6",
+    "au-7",
+    "ca-7",
+    "ir-8",
+    "si-4"
+  ]
+}

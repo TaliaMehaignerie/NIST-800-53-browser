@@ -1,0 +1,41 @@
+{
+  "id": "ma-6.1",
+  "slug": "ma-6-1",
+  "label": "MA-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "ma-6",
+  "enhancementSlugs": [],
+  "title": "Preventive Maintenance",
+  "familyCode": "MA",
+  "sortId": "ma-06.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Perform preventive maintenance on {{ insert: param, ma-06.01_odp.01 }} at {{ insert: param, ma-06.01_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Preventive maintenance includes proactive care and the servicing of system components to maintain organizational equipment and facilities in satisfactory operating condition. Such maintenance provides for the systematic inspection, tests, measurements, adjustments, parts replacement, detection, and correction of incipient failures either before they occur or before they develop into major defects. The primary goal of preventive maintenance is to avoid or mitigate the consequences of equipment failures. Preventive maintenance is designed to preserve and restore equipment reliability by replacing worn components before they fail. Methods of determining what preventive (or other) failure management policies to apply include original equipment manufacturer recommendations; statistical failure records; expert opinion; maintenance that has already been conducted on similar equipment; requirements of codes, laws, or regulations within a jurisdiction; or measured values and performance indications.",
+  "params": [
+    {
+      "id": "ma-06.01_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components on which preventive maintenance is to be performed are defined;"
+      ]
+    },
+    {
+      "id": "ma-06.01_odp.02",
+      "label": "time intervals",
+      "select": null,
+      "guidelines": [
+        "time intervals within which preventive maintenance is to be performed on system components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

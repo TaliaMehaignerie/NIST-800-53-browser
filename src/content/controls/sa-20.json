@@ -1,0 +1,37 @@
+{
+  "id": "sa-20",
+  "slug": "sa-20",
+  "label": "SA-20",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Customized Development of Critical Components",
+  "familyCode": "SA",
+  "sortId": "sa-20",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Reimplement or custom develop the following critical system components: {{ insert: param, sa-20_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations determine that certain system components likely cannot be trusted due to specific threats to and vulnerabilities in those components for which there are no viable security controls to adequately mitigate risk. Reimplementation or custom development of such components may satisfy requirements for higher assurance and is carried out by initiating changes to system components (including hardware, software, and firmware) such that the standard attacks by adversaries are less likely to succeed. In situations where no alternative sourcing is available and organizations choose not to reimplement or custom develop critical system components, additional controls can be employed. Controls include enhanced auditing, restrictions on source code and system utility access, and protection from deletion of system and application files.",
+  "params": [
+    {
+      "id": "sa-20_odp",
+      "label": "critical system",
+      "select": null,
+      "guidelines": [
+        "critical system components to be reimplemented or custom-developed are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "ra-9",
+    "sa-8"
+  ]
+}

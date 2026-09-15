@@ -1,0 +1,29 @@
+{
+  "id": "cp-7.2",
+  "slug": "cp-7-2",
+  "label": "CP-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "cp-7",
+  "enhancementSlugs": [],
+  "title": "Accessibility",
+  "familyCode": "CP",
+  "sortId": "cp-07.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Identify potential accessibility problems to alternate processing sites in the event of an area-wide disruption or disaster and outlines explicit mitigation actions.",
+      "children": []
+    }
+  ],
+  "guidance": "Area-wide disruptions refer to those types of disruptions that are broad in geographic scope with such determinations made by organizations based on organizational assessments of risk.",
+  "params": [],
+  "related": [
+    "ra-3"
+  ]
+}

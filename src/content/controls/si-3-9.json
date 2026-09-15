@@ -1,0 +1,20 @@
+{
+  "id": "si-3.9",
+  "slug": "si-3-9",
+  "label": "SI-3(9)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Authenticate Remote Commands",
+  "familyCode": "SI",
+  "sortId": "si-03.09",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-17.10"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

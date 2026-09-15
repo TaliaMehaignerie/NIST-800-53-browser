@@ -1,0 +1,52 @@
+{
+  "id": "sc-51",
+  "slug": "sc-51",
+  "label": "SC-51",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Hardware-based Protection",
+  "familyCode": "SC",
+  "sortId": "sc-51",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Employ hardware-based, write-protect for {{ insert: param, sc-51_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Implement specific procedures for {{ insert: param, sc-51_odp.02 }} to manually disable hardware write-protect for firmware modifications and re-enable the write-protect prior to returning to operational mode.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "None.",
+  "params": [
+    {
+      "id": "sc-51_odp.01",
+      "label": "system firmware components",
+      "select": null,
+      "guidelines": [
+        "system firmware components requiring hardware-based write-protect are defined;"
+      ]
+    },
+    {
+      "id": "sc-51_odp.02",
+      "label": "authorized individuals",
+      "select": null,
+      "guidelines": [
+        "authorized individuals requiring procedures for disabling and re-enabling hardware write-protect are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

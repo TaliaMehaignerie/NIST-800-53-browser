@@ -1,0 +1,47 @@
+{
+  "id": "cm-11.3",
+  "slug": "cm-11-3",
+  "label": "CM-11(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-11",
+  "enhancementSlugs": [],
+  "title": "Automated Enforcement and Monitoring",
+  "familyCode": "CM",
+  "sortId": "cm-11.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce and monitor compliance with software installation policies using {{ insert: param, cm-11.3_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations enforce and monitor compliance with software installation policies using automated mechanisms to more quickly detect and respond to unauthorized software installation which can be an indicator of an internal or external hostile attack.",
+  "params": [
+    {
+      "id": "cm-11.3_prm_1",
+      "label": "organization-defined automated mechanisms",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "cm-11.03_odp.01",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to enforce compliance are defined;"
+      ]
+    },
+    {
+      "id": "cm-11.03_odp.02",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to monitor compliance are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

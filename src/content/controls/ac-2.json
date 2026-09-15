@@ -1,0 +1,261 @@
+{
+  "id": "ac-2",
+  "slug": "ac-2",
+  "label": "AC-2",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-2-1",
+    "ac-2-2",
+    "ac-2-3",
+    "ac-2-4",
+    "ac-2-5",
+    "ac-2-6",
+    "ac-2-7",
+    "ac-2-8",
+    "ac-2-9",
+    "ac-2-10",
+    "ac-2-11",
+    "ac-2-12",
+    "ac-2-13"
+  ],
+  "title": "Account Management",
+  "familyCode": "AC",
+  "sortId": "ac-02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Define and document the types of accounts allowed and specifically prohibited for use within the system;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Assign account managers;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Require {{ insert: param, ac-02_odp.01 }} for group and role membership;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Specify:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Authorized users of the system;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Group and role membership; and",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "Access authorizations (i.e., privileges) and {{ insert: param, ac-02_odp.02 }} for each account;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "e.",
+          "prose": "Require approvals by {{ insert: param, ac-02_odp.03 }} for requests to create accounts;",
+          "children": []
+        },
+        {
+          "label": "f.",
+          "prose": "Create, enable, modify, disable, and remove accounts in accordance with {{ insert: param, ac-02_odp.04 }};",
+          "children": []
+        },
+        {
+          "label": "g.",
+          "prose": "Monitor the use of accounts;",
+          "children": []
+        },
+        {
+          "label": "h.",
+          "prose": "Notify account managers and {{ insert: param, ac-02_odp.05 }} within:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "{{ insert: param, ac-02_odp.06 }} when accounts are no longer required;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "{{ insert: param, ac-02_odp.07 }} when users are terminated or transferred; and",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "{{ insert: param, ac-02_odp.08 }} when system usage or need-to-know changes for an individual;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "i.",
+          "prose": "Authorize access to the system based on:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "A valid access authorization;",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Intended system usage; and",
+              "children": []
+            },
+            {
+              "label": "3.",
+              "prose": "{{ insert: param, ac-02_odp.09 }};",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "j.",
+          "prose": "Review accounts for compliance with account management requirements {{ insert: param, ac-02_odp.10 }};",
+          "children": []
+        },
+        {
+          "label": "k.",
+          "prose": "Establish and implement a process for changing shared or group account authenticators (if deployed) when individuals are removed from the group; and",
+          "children": []
+        },
+        {
+          "label": "l.",
+          "prose": "Align account management processes with personnel termination and transfer processes.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Examples of system account types include individual, shared, group, system, guest, anonymous, emergency, developer, temporary, and service. Identification of authorized system users and the specification of access privileges reflect the requirements in other controls in the security plan. Users requiring administrative privileges on system accounts receive additional scrutiny by organizational personnel responsible for approving such accounts and privileged access, including system owner, mission or business owner, senior agency information security officer, or senior agency official for privacy. Types of accounts that organizations may wish to prohibit due to increased risk include shared, group, emergency, anonymous, temporary, and guest accounts.\n\nWhere access involves personally identifiable information, security programs collaborate with the senior agency official for privacy to establish the specific conditions for group and role membership; specify authorized users, group and role membership, and access authorizations for each account; and create, adjust, or remove system accounts in accordance with organizational policies. Policies can include such information as account expiration dates or other factors that trigger the disabling of accounts. Organizations may choose to define access privileges or other attributes by account, type of account, or a combination of the two. Examples of other attributes required for authorizing access include restrictions on time of day, day of week, and point of origin. In defining other system account attributes, organizations consider system-related requirements and mission/business requirements. Failure to consider these factors could affect system availability.\n\nTemporary and emergency accounts are intended for short-term use. Organizations establish temporary accounts as part of normal account activation procedures when there is a need for short-term accounts without the demand for immediacy in account activation. Organizations establish emergency accounts in response to crisis situations and with the need for rapid account activation. Therefore, emergency account activation may bypass normal account authorization processes. Emergency and temporary accounts are not to be confused with infrequently used accounts, including local logon accounts used for special tasks or when network resources are unavailable (may also be known as accounts of last resort). Such accounts remain available and are not subject to automatic disabling or removal dates. Conditions for disabling or deactivating accounts include when shared/group, emergency, or temporary accounts are no longer required and when individuals are transferred or terminated. Changing shared/group authenticators when members leave the group is intended to ensure that former group members do not retain access to the shared or group account. Some types of system accounts may require specialized training.",
+  "params": [
+    {
+      "id": "ac-02_odp.01",
+      "label": "prerequisites and criteria",
+      "select": null,
+      "guidelines": [
+        "prerequisites and criteria for group and role membership are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.02",
+      "label": "attributes (as required)",
+      "select": null,
+      "guidelines": [
+        "attributes (as required) for each account are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.03",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles required to approve requests to create accounts is/are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.04",
+      "label": "policy, procedures, prerequisites, and criteria",
+      "select": null,
+      "guidelines": [
+        "policy, procedures, prerequisites, and criteria for account creation, enabling, modification, disabling, and removal are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.05",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified is/are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.06",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which to notify account managers when accounts are no longer required is defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.07",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which to notify account managers when users are terminated or transferred is defined; "
+      ]
+    },
+    {
+      "id": "ac-02_odp.08",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which to notify account managers when system usage or the need to know changes for an individual is defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.09",
+      "label": "attributes (as required)",
+      "select": null,
+      "guidelines": [
+        "attributes needed to authorize system access (as required) are defined;"
+      ]
+    },
+    {
+      "id": "ac-02_odp.10",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency of account review is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-5",
+    "ac-6",
+    "ac-17",
+    "ac-18",
+    "ac-20",
+    "ac-24",
+    "au-2",
+    "au-12",
+    "cm-5",
+    "ia-2",
+    "ia-4",
+    "ia-5",
+    "ia-8",
+    "ma-3",
+    "ma-5",
+    "pe-2",
+    "pl-4",
+    "ps-2",
+    "ps-4",
+    "ps-5",
+    "ps-7",
+    "pt-2",
+    "pt-3",
+    "sc-7",
+    "sc-12",
+    "sc-13",
+    "sc-37"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "cm-2.3",
+  "slug": "cm-2-3",
+  "label": "CM-2(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-2",
+  "enhancementSlugs": [],
+  "title": "Retention of Previous Configurations",
+  "familyCode": "CM",
+  "sortId": "cm-02.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Retain {{ insert: param, cm-02.03_odp }} of previous versions of baseline configurations of the system to support rollback.",
+      "children": []
+    }
+  ],
+  "guidance": "Retaining previous versions of baseline configurations to support rollback include hardware, software, firmware, configuration files, configuration records, and associated documentation.",
+  "params": [
+    {
+      "id": "cm-02.03_odp",
+      "label": "number",
+      "select": null,
+      "guidelines": [
+        "the number of previous baseline configuration versions to be retained is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

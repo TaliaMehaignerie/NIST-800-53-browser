@@ -1,0 +1,47 @@
+{
+  "id": "cp-12",
+  "slug": "cp-12",
+  "label": "CP-12",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Safe Mode",
+  "familyCode": "CP",
+  "sortId": "cp-12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When {{ insert: param, cp-12_odp.02 }} are detected, enter a safe mode of operation with {{ insert: param, cp-12_odp.01 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "For systems that support critical mission and business functions—including military operations, civilian space operations, nuclear power plant operations, and air traffic control operations (especially real-time operational environments)—organizations can identify certain conditions under which those systems revert to a predefined safe mode of operation. The safe mode of operation, which can be activated either automatically or manually, restricts the operations that systems can execute when those conditions are encountered. Restriction includes allowing only selected functions to execute that can be carried out under limited power or with reduced communications bandwidth.",
+  "params": [
+    {
+      "id": "cp-12_odp.01",
+      "label": "restrictions",
+      "select": null,
+      "guidelines": [
+        "restrictions for safe mode of operation are defined;"
+      ]
+    },
+    {
+      "id": "cp-12_odp.02",
+      "label": "conditions",
+      "select": null,
+      "guidelines": [
+        "conditions detected to enter a safe mode of operation are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "sa-8",
+    "sc-24",
+    "si-13",
+    "si-17"
+  ]
+}

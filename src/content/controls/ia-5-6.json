@@ -1,0 +1,29 @@
+{
+  "id": "ia-5.6",
+  "slug": "ia-5-6",
+  "label": "IA-5(6)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Protection of Authenticators",
+  "familyCode": "IA",
+  "sortId": "ia-05.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect authenticators commensurate with the security category of the information to which use of the authenticator permits access.",
+      "children": []
+    }
+  ],
+  "guidance": "For systems that contain multiple security categories of information without reliable physical or logical separation between categories, authenticators used to grant access to the systems are protected commensurate with the highest security category of information on the systems. Security categories of information are determined as part of the security categorization process.",
+  "params": [],
+  "related": [
+    "ra-2"
+  ]
+}

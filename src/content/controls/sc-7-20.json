@@ -1,0 +1,33 @@
+{
+  "id": "sc-7.20",
+  "slug": "sc-7-20",
+  "label": "SC-7(20)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Dynamic Isolation and Segregation",
+  "familyCode": "SC",
+  "sortId": "sc-07.20",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide the capability to dynamically isolate {{ insert: param, sc-07.20_odp }} from other system components.",
+      "children": []
+    }
+  ],
+  "guidance": "The capability to dynamically isolate certain internal system components is useful when it is necessary to partition or separate system components of questionable origin from components that possess greater trustworthiness. Component isolation reduces the attack surface of organizational systems. Isolating selected system components can also limit the damage from successful attacks when such attacks occur.",
+  "params": [
+    {
+      "id": "sc-07.20_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components to be dynamically isolated from other system components are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

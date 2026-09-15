@@ -1,0 +1,38 @@
+{
+  "id": "pe-8.3",
+  "slug": "pe-8-3",
+  "label": "PE-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-8",
+  "enhancementSlugs": [],
+  "title": "Limit Personally Identifiable Information Elements",
+  "familyCode": "PE",
+  "sortId": "pe-08.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Limit personally identifiable information contained in visitor access records to the following elements identified in the privacy risk assessment: {{ insert: param, pe-08.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations may have requirements that specify the contents of visitor access records. Limiting personally identifiable information in visitor access records when such information is not needed for operational purposes helps reduce the level of privacy risk created by a system.",
+  "params": [
+    {
+      "id": "pe-08.03_odp",
+      "label": "elements",
+      "select": null,
+      "guidelines": [
+        "elements identified in the privacy risk assessment to limit personally identifiable information contained in visitor access logs are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ra-3",
+    "sa-8"
+  ]
+}

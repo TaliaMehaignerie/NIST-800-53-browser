@@ -1,0 +1,26 @@
+{
+  "id": "ma-4.7",
+  "slug": "ma-4-7",
+  "label": "MA-4(7)",
+  "kind": "enhancement",
+  "parentSlug": "ma-4",
+  "enhancementSlugs": [],
+  "title": "Disconnect Verification",
+  "familyCode": "MA",
+  "sortId": "ma-04.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify session and network connection termination after the completion of nonlocal maintenance and diagnostic sessions.",
+      "children": []
+    }
+  ],
+  "guidance": "Verifying the termination of a connection once maintenance is completed ensures that connections established during nonlocal maintenance and diagnostic sessions have been terminated and are no longer available for use.",
+  "params": [],
+  "related": [
+    "ac-12"
+  ]
+}

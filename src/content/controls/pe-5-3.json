@@ -1,0 +1,20 @@
+{
+  "id": "pe-5.3",
+  "slug": "pe-5-3",
+  "label": "PE-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "pe-5",
+  "enhancementSlugs": [],
+  "title": "Marking Output Devices",
+  "familyCode": "PE",
+  "sortId": "pe-05.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "pe-22"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

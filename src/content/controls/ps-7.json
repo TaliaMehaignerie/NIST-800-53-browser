@@ -1,0 +1,84 @@
+{
+  "id": "ps-7",
+  "slug": "ps-7",
+  "label": "PS-7",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "External Personnel Security",
+  "familyCode": "PS",
+  "sortId": "ps-07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Establish personnel security requirements, including security roles and responsibilities for external providers;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Require external providers to comply with personnel security policies and procedures established by the organization;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Document personnel security requirements;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Require external providers to notify {{ insert: param, ps-07_odp.01 }} of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges, or who have system privileges within {{ insert: param, ps-07_odp.02 }} ; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Monitor provider compliance with personnel security requirements.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "External provider refers to organizations other than the organization operating or acquiring the system. External providers include service bureaus, contractors, and other organizations that provide system development, information technology services, testing or assessment services, outsourced applications, and network/security management. Organizations explicitly include personnel security requirements in acquisition-related documents. External providers may have personnel working at organizational facilities with credentials, badges, or system privileges issued by organizations. Notifications of external personnel changes ensure the appropriate termination of privileges and credentials. Organizations define the transfers and terminations deemed reportable by security-related characteristics that include functions, roles, and the nature of credentials or privileges associated with transferred or terminated individuals.",
+  "params": [
+    {
+      "id": "ps-07_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be notified of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges or who have system privileges is/are defined;"
+      ]
+    },
+    {
+      "id": "ps-07_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which third-party providers are required to notify organization-defined personnel or roles of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges or who have system privileges is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "at-2",
+    "at-3",
+    "ma-5",
+    "pe-3",
+    "ps-2",
+    "ps-3",
+    "ps-4",
+    "ps-5",
+    "ps-6",
+    "sa-5",
+    "sa-9",
+    "sa-21"
+  ]
+}

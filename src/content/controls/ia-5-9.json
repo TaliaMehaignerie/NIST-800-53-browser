@@ -1,0 +1,36 @@
+{
+  "id": "ia-5.9",
+  "slug": "ia-5-9",
+  "label": "IA-5(9)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Federated Credential Management",
+  "familyCode": "IA",
+  "sortId": "ia-05.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use the following external organizations to federate credentials: {{ insert: param, ia-05.09_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Federation provides organizations with the capability to authenticate individuals and devices when conducting cross-organization activities involving the processing, storage, or transmission of information. Using a specific list of approved external organizations for authentication helps to ensure that those organizations are vetted and trusted.",
+  "params": [
+    {
+      "id": "ia-05.09_odp",
+      "label": "external organizations",
+      "select": null,
+      "guidelines": [
+        "external organizations to be used for federating credentials are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-7",
+    "au-16"
+  ]
+}

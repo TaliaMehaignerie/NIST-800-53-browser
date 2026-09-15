@@ -1,0 +1,31 @@
+{
+  "id": "ac-6.4",
+  "slug": "ac-6-4",
+  "label": "AC-6(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Separate Processing Domains",
+  "familyCode": "AC",
+  "sortId": "ac-06.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide separate processing domains to enable finer-grained allocation of user privileges.",
+      "children": []
+    }
+  ],
+  "guidance": "Providing separate processing domains for finer-grained allocation of user privileges includes using virtualization techniques to permit additional user privileges within a virtual machine while restricting privileges to other virtual machines or to the underlying physical machine, implementing separate physical domains, and employing hardware or software domain separation mechanisms.",
+  "params": [],
+  "related": [
+    "ac-4",
+    "sc-2",
+    "sc-3",
+    "sc-30",
+    "sc-32",
+    "sc-39"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "si-4.1",
+  "slug": "si-4-1",
+  "label": "SI-4(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-4",
+  "enhancementSlugs": [],
+  "title": "System-wide Intrusion Detection System",
+  "familyCode": "SI",
+  "sortId": "si-04.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Connect and configure individual intrusion detection tools into a system-wide intrusion detection system.",
+      "children": []
+    }
+  ],
+  "guidance": "Linking individual intrusion detection tools into a system-wide intrusion detection system provides additional coverage and effective detection capabilities. The information contained in one intrusion detection tool can be shared widely across the organization, making the system-wide detection capability more robust and powerful.",
+  "params": [],
+  "related": []
+}

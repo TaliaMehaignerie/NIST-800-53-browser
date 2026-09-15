@@ -1,0 +1,29 @@
+{
+  "id": "au-9.7",
+  "slug": "au-9-7",
+  "label": "AU-9(7)",
+  "kind": "enhancement",
+  "parentSlug": "au-9",
+  "enhancementSlugs": [],
+  "title": "Store on Component with Different Operating System",
+  "familyCode": "AU",
+  "sortId": "au-09.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Store audit information on a component running a different operating system than the system or component being audited.",
+      "children": []
+    }
+  ],
+  "guidance": "Storing auditing information on a system component running a different operating system reduces the risk of a vulnerability specific to the system, resulting in a compromise of the audit records.",
+  "params": [],
+  "related": [
+    "au-4",
+    "au-5",
+    "au-11",
+    "sc-29"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "at-3.2",
+  "slug": "at-3-2",
+  "label": "AT-3(2)",
+  "kind": "enhancement",
+  "parentSlug": "at-3",
+  "enhancementSlugs": [],
+  "title": "Physical Security Controls",
+  "familyCode": "AT",
+  "sortId": "at-03.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide {{ insert: param, at-03.02_odp.01 }} with initial and {{ insert: param, at-03.02_odp.02 }} training in the employment and operation of physical security controls.",
+      "children": []
+    }
+  ],
+  "guidance": "Physical security controls include physical access control devices, physical intrusion and detection alarms, operating procedures for facility security guards, and monitoring or surveillance equipment.",
+  "params": [
+    {
+      "id": "at-03.02_odp.01",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to be provided with initial and refresher training in the employment and operation of physical security controls is/are defined;"
+      ]
+    },
+    {
+      "id": "at-03.02_odp.02",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to provide refresher training in the employment and operation of physical security controls is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pe-2",
+    "pe-3",
+    "pe-4"
+  ]
+}

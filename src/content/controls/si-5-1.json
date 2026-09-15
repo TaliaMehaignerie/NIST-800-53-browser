@@ -1,0 +1,35 @@
+{
+  "id": "si-5.1",
+  "slug": "si-5-1",
+  "label": "SI-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-5",
+  "enhancementSlugs": [],
+  "title": "Automated Alerts and Advisories",
+  "familyCode": "SI",
+  "sortId": "si-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Broadcast security alert and advisory information throughout the organization using {{ insert: param, si-05.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "The significant number of changes to organizational systems and environments of operation requires the dissemination of security-related information to a variety of organizational entities that have a direct interest in the success of organizational mission and business functions. Based on information provided by security alerts and advisories, changes may be required at one or more of the three levels related to the management of risk, including the governance level, mission and business process level, and the information system level.",
+  "params": [
+    {
+      "id": "si-05.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to broadcast security alert and advisory information throughout the organization are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

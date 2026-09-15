@@ -1,0 +1,41 @@
+{
+  "id": "sc-29",
+  "slug": "sc-29",
+  "label": "SC-29",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-29-1"
+  ],
+  "title": "Heterogeneity",
+  "familyCode": "SC",
+  "sortId": "sc-29",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Employ a diverse set of information technologies for the following system components in the implementation of the system: {{ insert: param, sc-29_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Increasing the diversity of information technologies within organizational systems reduces the impact of potential exploitations or compromises of specific technologies. Such diversity protects against common mode failures, including those failures induced by supply chain attacks. Diversity in information technologies also reduces the likelihood that the means adversaries use to compromise one system component will be effective against other system components, thus further increasing the adversary work factor to successfully complete planned attacks. An increase in diversity may add complexity and management overhead that could ultimately lead to mistakes and unauthorized configurations.",
+  "params": [
+    {
+      "id": "sc-29_odp",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components requiring a diverse set of information technologies to be employed in the implementation of the system are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-9",
+    "pl-8",
+    "sc-27",
+    "sc-30",
+    "sr-3"
+  ]
+}

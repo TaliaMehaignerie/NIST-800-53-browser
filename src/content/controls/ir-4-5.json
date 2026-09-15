@@ -1,0 +1,33 @@
+{
+  "id": "ir-4.5",
+  "slug": "ir-4-5",
+  "label": "IR-4(5)",
+  "kind": "enhancement",
+  "parentSlug": "ir-4",
+  "enhancementSlugs": [],
+  "title": "Automatic Disabling of System",
+  "familyCode": "IR",
+  "sortId": "ir-04.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement a configurable capability to automatically disable the system if {{ insert: param, ir-04.05_odp }} are detected.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations consider whether the capability to automatically disable the system conflicts with continuity of operations requirements specified as part of [CP-2](#cp-2) or [IR-4(3)](#ir-4.3) . Security violations include cyber-attacks that have compromised the integrity of the system or exfiltrated organizational information and serious errors in software programs that could adversely impact organizational missions or functions or jeopardize the safety of individuals.",
+  "params": [
+    {
+      "id": "ir-04.05_odp",
+      "label": "security violations",
+      "select": null,
+      "guidelines": [
+        "security violations that automatically disable a system are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

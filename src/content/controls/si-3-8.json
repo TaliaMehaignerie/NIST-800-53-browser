@@ -1,0 +1,69 @@
+{
+  "id": "si-3.8",
+  "slug": "si-3-8",
+  "label": "SI-3(8)",
+  "kind": "enhancement",
+  "parentSlug": "si-3",
+  "enhancementSlugs": [],
+  "title": "Detect Unauthorized Commands",
+  "familyCode": "SI",
+  "sortId": "si-03.08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Detect the following unauthorized operating system commands through the kernel application programming interface on {{ insert: param, si-03.08_odp.02 }}: {{ insert: param, si-03.08_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "{{ insert: param, si-03.08_odp.03 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Detecting unauthorized commands can be applied to critical interfaces other than kernel-based interfaces, including interfaces with virtual machines and privileged applications. Unauthorized operating system commands include commands for kernel functions from system processes that are not trusted to initiate such commands as well as commands for kernel functions that are suspicious even though commands of that type are reasonable for processes to initiate. Organizations can define the malicious commands to be detected by a combination of command types, command classes, or specific instances of commands. Organizations can also define hardware components by component type, component, component location in the network, or a combination thereof. Organizations may select different actions for different types, classes, or instances of malicious commands.",
+  "params": [
+    {
+      "id": "si-03.08_odp.01",
+      "label": "unauthorized operating system commands",
+      "select": null,
+      "guidelines": [
+        "system hardware components for which unauthorized operating system commands are to be detected through the kernel application programming interface are defined;"
+      ]
+    },
+    {
+      "id": "si-03.08_odp.02",
+      "label": "system hardware components",
+      "select": null,
+      "guidelines": [
+        "unauthorized operating system commands to be detected are defined;"
+      ]
+    },
+    {
+      "id": "si-03.08_odp.03",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "issue a warning",
+          "audit the command execution",
+          "prevent the execution of the command"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": [
+    "au-2",
+    "au-6",
+    "au-12"
+  ]
+}

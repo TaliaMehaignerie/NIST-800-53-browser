@@ -1,0 +1,20 @@
+{
+  "id": "ac-3.1",
+  "slug": "ac-3-1",
+  "label": "AC-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Restricted Access to Privileged Functions",
+  "familyCode": "AC",
+  "sortId": "ac-03.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ac-6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

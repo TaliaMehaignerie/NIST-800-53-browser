@@ -1,0 +1,21 @@
+{
+  "id": "sa-6",
+  "slug": "sa-6",
+  "label": "SA-6",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Software Usage Restrictions",
+  "familyCode": "SA",
+  "sortId": "sa-06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-10",
+    "si-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

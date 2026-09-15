@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.6",
+  "slug": "sa-12-6",
+  "label": "SA-12(6)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Minimizing Procurement Time",
+  "familyCode": "SA",
+  "sortId": "sa-12.06",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-5.1"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

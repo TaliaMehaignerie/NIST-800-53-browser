@@ -1,0 +1,20 @@
+{
+  "id": "sa-12.10",
+  "slug": "sa-12-10",
+  "label": "SA-12(10)",
+  "kind": "enhancement",
+  "parentSlug": "sa-12",
+  "enhancementSlugs": [],
+  "title": "Validate as Genuine and Not Altered",
+  "familyCode": "SA",
+  "sortId": "sa-12.10",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sr-4.3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

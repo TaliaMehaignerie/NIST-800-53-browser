@@ -1,0 +1,20 @@
+{
+  "id": "ir-9.1",
+  "slug": "ir-9-1",
+  "label": "IR-9(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-9",
+  "enhancementSlugs": [],
+  "title": "Responsible Personnel",
+  "familyCode": "IR",
+  "sortId": "ir-09.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ir-9"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

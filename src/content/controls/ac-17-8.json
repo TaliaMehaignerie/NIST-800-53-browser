@@ -1,0 +1,20 @@
+{
+  "id": "ac-17.8",
+  "slug": "ac-17-8",
+  "label": "AC-17(8)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Disable Nonsecure Network Protocols",
+  "familyCode": "AC",
+  "sortId": "ac-17.08",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "cm-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

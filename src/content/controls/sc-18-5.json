@@ -1,0 +1,27 @@
+{
+  "id": "sc-18.5",
+  "slug": "sc-18-5",
+  "label": "SC-18(5)",
+  "kind": "enhancement",
+  "parentSlug": "sc-18",
+  "enhancementSlugs": [],
+  "title": "Allow Execution Only in Confined Environments",
+  "familyCode": "SC",
+  "sortId": "sc-18.05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Allow execution of permitted mobile code only in confined virtual machine environments.",
+      "children": []
+    }
+  ],
+  "guidance": "Permitting the execution of mobile code only in confined virtual machine environments helps prevent the introduction of malicious code into other systems and system components.",
+  "params": [],
+  "related": [
+    "sc-44",
+    "si-7"
+  ]
+}

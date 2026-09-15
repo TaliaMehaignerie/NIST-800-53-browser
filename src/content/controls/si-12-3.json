@@ -1,0 +1,57 @@
+{
+  "id": "si-12.3",
+  "slug": "si-12-3",
+  "label": "SI-12(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-12",
+  "enhancementSlugs": [],
+  "title": "Information Disposal",
+  "familyCode": "SI",
+  "sortId": "si-12.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Use the following techniques to dispose of, destroy, or erase information following the retention period: {{ insert: param, si-12.3_prm_1 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can minimize both security and privacy risks by disposing of information when it is no longer needed. The disposal or destruction of information applies to originals as well as copies and archived records, including system logs that may contain personally identifiable information.",
+  "params": [
+    {
+      "id": "si-12.3_prm_1",
+      "label": "organization-defined techniques",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "si-12.03_odp.01",
+      "label": "techniques",
+      "select": null,
+      "guidelines": [
+        "techniques used to dispose of information following the retention period are defined;"
+      ]
+    },
+    {
+      "id": "si-12.03_odp.02",
+      "label": "techniques",
+      "select": null,
+      "guidelines": [
+        "techniques used to destroy information following the retention period are defined;"
+      ]
+    },
+    {
+      "id": "si-12.03_odp.03",
+      "label": "techniques",
+      "select": null,
+      "guidelines": [
+        "techniques used to erase information following the retention period are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

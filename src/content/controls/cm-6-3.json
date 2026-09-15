@@ -1,0 +1,20 @@
+{
+  "id": "cm-6.3",
+  "slug": "cm-6-3",
+  "label": "CM-6(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-6",
+  "enhancementSlugs": [],
+  "title": "Unauthorized Change Detection",
+  "familyCode": "CM",
+  "sortId": "cm-06.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "si-7"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

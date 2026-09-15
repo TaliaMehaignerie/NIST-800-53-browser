@@ -1,0 +1,28 @@
+{
+  "id": "sa-15.12",
+  "slug": "sa-15-12",
+  "label": "SA-15(12)",
+  "kind": "enhancement",
+  "parentSlug": "sa-15",
+  "enhancementSlugs": [],
+  "title": "Minimize Personally Identifiable Information",
+  "familyCode": "SA",
+  "sortId": "sa-15.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Require the developer of the system or system component to minimize the use of personally identifiable information in development and test environments.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations can minimize the risk to an individual’s privacy by using techniques such as de-identification or synthetic data. Limiting the use of personally identifiable information in development and test environments helps reduce the level of privacy risk created by a system.",
+  "params": [],
+  "related": [
+    "pm-25",
+    "sa-3",
+    "sa-8"
+  ]
+}

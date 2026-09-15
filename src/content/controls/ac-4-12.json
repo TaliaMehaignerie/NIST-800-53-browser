@@ -1,0 +1,33 @@
+{
+  "id": "ac-4.12",
+  "slug": "ac-4-12",
+  "label": "AC-4(12)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Data Type Identifiers",
+  "familyCode": "AC",
+  "sortId": "ac-04.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, use {{ insert: param, ac-04.12_odp }} to validate data essential for information flow decisions.",
+      "children": []
+    }
+  ],
+  "guidance": "Data type identifiers include filenames, file types, file signatures or tokens, and multiple internal file signatures or tokens. Systems only allow transfer of data that is compliant with data type format specifications. Identification and validation of data types is based on defined specifications associated with each allowed data format. The filename and number alone are not used for data type identification. Content is validated syntactically and semantically against its specification to ensure that it is the proper data type.",
+  "params": [
+    {
+      "id": "ac-04.12_odp",
+      "label": "data type identifiers",
+      "select": null,
+      "guidelines": [
+        "data type identifiers to be used to validate data essential for information flow decisions are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

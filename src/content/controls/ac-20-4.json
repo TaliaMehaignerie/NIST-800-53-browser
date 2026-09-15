@@ -1,0 +1,33 @@
+{
+  "id": "ac-20.4",
+  "slug": "ac-20-4",
+  "label": "AC-20(4)",
+  "kind": "enhancement",
+  "parentSlug": "ac-20",
+  "enhancementSlugs": [],
+  "title": "Network Accessible Storage Devices — Prohibited Use",
+  "familyCode": "AC",
+  "sortId": "ac-20.04",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prohibit the use of {{ insert: param, ac-20.04_odp }} in external systems.",
+      "children": []
+    }
+  ],
+  "guidance": "Network-accessible storage devices in external systems include online storage devices in public, hybrid, or community cloud-based systems.",
+  "params": [
+    {
+      "id": "ac-20.04_odp",
+      "label": "network-accessible storage devices",
+      "select": null,
+      "guidelines": [
+        "network-accessible storage devices prohibited from use in external systems are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

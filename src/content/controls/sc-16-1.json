@@ -1,0 +1,27 @@
+{
+  "id": "sc-16.1",
+  "slug": "sc-16-1",
+  "label": "SC-16(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-16",
+  "enhancementSlugs": [],
+  "title": "Integrity Verification",
+  "familyCode": "SC",
+  "sortId": "sc-16.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Verify the integrity of transmitted security and privacy attributes.",
+      "children": []
+    }
+  ],
+  "guidance": "Part of verifying the integrity of transmitted information is ensuring that security and privacy attributes that are associated with such information have not been modified in an unauthorized manner. Unauthorized modification of security or privacy attributes can result in a loss of integrity for transmitted information.",
+  "params": [],
+  "related": [
+    "au-10",
+    "sc-8"
+  ]
+}

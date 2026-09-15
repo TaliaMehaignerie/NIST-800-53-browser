@@ -1,0 +1,31 @@
+{
+  "id": "ac-6.9",
+  "slug": "ac-6-9",
+  "label": "AC-6(9)",
+  "kind": "enhancement",
+  "parentSlug": "ac-6",
+  "enhancementSlugs": [],
+  "title": "Log Use of Privileged Functions",
+  "familyCode": "AC",
+  "sortId": "ac-06.09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Log the execution of privileged functions.",
+      "children": []
+    }
+  ],
+  "guidance": "The misuse of privileged functions, either intentionally or unintentionally by authorized users or by unauthorized external entities that have compromised system accounts, is a serious and ongoing concern and can have significant adverse impacts on organizations. Logging and analyzing the use of privileged functions is one way to detect such misuse and, in doing so, help mitigate the risk from insider threats and the advanced persistent threat.",
+  "params": [],
+  "related": [
+    "au-2",
+    "au-3",
+    "au-12"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "sc-7.28",
+  "slug": "sc-7-28",
+  "label": "SC-7(28)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Connections to Public Networks",
+  "familyCode": "SC",
+  "sortId": "sc-07.28",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Prohibit the direct connection of {{ insert: param, sc-07.28_odp }} to a public network.",
+      "children": []
+    }
+  ],
+  "guidance": "A direct connection is a dedicated physical or virtual connection between two or more systems. A public network is a network accessible to the public, including the Internet and organizational extranets with public access.",
+  "params": [
+    {
+      "id": "sc-07.28_odp",
+      "label": "system",
+      "select": null,
+      "guidelines": [
+        "the system that is prohibited from directly connecting to a public network is defined;"
+      ]
+    }
+  ],
+  "related": []
+}

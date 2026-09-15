@@ -1,0 +1,107 @@
+{
+  "id": "ac-3.3",
+  "slug": "ac-3-3",
+  "label": "AC-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Mandatory Access Control",
+  "familyCode": "AC",
+  "sortId": "ac-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Enforce {{ insert: param, ac-3.3_prm_1 }} over the set of covered subjects and objects specified in the policy, and where the policy:",
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Is uniformly enforced across the covered subjects and objects within the system;",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Specifies that a subject that has been granted access to information is constrained from doing any of the following;",
+          "children": [
+            {
+              "label": "(1)",
+              "prose": "Passing the information to unauthorized subjects or objects;",
+              "children": []
+            },
+            {
+              "label": "(2)",
+              "prose": "Granting its privileges to other subjects;",
+              "children": []
+            },
+            {
+              "label": "(3)",
+              "prose": "Changing one or more security attributes (specified by the policy) on subjects, objects, the system, or system components;",
+              "children": []
+            },
+            {
+              "label": "(4)",
+              "prose": "Choosing the security attributes and attribute values (specified by the policy) to be associated with newly created or modified objects; and",
+              "children": []
+            },
+            {
+              "label": "(5)",
+              "prose": "Changing the rules governing access control; and",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "(c)",
+          "prose": "Specifies that {{ insert: param, ac-03.03_odp.03 }} may explicitly be granted {{ insert: param, ac-03.03_odp.04 }} such that they are not limited by any defined subset (or all) of the above constraints.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Mandatory access control is a type of nondiscretionary access control. Mandatory access control policies constrain what actions subjects can take with information obtained from objects for which they have already been granted access. This prevents the subjects from passing the information to unauthorized subjects and objects. Mandatory access control policies constrain actions that subjects can take with respect to the propagation of access control privileges; that is, a subject with a privilege cannot pass that privilege to other subjects. The policy is uniformly enforced over all subjects and objects to which the system has control. Otherwise, the access control policy can be circumvented. This enforcement is provided by an implementation that meets the reference monitor concept as described in [AC-25](#ac-25) . The policy is bounded by the system (i.e., once the information is passed outside of the control of the system, additional means may be required to ensure that the constraints on the information remain in effect).\n\nThe trusted subjects described above are granted privileges consistent with the concept of least privilege (see [AC-6](#ac-6) ). Trusted subjects are only given the minimum privileges necessary for satisfying organizational mission/business needs relative to the above policy. The control is most applicable when there is a mandate that establishes a policy regarding access to controlled unclassified information or classified information and some users of the system are not authorized access to all such information resident in the system. Mandatory access control can operate in conjunction with discretionary access control as described in [AC-3(4)](#ac-3.4) . A subject constrained in its operation by mandatory access control policies can still operate under the less rigorous constraints of AC-3(4), but mandatory access control policies take precedence over the less rigorous constraints of AC-3(4). For example, while a mandatory access control policy imposes a constraint that prevents a subject from passing information to another subject operating at a different impact or classification level, AC-3(4) permits the subject to pass the information to any other subject with the same impact or classification level as the subject. Examples of mandatory access control policies include the Bell-LaPadula policy to protect confidentiality of information and the Biba policy to protect the integrity of information.",
+  "params": [
+    {
+      "id": "ac-3.3_prm_1",
+      "label": "organization-defined mandatory access control policy",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ac-03.03_odp.01",
+      "label": "mandatory access control policy",
+      "select": null,
+      "guidelines": [
+        "mandatory access control policy enforced over the set of covered subjects is defined;"
+      ]
+    },
+    {
+      "id": "ac-03.03_odp.02",
+      "label": "mandatory access control policy",
+      "select": null,
+      "guidelines": [
+        "mandatory access control policy enforced over the set of covered objects is defined;"
+      ]
+    },
+    {
+      "id": "ac-03.03_odp.03",
+      "label": "subjects",
+      "select": null,
+      "guidelines": [
+        "subjects to be explicitly granted privileges are defined;"
+      ]
+    },
+    {
+      "id": "ac-03.03_odp.04",
+      "label": "privileges",
+      "select": null,
+      "guidelines": [
+        "privileges to be explicitly granted to subjects are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "sc-7"
+  ]
+}

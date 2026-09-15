@@ -1,0 +1,60 @@
+{
+  "id": "sc-34",
+  "slug": "sc-34",
+  "label": "SC-34",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-34-1",
+    "sc-34-2",
+    "sc-34-3"
+  ],
+  "title": "Non-modifiable Executable Programs",
+  "familyCode": "SC",
+  "sortId": "sc-34",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "For {{ insert: param, sc-34_odp.01 }} , load and execute:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "The operating environment from hardware-enforced, read-only media; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "The following applications from hardware-enforced, read-only media: {{ insert: param, sc-34_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The operating environment for a system contains the code that hosts applications, including operating systems, executives, or virtual machine monitors (i.e., hypervisors). It can also include certain applications that run directly on hardware platforms. Hardware-enforced, read-only media include Compact Disc-Recordable (CD-R) and Digital Versatile Disc-Recordable (DVD-R) disk drives as well as one-time, programmable, read-only memory. The use of non-modifiable storage ensures the integrity of software from the point of creation of the read-only image. The use of reprogrammable, read-only memory can be accepted as read-only media provided that integrity can be adequately protected from the point of initial writing to the insertion of the memory into the system, and there are reliable hardware protections against reprogramming the memory while installed in organizational systems.",
+  "params": [
+    {
+      "id": "sc-34_odp.01",
+      "label": "system components",
+      "select": null,
+      "guidelines": [
+        "system components for which the operating environment and applications are to be loaded and executed from hardware-enforced, read-only media are defined;"
+      ]
+    },
+    {
+      "id": "sc-34_odp.02",
+      "label": "applications",
+      "select": null,
+      "guidelines": [
+        "applications to be loaded and executed from hardware-enforced, read-only media are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "si-7",
+    "si-14"
+  ]
+}

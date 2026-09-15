@@ -1,0 +1,33 @@
+{
+  "id": "ia-8.6",
+  "slug": "ia-8-6",
+  "label": "IA-8(6)",
+  "kind": "enhancement",
+  "parentSlug": "ia-8",
+  "enhancementSlugs": [],
+  "title": "Disassociability",
+  "familyCode": "IA",
+  "sortId": "ia-08.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement the following measures to disassociate user attributes or identifier assertion relationships among individuals, credential service providers, and relying parties: {{ insert: param, ia-08.06_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Federated identity solutions can create increased privacy risks due to the tracking and profiling of individuals. Using identifier mapping tables or cryptographic techniques to blind credential service providers and relying parties from each other or to make identity attributes less visible to transmitting parties can reduce these privacy risks.",
+  "params": [
+    {
+      "id": "ia-08.06_odp",
+      "label": "measures",
+      "select": null,
+      "guidelines": [
+        "disassociability measures are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

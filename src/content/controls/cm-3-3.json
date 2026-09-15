@@ -1,0 +1,33 @@
+{
+  "id": "cm-3.3",
+  "slug": "cm-3-3",
+  "label": "CM-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-3",
+  "enhancementSlugs": [],
+  "title": "Automated Change Implementation",
+  "familyCode": "CM",
+  "sortId": "cm-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement changes to the current system baseline and deploy the updated baseline across the installed base using {{ insert: param, cm-03.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated tools can improve the accuracy, consistency, and availability of configuration baseline information. Automation can also provide data aggregation and data correlation capabilities, alerting mechanisms, and dashboards to support risk-based decision-making within the organization.",
+  "params": [
+    {
+      "id": "cm-03.03_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "mechanisms used to automate the implementation of changes and deployment of the updated baseline across the installed base are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

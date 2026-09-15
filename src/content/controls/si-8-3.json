@@ -1,0 +1,24 @@
+{
+  "id": "si-8.3",
+  "slug": "si-8-3",
+  "label": "SI-8(3)",
+  "kind": "enhancement",
+  "parentSlug": "si-8",
+  "enhancementSlugs": [],
+  "title": "Continuous Learning Capability",
+  "familyCode": "SI",
+  "sortId": "si-08.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement spam protection mechanisms with a learning capability to more effectively identify legitimate communications traffic.",
+      "children": []
+    }
+  ],
+  "guidance": "Learning mechanisms include Bayesian filters that respond to user inputs that identify specific traffic as spam or legitimate by updating algorithm parameters and thereby more accurately separating types of traffic.",
+  "params": [],
+  "related": []
+}

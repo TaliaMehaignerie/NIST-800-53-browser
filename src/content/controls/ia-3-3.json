@@ -1,0 +1,60 @@
+{
+  "id": "ia-3.3",
+  "slug": "ia-3-3",
+  "label": "IA-3(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-3",
+  "enhancementSlugs": [],
+  "title": "Dynamic Address Allocation",
+  "familyCode": "IA",
+  "sortId": "ia-03.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Where addresses are allocated dynamically, standardize dynamic address allocation lease information and the lease duration assigned to devices in accordance with {{ insert: param, ia-3.3_prm_1 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Audit lease information when assigned to a device.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The Dynamic Host Configuration Protocol (DHCP) is an example of a means by which clients can dynamically receive network address assignments.",
+  "params": [
+    {
+      "id": "ia-3.3_prm_1",
+      "label": "organization-defined lease information and lease duration",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "ia-03.03_odp.01",
+      "label": "lease information",
+      "select": null,
+      "guidelines": [
+        "lease information to be employed to standardize dynamic address allocation for devices is defined;"
+      ]
+    },
+    {
+      "id": "ia-03.03_odp.02",
+      "label": "lease duration",
+      "select": null,
+      "guidelines": [
+        "lease duration to be employed to standardize dynamic address allocation for devices is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "au-2"
+  ]
+}

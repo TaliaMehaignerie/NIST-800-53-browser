@@ -1,0 +1,53 @@
+{
+  "id": "ac-7.2",
+  "slug": "ac-7-2",
+  "label": "AC-7(2)",
+  "kind": "enhancement",
+  "parentSlug": "ac-7",
+  "enhancementSlugs": [],
+  "title": "Purge or Wipe Mobile Device",
+  "familyCode": "AC",
+  "sortId": "ac-07.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Purge or wipe information from {{ insert: param, ac-07.02_odp.01 }} based on {{ insert: param, ac-07.02_odp.02 }} after {{ insert: param, ac-07.02_odp.03 }} consecutive, unsuccessful device logon attempts.",
+      "children": []
+    }
+  ],
+  "guidance": "A mobile device is a computing device that has a small form factor such that it can be carried by a single individual; is designed to operate without a physical connection; possesses local, non-removable or removable data storage; and includes a self-contained power source. Purging or wiping the device applies only to mobile devices for which the organization-defined number of unsuccessful logons occurs. The logon is to the mobile device, not to any one account on the device. Successful logons to accounts on mobile devices reset the unsuccessful logon count to zero. Purging or wiping may be unnecessary if the information on the device is protected with sufficiently strong encryption mechanisms.",
+  "params": [
+    {
+      "id": "ac-07.02_odp.01",
+      "label": "mobile devices",
+      "select": null,
+      "guidelines": [
+        "mobile devices to be purged or wiped of information are defined;"
+      ]
+    },
+    {
+      "id": "ac-07.02_odp.02",
+      "label": "purging or wiping requirements and techniques",
+      "select": null,
+      "guidelines": [
+        "purging and wiping requirements and techniques to be used when mobile devices are purged or wiped of information are defined;"
+      ]
+    },
+    {
+      "id": "ac-07.02_odp.03",
+      "label": "number",
+      "select": null,
+      "guidelines": [
+        "the number of consecutive, unsuccessful logon attempts before the information is purged or wiped from mobile devices is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-19",
+    "mp-5",
+    "mp-6"
+  ]
+}

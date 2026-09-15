@@ -1,0 +1,56 @@
+{
+  "id": "sc-15",
+  "slug": "sc-15",
+  "label": "SC-15",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "sc-15-1",
+    "sc-15-2",
+    "sc-15-3",
+    "sc-15-4"
+  ],
+  "title": "Collaborative Computing Devices and Applications",
+  "familyCode": "SC",
+  "sortId": "sc-15",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Prohibit remote activation of collaborative computing devices and applications with the following exceptions: {{ insert: param, sc-15_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Provide an explicit indication of use to users physically present at the devices.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Collaborative computing devices and applications include remote meeting devices and applications, networked white boards, cameras, and microphones. The explicit indication of use includes signals to users when collaborative computing devices and applications are activated.",
+  "params": [
+    {
+      "id": "sc-15_odp",
+      "label": "exceptions where remote activation is to be allowed",
+      "select": null,
+      "guidelines": [
+        "exceptions where remote activation is to be allowed are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-21",
+    "sc-42"
+  ]
+}

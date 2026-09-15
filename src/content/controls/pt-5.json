@@ -1,0 +1,82 @@
+{
+  "id": "pt-5",
+  "slug": "pt-5",
+  "label": "PT-5",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "pt-5-1",
+    "pt-5-2"
+  ],
+  "title": "Privacy Notice",
+  "familyCode": "PT",
+  "sortId": "pt-05",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide notice to individuals about the processing of personally identifiable information that:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Is available to individuals upon first interacting with an organization, and subsequently at {{ insert: param, pt-05_odp.01 }};",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Is clear and easy-to-understand, expressing information about personally identifiable information processing in plain language;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Identifies the authority that authorizes the processing of personally identifiable information;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Identifies the purposes for which personally identifiable information is to be processed; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Includes {{ insert: param, pt-05_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Privacy notices help inform individuals about how their personally identifiable information is being processed by the system or organization. Organizations use privacy notices to inform individuals about how, under what authority, and for what purpose their personally identifiable information is processed, as well as other information such as choices individuals might have with respect to that processing and other parties with whom information is shared. Laws, executive orders, directives, regulations, or policies may require that privacy notices include specific elements or be provided in specific formats. Federal agency personnel consult with the senior agency official for privacy and legal counsel regarding when and where to provide privacy notices, as well as elements to include in privacy notices and required formats. In circumstances where laws or government-wide policies do not require privacy notices, organizational policies and determinations may require privacy notices and may serve as a source of the elements to include in privacy notices.\n\nPrivacy risk assessments identify the privacy risks associated with the processing of personally identifiable information and may help organizations determine appropriate elements to include in a privacy notice to manage such risks. To help individuals understand how their information is being processed, organizations write materials in plain language and avoid technical jargon.",
+  "params": [
+    {
+      "id": "pt-05_odp.01",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which a notice is provided to individuals after initial interaction with an organization is defined;"
+      ]
+    },
+    {
+      "id": "pt-05_odp.02",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "information to be included with the notice about the processing of personally identifiable information is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "pm-20",
+    "pm-22",
+    "pt-2",
+    "pt-3",
+    "pt-4",
+    "pt-7",
+    "ra-3",
+    "sc-42",
+    "si-18"
+  ]
+}

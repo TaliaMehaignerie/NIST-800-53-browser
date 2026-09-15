@@ -1,0 +1,36 @@
+{
+  "id": "ir-7.1",
+  "slug": "ir-7-1",
+  "label": "IR-7(1)",
+  "kind": "enhancement",
+  "parentSlug": "ir-7",
+  "enhancementSlugs": [],
+  "title": "Automation Support for Availability of Information and Support",
+  "familyCode": "IR",
+  "sortId": "ir-07.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Increase the availability of incident response information and support using {{ insert: param, ir-07.01_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms can provide a push or pull capability for users to obtain incident response assistance. For example, individuals may have access to a website to query the assistance capability, or the assistance capability can proactively send incident response information to users (general distribution or targeted) as part of increasing understanding of current response capabilities and support.",
+  "params": [
+    {
+      "id": "ir-07.01_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to increase the availability of incident response information and support are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

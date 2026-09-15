@@ -1,0 +1,21 @@
+{
+  "id": "ia-5.11",
+  "slug": "ia-5-11",
+  "label": "IA-5(11)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "Hardware Token-based Authentication",
+  "familyCode": "IA",
+  "sortId": "ia-05.11",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-2.1",
+    "ia-2.2"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

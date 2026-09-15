@@ -1,0 +1,20 @@
+{
+  "id": "ia-2.7",
+  "slug": "ia-2-7",
+  "label": "IA-2(7)",
+  "kind": "enhancement",
+  "parentSlug": "ia-2",
+  "enhancementSlugs": [],
+  "title": "Network Access to Non-privileged Accounts — Separate Device",
+  "familyCode": "IA",
+  "sortId": "ia-02.07",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-2.6"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

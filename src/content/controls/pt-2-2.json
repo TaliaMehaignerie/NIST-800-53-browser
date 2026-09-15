@@ -1,0 +1,44 @@
+{
+  "id": "pt-2.2",
+  "slug": "pt-2-2",
+  "label": "PT-2(2)",
+  "kind": "enhancement",
+  "parentSlug": "pt-2",
+  "enhancementSlugs": [],
+  "title": "Automation",
+  "familyCode": "PT",
+  "sortId": "pt-02.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Manage enforcement of the authorized processing of personally identifiable information using {{ insert: param, pt-02.02_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Automated mechanisms augment verification that only authorized processing is occurring.",
+  "params": [
+    {
+      "id": "pt-02.02_odp",
+      "label": "automated mechanisms",
+      "select": null,
+      "guidelines": [
+        "automated mechanisms used to manage enforcement of the authorized processing of personally identifiable information are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-6",
+    "cm-12",
+    "pm-5",
+    "pm-22",
+    "pt-4",
+    "sc-16",
+    "sc-43",
+    "si-10",
+    "si-15",
+    "si-19"
+  ]
+}

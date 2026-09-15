@@ -1,0 +1,51 @@
+{
+  "id": "ac-3.12",
+  "slug": "ac-3-12",
+  "label": "AC-3(12)",
+  "kind": "enhancement",
+  "parentSlug": "ac-3",
+  "enhancementSlugs": [],
+  "title": "Assert and Enforce Application Access",
+  "familyCode": "AC",
+  "sortId": "ac-03.12",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Require applications to assert, as part of the installation process, the access needed to the following system applications and functions: {{ insert: param, ac-03.12_odp }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Provide an enforcement mechanism to prevent unauthorized access; and",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Approve access changes after initial installation of the application.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Asserting and enforcing application access is intended to address applications that need to access existing system applications and functions, including user contacts, global positioning systems, cameras, keyboards, microphones, networks, phones, or other files.",
+  "params": [
+    {
+      "id": "ac-03.12_odp",
+      "label": "system applications and functions",
+      "select": null,
+      "guidelines": [
+        "system applications and functions requiring access assertion are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-7"
+  ]
+}

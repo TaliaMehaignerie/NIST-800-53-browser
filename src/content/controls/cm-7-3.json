@@ -1,0 +1,33 @@
+{
+  "id": "cm-7.3",
+  "slug": "cm-7-3",
+  "label": "CM-7(3)",
+  "kind": "enhancement",
+  "parentSlug": "cm-7",
+  "enhancementSlugs": [],
+  "title": "Registration Compliance",
+  "familyCode": "CM",
+  "sortId": "cm-07.03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Ensure compliance with {{ insert: param, cm-07.03_odp }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Organizations use the registration process to manage, track, and provide oversight for systems and implemented functions, ports, protocols, and services.",
+  "params": [
+    {
+      "id": "cm-07.03_odp",
+      "label": "registration requirements",
+      "select": null,
+      "guidelines": [
+        "registration requirements for functions, ports, protocols, and services are defined;"
+      ]
+    }
+  ],
+  "related": []
+}

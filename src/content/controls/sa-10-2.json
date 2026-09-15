@@ -1,0 +1,24 @@
+{
+  "id": "sa-10.2",
+  "slug": "sa-10-2",
+  "label": "SA-10(2)",
+  "kind": "enhancement",
+  "parentSlug": "sa-10",
+  "enhancementSlugs": [],
+  "title": "Alternative Configuration Management Processes",
+  "familyCode": "SA",
+  "sortId": "sa-10.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Provide an alternate configuration management process using organizational personnel in the absence of a dedicated developer configuration management team.",
+      "children": []
+    }
+  ],
+  "guidance": "Alternate configuration management processes may be required when organizations use commercial off-the-shelf information technology products. Alternate configuration management processes include organizational personnel who review and approve proposed changes to systems, system components, and system services and conduct security and privacy impact analyses prior to the implementation of changes to systems, components, or services.",
+  "params": [],
+  "related": []
+}

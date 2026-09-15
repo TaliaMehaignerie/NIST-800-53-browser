@@ -1,0 +1,58 @@
+{
+  "id": "ac-2.7",
+  "slug": "ac-2-7",
+  "label": "AC-2(7)",
+  "kind": "enhancement",
+  "parentSlug": "ac-2",
+  "enhancementSlugs": [],
+  "title": "Privileged User Accounts",
+  "familyCode": "AC",
+  "sortId": "ac-02.07",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Establish and administer privileged user accounts in accordance with {{ insert: param, ac-02.07_odp }};",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Monitor privileged role or attribute assignments;",
+          "children": []
+        },
+        {
+          "label": "(c)",
+          "prose": "Monitor changes to roles or attributes; and",
+          "children": []
+        },
+        {
+          "label": "(d)",
+          "prose": "Revoke access when privileged role or attribute assignments are no longer appropriate.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Privileged roles are organization-defined roles assigned to individuals that allow those individuals to perform certain security-relevant functions that ordinary users are not authorized to perform. Privileged roles include key management, account management, database administration, system and network administration, and web administration. A role-based access scheme organizes permitted system access and privileges into roles. In contrast, an attribute-based access scheme specifies allowed system access and privileges based on attributes.",
+  "params": [
+    {
+      "id": "ac-02.07_odp",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "a role-based access scheme",
+          "an attribute-based access scheme"
+        ]
+      },
+      "guidelines": []
+    }
+  ],
+  "related": []
+}

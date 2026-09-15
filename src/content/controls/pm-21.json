@@ -1,0 +1,57 @@
+{
+  "id": "pm-21",
+  "slug": "pm-21",
+  "label": "PM-21",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Accounting of Disclosures",
+  "familyCode": "PM",
+  "sortId": "pm-21",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Develop and maintain an accurate accounting of disclosures of personally identifiable information, including:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Date, nature, and purpose of each disclosure; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Name and address, or other contact information of the individual or organization to which the disclosure was made;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Retain the accounting of disclosures for the length of the time the personally identifiable information is maintained or five years after the disclosure is made, whichever is longer; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Make the accounting of disclosures available to the individual to whom the personally identifiable information relates upon request.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "The purpose of accounting of disclosures is to allow individuals to learn to whom their personally identifiable information has been disclosed, to provide a basis for subsequently advising recipients of any corrected or disputed personally identifiable information, and to provide an audit trail for subsequent reviews of organizational compliance with conditions for disclosures. For federal agencies, keeping an accounting of disclosures is required by the [PRIVACT](#18e71fec-c6fd-475a-925a-5d8495cf8455) ; agencies should consult with their senior agency official for privacy and legal counsel on this requirement and be aware of the statutory exceptions and OMB guidance relating to the provision.\n\nOrganizations can use any system for keeping notations of disclosures, if it can construct from such a system, a document listing of all disclosures along with the required information. Automated mechanisms can be used by organizations to determine when personally identifiable information is disclosed, including commercial services that provide notifications and alerts. Accounting of disclosures may also be used to help organizations verify compliance with applicable privacy statutes and policies governing the disclosure or dissemination of information and dissemination restrictions.",
+  "params": [],
+  "related": [
+    "ac-3",
+    "au-2",
+    "pt-2"
+  ]
+}

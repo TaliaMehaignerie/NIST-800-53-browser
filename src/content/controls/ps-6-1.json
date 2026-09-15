@@ -1,0 +1,20 @@
+{
+  "id": "ps-6.1",
+  "slug": "ps-6-1",
+  "label": "PS-6(1)",
+  "kind": "enhancement",
+  "parentSlug": "ps-6",
+  "enhancementSlugs": [],
+  "title": "Information Requiring Special Protection",
+  "familyCode": "PS",
+  "sortId": "ps-06.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ps-3"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

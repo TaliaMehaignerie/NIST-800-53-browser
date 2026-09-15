@@ -1,0 +1,46 @@
+{
+  "id": "pm-5.1",
+  "slug": "pm-5-1",
+  "label": "PM-5(1)",
+  "kind": "enhancement",
+  "parentSlug": "pm-5",
+  "enhancementSlugs": [],
+  "title": "Inventory of Personally Identifiable Information",
+  "familyCode": "PM",
+  "sortId": "pm-05.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish, maintain, and update {{ insert: param, pm-05.01_odp }} an inventory of all systems, applications, and projects that process personally identifiable information.",
+      "children": []
+    }
+  ],
+  "guidance": "An inventory of systems, applications, and projects that process personally identifiable information supports the mapping of data actions, providing individuals with privacy notices, maintaining accurate personally identifiable information, and limiting the processing of personally identifiable information when such information is not needed for operational purposes. Organizations may use this inventory to ensure that systems only process the personally identifiable information for authorized purposes and that this processing is still relevant and necessary for the purpose specified therein.",
+  "params": [
+    {
+      "id": "pm-05.01_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to update the inventory of systems, applications, and projects that process personally identifiable information is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "cm-8",
+    "cm-12",
+    "cm-13",
+    "pl-8",
+    "pm-22",
+    "pt-3",
+    "pt-5",
+    "si-12",
+    "si-18"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "sc-12.6",
+  "slug": "sc-12-6",
+  "label": "SC-12(6)",
+  "kind": "enhancement",
+  "parentSlug": "sc-12",
+  "enhancementSlugs": [],
+  "title": "Physical Control of Keys",
+  "familyCode": "SC",
+  "sortId": "sc-12.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Maintain physical control of cryptographic keys when stored information is encrypted by external service providers.",
+      "children": []
+    }
+  ],
+  "guidance": "For organizations that use external service providers (e.g., cloud service or data center providers), physical control of cryptographic keys provides additional assurance that information stored by such external providers is not subject to unauthorized disclosure or modification.",
+  "params": [],
+  "related": []
+}

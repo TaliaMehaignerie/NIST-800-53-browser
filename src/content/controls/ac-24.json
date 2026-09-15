@@ -1,0 +1,51 @@
+{
+  "id": "ac-24",
+  "slug": "ac-24",
+  "label": "AC-24",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "ac-24-1",
+    "ac-24-2"
+  ],
+  "title": "Access Control Decisions",
+  "familyCode": "AC",
+  "sortId": "ac-24",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "{{ insert: param, ac-24_odp.01 }} to ensure {{ insert: param, ac-24_odp.02 }} are applied to each access request prior to access enforcement.",
+      "children": []
+    }
+  ],
+  "guidance": "Access control decisions (also known as authorization decisions) occur when authorization information is applied to specific accesses. In contrast, access enforcement occurs when systems enforce access control decisions. While it is common to have access control decisions and access enforcement implemented by the same entity, it is not required, and it is not always an optimal implementation choice. For some architectures and distributed systems, different entities may make access control decisions and enforce access.",
+  "params": [
+    {
+      "id": "ac-24_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "establish procedures",
+          "implement mechanisms"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-24_odp.02",
+      "label": "access control decisions",
+      "select": null,
+      "guidelines": [
+        "access control decisions applied to each access request prior to access enforcement are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-2",
+    "ac-3"
+  ]
+}

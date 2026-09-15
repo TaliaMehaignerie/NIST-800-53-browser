@@ -1,0 +1,132 @@
+{
+  "id": "at-3",
+  "slug": "at-3",
+  "label": "AT-3",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "at-3-1",
+    "at-3-2",
+    "at-3-3",
+    "at-3-4",
+    "at-3-5"
+  ],
+  "title": "Role-based Training",
+  "familyCode": "AT",
+  "sortId": "at-03",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "low",
+    "moderate",
+    "high",
+    "privacy"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Provide role-based security and privacy training to personnel with the following roles and responsibilities: {{ insert: param, at-3_prm_1 }}:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Before authorizing access to the system, information, or performing assigned duties, and {{ insert: param, at-03_odp.03 }} thereafter; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "When required by system changes;",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Update role-based training content {{ insert: param, at-03_odp.04 }} and following {{ insert: param, at-03_odp.05 }} ; and",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Incorporate lessons learned from internal or external security incidents or breaches into role-based training.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Organizations determine the content of training based on the assigned roles and responsibilities of individuals as well as the security and privacy requirements of organizations and the systems to which personnel have authorized access, including technical training specifically tailored for assigned duties. Roles that may require role-based training include senior leaders or management officials (e.g., head of agency/chief executive officer, chief information officer, senior accountable official for risk management, senior agency information security officer, senior agency official for privacy), system owners; authorizing officials; system security officers; privacy officers; acquisition and procurement officials; enterprise architects; systems engineers; software developers; systems security engineers; privacy engineers; system, network, and database administrators; auditors; personnel conducting configuration management activities; personnel performing verification and validation activities; personnel with access to system-level software; control assessors; personnel with contingency planning and incident response duties; personnel with privacy management responsibilities; and personnel with access to personally identifiable information.\n\nComprehensive role-based training addresses management, operational, and technical roles and responsibilities covering physical, personnel, and technical controls. Role-based training also includes policies, procedures, tools, methods, and artifacts for the security and privacy roles defined. Organizations provide the training necessary for individuals to fulfill their responsibilities related to operations and supply chain risk management within the context of organizational security and privacy programs. Role-based training also applies to contractors who provide services to federal agencies. Types of training include web-based and computer-based training, classroom-style training, and hands-on training (including micro-training). Updating role-based training on a regular basis helps to ensure that the content remains relevant and effective. Events that may precipitate an update to role-based training content include, but are not limited to, assessment or audit findings, security incidents or breaches, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines.",
+  "params": [
+    {
+      "id": "at-3_prm_1",
+      "label": "organization-defined roles and responsibilities",
+      "select": null,
+      "guidelines": []
+    },
+    {
+      "id": "at-03_odp.01",
+      "label": "roles and responsibilities",
+      "select": null,
+      "guidelines": [
+        "roles and responsibilities for role-based security training are defined;"
+      ]
+    },
+    {
+      "id": "at-03_odp.02",
+      "label": "roles and responsibilities",
+      "select": null,
+      "guidelines": [
+        "roles and responsibilities for role-based privacy training are defined;"
+      ]
+    },
+    {
+      "id": "at-03_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to provide role-based security and privacy training to assigned personnel after initial training is defined;"
+      ]
+    },
+    {
+      "id": "at-03_odp.04",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to update role-based training content is defined;"
+      ]
+    },
+    {
+      "id": "at-03_odp.05",
+      "label": "events",
+      "select": null,
+      "guidelines": [
+        "events that require role-based training content to be updated are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ac-3",
+    "ac-17",
+    "ac-22",
+    "at-2",
+    "at-4",
+    "cp-3",
+    "ir-2",
+    "ir-4",
+    "ir-7",
+    "ir-9",
+    "pl-4",
+    "pm-13",
+    "pm-23",
+    "ps-7",
+    "ps-9",
+    "sa-3",
+    "sa-8",
+    "sa-11",
+    "sa-16",
+    "sr-5",
+    "sr-6",
+    "sr-11"
+  ]
+}

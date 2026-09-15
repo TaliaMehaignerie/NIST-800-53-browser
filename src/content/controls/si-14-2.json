@@ -1,0 +1,72 @@
+{
+  "id": "si-14.2",
+  "slug": "si-14-2",
+  "label": "SI-14(2)",
+  "kind": "enhancement",
+  "parentSlug": "si-14",
+  "enhancementSlugs": [],
+  "title": "Non-persistent Information",
+  "familyCode": "SI",
+  "sortId": "si-14.02",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "{{ insert: param, si-14.02_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Delete information when no longer needed.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Retaining information longer than is needed makes the information a potential target for advanced adversaries searching for high value assets to compromise through unauthorized disclosure, unauthorized modification, or exfiltration. For system-related information, unnecessary retention provides advanced adversaries information that can assist in their reconnaissance and lateral movement through the system.",
+  "params": [
+    {
+      "id": "si-14.02_odp.01",
+      "label": null,
+      "select": {
+        "howMany": null,
+        "choice": [
+          "refresh {{ insert: param, si-14.02_odp.02 }} {{ insert: param, si-14.02_odp.03 }} ",
+          "generate {{ insert: param, si-14.02_odp.04 }} on demand"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "si-14.02_odp.02",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "the information to be refreshed is defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-14.02_odp.03",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to refresh information is defined (if selected);"
+      ]
+    },
+    {
+      "id": "si-14.02_odp.04",
+      "label": "information",
+      "select": null,
+      "guidelines": [
+        "the information to be generated is defined (if selected);"
+      ]
+    }
+  ],
+  "related": []
+}

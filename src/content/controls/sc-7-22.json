@@ -1,0 +1,24 @@
+{
+  "id": "sc-7.22",
+  "slug": "sc-7-22",
+  "label": "SC-7(22)",
+  "kind": "enhancement",
+  "parentSlug": "sc-7",
+  "enhancementSlugs": [],
+  "title": "Separate Subnets for Connecting to Different Security Domains",
+  "familyCode": "SC",
+  "sortId": "sc-07.22",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Implement separate network addresses to connect to systems in different security domains.",
+      "children": []
+    }
+  ],
+  "guidance": "The decomposition of systems into subnetworks (i.e., subnets) helps to provide the appropriate level of protection for network connections to different security domains that contain information with different security categories or classification levels.",
+  "params": [],
+  "related": []
+}

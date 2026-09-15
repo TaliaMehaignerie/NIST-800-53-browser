@@ -1,0 +1,63 @@
+{
+  "id": "ra-10",
+  "slug": "ra-10",
+  "label": "RA-10",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [],
+  "title": "Threat Hunting",
+  "familyCode": "RA",
+  "sortId": "ra-10",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Establish and maintain a cyber threat hunting capability to:",
+          "children": [
+            {
+              "label": "1.",
+              "prose": "Search for indicators of compromise in organizational systems; and",
+              "children": []
+            },
+            {
+              "label": "2.",
+              "prose": "Detect, track, and disrupt threats that evade existing controls; and",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "b.",
+          "prose": "Employ the threat hunting capability {{ insert: param, ra-10_odp }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Threat hunting is an active means of cyber defense in contrast to traditional protection measures, such as firewalls, intrusion detection and prevention systems, quarantining malicious code in sandboxes, and Security Information and Event Management technologies and systems. Cyber threat hunting involves proactively searching organizational systems, networks, and infrastructure for advanced threats. The objective is to track and disrupt cyber adversaries as early as possible in the attack sequence and to measurably improve the speed and accuracy of organizational responses. Indications of compromise include unusual network traffic, unusual file changes, and the presence of malicious code. Threat hunting teams leverage existing threat intelligence and may create new threat intelligence, which is shared with peer organizations, Information Sharing and Analysis Organizations (ISAO), Information Sharing and Analysis Centers (ISAC), and relevant government departments and agencies.",
+  "params": [
+    {
+      "id": "ra-10_odp",
+      "label": "frequency",
+      "select": null,
+      "guidelines": [
+        "the frequency at which to employ the threat hunting capability is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "ca-2",
+    "ca-7",
+    "ca-8",
+    "ra-3",
+    "ra-5",
+    "ra-6",
+    "si-4"
+  ]
+}

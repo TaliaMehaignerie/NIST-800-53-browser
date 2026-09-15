@@ -1,0 +1,28 @@
+{
+  "id": "ac-17.6",
+  "slug": "ac-17-6",
+  "label": "AC-17(6)",
+  "kind": "enhancement",
+  "parentSlug": "ac-17",
+  "enhancementSlugs": [],
+  "title": "Protection of Mechanism Information",
+  "familyCode": "AC",
+  "sortId": "ac-17.06",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Protect information about remote access mechanisms from unauthorized use and disclosure.",
+      "children": []
+    }
+  ],
+  "guidance": "Remote access to organizational information by non-organizational entities can increase the risk of unauthorized use and disclosure about remote access mechanisms. The organization considers including remote access requirements in the information exchange agreements with other organizations, as applicable. Remote access requirements can also be included in rules of behavior (see [PL-4](#pl-4) ) and access agreements (see [PS-6](#ps-6)).",
+  "params": [],
+  "related": [
+    "at-2",
+    "at-3",
+    "ps-6"
+  ]
+}

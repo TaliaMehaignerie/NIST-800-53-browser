@@ -1,0 +1,56 @@
+{
+  "id": "cp-8",
+  "slug": "cp-8",
+  "label": "CP-8",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cp-8-1",
+    "cp-8-2",
+    "cp-8-3",
+    "cp-8-4",
+    "cp-8-5"
+  ],
+  "title": "Telecommunications Services",
+  "familyCode": "CP",
+  "sortId": "cp-08",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Establish alternate telecommunications services, including necessary agreements to permit the resumption of {{ insert: param, cp-08_odp.01 }} for essential mission and business functions within {{ insert: param, cp-08_odp.02 }} when the primary telecommunications capabilities are unavailable at either the primary or alternate processing or storage sites.",
+      "children": []
+    }
+  ],
+  "guidance": "Telecommunications services (for data and voice) for primary and alternate processing and storage sites are in scope for [CP-8](#cp-8) . Alternate telecommunications services reflect the continuity requirements in contingency plans to maintain essential mission and business functions despite the loss of primary telecommunications services. Organizations may specify different time periods for primary or alternate sites. Alternate telecommunications services include additional organizational or commercial ground-based circuits or lines, network-based approaches to telecommunications, or the use of satellites. Organizations consider factors such as availability, quality of service, and access when entering into alternate telecommunications agreements.",
+  "params": [
+    {
+      "id": "cp-08_odp.01",
+      "label": "system operations",
+      "select": null,
+      "guidelines": [
+        "system operations to be resumed for essential mission and business functions are defined;"
+      ]
+    },
+    {
+      "id": "cp-08_odp.02",
+      "label": "time period",
+      "select": null,
+      "guidelines": [
+        "time period within which to resume essential mission and business functions when the primary telecommunications capabilities are unavailable is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cp-2",
+    "cp-6",
+    "cp-7",
+    "cp-11",
+    "sc-7"
+  ]
+}

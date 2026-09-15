@@ -1,0 +1,20 @@
+{
+  "id": "ia-5.3",
+  "slug": "ia-5-3",
+  "label": "IA-5(3)",
+  "kind": "enhancement",
+  "parentSlug": "ia-5",
+  "enhancementSlugs": [],
+  "title": "In-person or Trusted External Party Registration",
+  "familyCode": "IA",
+  "sortId": "ia-05.03",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "ia-12.4"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

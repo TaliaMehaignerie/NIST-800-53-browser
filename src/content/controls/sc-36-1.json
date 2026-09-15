@@ -1,0 +1,54 @@
+{
+  "id": "sc-36.1",
+  "slug": "sc-36-1",
+  "label": "SC-36(1)",
+  "kind": "enhancement",
+  "parentSlug": "sc-36",
+  "enhancementSlugs": [],
+  "title": "Polling Techniques",
+  "familyCode": "SC",
+  "sortId": "sc-36.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": null,
+      "children": [
+        {
+          "label": "(a)",
+          "prose": "Employ polling techniques to identify potential faults, errors, or compromises to the following processing and storage components: {{ insert: param, sc-36.01_odp.01 }} ; and",
+          "children": []
+        },
+        {
+          "label": "(b)",
+          "prose": "Take the following actions in response to identified faults, errors, or compromises: {{ insert: param, sc-36.01_odp.02 }}.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Distributed processing and/or storage may be used to reduce opportunities for adversaries to compromise the confidentiality, integrity, or availability of organizational information and systems. However, the distribution of processing and storage components does not prevent adversaries from compromising one or more of the components. Polling compares the processing results and/or storage content from the distributed components and subsequently votes on the outcomes. Polling identifies potential faults, compromises, or errors in the distributed processing and storage components.",
+  "params": [
+    {
+      "id": "sc-36.01_odp.01",
+      "label": "distributed processing and storage components",
+      "select": null,
+      "guidelines": [
+        "distributed processing and storage components for which polling techniques are to be employed to identify potential faults, errors, or compromises are defined;"
+      ]
+    },
+    {
+      "id": "sc-36.01_odp.02",
+      "label": "actions",
+      "select": null,
+      "guidelines": [
+        "actions to be taken in response to identified faults, errors, or compromise are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "si-4"
+  ]
+}

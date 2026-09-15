@@ -1,0 +1,74 @@
+{
+  "id": "cm-9",
+  "slug": "cm-9",
+  "label": "CM-9",
+  "kind": "control",
+  "parentSlug": null,
+  "enhancementSlugs": [
+    "cm-9-1"
+  ],
+  "title": "Configuration Management Plan",
+  "familyCode": "CM",
+  "sortId": "cm-09",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [
+    "moderate",
+    "high"
+  ],
+  "statement": [
+    {
+      "label": null,
+      "prose": "Develop, document, and implement a configuration management plan for the system that:",
+      "children": [
+        {
+          "label": "a.",
+          "prose": "Addresses roles, responsibilities, and configuration management processes and procedures;",
+          "children": []
+        },
+        {
+          "label": "b.",
+          "prose": "Establishes a process for identifying configuration items throughout the system development life cycle and for managing the configuration of the configuration items;",
+          "children": []
+        },
+        {
+          "label": "c.",
+          "prose": "Defines the configuration items for the system and places the configuration items under configuration management;",
+          "children": []
+        },
+        {
+          "label": "d.",
+          "prose": "Is reviewed and approved by {{ insert: param, cm-09_odp }} ; and",
+          "children": []
+        },
+        {
+          "label": "e.",
+          "prose": "Protects the configuration management plan from unauthorized disclosure and modification.",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "guidance": "Configuration management activities occur throughout the system development life cycle. As such, there are developmental configuration management activities (e.g., the control of code and software libraries) and operational configuration management activities (e.g., control of installed components and how the components are configured). Configuration management plans satisfy the requirements in configuration management policies while being tailored to individual systems. Configuration management plans define processes and procedures for how configuration management is used to support system development life cycle activities.\n\nConfiguration management plans are generated during the development and acquisition stage of the system development life cycle. The plans describe how to advance changes through change management processes; update configuration settings and baselines; maintain component inventories; control development, test, and operational environments; and develop, release, and update key documents.\n\nOrganizations can employ templates to help ensure the consistent and timely development and implementation of configuration management plans. Templates can represent a configuration management plan for the organization with subsets of the plan implemented on a system by system basis. Configuration management approval processes include the designation of key stakeholders responsible for reviewing and approving proposed changes to systems, and personnel who conduct security and privacy impact analyses prior to the implementation of changes to the systems. Configuration items are the system components, such as the hardware, software, firmware, and documentation to be configuration-managed. As systems continue through the system development life cycle, new configuration items may be identified, and some existing configuration items may no longer need to be under configuration control.",
+  "params": [
+    {
+      "id": "cm-09_odp",
+      "label": "personnel or roles",
+      "select": null,
+      "guidelines": [
+        "personnel or roles to review and approve the configuration management plan is/are defined;"
+      ]
+    }
+  ],
+  "related": [
+    "cm-2",
+    "cm-3",
+    "cm-4",
+    "cm-5",
+    "cm-8",
+    "pl-2",
+    "ra-8",
+    "sa-10",
+    "si-12"
+  ]
+}

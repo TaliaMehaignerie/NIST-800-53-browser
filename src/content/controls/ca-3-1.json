@@ -1,0 +1,20 @@
+{
+  "id": "ca-3.1",
+  "slug": "ca-3-1",
+  "label": "CA-3(1)",
+  "kind": "enhancement",
+  "parentSlug": "ca-3",
+  "enhancementSlugs": [],
+  "title": "Unclassified National Security System Connections",
+  "familyCode": "CA",
+  "sortId": "ca-03.01",
+  "withdrawn": true,
+  "incorporatedInto": [
+    "sc-7.25"
+  ],
+  "baselines": [],
+  "statement": [],
+  "guidance": null,
+  "params": [],
+  "related": []
+}

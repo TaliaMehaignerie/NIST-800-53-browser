@@ -1,0 +1,24 @@
+{
+  "id": "si-19.1",
+  "slug": "si-19-1",
+  "label": "SI-19(1)",
+  "kind": "enhancement",
+  "parentSlug": "si-19",
+  "enhancementSlugs": [],
+  "title": "Collection",
+  "familyCode": "SI",
+  "sortId": "si-19.01",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "De-identify the dataset upon collection by not collecting personally identifiable information.",
+      "children": []
+    }
+  ],
+  "guidance": "If a data source contains personally identifiable information but the information will not be used, the dataset can be de-identified when it is created by not collecting the data elements that contain the personally identifiable information. For example, if an organization does not intend to use the social security number of an applicant, then application forms do not ask for a social security number.",
+  "params": [],
+  "related": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "ac-4.25",
+  "slug": "ac-4-25",
+  "label": "AC-4(25)",
+  "kind": "enhancement",
+  "parentSlug": "ac-4",
+  "enhancementSlugs": [],
+  "title": "Data Sanitization",
+  "familyCode": "AC",
+  "sortId": "ac-04.25",
+  "withdrawn": false,
+  "incorporatedInto": [],
+  "baselines": [],
+  "statement": [
+    {
+      "label": null,
+      "prose": "When transferring information between different security domains, sanitize data to minimize {{ insert: param, ac-04.25_odp.01 }} in accordance with {{ insert: param, ac-04.25_odp.02 }}.",
+      "children": []
+    }
+  ],
+  "guidance": "Data sanitization is the process of irreversibly removing or destroying data stored on a memory device (e.g., hard drives, flash memory/solid state drives, mobile devices, CDs, and DVDs) or in hard copy form.",
+  "params": [
+    {
+      "id": "ac-04.25_odp.01",
+      "label": null,
+      "select": {
+        "howMany": "one-or-more",
+        "choice": [
+          "delivery of malicious content, command and control of malicious code, malicious code augmentation, and steganography-encoded data",
+          "spillage of sensitive information"
+        ]
+      },
+      "guidelines": []
+    },
+    {
+      "id": "ac-04.25_odp.02",
+      "label": "policy",
+      "select": null,
+      "guidelines": [
+        "policy for sanitizing data is defined;"
+      ]
+    }
+  ],
+  "related": [
+    "mp-6"
+  ]
+}
