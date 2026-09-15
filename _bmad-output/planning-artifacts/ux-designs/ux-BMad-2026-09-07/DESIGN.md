@@ -75,6 +75,13 @@ components:
     opacityInert: 0.45
     rounded: '{rounded.full}'
     typography: '{typography.meta}'
+  withdrawn-marker:
+    background: '{colors.surface-overlay}'
+    color: '{colors.ink-secondary}'
+    rounded: '{rounded.full}'
+    typography: '{typography.meta}'
+    paddingX: '{spacing.2}'
+    paddingY: '2px'
   provenance-footer:
     typography: '{typography.meta}'
     color: '{colors.ink-secondary}'
@@ -115,12 +122,13 @@ No shadows anywhere. Hierarchy comes from the `surface-base` → `surface-raised
 
 ## Shapes
 
-`rounded/sm` for the Search box, list rows on hover, and the Enhancement toggle surface. `rounded/md` for the Control Detail card. `rounded/full` exclusively for Baseline badges — the one place a pill shape earns its keep, since it's what makes a badge read as a tag rather than a button.
+`rounded/sm` for the Search box, list rows on hover, and the Enhancement toggle surface. `rounded/md` for the Control Detail card. `rounded/full` for Baseline badges and the Withdrawn marker — the one shape family where a pill earns its keep, since it's what makes a badge read as a tag rather than a button.
 
 ## Components
 
-- **Control row** (family/list views) — one line: mono ID, title, Baseline badge(s) right-aligned. Hairline `border-hairline` divider, no fill except on hover (`surface-raised`).
+- **Control row** (family/list views) — one line: mono ID, title, Baseline badge(s) right-aligned. Hairline `border-hairline` divider, no fill except on hover (`surface-raised`). A withdrawn Control/Enhancement (see "Withdrawn marker" below) shows no Baseline badges — NIST never assigns a withdrawn entry to a Baseline — and its title renders in `ink-secondary` instead of `ink-primary`, so a scanned list reads it as present-but-inactive rather than equal-weight with live entries.
 - **Baseline badge** — small pill, semantic Baseline color as background at low opacity with the same color as text (not white-on-color — keeps it quiet against the dark surface). One badge per Baseline the Control belongs to.
+- **Withdrawn marker** — a small `meta`-type pill reading "Withdrawn", `ink-secondary` text on `surface-overlay`, sitting where a Baseline badge would (same position, same size) — deliberately the *only* place a non-Baseline pill appears there, so it never gets mistaken for a fifth Baseline. On the Control Detail card, pairs with one line beneath the title: "Withdrawn — incorporated into {label}" (or "Withdrawn — see {label}" for a `moved-to`), each `{label}` a real `accent`-colored link to its successor Control or Family page. When NIST withdrew an entry without naming a successor, the line reads "Withdrawn" alone — never invents a reason.
 - **Control Detail card** — the statement in `body` type on `surface-raised`, generous internal padding. Enhancements list below, each collapsed by default.
 - **Enhancement toggle** — collapsed: mono ID + title + its own Baseline badge(s), one line, `accent`-colored chevron/affordance. The badge shows the Enhancement's own Baseline membership, which may differ from that of the Control row above it (architecture AD-2; see EXPERIENCE.md → Component Patterns). Expanded: background shifts to `surface-overlay`, full statement renders inline, no navigation.
 - **ISO Crosswalk entry** — sits inside the Control Detail card, below the statement. Clause reference in `mono` type (matches the ID-scannability convention), clause title in `body` type, `ink-secondary` for the "ISO/IEC 27001:2022" label prefix. When none is published, the empty-state text (see EXPERIENCE.md → State Patterns) renders in its place, same position.
