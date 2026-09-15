@@ -136,7 +136,8 @@ erDiagram
   src/
     content/
       controls/         # canonical Content Collection: one entry per Control, sibling entries per Enhancement (parentId), 1 singleton meta entry (AD-2)
-      config.ts          # Zod schema: Control, Enhancement, Baseline, ISOClause, Meta
+    content.config.ts     # Zod schema + loaders: Control, Enhancement, Family, Meta.
+                          # NOT src/content/config.ts -- Astro 7 throws LegacyContentConfigError on that path.
     utils/
       slugify.ts          # the one shared slug function — OSCAL-native id in, slug out (AD-4). Imported by ingest.mjs too.
     layouts/

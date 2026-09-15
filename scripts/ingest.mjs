@@ -25,13 +25,21 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { slugify } from '../src/utils/slugify.ts';
+import { isOscalControlId, slugify } from '../src/utils/slugify.ts';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const RAW_DIR = join(ROOT, 'data', 'raw');
+// `INGEST_RAW_DIR` exists solely so --verify can exercise the missing-input
+// guard in a child process against a throwaway directory. Production runs
+// never set it and always read data/raw/.
+const RAW_DIR = process.env.INGEST_RAW_DIR
+  ? resolve(process.env.INGEST_RAW_DIR)
+  : join(ROOT, 'data', 'raw');
 const CONTENT_DIR = join(ROOT, 'src', 'content');
 
 const MASTER_FILE = join(RAW_DIR, 'NIST_SP-800-53_rev5_catalog-min.json');
@@ -106,7 +114,18 @@ function hrefTarget(href) {
 }
 
 function linkTargets(node, predicate) {
-  return (node.links ?? []).filter((l) => predicate(l.rel)).map((l) => hrefTarget(l.href));
+  return (node.links ?? [])
+    .filter((l) => predicate(l.rel))
+    .map((l) => {
+      const target = hrefTarget(l.href);
+      // Cross-references are stored as SLUGS, never raw OSCAL ids (AD-4).
+      // Base-control targets look identical either way (`ac-2`), which is why
+      // an unslugified enhancement target (`at-2.4` instead of `at-2-4`) hides
+      // so easily -- it silently fails to resolve against any entry.
+      // `sa-12` is the one catalog entry whose successor is a whole family
+      // (`sr`), which has no control slug; it stays raw by design.
+      return isOscalControlId(target) ? slugify(target) : target;
+    });
 }
 
 /**
@@ -470,8 +489,16 @@ function verify(result, warnings) {
   eq('sc-19 has no successor', byId.get('sc-19').incorporatedInto, []);
   check('sc-19 keeps its statement', byId.get('sc-19').statement.length === 1);
   eq('at-3.4 moved-to is treated as withdrawn', byId.get('at-3.4').withdrawn, true);
-  eq('at-3.4 successor', byId.get('at-3.4').incorporatedInto, ['at-2.4']);
+  eq('at-3.4 successor is a slug, not a raw id', byId.get('at-3.4').incorporatedInto, ['at-2-4']);
   eq('182 withdrawn entries in total', entries.filter((e) => e.withdrawn).length, 182);
+  const familySlugs = new Set(families.map((f) => f.slug));
+  const unresolved = entries
+    .flatMap((e) => e.incorporatedInto.map((t) => `${e.slug} -> ${t}`))
+    .filter((x) => {
+      const to = x.split(' -> ')[1];
+      return !bySlug.has(to) && !familySlugs.has(to);
+    });
+  eq('every successor resolves to a Control slug or a Family slug', unresolved, []);
   check(
     'every withdrawn entry either names a successor or keeps a statement',
     entries
@@ -565,6 +592,25 @@ function verify(result, warnings) {
       .map(([path]) => path);
     eq('committed output is byte-identical to a fresh ingest', drifted.slice(0, 5), []);
   }
+
+  // Matrix row: a missing input must abort loudly, name the file, and write
+  // nothing. Exercised in a child process against an empty directory, because
+  // exit code and "wrote nothing" are only observable from outside.
+  console.log('Missing input guard');
+  const emptyDir = mkdtempSync(join(tmpdir(), 'ingest-missing-'));
+  const before = existingFiles().size;
+  const child = spawnSync(process.execPath, [fileURLToPath(import.meta.url)], {
+    env: { ...process.env, INGEST_RAW_DIR: emptyDir },
+    encoding: 'utf8',
+  });
+  rmSync(emptyDir, { recursive: true, force: true });
+  eq('missing input exits non-zero', child.status, 1);
+  check(
+    'missing input names the file it could not find',
+    /Missing required input: .*NIST_SP-800-53_rev5_catalog-min\.json/.test(child.stderr ?? ''),
+    JSON.stringify((child.stderr ?? '').slice(0, 120)),
+  );
+  eq('missing input wrote nothing', existingFiles().size, before);
 
   return failures;
 }

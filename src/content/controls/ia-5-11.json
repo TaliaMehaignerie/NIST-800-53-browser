@@ -10,8 +10,8 @@
   "sortId": "ia-05.11",
   "withdrawn": true,
   "incorporatedInto": [
-    "ia-2.1",
-    "ia-2.2"
+    "ia-2-1",
+    "ia-2-2"
   ],
   "baselines": [],
   "statement": [],

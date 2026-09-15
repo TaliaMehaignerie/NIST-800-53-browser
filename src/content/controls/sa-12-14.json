@@ -10,8 +10,8 @@
   "sortId": "sa-12.14",
   "withdrawn": true,
   "incorporatedInto": [
-    "sr-4.1",
-    "sr-4.2"
+    "sr-4-1",
+    "sr-4-2"
   ],
   "baselines": [],
   "statement": [],

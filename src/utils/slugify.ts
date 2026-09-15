@@ -16,6 +16,18 @@
 const OSCAL_CONTROL_ID = /^[a-z]{2}-\d+(\.\d+)?$/;
 
 /**
+ * Is this an OSCAL-native control / enhancement id?
+ *
+ * Exported so callers that resolve cross-references (e.g. a withdrawn
+ * control's successor link, which may point at a whole family rather than a
+ * control) can test a target before slugifying it, without rebuilding the
+ * pattern locally and letting a second variant drift into existence.
+ */
+export function isOscalControlId(value: unknown): value is string {
+  return typeof value === 'string' && OSCAL_CONTROL_ID.test(value);
+}
+
+/**
  * Convert an OSCAL-native control or enhancement id into its URL/filename slug.
  *
  * `ac-2` -> `ac-2`, `ac-2.1` -> `ac-2-1`.
