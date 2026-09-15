@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Key Screen — Control Detail</title>
+<style>
+/*
+  Governs: EXPERIENCE.md -> Information Architecture (Control Detail surface),
+           EXPERIENCE.md -> Component Patterns (Enhancement toggle expanded, incl. its own Baseline badge),
+           EXPERIENCE.md -> State Patterns (ISO Crosswalk present state),
+           DESIGN.md -> Components (Control Detail card, Baseline badge, Enhancement toggle, ISO Crosswalk entry, Provenance footer)
+  State shown: AC-2 detail, AC-2(1) enhancement expanded, ISO crosswalk present (illustrative clause, not verified verbatim).
+  Control statement text below is illustrative/abbreviated for mockup purposes -- the real build renders verbatim OSCAL text.
+*/
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #3a3a3a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+.device {
+  width: 390px;
+  min-height: 780px;
+  background: #0D1117;
+  border-radius: 36px;
+  border: 8px solid #111;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #21262D;
+  font-size: 13px;
+  color: #8B949E;
+}
+header a { color: #58A6FF; text-decoration: none; }
+main { flex: 1; overflow-y: auto; padding: 16px; }
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.control-id {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 0.9em;
+  color: #58A6FF;
+}
+h1 {
+  font-size: 19px;
+  font-weight: 600;
+  color: #E6EDF3;
+  line-height: 1.3;
+}
+.badges { display: flex; gap: 6px; margin-bottom: 16px; }
+.badge {
+  font-size: 13px;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-weight: 500;
+}
+.badge.low { background: rgba(63,185,80,0.15); color: #3FB950; }
+.badge.moderate { background: rgba(210,153,34,0.15); color: #D29922; }
+.badge.high { background: rgba(248,81,73,0.15); color: #F85149; }
+.card {
+  background: #161B22;
+  border-radius: 10px;
+  padding: 24px;
+}
+.statement {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #E6EDF3;
+  margin-bottom: 24px;
+}
+.section-label {
+  font-size: 13px;
+  color: #8B949E;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.enhancement {
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.enh-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+.enh-header.expanded { background: #1C2128; border-radius: 6px 6px 0 0; }
+.chevron { color: #58A6FF; font-size: 12px; }
+.enh-id {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 0.9em;
+  color: #58A6FF;
+}
+.enh-title { font-size: 15px; color: #E6EDF3; flex: 1; }
+.enh-badge {
+  font-size: 12px;
+  border-radius: 9999px;
+  padding: 1px 8px;
+  background: rgba(210,153,34,0.15);
+  color: #D29922;
+}
+.enh-body {
+  background: #1C2128;
+  padding: 4px 10px 14px 32px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #E6EDF3;
+  border-radius: 0 0 6px 6px;
+}
+.crosswalk {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #21262D;
+}
+.crosswalk-label { font-size: 13px; color: #8B949E; margin-bottom: 4px; }
+.crosswalk-clause {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 0.9em;
+  color: #58A6FF;
+}
+.crosswalk-title { font-size: 15px; color: #E6EDF3; margin-top: 2px; }
+footer {
+  padding: 14px 16px;
+  border-top: 1px solid #21262D;
+  font-size: 13px;
+  color: #8B949E;
+  line-height: 1.4;
+}
+.caption {
+  max-width: 390px;
+  color: #ccc;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 12px;
+  font-family: -apple-system, sans-serif;
+}
+.wrap { display: flex; flex-direction: column; align-items: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="device">
+  <header><a href="#">← Access Control</a></header>
+  <main>
+    <div class="title-row">
+      <span class="control-id">AC-2</span>
+    </div>
+    <h1>Account Management</h1>
+    <div class="badges">
+      <span class="badge low">Low</span>
+      <span class="badge moderate">Moderate</span>
+      <span class="badge high">High</span>
+    </div>
+    <div class="card">
+      <div class="statement">
+        Define and document the types of accounts allowed and specifically prohibited for use within the system; assign account managers; require approvals for requests to create accounts; and monitor the use of accounts.
+      </div>
+      <div class="section-label">Enhancements</div>
+      <div class="enhancement">
+        <div class="enh-header expanded">
+          <span class="chevron">▾</span>
+          <span class="enh-id">AC-2(1)</span>
+          <span class="enh-title">Automated System Account Management</span>
+          <span class="enh-badge">Moderate</span>
+        </div>
+        <div class="enh-body">
+          Support the management of system accounts using automated mechanisms.
+        </div>
+      </div>
+      <div class="enhancement">
+        <div class="enh-header">
+          <span class="chevron">▸</span>
+          <span class="enh-id">AC-2(3)</span>
+          <span class="enh-title">Disable Accounts</span>
+        </div>
+      </div>
+      <div class="enhancement">
+        <div class="enh-header">
+          <span class="chevron">▸</span>
+          <span class="enh-id">AC-2(4)</span>
+          <span class="enh-title">Automated Audit Actions</span>
+        </div>
+      </div>
+      <div class="crosswalk">
+        <div class="crosswalk-label">ISO/IEC 27001:2022</div>
+        <div class="crosswalk-clause">A.5.16</div>
+        <div class="crosswalk-title">Identity management</div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    NIST SP 800-53 Rev 5, OSCAL Catalog v1.1.2 · ISO 27001 crosswalk transcribed 2026-09-01<br>
+    Unofficial reading tool — not a substitute for the published NIST document in any audit context.
+  </footer>
+</div>
+<div class="caption">Control Detail — AC-2, with AC-2(1) expanded (own Baseline badge, independent of AC-2's) and the ISO Crosswalk present state.</div>
+</div>
+</body>
+</html>
