@@ -52,6 +52,7 @@ const enhancements = (
           {
             enhancements.map((e) => (
               <EnhancementItem
+                slug={e.data.slug}
                 label={e.data.label}
                 title={e.data.title}
                 withdrawn={e.data.withdrawn}

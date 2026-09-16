@@ -1,6 +1,9 @@
 ---
-// DESIGN.md "Enhancement toggle" — rendered fully expanded/static in this
-// slice (no JS toggle; that's CAP-3). Own Baseline badges/Withdrawn marker,
+// DESIGN.md "Enhancement toggle" — collapsed by default (CAP-3): header
+// (chevron, id, title, badge/Withdrawn marker) always renders; the statement
+// body is hidden until expanded via click/tap or keyboard, and the most
+// recently opened Enhancement's slug is tracked in `location.hash` via the
+// shared `setUrlState()` helper (AD-3). Own Baseline badges/Withdrawn marker,
 // since an Enhancement's baseline membership may differ from its parent
 // Control's (architecture AD-2).
 import BaselineBadge from './BaselineBadge.astro';
@@ -14,6 +17,7 @@ interface StatementNode {
 }
 
 interface Props {
+  slug: string;
   label: string;
   title: string;
   withdrawn: boolean;
@@ -22,11 +26,30 @@ interface Props {
   statement: StatementNode[];
 }
 
-const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astro.props;
+const { slug, label, title, withdrawn, incorporatedInto, baselines, statement } = Astro.props;
 ---
 
-<div class="enhancement-item" data-baselines={baselines.join(' ')}>
-  <div class="enhancement-item__header">
+{
+  /*
+   * 157 real Enhancements (mostly withdrawn ones) have no statement, so
+   * clicking their header would flip a chevron and reveal nothing -- the
+   * toggle affordance (chevron, role, tabindex, aria-expanded) only appears
+   * when there's a body to expand.
+   */
+}
+<div class="enhancement-item" id={slug} data-baselines={baselines.join(' ')}>
+  <div
+    class="enhancement-item__header"
+    role={statement.length > 0 ? 'button' : undefined}
+    tabindex={statement.length > 0 ? 0 : undefined}
+    aria-expanded={statement.length > 0 ? 'false' : undefined}
+    aria-controls={statement.length > 0 ? `${slug}-statement` : undefined}
+  >
+    {statement.length > 0 && (
+      <svg class="enhancement-item__chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+        <path d="M3 2 L9 6 L3 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    )}
     <span class="enhancement-item__id">{label}</span>
     <span class={`enhancement-item__title ${withdrawn ? 'enhancement-item__title--withdrawn' : ''}`}>
       {title}
@@ -42,7 +65,7 @@ const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astr
     </span>
   </div>
   {statement.length > 0 && (
-    <div class="enhancement-item__statement">
+    <div class="enhancement-item__statement" id={`${slug}-statement`} hidden>
       <StatementTree nodes={statement} />
     </div>
   )}
@@ -60,6 +83,26 @@ const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astr
     display: flex;
     align-items: center;
     gap: 12px;
+    border-radius: var(--rounded-sm);
+  }
+
+  .enhancement-item__header[role='button'] {
+    cursor: pointer;
+  }
+
+  .enhancement-item__header:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .enhancement-item__chevron {
+    flex-shrink: 0;
+    color: var(--color-accent);
+    transition: transform 0.15s ease;
+  }
+
+  .enhancement-item__header[aria-expanded='true'] .enhancement-item__chevron {
+    transform: rotate(90deg);
   }
 
   .enhancement-item__id {
@@ -94,3 +137,53 @@ const { label, title, withdrawn, incorporatedInto, baselines, statement } = Astr
     margin-top: 12px;
   }
 </style>
+
+<script>
+  // Delegated single script over all `.enhancement-item` instances on the
+  // page, matching `BaselineFilter.astro`'s existing pattern -- Astro
+  // de-duplicates identical inline/module scripts across repeated component
+  // instances, so a `document.currentScript.closest()` per-instance approach
+  // (see spec Design Notes) can't be relied on to run once per Enhancement.
+  import { setUrlState } from '../utils/urlState';
+
+  function currentHashSlug(): string | null {
+    const hash = window.location.hash;
+    if (!hash) return null;
+    return hash.startsWith('#') ? hash.slice(1) : hash;
+  }
+
+  document.querySelectorAll<HTMLElement>('.enhancement-item').forEach((item) => {
+    const header = item.querySelector<HTMLElement>('.enhancement-item__header');
+    const body = item.querySelector<HTMLElement>('.enhancement-item__statement');
+    // No statement means no toggle affordance was rendered (role/tabindex/
+    // aria-expanded all omitted server-side) -- nothing to wire up.
+    if (!header || !body || header.getAttribute('role') !== 'button') return;
+
+    function reveal() {
+      header!.setAttribute('aria-expanded', 'true');
+      body!.hidden = false;
+    }
+
+    function toggle() {
+      const expanded = header!.getAttribute('aria-expanded') === 'true';
+      header!.setAttribute('aria-expanded', String(!expanded));
+      body!.hidden = expanded;
+      if (!expanded) setUrlState({ hash: item.id });
+    }
+
+    header.addEventListener('click', toggle);
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+
+    // Auto-expand on a matching deep-link hash without rewriting the URL
+    // back to the value it already has (setUrlState() would be a no-op
+    // replaceState, but there's no reason to call it).
+    if (currentHashSlug() === item.id) {
+      reveal();
+    }
+  });
+</script>

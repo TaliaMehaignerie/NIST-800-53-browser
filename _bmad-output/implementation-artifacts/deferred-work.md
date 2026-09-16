@@ -69,3 +69,19 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-baseline-filter.md`
   summary: The set of valid Baselines now exists in two places that could drift — `src/content.config.ts`'s `z.enum(['low','moderate','high','privacy'])` schema, and `BaselineFilter.astro`'s server-rendered `BASELINES` list (the client script's own `VALID_BASELINES` was patched during review to derive from the rendered pills, removing the third copy, but the schema-vs-component duplication remains).
   evidence: Real (verification-gap), but the schema and the UI component are necessarily two different layers (data contract vs. presentation) with no realistic single-source mechanism given the current stack (no shared constants module imported by both a `.ts` schema file and an `.astro` frontmatter today). Worth a shared `src/utils/baselines.ts` constant if a fifth capability ever touches this list.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-enhancement-toggle.md`
+  summary: No `hashchange` listener on `EnhancementItem` — the hash is only read once at script init, so a later in-page hash change (browser back/forward through hash states, or a future feature linking directly to another Enhancement anchor) won't open/close the matching Enhancement.
+  evidence: Real (blind-hunter/edge-case-hunter), but no current UI writes a second hash change after initial load besides the toggle's own `setUrlState()` calls (which already update the DOM directly), and there's no in-page anchor navigation feature yet to exercise it. Revisit if a future capability adds one.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-enhancement-toggle.md`
+  summary: `EnhancementItem`'s header uses `role="button"` + manual `tabindex`/`keydown` handling rather than a native `<button>`, even though the header's children (chevron SVG, id, title, badges) contain no nested interactive elements and could be wrapped in a real `<button>` without invalid nesting.
+  evidence: Real (blind-hunter) — the spec's own stated rationale for avoiding `<button>` ("can't contain the block-level statement body") doesn't hold, since the header and the statement body are siblings, not nested. The `role="button"` pattern is still a valid, WAI-ARIA-compliant disclosure pattern and functions correctly (verified), so this is a simplification opportunity, not a bug. Worth revisiting the spec's rationale if `EnhancementItem` is touched again.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-enhancement-toggle.md`
+  summary: No `scrollIntoView()` call when a deep-linked Enhancement auto-expands on load — relies entirely on the browser's native fragment-scroll (which targets the collapsed header, present in the DOM at parse time) rather than re-scrolling after the body expands and adds height below it.
+  evidence: Real (blind-hunter) but the native fragment-scroll already lands the user on the right row before the body expands, so the degraded case (content appearing below an already-scrolled-past fold) is a minor polish issue, not a broken deep link. No browser-automation tool available in this environment to verify a fix live.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-enhancement-toggle.md`
+  summary: No automated test exercises `EnhancementItem`'s toggle/keyboard/deep-link-auto-expand logic — verified by hand against real build output (including the confirmed-real 157-enhancement no-statement case), not by a repeatable check.
+  evidence: Real (blind-hunter/verification-gap), consistent with the identical gap already logged for Goal B and Goal C — the repo still has no test runner. Introducing one is a bigger decision than any single slice's scope.
