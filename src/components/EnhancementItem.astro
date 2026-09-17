@@ -16,6 +16,13 @@ interface StatementNode {
   children: StatementNode[];
 }
 
+interface Param {
+  id: string;
+  label: string | null;
+  select: { howMany: string | null; choice: string[] } | null;
+  guidelines: string[];
+}
+
 interface Props {
   slug: string;
   label: string;
@@ -24,9 +31,10 @@ interface Props {
   incorporatedInto: string[];
   baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
   statement: StatementNode[];
+  params: Param[];
 }
 
-const { slug, label, title, withdrawn, incorporatedInto, baselines, statement } = Astro.props;
+const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, params } = Astro.props;
 ---
 
 {
@@ -66,7 +74,7 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement } 
   </div>
   {statement.length > 0 && (
     <div class="enhancement-item__statement" id={`${slug}-statement`} hidden>
-      <StatementTree nodes={statement} />
+      <StatementTree nodes={statement} params={params} />
     </div>
   )}
 </div>

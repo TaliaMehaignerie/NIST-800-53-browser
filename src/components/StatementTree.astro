@@ -2,17 +2,32 @@
 // Recursive render of Goal A's `{label, prose, children}` statement shape.
 // Prose renders before children (never flattened/reordered) because 122
 // catalog entries carry prose AND sub-parts on the same node (AD-5).
+//
+// `params` resolves `{{ insert: param, <id> }}` placeholders into NIST's own
+// "[Assignment: organization-defined ...]" / "[Selection (...): ...]"
+// convention (resolveParams.ts) -- the raw OSCAL placeholder syntax otherwise
+// reads as broken text to a reader with no reason to know what OSCAL is.
+import { resolveParams } from '../utils/resolveParams';
+
 interface StatementNode {
   label: string | null;
   prose: string | null;
   children: StatementNode[];
 }
 
-interface Props {
-  nodes: StatementNode[];
+interface Param {
+  id: string;
+  label: string | null;
+  select: { howMany: string | null; choice: string[] } | null;
+  guidelines: string[];
 }
 
-const { nodes } = Astro.props;
+interface Props {
+  nodes: StatementNode[];
+  params: Param[];
+}
+
+const { nodes, params } = Astro.props;
 ---
 
 {
@@ -21,12 +36,12 @@ const { nodes } = Astro.props;
       {(n.label || n.prose) && (
         <p>
           {n.label && <span class="statement-node__label">{n.label}</span>}
-          {n.prose}
+          {n.prose && resolveParams(n.prose, params)}
         </p>
       )}
       {n.children.length > 0 && (
         <div class="statement-node__children">
-          <Astro.self nodes={n.children} />
+          <Astro.self nodes={n.children} params={params} />
         </div>
       )}
     </div>

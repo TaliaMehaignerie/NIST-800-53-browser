@@ -8,6 +8,7 @@ import BaselineBadge from '../../components/BaselineBadge.astro';
 import WithdrawnMarker from '../../components/WithdrawnMarker.astro';
 import StatementTree from '../../components/StatementTree.astro';
 import EnhancementItem from '../../components/EnhancementItem.astro';
+import { familyUrl } from '../../utils/url';
 
 export async function getStaticPaths() {
   const allEntries = await getCollection('controls');
@@ -19,10 +20,22 @@ export async function getStaticPaths() {
 }
 
 const { control } = Astro.props;
-const { label, title, withdrawn, incorporatedInto, baselines, statement, enhancementSlugs, crosswalk } =
-  control.data;
+const {
+  label,
+  title,
+  withdrawn,
+  incorporatedInto,
+  baselines,
+  statement,
+  enhancementSlugs,
+  crosswalk,
+  familyCode,
+  params,
+} = control.data;
 
 const crosswalkHasPartialMatch = crosswalk.some((code: string) => code.endsWith('*'));
+
+const family = await getEntry('families', familyCode.toLowerCase());
 
 const enhancements = (
   await Promise.all(enhancementSlugs.map((slug: string) => getEntry('controls', slug)))
@@ -30,6 +43,9 @@ const enhancements = (
 ---
 
 <BaseLayout title={`${label} ${title} — NIST 800-53 Browser`}>
+  {family && (
+    <a class="back-link" href={familyUrl(family.data.slug)}>← {family.data.code} — {family.data.name}</a>
+  )}
   <article class="control-detail-card">
     <h1>{label} {title}</h1>
     <div class="control-detail-card__badges">
@@ -44,7 +60,7 @@ const enhancements = (
 
     {statement.length > 0 && (
       <div class="control-detail-card__statement">
-        <StatementTree nodes={statement} />
+        <StatementTree nodes={statement} params={params} />
       </div>
     )}
 
@@ -62,6 +78,7 @@ const enhancements = (
                 incorporatedInto={e.data.incorporatedInto}
                 baselines={e.data.baselines}
                 statement={e.data.statement}
+                params={e.data.params}
               />
             ))
           }
@@ -89,6 +106,19 @@ const enhancements = (
 </BaseLayout>
 
 <style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
   .control-detail-card {
     background: var(--color-surface-raised);
     border-radius: var(--rounded-md);

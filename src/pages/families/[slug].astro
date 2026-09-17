@@ -3,6 +3,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ControlRow from '../../components/ControlRow.astro';
+import { homeUrl } from '../../utils/url';
 
 export async function getStaticPaths() {
   const families = await getCollection('families');
@@ -20,6 +21,7 @@ const controls = (
 ---
 
 <BaseLayout title={`${family.data.code} — ${family.data.name} — NIST 800-53 Browser`}>
+  <a class="back-link" href={homeUrl()}>← Home</a>
   <h1>{family.data.code} — {family.data.name}</h1>
   <div class="control-list">
     {
@@ -39,6 +41,19 @@ const controls = (
 </BaseLayout>
 
 <style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
   .baseline-empty-state {
     font-family: var(--font-meta);
     font-size: 13px;
