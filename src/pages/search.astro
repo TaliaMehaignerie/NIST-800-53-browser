@@ -2,15 +2,16 @@
 // Search results page (CAP-5, architecture AD-7). Reads `?q=` server-side
 // only to pre-fill SearchBox's initial HTML value (via BaseLayout's
 // searchQuery prop) -- everything after that is client-side Pagefind
-// (AD-1: no server-side search execution). BaselineFilter renders inert
-// here (filterInert) per DESIGN.md's explicit carve-out -- it has nothing
-// to filter on this page.
+// (AD-1: no server-side search execution). BaselineFilter now renders fully
+// functional here (spec-search-baseline-integration): SearchBox listens for
+// its `baselinefilterchange` event and re-runs the query through Pagefind's
+// native filters option.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const query = Astro.url.searchParams.get('q') ?? '';
 ---
 
-<BaseLayout title="Search — NIST 800-53 Browser" filterInert searchQuery={query}>
+<BaseLayout title="Search — NIST 800-53 Browser" showBaselineFilter searchQuery={query}>
   <div data-pagefind-ignore>
     <!--
       This page's own content shouldn't be indexed: its "Search" heading and
@@ -65,5 +66,47 @@ const query = Astro.url.searchParams.get('q') ?? '';
 
   .search-result__title {
     color: var(--color-ink-primary);
+  }
+
+  .search-result__badges {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  /*
+   * Duplicated from BaselineBadge.astro's scoped styles: /search's page tree
+   * never renders the actual component (results are built client-side from
+   * Pagefind data via SearchBox's script), so its scoped CSS isn't bundled
+   * here. Kept in sync by hand with BaselineBadge.astro -- see spec
+   * spec-search-baseline-integration's Code Map.
+   */
+  .baseline-badge {
+    display: inline-block;
+    border-radius: var(--rounded-full);
+    font-family: var(--font-meta);
+    font-size: 13px;
+    line-height: 1.4;
+    padding: 2px 8px;
+  }
+
+  .baseline-badge--low {
+    background: color-mix(in srgb, var(--color-baseline-low) 20%, transparent);
+    color: var(--color-baseline-low);
+  }
+
+  .baseline-badge--moderate {
+    background: color-mix(in srgb, var(--color-baseline-moderate) 20%, transparent);
+    color: var(--color-baseline-moderate);
+  }
+
+  .baseline-badge--high {
+    background: color-mix(in srgb, var(--color-baseline-high) 20%, transparent);
+    color: var(--color-baseline-high);
+  }
+
+  .baseline-badge--privacy {
+    background: color-mix(in srgb, var(--color-baseline-privacy) 20%, transparent);
+    color: var(--color-baseline-privacy);
   }
 </style>

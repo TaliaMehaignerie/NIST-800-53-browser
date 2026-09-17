@@ -1,5 +1,11 @@
 ---
 // Family page (AD-1 static): Controls in catalog order via `controlSlugs`.
+//
+// Intentionally no data-pagefind-filter/-meta here (spec
+// spec-search-baseline-integration): Families aren't Baseline-tagged
+// entities, only Controls/Enhancements are (AD-2). A Family search result on
+// /search always shows no Baseline badge and disappears whenever a specific
+// Baseline filter is active on /search -- accepted, not a bug.
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ControlRow from '../../components/ControlRow.astro';
@@ -20,7 +26,7 @@ const controls = (
 ).filter((c): c is NonNullable<typeof c> => c !== undefined);
 ---
 
-<BaseLayout title={`${family.data.code} — ${family.data.name} — NIST 800-53 Browser`}>
+<BaseLayout title={`${family.data.code} — ${family.data.name} — NIST 800-53 Browser`} showBaselineFilter>
   <a class="back-link" href={homeUrl()}>← Home</a>
   <h1>{family.data.code} — {family.data.name}</h1>
   <div class="control-list">

@@ -72,11 +72,32 @@ const { value = '' } = Astro.props;
     const form = document.querySelector<HTMLFormElement>('.search-box');
 
     if (input && status && list) {
-      type PagefindResult = { url: string; meta: { title?: string } };
+      type PagefindResult = { url: string; meta: { title?: string; baselines?: string } };
+      type PagefindSearchOptions = { filters?: { baseline: string[] } };
       type PagefindClient = {
         init: () => Promise<void>;
-        search: (query: string) => Promise<{ results: { data: () => Promise<PagefindResult> }[] }>;
+        search: (
+          query: string,
+          options?: PagefindSearchOptions,
+        ) => Promise<{ results: { data: () => Promise<PagefindResult> }[] }>;
       };
+
+      // Reads the same `?baseline=` URL state BaselineFilter writes via
+      // setUrlState() (AD-3) -- a filtered search is itself a deep-linkable
+      // URL like everywhere else in the app. Validated against the pills
+      // BaselineFilter actually rendered (same derive-don't-duplicate pattern
+      // as BaselineFilter's own VALID_BASELINES) rather than trusting the URL
+      // blindly -- a stale/malformed `?baseline=` would otherwise ask
+      // Pagefind to filter on a facet value that was never indexed, silently
+      // returning zero results with no explanation.
+      const VALID_BASELINES = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-pill'))
+        .map((pill) => pill.dataset.baseline)
+        .filter((v): v is string => Boolean(v));
+
+      function currentBaselineFilter(): string | null {
+        const value = new URLSearchParams(window.location.search).get('baseline');
+        return value && VALID_BASELINES.includes(value) ? value : null;
+      }
 
       let pagefind: PagefindClient | undefined;
       // Once JS is driving /search in place, a plain Enter-to-submit would
@@ -133,13 +154,33 @@ const { value = '' } = Astro.props;
         list.replaceChildren();
       }
 
-      function renderResults(rows: { id: string; title: string; href: string }[]) {
+      // Same derive-don't-duplicate approach as VALID_BASELINES above --
+      // reads each pill's own display label instead of a second hardcoded
+      // low/moderate/high/privacy -> "Low"/"Moderate"/... map.
+      const BASELINE_LABELS: Record<string, string> = Object.fromEntries(
+        Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-pill'))
+          .filter((pill) => pill.dataset.baseline)
+          .map((pill) => [pill.dataset.baseline as string, pill.textContent?.trim() ?? '']),
+      );
+
+      function renderResults(rows: { id: string; title: string; href: string; baselines: string[] }[]) {
         status.textContent = `${rows.length} matches`;
+        const baseline = currentBaselineFilter();
         list.replaceChildren(
           ...rows.map((row) => {
             const li = document.createElement('li');
             const a = document.createElement('a');
-            a.href = row.href;
+            // A filtered search is itself a deep-linkable URL (AD-3) --
+            // clicking through to a result must carry the active Baseline
+            // filter forward the same way BaselineFilter's updateLinks()
+            // does for Family/Control rows, or every other page's filter
+            // persistence guarantee breaks the moment a search result is the
+            // link clicked. (renderResults() replaces the whole list on every
+            // query/filter change, so a one-time updateLinks() pass over the
+            // DOM can never keep up -- each row must carry it from creation.)
+            const href = new URL(row.href, window.location.origin);
+            if (baseline) href.searchParams.set('baseline', baseline);
+            a.href = href.pathname + href.search;
             a.className = 'search-result';
             const idSpan = document.createElement('span');
             idSpan.className = 'search-result__id';
@@ -148,6 +189,17 @@ const { value = '' } = Astro.props;
             titleSpan.className = 'search-result__title';
             titleSpan.textContent = row.title;
             a.append(idSpan, titleSpan);
+            if (row.baselines.length > 0) {
+              const badgesSpan = document.createElement('span');
+              badgesSpan.className = 'search-result__badges';
+              row.baselines.forEach((b) => {
+                const badge = document.createElement('span');
+                badge.className = `baseline-badge baseline-badge--${b}`;
+                badge.textContent = BASELINE_LABELS[b] ?? b;
+                badgesSpan.append(badge);
+              });
+              a.append(badgesSpan);
+            }
             li.append(a);
             return li;
           }),
@@ -170,9 +222,10 @@ const { value = '' } = Astro.props;
           return;
         }
         renderLoading();
+        const baseline = currentBaselineFilter();
         let search: Awaited<ReturnType<PagefindClient['search']>>;
         try {
-          search = await pagefind.search(query);
+          search = await pagefind.search(query, baseline ? { filters: { baseline: [baseline] } } : undefined);
         } catch {
           if (token === queryToken) status.textContent = 'Search failed.';
           return;
@@ -186,9 +239,13 @@ const { value = '' } = Astro.props;
             if (!classified) return null;
             const href = classified.type === 'control' ? controlUrl(classified.slug) : familyUrl(classified.slug);
             const { id, title } = splitTitle(r.meta?.title ?? '');
-            return { id, title, href };
+            const baselines = (r.meta?.baselines ?? '')
+              .split(',')
+              .map((b) => b.trim())
+              .filter(Boolean);
+            return { id, title, href, baselines };
           })
-          .filter((row): row is { id: string; title: string; href: string } => row !== null);
+          .filter((row): row is { id: string; title: string; href: string; baselines: string[] } => row !== null);
 
         if (rows.length === 0) {
           renderEmpty(query);
@@ -243,6 +300,16 @@ const { value = '' } = Astro.props;
         // `search` rather than `input` in some versions.
         input.addEventListener('input', () => queueQuery(input.value));
         input.addEventListener('search', () => queueQuery(input.value));
+
+        // BaselineFilter (spec-search-baseline-integration) dispatches this
+        // synchronously, after already writing `?baseline=` via setUrlState()
+        // -- runQuery() re-reads the filter itself via currentBaselineFilter()
+        // rather than the event's `detail.baseline`, since it needs to do
+        // that read regardless (for the Pagefind filters option) and the URL
+        // is guaranteed current by the time this listener runs. Re-run
+        // immediately (no debounce; this isn't a keystroke) so results narrow
+        // to the newly selected Baseline right away.
+        window.addEventListener('baselinefilterchange', () => runQuery(input.value));
       })();
     }
   }

@@ -1,21 +1,13 @@
 ---
 // DESIGN.md "Baseline filter": single-select toggle group (All / Low /
-// Moderate / High / Privacy) mounted in BaseLayout's header (architecture
-// AD-7). Inactive pills are plain meta text; the active pill gets a
-// surface-overlay pill background — same grammar as a Baseline badge.
-//
-// Renders active (not inert) everywhere it's mounted except /search — the
-// spec's resolved ambiguity is that AD-7's data-baselines mechanism only
-// actually narrows rows on Family Detail (ControlRow) and Control Detail
-// (EnhancementItem); Home has no data-baselines rows, so the pill state
-// there is visible/persists across navigation but has nothing to hide.
-//
-// On /search (CAP-5), DESIGN.md's explicit carve-out applies: the group
-// renders present-but-inert at `opacityInert` (45%) via the `inert` prop,
-// set only by BaseLayout's `filterInert` (passed only from search.astro).
-// This is presentation-only — the filtering script below is unchanged and
-// still runs identically on every page; /search just has no
-// `[data-baselines]` rows for it to act on.
+// Moderate / High / Privacy). Mounted opt-in per page (BaseLayout's
+// `showBaselineFilter` prop, spec-search-baseline-integration) only where
+// it has something to act on: Family Detail and Control Detail (their own
+// DOM-based `[data-baselines]` filtering, unchanged) and /search, where it
+// instead drives Pagefind-native filtering via a `baselinefilterchange`
+// CustomEvent that SearchBox listens for. Home never mounts it. Inactive
+// pills are plain meta text; the active pill gets a surface-overlay pill
+// background — same grammar as a Baseline badge.
 const BASELINES: { value: string | null; label: string }[] = [
   { value: null, label: 'All' },
   { value: 'low', label: 'Low' },
@@ -23,19 +15,9 @@ const BASELINES: { value: string | null; label: string }[] = [
   { value: 'high', label: 'High' },
   { value: 'privacy', label: 'Privacy' },
 ];
-
-interface Props {
-  inert?: boolean;
-}
-
-const { inert = false } = Astro.props;
 ---
 
-<div
-  class={`baseline-filter ${inert ? 'baseline-filter--inert' : ''}`}
-  role="group"
-  aria-label="Filter by Baseline"
->
+<div class="baseline-filter" role="group" aria-label="Filter by Baseline">
   {BASELINES.map(({ value, label }) => (
     <button type="button" class="filter-pill" data-baseline={value ?? ''} aria-pressed="false">
       {label}
@@ -73,12 +55,6 @@ const { inert = false } = Astro.props;
   .filter-pill:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-  }
-
-  /* DESIGN.md components.baseline-filter.opacityInert -- /search only
-     (BaseLayout's filterInert prop), presentation-only. */
-  .baseline-filter--inert {
-    opacity: var(--opacity-inert);
   }
 </style>
 
@@ -167,6 +143,10 @@ const { inert = false } = Astro.props;
         markActivePill(next);
         applyFilter(next);
         updateLinks(next);
+        // Decoupled signal for /search's Pagefind-native filtering
+        // (SearchBox.astro) -- BaselineFilter doesn't need to know SearchBox
+        // exists. No effect on Family/Control pages beyond the event firing.
+        window.dispatchEvent(new CustomEvent('baselinefilterchange', { detail: { baseline: next } }));
       });
     });
   }

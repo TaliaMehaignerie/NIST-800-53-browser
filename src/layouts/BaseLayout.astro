@@ -10,6 +10,12 @@
 // search result's relevance with nav/disclaimer/provenance text. Scoping
 // the attribute to `<main>` means only real page content (Family names,
 // Control titles/statements, crosswalk codes) is indexed.
+//
+// `BaselineFilter` is opt-in per page via `showBaselineFilter` (spec
+// spec-search-baseline-integration): it only mounts where it has something
+// to act on -- Family Detail, Control Detail, and /search (Pagefind-native
+// filtering, CAP-5+CAP-2 integration). Home sets nothing and gets no filter
+// markup at all.
 import ProvenanceFooter from '../components/ProvenanceFooter.astro';
 import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
@@ -17,11 +23,11 @@ import { homeUrl } from '../utils/url';
 
 interface Props {
   title: string;
-  filterInert?: boolean;
+  showBaselineFilter?: boolean;
   searchQuery?: string;
 }
 
-const { title, filterInert = false, searchQuery = '' } = Astro.props;
+const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
 ---
 
 <html lang="en">
@@ -34,7 +40,7 @@ const { title, filterInert = false, searchQuery = '' } = Astro.props;
     <header class="site-header">
       <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
       <SearchBox value={searchQuery} />
-      <BaselineFilter inert={filterInert} />
+      {showBaselineFilter && <BaselineFilter />}
     </header>
     <main data-pagefind-body>
       <slot />
@@ -65,9 +71,6 @@ const { title, filterInert = false, searchQuery = '' } = Astro.props;
     --rounded-sm: 6px;
     --rounded-md: 10px;
     --rounded-full: 9999px;
-
-    /* DESIGN.md components.baseline-filter.opacityInert -- /search only. */
-    --opacity-inert: 0.45;
   }
 
   * {

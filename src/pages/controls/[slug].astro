@@ -42,12 +42,34 @@ const enhancements = (
 ).filter((e): e is NonNullable<typeof e> => e !== undefined);
 ---
 
-<BaseLayout title={`${label} ${title} — NIST 800-53 Browser`}>
+<BaseLayout title={`${label} ${title} — NIST 800-53 Browser`} showBaselineFilter>
   {family && (
     <a class="back-link" href={familyUrl(family.data.slug)}>← {family.data.code} — {family.data.name}</a>
   )}
   <article class="control-detail-card">
-    <h1>{label} {title}</h1>
+    <h1 data-pagefind-meta={!withdrawn && baselines.length > 0 ? `baselines:${baselines.join(',')}` : undefined}>
+      {label} {title}
+    </h1>
+    {
+      /*
+       * data-pagefind-filter takes exactly one key:value pair per element --
+       * it splits on the first colon and treats everything after as the
+       * literal value, commas included, so a single element can't carry
+       * multiple Baseline values (confirmed empirically via pagefind.filters()
+       * live output; a comma-joined value produced one bogus combined-string
+       * facet value per Control instead of three independent ones). Each
+       * value needs its own element; Pagefind aggregates per-page across all
+       * elements within data-pagefind-body scope.
+       *
+       * Gated on `!withdrawn` even though a withdrawn Control's `baselines`
+       * is always empty in real data today (verified: 0 occurrences) --
+       * this keeps search filtering/faceting in sync with what the page
+       * itself visually shows (a Withdrawn marker, never Baseline badges)
+       * if that ever changed, rather than relying on an incidental guarantee
+       * from the ingestion layer.
+       */
+    }
+    {!withdrawn && baselines.map((b: string) => <span data-pagefind-filter={`baseline:${b}`} />)}
     <div class="control-detail-card__badges">
       {withdrawn ? (
         <WithdrawnMarker incorporatedInto={incorporatedInto} showSuccessors />
