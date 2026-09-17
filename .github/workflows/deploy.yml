@@ -1,0 +1,53 @@
+# CI-only deploy (architecture spine AD-6): astro build + Pagefind index +
+# artifact-based GitHub Pages deploy, triggered on push to main. Ingestion
+# (scripts/ingest.mjs, AD-2) never runs here -- it's a local, human-reviewed
+# step whose output is committed before push.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy in flight at a time; a newer push supersedes an in-progress
+# one rather than queuing behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+          cache: 'npm'
+
+      - run: npm ci
+
+      # Runs the same "astro build && pagefind --site dist" as a local build
+      # (package.json's build script) -- CI never diverges from what a
+      # human can reproduce locally.
+      - run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
