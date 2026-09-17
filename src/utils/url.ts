@@ -29,3 +29,7 @@ export function familyUrl(slug: string): string {
 export function controlUrl(slug: string): string {
   return `${BASE}/controls/${slug}/`;
 }
+
+export function searchUrl(): string {
+  return `${BASE}/search/`;
+}

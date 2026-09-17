@@ -1,0 +1,249 @@
+---
+// DESIGN.md "Search box": lives in the global header (every page), mounted
+// once by BaseLayout (architecture AD-7). Plain HTML form everywhere -- a
+// normal full-page GET to /search?q=... (AD-1/AD-3's zero-JS-by-default MPA
+// posture, EXPERIENCE.md Component Patterns). The live-query hydration below
+// only activates when this same markup happens to be rendered on /search
+// itself (checked once at hydration via `window.location.pathname`, not a
+// page-type prop) -- CAP-5 spec Boundaries.
+import { searchUrl } from '../utils/url';
+
+interface Props {
+  value?: string;
+}
+
+const { value = '' } = Astro.props;
+---
+
+<form class="search-box" method="get" action={searchUrl()}>
+  <input
+    class="search-box__input"
+    type="search"
+    name="q"
+    value={value}
+    placeholder="Search controls…"
+    aria-label="Search controls"
+  />
+</form>
+
+<style>
+  .search-box {
+    margin-bottom: 12px;
+  }
+
+  .search-box__input {
+    width: 100%;
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    color: var(--color-ink-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .search-box__input::placeholder {
+    color: var(--color-ink-secondary);
+  }
+
+  .search-box__input:focus,
+  .search-box__input:focus-visible {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  // Only ever does anything on /search (CAP-5 spec Boundaries -- every other
+  // page keeps this a plain zero-JS form). Talks directly to Pagefind's raw
+  // JS API (never astro-pagefind / pagefind-ui.js -- architecture spine
+  // already ruled those out, see Stack table).
+  import { setUrlState } from '../utils/urlState';
+  import { controlUrl, familyUrl } from '../utils/url';
+
+  const isSearchPage =
+    window.location.pathname.endsWith('/search') || window.location.pathname.endsWith('/search/');
+
+  if (isSearchPage) {
+    const input = document.querySelector<HTMLInputElement>('.search-box__input');
+    const status = document.querySelector<HTMLElement>('#search-status');
+    const list = document.querySelector<HTMLUListElement>('#search-list');
+
+    const form = document.querySelector<HTMLFormElement>('.search-box');
+
+    if (input && status && list) {
+      type PagefindResult = { url: string; meta: { title?: string } };
+      type PagefindClient = {
+        init: () => Promise<void>;
+        search: (query: string) => Promise<{ results: { data: () => Promise<PagefindResult> }[] }>;
+      };
+
+      let pagefind: PagefindClient | undefined;
+      // Once JS is driving /search in place, a plain Enter-to-submit would
+      // still fire the form's native GET and reload the same page the live
+      // query just updated -- prevent that redundant reload.
+      form?.addEventListener('submit', (e) => e.preventDefault());
+
+      // This site's <title> convention -- "{ID} {Title} — NIST 800-53
+      // Browser" for Control pages (src/pages/controls/[slug].astro),
+      // "{Code} — {Name} — NIST 800-53 Browser" for Family pages
+      // (src/pages/families/[slug].astro) -- is parsed back into a mono id +
+      // title pair for display. This is ordinary client-side text
+      // formatting, not `data-pagefind-meta` wiring (spec Boundaries ->
+      // Never rules out adding that markup, not reading the page <title>
+      // Pagefind already captures by default).
+      function splitTitle(rawTitle: string): { id: string; title: string } {
+        const withoutSuffix = rawTitle.replace(/\s*—\s*NIST 800-53 Browser\s*$/, '');
+        const match = withoutSuffix.match(/^([A-Z]{2,4}(?:-\d+(?:\(\d+\))?)?)\s*(?:—\s*)?(.*)$/);
+        if (match && match[2]) {
+          return { id: match[1], title: match[2] };
+        }
+        return { id: '', title: withoutSuffix };
+      }
+
+      // Result granularity is Control/Family pages only (spec Intent ->
+      // "Resolved ambiguity -- result granularity"). Pagefind's result URL
+      // is relative to the crawled `dist/` root and is not base-path-aware
+      // (astro.config.mjs's `base` is applied by Astro at request time, not
+      // known to the standalone Pagefind CLI) -- so results are re-derived
+      // through the slug and rebuilt via the existing `controlUrl()`/
+      // `familyUrl()` helpers (AD-4) rather than linked with the raw
+      // Pagefind URL, per spec Boundaries ("no new link-building logic").
+      // Any other indexed page (Home, /search itself) is excluded here.
+      function classify(pagefindUrl: string): { type: 'control' | 'family'; slug: string } | null {
+        const controlMatch = pagefindUrl.match(/\/controls\/([a-z0-9-]+)\/?(?:index\.html)?$/);
+        if (controlMatch) return { type: 'control', slug: controlMatch[1] };
+        const familyMatch = pagefindUrl.match(/\/families\/([a-z0-9-]+)\/?(?:index\.html)?$/);
+        if (familyMatch) return { type: 'family', slug: familyMatch[1] };
+        return null;
+      }
+
+      function renderNothingEntered() {
+        status.textContent = '';
+        list.replaceChildren();
+      }
+
+      function renderLoading() {
+        status.textContent = 'Searching…';
+        list.replaceChildren();
+      }
+
+      function renderEmpty(query: string) {
+        status.textContent = `No controls match "${query}".`;
+        list.replaceChildren();
+      }
+
+      function renderResults(rows: { id: string; title: string; href: string }[]) {
+        status.textContent = `${rows.length} matches`;
+        list.replaceChildren(
+          ...rows.map((row) => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = row.href;
+            a.className = 'search-result';
+            const idSpan = document.createElement('span');
+            idSpan.className = 'search-result__id';
+            idSpan.textContent = row.id;
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'search-result__title';
+            titleSpan.textContent = row.title;
+            a.append(idSpan, titleSpan);
+            li.append(a);
+            return li;
+          }),
+        );
+      }
+
+      // Guards against out-of-order async results: a fast keystroke can fire
+      // a second runQuery() before the first's `search()`/`data()` resolves,
+      // and without this token the slower, now-stale query could resolve
+      // last and overwrite the list with results for what the user already
+      // typed over.
+      let queryToken = 0;
+
+      async function runQuery(rawQuery: string) {
+        const query = rawQuery.trim();
+        const token = ++queryToken;
+        if (!pagefind) return;
+        if (!query) {
+          renderNothingEntered();
+          return;
+        }
+        renderLoading();
+        let search: Awaited<ReturnType<PagefindClient['search']>>;
+        try {
+          search = await pagefind.search(query);
+        } catch {
+          if (token === queryToken) status.textContent = 'Search failed.';
+          return;
+        }
+        if (token !== queryToken) return; // a newer query already superseded this one
+        const results = await Promise.all(search.results.map((r) => r.data()));
+        if (token !== queryToken) return;
+        const rows = results
+          .map((r) => {
+            const classified = classify(r.url);
+            if (!classified) return null;
+            const href = classified.type === 'control' ? controlUrl(classified.slug) : familyUrl(classified.slug);
+            const { id, title } = splitTitle(r.meta?.title ?? '');
+            return { id, title, href };
+          })
+          .filter((row): row is { id: string; title: string; href: string } => row !== null);
+
+        if (rows.length === 0) {
+          renderEmpty(query);
+        } else {
+          renderResults(rows);
+        }
+      }
+
+      // Prefill synchronously, before the async Pagefind load below -- if
+      // this waited until after `pagefind.init()` resolved, a user who
+      // starts typing during that network-fetch window would have their
+      // keystroke overwritten the moment init finished.
+      const initialQuery = new URLSearchParams(window.location.search).get('q') ?? '';
+      input.value = initialQuery;
+
+      let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+      function queueQuery(value: string) {
+        setUrlState({ search: { q: value.trim() || null } });
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => runQuery(value), 150);
+      }
+
+      (async () => {
+        try {
+          // `import.meta.env.BASE_URL` reflects astro.config.mjs's `base`
+          // verbatim and is NOT guaranteed to end in `/` (this project's base
+          // is `/NIST-800-53-browser`, no trailing slash -- see
+          // src/utils/url.ts's identical normalization) -- so a literal
+          // `${BASE_URL}pagefind/pagefind.js` concatenation would 404 as
+          // `/NIST-800-53-browserpagefind/pagefind.js`. Normalize to exactly
+          // one separating slash regardless of how `base` happens to be
+          // spelled.
+          const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+          pagefind = (await import(
+            /* @vite-ignore */ `${base}/pagefind/pagefind.js`
+          )) as unknown as PagefindClient;
+          await pagefind.init();
+        } catch {
+          // Most commonly `npm run dev` with no prior `npm run build` --
+          // Pagefind's index is build-time only (AD-1), documented as a
+          // known local-dev limitation in the spec's Verification section.
+          status.textContent = 'Search unavailable.';
+          return;
+        }
+
+        if (input.value) {
+          await runQuery(input.value);
+        }
+
+        // `input` covers typing; `search` additionally covers Safari's
+        // native (x) clear button on type="search" fields, which fires
+        // `search` rather than `input` in some versions.
+        input.addEventListener('input', () => queueQuery(input.value));
+        input.addEventListener('search', () => queueQuery(input.value));
+      })();
+    }
+  }
+</script>
