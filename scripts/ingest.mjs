@@ -56,6 +56,18 @@ const CONTENT_DIR = process.env.INGEST_CONTENT_DIR
   : join(ROOT, 'src', 'content');
 
 const MASTER_FILE = join(RAW_DIR, 'NIST_SP-800-53_rev5_catalog-min.json');
+// `INGEST_CROSSWALK_FILE` exists for the same reason as `INGEST_RAW_DIR`: so
+// --verify can exercise the orphan-key guard (CAP-4) against a throwaway
+// file, never the real committed data/crosswalk.json.
+const CROSSWALK_FILE = process.env.INGEST_CROSSWALK_FILE
+  ? resolve(process.env.INGEST_CROSSWALK_FILE)
+  : join(ROOT, 'data', 'crosswalk.json');
+
+// The date this ISO 27001 crosswalk transcription was verified (CAP-4) -- an
+// explicit committed value, not derived from file mtime or git history,
+// matching how every other provenance fact in this pipeline is authored, not
+// inferred (see meta.crosswalkTranscribedAt below).
+const CROSSWALK_TRANSCRIBED_AT = '2026-09-17';
 
 /** Baseline key, its resolved profile file, and the entry count it should carry. */
 const BASELINES = [
@@ -202,7 +214,13 @@ function referencedParamIds(statement, guidance) {
  * fields: baseline membership is looked up per-entry either way, so an
  * Enhancement never implicitly inherits its Control's baselines (AD-2).
  */
-function buildEntry(node, { kind, familyCode, parentSlug, enhancementSlugs }, baselineSets, warn) {
+function buildEntry(
+  node,
+  { kind, familyCode, parentSlug, enhancementSlugs },
+  baselineSets,
+  crosswalkData,
+  warn,
+) {
   const statement = partsNamed(node, 'statement').map(statementNode);
   const guidance = partsNamed(node, 'guidance')[0]?.prose ?? null;
 
@@ -243,6 +261,11 @@ function buildEntry(node, { kind, familyCode, parentSlug, enhancementSlugs }, ba
     guidance,
     params,
     related: linkTargets(node, (rel) => rel === 'related'),
+    // data/crosswalk.json is keyed by the OSCAL-native id, already in its
+    // final shape -- read as-is, no reshaping (CAP-4). Empty array when this
+    // id has no published mapping, or genuinely isn't in the file (ia-13,
+    // sa-24 postdate NIST's crosswalk doc).
+    crosswalk: crosswalkData[node.id] ?? [],
   };
 }
 
@@ -274,6 +297,20 @@ function readCatalog(file) {
     throw new Error(`${file}'s catalog has no "metadata" -- is this a valid OSCAL catalog?`);
   }
   return catalog;
+}
+
+/** Read data/crosswalk.json and confirm it actually has the shape ingestion assumes (CAP-4). */
+function readCrosswalk(file) {
+  const data = readJson(file);
+  if (data === null || typeof data !== 'object' || Array.isArray(data)) {
+    throw new Error(`${file} must be a JSON object keyed by OSCAL-native id`);
+  }
+  for (const [key, value] of Object.entries(data)) {
+    if (!Array.isArray(value) || !value.every((c) => typeof c === 'string')) {
+      throw new Error(`${file} entry "${key}" must be an array of strings`);
+    }
+  }
+  return data;
 }
 
 /**
@@ -322,6 +359,10 @@ function ingest({ warn }) {
     BASELINES.map((b) => [b.key, baselineIds(readCatalog(join(RAW_DIR, b.file)))]),
   );
 
+  // data/crosswalk.json is already in its final, verified shape (CAP-4) --
+  // ingestion reads its clause codes as-is, no reshaping.
+  const crosswalkData = readCrosswalk(CROSSWALK_FILE);
+
   const controls = [];
   const enhancements = [];
   const families = [];
@@ -350,6 +391,7 @@ function ingest({ warn }) {
             enhancementSlugs: childNodes.map((e) => slugify(e.id)),
           },
           baselineSets,
+          crosswalkData,
           warn,
         ),
       );
@@ -365,6 +407,7 @@ function ingest({ warn }) {
             enhancement,
             { kind: 'enhancement', familyCode, parentSlug: controlSlug, enhancementSlugs: [] },
             baselineSets,
+            crosswalkData,
             warn,
           ),
         );
@@ -384,14 +427,23 @@ function ingest({ warn }) {
     });
   }
 
+  // A key with no matching real catalog id is a typo or a stale
+  // re-transcription -- fail loudly before writing anything rather than let
+  // it silently vanish (CAP-4).
+  const realIds = new Set([...controls, ...enhancements].map((e) => e.id));
+  for (const key of Object.keys(crosswalkData)) {
+    if (!realIds.has(key)) {
+      throw new Error(`data/crosswalk.json has entry "${key}" with no matching catalog id`);
+    }
+  }
+
   const meta = {
     catalogTitle: catalog.metadata.title,
     catalogVersion: catalog.metadata.version,
     oscalVersion: catalog.metadata['oscal-version'],
     lastModified: catalog.metadata['last-modified'],
-    // CAP-4 is not built yet; AD-5 wants the field present so BaseLayout has
-    // one shape to render against once the crosswalk is transcribed.
-    crosswalkTranscribedAt: null,
+    // The date this ISO 27001 crosswalk transcription was verified (CAP-4).
+    crosswalkTranscribedAt: CROSSWALK_TRANSCRIBED_AT,
     counts: {
       families: families.length,
       controls: controls.length,
@@ -543,6 +595,7 @@ function verify(result, warnings) {
   const STUB = {
     slug: null, baselines: [], kind: null, enhancementSlugs: [], parentSlug: null,
     incorporatedInto: [], withdrawn: null, statement: [{ label: null, prose: '', children: [] }], related: [],
+    crosswalk: [],
   };
   const fixture = (id) => {
     const entry = byId.get(id);
@@ -722,7 +775,26 @@ function verify(result, warnings) {
     meta.lastModified,
     readCatalog(MASTER_FILE).metadata['last-modified'],
   );
-  eq('crosswalkTranscribedAt is null until CAP-4', meta.crosswalkTranscribedAt, null);
+  eq('crosswalkTranscribedAt is the real transcription date (CAP-4)', meta.crosswalkTranscribedAt, CROSSWALK_TRANSCRIBED_AT);
+
+  console.log('ISO 27001 crosswalk (CAP-4)');
+  eq('ac-1 crosswalk', fixture('ac-1').crosswalk, [
+    '5.2', '5.3', '7.5.1', '7.5.2', '7.5.3', 'A.5.1', 'A.5.2', 'A.5.4', 'A.5.15', 'A.5.31',
+    'A.5.36', 'A.5.37',
+  ]);
+  eq('ca-1 crosswalk, asterisks preserved verbatim', fixture('ca-1').crosswalk, [
+    '5.2', '5.3', '7.5.1', '7.5.2', '7.5.3', '9.2.2*', '9.3.1*', 'A.5.1', 'A.5.2', 'A.5.4',
+    'A.5.31', 'A.5.36', 'A.5.37',
+  ]);
+  eq('ia-13 has no crosswalk entry (postdates NIST\'s mapping doc)', fixture('ia-13').crosswalk, []);
+  eq('sa-24 has no crosswalk entry (postdates NIST\'s mapping doc)', fixture('sa-24').crosswalk, []);
+  eq('ac-13 (withdrawn, NIST\'s own "---") has an empty crosswalk', fixture('ac-13').crosswalk, []);
+  eq('ac-10 (an ordinary "None" row) has an empty crosswalk', fixture('ac-10').crosswalk, []);
+  // NIST's mapping doc has no Table 2 (enhancement-specific) rows in this
+  // transcription, so every Enhancement's crosswalk is empty today -- this
+  // pins that current reality rather than asserting inheritance, since
+  // AD-2's per-entry rule means there is nothing to inherit from either way.
+  eq('an Enhancement has its own (currently empty) crosswalk, not its parent\'s', fixture('ac-2.1').crosswalk, []);
 
   console.log('Committed output (AD-2: the repo is the source of truth)');
   const planned = plannedFiles(result).byPath;
@@ -776,6 +848,44 @@ function verify(result, warnings) {
   eq(
     'missing input left the real committed collection byte-for-byte untouched',
     [...afterContents].filter(([path, contents]) => beforeContents.get(path) !== contents),
+    [],
+  );
+
+  // Matrix row (CAP-4): a data/crosswalk.json key with no matching real id
+  // must abort loudly and write nothing -- "must not silently vanish" has no
+  // automated regression protection unless a real orphan key is actually
+  // driven through ingest() once. Sandboxed the same way as the missing-input
+  // guard above: real raw OSCAL, a throwaway CONTENT_DIR, and here also a
+  // throwaway crosswalk file so the real data/crosswalk.json is never touched.
+  console.log('Crosswalk orphan-key guard (CAP-4)');
+  const orphanCrosswalkFile = join(mkdtempSync(join(tmpdir(), 'ingest-orphan-crosswalk-')), 'crosswalk.json');
+  writeFileSync(orphanCrosswalkFile, JSON.stringify({ 'xx-999': ['A.0.0'] }), 'utf8');
+  const orphanContentDir = mkdtempSync(join(tmpdir(), 'ingest-orphan-content-'));
+  const beforeOrphanContents = new Map(existingFiles());
+  const orphanChild = spawnSync(
+    process.execPath,
+    [...process.execArgv, fileURLToPath(import.meta.url)],
+    {
+      env: {
+        ...process.env,
+        INGEST_CROSSWALK_FILE: orphanCrosswalkFile,
+        INGEST_CONTENT_DIR: orphanContentDir,
+      },
+      encoding: 'utf8',
+    },
+  );
+  rmSync(dirname(orphanCrosswalkFile), { recursive: true, force: true });
+  rmSync(orphanContentDir, { recursive: true, force: true });
+  eq('orphan crosswalk key exits non-zero', orphanChild.status, 1);
+  check(
+    'orphan crosswalk key names the bad key',
+    /data\/crosswalk\.json has entry "xx-999" with no matching catalog id/.test(orphanChild.stderr ?? ''),
+    JSON.stringify((orphanChild.stderr ?? '').slice(0, 160)),
+  );
+  const afterOrphanContents = existingFiles();
+  eq(
+    'orphan crosswalk key left the real committed collection byte-for-byte untouched',
+    [...afterOrphanContents].filter(([path, contents]) => beforeOrphanContents.get(path) !== contents),
     [],
   );
 

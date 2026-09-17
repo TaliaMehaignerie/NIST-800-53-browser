@@ -23,5 +23,6 @@
   ],
   "guidance": "Plans that are related to contingency plans include Business Continuity Plans, Disaster Recovery Plans, Critical Infrastructure Plans, Continuity of Operations Plans, Crisis Communications Plans, Insider Threat Implementation Plans, Data Breach Response Plans, Cyber Incident Response Plans, Breach Response Plans, and Occupant Emergency Plans.",
   "params": [],
-  "related": []
+  "related": [],
+  "crosswalk": []
 }

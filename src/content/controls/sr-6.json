@@ -37,5 +37,8 @@
   "related": [
     "sr-3",
     "sr-5"
+  ],
+  "crosswalk": [
+    "A.5.22"
   ]
 }

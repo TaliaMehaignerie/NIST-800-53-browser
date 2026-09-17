@@ -22,5 +22,6 @@
   ],
   "guidance": "Organizations establish recovery time and recovery point objectives as part of contingency planning. Configuration of the alternate storage site includes physical facilities and the systems supporting recovery operations that ensure accessibility and correct execution.",
   "params": [],
-  "related": []
+  "related": [],
+  "crosswalk": []
 }

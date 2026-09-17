@@ -85,3 +85,15 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-enhancement-toggle.md`
   summary: No automated test exercises `EnhancementItem`'s toggle/keyboard/deep-link-auto-expand logic — verified by hand against real build output (including the confirmed-real 157-enhancement no-statement case), not by a repeatable check.
   evidence: Real (blind-hunter/verification-gap), consistent with the identical gap already logged for Goal B and Goal C — the repo still has no test runner. Introducing one is a bigger decision than any single slice's scope.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-iso-crosswalk.md`
+  summary: `meta.crosswalkTranscribedAt` is a hardcoded date constant in `ingest.mjs` with nothing forcing it to be bumped/reviewed if `data/crosswalk.json` is edited later (e.g. fixing a transcription error) — the date and the data it describes live in two files with no automated check that they're kept in sync.
+  evidence: Real (blind-hunter), but this matches an explicit spec decision (Boundaries: "an explicit committed value... not derived from file mtime or git history") rather than an oversight. Worth a process note (bump the constant whenever `data/crosswalk.json` changes) rather than a code fix.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-iso-crosswalk.md`
+  summary: `content.config.ts`'s `crosswalk: z.array(z.string())` has no format constraint (e.g. a regex for valid ISO clause shapes) — a future manual edit to `data/crosswalk.json` with a stray-whitespace or malformed code would pass schema validation silently.
+  evidence: Real (blind-hunter), but `scripts/ingest.mjs`'s new `readCrosswalk()` (added during this review) already rejects non-string/non-array values at the ingestion layer, which is the only place `data/crosswalk.json` is read — the Zod schema is a second, redundant validation layer, not the sole guard. Worth adding if `crosswalk` data is ever produced by a path other than `ingest.mjs`.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-iso-crosswalk.md`
+  summary: The ISO Crosswalk pills render as bare `<span>` elements with no list semantics (`<ul>/<li>`) or `aria-label` describing the group, and the partial-match legend has no `aria-describedby` tying it back to which specific pill(s) triggered it.
+  evidence: Real (blind-hunter), but this is a static, non-interactive list (no keyboard/focus requirement applies), and EXPERIENCE.md's Accessibility Floor doesn't require list semantics for this case — both the code-only rendering and the literal-asterisk-plus-legend treatment were explicit user decisions this session, not oversights. Worth polishing if it reads as a real a11y gap in practice.

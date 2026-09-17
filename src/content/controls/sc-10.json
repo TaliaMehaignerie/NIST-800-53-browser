@@ -35,5 +35,8 @@
   "related": [
     "ac-17",
     "sc-23"
+  ],
+  "crosswalk": [
+    "A.8.20"
   ]
 }

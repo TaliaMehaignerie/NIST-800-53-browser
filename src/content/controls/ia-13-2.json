@@ -20,5 +20,6 @@
   ],
   "guidance": "This includes verification of digital signatures protecting identity assertions and access tokens, as well as included metadata. Metadata includes information about the access request such as information unique to user, system or information resource being accessed, or the transaction itself such as time. Protected system and information resources could include connected networks, applications, and APIs.",
   "params": [],
-  "related": []
+  "related": [],
+  "crosswalk": []
 }

@@ -121,6 +121,15 @@ const controls = defineCollection({
      * Control's `slug`, never its `id`.
      */
     related: z.array(z.string()),
+    /**
+     * ISO/IEC 27001:2022 clause codes this entry maps to (CAP-4), as literal
+     * strings straight from `data/crosswalk.json` -- asterisk preserved
+     * verbatim (`"9.2.2*"`) for a NIST-flagged partial-intent match. Empty
+     * when no mapping is published, or this id isn't in NIST's crosswalk doc
+     * (e.g. `ia-13`, `sa-24`, which postdate it). Computed per-entry, not
+     * inherited from parent to Enhancement (mirrors `baselines`, AD-2).
+     */
+    crosswalk: z.array(z.string()),
   }),
 });
 
@@ -162,7 +171,7 @@ const meta = defineCollection({
     oscalVersion: z.string(),
     /** Catalog `last-modified`, verbatim from OSCAL metadata (ISO 8601). */
     lastModified: z.string(),
-    /** Null until the CAP-4 ISO 27001 crosswalk is hand-transcribed. */
+    /** Date the ISO 27001 crosswalk (CAP-4) was hand-transcribed and verified; null before that. */
     crosswalkTranscribedAt: z.string().nullable(),
     counts: z.object({
       families: z.number().int(),
