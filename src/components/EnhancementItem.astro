@@ -31,10 +31,11 @@ interface Props {
   incorporatedInto: string[];
   baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
   statement: StatementNode[];
+  guidance: string | null;
   params: Param[];
 }
 
-const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, params } = Astro.props;
+const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, guidance, params } = Astro.props;
 ---
 
 {
@@ -75,6 +76,12 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, p
   {statement.length > 0 && (
     <div class="enhancement-item__statement" id={`${slug}-statement`} hidden>
       <StatementTree nodes={statement} params={params} />
+      {guidance && (
+        <div class="enhancement-item__discussion">
+          <p class="enhancement-item__discussion-label">Discussion</p>
+          <p>{guidance}</p>
+        </div>
+      )}
     </div>
   )}
 </div>
@@ -143,6 +150,23 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, p
 
   .enhancement-item__statement {
     margin-top: 12px;
+  }
+
+  .enhancement-item__discussion {
+    margin-top: 12px;
+  }
+
+  .enhancement-item__discussion-label {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .enhancement-item__discussion p:not(.enhancement-item__discussion-label) {
+    color: var(--color-ink-secondary);
+    margin: 0;
   }
 </style>
 

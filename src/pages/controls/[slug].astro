@@ -27,6 +27,7 @@ const {
   incorporatedInto,
   baselines,
   statement,
+  guidance,
   enhancementSlugs,
   crosswalk,
   familyCode,
@@ -86,6 +87,13 @@ const enhancements = (
       </div>
     )}
 
+    {guidance && (
+      <section class="control-detail-card__discussion">
+        <h2>Discussion</h2>
+        <p>{guidance}</p>
+      </section>
+    )}
+
     {enhancements.length > 0 && (
       <section class="control-detail-card__enhancements">
         <h2>Enhancements</h2>
@@ -100,6 +108,7 @@ const enhancements = (
                 incorporatedInto={e.data.incorporatedInto}
                 baselines={e.data.baselines}
                 statement={e.data.statement}
+                guidance={e.data.guidance}
                 params={e.data.params}
               />
             ))
@@ -159,8 +168,17 @@ const enhancements = (
   }
 
   .control-detail-card__enhancements h2,
-  .control-detail-card__crosswalk h2 {
+  .control-detail-card__crosswalk h2,
+  .control-detail-card__discussion h2 {
     font-size: 1.1em;
+  }
+
+  .control-detail-card__discussion {
+    margin-bottom: 24px;
+  }
+
+  .control-detail-card__discussion p {
+    color: var(--color-ink-secondary);
   }
 
   .control-detail-card__crosswalk-empty {
