@@ -245,3 +245,23 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
   summary: `profile.imports[0].href` is a bare filename (e.g. `NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json`) with no path or URI scheme — unclear how external OSCAL tooling would resolve it outside this project's own `data/raw/` layout.
   evidence: Explicit spec decision (Boundaries: "references the actual ingested source filename... truthful provenance, never a fabricated or unverified live URL"), not an oversight — flagged by two reviewers as worth double-checking, but the spec deliberately chose traceable-but-not-necessarily-resolvable provenance over inventing an unverified live URL. Revisit if this tool ever needs to interoperate with external OSCAL tooling that requires a resolvable import.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
+  summary: `OdpDatasetEntry` is declared as two independent, hand-copied interfaces (`odp-dataset.json.ts` and `odpCluster.ts`) rather than one shared type — this story had to add `controlTitle`/`statementProse` to both by hand, and nothing enforces they stay in sync on the next change.
+  evidence: Real (blind-hunter), pre-existing since story 2 (not introduced by this story), which this story's own diff extended consistently. Worth consolidating into one shared type the endpoint imports from `odpCluster.ts` (or a third shared module) next time either file is touched.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
+  summary: `findStatementProse` re-walks a control's entire statement tree from scratch for every one of its params, rather than building one paramId→prose map per control and doing O(1) lookups.
+  evidence: Real (blind-hunter) but negligible at real scale (324 controls, small statement trees, run once at build time, not per-request). Worth a per-control map if the corpus grows substantially or build time becomes a concern.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
+  summary: A divergent-cluster batch row's fallback sentence is rendered with app-generated commentary concatenated directly into the same text node as the actual NIST prose (`"${prose} (shown for ${controlId}; wording varies...)"`), rather than as a visually/semantically separate element.
+  evidence: Real (blind-hunter), a presentation nitpick with no functional effect — the attribution is still readable and accurate. Worth splitting into two elements (quoted sentence + a separate meta-text attribution) if this reads as muddled in practice.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
+  summary: The batch row's covered-control list renders as one comma-joined `<p>` rather than a real `<ul>/<li>` list, so assistive tech won't announce it as "list of N items."
+  evidence: Real (blind-hunter), matches the same accessibility-floor-not-required pattern already logged for the ISO crosswalk pills (bare `<span>`s, explicit prior decision) — an enhancement beyond the established floor. Also relevant to story 6: the toggle's expand/collapse state isn't preserved across a future filter-driven re-render, worth handling together when that story adds row rebuilding.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
+  summary: `statementProse` is duplicated verbatim per param entry in `odp-dataset.json` rather than deduplicated — a cluster of 18 controls sharing one identical sentence stores that full sentence 18 times, adding to the already-measured +31.6 KB gzipped size cost.
+  evidence: Real (blind-hunter), but the size cost was already measured and explicitly accepted in this story's own Design Notes before implementation — a further optimization (e.g. a lookup table keyed by sentence hash), not a correctness gap. Worth it only if dataset size becomes a real complaint.

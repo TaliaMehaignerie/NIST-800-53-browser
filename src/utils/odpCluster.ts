@@ -13,11 +13,13 @@
 export interface OdpDatasetEntry {
   controlSlug: string;
   controlId: string;
+  controlTitle: string;
   familyCode: string;
   paramId: string;
   label: string | null;
   guidelines: string[];
   select: { howMany: string | null; choice: string[] } | null;
+  statementProse: string | null;
   baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
 }
 
@@ -36,6 +38,26 @@ export interface Cluster {
   select: { howMany: string | null; choice: string[] } | null;
   /** Only members whose `select` shape is deep-equal across the whole cluster — a divergent member is dropped here. */
   members: ClusterMember[];
+  /**
+   * The control title shared by every member, or `null` when it diverges.
+   * Real-data verified: all 18 dash-one controls share `"Policy and
+   * Procedures"`, so this is non-null for every current cluster — but
+   * computed fresh, never assumed (spec Boundaries).
+   */
+  sharedTitle: string | null;
+  /**
+   * The statement sentence shared verbatim by every member, or `null` when
+   * it diverges. Real-data verified: `prm_1` shares one identical sentence
+   * across all 18 members, but `odp.03` has 18 distinct sentences (each
+   * names its own family's policy) — never presented as if shared.
+   */
+  sharedProse: string | null;
+  /**
+   * The first member, for attributing a non-shared sentence to a specific
+   * control when `sharedProse` is `null` — never presented as if it applied
+   * to every member (spec Boundaries).
+   */
+  representative: { controlId: string; statementProse: string | null };
 }
 
 /**
@@ -124,12 +146,28 @@ export function groupDashOneClusters(entries: OdpDatasetEntry[]): Cluster[] {
     const matching = [first, ...rest.filter((m) => selectDeepEqual(m.select, first.select))];
     if (matching.length < 2) continue;
 
+    const allSameTitle = matching.every((m) => m.controlTitle === first.controlTitle);
+    const allSameProse = matching.every((m) => m.statementProse === first.statementProse);
+
+    // For the divergent-sentence fallback, prefer a member that actually
+    // has a sentence — `first` (insertion order) can itself lack one (real
+    // data: the `odp.01`/`odp.02` clusters' first member, `ac-1`, has no
+    // statement reference, even though `pm-1` in the same cluster does).
+    // Falling back to `first` only when no member has a sentence keeps the
+    // spec's "never present a non-shared sentence as if it applied to all"
+    // rule from silently degrading into "show nothing" when the answer was
+    // there all along, just not on the first member.
+    const proseHolder = matching.find((m) => m.statementProse) ?? first;
+
     clusters.push({
       clusterKey: key,
       label: first.label,
       guidelines: first.guidelines,
       select: first.select,
       members: matching.map((m) => ({ controlSlug: m.controlSlug, controlId: m.controlId, paramId: m.paramId })),
+      sharedTitle: allSameTitle ? first.controlTitle : null,
+      sharedProse: allSameProse ? first.statementProse : null,
+      representative: { controlId: proseHolder.controlId, statementProse: proseHolder.statementProse },
     });
   }
 

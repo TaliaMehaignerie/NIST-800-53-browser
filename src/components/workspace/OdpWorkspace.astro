@@ -277,6 +277,35 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     color: var(--color-ink-primary);
   }
 
+  .odp-row__statement {
+    margin: 0 0 8px;
+    color: var(--color-ink-primary);
+    font-style: italic;
+  }
+
+  .odp-row__shared-title {
+    margin: 0 0 8px;
+    color: var(--color-ink-secondary);
+    font-family: var(--font-meta);
+    font-size: 13px;
+  }
+
+  .odp-row__member-toggle {
+    cursor: pointer;
+  }
+
+  .odp-row__member-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-row__member-list {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-ink-secondary);
+  }
+
   .odp-row__guidelines {
     margin: 0 0 12px;
     padding-left: 18px;
@@ -674,7 +703,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
     const controlSpan = document.createElement('span');
     controlSpan.className = 'odp-row__control-id';
-    controlSpan.textContent = entry.controlId.toUpperCase();
+    controlSpan.textContent = `${entry.controlId.toUpperCase()} — ${entry.controlTitle}`;
     header.appendChild(controlSpan);
 
     const paramSpan = document.createElement('span');
@@ -688,6 +717,16 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     header.appendChild(statusLabel);
 
     row.appendChild(header);
+
+    // The statement sentence this param sits in, resolved at build time
+    // (spec Boundaries) — omitted entirely when null, never an empty block
+    // (399 of 1600 real params have no statement reference at all).
+    if (entry.statementProse) {
+      const proseP = document.createElement('p');
+      proseP.className = 'odp-row__statement';
+      proseP.textContent = entry.statementProse;
+      row.appendChild(proseP);
+    }
 
     if (entry.label) {
       const labelP = document.createElement('p');
@@ -837,10 +876,19 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     paramSpan.textContent = cluster.clusterKey;
     header.appendChild(paramSpan);
 
-    const countSpan = document.createElement('span');
-    countSpan.className = 'odp-row__param-id';
-    countSpan.textContent = `${cluster.members.length} dash-one controls`;
-    header.appendChild(countSpan);
+    // Collapsed-by-default list of covered control ids (spec Tasks &
+    // Acceptance) — the count itself is the disclosure trigger, following
+    // the same role/aria-expanded pattern as EnhancementItem.astro.
+    const memberIds = cluster.members.map((m) => m.controlId.toUpperCase());
+    const memberListId = `odp-batch-members-${cluster.clusterKey}`;
+    const countToggle = document.createElement('span');
+    countToggle.className = 'odp-row__param-id odp-row__member-toggle';
+    countToggle.textContent = `${cluster.members.length} dash-one controls`;
+    countToggle.setAttribute('role', 'button');
+    countToggle.setAttribute('tabindex', '0');
+    countToggle.setAttribute('aria-expanded', 'false');
+    countToggle.setAttribute('aria-controls', memberListId);
+    header.appendChild(countToggle);
 
     const matchLabel = document.createElement('span');
     matchLabel.className = 'odp-row__match-label';
@@ -848,6 +896,49 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     header.appendChild(matchLabel);
 
     row.appendChild(header);
+
+    const memberList = document.createElement('p');
+    memberList.id = memberListId;
+    memberList.className = 'odp-row__member-list';
+    memberList.textContent = memberIds.join(', ');
+    memberList.hidden = true;
+    row.appendChild(memberList);
+
+    function toggleMemberList() {
+      const expanded = countToggle.getAttribute('aria-expanded') === 'true';
+      countToggle.setAttribute('aria-expanded', String(!expanded));
+      memberList.hidden = expanded;
+    }
+    countToggle.addEventListener('click', toggleMemberList);
+    countToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMemberList();
+      }
+    });
+
+    // Shared title/sentence only when identical across every member (spec
+    // Boundaries) — a divergent cluster (e.g. `odp.03`'s 18 distinct
+    // sentences) shows one member's sentence explicitly attributed to that
+    // control, never presented as if it applied to all.
+    if (cluster.sharedTitle) {
+      const titleP = document.createElement('p');
+      titleP.className = 'odp-row__shared-title';
+      titleP.textContent = cluster.sharedTitle;
+      row.appendChild(titleP);
+    }
+
+    if (cluster.sharedProse) {
+      const proseP = document.createElement('p');
+      proseP.className = 'odp-row__statement';
+      proseP.textContent = cluster.sharedProse;
+      row.appendChild(proseP);
+    } else if (cluster.representative.statementProse) {
+      const proseP = document.createElement('p');
+      proseP.className = 'odp-row__statement';
+      proseP.textContent = `${cluster.representative.statementProse} (shown for ${cluster.representative.controlId.toUpperCase()}; wording varies by control in this cluster)`;
+      row.appendChild(proseP);
+    }
 
     if (cluster.label) {
       const labelP = document.createElement('p');
