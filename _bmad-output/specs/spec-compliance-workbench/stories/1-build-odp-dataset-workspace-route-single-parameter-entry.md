@@ -93,33 +93,33 @@ context: ['{project-root}/_bmad-output/specs/spec-compliance-workbench/SPEC.md',
 **Decision flow (AD-9)**
 
 - Entry point: fetches the dataset, filters to the current baseline, and builds one row per parameter — start here to see the whole flow.
-  [`OdpWorkspace.astro:421`](../../../src/components/workspace/OdpWorkspace.astro#L421)
+  [`OdpWorkspace.astro`](../../../../src/components/workspace/OdpWorkspace.astro) (`init()`; story 2 has since extended this file, so line numbers below are approximate)
 
 - Confirm/Override validation and save, including the generic failure message covering both rejection reasons (empty rationale or a failed `localStorage` write).
-  [`OdpWorkspace.astro:373`](../../../src/components/workspace/OdpWorkspace.astro#L373)
+  [`OdpWorkspace.astro`](../../../../src/components/workspace/OdpWorkspace.astro) (`handleAction`)
 
 **Persistence invariants (AD-10)**
 
 - Sole write path: rejects `overridden` without a non-empty rationale, and now returns `false` (not `true`) when the underlying write itself fails.
-  [`odpStore.ts:118`](../../../src/utils/odpStore.ts#L118)
+  [`odpStore.ts:118`](../../../../src/utils/odpStore.ts#L118)
 
 - Read-path shape validation: mirrors the write-path rationale invariant so a hand-edited or corrupted `overridden` entry with no rationale can't pass validation.
-  [`odpStore.ts:32`](../../../src/utils/odpStore.ts#L32)
+  [`odpStore.ts:32`](../../../../src/utils/odpStore.ts#L32)
 
 - Corrupt/missing-blob-safe read — never throws, always falls back to empty state.
-  [`odpStore.ts:63`](../../../src/utils/odpStore.ts#L63)
+  [`odpStore.ts:63`](../../../../src/utils/odpStore.ts#L63)
 
 **Dataset source (AD-8)**
 
 - Build-time endpoint: flattens `getCollection('controls')` into one entry per non-withdrawn param instance — the sole data source for the workspace.
-  [`odp-dataset.json.ts:20`](../../../src/pages/odp-dataset.json.ts#L20)
+  [`odp-dataset.json.ts:20`](../../../../src/pages/odp-dataset.json.ts#L20)
 
 **Routing (AD-9)**
 
 - One route, one mount point, all four baselines built — this file intentionally does nothing else.
-  [`[baseline].astro:12`](../../../src/pages/workspace/%5Bbaseline%5D.astro#L12)
+  [`[baseline].astro:12`](../../../../src/pages/workspace/%5Bbaseline%5D.astro#L12)
 
 **Supporting**
 
 - New base-aware URL builders (`workspaceUrl`, `odpDatasetUrl`) added alongside the existing pattern (AD-4).
-  [`url.ts:37`](../../../src/utils/url.ts#L37)
+  [`url.ts:37`](../../../../src/utils/url.ts#L37)

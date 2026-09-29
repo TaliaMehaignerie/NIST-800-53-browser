@@ -157,3 +157,35 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
   summary: Multi-select fields (`select.howMany === 'one-or-more'`) render as a bare native `<select multiple>` with no instructional text on how to select more than one option (e.g. Ctrl/Cmd-click), a common usability trap.
   evidence: Real (blind-hunter), pure UX polish not covered by any spec requirement. Cheap to add (a short hint line) whenever this component is next touched.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: A batch cluster row's "N/total controls match this value" count doesn't distinguish an undecided member (no decision yet) from a diverged one (decided differently) — both lower the displayed ratio identically.
+  evidence: Real (blind-hunter), but no acceptance criterion requires the distinction, and the two ACs that do exercise the count (all-confirmed, and one-override-drops-to-17/18) are unambiguous either way. Worth splitting into two counts ("N confirmed, M diverged") if user feedback finds the merged ratio confusing.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: When `groupDashOneClusters` excludes a member for diverging `select` shape (the real `sc-1`/`odp.03` case), the batch row gives no visual cue that a member was excluded — only a bare `17 dash-one controls` count, no different in style from any other cluster's `18`.
+  evidence: Real (blind-hunter), but the spec's acceptance criterion only requires the exclusion to happen correctly and `sc-1`'s own row to still render individually below — not that the batch UI announce the exclusion. Worth a small note ("1 control excluded — differing options") if this proves confusing in practice.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: No `aria-live`/`role="status"` on the batch row's match-count label, so a screen-reader user isn't notified when it updates after a Confirm/Override.
+  evidence: Real (blind-hunter), consistent with the same accessibility-floor gap already logged for story 1 (no live-region announcement of a saved decision) — an enhancement beyond the established floor, not a regression from it.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: `odpCluster.ts`'s `clusterKey()` silently no-ops (returns the raw `paramId` unchanged) if a `paramId` doesn't actually start with the expected `^<familyCode>-1_`/`^<familyCode>-01_` prefix, rather than flagging a data-integrity problem.
+  evidence: Real (blind-hunter/edge-case-hunter) but unreachable against real data today — every dash-one entry's `paramId` was verified to match the expected prefix pattern across all 9 clusters. Worth a loud failure if the ingested corpus's naming convention ever changes.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: `selectDeepEqual` (used to decide whether a member belongs in a cluster) compares `select.choice` order-sensitively, while `valuesMatch` (used for "does this member's stored value match the batch value") is deliberately order-independent — an inconsistency within the same file's design philosophy.
+  evidence: Real (blind-hunter), but no real dash-one param currently has the same choice set in a different order across members (verified: the only real divergence, `sc-1`'s `odp.03`, differs by exact text, not order) — a plausible future data shape, not a demonstrated one.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: `computeClusterMatch`'s tie-break when two distinct values tie for the largest group is undocumented and unflagged — the batch row pre-fills whichever value happened to appear first among members, presented identically to a genuine majority.
+  evidence: Real (edge-case-hunter), a real but narrow window (only mid-way through manually deciding a cluster one-by-one, before any batch action has run). Worth returning an explicit "no majority" signal if this proves confusing in practice.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: A batch cluster row shows only a member count ("18 dash-one controls"), not the actual control IDs it covers — a user confirming or overriding a batched value can't see the exact scope from the batch UI itself without cross-referencing the individual rows below.
+  evidence: Real (blind-hunter/edge-case-hunter), pure UX polish not required by any acceptance criterion. Worth a "AC-1, AU-1, ... (show all)" expandable list if this proves too opaque in practice.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
+  summary: `clusterKey()`'s `new RegExp(\`^${fc}-0?1_\`)` interpolates `familyCode` into a regex without escaping regex metacharacters.
+  evidence: Real (edge-case-hunter) but `familyCode` is always one of 20 fixed uppercase letter-pairs from the ingested catalog (verified, no metacharacters possible) — theoretical hardening against input that can't occur today, consistent with similarly-scoped deferred items already logged for the ingestion pipeline.

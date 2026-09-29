@@ -29,6 +29,15 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   <p class="odp-workspace__status" data-odp-loading>Loading parameters…</p>
   <p class="odp-workspace__status" data-odp-empty hidden>No organization-defined parameters for this baseline.</p>
 
+  <div class="odp-workspace__batch" data-odp-batch hidden>
+    <h2 class="odp-workspace__batch-heading">Batch entry — dash-one clusters</h2>
+    <p class="odp-workspace__batch-intro">
+      These parameters share one value across every dash-one policy/procedure control. Set it once here — each
+      control's own row below still shows and can independently override its own decision.
+    </p>
+    <div class="odp-workspace__rows" data-odp-batch-rows></div>
+  </div>
+
   <div class="odp-workspace__rows" data-odp-rows></div>
 </section>
 
@@ -53,6 +62,25 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     flex-direction: column;
     gap: 12px;
     margin-top: 16px;
+  }
+
+  .odp-workspace__batch {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border-hairline);
+  }
+
+  .odp-workspace__batch-heading {
+    margin: 0 0 4px;
+    font-size: 1.1em;
+    color: var(--color-ink-primary);
+  }
+
+  .odp-workspace__batch-intro {
+    margin: 0;
+    color: var(--color-ink-secondary);
+    font-size: 0.9em;
+    max-width: 70ch;
   }
 </style>
 
@@ -99,6 +127,16 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
   .odp-row__status-label[data-status='overridden'] {
     color: var(--color-baseline-moderate);
+  }
+
+  .odp-row__match-label {
+    margin-left: auto;
+    font-family: var(--font-meta);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: var(--rounded-full);
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-secondary);
   }
 
   .odp-row__label {
@@ -190,17 +228,12 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 <script>
   import { getDecision, setDecision, type Decision, type DecisionStatus } from '../../utils/odpStore';
   import { odpDatasetUrl } from '../../utils/url';
-
-  interface OdpDatasetEntry {
-    controlSlug: string;
-    controlId: string;
-    familyCode: string;
-    paramId: string;
-    label: string | null;
-    guidelines: string[];
-    select: { howMany: string | null; choice: string[] } | null;
-    baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
-  }
+  import {
+    groupDashOneClusters,
+    computeClusterMatch,
+    type Cluster,
+    type OdpDatasetEntry,
+  } from '../../utils/odpCluster';
 
   const STATUS_TEXT: Record<DecisionStatus, string> = {
     'unreviewed-default': 'Unreviewed',
@@ -212,39 +245,47 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     return `${entry.controlSlug}:${entry.paramId}`;
   }
 
-  function buildValueField(entry: OdpDatasetEntry, current: string | string[] | undefined): HTMLElement {
+  type ValueFieldSelect = OdpDatasetEntry['select'];
+
+  // Shared by an individual param row and a batch cluster row — same
+  // free-text/select input shape either way (spec Code Map: the batch row
+  // reuses this unchanged).
+  function buildValueField(
+    fieldId: string,
+    select: ValueFieldSelect,
+    current: string | string[] | undefined,
+  ): HTMLElement {
     const field = document.createElement('div');
     field.className = 'odp-row__field';
     const label = document.createElement('label');
-    const fieldId = `odp-value-${entry.controlSlug}-${entry.paramId}`;
     label.setAttribute('for', fieldId);
     label.textContent = 'Value';
     field.appendChild(label);
 
-    if (entry.select) {
-      const isMulti = entry.select.howMany === 'one-or-more';
-      const select = document.createElement('select');
-      select.className = 'odp-row__value-input';
-      select.id = fieldId;
-      select.dataset.odpValueInput = 'true';
+    if (select) {
+      const isMulti = select.howMany === 'one-or-more';
+      const selectEl = document.createElement('select');
+      selectEl.className = 'odp-row__value-input';
+      selectEl.id = fieldId;
+      selectEl.dataset.odpValueInput = 'true';
       if (isMulti) {
-        select.multiple = true;
-        select.size = Math.min(entry.select.choice.length, 6) || 1;
+        selectEl.multiple = true;
+        selectEl.size = Math.min(select.choice.length, 6) || 1;
       } else {
         const placeholder = document.createElement('option');
         placeholder.value = '';
         placeholder.textContent = '— choose —';
-        select.appendChild(placeholder);
+        selectEl.appendChild(placeholder);
       }
       const currentValues = Array.isArray(current) ? current : current ? [current] : [];
-      for (const choice of entry.select.choice) {
+      for (const choice of select.choice) {
         const option = document.createElement('option');
         option.value = choice;
         option.textContent = choice;
         if (currentValues.includes(choice)) option.selected = true;
-        select.appendChild(option);
+        selectEl.appendChild(option);
       }
-      field.appendChild(select);
+      field.appendChild(selectEl);
     } else {
       const input = document.createElement('input');
       input.type = 'text';
@@ -258,21 +299,42 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     return field;
   }
 
-  function readValue(entry: OdpDatasetEntry, row: HTMLElement): string | string[] {
+  function readValue(select: ValueFieldSelect, row: HTMLElement): string | string[] {
     const input = row.querySelector('[data-odp-value-input]') as HTMLInputElement | HTMLSelectElement;
-    if (entry.select) {
-      const select = input as HTMLSelectElement;
-      if (entry.select.howMany === 'one-or-more') {
-        return Array.from(select.selectedOptions).map((o) => o.value);
+    if (select) {
+      const selectEl = input as HTMLSelectElement;
+      if (select.howMany === 'one-or-more') {
+        return Array.from(selectEl.selectedOptions).map((o) => o.value);
       }
-      return select.value;
+      return selectEl.value;
     }
     return (input as HTMLInputElement).value;
+  }
+
+  // Re-applies a saved value to an already-rendered field, used to keep an
+  // individual row's display in sync right after a batch save touches it
+  // (spec manual check: no reload needed to see the fan-out).
+  function setFieldValue(select: ValueFieldSelect, row: HTMLElement, value: string | string[]): void {
+    const input = row.querySelector('[data-odp-value-input]') as HTMLInputElement | HTMLSelectElement;
+    if (!input) return;
+    if (select) {
+      const values = Array.isArray(value) ? value : value ? [value] : [];
+      Array.from((input as HTMLSelectElement).options).forEach((option) => {
+        option.selected = values.includes(option.value);
+      });
+    } else {
+      (input as HTMLInputElement).value = typeof value === 'string' ? value : '';
+    }
   }
 
   function isValueEmpty(value: string | string[]): boolean {
     return Array.isArray(value) ? value.length === 0 : value.trim().length === 0;
   }
+
+  // Individual rows register themselves here so a batch save (below) can
+  // refresh an already-rendered row's display in place — no reload needed
+  // to see the fan-out (spec manual checks).
+  const rowRegistry = new Map<string, { row: HTMLElement; select: ValueFieldSelect }>();
 
   function buildRow(entry: OdpDatasetEntry, baseline: string): HTMLElement {
     const key = decisionKey(entry);
@@ -320,7 +382,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       row.appendChild(list);
     }
 
-    row.appendChild(buildValueField(entry, existing?.value));
+    const fieldId = `odp-value-${entry.controlSlug}-${entry.paramId}`;
+    row.appendChild(buildValueField(fieldId, entry.select, existing?.value));
 
     const rationaleField = document.createElement('div');
     rationaleField.className = 'odp-row__field';
@@ -375,7 +438,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       error.hidden = true;
       error.textContent = '';
 
-      const value = readValue(entry, row);
+      const value = readValue(entry.select, row);
       const rationale = (row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement).value;
 
       if (isValueEmpty(value)) {
@@ -405,6 +468,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     confirmBtn.addEventListener('click', () => handleAction('confirmed'));
     overrideBtn.addEventListener('click', () => handleAction('overridden'));
 
+    rowRegistry.set(key, { row, select: entry.select });
+
     return row;
   }
 
@@ -418,6 +483,172 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     });
   }
 
+  function refreshClusterMatch(matchLabel: HTMLElement, cluster: Cluster, baseline: string): void {
+    const currentValues = cluster.members.map((m) => getDecision(baseline, `${m.controlSlug}:${m.paramId}`)?.value);
+    const { matchCount, total } = computeClusterMatch(currentValues);
+    matchLabel.textContent = `${matchCount}/${total} controls match this value`;
+  }
+
+  // The batch row: one per dash-one cluster (spec Tasks & Acceptance). Reuses
+  // `buildValueField`/`readValue` for the same free-text/select input as an
+  // individual row, and loops `setDecision` once per member — never a
+  // combined or batch-tagged storage entry (AD-11). Reuses `setDecision`'s
+  // own override-requires-rationale rejection rather than reimplementing
+  // that check here.
+  function buildBatchRow(cluster: Cluster, baseline: string): HTMLElement {
+    const currentValues = cluster.members.map((m) => getDecision(baseline, `${m.controlSlug}:${m.paramId}`)?.value);
+    const { majorityValue } = computeClusterMatch(currentValues);
+
+    const row = document.createElement('article');
+    row.className = 'odp-row odp-row--batch';
+    row.dataset.odpClusterKey = cluster.clusterKey;
+
+    const header = document.createElement('header');
+    header.className = 'odp-row__header';
+
+    const paramSpan = document.createElement('span');
+    paramSpan.className = 'odp-row__param-id';
+    paramSpan.textContent = cluster.clusterKey;
+    header.appendChild(paramSpan);
+
+    const countSpan = document.createElement('span');
+    countSpan.className = 'odp-row__param-id';
+    countSpan.textContent = `${cluster.members.length} dash-one controls`;
+    header.appendChild(countSpan);
+
+    const matchLabel = document.createElement('span');
+    matchLabel.className = 'odp-row__match-label';
+    matchLabel.dataset.odpBatchMatch = 'true';
+    header.appendChild(matchLabel);
+
+    row.appendChild(header);
+
+    if (cluster.label) {
+      const labelP = document.createElement('p');
+      labelP.className = 'odp-row__label';
+      labelP.textContent = cluster.label;
+      row.appendChild(labelP);
+    }
+
+    if (cluster.guidelines.length > 0) {
+      const list = document.createElement('ul');
+      list.className = 'odp-row__guidelines';
+      for (const g of cluster.guidelines) {
+        const li = document.createElement('li');
+        li.textContent = g;
+        list.appendChild(li);
+      }
+      row.appendChild(list);
+    }
+
+    const fieldId = `odp-batch-value-${cluster.clusterKey}`;
+    row.appendChild(buildValueField(fieldId, cluster.select, majorityValue));
+
+    const rationaleField = document.createElement('div');
+    rationaleField.className = 'odp-row__field';
+    const rationaleLabel = document.createElement('label');
+    const rationaleId = `odp-batch-rationale-${cluster.clusterKey}`;
+    rationaleLabel.setAttribute('for', rationaleId);
+    rationaleLabel.textContent = 'Rationale (required to override)';
+    rationaleField.appendChild(rationaleLabel);
+    const rationaleInput = document.createElement('textarea');
+    rationaleInput.className = 'odp-row__rationale-input';
+    rationaleInput.id = rationaleId;
+    rationaleInput.dataset.odpRationaleInput = 'true';
+    rationaleInput.rows = 2;
+    rationaleField.appendChild(rationaleInput);
+    row.appendChild(rationaleField);
+
+    const errorP = document.createElement('p');
+    errorP.className = 'odp-row__error';
+    errorP.setAttribute('role', 'alert');
+    errorP.hidden = true;
+    errorP.dataset.odpError = 'true';
+    row.appendChild(errorP);
+
+    const actions = document.createElement('div');
+    actions.className = 'odp-row__actions';
+    actions.setAttribute('role', 'group');
+    actions.setAttribute('aria-label', `${cluster.clusterKey} batch decision`);
+
+    const confirmBtn = document.createElement('button');
+    confirmBtn.type = 'button';
+    confirmBtn.className = 'odp-row__action';
+    confirmBtn.dataset.odpAction = 'confirmed';
+    confirmBtn.textContent = 'Confirm';
+    actions.appendChild(confirmBtn);
+
+    const overrideBtn = document.createElement('button');
+    overrideBtn.type = 'button';
+    overrideBtn.className = 'odp-row__action';
+    overrideBtn.dataset.odpAction = 'overridden';
+    overrideBtn.textContent = 'Override';
+    actions.appendChild(overrideBtn);
+
+    row.appendChild(actions);
+
+    refreshClusterMatch(matchLabel, cluster, baseline);
+
+    function handleBatchAction(status: DecisionStatus) {
+      const error = row.querySelector('[data-odp-error]') as HTMLElement;
+      error.hidden = true;
+      error.textContent = '';
+
+      const value = readValue(cluster.select, row);
+      const rationale = (row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement).value;
+
+      if (isValueEmpty(value)) {
+        error.textContent = 'Enter or select a value before saving a decision.';
+        error.hidden = false;
+        return;
+      }
+
+      const decision: Decision = { value, status, rationale };
+
+      // One independent `setDecision` call per member (AD-11) — never a
+      // combined write. `setDecision`'s own rationale-required rejection is
+      // reused unmodified, and since `decision` is identical for every
+      // member, that specific rejection does fire for every call together
+      // (checked before any storage write). A *storage-layer* failure
+      // (`localStorage.setItem` throwing — quota exceeded, private mode) is
+      // not guaranteed atomic the same way: it can happen partway through
+      // the loop, after earlier members already wrote successfully. So on
+      // any failure, still resync the display for whichever members did
+      // succeed — never leave a row showing a stale value/status for a
+      // decision that's actually already been persisted.
+      const results = cluster.members.map((m) => ({
+        member: m,
+        ok: setDecision(baseline, `${m.controlSlug}:${m.paramId}`, decision),
+      }));
+
+      for (const { member, ok } of results) {
+        if (!ok) continue;
+        const key = `${member.controlSlug}:${member.paramId}`;
+        const registered = rowRegistry.get(key);
+        if (!registered) continue;
+        setFieldValue(registered.select, registered.row, value);
+        const memberRationaleInput = registered.row.querySelector(
+          '[data-odp-rationale-input]',
+        ) as HTMLTextAreaElement | null;
+        if (memberRationaleInput) memberRationaleInput.value = rationale;
+        applyStatus(registered.row, status);
+      }
+
+      if (!results.every((r) => r.ok)) {
+        error.textContent =
+          "Could not save this decision for every control. If you're overriding, check the rationale is filled in; otherwise your browser storage may be full or unavailable. Rows above now reflect what was actually saved.";
+        error.hidden = false;
+      }
+
+      refreshClusterMatch(matchLabel, cluster, baseline);
+    }
+
+    confirmBtn.addEventListener('click', () => handleBatchAction('confirmed'));
+    overrideBtn.addEventListener('click', () => handleBatchAction('overridden'));
+
+    return row;
+  }
+
   async function init() {
     const workspace = document.querySelector<HTMLElement>('[data-odp-workspace]');
     if (!workspace) return;
@@ -427,6 +658,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
     const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');
     const rowsContainer = workspace.querySelector<HTMLElement>('[data-odp-rows]');
+    const batchSection = workspace.querySelector<HTMLElement>('[data-odp-batch]');
+    const batchRowsContainer = workspace.querySelector<HTMLElement>('[data-odp-batch-rows]');
     if (!rowsContainer) return;
 
     let dataset: OdpDatasetEntry[];
@@ -453,8 +686,21 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       return;
     }
 
+    // Individual rows render for every entry, dash-one included, unchanged
+    // from story 1 — this is what keeps every fanned-out decision
+    // independently overridable (FR-5), regardless of clustering below.
     for (const entry of entries) {
       rowsContainer.appendChild(buildRow(entry, baselineValue));
+    }
+
+    // Clustering is computed at render time only, from this baseline's
+    // entries — never stored (AD-11).
+    const clusters = groupDashOneClusters(entries);
+    if (clusters.length > 0 && batchSection && batchRowsContainer) {
+      batchSection.hidden = false;
+      for (const cluster of clusters) {
+        batchRowsContainer.appendChild(buildBatchRow(cluster, baselineValue));
+      }
     }
   }
 
