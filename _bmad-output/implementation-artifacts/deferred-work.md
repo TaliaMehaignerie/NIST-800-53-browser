@@ -265,3 +265,19 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/5-parameter-control-and-statement-context.md`
   summary: `statementProse` is duplicated verbatim per param entry in `odp-dataset.json` rather than deduplicated — a cluster of 18 controls sharing one identical sentence stores that full sentence 18 times, adding to the already-measured +31.6 KB gzipped size cost.
   evidence: Real (blind-hunter), but the size cost was already measured and explicitly accepted in this story's own Design Notes before implementation — a further optimization (e.g. a lookup table keyed by sentence hash), not a correctness gap. Worth it only if dataset size becomes a real complaint.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/6-split-workspace-into-views.md`
+  summary: When a row is removed from the Individual view by the unreviewed-only filter (after a confirm/override), focus isn't moved anywhere — it silently falls back to `<body>` for keyboard/screen-reader users.
+  evidence: Real (blind-hunter), an accessibility enhancement beyond the established floor (no other interaction in this component moves focus after a DOM removal either). Worth moving focus to the next remaining row or a status message if this proves disorienting in practice.
+  
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/6-split-workspace-into-views.md`
+  summary: Landing directly on the Dashboard or Batch view (via the tab, not a URL) leaves any stale `family`/`unreviewed` query params sitting unused in the address bar instead of being cleared, since the initial-load branch for those two views never calls `setUrlState` the way `switchToView` does.
+  evidence: Real (blind-hunter), cosmetic only — the stale params have no effect on behavior (Individual view always recomputes fresh from `representedFamilies`/`unreviewedOnly` when next selected). Worth a one-line `setUrlState` call on initial dashboard/batch load if a clean address bar matters.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/6-split-workspace-into-views.md`
+  summary: Switching views/families/the unreviewed toggle never pushes a browser history entry (`setUrlState` is `replaceState`-only, by design) — the back button doesn't step through Dashboard → Batch → Individual the way one might expect from "URL-reflected state."
+  evidence: Explicit, sitewide design decision (EXPERIENCE.md: "filter/expand/search-in-place never add a history entry"), not an oversight — matches `BaselineFilter.astro`'s identical behavior. Not a bug; flagged by one reviewer as worth confirming, now confirmed intentional.
+  
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/6-split-workspace-into-views.md`
+  summary: No `aria-live` announcement when switching views, changing family, or toggling the unreviewed-only filter — screen-reader users get no confirmation that a change took effect beyond whatever becomes visible.
+  evidence: Real (blind-hunter), consistent with the same accessibility-floor-not-required pattern already logged for stories 1, 3, and 5 (no live-region announcement of state changes beyond validation errors) — an enhancement beyond the established floor.

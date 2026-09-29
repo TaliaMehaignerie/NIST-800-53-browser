@@ -39,6 +39,43 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   <p class="odp-workspace__status" data-odp-loading>Loading parameters…</p>
   <p class="odp-workspace__status" data-odp-empty hidden>No organization-defined parameters for this baseline.</p>
 
+  <div class="odp-workspace__view-switcher" role="tablist" aria-label="Workspace view" data-odp-view-switcher hidden>
+    <button
+      type="button"
+      role="tab"
+      class="odp-workspace__view-btn"
+      data-odp-view-btn="dashboard"
+      aria-selected="true">Dashboard</button
+    >
+    <button
+      type="button"
+      role="tab"
+      class="odp-workspace__view-btn"
+      data-odp-view-btn="batch"
+      aria-selected="false">Batch entry</button
+    >
+    <button
+      type="button"
+      role="tab"
+      class="odp-workspace__view-btn"
+      data-odp-view-btn="individual"
+      aria-selected="false"
+    >
+      Individual parameters
+    </button>
+  </div>
+
+  <div class="odp-workspace__individual-controls" data-odp-individual-controls hidden>
+    <div class="odp-workspace__family-field">
+      <label for="odp-family-select">Family</label>
+      <select id="odp-family-select" class="odp-row__value-input" data-odp-family-select></select>
+    </div>
+    <label class="odp-workspace__unreviewed-toggle">
+      <input type="checkbox" data-odp-unreviewed-toggle />
+      Unreviewed only
+    </label>
+  </div>
+
   <div class="odp-workspace__dashboard" data-odp-dashboard hidden>
     <h2 class="odp-workspace__dashboard-heading">Readiness</h2>
     <p class="odp-dashboard__summary" data-odp-dashboard-summary></p>
@@ -116,6 +153,80 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     flex-direction: column;
     gap: 12px;
     margin-top: 16px;
+  }
+
+  .odp-workspace__view-switcher {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  /*
+   * Dedicated class, not `.odp-row__action` (found in review) — a row's
+   * Confirm/Override buttons and this mutually-exclusive view switcher are
+   * unrelated components that happened to look alike; sharing a class would
+   * couple their future styling. Same visual treatment, `aria-selected`
+   * instead of `aria-pressed` since exactly one of these three is always
+   * the active view (`role="tablist"`/`role="tab"` above), not three
+   * independent toggles.
+   */
+  .odp-workspace__view-btn {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .odp-workspace__view-btn:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .odp-workspace__view-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-workspace__view-btn[aria-selected='true'] {
+    background: var(--color-accent);
+    color: var(--color-surface-base);
+  }
+
+  .odp-workspace__individual-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .odp-workspace__family-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .odp-workspace__family-field label {
+    font-family: var(--font-meta);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-workspace__family-field select {
+    width: auto;
+  }
+
+  .odp-workspace__unreviewed-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
   }
 
   .odp-workspace__batch {
@@ -397,6 +508,20 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     type OdpDatasetEntry,
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
+  import { setUrlState } from '../../utils/urlState';
+
+  // Story 6: three views (Dashboard / Batch entry / Individual parameters)
+  // switched by a button group whose state lives in the URL query (AD-3),
+  // written exclusively through `setUrlState`. The Individual view always
+  // requires a family (no "all families" option) — this is what keeps the
+  // DOM-size guarantee structural: rows are built only for the selected
+  // family, never all 643 up front (spec Boundaries).
+  type ViewName = 'dashboard' | 'batch' | 'individual';
+
+  let currentView: ViewName = 'dashboard';
+  let currentFamily = '';
+  let unreviewedOnly = false;
+  let representedFamilies: string[] = [];
 
   const STATUS_TEXT: Record<DecisionStatus, string> = {
     'unreviewed-default': 'Unreviewed',
@@ -508,6 +633,24 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   let dashboardClusters: Cluster[] = [];
   let dashboardBaseline = '';
 
+  // Story 6: on a fresh load, no individual OR batch rows exist in the DOM
+  // yet (I/O matrix) — clustering itself is computed once at init (needed
+  // by `jumpToNextUnreviewed` regardless of whether Batch has been opened),
+  // but the 9 batch rows are only actually built the first time the Batch
+  // view is activated, then kept as-is (never rebuilt per switch, unlike
+  // Individual's per-family rebuild).
+  let batchRowsBuilt = false;
+
+  function ensureBatchRowsBuilt(): void {
+    if (batchRowsBuilt) return;
+    const batchRowsContainer = document.querySelector<HTMLElement>('[data-odp-batch-rows]');
+    if (!batchRowsContainer) return;
+    for (const cluster of dashboardClusters) {
+      batchRowsContainer.appendChild(buildBatchRow(cluster, dashboardBaseline));
+    }
+    batchRowsBuilt = true;
+  }
+
   // Story 4: OSCAL export. `oscalVersion` comes from the new build-time
   // `odp-meta.json` endpoint (AD-12) — fetched once in `init()`, never
   // hardcoded or re-derived here. Export is wired independently of the
@@ -596,14 +739,126 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     );
   }
 
+  // Derived from this baseline's loaded entries only — never a hardcoded or
+  // corpus-wide family list (spec Boundaries).
+  function getRepresentedFamilies(entries: OdpDatasetEntry[]): string[] {
+    return Array.from(new Set(entries.map((entry) => entry.familyCode))).sort();
+  }
+
+  // Shows/hides the three containers and syncs the switcher's `aria-selected`
+  // state — the sole place view visibility is decided. Dashboard/Batch keep
+  // their exact existing rendering (built once); only their visibility
+  // changes here.
+  function setActiveView(view: ViewName): void {
+    currentView = view;
+
+    const dashboard = document.querySelector<HTMLElement>('[data-odp-dashboard]');
+    const batch = document.querySelector<HTMLElement>('[data-odp-batch]');
+    const rows = document.querySelector<HTMLElement>('[data-odp-rows]');
+    const individualControls = document.querySelector<HTMLElement>('[data-odp-individual-controls]');
+
+    if (dashboard) dashboard.hidden = view !== 'dashboard';
+    // Batch only has something to show when this baseline actually has
+    // dash-one clusters — every one of the 4 real baselines does today, but
+    // this guard (restored from the pre-story-6 behavior, found missing in
+    // review) keeps an empty section from appearing if that ever changes.
+    if (batch) batch.hidden = view !== 'batch' || dashboardClusters.length === 0;
+    if (rows) rows.hidden = view !== 'individual';
+    if (individualControls) individualControls.hidden = view !== 'individual';
+
+    if (view === 'batch') ensureBatchRowsBuilt();
+
+    document.querySelectorAll<HTMLButtonElement>('[data-odp-view-btn]').forEach((btn) => {
+      btn.setAttribute('aria-selected', String(btn.dataset.odpViewBtn === view));
+    });
+  }
+
+  // Clears `rowRegistry` and the rows container, then builds rows only for
+  // entries matching `familyCode === family` (and unreviewed-only when the
+  // toggle is on) — only one family's rows ever exist in the DOM at a time
+  // (spec Boundaries).
+  function renderIndividualRows(family: string, unreviewedOnlyFlag: boolean): void {
+    const rowsContainer = document.querySelector<HTMLElement>('[data-odp-rows]');
+    if (!rowsContainer || !family) return;
+
+    rowRegistry.clear();
+    rowsContainer.innerHTML = '';
+
+    const matching = dashboardEntries.filter(
+      (entry) =>
+        entry.familyCode === family &&
+        (!unreviewedOnlyFlag || currentStatus(entry, dashboardBaseline) === 'unreviewed-default'),
+    );
+
+    for (const entry of matching) {
+      rowsContainer.appendChild(buildRow(entry, dashboardBaseline));
+    }
+  }
+
+  // Removes just the one row that changed, rather than rebuilding the whole
+  // family list — this is what makes a just-confirmed/overridden row
+  // disappear from view without a reload (spec Acceptance Criteria), without
+  // touching storage. A full `renderIndividualRows()` rebuild here would
+  // wipe every other currently-rendered row too, discarding any unsaved
+  // rationale text a user had typed into a sibling row (found in review) —
+  // removing only the acted-on row avoids that entirely.
+  function removeRowFromIndividualViewIfFiltered(key: string): void {
+    if (currentView !== 'individual' || !unreviewedOnly) return;
+    const registered = rowRegistry.get(key);
+    if (!registered) return;
+    registered.row.remove();
+    rowRegistry.delete(key);
+  }
+
+  // Switches the active view and, for `individual`, the selected family —
+  // always through `setUrlState` (never a second URL-writing path), always
+  // a `replaceState` write. Falls back to the first represented family
+  // (alphabetical) when no valid family is given, since the Individual view
+  // never has an "all families" state.
+  function switchToView(view: ViewName, familyOverride?: string): void {
+    if (view === 'individual') {
+      const requested = familyOverride ?? currentFamily;
+      const family = representedFamilies.includes(requested) ? requested : representedFamilies[0];
+      if (!family) return;
+
+      // Re-selecting the same family while already on the Individual view is
+      // a no-op — skip the rebuild so it doesn't blow away scroll position
+      // or in-progress input for zero actual change (found in review).
+      if (currentView === 'individual' && family === currentFamily) return;
+      currentFamily = family;
+
+      const familySelect = document.querySelector<HTMLSelectElement>('[data-odp-family-select]');
+      if (familySelect) familySelect.value = currentFamily;
+
+      setActiveView('individual');
+      setUrlState({
+        search: { view: 'individual', family: currentFamily, unreviewed: unreviewedOnly ? '1' : null },
+      });
+      renderIndividualRows(currentFamily, unreviewedOnly);
+    } else {
+      if (currentView === view) return;
+      setActiveView(view);
+      setUrlState({ search: { view, family: null, unreviewed: null } });
+    }
+  }
+
   // Scrolls to and focuses the jump target: the cluster's batch row if the
   // next unreviewed entry belongs to one (`groupDashOneClusters`, story 2,
-  // reused unmodified — never reimplemented here), else the entry's own row.
+  // reused unmodified — never reimplemented here), else the entry's own row
+  // in the Individual view. The view (and, for a non-clustered target, the
+  // family) is switched first so the target actually exists in the DOM
+  // before `scrollIntoView` runs (spec Boundaries).
   function jumpToNextUnreviewed(): void {
     const next = findNextUnreviewedEntry(dashboardEntries, dashboardBaseline);
     if (!next) return;
 
     const cluster = findClusterForEntry(next, dashboardClusters);
+    if (cluster) {
+      switchToView('batch');
+    } else {
+      switchToView('individual', next.familyCode);
+    }
+
     const selector = cluster
       ? `[data-odp-cluster-key="${cluster.clusterKey}"]`
       : `[data-odp-key="${decisionKey(next)}"]`;
@@ -635,7 +890,9 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   function refreshDashboard(): void {
     const dashboard = document.querySelector<HTMLElement>('[data-odp-dashboard]');
     if (!dashboard || dashboardEntries.length === 0) return;
-    dashboard.hidden = false;
+    // Visibility is owned by `setActiveView`, not this function — the
+    // dashboard is recomputed on every decision change regardless of which
+    // view is currently active, so it's never stale the moment it's shown.
 
     const { overall, byFamily } = computeDashboardCounts(dashboardEntries, dashboardBaseline);
 
@@ -828,6 +1085,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
       applyStatus(row, status);
       refreshDashboard();
+      removeRowFromIndividualViewIfFiltered(key);
     }
 
     confirmBtn.addEventListener('click', () => handleAction('confirmed'));
@@ -1049,6 +1307,11 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
         ) as HTMLTextAreaElement | null;
         if (memberRationaleInput) memberRationaleInput.value = rationale;
         applyStatus(registered.row, status);
+        // Remove just this member's row if it's now filtered out, rather
+        // than rebuilding the whole family list (which would also discard
+        // any unsaved input in an unrelated sibling row still awaiting
+        // review — found in review).
+        removeRowFromIndividualViewIfFiltered(key);
       }
 
       if (!results.every((r) => r.ok)) {
@@ -1079,8 +1342,6 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
     const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');
     const rowsContainer = workspace.querySelector<HTMLElement>('[data-odp-rows]');
-    const batchSection = workspace.querySelector<HTMLElement>('[data-odp-batch]');
-    const batchRowsContainer = workspace.querySelector<HTMLElement>('[data-odp-batch-rows]');
     if (!rowsContainer) return;
 
     // The export button's click listener is wired up-front, before the
@@ -1131,32 +1392,81 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       return;
     }
 
-    // Individual rows render for every entry, dash-one included, unchanged
-    // from story 1 — this is what keeps every fanned-out decision
-    // independently overridable (FR-5), regardless of clustering below.
-    for (const entry of entries) {
-      rowsContainer.appendChild(buildRow(entry, baselineValue));
-    }
-
     // Clustering is computed at render time only, from this baseline's
-    // entries — never stored (AD-11).
+    // entries — never stored (AD-11). The batch rows themselves are built
+    // lazily, the first time the Batch view is activated (`ensureBatchRowsBuilt`),
+    // so a fresh load builds neither Individual nor Batch rows up front.
     const clusters = groupDashOneClusters(entries);
-    if (clusters.length > 0 && batchSection && batchRowsContainer) {
-      batchSection.hidden = false;
-      for (const cluster of clusters) {
-        batchRowsContainer.appendChild(buildBatchRow(cluster, baselineValue));
-      }
-    }
 
     dashboardEntries = entries;
     dashboardClusters = clusters;
     dashboardBaseline = baselineValue;
+
+    // Individual rows are no longer built for every entry up front (story 6)
+    // — only the represented families are computed here; rows for whichever
+    // family ends up selected are built by `renderIndividualRows` below.
+    representedFamilies = getRepresentedFamilies(entries);
+    const familySelect = workspace.querySelector<HTMLSelectElement>('[data-odp-family-select]');
+    if (familySelect) {
+      familySelect.innerHTML = '';
+      for (const family of representedFamilies) {
+        const option = document.createElement('option');
+        option.value = family;
+        option.textContent = family.toUpperCase();
+        familySelect.appendChild(option);
+      }
+      familySelect.addEventListener('change', () => {
+        switchToView('individual', familySelect.value);
+      });
+    }
+
+    const unreviewedToggle = workspace.querySelector<HTMLInputElement>('[data-odp-unreviewed-toggle]');
+    unreviewedToggle?.addEventListener('change', () => {
+      unreviewedOnly = unreviewedToggle.checked;
+      setUrlState({
+        search: { view: 'individual', family: currentFamily, unreviewed: unreviewedOnly ? '1' : null },
+      });
+      renderIndividualRows(currentFamily, unreviewedOnly);
+    });
+
+    workspace.querySelectorAll<HTMLButtonElement>('[data-odp-view-btn]').forEach((btn) => {
+      const view = btn.dataset.odpViewBtn as ViewName;
+      btn.addEventListener('click', () => switchToView(view));
+    });
 
     const jumpBtn = workspace.querySelector<HTMLButtonElement>('[data-odp-jump-next]');
     jumpBtn?.addEventListener('click', () => jumpToNextUnreviewed());
 
     const markReadyBtn = workspace.querySelector<HTMLButtonElement>('[data-odp-mark-ready]');
     markReadyBtn?.addEventListener('click', () => handleMarkReady());
+
+    // Initial view/family/unreviewed-only state comes from the URL
+    // (`?view=`/`?family=`/`?unreviewed=`), defaulting per Boundaries: an
+    // absent or invalid `view` defaults to `dashboard`; an absent or invalid
+    // `family` (not one of `representedFamilies`) defaults to the first
+    // represented family alphabetically — never a hardcoded/corpus-wide one.
+    const params = new URLSearchParams(window.location.search);
+    const rawView = params.get('view');
+    const initialView: ViewName = rawView === 'batch' || rawView === 'individual' ? rawView : 'dashboard';
+    const rawFamily = params.get('family');
+    unreviewedOnly = params.get('unreviewed') === '1';
+    if (unreviewedToggle) unreviewedToggle.checked = unreviewedOnly;
+
+    const viewSwitcher = workspace.querySelector<HTMLElement>('[data-odp-view-switcher]');
+    if (viewSwitcher) viewSwitcher.hidden = false;
+
+    // No dash-one clusters for this baseline means nothing to batch — hide
+    // the tab itself rather than leaving a dead button that opens an empty
+    // section (matches the pre-story-6 behavior; every real baseline today
+    // has 9 clusters, but this keeps the guarantee explicit).
+    const batchTab = workspace.querySelector<HTMLButtonElement>('[data-odp-view-btn="batch"]');
+    if (batchTab && dashboardClusters.length === 0) batchTab.hidden = true;
+
+    if (initialView === 'individual') {
+      switchToView('individual', rawFamily ?? undefined);
+    } else {
+      setActiveView(initialView);
+    }
 
     refreshDashboard();
   }
