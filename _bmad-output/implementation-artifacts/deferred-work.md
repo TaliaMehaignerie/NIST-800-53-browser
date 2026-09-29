@@ -125,3 +125,35 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-search-baseline-integration.md`
   summary: No timeout/fallback if Pagefind's dynamic `import()`/`init()` stalls (slow network) rather than rejecting outright — the existing `try/catch` only handles a rejection, not a hang, leaving the search box silently inert with no loading or error feedback in that specific case.
   evidence: Real (edge-case-hunter), a rare degraded-network edge case beyond what the existing error handling (added in the prior search-fixes round) covers. Low priority given the existing catch already handles the common case (missing pagefind.js in dev).
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: `/workspace/{baseline}` has no discoverable entry point from any other page — no link from Home, Search, Family, or Control detail pages, and no back link/breadcrumb on the workspace page itself back to Home/Search.
+  evidence: Real (blind-hunter), but the story's frozen Intent and Tasks scope only the dataset endpoint, route, and single-parameter entry — navigation wiring was never a task. The architecture spine's own Deferred section similarly declines to commit a per-control deep-link badge for v1. Revisit once story 3's dashboard exists, which is the more natural nav entry point.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: No action reverts a decision back to `unreviewed-default` or clears it entirely — `OdpWorkspace.astro` only offers Confirm/Override, both of which overwrite in place.
+  evidence: Real (blind-hunter), but not required by the spec's Intent ("set/confirm/override") or its I/O matrix. A user can already correct a wrong value by re-entering and re-confirming; only reverting to the unreviewed state has no path. Worth adding alongside story 3's dashboard, which will need a way to jump back to unreviewed items.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: `odpStore.ts`'s `isOdpBlob` discards the entire blob (every decision for that baseline) if even one entry in `decisions` fails `isDecision` shape validation, rather than dropping only the malformed entry and keeping the rest.
+  evidence: Real (verification-gap "Other findings"), stricter than the spec's stated "missing or unparseable blob is treated as empty state" (written for JSON-level corruption, not a single bad entry in an otherwise-valid blob). Worth a per-entry-drop policy once story 2+ adds more write paths that could produce partially-invalid blobs.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: `OdpWorkspace.astro`'s `init()` trusts the fetched `odp-dataset.json` response shape completely (`await response.json()` straight into `.filter`/`.flatMap`, and `entry.baselines.includes(...)` assumes `baselines` is always an array) — a malformed response would throw uncaught rather than degrading like the localStorage corrupt-blob path does.
+  evidence: Real (blind-hunter/edge-case-hunter), but `odp-dataset.json.ts` is a build-time endpoint whose shape is Zod-validated at build via `content.config.ts`, so a malformed response can only occur from a broken deployment or manual DevTools tampering — much lower probability than the localStorage case the spec's I/O matrix actually tests. Worth a defensive `Array.isArray` guard if this endpoint ever gains a second producer.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: A previously-saved decision's stored `value` can silently fail to render (blank/unselected field, no indication) if the dataset's shape for that `paramId` changes between builds (e.g. a param converted from free-text to `select`, or a choice removed from `select.choice`).
+  evidence: Real (edge-case-hunter), but requires the ingested OSCAL corpus to change a param's shape across builds while old localStorage decisions persist — no evidence this has happened or is likely mid-baseline. Revisit if `schemaVersion` migration (also deferred) is ever built.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: No `aria-live` region announces a decision's status change (e.g. "Confirmed") after Confirm/Override is clicked — only the validation error (`role="alert"`) is announced to screen readers; a successful save is silent.
+  evidence: Real (blind-hunter), and the spec's Boundaries only require following the site's existing `role`/`aria-expanded`/`focus-visible` conventions (which don't include live-region success announcements anywhere else in the codebase either — e.g. `BaselineFilter`'s pill state change isn't announced). An enhancement beyond the established floor, not a regression from it.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: A `select`-typed parameter with an empty `choice` array would render a permanently empty, unusable multi-select with no explanatory message, blocking Confirm/Override forever for that parameter.
+  evidence: Real in principle (blind-hunter) but unverified against actual corpus data — an OSCAL `select` assignment with zero offered choices would be a meaningless authoring error upstream, and no such case is confirmed to exist in the ingested Moderate baseline. Worth a guard if real data ever shows this.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/1-build-odp-dataset-workspace-route-single-parameter-entry.md`
+  summary: Multi-select fields (`select.howMany === 'one-or-more'`) render as a bare native `<select multiple>` with no instructional text on how to select more than one option (e.g. Ctrl/Cmd-click), a common usability trap.
+  evidence: Real (blind-hunter), pure UX polish not covered by any spec requirement. Cheap to add (a short hint line) whenever this component is next touched.

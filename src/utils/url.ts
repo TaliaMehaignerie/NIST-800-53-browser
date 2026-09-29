@@ -33,3 +33,11 @@ export function controlUrl(slug: string): string {
 export function searchUrl(): string {
   return `${BASE}/search/`;
 }
+
+export function workspaceUrl(baseline: string): string {
+  return `${BASE}/workspace/${encodeURIComponent(baseline)}/`;
+}
+
+export function odpDatasetUrl(): string {
+  return `${BASE}/odp-dataset.json`;
+}

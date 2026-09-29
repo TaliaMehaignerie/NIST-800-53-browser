@@ -1,0 +1,462 @@
+---
+// AD-9: the single stateful island. Owns the entire ODP decision flow for
+// one baseline — this story covers single-parameter set/confirm/override
+// only (dash-one batching, the readiness dashboard, and OSCAL export are
+// deferred to stories 2-4). No other page reads or writes a decision.
+//
+// Per the spec's Design Notes, the dataset is fetched client-side
+// (`odp-dataset.json`) rather than via a build-time `getCollection` call in
+// the route, so all row-building/filtering logic lives in one client-side
+// place — this route/component only picks the baseline and mounts. Follows
+// the no-framework island pattern already used by `BaselineFilter.astro` /
+// `EnhancementItem.astro`: plain `<script>`, delegated listeners, no
+// React/Vue/etc.
+interface Props {
+  baseline: 'low' | 'moderate' | 'high' | 'privacy';
+}
+
+const { baseline } = Astro.props;
+const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+---
+
+<section class="odp-workspace" data-odp-workspace data-baseline={baseline}>
+  <h1>{baselineLabel} ODP Workspace</h1>
+  <p class="odp-workspace__intro">
+    Set, confirm, or override each organization-defined parameter for the {baselineLabel} baseline. Decisions are
+    saved to this browser only.
+  </p>
+
+  <p class="odp-workspace__status" data-odp-loading>Loading parameters…</p>
+  <p class="odp-workspace__status" data-odp-empty hidden>No organization-defined parameters for this baseline.</p>
+
+  <div class="odp-workspace__rows" data-odp-rows></div>
+</section>
+
+<style>
+  .odp-workspace {
+    padding: 24px 0;
+  }
+
+  .odp-workspace__intro {
+    color: var(--color-ink-secondary);
+    max-width: 60ch;
+  }
+
+  .odp-workspace__status {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-workspace__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+</style>
+
+<style is:global>
+  .odp-row {
+    background: var(--color-surface-raised);
+    border-radius: var(--rounded-md);
+    padding: 16px;
+  }
+
+  .odp-row__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .odp-row__control-id {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-row__param-id {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-ink-disabled);
+  }
+
+  .odp-row__status-label {
+    margin-left: auto;
+    font-family: var(--font-meta);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: var(--rounded-full);
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-row__status-label[data-status='confirmed'] {
+    color: var(--color-baseline-low);
+  }
+
+  .odp-row__status-label[data-status='overridden'] {
+    color: var(--color-baseline-moderate);
+  }
+
+  .odp-row__label {
+    margin: 0 0 8px;
+    color: var(--color-ink-primary);
+  }
+
+  .odp-row__guidelines {
+    margin: 0 0 12px;
+    padding-left: 18px;
+    color: var(--color-ink-secondary);
+    font-size: 0.95em;
+  }
+
+  .odp-row__guidelines:empty {
+    display: none;
+  }
+
+  .odp-row__field {
+    margin-bottom: 10px;
+  }
+
+  .odp-row__field label {
+    display: block;
+    font-family: var(--font-meta);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+    margin-bottom: 4px;
+  }
+
+  .odp-row__value-input,
+  .odp-row__rationale-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-primary);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 6px 10px;
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  .odp-row__value-input[multiple] {
+    height: auto;
+  }
+
+  .odp-row__value-input:focus-visible,
+  .odp-row__rationale-input:focus-visible,
+  .odp-row__action:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-row__error {
+    color: var(--color-baseline-high);
+    font-family: var(--font-meta);
+    font-size: 13px;
+    margin: 8px 0;
+  }
+
+  .odp-row__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .odp-row__action {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .odp-row__action:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .odp-row__action[aria-pressed='true'] {
+    background: var(--color-accent);
+    color: var(--color-surface-base);
+  }
+</style>
+
+<script>
+  import { getDecision, setDecision, type Decision, type DecisionStatus } from '../../utils/odpStore';
+  import { odpDatasetUrl } from '../../utils/url';
+
+  interface OdpDatasetEntry {
+    controlSlug: string;
+    controlId: string;
+    familyCode: string;
+    paramId: string;
+    label: string | null;
+    guidelines: string[];
+    select: { howMany: string | null; choice: string[] } | null;
+    baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
+  }
+
+  const STATUS_TEXT: Record<DecisionStatus, string> = {
+    'unreviewed-default': 'Unreviewed',
+    confirmed: 'Confirmed',
+    overridden: 'Overridden',
+  };
+
+  function decisionKey(entry: OdpDatasetEntry): string {
+    return `${entry.controlSlug}:${entry.paramId}`;
+  }
+
+  function buildValueField(entry: OdpDatasetEntry, current: string | string[] | undefined): HTMLElement {
+    const field = document.createElement('div');
+    field.className = 'odp-row__field';
+    const label = document.createElement('label');
+    const fieldId = `odp-value-${entry.controlSlug}-${entry.paramId}`;
+    label.setAttribute('for', fieldId);
+    label.textContent = 'Value';
+    field.appendChild(label);
+
+    if (entry.select) {
+      const isMulti = entry.select.howMany === 'one-or-more';
+      const select = document.createElement('select');
+      select.className = 'odp-row__value-input';
+      select.id = fieldId;
+      select.dataset.odpValueInput = 'true';
+      if (isMulti) {
+        select.multiple = true;
+        select.size = Math.min(entry.select.choice.length, 6) || 1;
+      } else {
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = '— choose —';
+        select.appendChild(placeholder);
+      }
+      const currentValues = Array.isArray(current) ? current : current ? [current] : [];
+      for (const choice of entry.select.choice) {
+        const option = document.createElement('option');
+        option.value = choice;
+        option.textContent = choice;
+        if (currentValues.includes(choice)) option.selected = true;
+        select.appendChild(option);
+      }
+      field.appendChild(select);
+    } else {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'odp-row__value-input';
+      input.id = fieldId;
+      input.dataset.odpValueInput = 'true';
+      input.value = typeof current === 'string' ? current : '';
+      field.appendChild(input);
+    }
+
+    return field;
+  }
+
+  function readValue(entry: OdpDatasetEntry, row: HTMLElement): string | string[] {
+    const input = row.querySelector('[data-odp-value-input]') as HTMLInputElement | HTMLSelectElement;
+    if (entry.select) {
+      const select = input as HTMLSelectElement;
+      if (entry.select.howMany === 'one-or-more') {
+        return Array.from(select.selectedOptions).map((o) => o.value);
+      }
+      return select.value;
+    }
+    return (input as HTMLInputElement).value;
+  }
+
+  function isValueEmpty(value: string | string[]): boolean {
+    return Array.isArray(value) ? value.length === 0 : value.trim().length === 0;
+  }
+
+  function buildRow(entry: OdpDatasetEntry, baseline: string): HTMLElement {
+    const key = decisionKey(entry);
+    const existing = getDecision(baseline, key);
+
+    const row = document.createElement('article');
+    row.className = 'odp-row';
+    row.dataset.odpKey = key;
+
+    const header = document.createElement('header');
+    header.className = 'odp-row__header';
+
+    const controlSpan = document.createElement('span');
+    controlSpan.className = 'odp-row__control-id';
+    controlSpan.textContent = entry.controlId.toUpperCase();
+    header.appendChild(controlSpan);
+
+    const paramSpan = document.createElement('span');
+    paramSpan.className = 'odp-row__param-id';
+    paramSpan.textContent = entry.paramId;
+    header.appendChild(paramSpan);
+
+    const statusLabel = document.createElement('span');
+    statusLabel.className = 'odp-row__status-label';
+    statusLabel.dataset.odpStatusLabel = 'true';
+    header.appendChild(statusLabel);
+
+    row.appendChild(header);
+
+    if (entry.label) {
+      const labelP = document.createElement('p');
+      labelP.className = 'odp-row__label';
+      labelP.textContent = entry.label;
+      row.appendChild(labelP);
+    }
+
+    if (entry.guidelines.length > 0) {
+      const list = document.createElement('ul');
+      list.className = 'odp-row__guidelines';
+      for (const g of entry.guidelines) {
+        const li = document.createElement('li');
+        li.textContent = g;
+        list.appendChild(li);
+      }
+      row.appendChild(list);
+    }
+
+    row.appendChild(buildValueField(entry, existing?.value));
+
+    const rationaleField = document.createElement('div');
+    rationaleField.className = 'odp-row__field';
+    const rationaleLabel = document.createElement('label');
+    const rationaleId = `odp-rationale-${entry.controlSlug}-${entry.paramId}`;
+    rationaleLabel.setAttribute('for', rationaleId);
+    rationaleLabel.textContent = 'Rationale (required to override)';
+    rationaleField.appendChild(rationaleLabel);
+    const rationaleInput = document.createElement('textarea');
+    rationaleInput.className = 'odp-row__rationale-input';
+    rationaleInput.id = rationaleId;
+    rationaleInput.dataset.odpRationaleInput = 'true';
+    rationaleInput.rows = 2;
+    rationaleInput.value = existing?.rationale ?? '';
+    rationaleField.appendChild(rationaleInput);
+    row.appendChild(rationaleField);
+
+    const errorP = document.createElement('p');
+    errorP.className = 'odp-row__error';
+    errorP.setAttribute('role', 'alert');
+    errorP.hidden = true;
+    errorP.dataset.odpError = 'true';
+    row.appendChild(errorP);
+
+    const actions = document.createElement('div');
+    actions.className = 'odp-row__actions';
+    actions.setAttribute('role', 'group');
+    actions.setAttribute('aria-label', `${entry.controlId.toUpperCase()} ${entry.paramId} decision status`);
+
+    const confirmBtn = document.createElement('button');
+    confirmBtn.type = 'button';
+    confirmBtn.className = 'odp-row__action';
+    confirmBtn.dataset.odpAction = 'confirmed';
+    confirmBtn.textContent = 'Confirm';
+    confirmBtn.setAttribute('aria-pressed', 'false');
+    actions.appendChild(confirmBtn);
+
+    const overrideBtn = document.createElement('button');
+    overrideBtn.type = 'button';
+    overrideBtn.className = 'odp-row__action';
+    overrideBtn.dataset.odpAction = 'overridden';
+    overrideBtn.textContent = 'Override';
+    overrideBtn.setAttribute('aria-pressed', 'false');
+    actions.appendChild(overrideBtn);
+
+    row.appendChild(actions);
+
+    applyStatus(row, existing?.status ?? 'unreviewed-default');
+
+    function handleAction(status: DecisionStatus) {
+      const error = row.querySelector('[data-odp-error]') as HTMLElement;
+      error.hidden = true;
+      error.textContent = '';
+
+      const value = readValue(entry, row);
+      const rationale = (row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement).value;
+
+      if (isValueEmpty(value)) {
+        error.textContent = 'Enter or select a value before saving a decision.';
+        error.hidden = false;
+        return;
+      }
+
+      if (status === 'overridden' && rationale.trim().length === 0) {
+        error.textContent = 'A rationale is required to override a value.';
+        error.hidden = false;
+        return;
+      }
+
+      const decision: Decision = { value, status, rationale };
+      const ok = setDecision(baseline, key, decision);
+      if (!ok) {
+        error.textContent =
+          "Could not save this decision. If you're overriding, check the rationale is filled in; otherwise your browser storage may be full or unavailable.";
+        error.hidden = false;
+        return;
+      }
+
+      applyStatus(row, status);
+    }
+
+    confirmBtn.addEventListener('click', () => handleAction('confirmed'));
+    overrideBtn.addEventListener('click', () => handleAction('overridden'));
+
+    return row;
+  }
+
+  function applyStatus(row: HTMLElement, status: DecisionStatus) {
+    const statusLabel = row.querySelector('[data-odp-status-label]') as HTMLElement;
+    statusLabel.textContent = STATUS_TEXT[status];
+    statusLabel.dataset.status = status;
+
+    row.querySelectorAll<HTMLButtonElement>('[data-odp-action]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(btn.dataset.odpAction === status));
+    });
+  }
+
+  async function init() {
+    const workspace = document.querySelector<HTMLElement>('[data-odp-workspace]');
+    if (!workspace) return;
+    const baselineValue = workspace.dataset.baseline;
+    if (!baselineValue) return;
+
+    const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
+    const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');
+    const rowsContainer = workspace.querySelector<HTMLElement>('[data-odp-rows]');
+    if (!rowsContainer) return;
+
+    let dataset: OdpDatasetEntry[];
+    try {
+      const response = await fetch(odpDatasetUrl());
+      if (!response.ok) throw new Error(`odp-dataset.json fetch failed: ${response.status}`);
+      dataset = await response.json();
+    } catch (err) {
+      console.error('OdpWorkspace: failed to load odp-dataset.json', err);
+      if (loading) loading.hidden = true;
+      if (empty) {
+        empty.hidden = false;
+        empty.textContent = 'Unable to load parameters. Please reload the page.';
+      }
+      return;
+    }
+
+    const entries = dataset.filter((entry) => entry.baselines.includes(baselineValue as OdpDatasetEntry['baselines'][number]));
+
+    if (loading) loading.hidden = true;
+
+    if (entries.length === 0) {
+      if (empty) empty.hidden = false;
+      return;
+    }
+
+    for (const entry of entries) {
+      rowsContainer.appendChild(buildRow(entry, baselineValue));
+    }
+  }
+
+  init();
+</script>

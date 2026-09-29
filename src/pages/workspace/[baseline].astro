@@ -1,0 +1,25 @@
+---
+// AD-9: the one ODP Workspace route. Renders exactly one client component,
+// `OdpWorkspace`, which owns the entire decision flow — this route only
+// picks the baseline and mounts it (spec Design Notes). Built for all 4
+// baselines (spec Boundaries), though only Moderate is manually verified
+// this story (SPEC V1 scope).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import OdpWorkspace from '../../components/workspace/OdpWorkspace.astro';
+
+type Baseline = 'low' | 'moderate' | 'high' | 'privacy';
+
+export function getStaticPaths() {
+  const baselines: Baseline[] = ['low', 'moderate', 'high', 'privacy'];
+  return baselines.map((baseline) => ({
+    params: { baseline },
+    props: { baseline },
+  }));
+}
+
+const { baseline } = Astro.props as { baseline: Baseline };
+---
+
+<BaseLayout title={`${baseline[0].toUpperCase()}${baseline.slice(1)} ODP Workspace — NIST 800-53 Browser`}>
+  <OdpWorkspace baseline={baseline} />
+</BaseLayout>
