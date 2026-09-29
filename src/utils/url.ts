@@ -41,3 +41,7 @@ export function workspaceUrl(baseline: string): string {
 export function odpDatasetUrl(): string {
   return `${BASE}/odp-dataset.json`;
 }
+
+export function odpMetaUrl(): string {
+  return `${BASE}/odp-meta.json`;
+}

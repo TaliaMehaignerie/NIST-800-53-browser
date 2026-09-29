@@ -225,3 +225,23 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
   summary: The by-Family table's `<th>` header cells have no visual weight differentiation from `<td>` body cells (same padding/border/color, no bold or background tint) — the header row is distinguishable only by tag semantics, not appearance.
   evidence: Real (blind-hunter), pure visual polish not covered by any spec requirement or the site's existing design tokens for tables (no prior table exists elsewhere in the Browser to match). Cheap to add (`font-weight: 600`) whenever this component is next touched.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
+  summary: `oscalExport.ts`'s `buildSetParameter` assumes `decision.rationale`/`decision.value` are always defined (per `Decision`'s type and `odpStore.isDecision`'s shape validation), and `BASELINE_SOURCE_FILENAME[baseline]` assumes `baseline` is always one of the four route-generated literals — none of these are defensively re-checked at the export boundary.
+  evidence: Real (blind-hunter/edge-case-hunter) but unreachable in practice today: every `Decision` read via `getDecisions` already passed `odpStore.ts`'s `isDecision` shape validation (rationale/value always present and correctly typed), and `baseline` always comes from the route's own `Baseline` union via `getStaticPaths`. Worth hardening if `oscalExport.ts` is ever called from a path that bypasses those guarantees.
+  
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
+  summary: `src/pages/odp-meta.json.ts` silently returns `{ oscalVersion: '' }` if the `meta`/`provenance` Content Collection entry is ever missing, rather than failing the build loudly.
+  evidence: Real (edge-case-hunter/blind-hunter), but this is a build-time endpoint reading from the same always-present singleton every other page already depends on (`ProvenanceFooter.astro`) — if it were ever actually missing, other pages would already be visibly broken first. The client now independently guards against an empty `oscalVersion` (disables export, shows an error) as a second line of defense.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
+  summary: The exported Profile's `version` field is hardcoded to `'1.0.0'` on every export — nothing increments it across repeated exports of the same baseline, so two exports minutes apart are distinguishable only by `last-modified`.
+  evidence: Real (blind-hunter), minor and non-blocking — no spec requirement or OSCAL constraint requires a meaningful version sequence for this document's own `version` field. Worth deriving from an export counter or timestamp if downstream tooling ever needs to distinguish export iterations.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
+  summary: The export button reuses the `.odp-dashboard__action` CSS class for styling, even though it's not part of the dashboard section — couples the button's appearance to a class whose name/purpose belongs to a different feature.
+  evidence: Real (blind-hunter), a naming/organization nit with no functional effect (the shared styles are visually correct for this button too). Cheap to split into its own class whenever this component is next touched.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/4-oscal-export.md`
+  summary: `profile.imports[0].href` is a bare filename (e.g. `NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json`) with no path or URI scheme — unclear how external OSCAL tooling would resolve it outside this project's own `data/raw/` layout.
+  evidence: Explicit spec decision (Boundaries: "references the actual ingested source filename... truthful provenance, never a fabricated or unverified live URL"), not an oversight — flagged by two reviewers as worth double-checking, but the spec deliberately chose traceable-but-not-necessarily-resolvable provenance over inventing an unverified live URL. Revisit if this tool ever needs to interoperate with external OSCAL tooling that requires a resolvable import.

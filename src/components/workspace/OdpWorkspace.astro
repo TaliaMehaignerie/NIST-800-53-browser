@@ -26,6 +26,16 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     saved to this browser only.
   </p>
 
+  <div class="odp-workspace__export">
+    <button type="button" class="odp-dashboard__action" data-odp-export disabled>Export OSCAL Profile</button>
+    <p class="odp-workspace__export-hint">
+      Decisions live only in this browser. Export regularly — this file is your durable backup copy.
+    </p>
+    <p class="odp-workspace__export-message" data-odp-export-message role="status" aria-live="polite">
+      Loading export metadata…
+    </p>
+  </div>
+
   <p class="odp-workspace__status" data-odp-loading>Loading parameters…</p>
   <p class="odp-workspace__status" data-odp-empty hidden>No organization-defined parameters for this baseline.</p>
 
@@ -75,6 +85,27 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   }
 
   .odp-workspace__status {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-workspace__export {
+    margin: 16px 0;
+    padding: 12px 16px;
+    background: var(--color-surface-raised);
+    border-radius: var(--rounded-md);
+  }
+
+  .odp-workspace__export-hint {
+    margin: 6px 0 0;
+    font-family: var(--font-meta);
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-workspace__export-message {
+    margin: 6px 0 0;
     font-family: var(--font-meta);
     font-size: 13px;
     color: var(--color-ink-secondary);
@@ -328,14 +359,15 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 </style>
 
 <script>
-  import { getDecision, setDecision, type Decision, type DecisionStatus } from '../../utils/odpStore';
-  import { odpDatasetUrl } from '../../utils/url';
+  import { getDecision, getDecisions, setDecision, type Decision, type DecisionStatus } from '../../utils/odpStore';
+  import { odpDatasetUrl, odpMetaUrl } from '../../utils/url';
   import {
     groupDashOneClusters,
     computeClusterMatch,
     type Cluster,
     type OdpDatasetEntry,
   } from '../../utils/odpCluster';
+  import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
 
   const STATUS_TEXT: Record<DecisionStatus, string> = {
     'unreviewed-default': 'Unreviewed',
@@ -446,6 +478,34 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   let dashboardEntries: OdpDatasetEntry[] = [];
   let dashboardClusters: Cluster[] = [];
   let dashboardBaseline = '';
+
+  // Story 4: OSCAL export. `oscalVersion` comes from the new build-time
+  // `odp-meta.json` endpoint (AD-12) — fetched once in `init()`, never
+  // hardcoded or re-derived here. Export is wired independently of the
+  // dashboard/rows load path so it stays available even for a baseline with
+  // zero parameters or zero decisions (spec Boundaries: never gated by the
+  // readiness gate, doubles as the user's backup copy). The button starts
+  // `disabled` (markup) and is only enabled once `oscalVersion` has actually
+  // loaded — never clickable while it could still export an empty
+  // `oscal-version` (found in review: the meta fetch is async, and the
+  // button was previously enabled before or even if it failed).
+  let oscalVersion = '';
+
+  function handleExport(baseline: string): void {
+    const message = document.querySelector<HTMLElement>('[data-odp-export-message]');
+    try {
+      const decisions = getDecisions(baseline);
+      const profile = buildOscalProfile({ baseline: baseline as Baseline, decisions, oscalVersion });
+      downloadOscalProfile(profile, baseline as Baseline);
+      if (message) {
+        const count = Object.keys(decisions).length;
+        message.textContent = `Exported ${count} decision${count === 1 ? '' : 's'}.`;
+      }
+    } catch (err) {
+      console.error('OdpWorkspace: export failed', err);
+      if (message) message.textContent = 'Export failed. Please try again.';
+    }
+  }
 
   interface StatusCounts {
     unreviewed: number;
@@ -931,6 +991,30 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     const batchSection = workspace.querySelector<HTMLElement>('[data-odp-batch]');
     const batchRowsContainer = workspace.querySelector<HTMLElement>('[data-odp-batch-rows]');
     if (!rowsContainer) return;
+
+    // The export button's click listener is wired up-front, before the
+    // dataset fetch below, so it stays usable even if that fetch fails —
+    // export only depends on `odp-meta.json` and whatever decisions already
+    // exist in storage (spec Boundaries: always available, including with
+    // zero decisions). The button itself starts `disabled` (markup) and is
+    // only enabled once `oscalVersion` has actually loaded, below — clicking
+    // it can never produce a document with an empty `oscal-version`.
+    const exportBtn = workspace.querySelector<HTMLButtonElement>('[data-odp-export]');
+    const exportMessage = workspace.querySelector<HTMLElement>('[data-odp-export-message]');
+    exportBtn?.addEventListener('click', () => handleExport(baselineValue));
+
+    try {
+      const metaResponse = await fetch(odpMetaUrl());
+      if (!metaResponse.ok) throw new Error(`odp-meta.json fetch failed: ${metaResponse.status}`);
+      const meta = (await metaResponse.json()) as { oscalVersion: string };
+      if (!meta.oscalVersion) throw new Error('odp-meta.json returned an empty oscalVersion');
+      oscalVersion = meta.oscalVersion;
+      if (exportBtn) exportBtn.disabled = false;
+      if (exportMessage) exportMessage.textContent = '';
+    } catch (err) {
+      console.error('OdpWorkspace: failed to load odp-meta.json', err);
+      if (exportMessage) exportMessage.textContent = 'Export is unavailable — could not load export metadata. Please reload the page.';
+    }
 
     let dataset: OdpDatasetEntry[];
     try {
