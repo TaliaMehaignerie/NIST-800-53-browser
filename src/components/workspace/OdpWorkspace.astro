@@ -29,6 +29,29 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   <p class="odp-workspace__status" data-odp-loading>Loading parameters…</p>
   <p class="odp-workspace__status" data-odp-empty hidden>No organization-defined parameters for this baseline.</p>
 
+  <div class="odp-workspace__dashboard" data-odp-dashboard hidden>
+    <h2 class="odp-workspace__dashboard-heading">Readiness</h2>
+    <p class="odp-dashboard__summary" data-odp-dashboard-summary></p>
+    <table class="odp-dashboard__table" data-odp-dashboard-table>
+      <caption class="odp-dashboard__table-caption">By family</caption>
+      <thead>
+        <tr>
+          <th scope="col">Family</th>
+          <th scope="col">Unreviewed</th>
+          <th scope="col">Confirmed</th>
+          <th scope="col">Overridden</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody data-odp-dashboard-tbody></tbody>
+    </table>
+    <div class="odp-dashboard__actions">
+      <button type="button" class="odp-dashboard__action" data-odp-jump-next>Jump to next unreviewed</button>
+      <button type="button" class="odp-dashboard__action" data-odp-mark-ready>Mark ready</button>
+    </div>
+    <p class="odp-dashboard__message" data-odp-dashboard-message role="status" aria-live="polite"></p>
+  </div>
+
   <div class="odp-workspace__batch" data-odp-batch hidden>
     <h2 class="odp-workspace__batch-heading">Batch entry — dash-one clusters</h2>
     <p class="odp-workspace__batch-intro">
@@ -68,6 +91,85 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     margin-top: 24px;
     padding-top: 16px;
     border-top: 1px solid var(--color-border-hairline);
+  }
+
+  .odp-workspace__dashboard {
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--color-surface-raised);
+    border-radius: var(--rounded-md);
+  }
+
+  .odp-workspace__dashboard-heading {
+    margin: 0 0 8px;
+    font-size: 1.1em;
+    color: var(--color-ink-primary);
+  }
+
+  .odp-dashboard__summary {
+    margin: 0 0 12px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-dashboard__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+
+  .odp-dashboard__table-caption {
+    text-align: left;
+    color: var(--color-ink-secondary);
+    font-family: var(--font-meta);
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .odp-dashboard__table th,
+  .odp-dashboard__table td {
+    text-align: left;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    color: var(--color-ink-primary);
+  }
+
+  .odp-dashboard__actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .odp-dashboard__action {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .odp-dashboard__action:hover:not(:disabled) {
+    background: var(--color-border-hairline);
+  }
+
+  .odp-dashboard__action:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .odp-dashboard__action:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-dashboard__message {
+    margin: 8px 0 0;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
   }
 
   .odp-workspace__batch-heading {
@@ -336,6 +438,169 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   // to see the fan-out (spec manual checks).
   const rowRegistry = new Map<string, { row: HTMLElement; select: ValueFieldSelect }>();
 
+  // Story 3: readiness dashboard state. `entries`/`clusters` don't change
+  // after `init()` loads them — only the decisions they're read against do
+  // — so they're captured once here and every dashboard refresh recomputes
+  // counts fresh from `getDecision` over them (never cached, never stored;
+  // spec Design Notes).
+  let dashboardEntries: OdpDatasetEntry[] = [];
+  let dashboardClusters: Cluster[] = [];
+  let dashboardBaseline = '';
+
+  interface StatusCounts {
+    unreviewed: number;
+    confirmed: number;
+    overridden: number;
+    total: number;
+  }
+
+  function emptyStatusCounts(): StatusCounts {
+    return { unreviewed: 0, confirmed: 0, overridden: 0, total: 0 };
+  }
+
+  function statusField(status: DecisionStatus): 'unreviewed' | 'confirmed' | 'overridden' {
+    return status === 'unreviewed-default' ? 'unreviewed' : status;
+  }
+
+  function currentStatus(entry: OdpDatasetEntry, baseline: string): DecisionStatus {
+    return getDecision(baseline, decisionKey(entry))?.status ?? 'unreviewed-default';
+  }
+
+  // Tallies overall and by-Family counts by reading every entry's status via
+  // `getDecision` — a missing decision counts as `unreviewed-default`
+  // (AD-10). Computed fresh on every call, never cached (spec Design Notes).
+  function computeDashboardCounts(
+    entries: OdpDatasetEntry[],
+    baseline: string,
+  ): { overall: StatusCounts; byFamily: Map<string, StatusCounts> } {
+    const overall = emptyStatusCounts();
+    const byFamily = new Map<string, StatusCounts>();
+
+    for (const entry of entries) {
+      const status = currentStatus(entry, baseline);
+      const field = statusField(status);
+
+      overall.total += 1;
+      overall[field] += 1;
+
+      let familyCounts = byFamily.get(entry.familyCode);
+      if (!familyCounts) {
+        familyCounts = emptyStatusCounts();
+        byFamily.set(entry.familyCode, familyCounts);
+      }
+      familyCounts.total += 1;
+      familyCounts[field] += 1;
+    }
+
+    return { overall, byFamily };
+  }
+
+  // First entry in document order (i.e. `entries`' own order, which is what
+  // rows are built from) whose current status is `unreviewed-default`.
+  function findNextUnreviewedEntry(entries: OdpDatasetEntry[], baseline: string): OdpDatasetEntry | undefined {
+    return entries.find((entry) => currentStatus(entry, baseline) === 'unreviewed-default');
+  }
+
+  function findClusterForEntry(entry: OdpDatasetEntry, clusters: Cluster[]): Cluster | undefined {
+    return clusters.find((cluster) =>
+      cluster.members.some((m) => m.controlSlug === entry.controlSlug && m.paramId === entry.paramId),
+    );
+  }
+
+  // Scrolls to and focuses the jump target: the cluster's batch row if the
+  // next unreviewed entry belongs to one (`groupDashOneClusters`, story 2,
+  // reused unmodified — never reimplemented here), else the entry's own row.
+  function jumpToNextUnreviewed(): void {
+    const next = findNextUnreviewedEntry(dashboardEntries, dashboardBaseline);
+    if (!next) return;
+
+    const cluster = findClusterForEntry(next, dashboardClusters);
+    const selector = cluster
+      ? `[data-odp-cluster-key="${cluster.clusterKey}"]`
+      : `[data-odp-key="${decisionKey(next)}"]`;
+    const target = document.querySelector<HTMLElement>(selector);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus();
+  }
+
+  function handleMarkReady(): void {
+    const message = document.querySelector<HTMLElement>('[data-odp-dashboard-message]');
+    const { overall } = computeDashboardCounts(dashboardEntries, dashboardBaseline);
+    if (!message) return;
+
+    if (overall.unreviewed > 0) {
+      message.textContent = `Not ready — ${overall.unreviewed} parameter${overall.unreviewed === 1 ? '' : 's'} still unreviewed.`;
+      return;
+    }
+
+    message.textContent = `Ready — all ${overall.total} parameters reviewed.`;
+  }
+
+  // Recomputes and re-renders the whole dashboard from current decision
+  // state — called on load and after every successful individual/batch save
+  // so the dashboard is never stale relative to the decisions it counts
+  // (spec Tasks & Acceptance).
+  function refreshDashboard(): void {
+    const dashboard = document.querySelector<HTMLElement>('[data-odp-dashboard]');
+    if (!dashboard || dashboardEntries.length === 0) return;
+    dashboard.hidden = false;
+
+    const { overall, byFamily } = computeDashboardCounts(dashboardEntries, dashboardBaseline);
+
+    const summary = dashboard.querySelector<HTMLElement>('[data-odp-dashboard-summary]');
+    if (summary) {
+      const pct = (n: number) => (overall.total > 0 ? Math.round((n / overall.total) * 100) : 0);
+      summary.textContent =
+        `${overall.unreviewed} unreviewed (${pct(overall.unreviewed)}%) / ` +
+        `${overall.confirmed} confirmed (${pct(overall.confirmed)}%) / ` +
+        `${overall.overridden} overridden (${pct(overall.overridden)}%) of ${overall.total} total`;
+    }
+
+    const tbody = dashboard.querySelector<HTMLElement>('[data-odp-dashboard-tbody]');
+    if (tbody) {
+      tbody.innerHTML = '';
+      const families = Array.from(byFamily.keys()).sort();
+      for (const family of families) {
+        const counts = byFamily.get(family);
+        if (!counts) continue;
+        const tr = document.createElement('tr');
+        const values = [
+          family.toUpperCase(),
+          String(counts.unreviewed),
+          String(counts.confirmed),
+          String(counts.overridden),
+          String(counts.total),
+        ];
+        for (const text of values) {
+          const td = document.createElement('td');
+          td.textContent = text;
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+    }
+
+    const jumpBtn = dashboard.querySelector<HTMLButtonElement>('[data-odp-jump-next]');
+    if (jumpBtn) {
+      jumpBtn.disabled = !findNextUnreviewedEntry(dashboardEntries, dashboardBaseline);
+    }
+
+    const markReadyBtn = dashboard.querySelector<HTMLButtonElement>('[data-odp-mark-ready]');
+    const message = dashboard.querySelector<HTMLElement>('[data-odp-dashboard-message]');
+    if (markReadyBtn) {
+      markReadyBtn.disabled = overall.unreviewed > 0;
+    }
+    if (message) {
+      message.textContent =
+        overall.unreviewed > 0
+          ? `Not ready — ${overall.unreviewed} parameter${overall.unreviewed === 1 ? '' : 's'} still unreviewed.`
+          : '';
+    }
+  }
+
   function buildRow(entry: OdpDatasetEntry, baseline: string): HTMLElement {
     const key = decisionKey(entry);
     const existing = getDecision(baseline, key);
@@ -463,6 +728,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       }
 
       applyStatus(row, status);
+      refreshDashboard();
     }
 
     confirmBtn.addEventListener('click', () => handleAction('confirmed'));
@@ -641,6 +907,10 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       }
 
       refreshClusterMatch(matchLabel, cluster, baseline);
+      // At least one member write may have succeeded even when `results`
+      // includes a failure (see comment above) — refresh regardless so the
+      // dashboard never undercounts a decision that's actually persisted.
+      refreshDashboard();
     }
 
     confirmBtn.addEventListener('click', () => handleBatchAction('confirmed'));
@@ -702,6 +972,18 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
         batchRowsContainer.appendChild(buildBatchRow(cluster, baselineValue));
       }
     }
+
+    dashboardEntries = entries;
+    dashboardClusters = clusters;
+    dashboardBaseline = baselineValue;
+
+    const jumpBtn = workspace.querySelector<HTMLButtonElement>('[data-odp-jump-next]');
+    jumpBtn?.addEventListener('click', () => jumpToNextUnreviewed());
+
+    const markReadyBtn = workspace.querySelector<HTMLButtonElement>('[data-odp-mark-ready]');
+    markReadyBtn?.addEventListener('click', () => handleMarkReady());
+
+    refreshDashboard();
   }
 
   init();

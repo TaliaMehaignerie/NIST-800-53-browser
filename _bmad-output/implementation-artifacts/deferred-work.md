@@ -189,3 +189,39 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/2-add-batched-dash-one-entry.md`
   summary: `clusterKey()`'s `new RegExp(\`^${fc}-0?1_\`)` interpolates `familyCode` into a regex without escaping regex metacharacters.
   evidence: Real (edge-case-hunter) but `familyCode` is always one of 20 fixed uppercase letter-pairs from the ingested catalog (verified, no metacharacters possible) — theoretical hardening against input that can't occur today, consistent with similarly-scoped deferred items already logged for the ingestion pipeline.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: The dashboard's overall summary line rounds each status's percentage independently (`Math.round`), so the three percentages shown can visibly fail to sum to 100% (e.g. three-way near-even splits rendering as 33/33/33).
+  evidence: Real (blind-hunter), a cosmetic rounding artifact with no functional consequence — the underlying counts (not percentages) are exact and drive the actual gate. Worth a reconciling rounding scheme (e.g. largest-remainder) if this reads as sloppy in practice.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `statusField()` maps `DecisionStatus` to a `StatusCounts` key via a two-branch inference (`unreviewed-default` → `'unreviewed'`, else pass-through) rather than an exhaustive switch — if `DecisionStatus` ever gains a fourth member, the pass-through branch would silently produce a key not in `StatusCounts` with no compiler error.
+  evidence: Real (blind-hunter), but `DecisionStatus` is a fixed 3-member union defined once in `odpStore.ts` and load-bearing everywhere else in the workspace (row status labels, cluster matching) — a fourth status would require touching many other places first, making this an unlikely silent-break vector. Worth an exhaustive switch if the status enum is ever extended.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: The dashboard's summary line (`[data-odp-dashboard-summary]`) has no `aria-live` region, so a screen-reader user gets no announcement when the counts change after a save — only the blocked/ready message (`role="status"`) is announced.
+  evidence: Real (blind-hunter), consistent with the same accessibility-floor gap already logged for stories 1 and 2 (no live-region announcement of state changes beyond errors) — an enhancement beyond the established floor, not a regression from it.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `refreshDashboard()` rebuilds the entire by-Family `<tbody>` (`innerHTML = ''` + recreate every row) on every single confirm/override, including batch actions with 18 members — tears down and rebuilds all 18 family rows each time instead of patching just the changed family's row, and drops any focus that was inside the table.
+  evidence: Real (blind-hunter), but the table is small (18 rows for Moderate) and rebuilt only after a user-initiated save, not on a hot path — no perceptible lag expected (NFR-2). Worth patching individual rows if the table grows or focus-preservation becomes a real complaint.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `handleMarkReady()` independently recomputes `computeDashboardCounts` and re-derives the same "Not ready — N unreviewed" message that `refreshDashboard()` already writes into the same element on every state change — two independent implementations of the same string that could drift.
+  evidence: Real (blind-hunter/verification-gap), a simplification opportunity rather than a bug: the blocked branch is unreachable in normal use since the button is already `disabled` by `refreshDashboard` whenever `unreviewed > 0`. Worth having `handleMarkReady` just call `refreshDashboard()` plus append the "Ready — all N reviewed" confirmation on the success path, removing the duplicate computation.
+  
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `jumpToNextUnreviewed()` permanently adds `tabindex="-1"` to whatever row/cluster element it focuses and never removes it — over a session, many rows can accumulate stray `tabindex="-1"` attributes.
+  evidence: Real (blind-hunter), harmless DOM accumulation (doesn't affect tab order since `-1` excludes an element from the natural tab sequence either way). Worth cleaning up on blur if a future accessibility audit flags it.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `jumpToNextUnreviewed`'s selector interpolates `cluster.clusterKey`/`decisionKey(next)` into a `querySelector` attribute-value string without `CSS.escape`, so a value containing a `"` would break the selector.
+  evidence: Real (edge-case-hunter) but unreachable against real data — cluster keys (`prm_1`, `odp.01`..`odp.08`) and decision keys (`${controlSlug}:${paramId}`) never contain quote characters in the ingested catalog (verified). Same class of theoretical hardening already deferred for `clusterKey()`'s regex interpolation in story 2.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: `findClusterForEntry` does a linear scan of every cluster's every member on each "Jump to next unreviewed" click, with no precomputed lookup map.
+  evidence: Real (blind-hunter) but negligible at real scale (9 clusters × ≤18 members, once per button click, not a render-loop hot path). Worth a `Map<entryKey, Cluster>` built once alongside `dashboardEntries` if cluster/entry counts grow substantially.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/3-readiness-gate-and-dashboard.md`
+  summary: The by-Family table's `<th>` header cells have no visual weight differentiation from `<td>` body cells (same padding/border/color, no bold or background tint) — the header row is distinguishable only by tag semantics, not appearance.
+  evidence: Real (blind-hunter), pure visual polish not covered by any spec requirement or the site's existing design tokens for tables (no prior table exists elsewhere in the Browser to match). Cheap to add (`font-weight: 600`) whenever this component is next touched.
