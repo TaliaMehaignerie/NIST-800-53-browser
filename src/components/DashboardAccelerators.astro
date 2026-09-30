@@ -241,28 +241,40 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
     const statuses = getStatuses();
     const name = baselineLabel(baseline);
 
-    const ready: { item: Item; detail: string }[] = [];
-    const blocked: { item: Item; detail: string; workspace: string }[] = [];
-    const stale: { item: Item; detail: string; workspace: string }[] = [];
+    type Row = { item: Item; detail: string; unreviewed: number; workspace?: string };
+    const ready: Row[] = [];
+    const blocked: Row[] = [];
+    const stale: Row[] = [];
+    const workspaceFor = (familyCode: string): string => {
+      const url = new URL(workspaceUrl(baseline), window.location.origin);
+      url.searchParams.set('view', 'individual');
+      url.searchParams.set('family', familyCode);
+      url.searchParams.set('unreviewed', '1');
+      return url.toString();
+    };
 
     for (const item of items) {
       if (!isCounted(item, baseline)) continue;
       const status = statuses[item.slug]?.status;
       if (status !== 'in-progress' && status !== 'compliant') continue;
       const gate = interlockFor({ slug: item.slug, baselines: item.baselines, paramIds: item.paramIds }, baseline, decisions);
-      const workspace = new URL(workspaceUrl(baseline), window.location.origin);
-      workspace.searchParams.set('view', 'individual');
-      workspace.searchParams.set('family', item.familyCode);
-      workspace.searchParams.set('unreviewed', '1');
-      const detail = `${gate.unreviewed} of ${gate.total} parameter${gate.total === 1 ? '' : 's'} unreviewed`;
-
-      if (status === 'in-progress' && !gate.blocked) ready.push({ item, detail: 'No unreviewed parameters' });
-      else if (status === 'in-progress') blocked.push({ item, detail, workspace: workspace.toString() });
-      else if (gate.blocked) stale.push({ item, detail, workspace: workspace.toString() });
+      if (status === 'in-progress' && !gate.blocked) {
+        ready.push({ item, detail: 'No unreviewed parameters', unreviewed: 0 });
+        continue;
+      }
+      if (!gate.blocked) continue;
+      const row: Row = {
+        item,
+        detail: `${gate.unreviewed} of ${gate.total} parameter${gate.total === 1 ? '' : 's'} unreviewed`,
+        unreviewed: gate.unreviewed,
+        workspace: workspaceFor(item.familyCode),
+      };
+      (status === 'in-progress' ? blocked : stale).push(row);
     }
 
-    blocked.sort((a, b) => Number(b.detail.split(' ')[0]) - Number(a.detail.split(' ')[0]));
-    stale.sort((a, b) => Number(b.detail.split(' ')[0]) - Number(a.detail.split(' ')[0]));
+    // Most unreviewed first: the most actionable items lead.
+    blocked.sort((a, b) => b.unreviewed - a.unreviewed);
+    stale.sort((a, b) => b.unreviewed - a.unreviewed);
 
     host.replaceChildren();
     const groups = [
@@ -279,9 +291,6 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
   }
 
   // ---- 2. Moving between baselines ---------------------------------------
-  function statusOf(slug: string): string {
-    return getStatuses()[slug]?.status ?? 'none';
-  }
 
   function renderDelta(): void {
     const fromSel = root!.querySelector<HTMLSelectElement>('[data-delta-from]')!;
@@ -299,6 +308,11 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
       return;
     }
 
+    // One read of the store per render, not one per item.
+    const statuses = getStatuses();
+    const hasRecord = (slug: string) => Object.prototype.hasOwnProperty.call(statuses, slug);
+    const statusOf = (slug: string): string => (hasRecord(slug) ? statuses[slug].status : 'none');
+
     const added = items.filter((i) => isCounted(i, to) && !isCounted(i, from));
     const dropped = items.filter((i) => isCounted(i, from) && !isCounted(i, to));
     const unstatused = added.filter((i) => statusOf(i.slug) === 'none');
@@ -308,17 +322,20 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
       `${unstatused.length} of them ha${unstatused.length === 1 ? 's' : 've'} no status yet.` +
       (dropped.length > 0 ? ` It also drops ${dropped.length} item${dropped.length === 1 ? '' : 's'}.` : '');
 
-    const tally: [string, string][] = [
-      ['compliant', 'Compliant'],
-      ['in-progress', 'In progress'],
-      ['incomplete', 'Incomplete'],
-      ['not-applicable', 'Not applicable'],
-      ['none', 'No status yet'],
+    // Same definition as the dashboard above (AD-15): an item with no record
+    // IS incomplete, so the two are one bucket here, with the never-statused
+    // part called out rather than counted separately.
+    const tally = new Map<string, number>();
+    for (const i of added) tally.set(statusOf(i.slug), (tally.get(statusOf(i.slug)) ?? 0) + 1);
+    const n = (key: string) => tally.get(key) ?? 0;
+    const incomplete = n('incomplete') + n('none');
+    const lines: [number, string][] = [
+      [n('compliant'), 'Compliant'],
+      [n('in-progress'), 'In progress'],
+      [incomplete, `Incomplete (${n('none')} with no status set yet)`],
+      [n('not-applicable'), 'Not applicable'],
     ];
-    for (const [key, label] of tally) {
-      const n = added.filter((i) => statusOf(i.slug) === key).length;
-      if (n > 0) breakdown.appendChild(el('li', undefined, `${label}: ${n}`));
-    }
+    for (const [count, label] of lines) if (count > 0) breakdown.appendChild(el('li', undefined, `${label}: ${count}`));
 
     if (added.length === 0) return;
     const byFamily = new Map<string, { added: number; none: number }>();

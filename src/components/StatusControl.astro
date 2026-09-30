@@ -412,14 +412,10 @@ const OPTIONS: { value: string; label: string }[] = [
     const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
     const inherited = status === 'not-applicable' && p.jtype.value === 'inherited';
     const inheritedFrom = inherited ? p.provider.value.trim() : undefined;
-    const justification =
-      status !== 'not-applicable'
-        ? ''
-        : inherited
-          ? inheritedFrom
-            ? inheritedJustification(inheritedFrom, p.justification.value)
-            : p.justification.value
-          : p.justification.value;
+    let justification = '';
+    if (status === 'not-applicable') {
+      justification = inheritedFrom ? inheritedJustification(inheritedFrom, p.justification.value) : p.justification.value;
+    }
     const evidence = readEvidence(root);
     // Defense in depth: the Save button is disabled while blocked, but the
     // rule is enforced here too.

@@ -293,3 +293,7 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/17-progressive-home-page.md`
   summary: Revealing the home dashboard shifts the catalog down (~250px) for returning visitors, and its headings precede the page h1.
   evidence: The plan deliberately renders the catalog first and reveals the dashboard after the has-data check. Avoiding the shift needs a pre-paint check, which can only be an inline script reading localStorage outside the stores (against AD-10/AD-14) or a reserved placeholder height.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/19-workflow-accelerators.md`
+  summary: The dashboard page embeds two overlapping item payloads (ComplianceDashboard's and DashboardAccelerators').
+  evidence: Both are built from the same Content Collection query; the second adds label, title, parent slug and parameter ids. A single shared payload (passed from dashboard.astro to both components, with the home page keeping the lean one) would save bytes; it is a refactor, not a correctness issue.

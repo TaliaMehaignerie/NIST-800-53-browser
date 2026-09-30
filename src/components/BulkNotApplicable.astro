@@ -37,6 +37,11 @@ const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
     <textarea rows="2" data-bulk-justification aria-label="Justification" placeholder="Justification (required for Other; optional details for a provider)"></textarea>
   </fieldset>
 
+  <label class="bulk-na__include">
+    <input type="checkbox" data-bulk-include-worked /> Also replace items already marked compliant or in progress
+    (<span data-bulk-worked-count></span>)
+  </label>
+
   <p class="bulk-na__preview" data-bulk-preview></p>
   <p class="bulk-na__error" role="alert" data-bulk-error hidden></p>
   <div class="bulk-na__actions">
@@ -177,16 +182,28 @@ const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
     const reasonOf = () => root.querySelector<HTMLInputElement>('input[name="bulk-na-reason"]:checked')!.value;
     let planned: { slug: string; record: StatusInput }[] = [];
 
-    // The items a click would change: the chosen scope, minus those already
-    // not applicable (which keep their own justification).
-    function candidates(): BulkItem[] {
+    function inScope(): BulkItem[] {
       const baseline = getActiveBaseline();
-      const inScope =
-        scopeOf() === 'family'
-          ? items
-          : items.filter((i) => isCounted({ slug: i.slug, familyCode, baselines: i.baselines, withdrawn: false }, baseline));
+      return scopeOf() === 'family'
+        ? items
+        : items.filter((i) => isCounted({ slug: i.slug, familyCode, baselines: i.baselines, withdrawn: false }, baseline));
+    }
+
+    // Worked items (compliant or in progress) carry real work that a bulk
+    // write would replace, with no undo — so they are left alone unless the
+    // user opts in. Items already not applicable always keep their own
+    // justification.
+    function isWorked(slug: string): boolean {
+      const status = getStatuses()[slug]?.status;
+      return status === 'compliant' || status === 'in-progress';
+    }
+
+    function candidates(): BulkItem[] {
+      const includeWorked = $<HTMLInputElement>('[data-bulk-include-worked]').checked;
       const statuses = getStatuses();
-      return inScope.filter((i) => statuses[i.slug]?.status !== 'not-applicable');
+      return inScope().filter(
+        (i) => statuses[i.slug]?.status !== 'not-applicable' && (includeWorked || !isWorked(i.slug)),
+      );
     }
 
     function buildInput(): { input: Omit<StatusInput, 'owner'>; problem: string | null } {
@@ -220,12 +237,21 @@ const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
       $('[data-bulk-count-family]').textContent = String(items.length);
 
       const list = candidates();
-      const alreadyNa = (scopeOf() === 'family' ? items : inBaseline).length - list.length;
+      const scope = inScope();
+      const statuses = getStatuses();
+      const alreadyNa = scope.filter((i) => statuses[i.slug]?.status === 'not-applicable').length;
+      const worked = scope.filter((i) => isWorked(i.slug)).length;
+      const includeWorked = $<HTMLInputElement>('[data-bulk-include-worked]').checked;
+      $('[data-bulk-worked-count]').textContent = String(worked);
+      const leftAlone = (includeWorked ? 0 : worked) + alreadyNa;
       $('[data-bulk-preview]').textContent =
         list.length === 0
-          ? 'Nothing to change: every item in this scope is already not applicable.'
+          ? 'Nothing to change with these settings.' + (leftAlone > 0 ? ` ${leftAlone} item${leftAlone === 1 ? ' is' : 's are'} left as they are.` : '')
           : `This will mark ${list.length} item${list.length === 1 ? '' : 's'} not applicable. ${breakdownText(list)}` +
-            (alreadyNa > 0 ? ` ${alreadyNa} already not applicable ${alreadyNa === 1 ? 'is' : 'are'} left as they are.` : '');
+            (leftAlone > 0
+              ? ` ${leftAlone} item${leftAlone === 1 ? ' is' : 's are'} left as ${leftAlone === 1 ? 'it is' : 'they are'} ` +
+                `(already not applicable${includeWorked ? '' : ', compliant or in progress'}).`
+              : '');
       $<HTMLButtonElement>('[data-bulk-apply]').disabled = list.length === 0;
     }
 
@@ -263,10 +289,10 @@ const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
     });
 
     $('[data-bulk-confirm-yes]').addEventListener('click', () => {
-      // Re-plan against the data as it is NOW, so the confirmation can never be stale.
-      const before = planned.length;
-      const fresh = candidates();
-      if (fresh.length !== before) {
+      // Re-plan against the data as it is NOW, so the confirmation can never be
+      // stale: the exact items must match, not just how many there are.
+      const fresh = candidates().map((i) => i.slug).join('|');
+      if (fresh !== planned.map((p) => p.slug).join('|')) {
         closeConfirm();
         render();
         $('[data-bulk-error]').textContent = 'The items changed while you were confirming. Review the updated preview and try again.';
@@ -297,7 +323,19 @@ const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
       }
     });
 
-    root.addEventListener('change', render);
+    // Changing any setting under an open confirmation would leave it describing
+    // a plan the user no longer has, so dismiss it and let them re-confirm.
+    const dismissStaleConfirm = () => {
+      if (!$('[data-bulk-confirm]').hidden) {
+        closeConfirm();
+        say('Settings changed. Review the updated preview and confirm again.');
+      }
+    };
+    root.addEventListener('change', () => {
+      dismissStaleConfirm();
+      render();
+    });
+    root.addEventListener('input', dismissStaleConfirm);
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     onOdpStorageChange(render, { baseline: true, decisions: false, status: true });
     render();

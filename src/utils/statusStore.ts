@@ -250,13 +250,6 @@ function getOwn(items: Record<string, StatusRecord>, slug: string): StatusRecord
   return Object.prototype.hasOwnProperty.call(items, slug) ? items[slug] : undefined;
 }
 
-/**
- * Writes one item's status and stamps `updatedAt`. Rejects (returns `false`,
- * nothing written) when `status` is unknown, or when `not-applicable` is
- * requested without a non-empty justification — the same boundary and idiom
- * as `overridden` requiring a rationale in `odpStore`. Also returns `false`
- * when the underlying write fails (quota, private mode).
- */
 /** The justification stored for an inherited N/A: the user's details, else a default naming the provider. */
 export function inheritedJustification(provider: string, details: string): string {
   return details.trim().length > 0 ? details : `Inherited from ${provider.trim()}`;
@@ -313,6 +306,13 @@ function writeBlob(next: StatusBlob): boolean {
   }
 }
 
+/**
+ * Writes one item's status and stamps `updatedAt`. Rejects (returns `false`,
+ * nothing written) when `status` is unknown, or when `not-applicable` is
+ * requested without a non-empty justification — the same boundary and idiom
+ * as `overridden` requiring a rationale in `odpStore`. Also returns `false`
+ * when the underlying write fails (quota, private mode).
+ */
 export function setStatus(slug: string, record: StatusInput): boolean {
   if (!isItemStatus(record.status)) return false;
   if (statusProblem(record) !== null) return false;

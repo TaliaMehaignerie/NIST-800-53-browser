@@ -483,8 +483,7 @@ const ICONS: Record<string, string> = {
   } from '../utils/complianceCount';
   import { onOdpStorageChange } from '../utils/storageSync';
   import { hasWorkbenchData } from '../utils/workbenchData';
-  import { DASHBOARD_BASELINE_EVENT, dashboardBaseline, explicitDashboardBaseline } from '../utils/dashboardBaseline';
-  import { setUrlState } from '../utils/urlState';
+  import { dashboardBaseline, explicitDashboardBaseline, setDashboardBaseline } from '../utils/dashboardBaseline';
 
   interface FamilyInfo {
     code: string;
@@ -696,16 +695,14 @@ const ICONS: Record<string, string> = {
 
     root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((button) => {
       button.addEventListener('click', () => {
-        setUrlState({ search: { baseline: button.dataset.baseline ?? null } });
+        setDashboardBaseline(button.dataset.baseline ?? null);
         render();
-        window.dispatchEvent(new CustomEvent(DASHBOARD_BASELINE_EVENT));
       });
     });
 
     root.querySelector<HTMLButtonElement>('[data-pin-clear]')?.addEventListener('click', () => {
-      setUrlState({ search: { baseline: null } });
+      setDashboardBaseline(null);
       render();
-      window.dispatchEvent(new CustomEvent(DASHBOARD_BASELINE_EVENT));
     });
 
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
