@@ -522,6 +522,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
   import { setUrlState } from '../../utils/urlState';
+  import { isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
   // switched by a button group whose state lives in the URL query (AD-3),
@@ -811,6 +812,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   // so the dashboard is never stale relative to the decisions it counts
   // (spec Tasks & Acceptance).
   function refreshDashboard(): void {
+    window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
     const dashboard = document.querySelector<HTMLElement>('[data-odp-dashboard]');
     if (!dashboard || dashboardEntries.length === 0) return;
     // Visibility is owned by `setActiveView`, not this function — the
@@ -1252,6 +1254,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     if (!workspace) return;
     const baselineValue = workspace.dataset.baseline;
     if (!baselineValue) return;
+    // The route's path baseline is authoritative (AD-13): opening this page is unambiguous intent.
+    if (isBaseline(baselineValue)) setActiveBaseline(baselineValue);
 
     const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
     const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');

@@ -19,6 +19,7 @@
 import ProvenanceFooter from '../components/ProvenanceFooter.astro';
 import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
+import WorkingBaseline from '../components/WorkingBaseline.astro';
 import { homeUrl } from '../utils/url';
 
 interface Props {
@@ -40,6 +41,7 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     <header class="site-header">
       <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
       <SearchBox value={searchQuery} />
+      <WorkingBaseline />
       {showBaselineFilter && <BaselineFilter />}
     </header>
     <main data-pagefind-body>

@@ -1,0 +1,137 @@
+---
+// AD-13: the working baseline ("whose decisions am I making") — separate from
+// BaselineFilter ("what do I want to see"). No `All` here. Hidden until the
+// script runs so a JS-off header is unchanged.
+import { BASELINES } from '../utils/activeBaseline';
+import { workspaceUrl } from '../utils/url';
+
+const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
+---
+
+<div class="working-baseline" data-working-baseline hidden>
+  <label class="working-baseline__label" for="working-baseline-select">Working in</label>
+  <select id="working-baseline-select" class="working-baseline__select" data-working-baseline-select>
+    {BASELINES.map((b) => <option value={b}>{label(b)}</option>)}
+  </select>
+  <a class="working-baseline__chip" href={workspaceUrl('moderate')} data-working-baseline-chip>Moderate</a>
+</div>
+
+<style>
+  .working-baseline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    background: var(--color-surface-raised);
+  }
+
+  .working-baseline[hidden] {
+    display: none;
+  }
+
+  .working-baseline__label {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .working-baseline__select {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 3px 6px;
+  }
+
+  .working-baseline__select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .working-baseline__chip {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border-radius: var(--rounded-full);
+    padding: 2px 10px;
+    text-decoration: none;
+  }
+
+  .working-baseline__chip:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  import {
+    ACTIVE_BASELINE_EVENT,
+    getActiveBaseline,
+    isBaseline,
+    setActiveBaseline,
+    type Baseline,
+  } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { odpMetaUrl, workspaceUrl } from '../utils/url';
+
+  const root = document.querySelector<HTMLElement>('[data-working-baseline]');
+  const select = root?.querySelector<HTMLSelectElement>('[data-working-baseline-select]');
+  const chip = root?.querySelector<HTMLAnchorElement>('[data-working-baseline-chip]');
+
+  // null until odp-meta.json loads (or if it fails) — the chip then shows the
+  // baseline name alone, never a fabricated 0/0.
+  let totals: Record<string, number> | null = null;
+
+  function render(): void {
+    if (!root || !select || !chip) return;
+    const baseline = getActiveBaseline();
+    const name = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+    select.value = baseline;
+    chip.href = workspaceUrl(baseline);
+
+    const total = totals?.[baseline];
+    if (typeof total === 'number') {
+      const reviewed = Object.values(getDecisions(baseline)).filter((d) => d.status !== 'unreviewed-default').length;
+      chip.textContent = `${name} · ${reviewed}/${total} reviewed`;
+    } else {
+      chip.textContent = name;
+    }
+  }
+
+  async function loadTotals(): Promise<void> {
+    try {
+      const response = await fetch(odpMetaUrl());
+      if (!response.ok) throw new Error(`odp-meta.json fetch failed: ${response.status}`);
+      const meta = (await response.json()) as { paramCounts?: Record<string, number> };
+      totals = meta.paramCounts ?? null;
+    } catch (err) {
+      console.error('WorkingBaseline: failed to load readiness totals', err);
+    }
+    render();
+  }
+
+  if (root && select && chip) {
+    render();
+    root.hidden = false;
+
+    select.addEventListener('change', () => {
+      if (!isBaseline(select.value)) return;
+      const next: Baseline = select.value;
+      setActiveBaseline(next);
+      // The workspace route's path baseline is authoritative for its own page.
+      if (document.querySelector('[data-odp-workspace]')) {
+        window.location.assign(workspaceUrl(next));
+      }
+    });
+
+    window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+    window.addEventListener('odpdecisionschanged', render);
+    loadTotals();
+  }
+</script>
