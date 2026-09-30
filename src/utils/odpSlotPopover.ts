@@ -18,6 +18,7 @@ import {
   type ValueFieldSelect,
 } from './odpEdit';
 import { valuesMatch } from './odpCluster';
+import { ACTIVE_BASELINE_EVENT } from './activeBaseline';
 import { workspaceUrl } from './url';
 
 export interface SlotParam {
@@ -56,14 +57,20 @@ export interface OpenPopoverArgs {
 
 let current: { el: HTMLElement; slot: HTMLElement; cleanup: () => void } | null = null;
 
-export function closeSlotPopover(): void {
+export function isSlotPopoverOpenFor(slot: HTMLElement): boolean {
+  return current?.slot === slot;
+}
+
+// Focus goes back to the slot except on outside-click dismissal, where the
+// user has deliberately moved elsewhere and a focus() would scroll them back.
+export function closeSlotPopover(restoreFocus = true): void {
   if (!current) return;
   const { el, slot, cleanup } = current;
   current = null;
   cleanup();
   el.remove();
   slot.setAttribute('aria-expanded', 'false');
-  slot.focus();
+  if (restoreFocus) slot.focus({ preventScroll: true });
 }
 
 export function openSlotPopover(args: OpenPopoverArgs): void {
@@ -125,10 +132,13 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
   // in the working baseline. The match count is recomputed from odpStore on
   // every change (AD-11) — nothing about the cluster is ever stored.
   const listIdx = cluster.byParam[paramId]?.[baseline];
-  const members = (listIdx !== undefined ? cluster.lists[listIdx] : []).map(([slug, pid]) => ({
+  const listed = (listIdx !== undefined ? cluster.lists[listIdx] : []).map(([slug, pid]) => ({
     controlSlug: slug,
     paramId: pid,
   }));
+  // The index is keyed by paramId for this page's own control; only trust it
+  // when this slot's own decision key is actually one of the members.
+  const members = listed.some((m) => m.controlSlug === controlSlug && m.paramId === paramId) ? listed : [];
   let scopeAll: HTMLInputElement | null = null;
   let countLine: HTMLElement | null = null;
 
@@ -288,11 +298,18 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
 
   function onPointerDown(e: MouseEvent): void {
     const target = e.target as Node;
-    if (!el.contains(target) && !slot.contains(target)) closeSlotPopover();
+    if (!el.contains(target) && !slot.contains(target)) closeSlotPopover(false);
+  }
+
+  // The popover saves to the baseline it opened for; if the working baseline
+  // changes underneath it, close rather than write to a stale one.
+  function onBaselineChange(): void {
+    closeSlotPopover();
   }
 
   document.addEventListener('keydown', onKeydown);
   document.addEventListener('mousedown', onPointerDown);
+  window.addEventListener(ACTIVE_BASELINE_EVENT, onBaselineChange);
 
   document.body.appendChild(el);
   const rect = slot.getBoundingClientRect();
@@ -309,6 +326,7 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
     cleanup: () => {
       document.removeEventListener('keydown', onKeydown);
       document.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener(ACTIVE_BASELINE_EVENT, onBaselineChange);
     },
   };
   (focusables()[0] ?? el).focus();

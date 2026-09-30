@@ -10,18 +10,10 @@
 // (`odpSlotPopover.ts`, which mounts `odpEdit.ts`). Its data is embedded per
 // page at build time — only each control's own param label/select/guidelines,
 // never the 736 KB dataset (AD-8 still applies: same Content Collection).
-interface SlotControl {
-  familyCode: string;
-  controlId: string;
-  title: string;
-  params: Record<string, { label: string | null; select: { howMany: string | null; choice: string[] } | null; guidelines: string[] }>;
-}
+import type { SlotPayload } from '../utils/odpSlotPopover';
 
 interface Props {
-  payload: {
-    controls: Record<string, SlotControl>;
-    cluster: { lists: [string, string][][]; byParam: Record<string, Record<string, number>> };
-  };
+  payload: SlotPayload;
 }
 
 const { payload: data } = Astro.props;
@@ -190,7 +182,7 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
 <script>
   import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
-  import { openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
+  import { closeSlotPopover, isSlotPopoverOpenFor, openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
 
   let controlData: Record<string, SlotControl> = {};
   let clusterData: SlotPayload['cluster'] = { lists: [], byParam: {} };
@@ -215,6 +207,12 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
 
   function openFor(slot: HTMLElement): void {
     if (slot.getAttribute('role') !== 'button') return;
+    // Clicking the slot that already has the popover open toggles it off
+    // instead of rebuilding it (which would discard typed input).
+    if (isSlotPopoverOpenFor(slot)) {
+      closeSlotPopover();
+      return;
+    }
     const slug = slot.dataset.controlSlug ?? '';
     const control = controlData[slug];
     if (!control) return;
@@ -282,12 +280,12 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
   window.addEventListener(ACTIVE_BASELINE_EVENT, render);
 
   document.addEventListener('click', (e) => {
-    const slot = (e.target as HTMLElement).closest<HTMLElement>('[data-odp-slot]');
+    const slot = (e.target as Element | null)?.closest?.<HTMLElement>('[data-odp-slot]');
     if (slot) openFor(slot);
   });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' && e.key !== ' ') return;
-    const slot = (e.target as HTMLElement).closest<HTMLElement>?.('[data-odp-slot]');
+    const slot = (e.target as Element | null)?.closest?.<HTMLElement>('[data-odp-slot]');
     if (!slot || e.target !== slot) return;
     e.preventDefault();
     openFor(slot);
