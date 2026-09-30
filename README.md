@@ -1,6 +1,6 @@
 # NIST 800-53 Browser
 
-A fast, phone-readable way to read [NIST SP 800-53 Rev 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final) with a search tool and baseline filter.
+A fast, phone-readable way to read [NIST SP 800-53 Rev 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final) with a search tool and baseline filter. It also works as a small compliance workbench: decide NIST's organization-defined parameters, track implementation status and evidence, and see how complete you are — all stored in your own browser.
 
 **🔗 [Link to browser webpage](https://taliamehaignerie.github.io/NIST-800-53-browser/)**
 
@@ -12,6 +12,16 @@ A fast, phone-readable way to read [NIST SP 800-53 Rev 5](https://csrc.nist.gov/
 - **See the ISO 27001 crosswalk** — each Control shows its mapped ISO/IEC 27001:2022 clauses, hand-transcribed from NIST's own official mapping.
 - **Search** — by Control ID, title, or keyword (including NIST's own "Discussion" explanatory text), filterable by baseline.
 - **Deep-linkable everything** — every view (a filtered list, an expanded enhancement, a search result) is a real URL you can share.
+
+## Compliance workbench
+
+Everything below is optional, runs entirely in the browser, and keeps its data in this browser's local storage — there is no backend and nothing is uploaded.
+
+- **Decide the parameters** — the 643 organization-defined parameters in the Moderate baseline (767 in High) appear inline in each Control's text. Click one to confirm NIST's wording or override it with a rationale, or work through them in a workspace with batch entry for the shared dash-one policy controls.
+- **Proposals, never copies** — a parameter you already decided in another baseline is proposed with its source named; nothing is saved until you confirm it, so moving from Moderate to High still costs an act of review.
+- **Track status and evidence** — mark each Control and Enhancement incomplete, in progress, compliant or not applicable, with an owner and evidence references. "Inherited from a provider" is a first-class reason, and a Control cannot be marked compliant while its own parameters are unreviewed.
+- **See where you stand** — a dashboard shows the completion percentage with its raw fraction beside it, broken down by family, plus what's blocking you and what moving between baselines adds. The home page promotes it once you have data.
+- **Export and back up** — export an OSCAL Profile, and download or restore everything in one versioned backup file. Restoring asks for confirmation and never applies a file partially.
 
 ## Not an official source
 
