@@ -85,7 +85,7 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
   const existing = getDecision(baseline, key);
   // Story 20: an earlier answer from another baseline is PROPOSED, never
   // copied. It prefills the fields; nothing is saved until Confirm/Override.
-  const proposal = existing && existing.status !== 'unreviewed-default' ? undefined : proposalsFor([key], baseline).get(key);
+  const proposal = existing ? undefined : proposalsFor([key], baseline).get(key);
   const baselineName = baselineLabel(baseline);
   const uid = `odp-pop-${controlSlug}-${paramId}`.replace(/[^a-zA-Z0-9_-]/g, '-');
 

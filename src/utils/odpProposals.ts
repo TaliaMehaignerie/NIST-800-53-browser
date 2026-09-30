@@ -43,6 +43,7 @@ const NESTED = ['low', 'moderate', 'high'] as const;
  * offered High's answer before Low's). Privacy is last, except as a target.
  */
 export function sourceOrder(target: string): string[] {
+  if (!(BASELINES as readonly string[]).includes(target)) return [];
   if (target === 'privacy') return ['high', 'moderate', 'low'];
   const rank = NESTED.indexOf(target as (typeof NESTED)[number]);
   const nested = NESTED.filter((b) => b !== target).sort(
@@ -56,7 +57,11 @@ function isDecided(decision: Decision | undefined): decision is Decision & { sta
   return decision !== undefined && decision.status !== 'unreviewed-default';
 }
 
-/** Proposals for the keys that are still unreviewed in `target`; keys already decided there get none. */
+/**
+ * Proposals for the keys that have NO stored decision in `target`. A stored
+ * decision of any status is the user's own (a draft included) and is never
+ * second-guessed by a proposal, so the prefill and the note can never disagree.
+ */
 export function proposalsFor(keys: string[], target: string): Map<string, Proposal> {
   const own = getDecisions(target);
   const sources = sourceOrder(target)
@@ -65,7 +70,7 @@ export function proposalsFor(keys: string[], target: string): Map<string, Propos
 
   const proposals = new Map<string, Proposal>();
   for (const key of keys) {
-    if (isDecided(own[key])) continue;
+    if (own[key] !== undefined) continue;
     for (const { from, decisions } of sources) {
       const decision = decisions[key];
       if (!isDecided(decision)) continue;
