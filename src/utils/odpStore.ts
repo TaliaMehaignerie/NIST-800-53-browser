@@ -111,6 +111,23 @@ function parseBlob(raw: string | null): OdpBlob {
 }
 
 /**
+ * Writes many decisions in ONE atomic pass (story 20, bulk adopt): every entry
+ * is validated first (an override needs a non-empty rationale, exactly as in
+ * `setDecision`) and then all are written together, so either all land or none
+ * do. The decisions are fully independent — nothing marks them as adopted.
+ */
+export function setDecisions(baseline: string, entries: { key: string; decision: Decision }[]): boolean {
+  if (entries.length === 0) return true;
+  for (const { decision } of entries) {
+    if (decision.status === 'overridden' && decision.rationale.trim().length === 0) return false;
+  }
+  const current = readBlob(baseline);
+  const decisions = { ...current.decisions };
+  for (const { key, decision } of entries) decisions[key] = decision;
+  return writeBlob(baseline, { ...current, decisions });
+}
+
+/**
  * Backup/restore access (story 18): the stored text of one baseline's blob, or
  * `null` when none. Kept here so this module stays the only localStorage path.
  */

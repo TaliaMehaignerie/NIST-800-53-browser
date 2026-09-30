@@ -4,7 +4,8 @@
  * only module that calls `setDecision`; state itself stays in `odpStore.ts`
  * (AD-10). Callers own their own row/dashboard refresh.
  */
-import { setDecision, type Decision } from './odpStore';
+import { setDecision, setDecisions, type Decision } from './odpStore';
+import type { Proposal } from './odpProposals';
 import type { OdpDatasetEntry } from './odpCluster';
 
 export type ValueFieldSelect = OdpDatasetEntry['select'];
@@ -108,6 +109,22 @@ export function validateOverrideRationale(status: Decision['status'], rationale:
 
 export function saveDecision(baseline: string, key: string, decision: Decision): boolean {
   return setDecision(baseline, key, decision);
+}
+
+/**
+ * Story 20: adopt proposals from another baseline as this baseline's own
+ * decisions. Each is recorded under the SOURCE decision's status and rationale
+ * (an override keeps its reasoning), as a deliberate, individually editable
+ * decision — never a combined or adopted-tagged entry. One atomic write.
+ */
+export function adoptProposals(baseline: string, proposals: Map<string, Proposal>): boolean {
+  return setDecisions(
+    baseline,
+    Array.from(proposals, ([key, p]) => ({
+      key,
+      decision: { value: p.value, status: p.status, rationale: p.rationale },
+    })),
+  );
 }
 
 // AD-11: one independent write per member, never a combined entry.

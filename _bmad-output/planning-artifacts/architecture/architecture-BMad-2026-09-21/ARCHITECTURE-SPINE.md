@@ -176,6 +176,7 @@ No new runtime dependency is introduced — batching, clustering, storage, and O
     utils/
       odpStore.ts                # sole decision-state read/write path (AD-10)
       odpEdit.ts                 # sole decision-mutation path: fields, validation, fan-out (AD-9, amended)
+      odpProposals.ts            # cross-baseline proposals: a read across blobs, never stored, never auto-copied (AD-10, story 20)
       odpCluster.ts               # dash-one id-suffix matching, shared by batch UI + dashboard (AD-11)
       odpCounts.ts                # the one ODP status tally, shared by dashboard, control summary, family column
       odpReadiness.ts             # in-baseline readiness roll-up over a control and its enhancements

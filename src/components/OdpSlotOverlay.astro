@@ -206,6 +206,7 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
   import { getDecisions } from '../utils/odpStore';
   import { onOdpStorageChange } from '../utils/storageSync';
   import { readinessFor } from '../utils/odpReadiness';
+  import { proposalsFor } from '../utils/odpProposals';
   import { readSlotPayload } from '../utils/slotPayload';
   import { closeSlotPopover, isSlotPopoverOpenFor, openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
 
@@ -305,6 +306,13 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     const baseline = getActiveBaseline();
     const name = baselineLabel(baseline);
     const decisions = getDecisions(baseline);
+    // Story 20: parameters that are unreviewed here but decided in another baseline.
+    const proposals = proposalsFor(
+      Array.from(document.querySelectorAll<HTMLElement>('[data-odp-slot]')).map(
+        (s) => `${s.dataset.controlSlug}:${s.dataset.paramId}`,
+      ),
+      baseline,
+    );
 
     document.querySelectorAll<HTMLElement>('[data-odp-baselines]').forEach((scope) => {
       const inBaseline = (scope.dataset.odpBaselines ?? '').split(' ').includes(baseline);
@@ -323,7 +331,9 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
         const decision = decisions[`${slot.dataset.controlSlug}:${slot.dataset.paramId}`];
         const status = decision?.status ?? 'unreviewed-default';
         slot.dataset.status = status;
-        slot.title = `${STATUS_LABEL[status]} (${name})`;
+        const proposal = decision ? undefined : proposals.get(`${slot.dataset.controlSlug}:${slot.dataset.paramId}`);
+        slot.title =
+          `${STATUS_LABEL[status]} (${name})` + (proposal ? `; proposal available from ${baselineLabel(proposal.from)}` : '');
         if (decision) {
           slot.textContent = valueText(decision.value);
           const tag = document.createElement('span');

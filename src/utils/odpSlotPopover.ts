@@ -19,6 +19,7 @@ import {
 } from './odpEdit';
 import { valuesMatch } from './odpCluster';
 import { ACTIVE_BASELINE_EVENT, baselineLabel } from './activeBaseline';
+import { proposalsFor, proposalSourceText, proposalValueText } from './odpProposals';
 import { workspaceUrl } from './url';
 
 export interface SlotParam {
@@ -82,6 +83,9 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
 
   const key = decisionKey({ controlSlug, paramId });
   const existing = getDecision(baseline, key);
+  // Story 20: an earlier answer from another baseline is PROPOSED, never
+  // copied. It prefills the fields; nothing is saved until Confirm/Override.
+  const proposal = existing && existing.status !== 'unreviewed-default' ? undefined : proposalsFor([key], baseline).get(key);
   const baselineName = baselineLabel(baseline);
   const uid = `odp-pop-${controlSlug}-${paramId}`.replace(/[^a-zA-Z0-9_-]/g, '-');
 
@@ -102,6 +106,16 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
   meta.textContent = `${param.label ?? paramId} · ${baselineName} baseline`;
   el.appendChild(meta);
 
+  if (proposal) {
+    const note = document.createElement('p');
+    note.className = 'odp-popover__meta';
+    note.dataset.odpProposal = 'true';
+    note.textContent =
+      `Proposed from ${proposalSourceText(proposal)}: ${proposalValueText(proposal)}. ` +
+      `Nothing is saved until you confirm or override — edit it first if ${baselineName} needs a different value.`;
+    el.appendChild(note);
+  }
+
   if (param.guidelines.length > 0) {
     const list = document.createElement('ul');
     list.className = 'odp-popover__guidelines';
@@ -115,7 +129,7 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
 
   const form = document.createElement('div');
   form.className = 'odp-popover__form';
-  form.appendChild(buildValueField(`${uid}-value`, param.select, existing?.value));
+  form.appendChild(buildValueField(`${uid}-value`, param.select, existing?.value ?? proposal?.value));
 
   const rationaleField = document.createElement('div');
   rationaleField.className = 'odp-row__field';
@@ -125,7 +139,7 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
   const rationaleInput = document.createElement('textarea');
   rationaleInput.id = `${uid}-rationale`;
   rationaleInput.rows = 2;
-  rationaleInput.value = existing?.rationale ?? '';
+  rationaleInput.value = existing?.rationale ?? proposal?.rationale ?? '';
   rationaleField.append(rationaleLabel, rationaleInput);
   form.appendChild(rationaleField);
 

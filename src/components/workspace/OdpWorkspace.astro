@@ -97,6 +97,22 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       <button type="button" class="odp-dashboard__action" data-odp-mark-ready>Mark ready</button>
     </div>
     <p class="odp-dashboard__message" data-odp-dashboard-message role="status" aria-live="polite"></p>
+
+    <div class="odp-proposals" data-odp-proposals hidden>
+      <h3 class="odp-proposals__heading">Proposals from other baselines</h3>
+      <p class="odp-proposals__text" data-odp-proposals-text></p>
+      <div class="odp-dashboard__actions">
+        <button type="button" class="odp-dashboard__action" data-odp-adopt-all>Review and adopt all…</button>
+      </div>
+      <div class="odp-proposals__confirm" role="alertdialog" tabindex="-1" hidden data-odp-adopt-confirm>
+        <p><strong data-odp-adopt-confirm-text></strong></p>
+        <div class="odp-dashboard__actions">
+          <button type="button" class="odp-dashboard__action" data-odp-adopt-yes>Adopt</button>
+          <button type="button" class="odp-dashboard__action" data-odp-adopt-no>Cancel</button>
+        </div>
+      </div>
+      <p class="odp-proposals__status" data-odp-adopt-status role="status" aria-live="polite" hidden></p>
+    </div>
   </div>
 
   <div class="odp-workspace__batch" data-odp-batch hidden>
@@ -504,6 +520,56 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     background: var(--color-accent);
     color: var(--color-surface-base);
   }
+
+  .odp-row__proposal {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    margin: 8px 0;
+    padding: 4px 8px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-primary);
+  }
+
+  .odp-proposals {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-hairline);
+  }
+
+  .odp-proposals[hidden],
+  .odp-proposals__confirm[hidden],
+  .odp-proposals__status[hidden] {
+    display: none;
+  }
+
+  .odp-proposals__heading {
+    font-size: 1em;
+    margin: 0 0 6px;
+  }
+
+  .odp-proposals__text {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-proposals__confirm {
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-sm);
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-family: var(--font-meta);
+    font-size: 13px;
+  }
+
+  .odp-proposals__status {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    padding: 4px 8px;
+    border-left: 3px solid var(--color-ink-secondary);
+    background: var(--color-surface-overlay);
+  }
 </style>
 
 <script>
@@ -511,6 +577,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   import {
     buildValueField,
     decisionKey,
+    adoptProposals,
     fanOutDecision,
     readValue,
     saveDecision,
@@ -530,9 +597,10 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
   import { setUrlState } from '../../utils/urlState';
-  import { isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
+  import { baselineLabel, isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
   import { onOdpStorageChange } from '../../utils/storageSync';
+  import { proposalsFor, proposalSourceText, proposalValueText, type Proposal } from '../../utils/odpProposals';
   import { slugify } from '../../utils/slugify';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
@@ -565,6 +633,17 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
   function snapshotOf(decision: Decision | undefined): string {
     return JSON.stringify(decision ?? null);
+  }
+
+  // Story 20: proposals for this baseline's unreviewed parameters, read across
+  // the other baselines' blobs (odpProposals.ts). A proposal is never stored
+  // and never changes a decision's status: it only prefills a row until the
+  // user confirms or overrides it, so the readiness gate still counts it as
+  // unreviewed.
+  let proposals = new Map<string, Proposal>();
+
+  function recomputeProposals(): void {
+    proposals = proposalsFor(dashboardEntries.map((e) => decisionKey(e)), dashboardBaseline);
   }
 
   // Story 3: readiness dashboard state. `entries`/`clusters` don't change
@@ -792,6 +871,23 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     message.textContent = `Ready — all ${overall.total} parameters reviewed.`;
   }
 
+  function renderProposals(unreviewed: number): void {
+    const block = document.querySelector<HTMLElement>('[data-odp-proposals]');
+    if (!block) return;
+    const status = block.querySelector<HTMLElement>('[data-odp-adopt-status]')!;
+    block.hidden = proposals.size === 0 && status.hidden;
+    if (proposals.size === 0) return;
+
+    const bySource = new Map<string, number>();
+    for (const p of proposals.values()) bySource.set(p.from, (bySource.get(p.from) ?? 0) + 1);
+    const breakdown = Array.from(bySource, ([from, n]) => `${n} from ${baselineLabel(from)}`).join(', ');
+    const n = proposals.size;
+    block.querySelector<HTMLElement>('[data-odp-proposals-text]')!.textContent =
+      `${n} unreviewed parameter${n === 1 ? ' already has' : 's already have'} a decision in another baseline (${breakdown}). ` +
+      'These are proposals only: nothing is saved until you confirm each one, or adopt them together below. ' +
+      `${unreviewed - n} ha${unreviewed - n === 1 ? 's' : 've'} no decision anywhere yet.`;
+  }
+
   // Recomputes and re-renders the whole dashboard from current decision
   // state — called on load and after every successful individual/batch save
   // so the dashboard is never stale relative to the decisions it counts
@@ -805,6 +901,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     // view is currently active, so it's never stale the moment it's shown.
 
     const { overall, byFamily } = computeDashboardCounts(dashboardEntries, dashboardBaseline);
+    recomputeProposals();
+    renderProposals(overall.unreviewed);
 
     const summary = dashboard.querySelector<HTMLElement>('[data-odp-dashboard-summary]');
     if (summary) {
@@ -860,6 +958,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   function buildRow(entry: OdpDatasetEntry, baseline: string): HTMLElement {
     const key = decisionKey(entry);
     const existing = getDecision(baseline, key);
+    const proposal = existing && existing.status !== 'unreviewed-default' ? undefined : proposals.get(key);
 
     const row = document.createElement('article');
     row.className = 'odp-row';
@@ -920,8 +1019,18 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       row.appendChild(list);
     }
 
+    if (proposal) {
+      const note = document.createElement('p');
+      note.className = 'odp-row__proposal';
+      note.dataset.odpProposal = 'true';
+      note.textContent =
+        `Proposed from ${proposalSourceText(proposal)}: ${proposalValueText(proposal)}. ` +
+        'Nothing is saved until you confirm or override it — edit it first if this baseline needs a different value.';
+      row.appendChild(note);
+    }
+
     const fieldId = `odp-value-${entry.controlSlug}-${entry.paramId}`;
-    row.appendChild(buildValueField(fieldId, entry.select, existing?.value));
+    row.appendChild(buildValueField(fieldId, entry.select, existing?.value ?? proposal?.value));
 
     const rationaleField = document.createElement('div');
     rationaleField.className = 'odp-row__field';
@@ -935,7 +1044,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     rationaleInput.id = rationaleId;
     rationaleInput.dataset.odpRationaleInput = 'true';
     rationaleInput.rows = 2;
-    rationaleInput.value = existing?.rationale ?? '';
+    rationaleInput.value = existing?.rationale ?? proposal?.rationale ?? '';
     rationaleField.appendChild(rationaleInput);
     row.appendChild(rationaleField);
 
@@ -995,6 +1104,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       }
 
       applyStatus(row, status);
+      row.querySelector('[data-odp-proposal]')?.remove();
       const registeredRow = rowRegistry.get(key);
       if (registeredRow) registeredRow.snapshot = snapshotOf(decision);
       refreshDashboard();
@@ -1023,7 +1133,10 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       if (rationaleInput) rationaleInput.value = decision?.rationale ?? '';
       applyStatus(registered.row, decision?.status ?? 'unreviewed-default');
       registered.snapshot = snapshotOf(decision);
-      if (decision) removeRowFromIndividualViewIfFiltered(key);
+      if (decision) {
+        registered.row.querySelector('[data-odp-proposal]')?.remove();
+        removeRowFromIndividualViewIfFiltered(key);
+      }
     }
     for (const { matchLabel, cluster } of batchMatchRegistry) {
       refreshClusterMatch(matchLabel, cluster, dashboardBaseline);
@@ -1337,6 +1450,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     dashboardEntries = entries;
     dashboardClusters = clusters;
     dashboardBaseline = baselineValue;
+    recomputeProposals();
 
     // Individual rows are no longer built for every entry up front (story 6)
     // — only the represented families are computed here; rows for whichever
@@ -1406,7 +1520,82 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
     refreshDashboard();
 
-    onOdpStorageChange(refreshFromStorage, { baseline: false, onlyDecisionsFor: dashboardBaseline });
+    // Proposals read the OTHER baselines' blobs, so any decision blob changing
+    // (not just this baseline's) refreshes them.
+    onOdpStorageChange(refreshFromStorage, { baseline: false });
+
+    // Bulk adopt: a proposal still costs an act of review, so this is previewed
+    // with provenance and confirmed, and re-checked against the data as it is
+    // at confirm time. Each decision is recorded under its source's status and
+    // rationale, independent and individually editable afterward.
+    const adoptBlock = workspace.querySelector<HTMLElement>('[data-odp-proposals]');
+    if (adoptBlock) {
+      const confirmEl = adoptBlock.querySelector<HTMLElement>('[data-odp-adopt-confirm]')!;
+      const statusEl = adoptBlock.querySelector<HTMLElement>('[data-odp-adopt-status]')!;
+      let planned = new Map<string, Proposal>();
+
+      const signature = (m: Map<string, Proposal>) =>
+        JSON.stringify(Array.from(m, ([k, p]) => [k, p.from, p.status, p.value, p.rationale]).sort());
+      const sayAdopt = (text: string) => {
+        statusEl.textContent = text;
+        statusEl.hidden = false;
+      };
+      const closeAdopt = () => {
+        planned = new Map();
+        confirmEl.hidden = true;
+      };
+
+      adoptBlock.querySelector('[data-odp-adopt-all]')!.addEventListener('click', () => {
+        statusEl.hidden = true;
+        planned = new Map(proposals);
+        const bySource = new Map<string, { confirmed: number; overridden: number }>();
+        for (const p of planned.values()) {
+          const c = bySource.get(p.from) ?? { confirmed: 0, overridden: 0 };
+          c[p.status] += 1;
+          bySource.set(p.from, c);
+        }
+        const parts = Array.from(
+          bySource,
+          ([from, c]) => `${c.confirmed + c.overridden} from ${baselineLabel(from)} (${c.confirmed} confirmed, ${c.overridden} overridden)`,
+        );
+        adoptBlock.querySelector<HTMLElement>('[data-odp-adopt-confirm-text]')!.textContent =
+          `Adopt ${planned.size} decision${planned.size === 1 ? '' : 's'} as your ${baselineLabel(dashboardBaseline)} decisions: ${parts.join('; ')}? ` +
+          'Each is recorded as a deliberate review and stays individually editable. The other baselines are not changed.';
+        confirmEl.hidden = false;
+        confirmEl.focus();
+      });
+
+      adoptBlock.querySelector('[data-odp-adopt-yes]')!.addEventListener('click', () => {
+        recomputeProposals();
+        if (signature(proposals) !== signature(planned)) {
+          closeAdopt();
+          renderProposals(computeDashboardCounts(dashboardEntries, dashboardBaseline).overall.unreviewed);
+          sayAdopt('The proposals changed while you were confirming. Review the updated list and try again.');
+          return;
+        }
+        const count = planned.size;
+        const ok = adoptProposals(dashboardBaseline, planned);
+        closeAdopt();
+        if (!ok) {
+          sayAdopt('Could not save. Your browser storage may be full or unavailable; no decision was changed.');
+          return;
+        }
+        refreshFromStorage();
+        sayAdopt(`Adopted ${count} decision${count === 1 ? '' : 's'}. Each can be edited individually.`);
+        renderProposals(computeDashboardCounts(dashboardEntries, dashboardBaseline).overall.unreviewed);
+      });
+
+      adoptBlock.querySelector('[data-odp-adopt-no]')!.addEventListener('click', () => {
+        closeAdopt();
+        sayAdopt('Cancelled. Nothing was changed.');
+      });
+      confirmEl.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Escape') {
+          closeAdopt();
+          sayAdopt('Cancelled. Nothing was changed.');
+        }
+      });
+    }
   }
 
   init();
