@@ -206,17 +206,12 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
   import { getDecisions } from '../utils/odpStore';
   import { onOdpStorageChange } from '../utils/storageSync';
   import { readinessFor } from '../utils/odpReadiness';
+  import { readSlotPayload } from '../utils/slotPayload';
   import { closeSlotPopover, isSlotPopoverOpenFor, openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
 
-  let controlData: Record<string, SlotControl> = {};
-  let clusterData: SlotPayload['cluster'] = { lists: [], byParam: {} };
-  try {
-    const parsed: SlotPayload = JSON.parse(document.getElementById('odp-slot-data')?.textContent ?? '{}');
-    controlData = parsed.controls ?? {};
-    clusterData = parsed.cluster ?? clusterData;
-  } catch (err) {
-    console.error('OdpSlotOverlay: could not parse embedded slot data', err);
-  }
+  const pagePayload = readSlotPayload();
+  const controlData: Record<string, SlotControl> = pagePayload.controls;
+  const clusterData: SlotPayload['cluster'] = pagePayload.cluster;
 
   function makeInteractive(slot: HTMLElement, on: boolean): void {
     if (on) {

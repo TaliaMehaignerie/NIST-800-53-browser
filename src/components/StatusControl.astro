@@ -26,6 +26,10 @@ const OPTIONS: { value: string; label: string }[] = [
     <label for={`owner-${slug}`}>Owner</label>
     <input id={`owner-${slug}`} type="text" data-status-owner />
   </div>
+  <div class="status-control__gate" role="status" hidden data-status-gate>
+    <span data-gate-text></span>
+    <a data-gate-link>Open the unreviewed parameters in the workspace</a>
+  </div>
   <div class="status-control__justification" data-status-justification-wrap hidden>
     <label for={`justification-${slug}`}>Justification (required for not applicable)</label>
     <textarea id={`justification-${slug}`} rows="2" data-status-justification></textarea>
@@ -69,6 +73,22 @@ const OPTIONS: { value: string; label: string }[] = [
     flex-direction: column;
     gap: 4px;
     margin-top: 8px;
+  }
+
+  .status-control__gate {
+    margin-top: 8px;
+    padding: 4px 8px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .status-control__gate[hidden] {
+    display: none;
+  }
+
+  .status-control__gate a {
+    margin-left: 6px;
   }
 
   .status-control__justification[hidden] {
@@ -178,6 +198,11 @@ const OPTIONS: { value: string; label: string }[] = [
     type ItemStatus,
   } from '../utils/statusStore';
   import { onOdpStorageChange } from '../utils/storageSync';
+  import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { blockMessage, interlockFor, staleCompliantMessage } from '../utils/odpInterlock';
+  import { readSlotPayload } from '../utils/slotPayload';
+  import { workspaceUrl } from '../utils/url';
 
   const SAVE_FAILED = 'Could not save this status. Your browser storage may be full or unavailable.';
 
@@ -190,6 +215,9 @@ const OPTIONS: { value: string; label: string }[] = [
       justification: root.querySelector<HTMLTextAreaElement>('[data-status-justification]')!,
       evidenceList: root.querySelector<HTMLElement>('[data-evidence-list]')!,
       evidenceAdd: root.querySelector<HTMLButtonElement>('[data-evidence-add]')!,
+      gate: root.querySelector<HTMLElement>('[data-status-gate]')!,
+      gateText: root.querySelector<HTMLElement>('[data-gate-text]')!,
+      gateLink: root.querySelector<HTMLAnchorElement>('[data-gate-link]')!,
       error: root.querySelector<HTMLElement>('[data-status-error]')!,
       saved: root.querySelector<HTMLElement>('[data-status-saved]')!,
       save: root.querySelector<HTMLButtonElement>('[data-status-save]')!,
@@ -281,6 +309,42 @@ const OPTIONS: { value: string; label: string }[] = [
   // Fills the form from storage. `force` is for first paint; a cross-tab
   // refresh only touches controls whose stored record actually changed, so
   // typing in an unrelated item is never clobbered.
+  // Story 15: the ODP interlock. The item's parameters come from the page's
+  // embedded payload (never the dataset) and their statuses from odpStore for
+  // the working baseline. Only a move INTO compliant is blocked; an item that
+  // is already compliant gets a note instead, so a baseline switch can never
+  // trap edits to its owner or evidence.
+  const pagePayload = readSlotPayload();
+
+  function gateOf(slug: string) {
+    const baseline = getActiveBaseline();
+    const control = pagePayload.controls[slug];
+    const item = control ? { slug, baselines: control.baselines, paramIds: Object.keys(control.params) } : undefined;
+    return interlockFor(item, baseline, getDecisions(baseline));
+  }
+
+  function enteringCompliant(root: HTMLElement): boolean {
+    const p = parts(root);
+    return p.select.value === 'compliant' && getStatus(p.slug)?.status !== 'compliant';
+  }
+
+  function updateGate(root: HTMLElement): void {
+    const p = parts(root);
+    const gate = gateOf(p.slug);
+    const blocked = gate.blocked && enteringCompliant(root);
+    const stale = gate.blocked && p.select.value === 'compliant' && getStatus(p.slug)?.status === 'compliant';
+
+    p.save.disabled = blocked;
+    p.gate.hidden = !(blocked || stale);
+    if (p.gate.hidden) return;
+    p.gateText.textContent = blocked ? blockMessage(gate) : staleCompliantMessage(gate);
+    const url = new URL(workspaceUrl(gate.baseline), window.location.origin);
+    url.searchParams.set('view', 'individual');
+    url.searchParams.set('family', pagePayload.controls[p.slug]?.familyCode ?? '');
+    url.searchParams.set('unreviewed', '1');
+    p.gateLink.href = url.toString();
+  }
+
   function populate(root: HTMLElement, force: boolean): void {
     const p = parts(root);
     const record = getStatus(p.slug);
@@ -299,6 +363,7 @@ const OPTIONS: { value: string; label: string }[] = [
     p.error.hidden = true;
     p.saved.textContent = record ? `Last updated ${new Date(record.updatedAt).toLocaleString()}` : '';
     syncJustification(root);
+    updateGate(root);
   }
 
   function save(root: HTMLElement): void {
@@ -309,6 +374,17 @@ const OPTIONS: { value: string; label: string }[] = [
     const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
     const justification = status === 'not-applicable' ? p.justification.value : '';
     const evidence = readEvidence(root);
+    // Defense in depth: the Save button is disabled while blocked, but the
+    // rule is enforced here too.
+    if (enteringCompliant(root)) {
+      const gate = gateOf(p.slug);
+      if (gate.blocked) {
+        p.error.textContent = blockMessage(gate);
+        p.error.hidden = false;
+        updateGate(root);
+        return;
+      }
+    }
     const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification, evidence });
     if (!ok) {
       p.error.textContent = statusProblem({ status, justification, evidence }) ?? SAVE_FAILED;
@@ -326,6 +402,7 @@ const OPTIONS: { value: string; label: string }[] = [
     p.select.addEventListener('change', () => {
       markDirty(root);
       syncJustification(root);
+      updateGate(root);
     });
     p.owner.addEventListener('input', () => markDirty(root));
     p.justification.addEventListener('input', () => markDirty(root));
@@ -349,4 +426,11 @@ const OPTIONS: { value: string; label: string }[] = [
     decisions: false,
     status: true,
   });
+
+  // The verdict follows the parameters it reads: a decision made in the
+  // popover here, in another tab, or a working-baseline switch re-evaluates it.
+  const refreshGates = () => controls.forEach((root) => updateGate(root));
+  window.addEventListener('odpdecisionschanged', refreshGates);
+  window.addEventListener(ACTIVE_BASELINE_EVENT, refreshGates);
+  onOdpStorageChange(refreshGates);
 </script>

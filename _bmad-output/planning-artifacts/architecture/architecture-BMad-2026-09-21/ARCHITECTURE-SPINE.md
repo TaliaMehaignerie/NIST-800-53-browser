@@ -134,6 +134,8 @@ flowchart LR
 
   **The asymmetry with AD-10 is deliberate and load-bearing.** ODP values are per-baseline because they genuinely differ — High may demand a scan frequency Moderate does not. Implementation status does not work that way: you pursue one authorization, and AC-2 is either implemented in your system or it is not. Anyone reading the two modules side by side will read this as an inconsistency to clean up. It is not.
 
+  **ODP interlock (story 15).** `compliant` cannot be saved while any of the item's own parameters is unreviewed in the *working* baseline (`utils/odpInterlock.ts`, reading the per-control page payload and `odpStore`, counting through `odpCounts`). The verdict can differ between baselines for the same item, so the message always names one. Items with no parameters, or not in the working baseline, are never gated; only a move into `compliant` is blocked, so an already-compliant item is noted rather than trapped.
+
 ### AD-15 — One completion-count rule set, in one module *(added 2026-09-29)*
 
 - **Binds:** the compliance dashboard (stories 16–17, 19)
