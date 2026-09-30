@@ -42,6 +42,7 @@ const ICONS: Record<string, string> = {
   class="compliance"
   data-compliance
   data-progressive={progressive ? 'true' : undefined}
+  data-compact={compact ? 'true' : undefined}
   data-pagefind-ignore
   hidden
 >
@@ -96,36 +97,44 @@ const ICONS: Record<string, string> = {
   {
     compact && (
       <p class="compliance__more">
-        <a href={dashboardUrl()}>See the breakdown by family →</a>
+        <a href={dashboardUrl()} data-base={dashboardUrl()}>
+          See the breakdown by family →
+        </a>
       </p>
     )
   }
 
   <div data-compliance-detail hidden={compact}>
-  <h2 class="compliance__heading">By family</h2>
-  <div class="compliance__families" data-family-rows></div>
+    <h2 class="compliance__heading">By family</h2>
+    <div class="compliance__families" data-family-rows></div>
 
-  <details class="compliance__table">
-    <summary>Table view</summary>
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Family</th>
-          <th scope="col">Compliant</th>
-          <th scope="col">In progress</th>
-          <th scope="col">Incomplete</th>
-          <th scope="col">Not applicable</th>
-          <th scope="col">Compliance</th>
-        </tr>
-      </thead>
-      <tbody data-table-body></tbody>
-    </table>
-  </details>
+    <details class="compliance__table">
+      <summary>Table view</summary>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Family</th>
+            <th scope="col">Compliant</th>
+            <th scope="col">In progress</th>
+            <th scope="col">Incomplete</th>
+            <th scope="col">Not applicable</th>
+            <th scope="col">Compliance</th>
+          </tr>
+        </thead>
+        <tbody data-table-body></tbody>
+      </table>
+    </details>
   </div>
 
   <div class="compliance__tooltip" role="tooltip" hidden data-tooltip></div>
 </section>
-{!progressive && <noscript><p class="compliance__noscript">The compliance dashboard needs JavaScript: your statuses live in this browser.</p></noscript>}
+{
+  !progressive && (
+    <noscript>
+      <p class="compliance__noscript">The compliance dashboard needs JavaScript: your statuses live in this browser.</p>
+    </noscript>
+  )
+}
 
 <script type="application/json" id="compliance-data" set:html={payload} is:inline />
 
@@ -618,6 +627,11 @@ const ICONS: Record<string, string> = {
     const overallHost = root.querySelector<HTMLElement>('[data-overall]')!;
     overallHost.replaceChildren(buildBar(overall, `Overall, ${name} baseline`, true));
 
+    // The compact (home) variant has no detail section, so don't build it.
+    const more = root.querySelector<HTMLAnchorElement>('.compliance__more a');
+    if (more) more.href = `${more.dataset.base}${explicitBaseline() ? `?baseline=${baseline}` : ''}`;
+    if (root.dataset.compact === 'true') return;
+
     const rows = root.querySelector<HTMLElement>('[data-family-rows]')!;
     const tbody = root.querySelector<HTMLElement>('[data-table-body]')!;
     rows.replaceChildren();
@@ -674,10 +688,14 @@ const ICONS: Record<string, string> = {
       families = parsed.families;
     } catch (err) {
       console.error('ComplianceDashboard: could not parse embedded data', err);
-      const failed = document.createElement('p');
-      failed.className = 'compliance__noscript';
-      failed.textContent = 'The compliance dashboard could not load its data. Please reload the page.';
-      root.after(failed);
+      // On the home page the dashboard is optional: a visitor must still see
+      // exactly the catalog, so only the dashboard page reports the failure.
+      if (root.dataset.progressive !== 'true') {
+        const failed = document.createElement('p');
+        failed.className = 'compliance__noscript';
+        failed.textContent = 'The compliance dashboard could not load its data. Please reload the page.';
+        root.after(failed);
+      }
       dataFailed = true;
     }
 
@@ -694,7 +712,9 @@ const ICONS: Record<string, string> = {
     });
 
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
-    onOdpStorageChange(render, { baseline: true, decisions: false, status: true });
+    // Decision blobs only matter to the progressive (home) reveal, which asks
+    // whether ANY decision exists; the dashboard's own numbers come from statuses.
+    onOdpStorageChange(render, { baseline: true, decisions: root.dataset.progressive === 'true', status: true });
 
     // A same-tab visit after editing statuses elsewhere can be restored from
     // the back/forward cache with the old DOM, and `storage` never fires in

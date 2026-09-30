@@ -289,3 +289,7 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/16-compliance-dashboard.md`
   summary: The dashboard counts an item stored as compliant even if its working-baseline ODPs are unreviewed.
   evidence: Story 15 only blocks moving INTO compliant and notes stale ones on the item page; the dashboard reads statusStore alone. Surfacing "N compliant items have unreviewed parameters" needs per-item parameter ids on the dashboard page and its own design (caveat line vs excluding them).
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/17-progressive-home-page.md`
+  summary: Revealing the home dashboard shifts the catalog down (~250px) for returning visitors, and its headings precede the page h1.
+  evidence: The plan deliberately renders the catalog first and reveals the dashboard after the has-data check. Avoiding the shift needs a pre-paint check, which can only be an inline script reading localStorage outside the stores (against AD-10/AD-14) or a reserved placeholder height.
