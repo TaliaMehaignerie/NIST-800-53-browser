@@ -33,12 +33,25 @@ export interface EvidenceRef {
   collectedAt: string;
 }
 
-/** What callers pass in: `collectedAt` is kept when given (unchanged ref), stamped when absent. */
+/**
+ * What callers pass in. There is deliberately no date: the store carries an
+ * existing reference's `collectedAt` forward when its note and URL are
+ * unchanged, and stamps `now` otherwise, so a caller can neither backdate
+ * evidence nor accidentally re-stamp it.
+ */
 export interface EvidenceInput {
   note: string;
   url: string;
-  collectedAt?: string;
 }
+
+/** Caps that protect the ~5MB localStorage quota shared with the ODP blobs. */
+export const MAX_EVIDENCE_REFS = 20;
+export const MAX_EVIDENCE_NOTE_LENGTH = 2000;
+
+export const JUSTIFICATION_REQUIRED_MESSAGE = 'A justification is required to mark this not applicable.';
+export const EVIDENCE_NOTE_REQUIRED_MESSAGE = 'Each evidence reference needs a note.';
+export const EVIDENCE_URL_MESSAGE = 'Evidence URLs must start with http:// or https://.';
+export const EVIDENCE_LIMIT_MESSAGE = `An item can carry at most ${MAX_EVIDENCE_REFS} evidence references of ${MAX_EVIDENCE_NOTE_LENGTH} characters each.`;
 
 export interface StatusRecord {
   status: ItemStatus;
@@ -64,23 +77,48 @@ export function isItemStatus(value: unknown): value is ItemStatus {
   return typeof value === 'string' && (ITEM_STATUSES as readonly string[]).includes(value);
 }
 
-/** True for an http(s) URL — the only kind ever rendered as a link. */
+/**
+ * True only for a URL that literally starts with `http://` or `https://`,
+ * parses, and carries no credentials — the only kind ever rendered as a link.
+ * (`new URL('http:example.com')` and backslash forms parse as http(s), so the
+ * prefix is checked on the string itself, matching what the message promises.)
+ */
 export function isSafeEvidenceUrl(url: string): boolean {
+  if (!/^https?:\/\//i.test(url)) return false;
   try {
     const parsed = new URL(url);
-    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    return (
+      (parsed.protocol === 'http:' || parsed.protocol === 'https:') && parsed.username === '' && parsed.password === ''
+    );
   } catch {
     return false;
   }
 }
 
-/** First problem with a set of evidence inputs, or `null`. Shared by the store and the UI. */
-export function validateEvidence(evidence: EvidenceInput[]): string | null {
-  for (const ref of evidence) {
-    if (ref.note.trim().length === 0) return 'Each evidence reference needs a note.';
-    if (ref.url.trim().length > 0 && !isSafeEvidenceUrl(ref.url.trim())) {
-      return 'Evidence URLs must start with http:// or https://.';
-    }
+/** A row with neither note nor URL is an empty form row, not a reference. */
+function isBlankRef(ref: EvidenceInput): boolean {
+  return ref.note.trim().length === 0 && ref.url.trim().length === 0;
+}
+
+/**
+ * The one place a status write is judged. Returns the reason a write would be
+ * refused, or `null`. `setStatus` refuses on exactly this, and the UI shows
+ * exactly this, so the message can never drift from the rule.
+ */
+export function statusProblem(record: {
+  status: ItemStatus;
+  justification: string;
+  evidence?: EvidenceInput[];
+}): string | null {
+  if (record.status === 'not-applicable' && record.justification.trim().length === 0) {
+    return JUSTIFICATION_REQUIRED_MESSAGE;
+  }
+  const refs = (record.evidence ?? []).filter((r) => !isBlankRef(r));
+  if (refs.length > MAX_EVIDENCE_REFS) return EVIDENCE_LIMIT_MESSAGE;
+  for (const ref of refs) {
+    if (ref.note.trim().length === 0) return EVIDENCE_NOTE_REQUIRED_MESSAGE;
+    if (ref.note.length > MAX_EVIDENCE_NOTE_LENGTH) return EVIDENCE_LIMIT_MESSAGE;
+    if (ref.url.trim().length > 0 && !isSafeEvidenceUrl(ref.url.trim())) return EVIDENCE_URL_MESSAGE;
   }
   return null;
 }
@@ -91,10 +129,18 @@ function isEvidenceRef(value: unknown): value is EvidenceRef {
   return typeof e.note === 'string' && typeof e.url === 'string' && typeof e.collectedAt === 'string';
 }
 
+// A malformed or empty-note evidence entry is dropped on read, never allowed to
+// void the whole blob (every item's status) or to wedge later saves.
+function readableEvidence(value: unknown): EvidenceRef[] {
+  if (!Array.isArray(value)) return [];
+  const kept = value.filter((e): e is EvidenceRef => isEvidenceRef(e) && e.note.trim().length > 0);
+  if (kept.length !== value.length) console.error('statusStore: dropped malformed evidence entries from stored blob');
+  return kept;
+}
+
 function isStatusRecord(value: unknown): value is StatusRecord {
   if (!value || typeof value !== 'object') return false;
   const r = value as Record<string, unknown>;
-  if (r.evidence !== undefined && !(Array.isArray(r.evidence) && r.evidence.every(isEvidenceRef))) return false;
   if (!isItemStatus(r.status)) return false;
   if (typeof r.justification !== 'string' || typeof r.owner !== 'string' || typeof r.updatedAt !== 'string') return false;
   // Mirror the write-path invariant so a hand-edited blob fails like any corrupt one.
@@ -127,7 +173,7 @@ function parseBlob(raw: string | null): StatusBlob {
       return emptyBlob();
     }
     // Blobs written before evidence existed carry no `evidence` field.
-    for (const record of Object.values(parsed.items)) record.evidence ??= [];
+    for (const record of Object.values(parsed.items)) record.evidence = readableEvidence(record.evidence);
     return parsed;
   } catch (err) {
     console.error('statusStore: stored blob is not valid JSON, treating as empty state', err);
@@ -176,16 +222,27 @@ export function setStatus(
   record: { status: ItemStatus; justification: string; owner: string; evidence?: EvidenceInput[] },
 ): boolean {
   if (!isItemStatus(record.status)) return false;
-  if (record.status === 'not-applicable' && record.justification.trim().length === 0) return false;
-  if (record.evidence && validateEvidence(record.evidence) !== null) return false;
+  if (statusProblem(record) !== null) return false;
 
   const current = readBlob();
   const now = new Date().toISOString();
+  const stored = getOwn(current.items, slug)?.evidence ?? [];
   // Omitted evidence preserves what is stored, so a caller that only changes
-  // status (e.g. a bulk write) can never wipe references.
+  // status (e.g. a bulk write) can never wipe references. Given evidence: blank
+  // rows are dropped, and a reference whose note and URL match an unused stored
+  // one keeps that one's `collectedAt`; anything else is stamped `now`.
+  const unused = [...stored];
   const evidence: EvidenceRef[] = record.evidence
-    ? record.evidence.map((e) => ({ note: e.note.trim(), url: e.url.trim(), collectedAt: e.collectedAt ?? now }))
-    : (getOwn(current.items, slug)?.evidence ?? []);
+    ? record.evidence
+        .filter((e) => !isBlankRef(e))
+        .map((e) => {
+          const note = e.note.trim();
+          const url = e.url.trim();
+          const at = unused.findIndex((s) => s.note === note && s.url === url);
+          const collectedAt = at >= 0 ? unused.splice(at, 1)[0].collectedAt : now;
+          return { note, url, collectedAt };
+        })
+    : stored;
   const next: StatusBlob = {
     ...current,
     items: {
