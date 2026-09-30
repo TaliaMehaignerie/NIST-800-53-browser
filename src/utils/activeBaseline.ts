@@ -14,16 +14,21 @@ export function isBaseline(value: unknown): value is Baseline {
   return typeof value === 'string' && (BASELINES as readonly string[]).includes(value);
 }
 
+// Used only when localStorage is unavailable, so a pick still holds for this page.
+let memoryBaseline: Baseline | null = null;
+
 export function getActiveBaseline(): Baseline {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return isBaseline(raw) ? raw : DEFAULT_BASELINE;
+    if (isBaseline(raw)) return raw;
   } catch {
-    return DEFAULT_BASELINE;
+    // fall through to the in-memory value
   }
+  return memoryBaseline ?? DEFAULT_BASELINE;
 }
 
 export function setActiveBaseline(baseline: Baseline): void {
+  memoryBaseline = baseline;
   try {
     localStorage.setItem(STORAGE_KEY, baseline);
   } catch (err) {
