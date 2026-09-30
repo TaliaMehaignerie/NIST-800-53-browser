@@ -50,6 +50,10 @@ export function odpDatasetUrl(): string {
   return `${BASE}/odp-dataset.json`;
 }
 
+export function odpDiscussionUrl(): string {
+  return `${BASE}/odp-discussion.json`;
+}
+
 export function odpMetaUrl(): string {
   return `${BASE}/odp-meta.json`;
 }

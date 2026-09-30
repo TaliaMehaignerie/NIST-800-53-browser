@@ -82,7 +82,7 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, g
       {guidance && (
         <div class="enhancement-item__discussion">
           <p class="enhancement-item__discussion-label">Discussion</p>
-          <p>{guidance}</p>
+          <p data-discussion-for={slug}>{guidance}</p>
         </div>
       )}
     </div>

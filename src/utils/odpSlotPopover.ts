@@ -20,6 +20,7 @@ import {
 import { valuesMatch } from './odpCluster';
 import { ACTIVE_BASELINE_EVENT, baselineLabel } from './activeBaseline';
 import { proposalsFor, proposalSourceText, proposalValueText } from './odpProposals';
+import { buildDiscussionToggle, discussionFromPage } from './odpContext';
 import { workspaceUrl } from './url';
 
 export interface SlotParam {
@@ -126,6 +127,8 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
     }
     el.appendChild(list);
   }
+
+  el.appendChild(buildDiscussionToggle(control.controlId.toUpperCase(), uid, () => discussionFromPage(controlSlug)));
 
   const form = document.createElement('div');
   form.className = 'odp-popover__form';

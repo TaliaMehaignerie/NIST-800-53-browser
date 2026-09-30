@@ -602,6 +602,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
   import { onOdpStorageChange } from '../../utils/storageSync';
   import { proposalsFor, proposalSourceText, proposalValueText, type Proposal } from '../../utils/odpProposals';
+  import { buildDiscussionToggle, discussionFromEndpoint } from '../../utils/odpContext';
   import { slugify } from '../../utils/slugify';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
@@ -1038,6 +1039,12 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       row.appendChild(list);
     }
 
+    row.appendChild(
+      buildDiscussionToggle(entry.controlId.toUpperCase(), `odp-${entry.controlSlug}-${entry.paramId}`.replace(/[^a-zA-Z0-9_-]/g, '-'), () =>
+        discussionFromEndpoint(entry.controlSlug),
+      ),
+    );
+
     if (proposal) row.appendChild(buildProposalNote(proposal));
 
     const fieldId = `odp-value-${entry.controlSlug}-${entry.paramId}`;
@@ -1309,6 +1316,19 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
         list.appendChild(li);
       }
       row.appendChild(list);
+    }
+
+    // Dash-one controls share one purpose (each family's policy and procedures),
+    // so the first member's discussion is shown, attributed to that control.
+    const discussionSource = cluster.members[0];
+    if (discussionSource) {
+      row.appendChild(
+        buildDiscussionToggle(
+          discussionSource.controlId.toUpperCase(),
+          `odp-batch-${cluster.clusterKey}`.replace(/[^a-zA-Z0-9_-]/g, '-'),
+          () => discussionFromEndpoint(discussionSource.controlSlug),
+        ),
+      );
     }
 
     const fieldId = `odp-batch-value-${cluster.clusterKey}`;

@@ -126,6 +126,54 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
+
+  /* NIST discussion disclosure beside a parameter (utils/odpContext.ts). */
+  .odp-discussion {
+    margin: 6px 0 10px;
+    font-family: var(--font-meta);
+    font-size: 13px;
+  }
+
+  .odp-discussion__toggle {
+    font: inherit;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: underline;
+  }
+
+  .odp-discussion__toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-discussion__text {
+    margin-top: 6px;
+    padding: 8px 10px;
+    border-left: 3px solid var(--color-border-hairline);
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-secondary);
+    line-height: 1.55;
+    white-space: pre-line;
+  }
+
+  .odp-discussion__text[hidden] {
+    display: none;
+  }
+
+  .odp-discussion__text:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* In the anchored popover, long text must not push Confirm/Override off-screen. */
+  .odp-popover .odp-discussion__text {
+    max-height: 35vh;
+    overflow-y: auto;
+  }
 </style>
 
 <style>

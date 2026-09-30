@@ -121,7 +121,7 @@ const slotPayload = { controls: slotControls, cluster };
     {guidance && (
       <section class="control-detail-card__discussion">
         <h2>Discussion</h2>
-        <p>{guidance}</p>
+        <p data-discussion-for={control.data.slug}>{guidance}</p>
       </section>
     )}
 
