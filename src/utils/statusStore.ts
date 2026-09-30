@@ -65,13 +65,16 @@ export interface StatusRecord {
   updatedAt: string;
 }
 
-interface StatusBlob {
+export interface StatusBlob {
   schemaVersion: number;
   items: Record<string, StatusRecord>;
 }
 
 export const STATUS_STORAGE_KEY = 'control-status';
 const SCHEMA_VERSION = 1;
+
+/** The blob schema version this build reads and writes (travels inside a backup envelope). */
+export const STATUS_SCHEMA_VERSION = SCHEMA_VERSION;
 
 export function isItemStatus(value: unknown): value is ItemStatus {
   return typeof value === 'string' && (ITEM_STATUSES as readonly string[]).includes(value);
@@ -147,7 +150,7 @@ function isStatusRecord(value: unknown): value is StatusRecord {
   return r.status !== 'not-applicable' || r.justification.trim().length > 0;
 }
 
-function isStatusBlob(value: unknown): value is StatusBlob {
+export function isStatusBlob(value: unknown): value is StatusBlob {
   if (!value || typeof value !== 'object') return false;
   const b = value as Record<string, unknown>;
   if (typeof b.schemaVersion !== 'number') return false;
@@ -193,6 +196,31 @@ function readBlob(): StatusBlob {
   const blob = parseBlob(raw);
   cache = { raw, blob };
   return blob;
+}
+
+/**
+ * Backup/restore access (story 18): the stored text of the status blob, or
+ * `null` when none. Kept here so this module stays the only localStorage path.
+ */
+export function readRawBlob(): string | null {
+  try {
+    return localStorage.getItem(STATUS_STORAGE_KEY);
+  } catch (err) {
+    console.error('statusStore: localStorage unavailable', err);
+    return null;
+  }
+}
+
+/** Replaces the stored blob with `raw`, or removes it for `null`. Returns `false` on failure. */
+export function writeRawBlob(raw: string | null): boolean {
+  try {
+    if (raw === null) localStorage.removeItem(STATUS_STORAGE_KEY);
+    else localStorage.setItem(STATUS_STORAGE_KEY, raw);
+    return true;
+  } catch (err) {
+    console.error('statusStore: failed to write to localStorage', err);
+    return false;
+  }
 }
 
 /** All stored records keyed by item slug. Read-only. */

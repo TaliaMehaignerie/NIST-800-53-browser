@@ -1,0 +1,63 @@
+---
+// Story 18: warns BEFORE browser storage fills, site-wide. Once localStorage
+// is full, writes fail — and a full quota would silently stop parameter
+// decisions saving on unrelated pages. Hidden below the warn threshold, and
+// on the Your data page itself (which shows the full meter).
+import { dataUrl } from '../utils/url';
+---
+
+<p class="storage-warning" role="status" data-storage-warning hidden>
+  <span data-storage-warning-text></span>
+  <a href={dataUrl()}>Back up your data</a>
+</p>
+
+<style>
+  .storage-warning {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    margin: 0 0 12px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-raised);
+    color: var(--color-ink-primary);
+  }
+
+  .storage-warning[hidden] {
+    display: none;
+  }
+
+  .storage-warning a {
+    margin-left: 6px;
+  }
+</style>
+
+<script>
+  import { storageUsage } from '../utils/backup';
+  import { onOdpStorageChange } from '../utils/storageSync';
+
+  const banner = document.querySelector<HTMLElement>('[data-storage-warning]');
+  const text = document.querySelector<HTMLElement>('[data-storage-warning-text]');
+
+  function render(): void {
+    if (!banner || !text) return;
+    if (document.querySelector('[data-data-page]')) {
+      banner.hidden = true;
+      return;
+    }
+    const u = storageUsage();
+    banner.hidden = u.level === 'ok';
+    if (u.level === 'ok') return;
+    const pct = Math.round(u.ratio * 100);
+    text.textContent =
+      u.level === 'critical'
+        ? `Browser storage is ${pct}% full — new decisions may fail to save.`
+        : `Browser storage is ${pct}% full.`;
+  }
+
+  render();
+  window.addEventListener('odpdecisionschanged', render);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') render();
+  });
+  onOdpStorageChange(render, { baseline: false, status: true });
+</script>

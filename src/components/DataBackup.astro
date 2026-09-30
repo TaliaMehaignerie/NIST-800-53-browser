@@ -1,0 +1,305 @@
+---
+// Story 18: Download all data / Restore from file, and the storage budget.
+// Restore is the only destructive action in the app: it always confirms, and
+// the confirmation states exactly what will be overwritten. Hidden until the
+// script runs; `data-pagefind-ignore` keeps it out of search.
+---
+
+<section class="data-backup" data-data-page data-pagefind-ignore hidden>
+  <h2>Back up your data</h2>
+  <p>
+    Your statuses, evidence, owners and parameter decisions live only in this browser. One file holds all of it, so you
+    can restore it here or move it to another browser.
+  </p>
+  <p class="data-backup__note">
+    The OSCAL export in the workspace is not a backup: it omits owners, statuses and evidence notes, and it cannot be
+    imported again.
+  </p>
+  <div class="data-backup__actions">
+    <button type="button" data-download>Download all data</button>
+  </div>
+
+  <h2>Restore from a backup</h2>
+  <p>
+    Choose a backup file you downloaded here. Restoring <strong>replaces</strong> everything currently stored, and you will
+    be asked to confirm first.
+  </p>
+  <div class="data-backup__actions">
+    <button type="button" data-restore-pick>Restore from file…</button>
+    <input type="file" accept="application/json,.json" data-restore-file hidden />
+  </div>
+
+  <div class="data-backup__confirm" role="alertdialog" aria-labelledby="restore-confirm-title" hidden data-restore-confirm tabindex="-1">
+    <h3 id="restore-confirm-title">Replace your data with this backup?</h3>
+    <p><strong>Your current data — this will be overwritten:</strong></p>
+    <p data-current-summary></p>
+    <p><strong>The backup file (<span data-file-date></span>) — this will replace it:</strong></p>
+    <p data-file-summary></p>
+    <div class="data-backup__actions">
+      <button type="button" data-download-current>Download my current data first</button>
+      <button type="button" data-restore-confirm-btn>Replace my data</button>
+      <button type="button" data-restore-cancel>Cancel</button>
+    </div>
+  </div>
+
+  <p class="data-backup__status" role="status" aria-live="polite" data-status hidden></p>
+
+  <h2>Storage</h2>
+  <p data-budget-text></p>
+  <div class="data-backup__meter" role="img" data-budget-meter>
+    <div class="data-backup__meter-fill" data-budget-fill></div>
+  </div>
+  <ul class="data-backup__parts" data-budget-parts></ul>
+  <p class="data-backup__warn" data-budget-warn hidden></p>
+</section>
+<noscript><p class="data-backup__noscript">Backup and restore need JavaScript: your data lives in this browser.</p></noscript>
+
+<style is:global>
+  .data-backup {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-primary);
+    margin: 16px 0 32px;
+  }
+
+  .data-backup[hidden] {
+    display: none;
+  }
+
+  .data-backup h2 {
+    font-size: 1.1em;
+    margin: 28px 0 8px;
+  }
+
+  .data-backup p {
+    margin: 0 0 10px;
+  }
+
+  .data-backup__note,
+  .data-backup__noscript {
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+  }
+
+  .data-backup__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .data-backup button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .data-backup button:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .data-backup button:focus-visible,
+  .data-backup__confirm:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .data-backup__confirm {
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-raised);
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+
+  .data-backup__confirm[hidden] {
+    display: none;
+  }
+
+  .data-backup__confirm h3 {
+    margin: 0 0 8px;
+    font-size: 1em;
+  }
+
+  .data-backup__status {
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-ink-secondary);
+    background: var(--color-surface-overlay);
+  }
+
+  .data-backup__status[hidden],
+  .data-backup__warn[hidden] {
+    display: none;
+  }
+
+  .data-backup__meter {
+    height: 10px;
+    background: var(--color-surface-overlay);
+    border-radius: 0 4px 4px 0;
+    overflow: hidden;
+    margin: 6px 0 10px;
+  }
+
+  .data-backup__meter-fill {
+    height: 100%;
+    background: var(--color-ink-secondary);
+    min-width: 2px;
+  }
+
+  .data-backup__parts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+  }
+
+  .data-backup__warn {
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-overlay);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import {
+    applyEnvelope,
+    backupFileName,
+    buildEnvelope,
+    currentSummary,
+    formatSize,
+    parseEnvelope,
+    serializeEnvelope,
+    storageUsage,
+    summarize,
+    type BackupEnvelope,
+    type BackupSummary,
+  } from '../utils/backup';
+  import { baselineLabel } from '../utils/activeBaseline';
+  import { onOdpStorageChange } from '../utils/storageSync';
+
+  const root = document.querySelector<HTMLElement>('[data-data-page]');
+  if (root) {
+    const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const statusEl = $('[data-status]');
+    const confirmEl = $('[data-restore-confirm]');
+    const fileInput = $<HTMLInputElement>('[data-restore-file]');
+    let pending: BackupEnvelope | null = null;
+
+    function say(message: string): void {
+      statusEl.textContent = message;
+      statusEl.hidden = false;
+    }
+
+    function describe(s: BackupSummary): string {
+      const parts = Object.entries(s.decisionsByBaseline).map(
+        ([b, n]) => `${baselineLabel(b)}: ${n} decision${n === 1 ? '' : 's'}`,
+      );
+      if (s.statusRecords > 0) {
+        parts.push(`${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'} (${s.evidenceRefs} evidence reference${s.evidenceRefs === 1 ? '' : 's'})`);
+      }
+      return parts.length > 0 ? parts.join(' · ') : 'No data';
+    }
+
+    function download(): void {
+      const { envelope, skipped } = buildEnvelope();
+      const blob = new Blob([serializeEnvelope(envelope)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = backupFileName();
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      const s = summarize(envelope);
+      say(
+        `Downloaded ${s.totalDecisions} decision${s.totalDecisions === 1 ? '' : 's'} and ${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'}.` +
+          (skipped.length > 0 ? ` Left out because it could not be read: ${skipped.join(', ')}.` : ''),
+      );
+    }
+
+    function closeConfirm(): void {
+      pending = null;
+      confirmEl.hidden = true;
+      fileInput.value = '';
+    }
+
+    async function onFile(): Promise<void> {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      statusEl.hidden = true;
+      const result = parseEnvelope(await file.text());
+      if (!result.ok) {
+        fileInput.value = '';
+        say(result.message);
+        return;
+      }
+      pending = result.envelope;
+      $('[data-current-summary]').textContent = describe(currentSummary());
+      $('[data-file-summary]').textContent = describe(summarize(result.envelope));
+      $('[data-file-date]').textContent = `exported ${new Date(result.envelope.exportedAt).toLocaleString()}`;
+      confirmEl.hidden = false;
+      confirmEl.focus();
+    }
+
+    function renderBudget(): void {
+      const u = storageUsage();
+      const pct = Math.round(u.ratio * 100);
+      $('[data-budget-text]').textContent =
+        `Using ${formatSize(u.usedChars)} of about ${formatSize(u.quotaChars)} of browser storage (${pct}%). ` +
+        'The limit varies by browser, so this is approximate.';
+      const meter = $('[data-budget-meter]');
+      meter.setAttribute('aria-label', `Storage ${pct}% used`);
+      $('[data-budget-fill]').style.width = `${Math.min(100, u.ratio * 100)}%`;
+      const parts = $('[data-budget-parts]');
+      parts.replaceChildren(
+        ...u.parts.map((p) => {
+          const li = document.createElement('li');
+          li.textContent = `${p.label}: ${formatSize(p.chars)}`;
+          return li;
+        }),
+      );
+      const warn = $('[data-budget-warn]');
+      warn.hidden = u.level === 'ok';
+      warn.textContent =
+        u.level === 'critical'
+          ? 'Storage is almost full — new decisions may fail to save. Download a backup now.'
+          : u.level === 'warn'
+            ? 'Storage is getting full. Download a backup so you do not lose work.'
+            : '';
+    }
+
+    $('[data-download]').addEventListener('click', download);
+    $('[data-download-current]').addEventListener('click', download);
+    $('[data-restore-pick]').addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => void onFile());
+    $('[data-restore-cancel]').addEventListener('click', () => {
+      closeConfirm();
+      say('Restore cancelled. Nothing was changed.');
+    });
+    $('[data-restore-confirm-btn]').addEventListener('click', () => {
+      if (!pending) return;
+      const result = applyEnvelope(pending);
+      closeConfirm();
+      say(result.message);
+      renderBudget();
+      window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
+    });
+    confirmEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeConfirm();
+        say('Restore cancelled. Nothing was changed.');
+      }
+    });
+
+    onOdpStorageChange(renderBudget, { baseline: false, status: true });
+    renderBudget();
+    root.hidden = false;
+  }
+</script>

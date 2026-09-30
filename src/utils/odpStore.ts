@@ -18,14 +18,21 @@ export interface Decision {
   rationale: string;
 }
 
-interface OdpBlob {
+export interface OdpBlob {
   schemaVersion: number;
   decisions: Record<string, Decision>;
 }
 
 const SCHEMA_VERSION = 1;
 
+/** The blob schema version this build reads and writes (travels inside a backup envelope). */
+export const ODP_SCHEMA_VERSION = SCHEMA_VERSION;
+
 export const ODP_STORAGE_PREFIX = 'odp-decisions:';
+
+export function odpStorageKey(baseline: string): string {
+  return storageKey(baseline);
+}
 
 function storageKey(baseline: string): string {
   return `${ODP_STORAGE_PREFIX}${baseline}`;
@@ -47,7 +54,7 @@ function isDecision(value: unknown): value is Decision {
   return valueOk && statusOk && rationaleOk && overrideRationaleOk;
 }
 
-function isOdpBlob(value: unknown): value is OdpBlob {
+export function isOdpBlob(value: unknown): value is OdpBlob {
   if (!value || typeof value !== 'object') return false;
   const b = value as Record<string, unknown>;
   if (typeof b.schemaVersion !== 'number') return false;
@@ -100,6 +107,31 @@ function parseBlob(raw: string | null): OdpBlob {
   } catch (err) {
     console.error('odpStore: stored blob is not valid JSON, treating as empty state', err);
     return emptyBlob();
+  }
+}
+
+/**
+ * Backup/restore access (story 18): the stored text of one baseline's blob, or
+ * `null` when none. Kept here so this module stays the only localStorage path.
+ */
+export function readRawBlob(baseline: string): string | null {
+  try {
+    return localStorage.getItem(storageKey(baseline));
+  } catch (err) {
+    console.error('odpStore: localStorage unavailable', err);
+    return null;
+  }
+}
+
+/** Replaces one baseline's stored blob with `raw`, or removes it for `null`. Returns `false` on failure. */
+export function writeRawBlob(baseline: string, raw: string | null): boolean {
+  try {
+    if (raw === null) localStorage.removeItem(storageKey(baseline));
+    else localStorage.setItem(storageKey(baseline), raw);
+    return true;
+  } catch (err) {
+    console.error('odpStore: failed to write to localStorage', err);
+    return false;
   }
 }
 

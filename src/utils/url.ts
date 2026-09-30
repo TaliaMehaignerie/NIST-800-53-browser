@@ -26,6 +26,10 @@ export function dashboardUrl(): string {
   return `${BASE}/dashboard/`;
 }
 
+export function dataUrl(): string {
+  return `${BASE}/data/`;
+}
+
 export function familyUrl(slug: string): string {
   return `${BASE}/families/${slug}/`;
 }

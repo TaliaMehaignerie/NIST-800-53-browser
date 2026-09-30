@@ -20,7 +20,8 @@ import ProvenanceFooter from '../components/ProvenanceFooter.astro';
 import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
 import WorkingBaseline from '../components/WorkingBaseline.astro';
-import { dashboardUrl, homeUrl } from '../utils/url';
+import { dashboardUrl, dataUrl, homeUrl } from '../utils/url';
+import StorageWarning from '../components/StorageWarning.astro';
 
 interface Props {
   title: string;
@@ -41,8 +42,10 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     <header class="site-header">
       <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
       <a href={dashboardUrl()} class="site-nav">Compliance dashboard</a>
+      <a href={dataUrl()} class="site-nav">Your data</a>
       <SearchBox value={searchQuery} />
       <WorkingBaseline />
+      <StorageWarning />
       {showBaselineFilter && <BaselineFilter />}
     </header>
     <main data-pagefind-body>
@@ -130,6 +133,10 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     max-width: 720px;
     margin: 0 auto;
     padding: 24px 16px;
+  }
+
+  .site-nav + .site-nav {
+    margin-left: 14px;
   }
 
   .site-nav {
