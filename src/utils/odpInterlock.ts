@@ -15,10 +15,9 @@
  */
 import type { Decision } from './odpStore';
 import { readinessFor, type ReadinessItem } from './odpReadiness';
+import { baselineLabel } from './activeBaseline';
 
 export interface Gate {
-  /** The item has parameters and sits in the working baseline. */
-  applies: boolean;
   blocked: boolean;
   unreviewed: number;
   total: number;
@@ -30,25 +29,24 @@ export function interlockFor(
   baseline: string,
   decisions: Record<string, Decision>,
 ): Gate {
-  const none: Gate = { applies: false, blocked: false, unreviewed: 0, total: 0, baseline };
+  const none: Gate = { blocked: false, unreviewed: 0, total: 0, baseline };
   if (!item || item.paramIds.length === 0 || !item.baselines.includes(baseline)) return none;
   const counts = readinessFor([item], baseline, decisions);
-  return { applies: true, blocked: counts.unreviewed > 0, unreviewed: counts.unreviewed, total: counts.total, baseline };
-}
-
-function baselineName(baseline: string): string {
-  return `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+  return { blocked: counts.unreviewed > 0, unreviewed: counts.unreviewed, total: counts.total, baseline };
 }
 
 function parameterCount(gate: Gate): string {
   return `${gate.unreviewed} of ${gate.total} parameter${gate.total === 1 ? '' : 's'}`;
 }
 
+export const PAYLOAD_UNAVAILABLE_MESSAGE =
+  "Cannot mark compliant: this page's parameters could not be read, so they cannot be checked. Reload the page.";
+
 export function blockMessage(gate: Gate): string {
-  return `Cannot mark compliant: ${parameterCount(gate)} still unreviewed in the ${baselineName(gate.baseline)} baseline.`;
+  return `Cannot mark compliant: ${parameterCount(gate)} still unreviewed in the ${baselineLabel(gate.baseline)} baseline.`;
 }
 
 /** For an item that is already compliant when the working baseline's parameters are not all reviewed. */
 export function staleCompliantMessage(gate: Gate): string {
-  return `Marked compliant, but ${parameterCount(gate)} still unreviewed in the ${baselineName(gate.baseline)} baseline.`;
+  return `Marked compliant, but ${parameterCount(gate)} still unreviewed in the ${baselineLabel(gate.baseline)} baseline.`;
 }

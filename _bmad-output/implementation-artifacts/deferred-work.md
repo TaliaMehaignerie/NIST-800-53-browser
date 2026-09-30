@@ -281,3 +281,7 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/6-split-workspace-into-views.md`
   summary: No `aria-live` announcement when switching views, changing family, or toggling the unreviewed-only filter — screen-reader users get no confirmation that a change took effect beyond whatever becomes visible.
   evidence: Real (blind-hunter), consistent with the same accessibility-floor-not-required pattern already logged for stories 1, 3, and 5 (no live-region announcement of state changes beyond validation errors) — an enhancement beyond the established floor.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/15-odp-interlock.md`
+  summary: The interlock's workspace link opens the family's unreviewed parameters, not just the blocked item's.
+  evidence: The workspace filters by family and unreviewed only; a per-control filter (e.g. `control=ac-2-1`) would need a workspace change. The block message already names the item's own count.

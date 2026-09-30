@@ -200,7 +200,7 @@ const OPTIONS: { value: string; label: string }[] = [
   import { onOdpStorageChange } from '../utils/storageSync';
   import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
-  import { blockMessage, interlockFor, staleCompliantMessage } from '../utils/odpInterlock';
+  import { blockMessage, interlockFor, PAYLOAD_UNAVAILABLE_MESSAGE, staleCompliantMessage } from '../utils/odpInterlock';
   import { readSlotPayload } from '../utils/slotPayload';
   import { workspaceUrl } from '../utils/url';
 
@@ -306,19 +306,18 @@ const OPTIONS: { value: string; label: string }[] = [
     p.wrap.hidden = p.select.value !== 'not-applicable';
   }
 
-  // Fills the form from storage. `force` is for first paint; a cross-tab
-  // refresh only touches controls whose stored record actually changed, so
-  // typing in an unrelated item is never clobbered.
   // Story 15: the ODP interlock. The item's parameters come from the page's
   // embedded payload (never the dataset) and their statuses from odpStore for
   // the working baseline. Only a move INTO compliant is blocked; an item that
   // is already compliant gets a note instead, so a baseline switch can never
   // trap edits to its owner or evidence.
+  // `null` means the page's parameters could not be read. The interlock then
+  // fails CLOSED (no move into compliant) rather than silently open.
   const pagePayload = readSlotPayload();
 
   function gateOf(slug: string) {
     const baseline = getActiveBaseline();
-    const control = pagePayload.controls[slug];
+    const control = pagePayload?.controls[slug];
     const item = control ? { slug, baselines: control.baselines, paramIds: Object.keys(control.params) } : undefined;
     return interlockFor(item, baseline, getDecisions(baseline));
   }
@@ -330,21 +329,36 @@ const OPTIONS: { value: string; label: string }[] = [
 
   function updateGate(root: HTMLElement): void {
     const p = parts(root);
+    if (!pagePayload) {
+      const blockedNoPayload = enteringCompliant(root);
+      p.save.disabled = blockedNoPayload;
+      p.gate.hidden = !blockedNoPayload;
+      p.gateText.textContent = PAYLOAD_UNAVAILABLE_MESSAGE;
+      p.gateLink.hidden = true;
+      return;
+    }
+    p.gateLink.hidden = false;
     const gate = gateOf(p.slug);
     const blocked = gate.blocked && enteringCompliant(root);
-    const stale = gate.blocked && p.select.value === 'compliant' && getStatus(p.slug)?.status === 'compliant';
+    // Tied to the STORED status, not the draft select, so it doesn't flicker as the form is edited.
+    const stale = gate.blocked && getStatus(p.slug)?.status === 'compliant';
 
     p.save.disabled = blocked;
     p.gate.hidden = !(blocked || stale);
     if (p.gate.hidden) return;
-    p.gateText.textContent = blocked ? blockMessage(gate) : staleCompliantMessage(gate);
+    p.gateText.textContent = blocked
+      ? `${blockMessage(gate)} Choose another status to save your other changes.`
+      : staleCompliantMessage(gate);
     const url = new URL(workspaceUrl(gate.baseline), window.location.origin);
     url.searchParams.set('view', 'individual');
-    url.searchParams.set('family', pagePayload.controls[p.slug]?.familyCode ?? '');
+    url.searchParams.set('family', pagePayload?.controls[p.slug]?.familyCode ?? '');
     url.searchParams.set('unreviewed', '1');
     p.gateLink.href = url.toString();
   }
 
+  // Fills the form from storage. `force` is for first paint; a cross-tab
+  // refresh only touches controls whose stored record actually changed, so
+  // typing in an unrelated item is never clobbered.
   function populate(root: HTMLElement, force: boolean): void {
     const p = parts(root);
     const record = getStatus(p.slug);
@@ -378,8 +392,8 @@ const OPTIONS: { value: string; label: string }[] = [
     // rule is enforced here too.
     if (enteringCompliant(root)) {
       const gate = gateOf(p.slug);
-      if (gate.blocked) {
-        p.error.textContent = blockMessage(gate);
+      if (!pagePayload || gate.blocked) {
+        p.error.textContent = pagePayload ? blockMessage(gate) : PAYLOAD_UNAVAILABLE_MESSAGE;
         p.error.hidden = false;
         updateGate(root);
         return;
@@ -421,11 +435,20 @@ const OPTIONS: { value: string; label: string }[] = [
     p.save.addEventListener('click', () => save(root));
   });
 
-  onOdpStorageChange(() => controls.forEach((root) => populate(root, false)), {
+  // The gate depends on the stored status, so it is re-evaluated even when
+  // `populate` leaves a dirty form alone.
+  onOdpStorageChange(
+    () =>
+      controls.forEach((root) => {
+        populate(root, false);
+        updateGate(root);
+      }),
+    {
     baseline: false,
     decisions: false,
     status: true,
-  });
+    },
+  );
 
   // The verdict follows the parameters it reads: a decision made in the
   // popover here, in another tab, or a working-baseline switch re-evaluates it.

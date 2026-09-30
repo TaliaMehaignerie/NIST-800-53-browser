@@ -72,6 +72,7 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
 <script>
   import {
     ACTIVE_BASELINE_EVENT,
+    baselineLabel,
     getActiveBaseline,
     isBaseline,
     setActiveBaseline,
@@ -92,7 +93,7 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
   function render(): void {
     if (!root || !select || !chip) return;
     const baseline = getActiveBaseline();
-    const name = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+    const name = baselineLabel(baseline);
     select.value = baseline;
     chip.href = workspaceUrl(baseline);
 

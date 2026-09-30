@@ -18,7 +18,7 @@ import {
   type ValueFieldSelect,
 } from './odpEdit';
 import { valuesMatch } from './odpCluster';
-import { ACTIVE_BASELINE_EVENT } from './activeBaseline';
+import { ACTIVE_BASELINE_EVENT, baselineLabel } from './activeBaseline';
 import { workspaceUrl } from './url';
 
 export interface SlotParam {
@@ -82,7 +82,7 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
 
   const key = decisionKey({ controlSlug, paramId });
   const existing = getDecision(baseline, key);
-  const baselineName = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+  const baselineName = baselineLabel(baseline);
   const uid = `odp-pop-${controlSlug}-${paramId}`.replace(/[^a-zA-Z0-9_-]/g, '-');
 
   const el = document.createElement('div');

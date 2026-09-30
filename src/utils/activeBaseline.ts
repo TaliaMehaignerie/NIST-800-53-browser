@@ -10,6 +10,11 @@ export const ACTIVE_BASELINE_KEY = 'active-baseline';
 const DEFAULT_BASELINE: Baseline = 'moderate';
 export const ACTIVE_BASELINE_EVENT = 'activebaselinechange';
 
+/** Display name for a baseline, e.g. `moderate` -> `Moderate`. */
+export function baselineLabel(baseline: string): string {
+  return `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+}
+
 export function isBaseline(value: unknown): value is Baseline {
   return typeof value === 'string' && (BASELINES as readonly string[]).includes(value);
 }
