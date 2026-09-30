@@ -53,7 +53,7 @@ function isStatusBlob(value: unknown): value is StatusBlob {
   if (!value || typeof value !== 'object') return false;
   const b = value as Record<string, unknown>;
   if (typeof b.schemaVersion !== 'number') return false;
-  if (!b.items || typeof b.items !== 'object') return false;
+  if (!b.items || typeof b.items !== 'object' || Array.isArray(b.items)) return false;
   return Object.values(b.items as Record<string, unknown>).every(isStatusRecord);
 }
 
@@ -102,7 +102,9 @@ export function getStatuses(): Record<string, StatusRecord> {
 
 /** One item's record, or `undefined` when none was ever set (readers treat that as `incomplete`). */
 export function getStatus(slug: string): StatusRecord | undefined {
-  return readBlob().items[slug];
+  const items = readBlob().items;
+  // Own-property check: a slug like `constructor` must not resolve to a prototype member.
+  return Object.prototype.hasOwnProperty.call(items, slug) ? items[slug] : undefined;
 }
 
 /**

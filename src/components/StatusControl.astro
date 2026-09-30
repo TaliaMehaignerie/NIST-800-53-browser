@@ -66,6 +66,10 @@ const OPTIONS: { value: string; label: string }[] = [
     margin-top: 8px;
   }
 
+  .status-control__justification[hidden] {
+    display: none;
+  }
+
   .status-control select,
   .status-control input,
   .status-control textarea {
@@ -152,7 +156,11 @@ const OPTIONS: { value: string; label: string }[] = [
     const record = getStatus(p.slug);
     const snapshot = JSON.stringify(record ?? null);
     if (!force && root.dataset.snapshot === snapshot) return;
+    // Unsaved edits win over a passive cross-tab refresh; the next save
+    // (or reload) reconciles with storage.
+    if (!force && root.dataset.dirty === 'true') return;
     root.dataset.snapshot = snapshot;
+    delete root.dataset.dirty;
 
     p.select.value = record?.status ?? 'incomplete';
     p.owner.value = record?.owner ?? '';
@@ -169,7 +177,7 @@ const OPTIONS: { value: string; label: string }[] = [
 
     const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
     const justification = status === 'not-applicable' ? p.justification.value : '';
-    const ok = setStatus(p.slug, { status, owner: p.owner.value, justification });
+    const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification });
     if (!ok) {
       p.error.textContent =
         status === 'not-applicable' && justification.trim().length === 0 ? JUSTIFICATION_REQUIRED : SAVE_FAILED;
@@ -177,7 +185,6 @@ const OPTIONS: { value: string; label: string }[] = [
       return;
     }
     populate(root, true);
-    window.dispatchEvent(new CustomEvent('statuschanged', { detail: { slug: p.slug } }));
   }
 
   const controls = Array.from(document.querySelectorAll<HTMLElement>('[data-status-control]'));
@@ -185,9 +192,22 @@ const OPTIONS: { value: string; label: string }[] = [
     populate(root, true);
     root.hidden = false;
     const p = parts(root);
-    p.select.addEventListener('change', () => syncJustification(root));
+    const markDirty = () => {
+      root.dataset.dirty = 'true';
+      p.error.hidden = true;
+    };
+    p.select.addEventListener('change', () => {
+      markDirty();
+      syncJustification(root);
+    });
+    p.owner.addEventListener('input', markDirty);
+    p.justification.addEventListener('input', markDirty);
     p.save.addEventListener('click', () => save(root));
   });
 
-  onOdpStorageChange(() => controls.forEach((root) => populate(root, false)), { baseline: false });
+  onOdpStorageChange(() => controls.forEach((root) => populate(root, false)), {
+    baseline: false,
+    decisions: false,
+    status: true,
+  });
 </script>
