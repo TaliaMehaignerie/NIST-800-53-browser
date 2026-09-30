@@ -20,7 +20,7 @@ import ProvenanceFooter from '../components/ProvenanceFooter.astro';
 import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
 import WorkingBaseline from '../components/WorkingBaseline.astro';
-import { homeUrl } from '../utils/url';
+import { dashboardUrl, homeUrl } from '../utils/url';
 
 interface Props {
   title: string;
@@ -40,6 +40,7 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
   <body>
     <header class="site-header">
       <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
+      <a href={dashboardUrl()} class="site-nav">Compliance dashboard</a>
       <SearchBox value={searchQuery} />
       <WorkingBaseline />
       {showBaselineFilter && <BaselineFilter />}
@@ -65,6 +66,22 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     --color-baseline-moderate: #d29922;
     --color-baseline-high: #f85149;
     --color-baseline-privacy: #a371f7;
+
+    /*
+     * Status colors for the compliance dashboard (AD-15). Their own tokens —
+     * never reuse --color-baseline-* as chart fills: compliant-green sits
+     * DeltaE 7.9 from the low-baseline green, so a fill there would mean two
+     * things in one color. Only two saturated statuses; incomplete is the
+     * neutral absence state (no red, which fails deuteranopia separation from
+     * the green at DeltaE 4.1); not-applicable is neutral + 45deg hatch.
+     * Verified: validate_palette "#0ca30c,#fab219" --mode dark
+     * --surface "#161b22" --pairs all.
+     */
+    --color-status-compliant: #0ca30c;
+    --color-status-progress: #fab219;
+    --color-status-incomplete: #6e7681;
+    --color-status-na-fill: #1c2128;
+    --color-status-na-hatch: #6e7681;
 
     --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-meta: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -113,6 +130,14 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     max-width: 720px;
     margin: 0 auto;
     padding: 24px 16px;
+  }
+
+  .site-nav {
+    display: inline-block;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
   }
 
   .site-title {

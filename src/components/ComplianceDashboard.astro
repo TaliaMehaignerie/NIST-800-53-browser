@@ -1,0 +1,604 @@
+---
+// Story 16: the compliance dashboard — hero number, overall stacked bar, and
+// a per-family breakdown using the same mark, scoped by one baseline filter.
+// Counting is `complianceCount.ts` (AD-15) over item metadata embedded here at
+// build time from the Content Collection (no fetch) and statuses read from
+// `statusStore` (AD-14). Status colors are their own tokens, never the
+// baseline tokens (see BaseLayout). Hidden until the script runs; with JS off
+// the page says so. `data-pagefind-ignore` keeps it out of search results.
+import { getCollection } from 'astro:content';
+import { BASELINES } from '../utils/activeBaseline';
+import { familyUrl } from '../utils/url';
+
+const all = await getCollection('controls');
+// [slug, familyCode, space-joined baselines, withdrawn(0|1)] — compact on purpose.
+const items = all.map((e) => [e.data.slug, e.data.familyCode, e.data.baselines.join(' '), e.data.withdrawn ? 1 : 0]);
+const families = (await getCollection('families'))
+  .sort((a, b) => a.data.catalogOrder - b.data.catalogOrder)
+  .map((f) => ({ code: f.data.code, name: f.data.name, href: familyUrl(f.data.slug) }));
+// `<` escaped so embedded text can never close the script element.
+const payload = JSON.stringify({ items, families }).replace(/</g, '\\u003c');
+const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
+
+const ICONS: Record<string, string> = {
+  compliant: 'M2 6.5 L5 9.5 L10 3',
+  inProgress: 'M6 1.5 A4.5 4.5 0 0 1 6 10.5 Z',
+  incomplete: '',
+  notApplicable: 'M2.5 9.5 L9.5 2.5',
+};
+---
+
+<section class="compliance" data-compliance data-pagefind-ignore hidden>
+  <div class="compliance__filters" role="group" aria-label="Baseline">
+    <span class="compliance__filter-label">Baseline</span>
+    {
+      BASELINES.map((b) => (
+        <button type="button" class="compliance__filter" data-baseline={b} aria-pressed="false">
+          {label(b)}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="compliance__hero">
+    <div class="compliance__hero-row">
+      <span class="compliance__hero-value" data-hero-value>—</span>
+      <span class="compliance__hero-fraction" data-hero-fraction></span>
+    </div>
+    <p class="compliance__caption" data-hero-caption></p>
+    <p class="compliance__caption" data-programwide></p>
+  </div>
+
+  <ul class="compliance__legend" aria-label="Status key">
+    {
+      [
+        ['compliant', 'Compliant'],
+        ['inProgress', 'In progress'],
+        ['incomplete', 'Incomplete'],
+        ['notApplicable', 'Not applicable (excluded from the percentage)'],
+      ].map(([key, text]) => (
+        <li>
+          <svg class={`compliance__key compliance__key--${key}`} width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+            <circle cx="6" cy="6" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+            {ICONS[key] && <path d={ICONS[key]} fill={key === 'inProgress' ? 'currentColor' : 'none'} stroke={key === 'inProgress' ? 'none' : 'currentColor'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />}
+          </svg>
+          <span>{text}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="compliance__heading">Overall</h2>
+  <div data-overall></div>
+
+  <h2 class="compliance__heading">By family</h2>
+  <div class="compliance__families" data-family-rows></div>
+
+  <details class="compliance__table">
+    <summary>Table view</summary>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Family</th>
+          <th scope="col">Compliant</th>
+          <th scope="col">In progress</th>
+          <th scope="col">Incomplete</th>
+          <th scope="col">Not applicable</th>
+          <th scope="col">Compliance</th>
+        </tr>
+      </thead>
+      <tbody data-table-body></tbody>
+    </table>
+  </details>
+
+  <div class="compliance__tooltip" role="tooltip" hidden data-tooltip></div>
+</section>
+<noscript><p class="compliance__noscript">The compliance dashboard needs JavaScript: your statuses live in this browser.</p></noscript>
+
+<script type="application/json" id="compliance-data" set:html={payload} is:inline />
+
+<style is:global>
+  .compliance {
+    font-family: var(--font-meta);
+    color: var(--color-ink-primary);
+    margin: 16px 0 32px;
+  }
+
+  .compliance[hidden] {
+    display: none;
+  }
+
+  .compliance__noscript {
+    color: var(--color-ink-secondary);
+  }
+
+  .compliance__filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .compliance__filter-label {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin-right: 4px;
+  }
+
+  .compliance__filter {
+    font: inherit;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--rounded-full);
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+
+  .compliance__filter:hover {
+    background: var(--color-surface-overlay);
+  }
+
+  .compliance__filter[aria-pressed='true'] {
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-primary);
+  }
+
+  .compliance button:focus-visible,
+  .compliance a:focus-visible,
+  .compliance summary:focus-visible,
+  .compliance [data-bar]:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .compliance__hero {
+    margin-bottom: 20px;
+  }
+
+  .compliance__hero-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* One hero figure, same sans as everything else, proportional figures. */
+  .compliance__hero-value {
+    font-family: var(--font-body);
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .compliance__hero-fraction {
+    font-size: 20px;
+    color: var(--color-ink-secondary);
+  }
+
+  .compliance__caption {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: 4px 0 0;
+  }
+
+  .compliance__legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 20px;
+    padding: 0;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .compliance__legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .compliance__key--compliant {
+    color: var(--color-status-compliant);
+  }
+
+  .compliance__key--inProgress {
+    color: var(--color-status-progress);
+  }
+
+  .compliance__key--incomplete,
+  .compliance__key--notApplicable {
+    color: var(--color-status-incomplete);
+  }
+
+  .compliance__heading {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-secondary);
+    margin: 20px 0 8px;
+  }
+
+  /* The mark: a thin stacked bar, 2px surface gaps (no borders), square at the
+     baseline, 4px rounded data-end. */
+  .compliance [data-bar] {
+    display: flex;
+    gap: 2px;
+    height: 12px;
+    min-width: 0;
+    border-radius: 0 4px 4px 0;
+    overflow: hidden;
+  }
+
+  .compliance [data-bar].compliance__bar--overall {
+    height: 20px;
+  }
+
+  .compliance__seg {
+    flex-basis: 0;
+    min-width: 2px;
+    transition: filter 0.1s ease;
+  }
+
+  .compliance__seg--hover {
+    filter: brightness(1.25);
+  }
+
+  .compliance__seg--compliant {
+    background: var(--color-status-compliant);
+  }
+
+  .compliance__seg--inProgress {
+    background: var(--color-status-progress);
+  }
+
+  .compliance__seg--incomplete {
+    background: var(--color-status-incomplete);
+  }
+
+  .compliance__seg--notApplicable {
+    background:
+      repeating-linear-gradient(45deg, var(--color-status-na-hatch) 0 1.5px, transparent 1.5px 5px),
+      var(--color-status-na-fill);
+  }
+
+  .compliance__row {
+    display: grid;
+    grid-template-columns: minmax(150px, 220px) 1fr minmax(110px, auto);
+    align-items: center;
+    gap: 12px;
+    padding: 5px 0;
+  }
+
+  .compliance__row-label {
+    font-size: 13px;
+    line-height: 1.35;
+    color: var(--color-ink-primary);
+    text-decoration: none;
+  }
+
+  .compliance__row-label:hover {
+    text-decoration: underline;
+  }
+
+  .compliance__row-code {
+    font-family: var(--font-mono);
+    color: var(--color-ink-secondary);
+    margin-right: 6px;
+  }
+
+  .compliance__row-tag {
+    color: var(--color-ink-secondary);
+    margin-left: 6px;
+  }
+
+  .compliance__row-value {
+    font-size: 13px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 560px) {
+    .compliance__row {
+      grid-template-columns: 1fr auto;
+    }
+
+    .compliance__row [data-bar] {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+
+  .compliance__table {
+    margin-top: 24px;
+    font-size: 13px;
+  }
+
+  .compliance__table summary {
+    cursor: pointer;
+    color: var(--color-ink-secondary);
+  }
+
+  .compliance__table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .compliance__table th,
+  .compliance__table td {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .compliance__table th:first-child,
+  .compliance__table td:first-child {
+    text-align: left;
+  }
+
+  .compliance__table th {
+    color: var(--color-ink-secondary);
+    font-weight: 600;
+  }
+
+  .compliance__tooltip {
+    position: absolute;
+    z-index: 40;
+    pointer-events: none;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 8px 10px;
+    font-size: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  .compliance__tooltip[hidden] {
+    display: none;
+  }
+
+  .compliance__tooltip-title {
+    color: var(--color-ink-secondary);
+    margin: 0 0 4px;
+  }
+
+  .compliance__tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .compliance__tooltip-key {
+    width: 12px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .compliance__tooltip-value {
+    font-weight: 600;
+    margin-left: auto;
+    padding-left: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<script>
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, isBaseline } from '../utils/activeBaseline';
+  import { getStatuses } from '../utils/statusStore';
+  import {
+    countCompliance,
+    percentLabel,
+    compliancePercent,
+    type ComplianceCounts,
+    type ComplianceItem,
+  } from '../utils/complianceCount';
+  import { onOdpStorageChange } from '../utils/storageSync';
+  import { setUrlState } from '../utils/urlState';
+
+  interface FamilyInfo {
+    code: string;
+    name: string;
+    href: string;
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-compliance]');
+  const dataEl = document.getElementById('compliance-data');
+
+  const STATUSES = [
+    { key: 'compliant', label: 'Compliant', color: 'var(--color-status-compliant)' },
+    { key: 'inProgress', label: 'In progress', color: 'var(--color-status-progress)' },
+    { key: 'incomplete', label: 'Incomplete', color: 'var(--color-status-incomplete)' },
+    { key: 'notApplicable', label: 'Not applicable', color: 'var(--color-status-incomplete)' },
+  ] as const;
+
+  let items: ComplianceItem[] = [];
+  let families: FamilyInfo[] = [];
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // The filter is a view scope, independent of the working baseline (AD-13):
+  // an explicit `?baseline=` wins, otherwise it follows the working baseline.
+  function explicitBaseline(): string | null {
+    const value = new URLSearchParams(window.location.search).get('baseline');
+    return isBaseline(value) ? value : null;
+  }
+
+  function currentBaseline(): string {
+    return explicitBaseline() ?? getActiveBaseline();
+  }
+
+  function describe(counts: ComplianceCounts, title: string): string {
+    return (
+      `${title}: ${counts.compliant} compliant, ${counts.inProgress} in progress, ` +
+      `${counts.incomplete} incomplete, ${counts.notApplicable} not applicable`
+    );
+  }
+
+  const tooltip = root?.querySelector<HTMLElement>('[data-tooltip]') ?? null;
+
+  function showTooltip(bar: HTMLElement, counts: ComplianceCounts, title: string, hovered?: HTMLElement): void {
+    if (!tooltip) return;
+    tooltip.replaceChildren();
+    tooltip.appendChild(el('p', 'compliance__tooltip-title', title));
+    for (const s of STATUSES) {
+      const row = el('div', 'compliance__tooltip-row');
+      const key = el('span', 'compliance__tooltip-key');
+      key.style.background = s.color;
+      row.append(key, el('span', undefined, s.label), el('span', 'compliance__tooltip-value', String(counts[s.key])));
+      tooltip.appendChild(row);
+    }
+    tooltip.appendChild(el('p', 'compliance__tooltip-title', percentLabel(counts)));
+    tooltip.hidden = false;
+
+    const rect = (hovered ?? bar).getBoundingClientRect();
+    const tipWidth = tooltip.offsetWidth;
+    const left = Math.max(8, Math.min(rect.left + rect.width / 2 - tipWidth / 2, window.innerWidth - tipWidth - 8));
+    tooltip.style.left = `${left + window.scrollX}px`;
+    tooltip.style.top = `${rect.bottom + window.scrollY + 8}px`;
+  }
+
+  function hideTooltip(bar: HTMLElement): void {
+    if (tooltip) tooltip.hidden = true;
+    bar.querySelectorAll('.compliance__seg--hover').forEach((s) => s.classList.remove('compliance__seg--hover'));
+  }
+
+  // One stacked bar: a segment per status, widths proportional to the item
+  // count (not-applicable included, so its exclusion is visible as a segment).
+  // Segments carry no inline labels — too small to fit — so the legend, the
+  // tooltip and the table carry the values.
+  function buildBar(counts: ComplianceCounts, title: string, overall = false): HTMLElement {
+    const bar = el('div', overall ? 'compliance__bar--overall' : '');
+    bar.dataset.bar = 'true';
+    bar.tabIndex = 0;
+    bar.setAttribute('role', 'img');
+    bar.setAttribute('aria-label', describe(counts, title));
+
+    for (const s of STATUSES) {
+      const count = counts[s.key];
+      if (count === 0) continue;
+      const seg = el('div', `compliance__seg compliance__seg--${s.key}`);
+      seg.style.flexGrow = String(count);
+      seg.addEventListener('pointerenter', () => {
+        bar.querySelectorAll('.compliance__seg--hover').forEach((n) => n.classList.remove('compliance__seg--hover'));
+        seg.classList.add('compliance__seg--hover');
+        showTooltip(bar, counts, title, seg);
+      });
+      bar.appendChild(seg);
+    }
+    if (counts.total === 0) bar.appendChild(el('div', 'compliance__seg compliance__seg--incomplete')).style.flexGrow = '1';
+
+    bar.addEventListener('pointerleave', () => hideTooltip(bar));
+    bar.addEventListener('focus', () => showTooltip(bar, counts, title));
+    bar.addEventListener('blur', () => hideTooltip(bar));
+    return bar;
+  }
+
+  function render(): void {
+    if (!root) return;
+    const baseline = currentBaseline();
+    const name = baselineLabel(baseline);
+    const { overall, byFamily, programWide } = countCompliance(items, baseline, getStatuses());
+
+    root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.baseline === baseline));
+    });
+
+    const pct = compliancePercent(overall);
+    root.querySelector<HTMLElement>('[data-hero-value]')!.textContent = pct === null ? '—' : `${pct}%`;
+    root.querySelector<HTMLElement>('[data-hero-fraction]')!.textContent = `(${overall.compliant}/${overall.denominator})`;
+    root.querySelector<HTMLElement>('[data-hero-caption]')!.textContent =
+      `${overall.compliant} of ${overall.denominator} items compliant in the ${name} baseline` +
+      (overall.notApplicable > 0 ? `; ${overall.notApplicable} not applicable, excluded.` : '.');
+    root.querySelector<HTMLElement>('[data-programwide]')!.textContent =
+      programWide.total > 0
+        ? `Includes ${programWide.total} program-wide items (PM family, in no baseline), counted under every baseline: ${percentLabel(programWide)}.`
+        : '';
+
+    const overallHost = root.querySelector<HTMLElement>('[data-overall]')!;
+    overallHost.replaceChildren(buildBar(overall, `Overall, ${name} baseline`, true));
+
+    const rows = root.querySelector<HTMLElement>('[data-family-rows]')!;
+    const tbody = root.querySelector<HTMLElement>('[data-table-body]')!;
+    rows.replaceChildren();
+    tbody.replaceChildren();
+
+    for (const family of families) {
+      const counts = byFamily.get(family.code);
+      if (!counts || counts.total === 0) continue;
+
+      const row = el('div', 'compliance__row');
+      const label = el('a', 'compliance__row-label');
+      label.href = family.href;
+      label.append(el('span', 'compliance__row-code', family.code), document.createTextNode(family.name));
+      if (family.code.toUpperCase() === 'PM' && programWide.total > 0) {
+        label.append(el('span', 'compliance__row-tag', `incl. ${programWide.total} program-wide`));
+      }
+      row.append(label, buildBar(counts, `${family.code} ${family.name}`), el('span', 'compliance__row-value', percentLabel(counts)));
+      rows.appendChild(row);
+
+      const tr = el('tr');
+      tr.append(
+        el('td', undefined, `${family.code} — ${family.name}`),
+        el('td', undefined, String(counts.compliant)),
+        el('td', undefined, String(counts.inProgress)),
+        el('td', undefined, String(counts.incomplete)),
+        el('td', undefined, String(counts.notApplicable)),
+        el('td', undefined, percentLabel(counts)),
+      );
+      tbody.appendChild(tr);
+    }
+
+    const total = el('tr');
+    total.append(
+      el('td', undefined, 'Overall'),
+      el('td', undefined, String(overall.compliant)),
+      el('td', undefined, String(overall.inProgress)),
+      el('td', undefined, String(overall.incomplete)),
+      el('td', undefined, String(overall.notApplicable)),
+      el('td', undefined, percentLabel(overall)),
+    );
+    total.style.fontWeight = '600';
+    tbody.appendChild(total);
+  }
+
+  if (root && dataEl) {
+    try {
+      const parsed = JSON.parse(dataEl.textContent ?? '{}') as { items: [string, string, string, number][]; families: FamilyInfo[] };
+      items = parsed.items.map(([slug, familyCode, baselines, withdrawn]) => ({
+        slug,
+        familyCode,
+        baselines: baselines ? baselines.split(' ') : [],
+        withdrawn: withdrawn === 1,
+      }));
+      families = parsed.families;
+    } catch (err) {
+      console.error('ComplianceDashboard: could not parse embedded data', err);
+    }
+
+    root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((button) => {
+      button.addEventListener('click', () => {
+        setUrlState({ search: { baseline: button.dataset.baseline ?? null } });
+        render();
+      });
+    });
+
+    window.addEventListener(ACTIVE_BASELINE_EVENT, () => {
+      if (!explicitBaseline()) render();
+    });
+    onOdpStorageChange(render, { baseline: true, decisions: false, status: true });
+
+    render();
+    root.hidden = false;
+  }
+</script>

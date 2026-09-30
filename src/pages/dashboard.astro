@@ -1,0 +1,11 @@
+---
+// Story 16: the compliance dashboard page. The component is self-contained so
+// story 17 can promote it onto the home page without changing it.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ComplianceDashboard from '../components/ComplianceDashboard.astro';
+---
+
+<BaseLayout title="Compliance dashboard — NIST 800-53 Browser">
+  <h1>Compliance dashboard</h1>
+  <ComplianceDashboard />
+</BaseLayout>
