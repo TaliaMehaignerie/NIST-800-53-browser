@@ -21,6 +21,7 @@ const { label, title, slug, withdrawn, incorporatedInto, baselines } = Astro.pro
 <a class="control-row" href={controlUrl(slug)} data-baselines={baselines.join(' ')}>
   <span class="control-row__id">{label}</span>
   <span class={`control-row__title ${withdrawn ? 'control-row__title--withdrawn' : ''}`}>{title}</span>
+  <span class="control-row__readiness" data-odp-readiness data-control-slug={slug} hidden></span>
   <span class="control-row__badges">
     {withdrawn ? (
       <WithdrawnMarker incorporatedInto={incorporatedInto} />
@@ -61,6 +62,17 @@ const { label, title, slug, withdrawn, incorporatedInto, baselines } = Astro.pro
 
   .control-row__title--withdrawn {
     color: var(--color-ink-secondary);
+  }
+
+  .control-row__readiness {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    flex-shrink: 0;
+  }
+
+  .control-row__readiness[hidden] {
+    display: none;
   }
 
   .control-row__badges {

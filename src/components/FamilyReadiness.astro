@@ -1,0 +1,48 @@
+---
+// Story 12: fills each Control row's readiness span ("3/9 reviewed") for the
+// working baseline. Data is embedded at build time from the same Content
+// Collection; counting is the shared `odpCounts` tally via `odpReadiness`.
+interface Props {
+  items: Record<string, { slug: string; baselines: string[]; paramIds: string[] }[]>;
+}
+
+const { items } = Astro.props;
+// `<` escaped so embedded text can never close the script element.
+const payload = JSON.stringify(items).replace(/</g, '\\u003c');
+---
+
+<script type="application/json" id="odp-family-readiness" set:html={payload} is:inline />
+
+<script>
+  import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { readinessFor, reviewedCount, type ReadinessItem } from '../utils/odpReadiness';
+
+  let items: Record<string, ReadinessItem[]> = {};
+  try {
+    items = JSON.parse(document.getElementById('odp-family-readiness')?.textContent ?? '{}');
+  } catch (err) {
+    console.error('FamilyReadiness: could not parse embedded data', err);
+  }
+
+  function render(): void {
+    const baseline = getActiveBaseline();
+    const decisions = getDecisions(baseline);
+    document.querySelectorAll<HTMLElement>('[data-odp-readiness]').forEach((cell) => {
+      const counts = readinessFor(items[cell.dataset.controlSlug ?? ''] ?? [], baseline, decisions);
+      cell.hidden = counts.total === 0;
+      if (counts.total === 0) return;
+      cell.textContent = `${reviewedCount(counts)}/${counts.total} reviewed`;
+      cell.title =
+        `${counts.confirmed} confirmed, ${counts.overridden} overridden, ${counts.unreviewed} unreviewed ` +
+        `(${baseline[0].toUpperCase()}${baseline.slice(1)}, including enhancements)`;
+    });
+  }
+
+  render();
+  window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+  window.addEventListener('odpdecisionschanged', render);
+  window.addEventListener('storage', (e) => {
+    if (e.key === null || e.key === 'active-baseline' || e.key.startsWith('odp-decisions:')) render();
+  });
+</script>

@@ -349,6 +349,14 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     color: var(--color-ink-secondary);
   }
 
+  .odp-row__control-id a {
+    color: inherit;
+  }
+
+  .odp-row__control-id a:hover {
+    color: var(--color-accent);
+  }
+
   .odp-row__param-id {
     font-family: var(--font-mono);
     font-size: 0.85em;
@@ -513,7 +521,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     FAN_OUT_FAILED_MESSAGE,
     SAVE_FAILED_MESSAGE,
   } from '../../utils/odpEdit';
-  import { odpDatasetUrl, odpMetaUrl } from '../../utils/url';
+  import { controlUrl, odpDatasetUrl, odpMetaUrl } from '../../utils/url';
   import {
     groupDashOneClusters,
     computeClusterMatch,
@@ -523,6 +531,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
   import { setUrlState } from '../../utils/urlState';
   import { isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
+  import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
   // switched by a button group whose state lives in the URL query (AD-3),
@@ -546,7 +555,15 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   // Individual rows register themselves here so a batch save (below) can
   // refresh an already-rendered row's display in place — no reload needed
   // to see the fan-out (spec manual checks).
-  const rowRegistry = new Map<string, { row: HTMLElement; select: ValueFieldSelect }>();
+  // `snapshot` is the JSON of the decision this row last displayed, so a
+  // cross-tab `storage` event only touches rows whose stored decision actually
+  // changed (never clobbering unsaved typing in an unrelated row).
+  const rowRegistry = new Map<string, { row: HTMLElement; select: ValueFieldSelect; snapshot: string }>();
+  const batchMatchRegistry: { matchLabel: HTMLElement; cluster: Cluster }[] = [];
+
+  function snapshotOf(decision: Decision | undefined): string {
+    return JSON.stringify(decision ?? null);
+  }
 
   // Story 3: readiness dashboard state. `entries`/`clusters` don't change
   // after `init()` loads them — only the decisions they're read against do
@@ -603,52 +620,18 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     }
   }
 
-  interface StatusCounts {
-    unreviewed: number;
-    confirmed: number;
-    overridden: number;
-    total: number;
-  }
-
-  function emptyStatusCounts(): StatusCounts {
-    return { unreviewed: 0, confirmed: 0, overridden: 0, total: 0 };
-  }
-
-  function statusField(status: DecisionStatus): 'unreviewed' | 'confirmed' | 'overridden' {
-    return status === 'unreviewed-default' ? 'unreviewed' : status;
-  }
-
   function currentStatus(entry: OdpDatasetEntry, baseline: string): DecisionStatus {
     return getDecision(baseline, decisionKey(entry))?.status ?? 'unreviewed-default';
   }
 
-  // Tallies overall and by-Family counts by reading every entry's status via
-  // `getDecision` — a missing decision counts as `unreviewed-default`
-  // (AD-10). Computed fresh on every call, never cached (spec Design Notes).
+  // Counting lives in `odpCounts.ts`, shared with the control-page summary
+  // and the family readiness column — never a second counter.
   function computeDashboardCounts(
     entries: OdpDatasetEntry[],
     baseline: string,
   ): { overall: StatusCounts; byFamily: Map<string, StatusCounts> } {
-    const overall = emptyStatusCounts();
-    const byFamily = new Map<string, StatusCounts>();
-
-    for (const entry of entries) {
-      const status = currentStatus(entry, baseline);
-      const field = statusField(status);
-
-      overall.total += 1;
-      overall[field] += 1;
-
-      let familyCounts = byFamily.get(entry.familyCode);
-      if (!familyCounts) {
-        familyCounts = emptyStatusCounts();
-        byFamily.set(entry.familyCode, familyCounts);
-      }
-      familyCounts.total += 1;
-      familyCounts[field] += 1;
-    }
-
-    return { overall, byFamily };
+    const { overall, byGroup } = tallyStatuses(entries, decisionKey, (e) => e.familyCode, getDecisions(baseline));
+    return { overall, byFamily: byGroup };
   }
 
   // First entry in document order (i.e. `entries`' own order, which is what
@@ -885,7 +868,14 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
     const controlSpan = document.createElement('span');
     controlSpan.className = 'odp-row__control-id';
-    controlSpan.textContent = `${entry.controlId.toUpperCase()} — ${entry.controlTitle}`;
+    // Enhancements have no route of their own (AD-4): link to the parent
+    // control page, at the enhancement's own fragment.
+    const controlLink = document.createElement('a');
+    controlLink.href = entry.controlId.includes('.')
+      ? `${controlUrl(entry.controlId.split('.')[0])}#${entry.controlSlug}`
+      : controlUrl(entry.controlSlug);
+    controlLink.textContent = `${entry.controlId.toUpperCase()} — ${entry.controlTitle}`;
+    controlSpan.appendChild(controlLink);
     header.appendChild(controlSpan);
 
     const paramSpan = document.createElement('span');
@@ -1003,6 +993,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       }
 
       applyStatus(row, status);
+      const registeredRow = rowRegistry.get(key);
+      if (registeredRow) registeredRow.snapshot = snapshotOf(decision);
       refreshDashboard();
       removeRowFromIndividualViewIfFiltered(key);
     }
@@ -1010,9 +1002,29 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     confirmBtn.addEventListener('click', () => handleAction('confirmed'));
     overrideBtn.addEventListener('click', () => handleAction('overridden'));
 
-    rowRegistry.set(key, { row, select: entry.select });
+    rowRegistry.set(key, { row, select: entry.select, snapshot: snapshotOf(existing) });
 
     return row;
+  }
+
+  // Story 12: passive cross-tab refresh. Updates only rows whose stored
+  // decision differs from what they last showed, then the batch match labels.
+  function refreshFromStorage(): void {
+    const decisions = getDecisions(dashboardBaseline);
+    for (const [key, registered] of Array.from(rowRegistry.entries())) {
+      const decision = decisions[key];
+      if (!decision || snapshotOf(decision) === registered.snapshot) continue;
+      setFieldValue(registered.select, registered.row, decision.value);
+      const rationaleInput = registered.row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement | null;
+      if (rationaleInput) rationaleInput.value = decision.rationale;
+      applyStatus(registered.row, decision.status);
+      registered.snapshot = snapshotOf(decision);
+      removeRowFromIndividualViewIfFiltered(key);
+    }
+    for (const { matchLabel, cluster } of batchMatchRegistry) {
+      refreshClusterMatch(matchLabel, cluster, dashboardBaseline);
+    }
+    refreshDashboard();
   }
 
   function applyStatus(row: HTMLElement, status: DecisionStatus) {
@@ -1182,6 +1194,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     row.appendChild(actions);
 
     refreshClusterMatch(matchLabel, cluster, baseline);
+    batchMatchRegistry.push({ matchLabel, cluster });
 
     function handleBatchAction(status: DecisionStatus) {
       const error = row.querySelector('[data-odp-error]') as HTMLElement;
@@ -1224,6 +1237,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
         ) as HTMLTextAreaElement | null;
         if (memberRationaleInput) memberRationaleInput.value = rationale;
         applyStatus(registered.row, status);
+        registered.snapshot = snapshotOf(decision);
         // Remove just this member's row if it's now filtered out, rather
         // than rebuilding the whole family list (which would also discard
         // any unsaved input in an unrelated sibling row still awaiting
@@ -1387,6 +1401,10 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     }
 
     refreshDashboard();
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === null || e.key === `odp-decisions:${dashboardBaseline}`) refreshFromStorage();
+    });
   }
 
   init();

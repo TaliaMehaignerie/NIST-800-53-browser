@@ -46,6 +46,7 @@ const enhancements = (
 
 // Story 10: only what the edit popover needs, per control on this page.
 const slotEntry = (e: { data: typeof control.data }) => ({
+  baselines: e.data.baselines as string[],
   familyCode: e.data.familyCode,
   controlId: e.data.id,
   title: e.data.title,
@@ -104,6 +105,8 @@ const slotPayload = { controls: slotControls, cluster };
         <span class="control-detail-card__no-baseline">Not in a baseline</span>
       )}
     </div>
+
+    {Object.keys(slotControls).length > 0 && <p class="odp-summary" data-odp-summary hidden />}
 
     {statement.length > 0 && (
       <div class="control-detail-card__statement" data-odp-baselines={baselines.join(' ')}>

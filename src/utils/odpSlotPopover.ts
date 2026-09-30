@@ -28,6 +28,7 @@ export interface SlotParam {
 }
 
 export interface SlotControl {
+  baselines: string[];
   familyCode: string;
   controlId: string;
   title: string;

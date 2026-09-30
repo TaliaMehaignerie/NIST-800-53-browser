@@ -175,6 +175,8 @@ No new runtime dependency is introduced — batching, clustering, storage, and O
       odpStore.ts                # sole decision-state read/write path (AD-10)
       odpEdit.ts                 # sole decision-mutation path: fields, validation, fan-out (AD-9, amended)
       odpCluster.ts               # dash-one id-suffix matching, shared by batch UI + dashboard (AD-11)
+      odpCounts.ts                # the one ODP status tally, shared by dashboard, control summary, family column
+      odpReadiness.ts             # in-baseline readiness roll-up over a control and its enhancements
       oscalExport.ts              # serializes the decision blob to an OSCAL Profile document (AD-12)
       activeBaseline.ts           # the one app-global working baseline (AD-13)
       statusStore.ts              # control status, evidence, owner — one blob, not per baseline (AD-14)

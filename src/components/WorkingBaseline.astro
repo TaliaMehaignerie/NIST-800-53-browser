@@ -132,6 +132,10 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
 
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     window.addEventListener('odpdecisionschanged', render);
+    // Story 12: passive cross-tab refresh of the working baseline and counts.
+    window.addEventListener('storage', (e) => {
+      if (e.key === null || e.key === 'active-baseline' || e.key.startsWith('odp-decisions:')) render();
+    });
     loadTotals();
   }
 </script>
