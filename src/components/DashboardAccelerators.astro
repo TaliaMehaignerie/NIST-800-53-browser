@@ -1,0 +1,407 @@
+---
+// Story 19: two dashboard sections, each independently droppable (delete its
+// markup block and its render function — they share only the payload):
+//   1. "What's blocking me": story 15's gate, inverted.
+//   2. "Moving between baselines": the delta, exactly answerable from data
+//      already embedded here.
+// Both are scoped to the dashboard's baseline (the one filter above the
+// charts) and recompute from the stores on every change. Hidden until the
+// script runs; `data-pagefind-ignore` keeps it out of search.
+import { getCollection } from 'astro:content';
+
+const all = (await getCollection('controls')).filter((e) => !e.data.withdrawn);
+// [slug, label, title, familyCode, space-joined baselines, parentSlug ('' for a control), space-joined paramIds]
+const items = all.map((e) => [
+  e.data.slug,
+  e.data.label,
+  e.data.title,
+  e.data.familyCode,
+  e.data.baselines.join(' '),
+  e.data.parentSlug ?? '',
+  e.data.params.map((p: { id: string }) => p.id).join(' '),
+]);
+// `<` escaped so embedded text can never close the script element.
+const payload = JSON.stringify(items).replace(/</g, '\\u003c');
+---
+
+<div class="accel" data-accel data-pagefind-ignore hidden>
+  <section aria-labelledby="accel-blocking">
+    <h2 id="accel-blocking" class="accel__title">What's blocking me</h2>
+    <p class="accel__lead" data-blocking-lead></p>
+    <div data-blocking-groups></div>
+  </section>
+
+  <section aria-labelledby="accel-delta">
+    <h2 id="accel-delta" class="accel__title">Moving between baselines</h2>
+    <div class="accel__controls">
+      <label for="accel-from">From</label>
+      <select id="accel-from" data-delta-from></select>
+      <label for="accel-to">to</label>
+      <select id="accel-to" data-delta-to></select>
+    </div>
+    <p class="accel__lead" data-delta-lead></p>
+    <ul class="accel__list" data-delta-breakdown></ul>
+    <div data-delta-families></div>
+  </section>
+</div>
+
+<script type="application/json" id="accel-data" set:html={payload} is:inline />
+
+<style is:global>
+  .accel {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-primary);
+    margin: 8px 0 32px;
+  }
+
+  .accel[hidden] {
+    display: none;
+  }
+
+  .accel__title {
+    font-size: 1.1em;
+    margin: 28px 0 8px;
+  }
+
+  .accel__lead {
+    color: var(--color-ink-secondary);
+    margin: 0 0 10px;
+  }
+
+  .accel__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .accel select {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 3px 6px;
+  }
+
+  .accel select:focus-visible,
+  .accel a:focus-visible,
+  .accel summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .accel__group h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-secondary);
+    margin: 16px 0 6px;
+  }
+
+  .accel__list {
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  .accel__list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border-hairline);
+  }
+
+  .accel__label {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-ink-secondary);
+  }
+
+  .accel__detail {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .accel details summary {
+    cursor: pointer;
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+    margin: 4px 0;
+  }
+
+  .accel table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .accel th,
+  .accel td {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .accel th:first-child,
+  .accel td:first-child {
+    text-align: left;
+  }
+
+  .accel th {
+    color: var(--color-ink-secondary);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import { ACTIVE_BASELINE_EVENT, BASELINES, baselineLabel } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { getStatuses } from '../utils/statusStore';
+  import { isCounted, type ComplianceItem } from '../utils/complianceCount';
+  import { interlockFor } from '../utils/odpInterlock';
+  import { DASHBOARD_BASELINE_EVENT, dashboardBaseline } from '../utils/dashboardBaseline';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+  import { controlUrl, workspaceUrl } from '../utils/url';
+
+  interface Item extends ComplianceItem {
+    label: string;
+    title: string;
+    parentSlug: string;
+    paramIds: string[];
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-accel]');
+  const dataEl = document.getElementById('accel-data');
+  const SHOWN = 15;
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  let items: Item[] = [];
+
+  // ---- 1. What's blocking me ---------------------------------------------
+  // Story 15's gate, inverted: items in progress that are ready to mark
+  // compliant, items in progress held back by unreviewed parameters, and items
+  // already marked compliant while parameters are still unreviewed.
+  function itemLink(item: Item): HTMLAnchorElement {
+    const a = el('a');
+    a.href = item.parentSlug ? `${controlUrl(item.parentSlug)}#${item.slug}` : controlUrl(item.slug);
+    a.textContent = item.title;
+    return a;
+  }
+
+  function buildGroup(title: string, rows: { item: Item; detail: string; workspace?: string }[], note: string): HTMLElement | null {
+    if (rows.length === 0) return null;
+    const group = el('div', 'accel__group');
+    group.appendChild(el('h3', undefined, `${title} (${rows.length})`));
+    group.appendChild(el('p', 'accel__lead', note));
+
+    const build = (subset: typeof rows) => {
+      const ul = el('ul', 'accel__list');
+      for (const { item, detail, workspace } of subset) {
+        const li = el('li');
+        li.append(el('span', 'accel__label', item.label), itemLink(item), el('span', 'accel__detail', detail));
+        if (workspace) {
+          const w = el('a', undefined, 'Review parameters');
+          w.href = workspace;
+          li.appendChild(w);
+        }
+        ul.appendChild(li);
+      }
+      return ul;
+    };
+
+    group.appendChild(build(rows.slice(0, SHOWN)));
+    if (rows.length > SHOWN) {
+      const more = el('details');
+      more.appendChild(el('summary', undefined, `Show all ${rows.length}`));
+      more.appendChild(build(rows.slice(SHOWN)));
+      group.appendChild(more);
+    }
+    return group;
+  }
+
+  function renderBlocking(baseline: string): void {
+    const host = root!.querySelector<HTMLElement>('[data-blocking-groups]')!;
+    const lead = root!.querySelector<HTMLElement>('[data-blocking-lead]')!;
+    const decisions = getDecisions(baseline);
+    const statuses = getStatuses();
+    const name = baselineLabel(baseline);
+
+    const ready: { item: Item; detail: string }[] = [];
+    const blocked: { item: Item; detail: string; workspace: string }[] = [];
+    const stale: { item: Item; detail: string; workspace: string }[] = [];
+
+    for (const item of items) {
+      if (!isCounted(item, baseline)) continue;
+      const status = statuses[item.slug]?.status;
+      if (status !== 'in-progress' && status !== 'compliant') continue;
+      const gate = interlockFor({ slug: item.slug, baselines: item.baselines, paramIds: item.paramIds }, baseline, decisions);
+      const workspace = new URL(workspaceUrl(baseline), window.location.origin);
+      workspace.searchParams.set('view', 'individual');
+      workspace.searchParams.set('family', item.familyCode);
+      workspace.searchParams.set('unreviewed', '1');
+      const detail = `${gate.unreviewed} of ${gate.total} parameter${gate.total === 1 ? '' : 's'} unreviewed`;
+
+      if (status === 'in-progress' && !gate.blocked) ready.push({ item, detail: 'No unreviewed parameters' });
+      else if (status === 'in-progress') blocked.push({ item, detail, workspace: workspace.toString() });
+      else if (gate.blocked) stale.push({ item, detail, workspace: workspace.toString() });
+    }
+
+    blocked.sort((a, b) => Number(b.detail.split(' ')[0]) - Number(a.detail.split(' ')[0]));
+    stale.sort((a, b) => Number(b.detail.split(' ')[0]) - Number(a.detail.split(' ')[0]));
+
+    host.replaceChildren();
+    const groups = [
+      buildGroup('Ready to mark compliant', ready, `In progress with nothing left to review in the ${name} baseline.`),
+      buildGroup('Blocked by unreviewed parameters', blocked, `In progress, but these would be compliant if their ${name} parameters were reviewed.`),
+      buildGroup('Marked compliant with unreviewed parameters', stale, `Already compliant, yet parameters are still unreviewed in the ${name} baseline.`),
+    ];
+    for (const g of groups) if (g) host.appendChild(g);
+
+    lead.textContent =
+      groups.every((g) => g === null)
+        ? `Nothing in the ${name} baseline is in progress or held back by unreviewed parameters.`
+        : `In the ${name} baseline, the most actionable items first.`;
+  }
+
+  // ---- 2. Moving between baselines ---------------------------------------
+  function statusOf(slug: string): string {
+    return getStatuses()[slug]?.status ?? 'none';
+  }
+
+  function renderDelta(): void {
+    const fromSel = root!.querySelector<HTMLSelectElement>('[data-delta-from]')!;
+    const toSel = root!.querySelector<HTMLSelectElement>('[data-delta-to]')!;
+    const lead = root!.querySelector<HTMLElement>('[data-delta-lead]')!;
+    const breakdown = root!.querySelector<HTMLElement>('[data-delta-breakdown]')!;
+    const families = root!.querySelector<HTMLElement>('[data-delta-families]')!;
+    breakdown.replaceChildren();
+    families.replaceChildren();
+
+    const from = fromSel.value;
+    const to = toSel.value;
+    if (from === to) {
+      lead.textContent = 'Choose two different baselines to compare.';
+      return;
+    }
+
+    const added = items.filter((i) => isCounted(i, to) && !isCounted(i, from));
+    const dropped = items.filter((i) => isCounted(i, from) && !isCounted(i, to));
+    const unstatused = added.filter((i) => statusOf(i.slug) === 'none');
+
+    lead.textContent =
+      `Moving from ${baselineLabel(from)} to ${baselineLabel(to)} adds ${added.length} item${added.length === 1 ? '' : 's'}; ` +
+      `${unstatused.length} of them ha${unstatused.length === 1 ? 's' : 've'} no status yet.` +
+      (dropped.length > 0 ? ` It also drops ${dropped.length} item${dropped.length === 1 ? '' : 's'}.` : '');
+
+    const tally: [string, string][] = [
+      ['compliant', 'Compliant'],
+      ['in-progress', 'In progress'],
+      ['incomplete', 'Incomplete'],
+      ['not-applicable', 'Not applicable'],
+      ['none', 'No status yet'],
+    ];
+    for (const [key, label] of tally) {
+      const n = added.filter((i) => statusOf(i.slug) === key).length;
+      if (n > 0) breakdown.appendChild(el('li', undefined, `${label}: ${n}`));
+    }
+
+    if (added.length === 0) return;
+    const byFamily = new Map<string, { added: number; none: number }>();
+    for (const i of added) {
+      const row = byFamily.get(i.familyCode) ?? { added: 0, none: 0 };
+      row.added += 1;
+      if (statusOf(i.slug) === 'none') row.none += 1;
+      byFamily.set(i.familyCode, row);
+    }
+    const table = el('table');
+    const head = el('tr');
+    head.append(el('th', undefined, 'Family'), el('th', undefined, 'Items added'), el('th', undefined, 'No status yet'));
+    table.appendChild(el('thead')).appendChild(head);
+    const body = el('tbody');
+    for (const [code, row] of Array.from(byFamily.entries()).sort()) {
+      const tr = el('tr');
+      tr.append(el('td', undefined, code), el('td', undefined, String(row.added)), el('td', undefined, String(row.none)));
+      body.appendChild(tr);
+    }
+    table.appendChild(body);
+    families.appendChild(table);
+  }
+
+  // Default comparison: the dashboard's baseline and the next stricter one.
+  const NEXT: Record<string, string> = { low: 'moderate', moderate: 'high' };
+  let deltaTouched = false;
+
+  function syncDeltaDefaults(baseline: string): void {
+    if (deltaTouched) return;
+    root!.querySelector<HTMLSelectElement>('[data-delta-from]')!.value = baseline;
+    root!.querySelector<HTMLSelectElement>('[data-delta-to]')!.value = NEXT[baseline] ?? baseline;
+  }
+
+  function render(): void {
+    if (!root) return;
+    const baseline = dashboardBaseline();
+    syncDeltaDefaults(baseline);
+    renderBlocking(baseline);
+    renderDelta();
+  }
+
+  if (root && dataEl) {
+    try {
+      const parsed = JSON.parse(dataEl.textContent ?? '[]') as [string, string, string, string, string, string, string][];
+      items = parsed.map(([slug, label, title, familyCode, baselines, parentSlug, paramIds]) => ({
+        slug,
+        label,
+        title,
+        familyCode,
+        baselines: baselines ? baselines.split(' ') : [],
+        withdrawn: false,
+        parentSlug,
+        paramIds: paramIds ? paramIds.split(' ') : [],
+      }));
+
+      for (const sel of [root.querySelector<HTMLSelectElement>('[data-delta-from]')!, root.querySelector<HTMLSelectElement>('[data-delta-to]')!]) {
+        for (const b of BASELINES) {
+          const option = el('option', undefined, baselineLabel(b));
+          option.value = b;
+          sel.appendChild(option);
+        }
+        sel.addEventListener('change', () => {
+          deltaTouched = true;
+          renderDelta();
+        });
+      }
+
+      window.addEventListener(DASHBOARD_BASELINE_EVENT, render);
+      window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+      window.addEventListener('odpdecisionschanged', render);
+      window.addEventListener(WORKBENCH_DATA_EVENT, render);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') render();
+      });
+      window.addEventListener('pageshow', (e) => {
+        if ((e as PageTransitionEvent).persisted) render();
+      });
+      onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
+
+      render();
+      root.hidden = false;
+    } catch (err) {
+      console.error('DashboardAccelerators: could not parse embedded data', err);
+    }
+  }
+</script>

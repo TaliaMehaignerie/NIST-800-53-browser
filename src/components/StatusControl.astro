@@ -31,7 +31,15 @@ const OPTIONS: { value: string; label: string }[] = [
     <a data-gate-link>Open the unreviewed parameters in the workspace</a>
   </div>
   <div class="status-control__justification" data-status-justification-wrap hidden>
-    <label for={`justification-${slug}`}>Justification (required for not applicable)</label>
+    <div class="status-control__row">
+      <label for={`jtype-${slug}`}>Reason</label>
+      <select id={`jtype-${slug}`} data-status-jtype>
+        <option value="other">Other (explain below)</option>
+        <option value="inherited">Inherited from a provider</option>
+      </select>
+      <input type="text" data-status-provider placeholder="Provider name" aria-label="Provider this is inherited from" hidden />
+    </div>
+    <label for={`justification-${slug}`} data-status-justification-label>Justification (required for not applicable)</label>
     <textarea id={`justification-${slug}`} rows="2" data-status-justification></textarea>
   </div>
   <div class="status-control__evidence">
@@ -89,6 +97,10 @@ const OPTIONS: { value: string; label: string }[] = [
 
   .status-control__gate a {
     margin-left: 6px;
+  }
+
+  .status-control input[hidden] {
+    display: none;
   }
 
   .status-control__justification[hidden] {
@@ -186,6 +198,7 @@ const OPTIONS: { value: string; label: string }[] = [
 <script>
   import {
     getStatus,
+    inheritedJustification,
     setStatus,
     isItemStatus,
     isSafeEvidenceUrl,
@@ -213,6 +226,9 @@ const OPTIONS: { value: string; label: string }[] = [
       owner: root.querySelector<HTMLInputElement>('[data-status-owner]')!,
       wrap: root.querySelector<HTMLElement>('[data-status-justification-wrap]')!,
       justification: root.querySelector<HTMLTextAreaElement>('[data-status-justification]')!,
+      jtype: root.querySelector<HTMLSelectElement>('[data-status-jtype]')!,
+      provider: root.querySelector<HTMLInputElement>('[data-status-provider]')!,
+      justificationLabel: root.querySelector<HTMLElement>('[data-status-justification-label]')!,
       evidenceList: root.querySelector<HTMLElement>('[data-evidence-list]')!,
       evidenceAdd: root.querySelector<HTMLButtonElement>('[data-evidence-add]')!,
       gate: root.querySelector<HTMLElement>('[data-status-gate]')!,
@@ -304,6 +320,9 @@ const OPTIONS: { value: string; label: string }[] = [
   function syncJustification(root: HTMLElement): void {
     const p = parts(root);
     p.wrap.hidden = p.select.value !== 'not-applicable';
+    const inherited = p.jtype.value === 'inherited';
+    p.provider.hidden = !inherited;
+    p.justificationLabel.textContent = inherited ? 'Details (optional)' : 'Justification (required for not applicable)';
   }
 
   // Story 15: the ODP interlock. The item's parameters come from the page's
@@ -372,7 +391,12 @@ const OPTIONS: { value: string; label: string }[] = [
 
     p.select.value = record?.status ?? 'incomplete';
     p.owner.value = record?.owner ?? '';
-    p.justification.value = record?.justification ?? '';
+    const inheritedFrom = record?.inheritedFrom ?? '';
+    p.jtype.value = inheritedFrom ? 'inherited' : 'other';
+    p.provider.value = inheritedFrom;
+    // For an inherited N/A the default justification is just the provider line, so show details only if the user added some.
+    p.justification.value =
+      inheritedFrom && record?.justification === inheritedJustification(inheritedFrom, '') ? '' : (record?.justification ?? '');
     p.evidenceList.replaceChildren(...(record?.evidence ?? []).map((ref) => buildEvidenceRow(ref)));
     p.error.hidden = true;
     p.saved.textContent = record ? `Last updated ${new Date(record.updatedAt).toLocaleString()}` : '';
@@ -386,7 +410,16 @@ const OPTIONS: { value: string; label: string }[] = [
     p.error.textContent = '';
 
     const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
-    const justification = status === 'not-applicable' ? p.justification.value : '';
+    const inherited = status === 'not-applicable' && p.jtype.value === 'inherited';
+    const inheritedFrom = inherited ? p.provider.value.trim() : undefined;
+    const justification =
+      status !== 'not-applicable'
+        ? ''
+        : inherited
+          ? inheritedFrom
+            ? inheritedJustification(inheritedFrom, p.justification.value)
+            : p.justification.value
+          : p.justification.value;
     const evidence = readEvidence(root);
     // Defense in depth: the Save button is disabled while blocked, but the
     // rule is enforced here too.
@@ -399,9 +432,9 @@ const OPTIONS: { value: string; label: string }[] = [
         return;
       }
     }
-    const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification, evidence });
+    const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification, inheritedFrom, evidence });
     if (!ok) {
-      p.error.textContent = statusProblem({ status, justification, evidence }) ?? SAVE_FAILED;
+      p.error.textContent = statusProblem({ status, justification, inheritedFrom, evidence }) ?? SAVE_FAILED;
       p.error.hidden = false;
       return;
     }
@@ -419,6 +452,11 @@ const OPTIONS: { value: string; label: string }[] = [
       syncJustification(root);
       updateGate(root);
     });
+    p.jtype.addEventListener('change', () => {
+      markDirty(root);
+      syncJustification(root);
+    });
+    p.provider.addEventListener('input', () => markDirty(root));
     p.owner.addEventListener('input', () => markDirty(root));
     p.justification.addEventListener('input', () => markDirty(root));
     p.evidenceList.addEventListener('input', () => markDirty(root));

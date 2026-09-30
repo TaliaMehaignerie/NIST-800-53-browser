@@ -1,0 +1,306 @@
+---
+// Story 19: mark a family's items not applicable in bulk. Independently
+// droppable: delete this component and its mount on the family page.
+//
+// Marking all of PE not-applicable one control at a time is the friction that
+// makes people abandon a tracker, and "inherited from a provider" is the most
+// common real N/A reason and the one an assessor asks about — so it is a
+// first-class reason here, stored as a structured `inheritedFrom`, alongside
+// free text. The write is ONE atomic pass of N fully independent records
+// (`statusStore.setStatuses`, AD-11's discipline): nothing marks them as
+// bulk-derived and each stays individually editable afterward. Items already
+// not applicable keep their own justification. Hidden until the script runs.
+interface Props {
+  familyCode: string;
+  items: { slug: string; label: string; baselines: string[] }[];
+}
+
+const { familyCode, items } = Astro.props;
+// `<` escaped so embedded text can never close the script element.
+const payload = JSON.stringify({ familyCode, items }).replace(/</g, '\\u003c');
+---
+
+<details class="bulk-na" data-bulk-na data-pagefind-ignore hidden>
+  <summary>Mark items not applicable in bulk</summary>
+
+  <fieldset>
+    <legend>Which items</legend>
+    <label><input type="radio" name="bulk-na-scope" value="baseline" checked /> Items in the <span data-bulk-baseline></span> baseline (<span data-bulk-count-baseline></span>)</label>
+    <label><input type="radio" name="bulk-na-scope" value="family" /> Every item in this family (<span data-bulk-count-family></span>)</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Reason</legend>
+    <label><input type="radio" name="bulk-na-reason" value="inherited" checked /> Inherited from a provider</label>
+    <input type="text" data-bulk-provider placeholder="Provider name (required)" aria-label="Provider this is inherited from" />
+    <label><input type="radio" name="bulk-na-reason" value="other" /> Other</label>
+    <textarea rows="2" data-bulk-justification aria-label="Justification" placeholder="Justification (required for Other; optional details for a provider)"></textarea>
+  </fieldset>
+
+  <p class="bulk-na__preview" data-bulk-preview></p>
+  <p class="bulk-na__error" role="alert" data-bulk-error hidden></p>
+  <div class="bulk-na__actions">
+    <button type="button" data-bulk-apply>Mark not applicable…</button>
+  </div>
+
+  <div class="bulk-na__confirm" role="alertdialog" aria-labelledby="bulk-na-confirm-title" tabindex="-1" hidden data-bulk-confirm>
+    <p id="bulk-na-confirm-title"><strong data-bulk-confirm-text></strong></p>
+    <div class="bulk-na__actions">
+      <button type="button" data-bulk-confirm-yes>Confirm</button>
+      <button type="button" data-bulk-confirm-no>Cancel</button>
+    </div>
+  </div>
+
+  <p class="bulk-na__status" role="status" aria-live="polite" data-bulk-status hidden></p>
+</details>
+
+<style is:global>
+  .bulk-na {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 8px 12px;
+    margin: 16px 0;
+  }
+
+  .bulk-na[hidden] {
+    display: none;
+  }
+
+  .bulk-na summary {
+    cursor: pointer;
+    color: var(--color-ink-secondary);
+  }
+
+  .bulk-na fieldset {
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    margin: 10px 0;
+    padding: 6px 10px;
+  }
+
+  .bulk-na legend {
+    color: var(--color-ink-secondary);
+    padding: 0 4px;
+  }
+
+  .bulk-na label {
+    display: block;
+    margin: 4px 0;
+  }
+
+  .bulk-na input[type='text'],
+  .bulk-na textarea {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 4px 6px;
+    width: 100%;
+    margin: 2px 0 6px;
+  }
+
+  .bulk-na button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .bulk-na button:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .bulk-na input:focus-visible,
+  .bulk-na textarea:focus-visible,
+  .bulk-na button:focus-visible,
+  .bulk-na summary:focus-visible,
+  .bulk-na__confirm:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .bulk-na__actions {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .bulk-na__error,
+  .bulk-na__status {
+    padding: 4px 8px;
+    border-left: 3px solid var(--color-ink-secondary);
+    background: var(--color-surface-overlay);
+  }
+
+  .bulk-na__error[hidden],
+  .bulk-na__status[hidden],
+  .bulk-na__confirm[hidden] {
+    display: none;
+  }
+
+  .bulk-na__confirm {
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-sm);
+    padding: 8px 12px;
+    margin: 8px 0;
+  }
+</style>
+
+<script type="application/json" id="bulk-na-data" set:html={payload} is:inline />
+
+<script>
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline } from '../utils/activeBaseline';
+  import { getStatuses, inheritedJustification, setStatuses, statusProblem, type StatusInput } from '../utils/statusStore';
+  import { isCounted } from '../utils/complianceCount';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+
+  interface BulkItem {
+    slug: string;
+    label: string;
+    baselines: string[];
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-bulk-na]');
+  const dataEl = document.getElementById('bulk-na-data');
+
+  if (root && dataEl) {
+    const { familyCode, items } = JSON.parse(dataEl.textContent ?? '{}') as { familyCode: string; items: BulkItem[] };
+    const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const scopeOf = () => root.querySelector<HTMLInputElement>('input[name="bulk-na-scope"]:checked')!.value;
+    const reasonOf = () => root.querySelector<HTMLInputElement>('input[name="bulk-na-reason"]:checked')!.value;
+    let planned: { slug: string; record: StatusInput }[] = [];
+
+    // The items a click would change: the chosen scope, minus those already
+    // not applicable (which keep their own justification).
+    function candidates(): BulkItem[] {
+      const baseline = getActiveBaseline();
+      const inScope =
+        scopeOf() === 'family'
+          ? items
+          : items.filter((i) => isCounted({ slug: i.slug, familyCode, baselines: i.baselines, withdrawn: false }, baseline));
+      const statuses = getStatuses();
+      return inScope.filter((i) => statuses[i.slug]?.status !== 'not-applicable');
+    }
+
+    function buildInput(): { input: Omit<StatusInput, 'owner'>; problem: string | null } {
+      const details = $<HTMLTextAreaElement>('[data-bulk-justification]').value;
+      const inherited = reasonOf() === 'inherited';
+      const provider = $<HTMLInputElement>('[data-bulk-provider]').value.trim();
+      const input = inherited
+        ? { status: 'not-applicable' as const, inheritedFrom: provider, justification: provider ? inheritedJustification(provider, details) : details }
+        : { status: 'not-applicable' as const, justification: details };
+      return { input, problem: statusProblem(input) };
+    }
+
+    function breakdownText(list: BulkItem[]): string {
+      const statuses = getStatuses();
+      const count = (s: string) => list.filter((i) => (statuses[i.slug]?.status ?? 'incomplete') === s).length;
+      const parts = [
+        [count('compliant'), 'compliant'],
+        [count('in-progress'), 'in progress'],
+        [count('incomplete'), 'incomplete or not yet statused'],
+      ]
+        .filter(([n]) => (n as number) > 0)
+        .map(([n, label]) => `${n} ${label}`);
+      return parts.length > 0 ? `Currently: ${parts.join(', ')}.` : '';
+    }
+
+    function render(): void {
+      const baseline = getActiveBaseline();
+      $('[data-bulk-baseline]').textContent = baselineLabel(baseline);
+      const inBaseline = items.filter((i) => isCounted({ slug: i.slug, familyCode, baselines: i.baselines, withdrawn: false }, baseline));
+      $('[data-bulk-count-baseline]').textContent = String(inBaseline.length);
+      $('[data-bulk-count-family]').textContent = String(items.length);
+
+      const list = candidates();
+      const alreadyNa = (scopeOf() === 'family' ? items : inBaseline).length - list.length;
+      $('[data-bulk-preview]').textContent =
+        list.length === 0
+          ? 'Nothing to change: every item in this scope is already not applicable.'
+          : `This will mark ${list.length} item${list.length === 1 ? '' : 's'} not applicable. ${breakdownText(list)}` +
+            (alreadyNa > 0 ? ` ${alreadyNa} already not applicable ${alreadyNa === 1 ? 'is' : 'are'} left as they are.` : '');
+      $<HTMLButtonElement>('[data-bulk-apply]').disabled = list.length === 0;
+    }
+
+    function closeConfirm(): void {
+      planned = [];
+      $('[data-bulk-confirm]').hidden = true;
+    }
+
+    function say(message: string): void {
+      const status = $('[data-bulk-status]');
+      status.textContent = message;
+      status.hidden = false;
+    }
+
+    $('[data-bulk-apply]').addEventListener('click', () => {
+      const error = $('[data-bulk-error]');
+      error.hidden = true;
+      $('[data-bulk-status]').hidden = true;
+      const { input, problem } = buildInput();
+      if (problem) {
+        error.textContent = problem;
+        error.hidden = false;
+        return;
+      }
+      const list = candidates();
+      const statuses = getStatuses();
+      planned = list.map((i) => ({ slug: i.slug, record: { ...input, owner: statuses[i.slug]?.owner ?? '' } }));
+      $('[data-bulk-confirm-text]').textContent =
+        `Mark ${list.length} item${list.length === 1 ? '' : 's'} not applicable` +
+        (reasonOf() === 'inherited' ? `, inherited from ${$<HTMLInputElement>('[data-bulk-provider]').value.trim()}` : '') +
+        `? ${breakdownText(list)} Each stays editable on its own control page.`;
+      const confirmEl = $('[data-bulk-confirm]');
+      confirmEl.hidden = false;
+      confirmEl.focus();
+    });
+
+    $('[data-bulk-confirm-yes]').addEventListener('click', () => {
+      // Re-plan against the data as it is NOW, so the confirmation can never be stale.
+      const before = planned.length;
+      const fresh = candidates();
+      if (fresh.length !== before) {
+        closeConfirm();
+        render();
+        $('[data-bulk-error]').textContent = 'The items changed while you were confirming. Review the updated preview and try again.';
+        $('[data-bulk-error]').hidden = false;
+        return;
+      }
+      const ok = setStatuses(planned);
+      const count = planned.length;
+      closeConfirm();
+      if (!ok) {
+        $('[data-bulk-error]').textContent = 'Could not save. Your browser storage may be full or unavailable; no item was changed.';
+        $('[data-bulk-error]').hidden = false;
+        return;
+      }
+      say(`Marked ${count} item${count === 1 ? '' : 's'} not applicable. Each can be edited individually on its control page.`);
+      window.dispatchEvent(new CustomEvent(WORKBENCH_DATA_EVENT));
+      render();
+    });
+
+    $('[data-bulk-confirm-no]').addEventListener('click', () => {
+      closeConfirm();
+      say('Cancelled. Nothing was changed.');
+    });
+    $('[data-bulk-confirm]').addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') {
+        closeConfirm();
+        say('Cancelled. Nothing was changed.');
+      }
+    });
+
+    root.addEventListener('change', render);
+    window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+    onOdpStorageChange(render, { baseline: true, decisions: false, status: true });
+    render();
+    root.hidden = false;
+  }
+</script>

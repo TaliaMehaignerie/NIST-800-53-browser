@@ -10,6 +10,7 @@ import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ControlRow from '../../components/ControlRow.astro';
 import FamilyReadiness from '../../components/FamilyReadiness.astro';
+import BulkNotApplicable from '../../components/BulkNotApplicable.astro';
 import { homeUrl } from '../../utils/url';
 
 export async function getStaticPaths() {
@@ -28,11 +29,16 @@ const controls = (
 
 // Story 12: each row's readiness rolls up the control and its enhancements.
 const readinessItems: Record<string, { slug: string; baselines: string[]; paramIds: string[] }[]> = {};
+// Story 19: every non-withdrawn item (control or enhancement) in the family, for bulk not-applicable.
+const bulkItems: { slug: string; label: string; baselines: string[] }[] = [];
 for (const control of controls) {
   if (control.data.withdrawn) continue;
   const enhancements = (
     await Promise.all(control.data.enhancementSlugs.map((slug: string) => getEntry('controls', slug)))
   ).filter((e): e is NonNullable<typeof e> => e !== undefined && !e.data.withdrawn);
+  for (const e of [control, ...enhancements]) {
+    bulkItems.push({ slug: e.data.slug, label: e.data.label, baselines: e.data.baselines as string[] });
+  }
   const items = [control, ...enhancements]
     .filter((e) => e.data.params.length > 0)
     .map((e) => ({
@@ -63,6 +69,7 @@ for (const control of controls) {
   </div>
   <p class="baseline-empty-state" hidden>No controls match this Baseline.</p>
   <FamilyReadiness items={readinessItems} />
+  <BulkNotApplicable familyCode={family.data.code} items={bulkItems} />
 </BaseLayout>
 
 <style>
