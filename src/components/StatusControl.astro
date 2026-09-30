@@ -197,7 +197,7 @@ const OPTIONS: { value: string; label: string }[] = [
     type EvidenceRef,
     type ItemStatus,
   } from '../utils/statusStore';
-  import { onOdpStorageChange } from '../utils/storageSync';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
   import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { blockMessage, interlockFor, PAYLOAD_UNAVAILABLE_MESSAGE, staleCompliantMessage } from '../utils/odpInterlock';
@@ -406,6 +406,7 @@ const OPTIONS: { value: string; label: string }[] = [
       return;
     }
     populate(root, true);
+    window.dispatchEvent(new CustomEvent(WORKBENCH_DATA_EVENT));
   }
 
   const controls = Array.from(document.querySelectorAll<HTMLElement>('[data-status-control]'));

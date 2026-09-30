@@ -58,7 +58,7 @@ export function isOdpBlob(value: unknown): value is OdpBlob {
   if (!value || typeof value !== 'object') return false;
   const b = value as Record<string, unknown>;
   if (typeof b.schemaVersion !== 'number') return false;
-  if (!b.decisions || typeof b.decisions !== 'object') return false;
+  if (!b.decisions || typeof b.decisions !== 'object' || Array.isArray(b.decisions)) return false;
   return Object.values(b.decisions as Record<string, unknown>).every(isDecision);
 }
 

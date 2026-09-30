@@ -126,7 +126,7 @@ export function statusProblem(record: {
   return null;
 }
 
-function isEvidenceRef(value: unknown): value is EvidenceRef {
+export function isEvidenceRef(value: unknown): value is EvidenceRef {
   if (!value || typeof value !== 'object') return false;
   const e = value as Record<string, unknown>;
   return typeof e.note === 'string' && typeof e.url === 'string' && typeof e.collectedAt === 'string';

@@ -33,6 +33,7 @@
     <h3 id="restore-confirm-title">Replace your data with this backup?</h3>
     <p><strong>Your current data — this will be overwritten:</strong></p>
     <p data-current-summary></p>
+    <p class="data-backup__warn" data-unreadable-warning hidden></p>
     <p><strong>The backup file (<span data-file-date></span>) — this will replace it:</strong></p>
     <p data-file-summary></p>
     <div class="data-backup__actions">
@@ -190,6 +191,8 @@
     const confirmEl = $('[data-restore-confirm]');
     const fileInput = $<HTMLInputElement>('[data-restore-file]');
     let pending: BackupEnvelope | null = null;
+    let selection = 0;
+    let shownCurrent = '';
 
     function say(message: string): void {
       statusEl.textContent = message;
@@ -216,7 +219,8 @@
       document.body.appendChild(a);
       a.click();
       a.remove();
-      URL.revokeObjectURL(url);
+      // Some browsers start the download asynchronously; revoking right away can cancel it.
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
       const s = summarize(envelope);
       say(
         `Downloaded ${s.totalDecisions} decision${s.totalDecisions === 1 ? '' : 's'} and ${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'}.` +
@@ -225,23 +229,51 @@
     }
 
     function closeConfirm(): void {
+      selection += 1;
       pending = null;
       confirmEl.hidden = true;
       fileInput.value = '';
     }
 
+    // The "current data" the dialog states must be what the restore would really
+    // overwrite, so it is recomputed at confirm time, not just when the file is chosen.
+    function showCurrent(): string {
+      const current = currentSummary();
+      const text = describe(current);
+      $('[data-current-summary]').textContent = text;
+      const warn = $('[data-unreadable-warning]');
+      warn.hidden = current.unreadable.length === 0;
+      warn.textContent =
+        current.unreadable.length > 0
+          ? `These stored items cannot be read and are in no backup, so restoring will erase them: ${current.unreadable.join(', ')}. ` +
+            'Use "Download my current data first" to keep their raw text.'
+          : '';
+      return text + warn.textContent;
+    }
+
     async function onFile(): Promise<void> {
       const file = fileInput.files?.[0];
       if (!file) return;
+      const mine = ++selection;
       statusEl.hidden = true;
-      const result = parseEnvelope(await file.text());
+      let text: string;
+      try {
+        text = await file.text();
+      } catch (err) {
+        console.error('DataBackup: could not read the chosen file', err);
+        fileInput.value = '';
+        say('Could not read that file. Nothing was changed.');
+        return;
+      }
+      if (mine !== selection) return;
+      const result = parseEnvelope(text);
       if (!result.ok) {
         fileInput.value = '';
         say(result.message);
         return;
       }
       pending = result.envelope;
-      $('[data-current-summary]').textContent = describe(currentSummary());
+      shownCurrent = showCurrent();
       $('[data-file-summary]').textContent = describe(summarize(result.envelope));
       $('[data-file-date]').textContent = `exported ${new Date(result.envelope.exportedAt).toLocaleString()}`;
       confirmEl.hidden = false;
@@ -285,6 +317,11 @@
     });
     $('[data-restore-confirm-btn]').addEventListener('click', () => {
       if (!pending) return;
+      if (showCurrent() !== shownCurrent) {
+        shownCurrent = showCurrent();
+        say('Your data changed while this dialog was open. Review the updated summary, then confirm again.');
+        return;
+      }
       const result = applyEnvelope(pending);
       closeConfirm();
       say(result.message);

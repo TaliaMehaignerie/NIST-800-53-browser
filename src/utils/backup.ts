@@ -23,9 +23,11 @@ import {
   writeRawBlob as writeOdpRaw,
   type OdpBlob,
 } from './odpStore';
+import { originUsageChars } from './originStorage';
 import {
   STATUS_SCHEMA_VERSION,
   STATUS_STORAGE_KEY,
+  isEvidenceRef,
   isStatusBlob,
   readRawBlob as readStatusRaw,
   writeRawBlob as writeStatusRaw,
@@ -34,8 +36,12 @@ import {
 
 export const BACKUP_APP = 'nist-800-53-browser-workbench';
 export const ENVELOPE_VERSION = 1;
-/** A real backup is a few hundred KB at most; anything near the storage quota is not one of ours. */
-export const MAX_BACKUP_BYTES = 5 * 1024 * 1024;
+/**
+ * Generous ceiling (twice the ~5M-character storage budget): a backup of a
+ * nearly full store plus the envelope wrapper must still restore — that is the
+ * exact case "Download a backup now" sends people to.
+ */
+export const MAX_BACKUP_CHARS = 10 * 1024 * 1024;
 
 export interface BackupEnvelope {
   app: typeof BACKUP_APP;
@@ -43,9 +49,16 @@ export interface BackupEnvelope {
   exportedAt: string;
   odpDecisions: Partial<Record<Baseline, OdpBlob>>;
   controlStatus: StatusBlob | null;
+  /**
+   * Raw text of stored blobs that could not be read. Kept so a safety download
+   * never silently loses them; a restore ignores this field.
+   */
+  unreadable?: Record<string, string>;
 }
 
 export interface BackupSummary {
+  /** Stored items that are unreadable and so are in no restorable backup. */
+  unreadable: string[];
   decisionsByBaseline: Partial<Record<Baseline, number>>;
   totalDecisions: number;
   statusRecords: number;
@@ -66,13 +79,17 @@ function parseJson(raw: string | null): unknown {
 /** The current data as an envelope. `skipped` names any stored blob that was unreadable and so left out. */
 export function buildEnvelope(now: Date = new Date()): { envelope: BackupEnvelope; skipped: string[] } {
   const skipped: string[] = [];
+  const unreadable: Record<string, string> = {};
   const odpDecisions: BackupEnvelope['odpDecisions'] = {};
   for (const baseline of BASELINES) {
     const raw = readOdpRaw(baseline);
     if (raw === null) continue;
     const parsed = parseJson(raw);
     if (isOdpBlob(parsed)) odpDecisions[baseline] = parsed;
-    else skipped.push(`${baselineLabel(baseline)} decisions`);
+    else {
+      skipped.push(`${baselineLabel(baseline)} decisions`);
+      unreadable[odpStorageKey(baseline)] = raw;
+    }
   }
 
   let controlStatus: StatusBlob | null = null;
@@ -80,11 +97,21 @@ export function buildEnvelope(now: Date = new Date()): { envelope: BackupEnvelop
   if (statusRaw !== null) {
     const parsed = parseJson(statusRaw);
     if (isStatusBlob(parsed)) controlStatus = parsed;
-    else skipped.push('control status');
+    else {
+      skipped.push('control status');
+      unreadable[STATUS_STORAGE_KEY] = statusRaw;
+    }
   }
 
   return {
-    envelope: { app: BACKUP_APP, envelopeVersion: ENVELOPE_VERSION, exportedAt: now.toISOString(), odpDecisions, controlStatus },
+    envelope: {
+      app: BACKUP_APP,
+      envelopeVersion: ENVELOPE_VERSION,
+      exportedAt: now.toISOString(),
+      odpDecisions,
+      controlStatus,
+      ...(skipped.length > 0 ? { unreadable } : {}),
+    },
     skipped,
   };
 }
@@ -103,7 +130,7 @@ function refuse(message: string): ParseResult {
 
 /** Validates a whole backup file. Anything short of fully valid and on the current schema versions is refused. */
 export function parseEnvelope(text: string): ParseResult {
-  if (text.length > MAX_BACKUP_BYTES) return refuse('That file is too large to be a workbench backup.');
+  if (text.length > MAX_BACKUP_CHARS) return refuse('That file is too large to be a workbench backup.');
 
   let value: unknown;
   try {
@@ -148,6 +175,12 @@ export function parseEnvelope(text: string): ParseResult {
           `but this app reads version ${STATUS_SCHEMA_VERSION}.`,
       );
     }
+    for (const record of Object.values(file.controlStatus.items)) {
+      const evidence = (record as { evidence?: unknown }).evidence;
+      if (evidence !== undefined && !(Array.isArray(evidence) && evidence.every(isEvidenceRef))) {
+        return refuse('The evidence in that backup is damaged.');
+      }
+    }
     controlStatus = file.controlStatus;
   }
 
@@ -172,12 +205,14 @@ export function summarize(envelope: BackupEnvelope): BackupSummary {
     decisionsByBaseline,
     totalDecisions,
     statusRecords: records.length,
-    evidenceRefs: records.reduce((sum, r) => sum + (r.evidence?.length ?? 0), 0),
+    evidenceRefs: records.reduce((sum, r) => sum + (Array.isArray(r.evidence) ? r.evidence.length : 0), 0),
+    unreadable: [],
   };
 }
 
 export function currentSummary(): BackupSummary {
-  return summarize(buildEnvelope().envelope);
+  const { envelope, skipped } = buildEnvelope();
+  return { ...summarize(envelope), unreadable: skipped };
 }
 
 /** Replaces all stored data with the envelope's. All-or-nothing: a failed write restores every key. */
@@ -193,12 +228,27 @@ export function applyEnvelope(envelope: BackupEnvelope): { ok: boolean; message:
 
   if (writes.every(Boolean)) return { ok: true, message: 'Restored. Your data now matches the backup file.' };
 
-  for (const [baseline, raw] of previousOdp) writeOdpRaw(baseline, raw);
-  writeStatusRaw(previousStatus);
-  return {
-    ok: false,
-    message: 'Could not write the backup to browser storage (it may be full). Your previous data was put back unchanged.',
-  };
+  // Put every key back, and check that each put-back worked: freed space can be
+  // taken by another tab or site before the rollback lands.
+  const notRestored: string[] = [];
+  // Only keys that actually differ need putting back: a write that failed
+  // changed nothing, so there is nothing to undo (and nothing to fail again).
+  for (const [baseline, raw] of previousOdp) {
+    if (readOdpRaw(baseline) !== raw && !writeOdpRaw(baseline, raw)) notRestored.push(`${baselineLabel(baseline)} decisions`);
+  }
+  if (readStatusRaw() !== previousStatus && !writeStatusRaw(previousStatus)) notRestored.push('control status');
+
+  return notRestored.length === 0
+    ? {
+        ok: false,
+        message: 'Could not write the backup to browser storage (it may be full). Your previous data was put back unchanged.',
+      }
+    : {
+        ok: false,
+        message:
+          `Could not write the backup to browser storage, and could not put back: ${notRestored.join(', ')}. ` +
+          'Restore the backup file you downloaded before this, once there is space.',
+      };
 }
 
 // ---- storage budget ------------------------------------------------------
@@ -206,8 +256,10 @@ export function applyEnvelope(envelope: BackupEnvelope): { ok: boolean; message:
 /**
  * Browsers do not expose localStorage's limit. ~5M characters is the common
  * floor across engines, so it is used as the conservative budget and shown as
- * approximate. Usage is what this app actually stores (its own blobs), counted
- * in characters, since no other data shares this origin.
+ * approximate. The quota is shared by the whole ORIGIN, and this site is served
+ * from a `github.io` origin that other projects also write to, so usage is the
+ * origin's total (measured in `originStorage.ts`), with this app's own blobs
+ * broken out and the remainder reported as other data on the origin.
  */
 export const STORAGE_QUOTA_CHARS = 5 * 1024 * 1024;
 export const BUDGET_WARN_RATIO = 0.8;
@@ -235,7 +287,9 @@ export function storageUsage(): StorageUsage {
   const status = readStatusRaw();
   if (status !== null) parts.push({ label: 'Control status and evidence', chars: STATUS_STORAGE_KEY.length + status.length });
 
-  const usedChars = parts.reduce((sum, p) => sum + p.chars, 0);
+  const ours = parts.reduce((sum, p) => sum + p.chars, 0);
+  const usedChars = Math.max(originUsageChars(), ours);
+  if (usedChars > ours) parts.push({ label: 'Other data on this site\'s origin (other projects)', chars: usedChars - ours });
   const ratio = usedChars / STORAGE_QUOTA_CHARS;
   return {
     usedChars,

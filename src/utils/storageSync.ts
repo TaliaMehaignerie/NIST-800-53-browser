@@ -9,6 +9,9 @@ import { ACTIVE_BASELINE_KEY } from './activeBaseline';
 import { ODP_STORAGE_PREFIX } from './odpStore';
 import { STATUS_STORAGE_KEY } from './statusStore';
 
+/** Fired in the SAME tab after any workbench write that has no event of its own (e.g. a status save), so budget UI is not stale. */
+export const WORKBENCH_DATA_EVENT = 'workbenchdatachanged';
+
 interface Options {
   /** Also react to working-baseline changes. Pages whose baseline comes from their own route pass `false`. */
   baseline?: boolean;
