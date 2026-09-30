@@ -499,7 +499,20 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 </style>
 
 <script>
-  import { getDecision, getDecisions, setDecision, type Decision, type DecisionStatus } from '../../utils/odpStore';
+  import { getDecision, getDecisions, type Decision, type DecisionStatus } from '../../utils/odpStore';
+  import {
+    buildValueField,
+    decisionKey,
+    fanOutDecision,
+    readValue,
+    saveDecision,
+    setFieldValue,
+    validateOverrideRationale,
+    validateValue,
+    type ValueFieldSelect,
+    FAN_OUT_FAILED_MESSAGE,
+    SAVE_FAILED_MESSAGE,
+  } from '../../utils/odpEdit';
   import { odpDatasetUrl, odpMetaUrl } from '../../utils/url';
   import {
     groupDashOneClusters,
@@ -528,96 +541,6 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     confirmed: 'Confirmed',
     overridden: 'Overridden',
   };
-
-  function decisionKey(entry: OdpDatasetEntry): string {
-    return `${entry.controlSlug}:${entry.paramId}`;
-  }
-
-  type ValueFieldSelect = OdpDatasetEntry['select'];
-
-  // Shared by an individual param row and a batch cluster row — same
-  // free-text/select input shape either way (spec Code Map: the batch row
-  // reuses this unchanged).
-  function buildValueField(
-    fieldId: string,
-    select: ValueFieldSelect,
-    current: string | string[] | undefined,
-  ): HTMLElement {
-    const field = document.createElement('div');
-    field.className = 'odp-row__field';
-    const label = document.createElement('label');
-    label.setAttribute('for', fieldId);
-    label.textContent = 'Value';
-    field.appendChild(label);
-
-    if (select) {
-      const isMulti = select.howMany === 'one-or-more';
-      const selectEl = document.createElement('select');
-      selectEl.className = 'odp-row__value-input';
-      selectEl.id = fieldId;
-      selectEl.dataset.odpValueInput = 'true';
-      if (isMulti) {
-        selectEl.multiple = true;
-        selectEl.size = Math.min(select.choice.length, 6) || 1;
-      } else {
-        const placeholder = document.createElement('option');
-        placeholder.value = '';
-        placeholder.textContent = '— choose —';
-        selectEl.appendChild(placeholder);
-      }
-      const currentValues = Array.isArray(current) ? current : current ? [current] : [];
-      for (const choice of select.choice) {
-        const option = document.createElement('option');
-        option.value = choice;
-        option.textContent = choice;
-        if (currentValues.includes(choice)) option.selected = true;
-        selectEl.appendChild(option);
-      }
-      field.appendChild(selectEl);
-    } else {
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'odp-row__value-input';
-      input.id = fieldId;
-      input.dataset.odpValueInput = 'true';
-      input.value = typeof current === 'string' ? current : '';
-      field.appendChild(input);
-    }
-
-    return field;
-  }
-
-  function readValue(select: ValueFieldSelect, row: HTMLElement): string | string[] {
-    const input = row.querySelector('[data-odp-value-input]') as HTMLInputElement | HTMLSelectElement;
-    if (select) {
-      const selectEl = input as HTMLSelectElement;
-      if (select.howMany === 'one-or-more') {
-        return Array.from(selectEl.selectedOptions).map((o) => o.value);
-      }
-      return selectEl.value;
-    }
-    return (input as HTMLInputElement).value;
-  }
-
-  // Re-applies a saved value to an already-rendered field, used to keep an
-  // individual row's display in sync right after a batch save touches it
-  // (spec manual check: no reload needed to see the fan-out).
-  function setFieldValue(select: ValueFieldSelect, row: HTMLElement, value: string | string[]): void {
-    const input = row.querySelector('[data-odp-value-input]') as HTMLInputElement | HTMLSelectElement;
-    if (!input) return;
-    if (select) {
-      const values = Array.isArray(value) ? value : value ? [value] : [];
-      Array.from((input as HTMLSelectElement).options).forEach((option) => {
-        option.selected = values.includes(option.value);
-      });
-    } else {
-      (input as HTMLInputElement).value = typeof value === 'string' ? value : '';
-    }
-  }
-
-  function isValueEmpty(value: string | string[]): boolean {
-    return Array.isArray(value) ? value.length === 0 : value.trim().length === 0;
-  }
 
   // Individual rows register themselves here so a batch save (below) can
   // refresh an already-rendered row's display in place — no reload needed
@@ -1062,23 +985,17 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       const value = readValue(entry.select, row);
       const rationale = (row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement).value;
 
-      if (isValueEmpty(value)) {
-        error.textContent = 'Enter or select a value before saving a decision.';
-        error.hidden = false;
-        return;
-      }
-
-      if (status === 'overridden' && rationale.trim().length === 0) {
-        error.textContent = 'A rationale is required to override a value.';
+      const validationError = validateValue(value) ?? validateOverrideRationale(status, rationale);
+      if (validationError) {
+        error.textContent = validationError;
         error.hidden = false;
         return;
       }
 
       const decision: Decision = { value, status, rationale };
-      const ok = setDecision(baseline, key, decision);
+      const ok = saveDecision(baseline, key, decision);
       if (!ok) {
-        error.textContent =
-          "Could not save this decision. If you're overriding, check the rationale is filled in; otherwise your browser storage may be full or unavailable.";
+        error.textContent = SAVE_FAILED_MESSAGE;
         error.hidden = false;
         return;
       }
@@ -1272,8 +1189,9 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       const value = readValue(cluster.select, row);
       const rationale = (row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement).value;
 
-      if (isValueEmpty(value)) {
-        error.textContent = 'Enter or select a value before saving a decision.';
+      const validationError = validateValue(value);
+      if (validationError) {
+        error.textContent = validationError;
         error.hidden = false;
         return;
       }
@@ -1291,14 +1209,11 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       // any failure, still resync the display for whichever members did
       // succeed — never leave a row showing a stale value/status for a
       // decision that's actually already been persisted.
-      const results = cluster.members.map((m) => ({
-        member: m,
-        ok: setDecision(baseline, `${m.controlSlug}:${m.paramId}`, decision),
-      }));
+      const results = fanOutDecision(baseline, cluster.members, decision);
 
       for (const { member, ok } of results) {
         if (!ok) continue;
-        const key = `${member.controlSlug}:${member.paramId}`;
+        const key = decisionKey(member);
         const registered = rowRegistry.get(key);
         if (!registered) continue;
         setFieldValue(registered.select, registered.row, value);
@@ -1315,8 +1230,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       }
 
       if (!results.every((r) => r.ok)) {
-        error.textContent =
-          "Could not save this decision for every control. If you're overriding, check the rationale is filled in; otherwise your browser storage may be full or unavailable. Rows above now reflect what was actually saved.";
+        error.textContent = FAN_OUT_FAILED_MESSAGE;
         error.hidden = false;
       }
 
