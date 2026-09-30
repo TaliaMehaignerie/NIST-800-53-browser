@@ -18,12 +18,15 @@ interface SlotControl {
 }
 
 interface Props {
-  controls: Record<string, SlotControl>;
+  payload: {
+    controls: Record<string, SlotControl>;
+    cluster: { lists: [string, string][][]; byParam: Record<string, Record<string, number>> };
+  };
 }
 
-const { controls } = Astro.props;
+const { payload: data } = Astro.props;
 // `<` escaped so embedded text can never close the script element.
-const payload = JSON.stringify(controls).replace(/</g, '\\u003c');
+const payload = JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <script type="application/json" id="odp-slot-data" set:html={payload} is:inline />
@@ -114,6 +117,31 @@ const payload = JSON.stringify(controls).replace(/</g, '\\u003c');
     width: 100%;
   }
 
+  .odp-popover__scope {
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    margin: 0 0 8px;
+    padding: 6px 10px;
+  }
+
+  .odp-popover__scope legend {
+    color: var(--color-ink-secondary);
+    padding: 0 4px;
+  }
+
+  .odp-popover__scope-option {
+    display: block;
+  }
+
+  .odp-popover__scope-option input {
+    width: auto;
+  }
+
+  .odp-popover__count {
+    margin: 6px 0 0;
+    color: var(--color-ink-primary);
+  }
+
   .odp-popover__error {
     color: var(--color-ink-primary);
     background: var(--color-surface-overlay);
@@ -162,11 +190,14 @@ const payload = JSON.stringify(controls).replace(/</g, '\\u003c');
 <script>
   import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
-  import { openSlotPopover, type SlotControl } from '../utils/odpSlotPopover';
+  import { openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
 
   let controlData: Record<string, SlotControl> = {};
+  let clusterData: SlotPayload['cluster'] = { lists: [], byParam: {} };
   try {
-    controlData = JSON.parse(document.getElementById('odp-slot-data')?.textContent ?? '{}');
+    const parsed: SlotPayload = JSON.parse(document.getElementById('odp-slot-data')?.textContent ?? '{}');
+    controlData = parsed.controls ?? {};
+    clusterData = parsed.cluster ?? clusterData;
   } catch (err) {
     console.error('OdpSlotOverlay: could not parse embedded slot data', err);
   }
@@ -193,6 +224,7 @@ const payload = JSON.stringify(controls).replace(/</g, '\\u003c');
       controlSlug: slug,
       paramId: slot.dataset.paramId ?? '',
       baseline: getActiveBaseline(),
+      cluster: clusterData,
       onSaved: () => {
         render();
         window.dispatchEvent(new CustomEvent('odpdecisionschanged'));

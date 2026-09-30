@@ -10,6 +10,7 @@ import StatementTree from '../../components/StatementTree.astro';
 import EnhancementItem from '../../components/EnhancementItem.astro';
 import OdpSlotOverlay from '../../components/OdpSlotOverlay.astro';
 import { familyUrl } from '../../utils/url';
+import { clusterPayloadFor } from '../../utils/odpClusterIndex';
 
 export async function getStaticPaths() {
   const allEntries = await getCollection('controls');
@@ -58,6 +59,12 @@ const slotEntry = (e: { data: typeof control.data }) => ({
 const slotControls = Object.fromEntries(
   [control, ...enhancements].filter((e) => e.data.params.length > 0).map((e) => [e.data.slug, slotEntry(e)]),
 );
+// Batch scope (story 11): only dash-one controls can have cluster membership.
+const cluster = await clusterPayloadFor(
+  control.data.slug,
+  control.data.params.map((p: { id: string }) => p.id),
+);
+const slotPayload = { controls: slotControls, cluster };
 ---
 
 <BaseLayout title={`${label} ${title} — NIST 800-53 Browser`} showBaselineFilter>
@@ -152,7 +159,7 @@ const slotControls = Object.fromEntries(
       )}
     </section>
   </article>
-  <OdpSlotOverlay controls={slotControls} />
+  <OdpSlotOverlay payload={slotPayload} />
 </BaseLayout>
 
 <style>
