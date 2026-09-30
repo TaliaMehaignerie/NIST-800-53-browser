@@ -42,6 +42,22 @@ const family = await getEntry('families', familyCode.toLowerCase());
 const enhancements = (
   await Promise.all(enhancementSlugs.map((slug: string) => getEntry('controls', slug)))
 ).filter((e): e is NonNullable<typeof e> => e !== undefined);
+
+// Story 10: only what the edit popover needs, per control on this page.
+const slotEntry = (e: { data: typeof control.data }) => ({
+  familyCode: e.data.familyCode,
+  controlId: e.data.id,
+  title: e.data.title,
+  params: Object.fromEntries(
+    e.data.params.map((p: { id: string; label: string | null; select: any; guidelines: string[] }) => [
+      p.id,
+      { label: p.label, select: p.select, guidelines: p.guidelines },
+    ]),
+  ),
+});
+const slotControls = Object.fromEntries(
+  [control, ...enhancements].filter((e) => e.data.params.length > 0).map((e) => [e.data.slug, slotEntry(e)]),
+);
 ---
 
 <BaseLayout title={`${label} ${title} — NIST 800-53 Browser`} showBaselineFilter>
@@ -136,7 +152,7 @@ const enhancements = (
       )}
     </section>
   </article>
-  <OdpSlotOverlay />
+  <OdpSlotOverlay controls={slotControls} />
 </BaseLayout>
 
 <style>

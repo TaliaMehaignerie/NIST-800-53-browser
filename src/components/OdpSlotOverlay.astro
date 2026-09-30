@@ -5,7 +5,28 @@
 // Resolution stays build-time (AD-5); this only substitutes a stored value.
 // Without JS the page keeps NIST's text. Decided values are user input, so
 // they are written with textContent only, never innerHTML.
+//
+// Story 10: slots in the working baseline open an edit popover
+// (`odpSlotPopover.ts`, which mounts `odpEdit.ts`). Its data is embedded per
+// page at build time — only each control's own param label/select/guidelines,
+// never the 736 KB dataset (AD-8 still applies: same Content Collection).
+interface SlotControl {
+  familyCode: string;
+  controlId: string;
+  title: string;
+  params: Record<string, { label: string | null; select: { howMany: string | null; choice: string[] } | null; guidelines: string[] }>;
+}
+
+interface Props {
+  controls: Record<string, SlotControl>;
+}
+
+const { controls } = Astro.props;
+// `<` escaped so embedded text can never close the script element.
+const payload = JSON.stringify(controls).replace(/</g, '\\u003c');
 ---
+
+<script type="application/json" id="odp-slot-data" set:html={payload} is:inline />
 
 <style is:global>
   .odp-slot[data-status] {
@@ -35,6 +56,101 @@
     display: inline-block;
   }
 
+  .odp-slot[role='button'] {
+    cursor: pointer;
+  }
+
+  .odp-slot[role='button']:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .odp-popover {
+    position: absolute;
+    z-index: 50;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-md);
+    padding: 14px 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-meta);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-ink-primary);
+  }
+
+  .odp-popover__title {
+    font-size: 14px;
+    margin: 0 0 2px;
+  }
+
+  .odp-popover__meta {
+    margin: 0 0 8px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-popover__guidelines {
+    margin: 0 0 8px;
+    padding-left: 18px;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-popover .odp-row__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .odp-popover input,
+  .odp-popover select,
+  .odp-popover textarea {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 4px 6px;
+    width: 100%;
+  }
+
+  .odp-popover__error {
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border-left: 3px solid var(--color-ink-secondary);
+    padding: 4px 8px;
+    margin: 0 0 8px;
+  }
+
+  .odp-popover__actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .odp-popover__actions button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+
+  .odp-popover__actions button:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .odp-popover button:focus-visible,
+  .odp-popover a:focus-visible,
+  .odp-popover input:focus-visible,
+  .odp-popover select:focus-visible,
+  .odp-popover textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
   .odp-slot-note {
     font-family: var(--font-meta);
     font-size: 13px;
@@ -46,6 +162,43 @@
 <script>
   import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
+  import { openSlotPopover, type SlotControl } from '../utils/odpSlotPopover';
+
+  let controlData: Record<string, SlotControl> = {};
+  try {
+    controlData = JSON.parse(document.getElementById('odp-slot-data')?.textContent ?? '{}');
+  } catch (err) {
+    console.error('OdpSlotOverlay: could not parse embedded slot data', err);
+  }
+
+  function makeInteractive(slot: HTMLElement, on: boolean): void {
+    if (on) {
+      slot.setAttribute('role', 'button');
+      slot.setAttribute('tabindex', '0');
+      slot.setAttribute('aria-haspopup', 'dialog');
+      slot.setAttribute('aria-expanded', slot.getAttribute('aria-expanded') ?? 'false');
+    } else {
+      ['role', 'tabindex', 'aria-haspopup', 'aria-expanded'].forEach((a) => slot.removeAttribute(a));
+    }
+  }
+
+  function openFor(slot: HTMLElement): void {
+    if (slot.getAttribute('role') !== 'button') return;
+    const slug = slot.dataset.controlSlug ?? '';
+    const control = controlData[slug];
+    if (!control) return;
+    openSlotPopover({
+      slot,
+      control,
+      controlSlug: slug,
+      paramId: slot.dataset.paramId ?? '',
+      baseline: getActiveBaseline(),
+      onSaved: () => {
+        render();
+        window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
+      },
+    });
+  }
 
   const STATUS_LABEL = { confirmed: 'confirmed', overridden: 'overridden', 'unreviewed-default': 'unreviewed' } as const;
 
@@ -75,6 +228,7 @@
       scope.querySelectorAll<HTMLElement>('[data-odp-slot]').forEach((slot) => {
         if (slot.dataset.odpOriginal === undefined) slot.dataset.odpOriginal = slot.textContent ?? '';
         resetSlot(slot);
+        makeInteractive(slot, inBaseline && Boolean(controlData[slot.dataset.controlSlug ?? '']));
         if (!inBaseline) return;
 
         const decision = decisions[`${slot.dataset.controlSlug}:${slot.dataset.paramId}`];
@@ -94,4 +248,16 @@
 
   render();
   window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+
+  document.addEventListener('click', (e) => {
+    const slot = (e.target as HTMLElement).closest<HTMLElement>('[data-odp-slot]');
+    if (slot) openFor(slot);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const slot = (e.target as HTMLElement).closest<HTMLElement>?.('[data-odp-slot]');
+    if (!slot || e.target !== slot) return;
+    e.preventDefault();
+    openFor(slot);
+  });
 </script>
