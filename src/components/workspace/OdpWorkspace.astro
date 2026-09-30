@@ -1618,8 +1618,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
         recomputeProposals();
         if (signature(proposals) !== signature(planned)) {
           closeAdopt();
-          renderProposals(computeDashboardCounts(dashboardEntries, dashboardBaseline).overall.unreviewed);
           sayAdopt('The proposals changed while you were confirming. Review the updated list and try again.');
+          renderProposals(computeDashboardCounts(dashboardEntries, dashboardBaseline).overall.unreviewed);
           return;
         }
         const count = planned.size;
@@ -1629,9 +1629,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
           sayAdopt('No decision was changed. Browser storage may be full or unavailable, or a proposed override has no rationale.');
           return;
         }
-        refreshFromStorage();
         sayAdopt(`Adopted ${count} decision${count === 1 ? '' : 's'}. Each can be edited individually.`);
-        renderProposals(computeDashboardCounts(dashboardEntries, dashboardBaseline).overall.unreviewed);
+        refreshFromStorage();
       });
 
       adoptBlock.querySelector('[data-odp-adopt-no]')!.addEventListener('click', () => {

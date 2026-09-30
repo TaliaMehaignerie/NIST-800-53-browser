@@ -104,10 +104,11 @@ export function countCompliance(
  * the denominator is empty. Floored, never rounded: rounding would show
  * 199/200 as 100%, and a figure that reads audit-complete while items are
  * outstanding is exactly the flattery this module exists to prevent. 100%
- * therefore appears only when every counted item really is compliant.
+ * therefore appears only when every counted item really is compliant. Integer
+ * arithmetic on purpose: `Math.floor((29 / 100) * 100)` is 28 in floating point.
  */
 export function compliancePercent(counts: ComplianceCounts): number | null {
-  return counts.denominator === 0 ? null : Math.floor((counts.compliant / counts.denominator) * 100);
+  return counts.denominator === 0 ? null : Math.floor((counts.compliant * 100) / counts.denominator);
 }
 
 /** `64% (176/275)` — always the fraction beside the percentage; `— (0/0)` when nothing is countable. */

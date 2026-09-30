@@ -177,22 +177,45 @@ function emptyBlob(): StatusBlob {
 // Read-through cache keyed on the raw stored string (same scheme as
 // odpStore): a write replaces the entry, and comparing the raw string keeps
 // it correct across tabs. Cached blobs are shared and read-only.
-let cache: { raw: string | null; blob: StatusBlob } | null = null;
+let cache: { raw: string | null; blob: StatusBlob; unreadable?: string } | null = null;
 
-function parseBlob(raw: string | null): StatusBlob {
-  if (raw === null) return emptyBlob();
+// A blob that cannot be read as a whole is empty state, and its text is kept
+// (`unreadable`) so the next write can stash it rather than destroy it. A blob
+// that is readable but holds an invalid record keeps every valid record: one
+// bad entry must never void every other item's status, since the next save
+// would otherwise overwrite them all with an empty blob.
+function parseBlob(raw: string | null): { blob: StatusBlob; unreadable?: string } {
+  if (raw === null) return { blob: emptyBlob() };
   try {
-    const parsed = JSON.parse(raw);
-    if (!isStatusBlob(parsed)) {
+    const parsed = JSON.parse(raw) as Record<string, unknown> | null;
+    const items = parsed?.items;
+    if (
+      !parsed ||
+      typeof parsed !== 'object' ||
+      typeof parsed.schemaVersion !== 'number' ||
+      !items ||
+      typeof items !== 'object' ||
+      Array.isArray(items)
+    ) {
       console.error('statusStore: stored blob has unexpected shape, treating as empty state', parsed);
-      return emptyBlob();
+      return { blob: emptyBlob(), unreadable: raw };
     }
-    // Blobs written before evidence existed carry no `evidence` field.
-    for (const record of Object.values(parsed.items)) record.evidence = readableEvidence(record.evidence);
-    return parsed;
+    const valid: Record<string, StatusRecord> = {};
+    let dropped = 0;
+    for (const [slug, record] of Object.entries(items as Record<string, unknown>)) {
+      if (!isStatusRecord(record)) {
+        dropped += 1;
+        continue;
+      }
+      // Blobs written before evidence existed carry no `evidence` field.
+      record.evidence = readableEvidence(record.evidence);
+      valid[slug] = record;
+    }
+    if (dropped > 0) console.error(`statusStore: dropped ${dropped} invalid record(s) from the stored blob`);
+    return { blob: { schemaVersion: parsed.schemaVersion, items: valid } };
   } catch (err) {
     console.error('statusStore: stored blob is not valid JSON, treating as empty state', err);
-    return emptyBlob();
+    return { blob: emptyBlob(), unreadable: raw };
   }
 }
 
@@ -205,8 +228,8 @@ function readBlob(): StatusBlob {
     return emptyBlob();
   }
   if (cache && cache.raw === raw) return cache.blob;
-  const blob = parseBlob(raw);
-  cache = { raw, blob };
+  const { blob, unreadable } = parseBlob(raw);
+  cache = { raw, blob, unreadable };
   return blob;
 }
 
@@ -296,6 +319,15 @@ function buildRecord(existing: StatusRecord | undefined, input: StatusInput, now
 
 function writeBlob(next: StatusBlob): boolean {
   try {
+    // About to overwrite a blob that could not be read: keep its text in one
+    // recovery key instead of destroying it (best effort; quota errors ignored).
+    if (cache?.unreadable !== undefined) {
+      try {
+        localStorage.setItem(`${STATUS_STORAGE_KEY}:unreadable`, cache.unreadable);
+      } catch {
+        // no room for a recovery copy; the write below still proceeds
+      }
+    }
     const raw = JSON.stringify(next);
     localStorage.setItem(STATUS_STORAGE_KEY, raw);
     cache = { raw, blob: next };

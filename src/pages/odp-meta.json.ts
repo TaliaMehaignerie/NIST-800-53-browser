@@ -6,26 +6,19 @@
 // Runs inside the same `astro build` step as every other route (AD-6); this
 // project's `output: 'static'` makes this endpoint prerendered by default.
 import type { APIRoute } from 'astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { getParamCounts, type ParamCounts } from '../utils/paramCounts';
 
 interface OdpMeta {
   oscalVersion: string;
-  paramCounts: Record<'low' | 'moderate' | 'high' | 'privacy', number>;
+  paramCounts: ParamCounts;
 }
 
 export const GET: APIRoute = async () => {
   const provenance = await getEntry('meta', 'provenance');
   const oscalVersion = provenance?.data.oscalVersion ?? '';
 
-  const paramCounts: OdpMeta['paramCounts'] = { low: 0, moderate: 0, high: 0, privacy: 0 };
-  for (const entry of await getCollection('controls')) {
-    if (entry.data.withdrawn) continue;
-    for (const baseline of entry.data.baselines) {
-      paramCounts[baseline] += entry.data.params.length;
-    }
-  }
-
-  const meta: OdpMeta = { oscalVersion, paramCounts };
+  const meta: OdpMeta = { oscalVersion, paramCounts: await getParamCounts() };
 
   return new Response(JSON.stringify(meta), {
     headers: { 'Content-Type': 'application/json' },

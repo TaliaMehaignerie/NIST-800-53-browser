@@ -297,3 +297,7 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/19-workflow-accelerators.md`
   summary: The dashboard page embeds two overlapping item payloads (ComplianceDashboard's and DashboardAccelerators').
   evidence: Both are built from the same Content Collection query; the second adds label, title, parent slug and parameter ids. A single shared payload (passed from dashboard.astro to both components, with the home page keeping the lean one) would save bytes; it is a refactor, not a correctness issue.
+
+- source_spec: whole-branch review (stories 7-20)
+  summary: The site-wide storage warning measures the whole origin's localStorage on every page load and every relevant event.
+  evidence: originUsageChars() reads every key's value to total lengths. It is a handful of string reads for this app's own data and debounced on cross-tab events, but near the quota (multi-MB) it is repeated work on each save; a cached total updated on writes would avoid it.

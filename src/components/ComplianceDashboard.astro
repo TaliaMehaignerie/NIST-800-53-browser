@@ -8,7 +8,6 @@
 // the page says so. `data-pagefind-ignore` keeps it out of search results.
 import { getCollection } from 'astro:content';
 import { BASELINES, baselineLabel } from '../utils/activeBaseline';
-import { PROGRAM_WIDE_FAMILY } from '../utils/complianceCount';
 import { dashboardUrl, familyUrl } from '../utils/url';
 
 interface Props {
@@ -584,7 +583,7 @@ const ICONS: Record<string, string> = {
   }
 
   function render(): void {
-    if (!root) return;
+    if (!root || dataFailed) return;
     if (tooltip) tooltip.hidden = true;
     // Progressive (home page): the catalog is always there first; the
     // dashboard is revealed only once either store has data, and follows it

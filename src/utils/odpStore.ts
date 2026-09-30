@@ -31,10 +31,6 @@ export const ODP_SCHEMA_VERSION = SCHEMA_VERSION;
 export const ODP_STORAGE_PREFIX = 'odp-decisions:';
 
 export function odpStorageKey(baseline: string): string {
-  return storageKey(baseline);
-}
-
-function storageKey(baseline: string): string {
   return `${ODP_STORAGE_PREFIX}${baseline}`;
 }
 
@@ -72,7 +68,7 @@ function emptyBlob(): OdpBlob {
 // keeps this correct across tabs with no invalidation hook, and a write
 // replaces the entry. Cached blobs are shared - callers must treat them as
 // read-only, and `setDecision` builds a new object rather than mutating.
-const cache = new Map<string, { raw: string | null; blob: OdpBlob }>();
+const cache = new Map<string, { raw: string | null; blob: OdpBlob; unreadable?: string }>();
 
 /**
  * Reads the blob for a baseline, corrupt/missing-safe. Never throws.
@@ -80,7 +76,7 @@ const cache = new Map<string, { raw: string | null; blob: OdpBlob }>();
 function readBlob(baseline: string): OdpBlob {
   let raw: string | null;
   try {
-    raw = localStorage.getItem(storageKey(baseline));
+    raw = localStorage.getItem(odpStorageKey(baseline));
   } catch (err) {
     // localStorage can throw (e.g. disabled/private mode) - treat as empty.
     console.error('odpStore: localStorage unavailable, treating as empty state', err);
@@ -90,23 +86,43 @@ function readBlob(baseline: string): OdpBlob {
   const hit = cache.get(baseline);
   if (hit && hit.raw === raw) return hit.blob;
 
-  const blob = parseBlob(raw);
-  cache.set(baseline, { raw, blob });
+  const { blob, unreadable } = parseBlob(raw);
+  cache.set(baseline, { raw, blob, unreadable });
   return blob;
 }
 
-function parseBlob(raw: string | null): OdpBlob {
-  if (raw === null) return emptyBlob();
+// A blob that cannot be read as a whole is empty state, and its text is kept
+// (`unreadable`) so the next write can stash it rather than destroy it. A blob
+// that is readable but holds an invalid decision keeps every valid decision:
+// one bad entry must never void the rest, since the next save would otherwise
+// overwrite them all with an empty blob.
+function parseBlob(raw: string | null): { blob: OdpBlob; unreadable?: string } {
+  if (raw === null) return { blob: emptyBlob() };
   try {
-    const parsed = JSON.parse(raw);
-    if (!isOdpBlob(parsed)) {
+    const parsed = JSON.parse(raw) as Record<string, unknown> | null;
+    const decisions = parsed?.decisions;
+    if (
+      !parsed ||
+      typeof parsed !== 'object' ||
+      typeof parsed.schemaVersion !== 'number' ||
+      !decisions ||
+      typeof decisions !== 'object' ||
+      Array.isArray(decisions)
+    ) {
       console.error('odpStore: stored blob has unexpected shape, treating as empty state', parsed);
-      return emptyBlob();
+      return { blob: emptyBlob(), unreadable: raw };
     }
-    return parsed;
+    const valid: Record<string, Decision> = {};
+    let dropped = 0;
+    for (const [key, decision] of Object.entries(decisions as Record<string, unknown>)) {
+      if (isDecision(decision)) valid[key] = decision;
+      else dropped += 1;
+    }
+    if (dropped > 0) console.error(`odpStore: dropped ${dropped} invalid decision(s) from the stored blob`);
+    return { blob: { schemaVersion: parsed.schemaVersion, decisions: valid } };
   } catch (err) {
     console.error('odpStore: stored blob is not valid JSON, treating as empty state', err);
-    return emptyBlob();
+    return { blob: emptyBlob(), unreadable: raw };
   }
 }
 
@@ -133,7 +149,7 @@ export function setDecisions(baseline: string, entries: { key: string; decision:
  */
 export function readRawBlob(baseline: string): string | null {
   try {
-    return localStorage.getItem(storageKey(baseline));
+    return localStorage.getItem(odpStorageKey(baseline));
   } catch (err) {
     console.error('odpStore: localStorage unavailable', err);
     return null;
@@ -143,8 +159,8 @@ export function readRawBlob(baseline: string): string | null {
 /** Replaces one baseline's stored blob with `raw`, or removes it for `null`. Returns `false` on failure. */
 export function writeRawBlob(baseline: string, raw: string | null): boolean {
   try {
-    if (raw === null) localStorage.removeItem(storageKey(baseline));
-    else localStorage.setItem(storageKey(baseline), raw);
+    if (raw === null) localStorage.removeItem(odpStorageKey(baseline));
+    else localStorage.setItem(odpStorageKey(baseline), raw);
     return true;
   } catch (err) {
     console.error('odpStore: failed to write to localStorage', err);
@@ -155,8 +171,18 @@ export function writeRawBlob(baseline: string, raw: string | null): boolean {
 /** Returns `true` on a successful write, `false` on a caught failure (e.g. quota exceeded, private mode). */
 function writeBlob(baseline: string, blob: OdpBlob): boolean {
   try {
+    // About to overwrite a blob that could not be read: keep its text in one
+    // recovery key instead of destroying it (best effort; quota errors ignored).
+    const unreadable = cache.get(baseline)?.unreadable;
+    if (unreadable !== undefined) {
+      try {
+        localStorage.setItem(`${odpStorageKey(baseline)}:unreadable`, unreadable);
+      } catch {
+        // no room for a recovery copy; the write below still proceeds
+      }
+    }
     const raw = JSON.stringify(blob);
-    localStorage.setItem(storageKey(baseline), raw);
+    localStorage.setItem(odpStorageKey(baseline), raw);
     cache.set(baseline, { raw, blob });
     return true;
   } catch (err) {

@@ -350,7 +350,7 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
     head.append(el('th', undefined, 'Family'), el('th', undefined, 'Items added'), el('th', undefined, 'No status yet'));
     table.appendChild(el('thead')).appendChild(head);
     const body = el('tbody');
-    for (const [code, row] of Array.from(byFamily.entries()).sort()) {
+    for (const [code, row] of Array.from(byFamily.entries()).sort(([a], [b]) => a.localeCompare(b))) {
       const tr = el('tr');
       tr.append(el('td', undefined, code), el('td', undefined, String(row.added)), el('td', undefined, String(row.none)));
       body.appendChild(tr);

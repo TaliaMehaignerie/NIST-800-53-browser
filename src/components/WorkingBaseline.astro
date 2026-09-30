@@ -2,16 +2,19 @@
 // AD-13: the working baseline ("whose decisions am I making") — separate from
 // BaselineFilter ("what do I want to see"). No `All` here. Hidden until the
 // script runs so a JS-off header is unchanged.
-import { BASELINES } from '../utils/activeBaseline';
+import { BASELINES, baselineLabel } from '../utils/activeBaseline';
+import { getParamCounts } from '../utils/paramCounts';
 import { workspaceUrl } from '../utils/url';
 
-const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
+// Build-time constants, embedded in the markup: no per-page request and no
+// text change once the chip has rendered.
+const totals = JSON.stringify(await getParamCounts());
 ---
 
-<div class="working-baseline" data-working-baseline hidden>
+<div class="working-baseline" data-working-baseline data-totals={totals} hidden>
   <label class="working-baseline__label" for="working-baseline-select">Working in</label>
   <select id="working-baseline-select" class="working-baseline__select" data-working-baseline-select>
-    {BASELINES.map((b) => <option value={b}>{label(b)}</option>)}
+    {BASELINES.map((b) => <option value={b}>{baselineLabel(b)}</option>)}
   </select>
   <a class="working-baseline__chip" href={workspaceUrl('moderate')} data-working-baseline-chip>Moderate</a>
 </div>
@@ -80,19 +83,31 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
   } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { onOdpStorageChange } from '../utils/storageSync';
-  import { odpMetaUrl, workspaceUrl } from '../utils/url';
+  import { workspaceUrl } from '../utils/url';
 
   const root = document.querySelector<HTMLElement>('[data-working-baseline]');
   const select = root?.querySelector<HTMLSelectElement>('[data-working-baseline-select]');
   const chip = root?.querySelector<HTMLAnchorElement>('[data-working-baseline-chip]');
 
-  // null until odp-meta.json loads (or if it fails) — the chip then shows the
-  // baseline name alone, never a fabricated 0/0.
+  // Per-baseline totals, embedded at build time. Absent or unreadable, the chip
+  // shows the baseline name alone, never a fabricated 0/0.
   let totals: Record<string, number> | null = null;
+  try {
+    totals = JSON.parse(root?.dataset.totals ?? 'null');
+  } catch (err) {
+    console.error('WorkingBaseline: could not read the embedded totals', err);
+  }
+
+  // A workspace route's baseline is authoritative for its own page (AD-13): the
+  // header there follows the route, not the global working baseline, so the
+  // chip can never disagree with the page being edited.
+  function shownBaseline(): string {
+    return document.querySelector<HTMLElement>('[data-odp-workspace]')?.dataset.baseline ?? getActiveBaseline();
+  }
 
   function render(): void {
     if (!root || !select || !chip) return;
-    const baseline = getActiveBaseline();
+    const baseline = shownBaseline();
     const name = baselineLabel(baseline);
     select.value = baseline;
     chip.href = workspaceUrl(baseline);
@@ -104,18 +119,6 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
     } else {
       chip.textContent = name;
     }
-  }
-
-  async function loadTotals(): Promise<void> {
-    try {
-      const response = await fetch(odpMetaUrl());
-      if (!response.ok) throw new Error(`odp-meta.json fetch failed: ${response.status}`);
-      const meta = (await response.json()) as { paramCounts?: Record<string, number> };
-      totals = meta.paramCounts ?? null;
-    } catch (err) {
-      console.error('WorkingBaseline: failed to load readiness totals', err);
-    }
-    render();
   }
 
   if (root && select && chip) {
@@ -138,6 +141,5 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
     // A workspace route's baseline is authoritative for its own page, so it
     // does not follow another tab's working-baseline change (AD-13).
     onOdpStorageChange(render, { baseline: !document.querySelector('[data-odp-workspace]') });
-    loadTotals();
   }
 </script>
