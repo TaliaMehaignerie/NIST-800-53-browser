@@ -3,11 +3,22 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FamilyRow from '../components/FamilyRow.astro';
+import ComplianceDashboard from '../components/ComplianceDashboard.astro';
 
 const families = (await getCollection('families')).sort((a, b) => a.data.catalogOrder - b.data.catalogOrder);
 ---
 
 <BaseLayout title="NIST 800-53 Browser">
+  {
+    /*
+     * Story 17: the dashboard is promoted above the catalog only once the
+     * visitor has any status or decision data; with none (or without JS) this
+     * page is exactly the family list. It starts hidden in the markup, so the
+     * catalog is what first paints and the dashboard is revealed after the
+     * has-data check, never the reverse.
+     */
+  }
+  <ComplianceDashboard progressive compact title="Compliance progress" />
   <h1>Control Families</h1>
   <div class="family-list">
     {

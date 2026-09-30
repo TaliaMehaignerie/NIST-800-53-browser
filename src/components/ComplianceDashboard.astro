@@ -9,7 +9,17 @@
 import { getCollection } from 'astro:content';
 import { BASELINES, baselineLabel } from '../utils/activeBaseline';
 import { PROGRAM_WIDE_FAMILY } from '../utils/complianceCount';
-import { familyUrl } from '../utils/url';
+import { dashboardUrl, familyUrl } from '../utils/url';
+
+interface Props {
+  /** Story 17: stay hidden unless either store holds data (the home page). */
+  progressive?: boolean;
+  /** Hero, bar and a link to the full page only — no family rows or table. */
+  compact?: boolean;
+  title?: string;
+}
+
+const { progressive = false, compact = false, title } = Astro.props;
 
 const all = await getCollection('controls');
 // [slug, familyCode, space-joined baselines, withdrawn(0|1)] — compact on purpose.
@@ -28,7 +38,14 @@ const ICONS: Record<string, string> = {
 };
 ---
 
-<section class="compliance" data-compliance data-pagefind-ignore hidden>
+<section
+  class="compliance"
+  data-compliance
+  data-progressive={progressive ? 'true' : undefined}
+  data-pagefind-ignore
+  hidden
+>
+  {title && <h2 class="compliance__title">{title}</h2>}
   <div class="compliance__filters" role="group" aria-label="Baseline">
     <span class="compliance__filter-label">Baseline</span>
     {
@@ -76,6 +93,15 @@ const ICONS: Record<string, string> = {
   <h2 class="compliance__heading">Overall</h2>
   <div data-overall></div>
 
+  {
+    compact && (
+      <p class="compliance__more">
+        <a href={dashboardUrl()}>See the breakdown by family →</a>
+      </p>
+    )
+  }
+
+  <div data-compliance-detail hidden={compact}>
   <h2 class="compliance__heading">By family</h2>
   <div class="compliance__families" data-family-rows></div>
 
@@ -95,10 +121,11 @@ const ICONS: Record<string, string> = {
       <tbody data-table-body></tbody>
     </table>
   </details>
+  </div>
 
   <div class="compliance__tooltip" role="tooltip" hidden data-tooltip></div>
 </section>
-<noscript><p class="compliance__noscript">The compliance dashboard needs JavaScript: your statuses live in this browser.</p></noscript>
+{!progressive && <noscript><p class="compliance__noscript">The compliance dashboard needs JavaScript: your statuses live in this browser.</p></noscript>}
 
 <script type="application/json" id="compliance-data" set:html={payload} is:inline />
 
@@ -110,6 +137,20 @@ const ICONS: Record<string, string> = {
   }
 
   .compliance[hidden] {
+    display: none;
+  }
+
+  .compliance__title {
+    font-size: 1.25em;
+    margin: 0 0 12px;
+  }
+
+  .compliance__more {
+    font-size: 13px;
+    margin: 12px 0 0;
+  }
+
+  .compliance [data-compliance-detail][hidden] {
     display: none;
   }
 
@@ -432,6 +473,7 @@ const ICONS: Record<string, string> = {
     type ComplianceItem,
   } from '../utils/complianceCount';
   import { onOdpStorageChange } from '../utils/storageSync';
+  import { hasWorkbenchData } from '../utils/workbenchData';
   import { setUrlState } from '../utils/urlState';
 
   interface FamilyInfo {
@@ -541,6 +583,14 @@ const ICONS: Record<string, string> = {
   function render(): void {
     if (!root) return;
     if (tooltip) tooltip.hidden = true;
+    // Progressive (home page): the catalog is always there first; the
+    // dashboard is revealed only once either store has data, and follows it
+    // if that changes in another tab.
+    if (root.dataset.progressive === 'true') {
+      const hasData = hasWorkbenchData();
+      root.hidden = !hasData;
+      if (!hasData) return;
+    }
     const baseline = currentBaseline();
     const working = getActiveBaseline();
     const pinNote = root.querySelector<HTMLElement>('[data-pin-note]')!;
@@ -666,7 +716,7 @@ const ICONS: Record<string, string> = {
 
     if (!dataFailed) {
       render();
-      root.hidden = false;
+      if (root.dataset.progressive !== 'true') root.hidden = false;
     }
   }
 </script>
