@@ -532,6 +532,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   import { setUrlState } from '../../utils/urlState';
   import { isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
+  import { onOdpStorageChange } from '../../utils/storageSync';
+  import { slugify } from '../../utils/slugify';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
   // switched by a button group whose state lives in the URL query (AD-3),
@@ -872,7 +874,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     // control page, at the enhancement's own fragment.
     const controlLink = document.createElement('a');
     controlLink.href = entry.controlId.includes('.')
-      ? `${controlUrl(entry.controlId.split('.')[0])}#${entry.controlSlug}`
+      ? `${controlUrl(slugify(entry.controlId.split('.')[0]))}#${entry.controlSlug}`
       : controlUrl(entry.controlSlug);
     controlLink.textContent = `${entry.controlId.toUpperCase()} — ${entry.controlTitle}`;
     controlSpan.appendChild(controlLink);
@@ -1013,13 +1015,15 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     const decisions = getDecisions(dashboardBaseline);
     for (const [key, registered] of Array.from(rowRegistry.entries())) {
       const decision = decisions[key];
-      if (!decision || snapshotOf(decision) === registered.snapshot) continue;
-      setFieldValue(registered.select, registered.row, decision.value);
+      if (snapshotOf(decision) === registered.snapshot) continue;
+      // A decision that vanished (blob cleared in another tab) resets the row
+      // to unreviewed so it agrees with the recounted dashboard.
+      setFieldValue(registered.select, registered.row, decision?.value ?? (registered.select?.howMany === 'one-or-more' ? [] : ''));
       const rationaleInput = registered.row.querySelector('[data-odp-rationale-input]') as HTMLTextAreaElement | null;
-      if (rationaleInput) rationaleInput.value = decision.rationale;
-      applyStatus(registered.row, decision.status);
+      if (rationaleInput) rationaleInput.value = decision?.rationale ?? '';
+      applyStatus(registered.row, decision?.status ?? 'unreviewed-default');
       registered.snapshot = snapshotOf(decision);
-      removeRowFromIndividualViewIfFiltered(key);
+      if (decision) removeRowFromIndividualViewIfFiltered(key);
     }
     for (const { matchLabel, cluster } of batchMatchRegistry) {
       refreshClusterMatch(matchLabel, cluster, dashboardBaseline);
@@ -1402,9 +1406,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 
     refreshDashboard();
 
-    window.addEventListener('storage', (e) => {
-      if (e.key === null || e.key === `odp-decisions:${dashboardBaseline}`) refreshFromStorage();
-    });
+    onOdpStorageChange(refreshFromStorage, { baseline: false, onlyDecisionsFor: dashboardBaseline });
   }
 
   init();

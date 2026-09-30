@@ -25,8 +25,10 @@ interface OdpBlob {
 
 const SCHEMA_VERSION = 1;
 
+export const ODP_STORAGE_PREFIX = 'odp-decisions:';
+
 function storageKey(baseline: string): string {
-  return `odp-decisions:${baseline}`;
+  return `${ODP_STORAGE_PREFIX}${baseline}`;
 }
 
 function isDecision(value: unknown): value is Decision {

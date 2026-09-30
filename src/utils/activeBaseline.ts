@@ -6,7 +6,7 @@
 export const BASELINES = ['low', 'moderate', 'high', 'privacy'] as const;
 export type Baseline = (typeof BASELINES)[number];
 
-const STORAGE_KEY = 'active-baseline';
+export const ACTIVE_BASELINE_KEY = 'active-baseline';
 const DEFAULT_BASELINE: Baseline = 'moderate';
 export const ACTIVE_BASELINE_EVENT = 'activebaselinechange';
 
@@ -19,7 +19,7 @@ let memoryBaseline: Baseline | null = null;
 
 export function getActiveBaseline(): Baseline {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(ACTIVE_BASELINE_KEY);
     if (isBaseline(raw)) return raw;
   } catch {
     // fall through to the in-memory value
@@ -30,7 +30,7 @@ export function getActiveBaseline(): Baseline {
 export function setActiveBaseline(baseline: Baseline): void {
   memoryBaseline = baseline;
   try {
-    localStorage.setItem(STORAGE_KEY, baseline);
+    localStorage.setItem(ACTIVE_BASELINE_KEY, baseline);
   } catch (err) {
     console.error('activeBaseline: failed to persist working baseline', err);
   }

@@ -78,6 +78,7 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
     type Baseline,
   } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
+  import { onOdpStorageChange } from '../utils/storageSync';
   import { odpMetaUrl, workspaceUrl } from '../utils/url';
 
   const root = document.querySelector<HTMLElement>('[data-working-baseline]');
@@ -133,9 +134,9 @@ const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     window.addEventListener('odpdecisionschanged', render);
     // Story 12: passive cross-tab refresh of the working baseline and counts.
-    window.addEventListener('storage', (e) => {
-      if (e.key === null || e.key === 'active-baseline' || e.key.startsWith('odp-decisions:')) render();
-    });
+    // A workspace route's baseline is authoritative for its own page, so it
+    // does not follow another tab's working-baseline change (AD-13).
+    onOdpStorageChange(render, { baseline: !document.querySelector('[data-odp-workspace]') });
     loadTotals();
   }
 </script>
