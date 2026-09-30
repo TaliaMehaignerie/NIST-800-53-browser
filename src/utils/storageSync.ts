@@ -6,6 +6,7 @@
  */
 import { ACTIVE_BASELINE_KEY } from './activeBaseline';
 import { ODP_STORAGE_PREFIX } from './odpStore';
+import { STATUS_STORAGE_KEY } from './statusStore';
 
 interface Options {
   /** Also react to working-baseline changes. Pages whose baseline comes from their own route pass `false`. */
@@ -20,6 +21,7 @@ export function onOdpStorageChange(callback: () => void, { baseline = true, only
     const key = e.key;
     const relevant =
       key === null ||
+      key === STATUS_STORAGE_KEY ||
       (baseline && key === ACTIVE_BASELINE_KEY) ||
       (onlyDecisionsFor !== undefined
         ? key === `${ODP_STORAGE_PREFIX}${onlyDecisionsFor}`

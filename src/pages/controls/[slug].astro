@@ -9,6 +9,7 @@ import WithdrawnMarker from '../../components/WithdrawnMarker.astro';
 import StatementTree from '../../components/StatementTree.astro';
 import EnhancementItem from '../../components/EnhancementItem.astro';
 import OdpSlotOverlay from '../../components/OdpSlotOverlay.astro';
+import StatusControl from '../../components/StatusControl.astro';
 import { familyUrl } from '../../utils/url';
 import { clusterPayloadFor } from '../../utils/odpClusterIndex';
 
@@ -105,6 +106,8 @@ const slotPayload = { controls: slotControls, cluster };
         <span class="control-detail-card__no-baseline">Not in a baseline</span>
       )}
     </div>
+
+    {!withdrawn && <StatusControl slug={control.data.slug} />}
 
     {Object.keys(slotControls).length > 0 && <p class="odp-summary" data-odp-summary hidden />}
 

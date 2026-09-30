@@ -59,20 +59,37 @@ function emptyBlob(): OdpBlob {
   return { schemaVersion: SCHEMA_VERSION, decisions: {} };
 }
 
+// Read-through cache keyed on the raw stored string: `localStorage.getItem`
+// is cheap, `JSON.parse` plus validation of the whole blob is not (the
+// dashboard used to do 643 full parses per refresh). Comparing the raw string
+// keeps this correct across tabs with no invalidation hook, and a write
+// replaces the entry. Cached blobs are shared - callers must treat them as
+// read-only, and `setDecision` builds a new object rather than mutating.
+const cache = new Map<string, { raw: string | null; blob: OdpBlob }>();
+
 /**
- * Reads the raw blob for a baseline, corrupt/missing-safe. Never throws.
+ * Reads the blob for a baseline, corrupt/missing-safe. Never throws.
  */
 function readBlob(baseline: string): OdpBlob {
   let raw: string | null;
   try {
     raw = localStorage.getItem(storageKey(baseline));
   } catch (err) {
-    // localStorage can throw (e.g. disabled/private mode) — treat as empty.
+    // localStorage can throw (e.g. disabled/private mode) - treat as empty.
     console.error('odpStore: localStorage unavailable, treating as empty state', err);
     return emptyBlob();
   }
-  if (raw === null) return emptyBlob();
 
+  const hit = cache.get(baseline);
+  if (hit && hit.raw === raw) return hit.blob;
+
+  const blob = parseBlob(raw);
+  cache.set(baseline, { raw, blob });
+  return blob;
+}
+
+function parseBlob(raw: string | null): OdpBlob {
+  if (raw === null) return emptyBlob();
   try {
     const parsed = JSON.parse(raw);
     if (!isOdpBlob(parsed)) {
@@ -89,7 +106,9 @@ function readBlob(baseline: string): OdpBlob {
 /** Returns `true` on a successful write, `false` on a caught failure (e.g. quota exceeded, private mode). */
 function writeBlob(baseline: string, blob: OdpBlob): boolean {
   try {
-    localStorage.setItem(storageKey(baseline), JSON.stringify(blob));
+    const raw = JSON.stringify(blob);
+    localStorage.setItem(storageKey(baseline), raw);
+    cache.set(baseline, { raw, blob });
     return true;
   } catch (err) {
     console.error('odpStore: failed to write to localStorage', err);
@@ -122,7 +141,6 @@ export function setDecision(baseline: string, key: string, decision: Decision): 
     return false;
   }
 
-  const blob = readBlob(baseline);
-  blob.decisions[key] = decision;
-  return writeBlob(baseline, blob);
+  const current = readBlob(baseline);
+  return writeBlob(baseline, { ...current, decisions: { ...current.decisions, [key]: decision } });
 }

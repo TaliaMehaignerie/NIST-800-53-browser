@@ -1,0 +1,193 @@
+---
+// Story 13: the one status control (AD-14), used on the Control detail page
+// and inside every Enhancement fragment — never two implementations. Status
+// is per-system, keyed by item slug, independent of the working baseline.
+// Hidden until the script runs: with JS disabled the page is unchanged.
+// `data-pagefind-ignore` keeps form labels out of the search index.
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const OPTIONS: { value: string; label: string }[] = [
+  { value: 'incomplete', label: 'Incomplete' },
+  { value: 'in-progress', label: 'In progress' },
+  { value: 'compliant', label: 'Compliant' },
+  { value: 'not-applicable', label: 'Not applicable' },
+];
+---
+
+<div class="status-control" data-status-control data-item-slug={slug} data-pagefind-ignore hidden>
+  <div class="status-control__row">
+    <label for={`status-${slug}`}>Status</label>
+    <select id={`status-${slug}`} data-status-select>
+      {OPTIONS.map((o) => <option value={o.value}>{o.label}</option>)}
+    </select>
+    <label for={`owner-${slug}`}>Owner</label>
+    <input id={`owner-${slug}`} type="text" data-status-owner />
+  </div>
+  <div class="status-control__justification" data-status-justification-wrap hidden>
+    <label for={`justification-${slug}`}>Justification (required for not applicable)</label>
+    <textarea id={`justification-${slug}`} rows="2" data-status-justification></textarea>
+  </div>
+  <p class="status-control__error" role="alert" hidden data-status-error></p>
+  <div class="status-control__actions">
+    <button type="button" data-status-save>Save status</button>
+    <span class="status-control__saved" role="status" data-status-saved></span>
+  </div>
+</div>
+
+<style>
+  .status-control {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 8px 12px;
+    margin: 0 0 16px;
+  }
+
+  .status-control[hidden] {
+    display: none;
+  }
+
+  .status-control__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .status-control__justification {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .status-control select,
+  .status-control input,
+  .status-control textarea {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 3px 6px;
+  }
+
+  .status-control textarea {
+    width: 100%;
+  }
+
+  .status-control select:focus-visible,
+  .status-control input:focus-visible,
+  .status-control textarea:focus-visible,
+  .status-control button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .status-control__error {
+    margin: 8px 0 0;
+    padding: 4px 8px;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border-left: 3px solid var(--color-ink-secondary);
+  }
+
+  .status-control__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .status-control button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+
+  .status-control button:hover {
+    background: var(--color-border-hairline);
+  }
+</style>
+
+<script>
+  import { getStatus, setStatus, isItemStatus, type ItemStatus } from '../utils/statusStore';
+  import { onOdpStorageChange } from '../utils/storageSync';
+
+  const JUSTIFICATION_REQUIRED = 'A justification is required to mark this not applicable.';
+  const SAVE_FAILED = 'Could not save this status. Your browser storage may be full or unavailable.';
+
+  function parts(root: HTMLElement) {
+    return {
+      slug: root.dataset.itemSlug ?? '',
+      select: root.querySelector<HTMLSelectElement>('[data-status-select]')!,
+      owner: root.querySelector<HTMLInputElement>('[data-status-owner]')!,
+      wrap: root.querySelector<HTMLElement>('[data-status-justification-wrap]')!,
+      justification: root.querySelector<HTMLTextAreaElement>('[data-status-justification]')!,
+      error: root.querySelector<HTMLElement>('[data-status-error]')!,
+      saved: root.querySelector<HTMLElement>('[data-status-saved]')!,
+      save: root.querySelector<HTMLButtonElement>('[data-status-save]')!,
+    };
+  }
+
+  function syncJustification(root: HTMLElement): void {
+    const p = parts(root);
+    p.wrap.hidden = p.select.value !== 'not-applicable';
+  }
+
+  // Fills the form from storage. `force` is for first paint; a cross-tab
+  // refresh only touches controls whose stored record actually changed, so
+  // typing in an unrelated item is never clobbered.
+  function populate(root: HTMLElement, force: boolean): void {
+    const p = parts(root);
+    const record = getStatus(p.slug);
+    const snapshot = JSON.stringify(record ?? null);
+    if (!force && root.dataset.snapshot === snapshot) return;
+    root.dataset.snapshot = snapshot;
+
+    p.select.value = record?.status ?? 'incomplete';
+    p.owner.value = record?.owner ?? '';
+    p.justification.value = record?.justification ?? '';
+    p.error.hidden = true;
+    p.saved.textContent = record ? `Last updated ${new Date(record.updatedAt).toLocaleString()}` : '';
+    syncJustification(root);
+  }
+
+  function save(root: HTMLElement): void {
+    const p = parts(root);
+    p.error.hidden = true;
+    p.error.textContent = '';
+
+    const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
+    const justification = status === 'not-applicable' ? p.justification.value : '';
+    const ok = setStatus(p.slug, { status, owner: p.owner.value, justification });
+    if (!ok) {
+      p.error.textContent =
+        status === 'not-applicable' && justification.trim().length === 0 ? JUSTIFICATION_REQUIRED : SAVE_FAILED;
+      p.error.hidden = false;
+      return;
+    }
+    populate(root, true);
+    window.dispatchEvent(new CustomEvent('statuschanged', { detail: { slug: p.slug } }));
+  }
+
+  const controls = Array.from(document.querySelectorAll<HTMLElement>('[data-status-control]'));
+  controls.forEach((root) => {
+    populate(root, true);
+    root.hidden = false;
+    const p = parts(root);
+    p.select.addEventListener('change', () => syncJustification(root));
+    p.save.addEventListener('click', () => save(root));
+  });
+
+  onOdpStorageChange(() => controls.forEach((root) => populate(root, false)), { baseline: false });
+</script>

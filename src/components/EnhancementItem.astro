@@ -9,6 +9,7 @@
 import BaselineBadge from './BaselineBadge.astro';
 import WithdrawnMarker from './WithdrawnMarker.astro';
 import StatementTree from './StatementTree.astro';
+import StatusControl from './StatusControl.astro';
 
 interface StatementNode {
   label: string | null;
@@ -75,6 +76,7 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, g
   </div>
   {statement.length > 0 && (
     <div class="enhancement-item__statement" id={`${slug}-statement`} hidden data-odp-baselines={baselines.join(' ')}>
+      {!withdrawn && <StatusControl slug={slug} />}
       <StatementTree nodes={statement} params={params} controlSlug={slug} />
       {params.length > 0 && <p class="odp-slot-note" data-odp-slot-note hidden />}
       {guidance && (
