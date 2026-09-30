@@ -47,9 +47,12 @@ export function emptyComplianceCounts(): ComplianceCounts {
   return { compliant: 0, inProgress: 0, incomplete: 0, notApplicable: 0, denominator: 0, total: 0 };
 }
 
+/** The family whose baseline-less items are program-wide (AD-15). */
+export const PROGRAM_WIDE_FAMILY = 'PM';
+
 /** A baseline-less PM-family item: part of the program, in no baseline, shown under every baseline. */
 export function isProgramWide(item: ComplianceItem): boolean {
-  return !item.withdrawn && item.baselines.length === 0 && item.familyCode.toUpperCase() === 'PM';
+  return !item.withdrawn && item.baselines.length === 0 && item.familyCode.toUpperCase() === PROGRAM_WIDE_FAMILY;
 }
 
 /** Whether an item is counted under `baseline`. Withdrawn items never are. */
@@ -96,9 +99,15 @@ export function countCompliance(
   return { overall, byFamily, programWide };
 }
 
-/** Whole-number percent of the denominator that is compliant, or `null` when the denominator is empty. */
+/**
+ * Whole-number percent of the denominator that is compliant, or `null` when
+ * the denominator is empty. Floored, never rounded: rounding would show
+ * 199/200 as 100%, and a figure that reads audit-complete while items are
+ * outstanding is exactly the flattery this module exists to prevent. 100%
+ * therefore appears only when every counted item really is compliant.
+ */
 export function compliancePercent(counts: ComplianceCounts): number | null {
-  return counts.denominator === 0 ? null : Math.round((counts.compliant / counts.denominator) * 100);
+  return counts.denominator === 0 ? null : Math.floor((counts.compliant / counts.denominator) * 100);
 }
 
 /** `64% (176/275)` — always the fraction beside the percentage; `— (0/0)` when nothing is countable. */

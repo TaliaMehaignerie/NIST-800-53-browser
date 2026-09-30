@@ -285,3 +285,7 @@
 - source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/15-odp-interlock.md`
   summary: The interlock's workspace link opens the family's unreviewed parameters, not just the blocked item's.
   evidence: The workspace filters by family and unreviewed only; a per-control filter (e.g. `control=ac-2-1`) would need a workspace change. The block message already names the item's own count.
+
+- source_spec: `_bmad-output/specs/spec-compliance-workbench/stories/16-compliance-dashboard.md`
+  summary: The dashboard counts an item stored as compliant even if its working-baseline ODPs are unreviewed.
+  evidence: Story 15 only blocks moving INTO compliant and notes stale ones on the item page; the dashboard reads statusStore alone. Surfacing "N compliant items have unreviewed parameters" needs per-item parameter ids on the dashboard page and its own design (caveat line vs excluding them).

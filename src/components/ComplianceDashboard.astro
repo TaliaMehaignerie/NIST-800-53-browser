@@ -7,7 +7,8 @@
 // baseline tokens (see BaseLayout). Hidden until the script runs; with JS off
 // the page says so. `data-pagefind-ignore` keeps it out of search results.
 import { getCollection } from 'astro:content';
-import { BASELINES } from '../utils/activeBaseline';
+import { BASELINES, baselineLabel } from '../utils/activeBaseline';
+import { PROGRAM_WIDE_FAMILY } from '../utils/complianceCount';
 import { familyUrl } from '../utils/url';
 
 const all = await getCollection('controls');
@@ -18,7 +19,6 @@ const families = (await getCollection('families'))
   .map((f) => ({ code: f.data.code, name: f.data.name, href: familyUrl(f.data.slug) }));
 // `<` escaped so embedded text can never close the script element.
 const payload = JSON.stringify({ items, families }).replace(/</g, '\\u003c');
-const label = (b: string) => `${b[0].toUpperCase()}${b.slice(1)}`;
 
 const ICONS: Record<string, string> = {
   compliant: 'M2 6.5 L5 9.5 L10 3',
@@ -34,11 +34,16 @@ const ICONS: Record<string, string> = {
     {
       BASELINES.map((b) => (
         <button type="button" class="compliance__filter" data-baseline={b} aria-pressed="false">
-          {label(b)}
+          {baselineLabel(b)}
         </button>
       ))
     }
   </div>
+
+  <p class="compliance__pin" data-pin-note hidden>
+    <span data-pin-text></span>
+    <button type="button" data-pin-clear>Follow my working baseline</button>
+  </p>
 
   <div class="compliance__hero">
     <div class="compliance__hero-row">
@@ -152,6 +157,26 @@ const ICONS: Record<string, string> = {
   .compliance [data-bar]:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+  }
+
+  .compliance__pin {
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: -12px 0 16px;
+  }
+
+  .compliance__pin[hidden] {
+    display: none;
+  }
+
+  .compliance__pin button {
+    font: inherit;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0 0 0 6px;
+    cursor: pointer;
+    text-decoration: underline;
   }
 
   .compliance__hero {
@@ -380,6 +405,13 @@ const ICONS: Record<string, string> = {
     flex-shrink: 0;
   }
 
+  .compliance__tooltip-key--na {
+    background:
+      repeating-linear-gradient(45deg, var(--color-status-na-hatch) 0 1.5px, transparent 1.5px 4px),
+      var(--color-status-na-fill) !important;
+    outline: 1px solid var(--color-status-na-hatch);
+  }
+
   .compliance__tooltip-value {
     font-weight: 600;
     margin-left: auto;
@@ -395,6 +427,7 @@ const ICONS: Record<string, string> = {
     countCompliance,
     percentLabel,
     compliancePercent,
+    PROGRAM_WIDE_FAMILY,
     type ComplianceCounts,
     type ComplianceItem,
   } from '../utils/complianceCount';
@@ -419,6 +452,7 @@ const ICONS: Record<string, string> = {
 
   let items: ComplianceItem[] = [];
   let families: FamilyInfo[] = [];
+  let dataFailed = false;
 
   function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
     const node = document.createElement(tag);
@@ -453,7 +487,7 @@ const ICONS: Record<string, string> = {
     tooltip.appendChild(el('p', 'compliance__tooltip-title', title));
     for (const s of STATUSES) {
       const row = el('div', 'compliance__tooltip-row');
-      const key = el('span', 'compliance__tooltip-key');
+      const key = el('span', s.key === 'notApplicable' ? 'compliance__tooltip-key compliance__tooltip-key--na' : 'compliance__tooltip-key');
       key.style.background = s.color;
       row.append(key, el('span', undefined, s.label), el('span', 'compliance__tooltip-value', String(counts[s.key])));
       tooltip.appendChild(row);
@@ -506,7 +540,13 @@ const ICONS: Record<string, string> = {
 
   function render(): void {
     if (!root) return;
+    if (tooltip) tooltip.hidden = true;
     const baseline = currentBaseline();
+    const working = getActiveBaseline();
+    const pinNote = root.querySelector<HTMLElement>('[data-pin-note]')!;
+    pinNote.hidden = !(explicitBaseline() && baseline !== working);
+    root.querySelector<HTMLElement>('[data-pin-text]')!.textContent =
+      `Viewing the ${baselineLabel(baseline)} baseline; you are working in ${baselineLabel(working)}.`;
     const name = baselineLabel(baseline);
     const { overall, byFamily, programWide } = countCompliance(items, baseline, getStatuses());
 
@@ -541,7 +581,7 @@ const ICONS: Record<string, string> = {
       const label = el('a', 'compliance__row-label');
       label.href = family.href;
       label.append(el('span', 'compliance__row-code', family.code), document.createTextNode(family.name));
-      if (family.code.toUpperCase() === 'PM' && programWide.total > 0) {
+      if (family.code.toUpperCase() === PROGRAM_WIDE_FAMILY && programWide.total > 0) {
         label.append(el('span', 'compliance__row-tag', `incl. ${programWide.total} program-wide`));
       }
       row.append(label, buildBar(counts, `${family.code} ${family.name}`), el('span', 'compliance__row-value', percentLabel(counts)));
@@ -584,6 +624,11 @@ const ICONS: Record<string, string> = {
       families = parsed.families;
     } catch (err) {
       console.error('ComplianceDashboard: could not parse embedded data', err);
+      const failed = document.createElement('p');
+      failed.className = 'compliance__noscript';
+      failed.textContent = 'The compliance dashboard could not load its data. Please reload the page.';
+      root.after(failed);
+      dataFailed = true;
     }
 
     root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((button) => {
@@ -593,12 +638,35 @@ const ICONS: Record<string, string> = {
       });
     });
 
-    window.addEventListener(ACTIVE_BASELINE_EVENT, () => {
-      if (!explicitBaseline()) render();
+    root.querySelector<HTMLButtonElement>('[data-pin-clear]')?.addEventListener('click', () => {
+      setUrlState({ search: { baseline: null } });
+      render();
     });
+
+    window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     onOdpStorageChange(render, { baseline: true, decisions: false, status: true });
 
-    render();
-    root.hidden = false;
+    // A same-tab visit after editing statuses elsewhere can be restored from
+    // the back/forward cache with the old DOM, and `storage` never fires in
+    // the tab that wrote — so refresh on restore and on refocus.
+    window.addEventListener('pageshow', (e) => {
+      if ((e as PageTransitionEvent).persisted) render();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') render();
+    });
+
+    // Tooltips must be dismissible without the pointer (WCAG 1.4.13) and on touch.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && tooltip) tooltip.hidden = true;
+    });
+    document.addEventListener('pointerdown', (e) => {
+      if (tooltip && !(e.target as Element).closest?.('[data-bar]')) tooltip.hidden = true;
+    });
+
+    if (!dataFailed) {
+      render();
+      root.hidden = false;
+    }
   }
 </script>
