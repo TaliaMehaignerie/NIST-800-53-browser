@@ -74,8 +74,9 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, g
     </span>
   </div>
   {statement.length > 0 && (
-    <div class="enhancement-item__statement" id={`${slug}-statement`} hidden>
-      <StatementTree nodes={statement} params={params} />
+    <div class="enhancement-item__statement" id={`${slug}-statement`} hidden data-odp-baselines={baselines.join(' ')}>
+      <StatementTree nodes={statement} params={params} controlSlug={slug} />
+      {params.length > 0 && <p class="odp-slot-note" data-odp-slot-note hidden />}
       {guidance && (
         <div class="enhancement-item__discussion">
           <p class="enhancement-item__discussion-label">Discussion</p>

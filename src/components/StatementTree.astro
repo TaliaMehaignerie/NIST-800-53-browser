@@ -7,7 +7,7 @@
 // "[Assignment: organization-defined ...]" / "[Selection (...): ...]"
 // convention (resolveParams.ts) -- the raw OSCAL placeholder syntax otherwise
 // reads as broken text to a reader with no reason to know what OSCAL is.
-import { resolveParams } from '../utils/resolveParams';
+import { resolveParamSegments } from '../utils/resolveParams';
 
 interface StatementNode {
   label: string | null;
@@ -25,9 +25,12 @@ interface Param {
 interface Props {
   nodes: StatementNode[];
   params: Param[];
+  // When set, each resolved param becomes an addressable `.odp-slot` span
+  // (story 9) that the client overlay can swap a decided value into.
+  controlSlug?: string;
 }
 
-const { nodes, params } = Astro.props;
+const { nodes, params, controlSlug } = Astro.props;
 ---
 
 {
@@ -36,12 +39,21 @@ const { nodes, params } = Astro.props;
       {(n.label || n.prose) && (
         <p>
           {n.label && <span class="statement-node__label">{n.label}</span>}
-          {n.prose && resolveParams(n.prose, params)}
+          {n.prose &&
+            resolveParamSegments(n.prose, params).map((seg) =>
+              seg.paramId && controlSlug ? (
+                <span class="odp-slot" data-odp-slot data-control-slug={controlSlug} data-param-id={seg.paramId}>
+                  {seg.text}
+                </span>
+              ) : (
+                seg.text
+              ),
+            )}
         </p>
       )}
       {n.children.length > 0 && (
         <div class="statement-node__children">
-          <Astro.self nodes={n.children} params={params} />
+          <Astro.self nodes={n.children} params={params} controlSlug={controlSlug} />
         </div>
       )}
     </div>

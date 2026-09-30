@@ -1,0 +1,97 @@
+---
+// Story 9: client overlay for the addressable `.odp-slot` spans emitted by
+// StatementTree. Read-only — swaps the user's decided value in for NIST's
+// resolved `[Assignment: …]`/`[Selection: …]` text, with a status treatment.
+// Resolution stays build-time (AD-5); this only substitutes a stored value.
+// Without JS the page keeps NIST's text. Decided values are user input, so
+// they are written with textContent only, never innerHTML.
+---
+
+<style is:global>
+  .odp-slot[data-status] {
+    text-underline-offset: 3px;
+  }
+
+  .odp-slot[data-status='unreviewed-default'] {
+    text-decoration: underline dotted var(--color-ink-secondary);
+  }
+
+  .odp-slot[data-status='confirmed'] {
+    color: var(--color-accent);
+    text-decoration: underline solid var(--color-accent);
+  }
+
+  .odp-slot[data-status='overridden'] {
+    color: var(--color-accent);
+    text-decoration: underline double var(--color-accent);
+  }
+
+  .odp-slot__status {
+    font-family: var(--font-meta);
+    font-size: 11px;
+    margin-left: 4px;
+    color: var(--color-ink-secondary);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .odp-slot-note {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: 0 0 12px;
+  }
+</style>
+
+<script>
+  import { ACTIVE_BASELINE_EVENT, getActiveBaseline } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+
+  const STATUS_LABEL = { confirmed: 'confirmed', overridden: 'overridden', 'unreviewed-default': 'unreviewed' } as const;
+
+  function valueText(value: string | string[]): string {
+    return Array.isArray(value) ? value.join('; ') : value;
+  }
+
+  function resetSlot(slot: HTMLElement): void {
+    if (slot.dataset.odpOriginal !== undefined) slot.textContent = slot.dataset.odpOriginal;
+    delete slot.dataset.status;
+    slot.removeAttribute('title');
+  }
+
+  function render(): void {
+    const baseline = getActiveBaseline();
+    const name = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
+    const decisions = getDecisions(baseline);
+
+    document.querySelectorAll<HTMLElement>('[data-odp-baselines]').forEach((scope) => {
+      const inBaseline = (scope.dataset.odpBaselines ?? '').split(' ').includes(baseline);
+      const note = scope.querySelector<HTMLElement>('[data-odp-slot-note]');
+      if (note) {
+        note.hidden = inBaseline;
+        note.textContent = inBaseline ? '' : `Not part of the ${name} baseline — parameters shown as NIST wrote them.`;
+      }
+
+      scope.querySelectorAll<HTMLElement>('[data-odp-slot]').forEach((slot) => {
+        if (slot.dataset.odpOriginal === undefined) slot.dataset.odpOriginal = slot.textContent ?? '';
+        resetSlot(slot);
+        if (!inBaseline) return;
+
+        const decision = decisions[`${slot.dataset.controlSlug}:${slot.dataset.paramId}`];
+        const status = decision?.status ?? 'unreviewed-default';
+        slot.dataset.status = status;
+        slot.title = `${STATUS_LABEL[status]} (${name})`;
+        if (decision) {
+          slot.textContent = valueText(decision.value);
+          const tag = document.createElement('span');
+          tag.className = 'odp-slot__status';
+          tag.textContent = STATUS_LABEL[status];
+          slot.appendChild(tag);
+        }
+      });
+    });
+  }
+
+  render();
+  window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+</script>

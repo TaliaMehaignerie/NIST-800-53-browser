@@ -38,10 +38,35 @@ function describe(param: Param): string {
   return `[Assignment: organization-defined value]`;
 }
 
-export function resolveParams(prose: string, params: Param[]): string {
+/**
+ * A run of resolved prose. `paramId` is set only for a placeholder that
+ * matched a real param (the addressable ODP slot); an unmatched placeholder
+ * stays verbatim plain text with no `paramId` and gets no slot.
+ */
+export interface ProseSegment {
+  text: string;
+  paramId?: string;
+}
+
+/** The one resolver (AD-5): everything else derives from this. */
+export function resolveParamSegments(prose: string, params: Param[]): ProseSegment[] {
   const byId = new Map(params.map((p) => [p.id, p]));
-  return prose.replace(PLACEHOLDER, (match, id) => {
-    const param = byId.get(id);
-    return param ? describe(param) : match;
-  });
+  const segments: ProseSegment[] = [];
+  let last = 0;
+  for (const m of prose.matchAll(PLACEHOLDER)) {
+    const index = m.index ?? 0;
+    const param = byId.get(m[1]);
+    if (!param) continue;
+    if (index > last) segments.push({ text: prose.slice(last, index) });
+    segments.push({ text: describe(param), paramId: param.id });
+    last = index + m[0].length;
+  }
+  if (last < prose.length) segments.push({ text: prose.slice(last) });
+  return segments;
+}
+
+export function resolveParams(prose: string, params: Param[]): string {
+  return resolveParamSegments(prose, params)
+    .map((s) => s.text)
+    .join('');
 }
