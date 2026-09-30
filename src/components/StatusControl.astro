@@ -30,6 +30,11 @@ const OPTIONS: { value: string; label: string }[] = [
     <label for={`justification-${slug}`}>Justification (required for not applicable)</label>
     <textarea id={`justification-${slug}`} rows="2" data-status-justification></textarea>
   </div>
+  <div class="status-control__evidence">
+    <p class="status-control__evidence-title">Evidence</p>
+    <ul class="status-control__evidence-list" data-evidence-list></ul>
+    <button type="button" data-evidence-add>Add evidence</button>
+  </div>
   <p class="status-control__error" role="alert" hidden data-status-error></p>
   <div class="status-control__actions">
     <button type="button" data-status-save>Save status</button>
@@ -93,6 +98,41 @@ const OPTIONS: { value: string; label: string }[] = [
     outline-offset: 2px;
   }
 
+  .status-control__evidence {
+    margin-top: 10px;
+  }
+
+  .status-control__evidence-title {
+    margin: 0 0 4px;
+    font-weight: 600;
+  }
+
+  .status-control__evidence-list {
+    list-style: none;
+    margin: 0 0 6px;
+    padding: 0;
+  }
+
+  .status-control__evidence-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 0;
+    border-top: 1px solid var(--color-border-hairline);
+  }
+
+  .status-control__evidence-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .status-control__evidence-item textarea,
+  .status-control__evidence-item input {
+    width: 100%;
+  }
+
   .status-control__error {
     margin: 8px 0 0;
     padding: 4px 8px;
@@ -124,7 +164,16 @@ const OPTIONS: { value: string; label: string }[] = [
 </style>
 
 <script>
-  import { getStatus, setStatus, isItemStatus, type ItemStatus } from '../utils/statusStore';
+  import {
+    getStatus,
+    setStatus,
+    isItemStatus,
+    isSafeEvidenceUrl,
+    validateEvidence,
+    type EvidenceInput,
+    type EvidenceRef,
+    type ItemStatus,
+  } from '../utils/statusStore';
   import { onOdpStorageChange } from '../utils/storageSync';
 
   const JUSTIFICATION_REQUIRED = 'A justification is required to mark this not applicable.';
@@ -137,10 +186,85 @@ const OPTIONS: { value: string; label: string }[] = [
       owner: root.querySelector<HTMLInputElement>('[data-status-owner]')!,
       wrap: root.querySelector<HTMLElement>('[data-status-justification-wrap]')!,
       justification: root.querySelector<HTMLTextAreaElement>('[data-status-justification]')!,
+      evidenceList: root.querySelector<HTMLElement>('[data-evidence-list]')!,
+      evidenceAdd: root.querySelector<HTMLButtonElement>('[data-evidence-add]')!,
       error: root.querySelector<HTMLElement>('[data-status-error]')!,
       saved: root.querySelector<HTMLElement>('[data-status-saved]')!,
       save: root.querySelector<HTMLButtonElement>('[data-status-save]')!,
     };
+  }
+
+  // One evidence row. Note and URL are user input: set via .value/.textContent
+  // only, and the URL becomes a link only when it is a safe http(s) URL.
+  // `collectedAt` is shown, never editable; the original values are kept so an
+  // untouched row keeps its date and an edited one is re-stamped on save.
+  function buildEvidenceRow(ref?: EvidenceRef): HTMLElement {
+    const li = document.createElement('li');
+    li.className = 'status-control__evidence-item';
+    li.dataset.evidenceRow = 'true';
+    if (ref) {
+      li.dataset.collectedAt = ref.collectedAt;
+      li.dataset.origNote = ref.note;
+      li.dataset.origUrl = ref.url;
+    }
+
+    const note = document.createElement('textarea');
+    note.rows = 2;
+    note.value = ref?.note ?? '';
+    note.setAttribute('aria-label', 'Evidence note');
+    note.dataset.evidenceNote = 'true';
+
+    const url = document.createElement('input');
+    url.type = 'text';
+    url.value = ref?.url ?? '';
+    url.placeholder = 'https://… (optional)';
+    url.setAttribute('aria-label', 'Evidence URL (optional)');
+    url.dataset.evidenceUrl = 'true';
+
+    const meta = document.createElement('div');
+    meta.className = 'status-control__evidence-meta';
+    if (ref) {
+      const collected = document.createElement('span');
+      collected.textContent = `Collected ${new Date(ref.collectedAt).toLocaleDateString()}`;
+      meta.appendChild(collected);
+      if (ref.url && isSafeEvidenceUrl(ref.url)) {
+        const link = document.createElement('a');
+        link.href = ref.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Open link';
+        meta.appendChild(link);
+      }
+    }
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.textContent = 'Remove';
+    remove.addEventListener('click', () => {
+      const root = li.closest<HTMLElement>('[data-status-control]');
+      li.remove();
+      if (root) markDirty(root);
+    });
+    meta.appendChild(remove);
+
+    li.append(note, url, meta);
+    return li;
+  }
+
+  function markDirty(root: HTMLElement): void {
+    root.dataset.dirty = 'true';
+    parts(root).error.hidden = true;
+  }
+
+  function readEvidence(root: HTMLElement): EvidenceInput[] {
+    const inputs: EvidenceInput[] = [];
+    root.querySelectorAll<HTMLElement>('[data-evidence-row]').forEach((li) => {
+      const note = li.querySelector<HTMLTextAreaElement>('[data-evidence-note]')!.value;
+      const url = li.querySelector<HTMLInputElement>('[data-evidence-url]')!.value;
+      if (note.trim().length === 0 && url.trim().length === 0) return;
+      const unchanged = li.dataset.origNote === note.trim() && li.dataset.origUrl === url.trim();
+      inputs.push({ note, url, collectedAt: unchanged ? li.dataset.collectedAt : undefined });
+    });
+    return inputs;
   }
 
   function syncJustification(root: HTMLElement): void {
@@ -165,6 +289,7 @@ const OPTIONS: { value: string; label: string }[] = [
     p.select.value = record?.status ?? 'incomplete';
     p.owner.value = record?.owner ?? '';
     p.justification.value = record?.justification ?? '';
+    p.evidenceList.replaceChildren(...(record?.evidence ?? []).map((ref) => buildEvidenceRow(ref)));
     p.error.hidden = true;
     p.saved.textContent = record ? `Last updated ${new Date(record.updatedAt).toLocaleString()}` : '';
     syncJustification(root);
@@ -177,10 +302,12 @@ const OPTIONS: { value: string; label: string }[] = [
 
     const status: ItemStatus = isItemStatus(p.select.value) ? p.select.value : 'incomplete';
     const justification = status === 'not-applicable' ? p.justification.value : '';
-    const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification });
+    const evidence = readEvidence(root);
+    const ok = setStatus(p.slug, { status, owner: p.owner.value.trim(), justification, evidence });
     if (!ok) {
       p.error.textContent =
-        status === 'not-applicable' && justification.trim().length === 0 ? JUSTIFICATION_REQUIRED : SAVE_FAILED;
+        validateEvidence(evidence) ??
+        (status === 'not-applicable' && justification.trim().length === 0 ? JUSTIFICATION_REQUIRED : SAVE_FAILED);
       p.error.hidden = false;
       return;
     }
@@ -192,16 +319,19 @@ const OPTIONS: { value: string; label: string }[] = [
     populate(root, true);
     root.hidden = false;
     const p = parts(root);
-    const markDirty = () => {
-      root.dataset.dirty = 'true';
-      p.error.hidden = true;
-    };
     p.select.addEventListener('change', () => {
-      markDirty();
+      markDirty(root);
       syncJustification(root);
     });
-    p.owner.addEventListener('input', markDirty);
-    p.justification.addEventListener('input', markDirty);
+    p.owner.addEventListener('input', () => markDirty(root));
+    p.justification.addEventListener('input', () => markDirty(root));
+    p.evidenceList.addEventListener('input', () => markDirty(root));
+    p.evidenceAdd.addEventListener('click', () => {
+      const row = buildEvidenceRow();
+      p.evidenceList.appendChild(row);
+      row.querySelector<HTMLTextAreaElement>('[data-evidence-note]')?.focus();
+      markDirty(root);
+    });
     p.save.addEventListener('click', () => save(root));
   });
 
