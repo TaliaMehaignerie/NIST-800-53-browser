@@ -14,7 +14,16 @@
  * to what it was — a file from another schema version, or one that cannot be
  * fully applied, never changes your data.
  */
-import { BASELINES, activeBaselineStorageChars, baselineLabel, type Baseline } from './activeBaseline';
+import {
+  BASELINES,
+  activeBaselineStorageChars,
+  baselineLabel,
+  getActiveBaseline,
+  hasChosenBaseline,
+  isBaseline,
+  setActiveBaseline,
+  type Baseline,
+} from './activeBaseline';
 import {
   ODP_SCHEMA_VERSION,
   isOdpBlob,
@@ -49,6 +58,12 @@ export interface BackupEnvelope {
   exportedAt: string;
   odpDecisions: Partial<Record<Baseline, OdpBlob>>;
   controlStatus: StatusBlob | null;
+  /**
+   * Your system's baseline, when chosen. Without it a restored browser would
+   * read as "no baseline chosen" and the restored work would look lost.
+   * Optional, so older backups still restore.
+   */
+  activeBaseline?: Baseline;
   /**
    * Raw text of stored blobs that could not be read. Kept so a safety download
    * never silently loses them; a restore ignores this field.
@@ -110,6 +125,7 @@ export function buildEnvelope(now: Date = new Date()): { envelope: BackupEnvelop
       exportedAt: now.toISOString(),
       odpDecisions,
       controlStatus,
+      ...(hasChosenBaseline() ? { activeBaseline: getActiveBaseline() } : {}),
       ...(skipped.length > 0 ? { unreadable } : {}),
     },
     skipped,
@@ -184,9 +200,19 @@ export function parseEnvelope(text: string): ParseResult {
     controlStatus = file.controlStatus;
   }
 
+  const baseline = file.activeBaseline;
+  if (baseline !== undefined && !isBaseline(baseline)) return refuse('The baseline in that backup is not recognised.');
+
   return {
     ok: true,
-    envelope: { app: BACKUP_APP, envelopeVersion: ENVELOPE_VERSION, exportedAt: file.exportedAt, odpDecisions, controlStatus },
+    envelope: {
+      app: BACKUP_APP,
+      envelopeVersion: ENVELOPE_VERSION,
+      exportedAt: file.exportedAt,
+      odpDecisions,
+      controlStatus,
+      ...(baseline !== undefined ? { activeBaseline: baseline } : {}),
+    },
   };
 }
 
@@ -226,7 +252,10 @@ export function applyEnvelope(envelope: BackupEnvelope): { ok: boolean; message:
   });
   writes.push(writeStatusRaw(envelope.controlStatus ? JSON.stringify(envelope.controlStatus) : null));
 
-  if (writes.every(Boolean)) return { ok: true, message: 'Restored. Your data now matches the backup file.' };
+  if (writes.every(Boolean)) {
+    if (envelope.activeBaseline) setActiveBaseline(envelope.activeBaseline);
+    return { ok: true, message: 'Restored. Your data now matches the backup file.' };
+  }
 
   // Put every key back, and check that each put-back worked: freed space can be
   // taken by another tab or site before the rollback lands.

@@ -171,9 +171,6 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     outline-offset: 2px;
   }
 
-
-
-
   .odp-slot-note {
     font-family: var(--font-meta);
     font-size: 13px;
@@ -224,7 +221,7 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
       baseline: getActiveBaseline(),
       cluster: clusterData,
       onSaved: () => {
-        render();
+        // `render` is listening for this event.
         window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
       },
     });
@@ -246,6 +243,7 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     const baseline = getActiveBaseline();
     const name = baselineLabel(baseline);
     const decisions = getDecisions(baseline);
+    const chosen = hasChosenBaseline();
     // Story 20: parameters that are unreviewed here but decided in another baseline.
     const proposals = proposalsFor(
       Array.from(document.querySelectorAll<HTMLElement>('[data-odp-slot]')).map(
@@ -258,7 +256,6 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
       // Before your system's baseline is chosen the text is simply NIST's: no
       // status treatment, nothing to click, no note (the review card invites
       // the choice instead).
-      const chosen = hasChosenBaseline();
       const inBaseline = chosen && (scope.dataset.odpBaselines ?? '').split(' ').includes(baseline);
       const note = scope.querySelector<HTMLElement>('[data-odp-slot-note]');
       if (note) {

@@ -13,12 +13,14 @@ interface Props {
   withdrawn: boolean;
   incorporatedInto: string[];
   baselines: ('low' | 'moderate' | 'high' | 'privacy')[];
+  /** A baseline-less PM item: in every baseline's scope (AD-15), so no baseline filter hides it. */
+  programWide?: boolean;
 }
 
-const { label, title, slug, withdrawn, incorporatedInto, baselines } = Astro.props;
+const { label, title, slug, withdrawn, incorporatedInto, baselines, programWide = false } = Astro.props;
 ---
 
-<a class="control-row" href={controlUrl(slug)} data-baselines={baselines.join(' ')}>
+<a class="control-row" href={controlUrl(slug)} data-baselines={baselines.join(' ')} data-program-wide={programWide ? 'true' : undefined}>
   <span class="control-row__id">{label}</span>
   <span class={`control-row__title ${withdrawn ? 'control-row__title--withdrawn' : ''}`}>{title}</span>
   <span class="control-row__readiness" data-odp-readiness data-control-slug={slug} hidden></span>

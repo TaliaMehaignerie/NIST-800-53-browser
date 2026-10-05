@@ -7,8 +7,7 @@
 // baseline tokens (see BaseLayout). Hidden until the script runs; with JS off
 // the page says so. `data-pagefind-ignore` keeps it out of search results.
 import { getCollection } from 'astro:content';
-import { reviewUrl } from '../utils/url';
-import { dashboardUrl, familyUrl } from '../utils/url';
+import { dashboardUrl, familyUrl, reviewUrl } from '../utils/url';
 
 interface Props {
   /** Story 17: stay hidden unless either store holds data (the home page). */
@@ -167,11 +166,6 @@ const ICONS: Record<string, string> = {
     color: var(--color-ink-secondary);
   }
 
-
-
-
-
-
   .compliance button:focus-visible,
   .compliance a:focus-visible,
   .compliance summary:focus-visible,
@@ -179,9 +173,6 @@ const ICONS: Record<string, string> = {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
-
-
-
 
   .compliance__hero {
     margin-bottom: 20px;
@@ -465,7 +456,6 @@ const ICONS: Record<string, string> = {
     return node;
   }
 
-
   function describe(counts: ComplianceCounts, title: string): string {
     return (
       `${title}: ${counts.compliant} compliant, ${counts.inProgress} in progress, ` +
@@ -552,7 +542,6 @@ const ICONS: Record<string, string> = {
     const baseline = getActiveBaseline();
     const name = baselineLabel(baseline);
     const { overall, byFamily, programWide } = countCompliance(items, baseline, getStatuses());
-
 
     const pct = compliancePercent(overall);
     root.querySelector<HTMLElement>('[data-hero-value]')!.textContent = pct === null ? '—' : `${pct}%`;

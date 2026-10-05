@@ -1,8 +1,8 @@
 /**
  * Per-baseline parameter totals, counted once at build time from the Content
  * Collection (AD-8) with the same non-withdrawn filter as `odp-dataset.json`.
- * Shared by the `odp-meta.json` endpoint and the header chip, which embeds the
- * numbers in its markup instead of fetching a build-time constant on every page.
+ * Shared by the `odp-meta.json` endpoint and the Review page's baseline options,
+ * which embed the numbers in their markup instead of fetching a build-time constant.
  * Server-side only (imports `astro:content`).
  */
 import { getCollection } from 'astro:content';

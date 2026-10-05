@@ -610,7 +610,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
   import { setUrlState } from '../../utils/urlState';
-  import { baselineLabel, getActiveBaseline, hasChosenBaseline } from '../../utils/activeBaseline';
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
   import { onOdpStorageChange } from '../../utils/storageSync';
   import { proposalsFor, proposalSourceText, proposalValueText, type Proposal } from '../../utils/odpProposals';
@@ -1469,6 +1469,9 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     // The route's baseline is authoritative for this page, but opening it never
     // changes your system's baseline (that is set once, on Review, and changed
     // only on Your data). Say so plainly when they differ.
+    // Only when none has been chosen yet: opening a table is then unambiguous
+    // intent, and decisions made here must show up everywhere else.
+    if (!hasChosenBaseline() && isBaseline(baselineValue)) setActiveBaseline(baselineValue);
     const baselineNote = workspace.querySelector<HTMLElement>('[data-odp-baseline-note]');
     if (baselineNote && hasChosenBaseline() && getActiveBaseline() !== baselineValue) {
       const chosen = getActiveBaseline();

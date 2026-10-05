@@ -131,7 +131,8 @@ const BASELINES: { value: string | null; label: string }[] = [
     const groups = new Map<Element, { total: number; visible: number }>();
     document.querySelectorAll<HTMLElement>('[data-baselines]').forEach((el) => {
       const values = (el.dataset.baselines ?? '').split(' ').filter(Boolean);
-      const visible = !baseline || values.includes(baseline);
+      // Program-wide PM items belong to every baseline's scope (AD-15).
+      const visible = !baseline || values.includes(baseline) || el.dataset.programWide === 'true';
       el.style.display = visible ? '' : 'none';
       const parent = el.parentElement;
       if (parent) {

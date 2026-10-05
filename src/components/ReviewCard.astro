@@ -281,7 +281,9 @@ const Heading = level === 2 ? 'h2' : 'h3';
     body.hidden = false;
 
     const control = payload.controls[slug];
-    const paramIds = control ? Object.keys(control.params) : [];
+    // Program-wide PM items are reviewed for status only (see `decidableParams`).
+    const itemBaselines = (card.dataset.itemBaselines ?? '').split(' ').filter(Boolean);
+    const paramIds = control && itemBaselines.includes(baseline) ? Object.keys(control.params) : [];
     const decisions = getDecisions(baseline);
     const proposals = proposalsFor(paramIds.map((id) => `${slug}:${id}`), baseline);
     const list = card.querySelector<HTMLElement>('[data-review-params]')!;
@@ -335,8 +337,8 @@ const Heading = level === 2 ? 'h2' : 'h3';
           baseline,
           cluster: payload.cluster,
           onSaved: () => {
+            // `renderAll` is listening for this event.
             window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
-            renderAll();
             // Keep keyboard focus on this parameter's (rebuilt) button.
             card.querySelectorAll<HTMLButtonElement>('.review-card__param button')[paramIds.indexOf(paramId)]?.focus();
           },

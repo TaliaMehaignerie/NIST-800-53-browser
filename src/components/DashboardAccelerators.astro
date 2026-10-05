@@ -137,24 +137,16 @@ const payload = await itemPayloadJson();
 </style>
 
 <script>
-  import { ACTIVE_BASELINE_EVENT, baselineLabel, hasChosenBaseline } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { getStatuses } from '../utils/statusStore';
-  import { isCounted, type ComplianceItem } from '../utils/complianceCount';
+  import { isCounted } from '../utils/complianceCount';
   import { interlockFor } from '../utils/odpInterlock';
-  import { DASHBOARD_BASELINE_EVENT, dashboardBaseline } from '../utils/dashboardBaseline';
+  import { itemUrl, readItems, type ReviewItem } from '../utils/reviewItems';
   import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
-  import { controlUrl, workspaceUrl } from '../utils/url';
-
-  interface Item extends ComplianceItem {
-    label: string;
-    title: string;
-    parentSlug: string;
-    paramIds: string[];
-  }
+  import { workspaceUrl } from '../utils/url';
 
   const root = document.querySelector<HTMLElement>('[data-accel]');
-  const dataEl = document.getElementById('accel-data');
   const SHOWN = 15;
 
   function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
@@ -164,15 +156,15 @@ const payload = await itemPayloadJson();
     return node;
   }
 
-  let items: Item[] = [];
+  let items: ReviewItem[] = [];
 
   // ---- 1. What's blocking me ---------------------------------------------
   // Story 15's gate, inverted: items in progress that are ready to mark
   // compliant, items in progress held back by unreviewed parameters, and items
   // already marked compliant while parameters are still unreviewed.
-  function itemLink(item: Item): HTMLAnchorElement {
+  function itemLink(item: ReviewItem): HTMLAnchorElement {
     const a = el('a');
-    a.href = item.parentSlug ? `${controlUrl(item.parentSlug)}#${item.slug}` : controlUrl(item.slug);
+    a.href = itemUrl(item);
     a.textContent = item.title;
     return a;
   }
@@ -270,24 +262,14 @@ const payload = await itemPayloadJson();
     const chosen = hasChosenBaseline();
     root.hidden = !chosen;
     if (!chosen) return;
-    renderBlocking(dashboardBaseline());
+    renderBlocking(getActiveBaseline());
   }
 
-  if (root && dataEl) {
+  const decoded = readItems('accel-data');
+  if (root && decoded) {
     try {
-      const parsed = JSON.parse(dataEl.textContent ?? '[]') as [string, string, string, string, string, string, string][];
-      items = parsed.map(([slug, label, title, familyCode, baselines, parentSlug, paramIds]) => ({
-        slug,
-        label,
-        title,
-        familyCode,
-        baselines: baselines ? baselines.split(' ') : [],
-        withdrawn: false,
-        parentSlug,
-        paramIds: paramIds ? paramIds.split(' ') : [],
-      }));
+      items = decoded;
 
-      window.addEventListener(DASHBOARD_BASELINE_EVENT, render);
       window.addEventListener(ACTIVE_BASELINE_EVENT, render);
       window.addEventListener('odpdecisionschanged', render);
       window.addEventListener(WORKBENCH_DATA_EVENT, render);

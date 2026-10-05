@@ -48,7 +48,12 @@ const { slug, label, title, withdrawn, incorporatedInto, baselines, statement, g
    * when there's a body to expand.
    */
 }
-<div class="enhancement-item" id={slug} data-baselines={baselines.join(' ')}>
+<div
+  class="enhancement-item"
+  id={slug}
+  data-baselines={baselines.join(' ')}
+  data-program-wide={!withdrawn && baselines.length === 0 && familyCode === 'PM' ? 'true' : undefined}
+>
   <div
     class="enhancement-item__header"
     role={statement.length > 0 ? 'button' : undefined}

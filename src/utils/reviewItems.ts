@@ -51,12 +51,23 @@ export function readItems(elementId: string): ReviewItem[] | null {
   }
 }
 
+/**
+ * Parameters can be decided only for an item that is IN your baseline. The
+ * program-wide PM items are counted for status (AD-15) but belong to no
+ * baseline, so their parameters are invisible to the workspace and the export
+ * and recording a decision there is out of scope (AD-13).
+ */
+export function decidableParams(item: ReviewItem, baseline: string): string[] {
+  return item.baselines.includes(baseline) ? item.paramIds : [];
+}
+
 export function progressFor(
   item: ReviewItem,
+  baseline: string,
   decisions: Record<string, Decision>,
   statuses: Record<string, StatusRecord>,
 ): ItemProgress {
-  const unreviewedParams = item.paramIds.filter((id) => {
+  const unreviewedParams = decidableParams(item, baseline).filter((id) => {
     const d = decisions[`${item.slug}:${id}`];
     return !d || d.status === 'unreviewed-default';
   }).length;
@@ -72,7 +83,7 @@ export function reviewProgress(
   decisions: Record<string, Decision>,
   statuses: Record<string, StatusRecord>,
 ): ItemProgress[] {
-  return items.filter((i) => isCounted(i, baseline)).map((i) => progressFor(i, decisions, statuses));
+  return items.filter((i) => isCounted(i, baseline)).map((i) => progressFor(i, baseline, decisions, statuses));
 }
 
 /** Where an item is reviewed: its own control page, or its parent's page at the enhancement. */

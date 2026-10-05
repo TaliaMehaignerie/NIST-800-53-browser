@@ -299,7 +299,14 @@ const familyNames = Object.fromEntries((await getCollection('families')).map((f)
   // Only same-site paths are honoured as a return target.
   function returnTarget(): string | null {
     const r = params.get('return');
-    return r && r.startsWith('/') && !r.startsWith('//') ? r : null;
+    if (!r) return null;
+    try {
+      // Parsed, not prefix-matched: a backslash after the slash is treated as a second slash by browsers.
+      const url = new URL(r, window.location.origin);
+      return url.origin === window.location.origin ? `${url.pathname}${url.search}${url.hash}` : null;
+    } catch {
+      return null;
+    }
   }
 
   function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
