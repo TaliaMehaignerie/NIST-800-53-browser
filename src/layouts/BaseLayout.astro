@@ -19,8 +19,7 @@
 import ProvenanceFooter from '../components/ProvenanceFooter.astro';
 import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
-import WorkingBaseline from '../components/WorkingBaseline.astro';
-import { dashboardUrl, dataUrl, homeUrl } from '../utils/url';
+import { dashboardUrl, dataUrl, homeUrl, reviewUrl } from '../utils/url';
 import StorageWarning from '../components/StorageWarning.astro';
 
 interface Props {
@@ -30,6 +29,7 @@ interface Props {
 }
 
 const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 ---
 
 <html lang="en">
@@ -40,11 +40,15 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
   </head>
   <body>
     <header class="site-header">
-      <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
-      <a href={dashboardUrl()} class="site-nav">Compliance dashboard</a>
-      <a href={dataUrl()} class="site-nav">Your data</a>
+      <div class="site-header__top">
+        <a href={homeUrl()} class="site-title">NIST 800-53 Browser</a>
+        <nav class="site-nav" aria-label="Workbench">
+          <a href={reviewUrl()} aria-current={path === reviewUrl() ? 'page' : undefined}>Review</a>
+          <a href={dashboardUrl()} aria-current={path === dashboardUrl() ? 'page' : undefined}>Progress</a>
+          <a href={dataUrl()} aria-current={path === dataUrl() ? 'page' : undefined}>Your data</a>
+        </nav>
+      </div>
       <SearchBox value={searchQuery} />
-      <WorkingBaseline />
       <StorageWarning />
       {showBaselineFilter && <BaselineFilter />}
     </header>
@@ -183,25 +187,42 @@ const { title, showBaselineFilter = false, searchQuery = '' } = Astro.props;
     padding: 24px 16px;
   }
 
-  .site-nav + .site-nav {
-    margin-left: 14px;
+  .site-header__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 12px;
   }
 
   .site-nav {
-    display: inline-block;
+    display: flex;
+    gap: 16px;
     font-family: var(--font-meta);
-    font-size: 13px;
+    font-size: 14px;
+  }
+
+  .site-nav a {
     color: var(--color-ink-secondary);
-    margin: 0 0 12px;
+    text-decoration: none;
+  }
+
+  .site-nav a:hover,
+  .site-nav a[aria-current='page'] {
+    color: var(--color-ink-primary);
+  }
+
+  .site-nav a[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   .site-title {
-    display: block;
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 18px;
     color: var(--color-ink-primary);
     text-decoration: none;
-    margin-bottom: 12px;
   }
 </style>

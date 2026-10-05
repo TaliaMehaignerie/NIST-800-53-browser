@@ -26,6 +26,10 @@ export function dashboardUrl(): string {
   return `${BASE}/dashboard/`;
 }
 
+export function reviewUrl(): string {
+  return `${BASE}/review/`;
+}
+
 export function dataUrl(): string {
   return `${BASE}/data/`;
 }

@@ -7,7 +7,7 @@
 // baseline tokens (see BaseLayout). Hidden until the script runs; with JS off
 // the page says so. `data-pagefind-ignore` keeps it out of search results.
 import { getCollection } from 'astro:content';
-import { BASELINES, baselineLabel } from '../utils/activeBaseline';
+import { reviewUrl } from '../utils/url';
 import { dashboardUrl, familyUrl } from '../utils/url';
 
 interface Props {
@@ -46,20 +46,8 @@ const ICONS: Record<string, string> = {
   hidden
 >
   {title && <h2 class="compliance__title">{title}</h2>}
-  <div class="compliance__filters" role="group" aria-label="Baseline">
-    <span class="compliance__filter-label">Baseline</span>
-    {
-      BASELINES.map((b) => (
-        <button type="button" class="compliance__filter" data-baseline={b} aria-pressed="false">
-          {baselineLabel(b)}
-        </button>
-      ))
-    }
-  </div>
-
-  <p class="compliance__pin" data-pin-note hidden>
-    <span data-pin-text></span>
-    <button type="button" data-pin-clear>Follow my working baseline</button>
+  <p class="compliance__choose" data-compliance-choose hidden>
+    Choose your system's baseline on <a href={reviewUrl()}>Review</a> to see your progress.
   </p>
 
   <div class="compliance__hero">
@@ -148,6 +136,19 @@ const ICONS: Record<string, string> = {
     display: none;
   }
 
+  /* Before a baseline is chosen only the title and the pointer to Review show. */
+  .compliance[data-unchosen] > :not([data-compliance-choose]):not(.compliance__title):not(.compliance__tooltip) {
+    display: none;
+  }
+
+  .compliance__choose {
+    color: var(--color-ink-secondary);
+  }
+
+  .compliance__choose[hidden] {
+    display: none;
+  }
+
   .compliance__title {
     font-size: 1.25em;
     margin: 0 0 12px;
@@ -166,39 +167,10 @@ const ICONS: Record<string, string> = {
     color: var(--color-ink-secondary);
   }
 
-  .compliance__filters {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 24px;
-  }
 
-  .compliance__filter-label {
-    font-size: 13px;
-    color: var(--color-ink-secondary);
-    margin-right: 4px;
-  }
 
-  .compliance__filter {
-    font: inherit;
-    font-size: 13px;
-    color: var(--color-ink-secondary);
-    background: transparent;
-    border: none;
-    border-radius: var(--rounded-full);
-    padding: 4px 12px;
-    cursor: pointer;
-  }
 
-  .compliance__filter:hover {
-    background: var(--color-surface-overlay);
-  }
 
-  .compliance__filter[aria-pressed='true'] {
-    background: var(--color-surface-overlay);
-    color: var(--color-ink-primary);
-  }
 
   .compliance button:focus-visible,
   .compliance a:focus-visible,
@@ -208,25 +180,8 @@ const ICONS: Record<string, string> = {
     outline-offset: 2px;
   }
 
-  .compliance__pin {
-    font-size: 13px;
-    color: var(--color-ink-secondary);
-    margin: -12px 0 16px;
-  }
 
-  .compliance__pin[hidden] {
-    display: none;
-  }
 
-  .compliance__pin button {
-    font: inherit;
-    color: var(--color-accent);
-    background: none;
-    border: none;
-    padding: 0 0 0 6px;
-    cursor: pointer;
-    text-decoration: underline;
-  }
 
   .compliance__hero {
     margin-bottom: 20px;
@@ -470,7 +425,7 @@ const ICONS: Record<string, string> = {
 </style>
 
 <script>
-  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
   import { getStatuses } from '../utils/statusStore';
   import {
     countCompliance,
@@ -482,7 +437,6 @@ const ICONS: Record<string, string> = {
   } from '../utils/complianceCount';
   import { onOdpStorageChange } from '../utils/storageSync';
   import { hasWorkbenchData } from '../utils/workbenchData';
-  import { dashboardBaseline, explicitDashboardBaseline, setDashboardBaseline } from '../utils/dashboardBaseline';
 
   interface FamilyInfo {
     code: string;
@@ -511,10 +465,6 @@ const ICONS: Record<string, string> = {
     return node;
   }
 
-  // The filter is a view scope, independent of the working baseline (AD-13);
-  // the definition is shared (`dashboardBaseline.ts`) with the sections scoped to it.
-  const explicitBaseline = explicitDashboardBaseline;
-  const currentBaseline = dashboardBaseline;
 
   function describe(counts: ComplianceCounts, title: string): string {
     return (
@@ -593,18 +543,16 @@ const ICONS: Record<string, string> = {
       root.hidden = !hasData;
       if (!hasData) return;
     }
-    const baseline = currentBaseline();
-    const working = getActiveBaseline();
-    const pinNote = root.querySelector<HTMLElement>('[data-pin-note]')!;
-    pinNote.hidden = !(explicitBaseline() && baseline !== working);
-    root.querySelector<HTMLElement>('[data-pin-text]')!.textContent =
-      `Viewing the ${baselineLabel(baseline)} baseline; you are working in ${baselineLabel(working)}.`;
+    // Progress is always for your system's baseline (AD-13); there is no
+    // baseline switcher here. Before one is chosen, point to Review instead.
+    const chosen = hasChosenBaseline();
+    root.toggleAttribute('data-unchosen', !chosen);
+    root.querySelector<HTMLElement>('[data-compliance-choose]')!.hidden = chosen;
+    if (!chosen) return;
+    const baseline = getActiveBaseline();
     const name = baselineLabel(baseline);
     const { overall, byFamily, programWide } = countCompliance(items, baseline, getStatuses());
 
-    root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((b) => {
-      b.setAttribute('aria-pressed', String(b.dataset.baseline === baseline));
-    });
 
     const pct = compliancePercent(overall);
     root.querySelector<HTMLElement>('[data-hero-value]')!.textContent = pct === null ? '—' : `${pct}%`;
@@ -622,7 +570,7 @@ const ICONS: Record<string, string> = {
 
     // The compact (home) variant has no detail section, so don't build it.
     const more = root.querySelector<HTMLAnchorElement>('.compliance__more a');
-    if (more) more.href = `${more.dataset.base}${explicitBaseline() ? `?baseline=${baseline}` : ''}`;
+    if (more) more.href = more.dataset.base ?? more.href;
     if (root.dataset.compact === 'true') return;
 
     const rows = root.querySelector<HTMLElement>('[data-family-rows]')!;
@@ -691,18 +639,6 @@ const ICONS: Record<string, string> = {
       }
       dataFailed = true;
     }
-
-    root.querySelectorAll<HTMLButtonElement>('.compliance__filter').forEach((button) => {
-      button.addEventListener('click', () => {
-        setDashboardBaseline(button.dataset.baseline ?? null);
-        render();
-      });
-    });
-
-    root.querySelector<HTMLButtonElement>('[data-pin-clear]')?.addEventListener('click', () => {
-      setDashboardBaseline(null);
-      render();
-    });
 
     window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     // Decision blobs only matter to the progressive (home) reveal, which asks

@@ -14,7 +14,7 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
 <script type="application/json" id="odp-family-readiness" set:html={payload} is:inline />
 
 <script>
-  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { onOdpStorageChange } from '../utils/storageSync';
   import { readinessFor, reviewedCount, type ReadinessItem } from '../utils/odpReadiness';
@@ -27,6 +27,11 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
   }
 
   function render(): void {
+    // Readiness only means something for your system's baseline, once chosen.
+    if (!hasChosenBaseline()) {
+      document.querySelectorAll<HTMLElement>('[data-odp-readiness]').forEach((cell) => (cell.hidden = true));
+      return;
+    }
     const baseline = getActiveBaseline();
     const decisions = getDecisions(baseline);
     document.querySelectorAll<HTMLElement>('[data-odp-readiness]').forEach((cell) => {

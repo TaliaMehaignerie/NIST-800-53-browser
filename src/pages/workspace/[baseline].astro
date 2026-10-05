@@ -20,6 +20,6 @@ export function getStaticPaths() {
 const { baseline } = Astro.props as { baseline: Baseline };
 ---
 
-<BaseLayout title={`${baseline[0].toUpperCase()}${baseline.slice(1)} ODP Workspace — NIST 800-53 Browser`}>
+<BaseLayout title={`${baseline[0].toUpperCase()}${baseline.slice(1)} parameters — NIST 800-53 Browser`}>
   <OdpWorkspace baseline={baseline} />
 </BaseLayout>

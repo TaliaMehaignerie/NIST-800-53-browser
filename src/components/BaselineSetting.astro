@@ -1,0 +1,175 @@
+---
+// Your system's baseline (AD-13): chosen once on Review, changed only here.
+// Changing it destroys nothing — statuses describe the system and carry over;
+// parameter decisions are kept per baseline (AD-10), and earlier answers are
+// offered as proposals (story 20). Before switching, the preview shows what the
+// move adds, so the cost is visible first. Hidden until the script runs.
+import { BASELINES, baselineLabel } from '../utils/activeBaseline';
+import { itemPayloadJson } from '../utils/itemPayload';
+import { reviewUrl } from '../utils/url';
+
+const payload = await itemPayloadJson();
+---
+
+<section class="baseline-setting" data-baseline-setting data-pagefind-ignore hidden>
+  <h2>Your system's baseline</h2>
+  <p data-bs-unchosen hidden>Not chosen yet. <a href={reviewUrl()}>Choose it on Review</a> to start tracking.</p>
+  <div data-bs-chosen hidden>
+    <p class="baseline-setting__current">Currently <strong data-bs-current></strong>.</p>
+    <div class="baseline-setting__change">
+      <label for="bs-target">Change to</label>
+      <select id="bs-target" data-bs-target>
+        {BASELINES.map((b) => <option value={b}>{baselineLabel(b)}</option>)}
+      </select>
+    </div>
+    <p data-bs-preview></p>
+    <ul class="baseline-setting__notes">
+      <li>Your statuses, owners and evidence carry over — they describe your system, not a baseline.</li>
+      <li data-bs-proposals></li>
+    </ul>
+    <button type="button" class="baseline-setting__switch" data-bs-switch></button>
+  </div>
+  <p class="baseline-setting__status" role="status" aria-live="polite" data-bs-status hidden></p>
+</section>
+
+<script type="application/json" id="bs-items" set:html={payload} is:inline />
+
+<style is:global>
+  .baseline-setting {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    margin: 16px 0 8px;
+  }
+
+  .baseline-setting[hidden],
+  .baseline-setting [hidden] {
+    display: none;
+  }
+
+  .baseline-setting h2 {
+    font-size: 1.1em;
+    margin: 0 0 8px;
+  }
+
+  .baseline-setting__change {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+  }
+
+  .baseline-setting select {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    padding: 3px 6px;
+  }
+
+  .baseline-setting__notes {
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+    padding-left: 18px;
+  }
+
+  .baseline-setting__switch {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .baseline-setting__switch:hover {
+    background: var(--color-border-hairline);
+  }
+
+  .baseline-setting select:focus-visible,
+  .baseline-setting button:focus-visible,
+  .baseline-setting a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .baseline-setting__status {
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-overlay);
+  }
+</style>
+
+<script>
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../utils/activeBaseline';
+  import { getStatuses } from '../utils/statusStore';
+  import { getDecisions } from '../utils/odpStore';
+  import { baselineDelta } from '../utils/baselineDelta';
+  import { readItems } from '../utils/reviewItems';
+  import { reviewUrl } from '../utils/url';
+
+  const root = document.querySelector<HTMLElement>('[data-baseline-setting]');
+  const items = readItems('bs-items');
+
+  function plural(n: number, word: string): string {
+    return `${n} ${word}${n === 1 ? '' : 's'}`;
+  }
+
+  function render(): void {
+    if (!root || !items) return;
+    const chosen = hasChosenBaseline();
+    root.querySelector<HTMLElement>('[data-bs-unchosen]')!.hidden = chosen;
+    root.querySelector<HTMLElement>('[data-bs-chosen]')!.hidden = !chosen;
+    if (!chosen) return;
+
+    const current = getActiveBaseline();
+    root.querySelector<HTMLElement>('[data-bs-current]')!.textContent = baselineLabel(current);
+    const select = root.querySelector<HTMLSelectElement>('[data-bs-target]')!;
+    const target = select.value;
+    const button = root.querySelector<HTMLButtonElement>('[data-bs-switch]')!;
+    const preview = root.querySelector<HTMLElement>('[data-bs-preview]')!;
+    const proposalsNote = root.querySelector<HTMLElement>('[data-bs-proposals]')!;
+
+    if (target === current) {
+      preview.textContent = `${baselineLabel(current)} is your baseline now. Pick another to see what changing would mean.`;
+      proposalsNote.textContent = 'Parameter decisions are kept per baseline, so nothing is lost by switching.';
+      button.hidden = true;
+      return;
+    }
+
+    const d = baselineDelta(items, current, target, getStatuses());
+    preview.textContent =
+      `Moving from ${baselineLabel(current)} to ${baselineLabel(target)} adds ${d.added.length} control${d.added.length === 1 ? '' : 's'} and enhancement${d.added.length === 1 ? '' : 's'}` +
+      ` (${d.unstatused} with no status yet)` +
+      (d.dropped.length > 0 ? ` and drops ${d.dropped.length}.` : '.');
+    const decidedHere = Object.values(getDecisions(current)).filter((x) => x.status !== 'unreviewed-default').length;
+    proposalsNote.textContent =
+      `Parameter decisions are kept per baseline. ${decidedHere > 0 ? `Your ${plural(decidedHere, 'decision')} in ${baselineLabel(current)} will be offered as ${decidedHere === 1 ? 'a proposal' : 'proposals'} in ${baselineLabel(target)}, for you to confirm or change — never copied silently.` : 'Nothing is lost by switching.'}`;
+    button.hidden = false;
+    button.textContent = `Switch to ${baselineLabel(target)}`;
+  }
+
+  if (root && items) {
+    const select = root.querySelector<HTMLSelectElement>('[data-bs-target]')!;
+    if (hasChosenBaseline()) select.value = getActiveBaseline();
+    select.addEventListener('change', render);
+    root.querySelector<HTMLButtonElement>('[data-bs-switch]')!.addEventListener('click', () => {
+      const target = select.value;
+      if (!isBaseline(target)) return;
+      setActiveBaseline(target);
+      const status = root.querySelector<HTMLElement>('[data-bs-status]')!;
+      status.replaceChildren(document.createTextNode(`Your system's baseline is now ${baselineLabel(target)}. `));
+      const a = document.createElement('a');
+      a.href = reviewUrl();
+      a.textContent = 'Continue reviewing';
+      status.appendChild(a);
+      status.hidden = false;
+      render();
+    });
+    render();
+    root.hidden = false;
+  }
+</script>

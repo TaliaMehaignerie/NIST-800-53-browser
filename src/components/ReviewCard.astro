@@ -1,0 +1,382 @@
+---
+// The one place to review a control or enhancement: its parameters as a short
+// list (each opens the parameter editor — `odpSlotPopover.ts`, so all writes
+// still go through `odpEdit.ts`, AD-9), then its status (`StatusControl`).
+// The dotted values in the statement text stay as a reading aid; this card is
+// the obvious path. Scoped to your system's baseline (AD-13): before a baseline
+// is chosen it invites you to choose one; outside your baseline it says there
+// is nothing to review. One component for controls and enhancements.
+import StatusControl from './StatusControl.astro';
+
+interface Props {
+  slug: string;
+  label: string;
+  familyCode: string;
+  baselines: string[];
+  /** Heading level: 2 on a control page, 3 inside an enhancement. */
+  level?: 2 | 3;
+}
+
+const { slug, label, familyCode, baselines, level = 2 } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
+---
+
+<section
+  class={`review-card review-card--l${level}`}
+  data-review-card
+  data-item-slug={slug}
+  data-item-label={label}
+  data-item-family={familyCode}
+  data-item-baselines={baselines.join(' ')}
+  data-pagefind-ignore
+  hidden
+>
+  <div class="review-card__head">
+    <Heading class="review-card__title">Review {label}</Heading>
+    <span class="review-card__summary" data-review-summary></span>
+  </div>
+  <p class="review-card__cta" data-review-cta hidden></p>
+  <div data-review-body>
+    <p class="review-card__step">1. Set its parameters</p>
+    <ol class="review-card__params" data-review-params></ol>
+    <p class="review-card__none" data-review-noparams hidden>No parameters to set for {label}.</p>
+    <p class="review-card__step">2. Record its status</p>
+    <StatusControl slug={slug} />
+  </div>
+</section>
+
+<style is:global>
+  .review-card {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-primary);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-base);
+    padding: 12px 14px;
+    margin: 0 0 18px;
+  }
+
+  .review-card[hidden],
+  .review-card [hidden] {
+    display: none;
+  }
+
+  .review-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-bottom: 8px;
+  }
+
+  .review-card__title {
+    font-family: var(--font-body);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .review-card--l3 .review-card__title {
+    font-size: 14px;
+  }
+
+  .review-card__summary {
+    color: var(--color-ink-secondary);
+  }
+
+  .review-card__cta {
+    margin: 0;
+    color: var(--color-ink-secondary);
+  }
+
+  .review-card__step {
+    font-weight: 600;
+    color: var(--color-ink-secondary);
+    margin: 10px 0 6px;
+  }
+
+  .review-card__params {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .review-card__param {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--color-border-hairline);
+  }
+
+  .review-card__param-name {
+    color: var(--color-ink-primary);
+  }
+
+  .review-card__param-where {
+    color: var(--color-ink-secondary);
+    margin-left: 6px;
+  }
+
+  .review-card__param-state {
+    grid-column: 1;
+    color: var(--color-ink-secondary);
+  }
+
+  .review-card__param-state--set {
+    color: var(--color-ink-primary);
+  }
+
+  .review-card__param button {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 5px 14px;
+    cursor: pointer;
+  }
+
+  .review-card__param button.review-card__set--todo {
+    background: var(--color-accent);
+    color: var(--color-surface-base);
+    font-weight: 600;
+  }
+
+  .review-card__param button:focus-visible,
+  .review-card a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .review-card .status-control {
+    margin-bottom: 0;
+  }
+
+  .review-mode {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    padding: 8px 12px;
+    margin: 0 0 12px;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-sm);
+    background: var(--color-surface-raised);
+  }
+
+  .review-mode[hidden] {
+    display: none;
+  }
+
+  .review-mode__links {
+    display: flex;
+    gap: 14px;
+  }
+
+  .review-mode__next {
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { getStatuses } from '../utils/statusStore';
+  import { isCounted } from '../utils/complianceCount';
+  import { proposalsFor, proposalSourceText, proposalValueText } from '../utils/odpProposals';
+  import { closeSlotPopover, isSlotPopoverOpenFor, openSlotPopover } from '../utils/odpSlotPopover';
+  import { readSlotPayload } from '../utils/slotPayload';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+  import { reviewUrl } from '../utils/url';
+
+  const STATUS_TEXT: Record<string, string> = {
+    incomplete: 'not recorded',
+    'in-progress': 'in progress',
+    compliant: 'compliant',
+    'not-applicable': 'not applicable',
+  };
+
+  const payload = readSlotPayload() ?? { controls: {}, cluster: { lists: [], byParam: {} } };
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-review-card]'));
+
+  function valueText(value: string | string[]): string {
+    return Array.isArray(value) ? value.join('; ') : value;
+  }
+
+  // Where the parameter sits in the statement ("part c.1"), read from the page.
+  function whereText(slug: string, paramId: string): string {
+    const slot = document.querySelector<HTMLElement>(
+      `[data-odp-slot][data-control-slug="${CSS.escape(slug)}"][data-param-id="${CSS.escape(paramId)}"]`,
+    );
+    if (!slot) return '';
+    const parts: string[] = [];
+    let node: Element | null = slot.closest('.statement-node');
+    while (node) {
+      const label = node.querySelector(':scope > p > .statement-node__label')?.textContent?.trim();
+      if (label) parts.unshift(label.replace(/[.()]/g, ''));
+      node = node.parentElement?.closest('.statement-node') ?? null;
+    }
+    return parts.length > 0 ? `part ${parts.join('.')}` : '';
+  }
+
+  // What a parameter IS, in plain words. NIST's own guideline describes it
+  // ("the frequency at which the current access control policy is reviewed
+  // and updated is defined;") — it tells apart parameters that share a short
+  // label ("frequency", "personnel or roles"). Choice-type parameters show
+  // their choices. Verbatim NIST text either way (AD-5), only trimmed.
+  function describeParam(param: { label: string | null; select: { howMany: string | null; choice: string[] } | null; guidelines: string[] }, paramId: string): string {
+    const guideline = param.guidelines[0]?.replace(/\s+(is\/are|is|are) defined;?\s*$/i, '').trim();
+    if (guideline) return guideline[0].toUpperCase() + guideline.slice(1);
+    if (param.select) {
+      const choices = param.select.choice.join('; ');
+      const lead = param.select.howMany === 'one-or-more' ? 'Choose one or more' : 'Choose one';
+      return `${lead}: ${choices.length > 140 ? `${choices.slice(0, 137)}…` : choices}`;
+    }
+    return param.label ?? paramId;
+  }
+
+  function renderCard(card: HTMLElement): void {
+    const slug = card.dataset.itemSlug ?? '';
+    const label = card.dataset.itemLabel ?? slug;
+    const cta = card.querySelector<HTMLElement>('[data-review-cta]')!;
+    const body = card.querySelector<HTMLElement>('[data-review-body]')!;
+    const summary = card.querySelector<HTMLElement>('[data-review-summary]')!;
+
+    if (!hasChosenBaseline()) {
+      cta.replaceChildren(document.createTextNode(`Track ${label} for your system: `));
+      const a = document.createElement('a');
+      a.href = `${reviewUrl()}?return=${encodeURIComponent(window.location.pathname + window.location.hash)}`;
+      a.textContent = 'choose your baseline to start reviewing';
+      cta.append(a, document.createTextNode('.'));
+      cta.hidden = false;
+      body.hidden = true;
+      summary.textContent = '';
+      return;
+    }
+
+    const baseline = getActiveBaseline();
+    const inScope = isCounted(
+      { slug, familyCode: card.dataset.itemFamily ?? '', baselines: (card.dataset.itemBaselines ?? '').split(' ').filter(Boolean), withdrawn: false },
+      baseline,
+    );
+    if (!inScope) {
+      cta.textContent = `${label} is not part of your ${baselineLabel(baseline)} baseline, so there is nothing to review here.`;
+      cta.hidden = false;
+      body.hidden = true;
+      summary.textContent = '';
+      return;
+    }
+    cta.hidden = true;
+    body.hidden = false;
+
+    const control = payload.controls[slug];
+    const paramIds = control ? Object.keys(control.params) : [];
+    const decisions = getDecisions(baseline);
+    const proposals = proposalsFor(paramIds.map((id) => `${slug}:${id}`), baseline);
+    const list = card.querySelector<HTMLElement>('[data-review-params]')!;
+    card.querySelector<HTMLElement>('[data-review-noparams]')!.hidden = paramIds.length > 0;
+    list.hidden = paramIds.length === 0;
+    list.replaceChildren();
+
+    let set = 0;
+    for (const paramId of paramIds) {
+      const decision = decisions[`${slug}:${paramId}`];
+      const isSet = decision !== undefined && decision.status !== 'unreviewed-default';
+      if (isSet) set += 1;
+      const proposal = decision ? undefined : proposals.get(`${slug}:${paramId}`);
+
+      const li = document.createElement('li');
+      li.className = 'review-card__param';
+      const name = document.createElement('span');
+      name.className = 'review-card__param-name';
+      name.textContent = describeParam(control!.params[paramId], paramId);
+      const where = whereText(slug, paramId);
+      if (where) {
+        const w = document.createElement('span');
+        w.className = 'review-card__param-where';
+        w.textContent = `(${where})`;
+        name.appendChild(w);
+      }
+      const state = document.createElement('span');
+      state.className = `review-card__param-state${isSet ? ' review-card__param-state--set' : ''}`;
+      state.textContent = isSet
+        ? `${valueText(decision!.value)} — ${decision!.status}`
+        : proposal
+          ? `Not set · proposed from ${proposalSourceText(proposal)}: ${proposalValueText(proposal)}`
+          : 'Not set';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = isSet ? 'Change' : 'Set';
+      if (!isSet) button.className = 'review-card__set--todo';
+      button.setAttribute('aria-label', `${isSet ? 'Change' : 'Set'} ${name.textContent} for ${label}`);
+      button.setAttribute('aria-haspopup', 'dialog');
+      button.addEventListener('click', () => {
+        if (isSlotPopoverOpenFor(button)) {
+          closeSlotPopover();
+          return;
+        }
+        openSlotPopover({
+          slot: button,
+          control: control!,
+          controlSlug: slug,
+          paramId,
+          baseline,
+          cluster: payload.cluster,
+          onSaved: () => {
+            window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
+            renderAll();
+            // Keep keyboard focus on this parameter's (rebuilt) button.
+            card.querySelectorAll<HTMLButtonElement>('.review-card__param button')[paramIds.indexOf(paramId)]?.focus();
+          },
+        });
+      });
+
+      li.append(name, button, state);
+      list.appendChild(li);
+    }
+
+    const status = getStatuses()[slug]?.status ?? 'incomplete';
+    summary.textContent =
+      (paramIds.length > 0 ? `${set} of ${paramIds.length} parameters set · ` : '') + `status ${STATUS_TEXT[status]}`;
+  }
+
+  // Review mode (`?review=1`, arriving from the Review queue): a bar that says
+  // where you are and goes on to the next item.
+  function renderReviewMode(): void {
+    const bar = document.querySelector<HTMLElement>('[data-review-mode]');
+    if (!bar) return;
+    const reviewing = new URLSearchParams(window.location.search).get('review') === '1' && hasChosenBaseline();
+    bar.hidden = !reviewing;
+    if (!reviewing) return;
+    const hash = window.location.hash.slice(1);
+    const current = hash && document.querySelector(`[data-review-card][data-item-slug="${CSS.escape(hash)}"]`) ? hash : bar.dataset.pageSlug ?? '';
+    bar.querySelector<HTMLElement>('[data-review-mode-text]')!.textContent = `Reviewing your ${baselineLabel(getActiveBaseline())} baseline`;
+    bar.querySelector<HTMLAnchorElement>('[data-review-mode-next]')!.href = `${reviewUrl()}?after=${encodeURIComponent(current)}`;
+  }
+
+  function renderAll(): void {
+    cards.forEach(renderCard);
+    renderReviewMode();
+  }
+
+  if (cards.length > 0) {
+    renderAll();
+    cards.forEach((c) => (c.hidden = false));
+    window.addEventListener('odpdecisionschanged', renderAll);
+    window.addEventListener(WORKBENCH_DATA_EVENT, renderAll);
+    window.addEventListener('hashchange', renderReviewMode);
+    onOdpStorageChange(renderAll, { baseline: true, decisions: true, status: true });
+  }
+</script>

@@ -9,7 +9,8 @@ import WithdrawnMarker from '../../components/WithdrawnMarker.astro';
 import StatementTree from '../../components/StatementTree.astro';
 import EnhancementItem from '../../components/EnhancementItem.astro';
 import OdpSlotOverlay from '../../components/OdpSlotOverlay.astro';
-import StatusControl from '../../components/StatusControl.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import { reviewUrl } from '../../utils/url';
 import { familyUrl } from '../../utils/url';
 import { clusterPayloadFor } from '../../utils/odpClusterIndex';
 
@@ -70,6 +71,13 @@ const slotPayload = { controls: slotControls, cluster };
 ---
 
 <BaseLayout title={`${label} ${title} — NIST 800-53 Browser`} showBaselineFilter>
+  <nav class="review-mode" aria-label="Review" data-review-mode data-page-slug={control.data.slug} hidden>
+    <span data-review-mode-text>Reviewing</span>
+    <span class="review-mode__links">
+      <a href={reviewUrl()}>Back to Review</a>
+      <a class="review-mode__next" data-review-mode-next href={reviewUrl()}>Next item →</a>
+    </span>
+  </nav>
   {family && (
     <a class="back-link" href={familyUrl(family.data.slug)}>← {family.data.code} — {family.data.name}</a>
   )}
@@ -107,9 +115,11 @@ const slotPayload = { controls: slotControls, cluster };
       )}
     </div>
 
-    {!withdrawn && <StatusControl slug={control.data.slug} />}
-
-    {Object.keys(slotControls).length > 0 && <p class="odp-summary" data-odp-summary hidden />}
+    {
+      !withdrawn && (
+        <ReviewCard slug={control.data.slug} label={label} familyCode={familyCode} baselines={baselines} />
+      )
+    }
 
     {statement.length > 0 && (
       <div class="control-detail-card__statement" data-odp-baselines={baselines.join(' ')}>
@@ -141,6 +151,7 @@ const slotPayload = { controls: slotControls, cluster };
                 statement={e.data.statement}
                 guidance={e.data.guidance}
                 params={e.data.params}
+                familyCode={e.data.familyCode}
               />
             ))
           }

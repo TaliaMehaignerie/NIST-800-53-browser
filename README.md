@@ -17,7 +17,7 @@ A fast, phone-readable way to read [NIST SP 800-53 Rev 5](https://csrc.nist.gov/
 
 Everything below is optional, runs entirely in the browser, and keeps its data in this browser's local storage — there is no backend and nothing is uploaded.
 
-- **Decide the parameters** — the 643 organization-defined parameters in the Moderate baseline (767 in High) appear inline in each Control's text. Click one to confirm NIST's wording or override it with a rationale, or work through them in a workspace with batch entry for the shared dash-one policy controls.
+- **Review, control by control** — tell it once which baseline your system is working toward, then the Review page walks you through what's left. Each control has a review card: set its organization-defined parameters (643 in Moderate, 767 in High) — confirming NIST's wording or entering your own value, with NIST's discussion one click away — then record its status. A parameter table with batch entry is there for setting many at once.
 - **Proposals, never copies** — a parameter you already decided in another baseline is proposed with its source named; nothing is saved until you confirm it, so moving from Moderate to High still costs an act of review.
 - **Track status and evidence** — mark each Control and Enhancement incomplete, in progress, compliant or not applicable, with an owner and evidence references. "Inherited from a provider" is a first-class reason, and a Control cannot be marked compliant while its own parameters are unreviewed.
 - **See where you stand** — a dashboard shows the completion percentage with its raw fraction beside it, broken down by family, plus what's blocking you and what moving between baselines adds. The home page promotes it once you have data.

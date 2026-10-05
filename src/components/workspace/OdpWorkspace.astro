@@ -15,16 +15,20 @@ interface Props {
   baseline: 'low' | 'moderate' | 'high' | 'privacy';
 }
 
+import { reviewUrl } from '../../utils/url';
+
 const { baseline } = Astro.props;
 const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 ---
 
 <section class="odp-workspace" data-odp-workspace data-baseline={baseline}>
-  <h1>{baselineLabel} ODP Workspace</h1>
+  <h1>{baselineLabel} parameters</h1>
   <p class="odp-workspace__intro">
-    Set, confirm, or override each organization-defined parameter for the {baselineLabel} baseline. Decisions are
-    saved to this browser only.
+    Every organization-defined parameter in the {baselineLabel} baseline, in one table — useful for setting many at
+    once. For a guided pass, control by control, use <a href={reviewUrl()}>Review</a>. Decisions are saved to this
+    browser only.
   </p>
+  <p class="odp-workspace__baseline-note" data-odp-baseline-note hidden></p>
 
   <div class="odp-workspace__export">
     <button type="button" class="odp-dashboard__action" data-odp-export disabled>Export OSCAL Profile</button>
@@ -128,6 +132,14 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
 </section>
 
 <style>
+  .odp-workspace__baseline-note {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-raised);
+  }
+
   .odp-workspace {
     padding: 24px 0;
   }
@@ -589,7 +601,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     FAN_OUT_FAILED_MESSAGE,
     SAVE_FAILED_MESSAGE,
   } from '../../utils/odpEdit';
-  import { controlUrl, odpDatasetUrl, odpMetaUrl } from '../../utils/url';
+  import { controlUrl, odpDatasetUrl, odpMetaUrl, workspaceUrl } from '../../utils/url';
   import {
     groupDashOneClusters,
     computeClusterMatch,
@@ -598,7 +610,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
   import { setUrlState } from '../../utils/urlState';
-  import { baselineLabel, isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline } from '../../utils/activeBaseline';
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
   import { onOdpStorageChange } from '../../utils/storageSync';
   import { proposalsFor, proposalSourceText, proposalValueText, type Proposal } from '../../utils/odpProposals';
@@ -1454,8 +1466,19 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     if (!workspace) return;
     const baselineValue = workspace.dataset.baseline;
     if (!baselineValue) return;
-    // The route's path baseline is authoritative (AD-13): opening this page is unambiguous intent.
-    if (isBaseline(baselineValue)) setActiveBaseline(baselineValue);
+    // The route's baseline is authoritative for this page, but opening it never
+    // changes your system's baseline (that is set once, on Review, and changed
+    // only on Your data). Say so plainly when they differ.
+    const baselineNote = workspace.querySelector<HTMLElement>('[data-odp-baseline-note]');
+    if (baselineNote && hasChosenBaseline() && getActiveBaseline() !== baselineValue) {
+      const chosen = getActiveBaseline();
+      baselineNote.textContent = `This is the ${baselineLabel(baselineValue)} table. Your system's baseline is ${baselineLabel(chosen)}: `;
+      const link = document.createElement('a');
+      link.href = workspaceUrl(chosen);
+      link.textContent = `go to the ${baselineLabel(chosen)} parameters`;
+      baselineNote.append(link, document.createTextNode('.'));
+      baselineNote.hidden = false;
+    }
 
     const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
     const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');

@@ -60,6 +60,7 @@ const { value = '' } = Astro.props;
   // already ruled those out, see Stack table).
   import { setUrlState } from '../utils/urlState';
   import { controlUrl, familyUrl } from '../utils/url';
+  import { viewBaseline, viewParam } from '../utils/viewFilter';
 
   const isSearchPage =
     window.location.pathname.endsWith('/search') || window.location.pathname.endsWith('/search/');
@@ -95,7 +96,7 @@ const { value = '' } = Astro.props;
         .filter((v): v is string => Boolean(v));
 
       function currentBaselineFilter(): string | null {
-        const value = new URLSearchParams(window.location.search).get('baseline');
+        const value = viewBaseline();
         return value && VALID_BASELINES.includes(value) ? value : null;
       }
 
@@ -179,7 +180,8 @@ const { value = '' } = Astro.props;
             // query/filter change, so a one-time updateLinks() pass over the
             // DOM can never keep up -- each row must carry it from creation.)
             const href = new URL(row.href, window.location.origin);
-            if (baseline) href.searchParams.set('baseline', baseline);
+            const param = viewParam(baseline);
+            if (param) href.searchParams.set('baseline', param);
             a.href = href.pathname + href.search;
             a.className = 'search-result';
             const idSpan = document.createElement('span');

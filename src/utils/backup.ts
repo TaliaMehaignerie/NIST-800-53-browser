@@ -14,7 +14,7 @@
  * to what it was — a file from another schema version, or one that cannot be
  * fully applied, never changes your data.
  */
-import { BASELINES, baselineLabel, type Baseline } from './activeBaseline';
+import { BASELINES, activeBaselineStorageChars, baselineLabel, type Baseline } from './activeBaseline';
 import {
   ODP_SCHEMA_VERSION,
   isOdpBlob,
@@ -287,6 +287,8 @@ export function storageUsage(): StorageUsage {
   const status = readStatusRaw();
   if (status !== null) parts.push({ label: 'Control status and evidence', chars: STATUS_STORAGE_KEY.length + status.length });
 
+  const setting = activeBaselineStorageChars();
+  if (setting > 0) parts.push({ label: 'Settings', chars: setting });
   const ours = parts.reduce((sum, p) => sum + p.chars, 0);
   const usedChars = Math.max(originUsageChars(), ours);
   if (usedChars > ours) parts.push({ label: 'Other data on this site\'s origin (other projects)', chars: usedChars - ours });

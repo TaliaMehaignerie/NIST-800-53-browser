@@ -1,0 +1,427 @@
+---
+// The Review page: the one entry point to the workbench.
+//  - First visit: asks once which baseline the system is working toward
+//    (AD-13), with plain-language descriptions, then gets out of the way.
+//  - After that: a guided queue — "Review next" walks control by control
+//    through what is left, in catalog order, plus a by-family list.
+// `?after=<slug>` jumps straight to the next item after that one (the "Next
+// item" link on a control page in review mode). Item data is embedded at build
+// time (no fetch); progress is read from the stores. Hidden until the script
+// runs; with JS off the page says so.
+import { getCollection } from 'astro:content';
+import { BASELINES, baselineLabel } from '../utils/activeBaseline';
+import { getItemTuples, itemPayloadJson } from '../utils/itemPayload';
+import { getParamCounts } from '../utils/paramCounts';
+import { dashboardUrl, dataUrl, workspaceUrl } from '../utils/url';
+
+const tuples = await getItemTuples();
+const paramCounts = await getParamCounts();
+const isPW = (t: (typeof tuples)[number]) => t[3] === 'PM' && t[4] === '';
+const itemCount = (b: string) => tuples.filter((t) => t[4].split(' ').includes(b) || isPW(t)).length;
+const payload = await itemPayloadJson();
+
+// FIPS 199 impact levels, which is what a system's categorization — and so its baseline — comes from.
+const OPTIONS: Record<string, string> = {
+  low: 'A breach would have a limited adverse effect on operations, assets or people.',
+  moderate: 'A breach would have a serious adverse effect. The most common choice for business and government systems.',
+  high: 'A breach would have a severe or catastrophic adverse effect.',
+  privacy: 'The privacy controls, for systems that process personally identifiable information.',
+};
+const familyNames = Object.fromEntries((await getCollection('families')).map((f) => [f.data.code, f.data.name]));
+---
+
+<section class="review" data-review data-pagefind-ignore hidden>
+  <form class="review__setup" data-review-setup hidden>
+    <h2>Which baseline is your system working toward?</h2>
+    <p class="review__lead">
+      Your system's security categorization decides this. You'll only be asked once — it shapes which controls you
+      review and which parameter values you record. You can change it later on <a href={dataUrl()}>Your data</a>.
+    </p>
+    <fieldset class="review__options">
+      <legend class="visually-hidden">Baseline</legend>
+      {
+        BASELINES.map((b) => (
+          <label class="review__option">
+            <input type="radio" name="review-baseline" value={b} checked={b === 'moderate'} />
+            <span class="review__option-body">
+              <span class="review__option-name">
+                {baselineLabel(b)} <span class="review__option-count">{itemCount(b)} controls and enhancements · {paramCounts[b as keyof typeof paramCounts]} parameters</span>
+              </span>
+              <span class="review__option-text">{OPTIONS[b]}</span>
+            </span>
+          </label>
+        ))
+      }
+    </fieldset>
+    <p class="review__hint">Not sure? Moderate is the most common starting point.</p>
+    <button type="submit" class="review__primary">Start reviewing</button>
+  </form>
+
+  <div class="review__queue" data-review-queue hidden>
+    <p class="review__lead">
+      <span data-review-baseline></span>{' · '}<a href={dataUrl()}>change</a>
+    </p>
+
+    <p class="review__explain">
+      Reviewing a control means two things: set each of its parameters — confirm NIST's wording or enter your
+      organization's value — and record its status. Controls are taken in catalog order.
+    </p>
+
+    <div class="review__progress">
+      <p class="review__progress-text" data-review-progress></p>
+      <div class="review__bar" aria-hidden="true"><div class="review__bar-fill" data-review-bar></div></div>
+    </div>
+
+    <div class="review__next" data-review-next></div>
+
+    <h2 class="review__h2">What's left, by family</h2>
+    <div data-review-families></div>
+
+    <h2 class="review__h2">Other ways in</h2>
+    <ul class="review__links">
+      <li><a data-review-workspace href={workspaceUrl('moderate')}>Set many parameters at once</a> — a table of every parameter, with batch entry for the shared policy controls.</li>
+      <li><a href={dashboardUrl()}>See your progress</a> — completion by family, and what's blocking you.</li>
+    </ul>
+  </div>
+</section>
+<noscript><p>The review workbench needs JavaScript: your work is saved in this browser.</p></noscript>
+
+<script type="application/json" id="review-items" set:html={payload} is:inline />
+<script type="application/json" id="review-families" set:html={JSON.stringify(familyNames).replace(/</g, '\\u003c')} is:inline />
+
+<style is:global>
+  .review {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-primary);
+    margin: 8px 0 32px;
+  }
+
+  .review[hidden],
+  .review [hidden] {
+    display: none;
+  }
+
+  .review h2 {
+    font-size: 1.2em;
+    margin: 0 0 8px;
+  }
+
+  .review__h2 {
+    margin-top: 28px !important;
+  }
+
+  .review__lead,
+  .review__hint,
+  .review__explain {
+    color: var(--color-ink-secondary);
+    margin: 0 0 14px;
+  }
+
+  .review__options {
+    border: none;
+    padding: 0;
+    margin: 0 0 8px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .review__option {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-raised);
+    cursor: pointer;
+  }
+
+  .review__option:has(input:checked) {
+    border-color: var(--color-accent);
+  }
+
+  .review__option input {
+    margin-top: 4px;
+  }
+
+  .review__option-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .review__option-name {
+    font-weight: 600;
+  }
+
+  .review__option-count {
+    font-weight: 400;
+    color: var(--color-ink-secondary);
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  .review__option-text {
+    color: var(--color-ink-secondary);
+  }
+
+  .review__primary {
+    display: inline-block;
+    font: inherit;
+    font-weight: 600;
+    color: var(--color-surface-base);
+    background: var(--color-accent);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 10px 18px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .review__primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .review button:focus-visible,
+  .review a:focus-visible,
+  .review input:focus-visible,
+  .review summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .review__progress {
+    margin: 0 0 18px;
+  }
+
+  .review__progress-text {
+    margin: 0 0 6px;
+  }
+
+  .review__bar {
+    height: 8px;
+    background: var(--color-surface-overlay);
+    border-radius: 0 4px 4px 0;
+    overflow: hidden;
+  }
+
+  .review__bar-fill {
+    height: 100%;
+    background: var(--color-status-compliant);
+  }
+
+  .review__next {
+    padding: 14px 16px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-raised);
+  }
+
+  .review__next-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .review__next-detail {
+    margin: 0 0 12px;
+    color: var(--color-ink-secondary);
+  }
+
+  .review__family summary {
+    cursor: pointer;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border-hairline);
+  }
+
+  .review__family-count {
+    color: var(--color-ink-secondary);
+    margin-left: 6px;
+  }
+
+  .review__family ul {
+    list-style: none;
+    margin: 6px 0 10px;
+    padding: 0 0 0 12px;
+  }
+
+  .review__family li {
+    padding: 3px 0;
+  }
+
+  .review__item-label {
+    font-family: var(--font-mono);
+    color: var(--color-ink-secondary);
+    margin-right: 6px;
+  }
+
+  .review__item-detail {
+    color: var(--color-ink-secondary);
+    margin-left: 6px;
+    font-size: 12px;
+  }
+
+  .review__links {
+    padding-left: 18px;
+    color: var(--color-ink-secondary);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../utils/activeBaseline';
+  import { getDecisions } from '../utils/odpStore';
+  import { getStatuses } from '../utils/statusStore';
+  import { itemUrl, nextToReview, readItems, reviewProgress, type ItemProgress } from '../utils/reviewItems';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+  import { workspaceUrl } from '../utils/url';
+
+  const root = document.querySelector<HTMLElement>('[data-review]');
+  const items = readItems('review-items');
+  let familyNames: Record<string, string> = {};
+  try {
+    familyNames = JSON.parse(document.getElementById('review-families')?.textContent ?? '{}');
+  } catch {
+    familyNames = {};
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  // Only same-site paths are honoured as a return target.
+  function returnTarget(): string | null {
+    const r = params.get('return');
+    return r && r.startsWith('/') && !r.startsWith('//') ? r : null;
+  }
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function detail(p: ItemProgress): string {
+    const parts: string[] = [];
+    if (p.unreviewedParams > 0) parts.push(`${p.unreviewedParams} parameter${p.unreviewedParams === 1 ? '' : 's'} to set`);
+    if (!p.hasStatus) parts.push('no status yet');
+    return parts.join(' · ');
+  }
+
+  function renderQueue(): void {
+    if (!root || !items) return;
+    const baseline = getActiveBaseline();
+    const progress = reviewProgress(items, baseline, getDecisions(baseline), getStatuses());
+    const done = progress.filter((p) => !p.needsReview).length;
+
+    root.querySelector<HTMLElement>('[data-review-baseline]')!.textContent = `Your system's baseline: ${baselineLabel(baseline)}`;
+    root.querySelector<HTMLAnchorElement>('[data-review-workspace]')!.href = workspaceUrl(baseline);
+    root.querySelector<HTMLElement>('[data-review-progress]')!.textContent =
+      `${done} of ${progress.length} controls and enhancements reviewed`;
+    root.querySelector<HTMLElement>('[data-review-bar]')!.style.width = `${progress.length ? (done / progress.length) * 100 : 0}%`;
+
+    const nextHost = root.querySelector<HTMLElement>('[data-review-next]')!;
+    nextHost.replaceChildren();
+    const next = nextToReview(progress);
+    if (next) {
+      nextHost.append(
+        el('p', 'review__next-title', `Next: ${next.item.label} ${next.item.title}`),
+        el('p', 'review__next-detail', detail(next)),
+      );
+      const go = el('a', 'review__primary', done === 0 ? 'Start reviewing' : 'Review next');
+      go.href = itemUrl(next.item, true);
+      nextHost.appendChild(go);
+    } else {
+      nextHost.append(
+        el('p', 'review__next-title', 'Everything in your baseline is reviewed.'),
+        el('p', 'review__next-detail', 'Every parameter is set and every control has a status. Your progress page shows what is compliant.'),
+      );
+    }
+
+    const famHost = root.querySelector<HTMLElement>('[data-review-families]')!;
+    famHost.replaceChildren();
+    const byFamily = new Map<string, ItemProgress[]>();
+    for (const p of progress) {
+      const list = byFamily.get(p.item.familyCode) ?? [];
+      list.push(p);
+      byFamily.set(p.item.familyCode, list);
+    }
+    for (const [code, list] of byFamily) {
+      const pending = list.filter((p) => p.needsReview);
+      const fam = el('details', 'review__family');
+      const summary = el('summary');
+      summary.append(
+        document.createTextNode(`${code} ${familyNames[code] ?? ''}`),
+        el('span', 'review__family-count', pending.length === 0 ? '— done' : `— ${pending.length} of ${list.length} to review`),
+      );
+      fam.appendChild(summary);
+      if (pending.length > 0) {
+        const ul = el('ul');
+        for (const p of pending) {
+          const li = el('li');
+          const a = el('a');
+          a.href = itemUrl(p.item, true);
+          a.append(el('span', 'review__item-label', p.item.label), document.createTextNode(p.item.title));
+          li.append(a, el('span', 'review__item-detail', detail(p)));
+          ul.appendChild(li);
+        }
+        fam.appendChild(ul);
+      }
+      famHost.appendChild(fam);
+    }
+  }
+
+  function render(): void {
+    if (!root) return;
+    const chosen = hasChosenBaseline();
+    root.querySelector<HTMLElement>('[data-review-setup]')!.hidden = chosen;
+    root.querySelector<HTMLElement>('[data-review-queue]')!.hidden = !chosen;
+    if (chosen) renderQueue();
+  }
+
+  if (root && items) {
+    // "Next item" from a control page: go straight on to the next one.
+    const after = params.get('after');
+    if (after && hasChosenBaseline()) {
+      const baseline = getActiveBaseline();
+      const next = nextToReview(reviewProgress(items, baseline, getDecisions(baseline), getStatuses()), after);
+      if (next) {
+        window.location.replace(itemUrl(next.item, true));
+      }
+    }
+
+    root.querySelector<HTMLFormElement>('[data-review-setup]')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const picked = root.querySelector<HTMLInputElement>('input[name="review-baseline"]:checked')?.value;
+      if (!isBaseline(picked)) return;
+      setActiveBaseline(picked);
+      const target = returnTarget();
+      if (target) {
+        window.location.assign(target);
+        return;
+      }
+      render();
+      root.querySelector<HTMLElement>('[data-review-next] a')?.focus();
+    });
+
+    window.addEventListener(WORKBENCH_DATA_EVENT, render);
+    window.addEventListener('odpdecisionschanged', render);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') render();
+    });
+    window.addEventListener('pageshow', (e) => {
+      if ((e as PageTransitionEvent).persisted) render();
+    });
+    onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
+    render();
+    root.hidden = false;
+  }
+</script>

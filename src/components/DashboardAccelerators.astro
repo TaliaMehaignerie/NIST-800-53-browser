@@ -1,27 +1,13 @@
 ---
-// Story 19: two dashboard sections, each independently droppable (delete its
-// markup block and its render function — they share only the payload):
-//   1. "What's blocking me": story 15's gate, inverted.
-//   2. "Moving between baselines": the delta, exactly answerable from data
-//      already embedded here.
-// Both are scoped to the dashboard's baseline (the one filter above the
-// charts) and recompute from the stores on every change. Hidden until the
-// script runs; `data-pagefind-ignore` keeps it out of search.
-import { getCollection } from 'astro:content';
+// "What's blocking me" on the Progress page: story 15's gate, inverted —
+// items in progress that are ready to mark compliant, items held back by
+// unreviewed parameters, and items already compliant with parameters still
+// unreviewed. Scoped to your system's baseline (AD-13) and recomputed from the
+// stores on every change. (The baseline delta that used to sit here now lives
+// on Your data, beside the baseline setting.) Hidden until the script runs.
+import { itemPayloadJson } from '../utils/itemPayload';
 
-const all = (await getCollection('controls')).filter((e) => !e.data.withdrawn);
-// [slug, label, title, familyCode, space-joined baselines, parentSlug ('' for a control), space-joined paramIds]
-const items = all.map((e) => [
-  e.data.slug,
-  e.data.label,
-  e.data.title,
-  e.data.familyCode,
-  e.data.baselines.join(' '),
-  e.data.parentSlug ?? '',
-  e.data.params.map((p: { id: string }) => p.id).join(' '),
-]);
-// `<` escaped so embedded text can never close the script element.
-const payload = JSON.stringify(items).replace(/</g, '\\u003c');
+const payload = await itemPayloadJson();
 ---
 
 <div class="accel" data-accel data-pagefind-ignore hidden>
@@ -31,18 +17,6 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
     <div data-blocking-groups></div>
   </section>
 
-  <section aria-labelledby="accel-delta">
-    <h2 id="accel-delta" class="accel__title">Moving between baselines</h2>
-    <div class="accel__controls">
-      <label for="accel-from">From</label>
-      <select id="accel-from" data-delta-from></select>
-      <label for="accel-to">to</label>
-      <select id="accel-to" data-delta-to></select>
-    </div>
-    <p class="accel__lead" data-delta-lead></p>
-    <ul class="accel__list" data-delta-breakdown></ul>
-    <div data-delta-families></div>
-  </section>
 </div>
 
 <script type="application/json" id="accel-data" set:html={payload} is:inline />
@@ -163,7 +137,7 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
 </style>
 
 <script>
-  import { ACTIVE_BASELINE_EVENT, BASELINES, baselineLabel } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, hasChosenBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { getStatuses } from '../utils/statusStore';
   import { isCounted, type ComplianceItem } from '../utils/complianceCount';
@@ -290,91 +264,13 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
         : `In the ${name} baseline, the most actionable items first.`;
   }
 
-  // ---- 2. Moving between baselines ---------------------------------------
-
-  function renderDelta(): void {
-    const fromSel = root!.querySelector<HTMLSelectElement>('[data-delta-from]')!;
-    const toSel = root!.querySelector<HTMLSelectElement>('[data-delta-to]')!;
-    const lead = root!.querySelector<HTMLElement>('[data-delta-lead]')!;
-    const breakdown = root!.querySelector<HTMLElement>('[data-delta-breakdown]')!;
-    const families = root!.querySelector<HTMLElement>('[data-delta-families]')!;
-    breakdown.replaceChildren();
-    families.replaceChildren();
-
-    const from = fromSel.value;
-    const to = toSel.value;
-    if (from === to) {
-      lead.textContent = 'Choose two different baselines to compare.';
-      return;
-    }
-
-    // One read of the store per render, not one per item.
-    const statuses = getStatuses();
-    const hasRecord = (slug: string) => Object.prototype.hasOwnProperty.call(statuses, slug);
-    const statusOf = (slug: string): string => (hasRecord(slug) ? statuses[slug].status : 'none');
-
-    const added = items.filter((i) => isCounted(i, to) && !isCounted(i, from));
-    const dropped = items.filter((i) => isCounted(i, from) && !isCounted(i, to));
-    const unstatused = added.filter((i) => statusOf(i.slug) === 'none');
-
-    lead.textContent =
-      `Moving from ${baselineLabel(from)} to ${baselineLabel(to)} adds ${added.length} item${added.length === 1 ? '' : 's'}; ` +
-      `${unstatused.length} of them ha${unstatused.length === 1 ? 's' : 've'} no status yet.` +
-      (dropped.length > 0 ? ` It also drops ${dropped.length} item${dropped.length === 1 ? '' : 's'}.` : '');
-
-    // Same definition as the dashboard above (AD-15): an item with no record
-    // IS incomplete, so the two are one bucket here, with the never-statused
-    // part called out rather than counted separately.
-    const tally = new Map<string, number>();
-    for (const i of added) tally.set(statusOf(i.slug), (tally.get(statusOf(i.slug)) ?? 0) + 1);
-    const n = (key: string) => tally.get(key) ?? 0;
-    const incomplete = n('incomplete') + n('none');
-    const lines: [number, string][] = [
-      [n('compliant'), 'Compliant'],
-      [n('in-progress'), 'In progress'],
-      [incomplete, `Incomplete (${n('none')} with no status set yet)`],
-      [n('not-applicable'), 'Not applicable'],
-    ];
-    for (const [count, label] of lines) if (count > 0) breakdown.appendChild(el('li', undefined, `${label}: ${count}`));
-
-    if (added.length === 0) return;
-    const byFamily = new Map<string, { added: number; none: number }>();
-    for (const i of added) {
-      const row = byFamily.get(i.familyCode) ?? { added: 0, none: 0 };
-      row.added += 1;
-      if (statusOf(i.slug) === 'none') row.none += 1;
-      byFamily.set(i.familyCode, row);
-    }
-    const table = el('table');
-    const head = el('tr');
-    head.append(el('th', undefined, 'Family'), el('th', undefined, 'Items added'), el('th', undefined, 'No status yet'));
-    table.appendChild(el('thead')).appendChild(head);
-    const body = el('tbody');
-    for (const [code, row] of Array.from(byFamily.entries()).sort(([a], [b]) => a.localeCompare(b))) {
-      const tr = el('tr');
-      tr.append(el('td', undefined, code), el('td', undefined, String(row.added)), el('td', undefined, String(row.none)));
-      body.appendChild(tr);
-    }
-    table.appendChild(body);
-    families.appendChild(table);
-  }
-
-  // Default comparison: the dashboard's baseline and the next stricter one.
-  const NEXT: Record<string, string> = { low: 'moderate', moderate: 'high' };
-  let deltaTouched = false;
-
-  function syncDeltaDefaults(baseline: string): void {
-    if (deltaTouched) return;
-    root!.querySelector<HTMLSelectElement>('[data-delta-from]')!.value = baseline;
-    root!.querySelector<HTMLSelectElement>('[data-delta-to]')!.value = NEXT[baseline] ?? baseline;
-  }
-
   function render(): void {
     if (!root) return;
-    const baseline = dashboardBaseline();
-    syncDeltaDefaults(baseline);
-    renderBlocking(baseline);
-    renderDelta();
+    // Only meaningful once your system's baseline is chosen.
+    const chosen = hasChosenBaseline();
+    root.hidden = !chosen;
+    if (!chosen) return;
+    renderBlocking(dashboardBaseline());
   }
 
   if (root && dataEl) {
@@ -391,18 +287,6 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
         paramIds: paramIds ? paramIds.split(' ') : [],
       }));
 
-      for (const sel of [root.querySelector<HTMLSelectElement>('[data-delta-from]')!, root.querySelector<HTMLSelectElement>('[data-delta-to]')!]) {
-        for (const b of BASELINES) {
-          const option = el('option', undefined, baselineLabel(b));
-          option.value = b;
-          sel.appendChild(option);
-        }
-        sel.addEventListener('change', () => {
-          deltaTouched = true;
-          renderDelta();
-        });
-      }
-
       window.addEventListener(DASHBOARD_BASELINE_EVENT, render);
       window.addEventListener(ACTIVE_BASELINE_EVENT, render);
       window.addEventListener('odpdecisionschanged', render);
@@ -416,7 +300,6 @@ const payload = JSON.stringify(items).replace(/</g, '\\u003c');
       onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
 
       render();
-      root.hidden = false;
     } catch (err) {
       console.error('DashboardAccelerators: could not parse embedded data', err);
     }

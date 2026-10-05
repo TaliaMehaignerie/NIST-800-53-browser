@@ -171,27 +171,8 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     outline-offset: 2px;
   }
 
-  .odp-summary {
-    font-family: var(--font-meta);
-    font-size: 13px;
-    color: var(--color-ink-secondary);
-    margin: 0 0 16px;
-  }
 
-  .odp-summary button {
-    font: inherit;
-    color: var(--color-accent);
-    background: none;
-    border: none;
-    padding: 0 0 0 8px;
-    cursor: pointer;
-    text-decoration: underline;
-  }
 
-  .odp-summary button:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
 
   .odp-slot-note {
     font-family: var(--font-meta);
@@ -202,10 +183,9 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
 </style>
 
 <script>
-  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
   import { getDecisions } from '../utils/odpStore';
   import { onOdpStorageChange } from '../utils/storageSync';
-  import { readinessFor } from '../utils/odpReadiness';
   import { proposalsFor } from '../utils/odpProposals';
   import { readSlotPayload } from '../utils/slotPayload';
   import { closeSlotPopover, isSlotPopoverOpenFor, openSlotPopover, type SlotControl, type SlotPayload } from '../utils/odpSlotPopover';
@@ -262,46 +242,6 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     slot.removeAttribute('title');
   }
 
-  // Per-control summary: this control plus its enhancements, counted by the
-  // shared `odpCounts` tally. Jump targets the first unreviewed slot in
-  // document order, expanding its enhancement if that is where it lives.
-  function renderSummary(baseline: string, name: string, decisions: ReturnType<typeof getDecisions>): void {
-    const summary = document.querySelector<HTMLElement>('[data-odp-summary]');
-    if (!summary) return;
-    const items = Object.entries(controlData).map(([slug, c]) => ({
-      slug,
-      baselines: c.baselines,
-      paramIds: Object.keys(c.params),
-    }));
-    const counts = readinessFor(items, baseline, decisions);
-    summary.textContent = '';
-    summary.hidden = counts.total === 0;
-    if (counts.total === 0) return;
-
-    summary.append(
-      document.createTextNode(
-        `${counts.total} parameter${counts.total === 1 ? '' : 's'} in ${name} — ` +
-          `${counts.confirmed} confirmed, ${counts.overridden} overridden, ${counts.unreviewed} unreviewed`,
-      ),
-    );
-
-    const target = Array.from(document.querySelectorAll<HTMLElement>('[data-odp-slot]')).find(
-      (slot) => slot.dataset.status === 'unreviewed-default',
-    );
-    if (target) {
-      const jump = document.createElement('button');
-      jump.type = 'button';
-      jump.textContent = 'Jump to first unreviewed';
-      jump.addEventListener('click', () => {
-        const header = target.closest('.enhancement-item')?.querySelector<HTMLElement>('.enhancement-item__header');
-        if (header && header.getAttribute('aria-expanded') === 'false') header.click();
-        target.scrollIntoView({ block: 'center' });
-        target.focus();
-      });
-      summary.appendChild(jump);
-    }
-  }
-
   function render(): void {
     const baseline = getActiveBaseline();
     const name = baselineLabel(baseline);
@@ -315,10 +255,14 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     );
 
     document.querySelectorAll<HTMLElement>('[data-odp-baselines]').forEach((scope) => {
-      const inBaseline = (scope.dataset.odpBaselines ?? '').split(' ').includes(baseline);
+      // Before your system's baseline is chosen the text is simply NIST's: no
+      // status treatment, nothing to click, no note (the review card invites
+      // the choice instead).
+      const chosen = hasChosenBaseline();
+      const inBaseline = chosen && (scope.dataset.odpBaselines ?? '').split(' ').includes(baseline);
       const note = scope.querySelector<HTMLElement>('[data-odp-slot-note]');
       if (note) {
-        note.hidden = inBaseline;
+        note.hidden = inBaseline || !chosen;
         note.textContent = inBaseline ? '' : `Not part of the ${name} baseline — parameters shown as NIST wrote them.`;
       }
 
@@ -344,11 +288,12 @@ const payload = JSON.stringify(data).replace(/</g, '\\u003c');
       });
     });
 
-    renderSummary(baseline, name, decisions);
   }
 
   render();
   window.addEventListener(ACTIVE_BASELINE_EVENT, render);
+  // A parameter set from the review card updates the values shown in the text.
+  window.addEventListener('odpdecisionschanged', render);
   // Story 12: passive cross-tab refresh (last-write-wins otherwise).
   onOdpStorageChange(render);
 

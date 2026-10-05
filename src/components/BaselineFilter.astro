@@ -17,7 +17,11 @@ const BASELINES: { value: string | null; label: string }[] = [
 ];
 ---
 
-<div class="baseline-filter" role="group" aria-label="Filter by Baseline">
+<p class="baseline-filter-compact" data-filter-compact hidden>
+  <span data-filter-compact-text></span>
+  <button type="button" class="baseline-filter-compact__toggle" data-filter-compact-toggle></button>
+</p>
+<div class="baseline-filter" role="group" aria-label="Filter by Baseline" data-filter-pills>
   <span class="baseline-filter__label">Viewing</span>
   {BASELINES.map(({ value, label }) => (
     <button type="button" class="filter-pill" data-baseline={value ?? ''} aria-pressed="false">
@@ -27,6 +31,33 @@ const BASELINES: { value: string | null; label: string }[] = [
 </div>
 
 <style>
+  .baseline-filter-compact {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    margin: 0;
+  }
+
+  .baseline-filter-compact[hidden],
+  .baseline-filter[hidden] {
+    display: none;
+  }
+
+  .baseline-filter-compact__toggle {
+    font: inherit;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0 0 0 6px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .baseline-filter-compact__toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
   .baseline-filter {
     display: flex;
     gap: 6px;
@@ -72,6 +103,8 @@ const BASELINES: { value: string | null; label: string }[] = [
 
 <script>
   import { setUrlState } from '../utils/urlState';
+  import { baselineLabel } from '../utils/activeBaseline';
+  import { defaultViewBaseline, viewBaseline, viewParam } from '../utils/viewFilter';
 
   // Derived from the rendered pills rather than a second hardcoded list, so
   // there's exactly one source of truth for "which baselines exist" (the
@@ -80,8 +113,10 @@ const BASELINES: { value: string | null; label: string }[] = [
     .map((pill) => pill.dataset.baseline)
     .filter((v): v is string => Boolean(v));
 
+  // `?baseline=` resolution is shared with search (`viewFilter.ts`): once your
+  // system's baseline is chosen it is the default, and `all` shows everything.
   function currentBaseline(): string | null {
-    const value = new URLSearchParams(window.location.search).get('baseline');
+    const value = viewBaseline();
     return value && VALID_BASELINES.includes(value) ? value : null;
   }
 
@@ -132,10 +167,39 @@ const BASELINES: { value: string | null; label: string }[] = [
       .querySelectorAll<HTMLAnchorElement>('main a[href*="/families/"], main a[href*="/controls/"]')
       .forEach((a) => {
         const url = new URL(a.href);
-        if (baseline) url.searchParams.set('baseline', baseline);
+        const param = viewParam(baseline);
+        if (param) url.searchParams.set('baseline', param);
         else url.searchParams.delete('baseline');
         a.href = url.toString();
       });
+  }
+
+  function setFilter(next: string | null) {
+    setUrlState({ search: { baseline: viewParam(next) } });
+    markActivePill(next);
+    applyFilter(next);
+    updateLinks(next);
+    renderCompact(next);
+    // Decoupled signal for /search's Pagefind-native filtering
+    // (SearchBox.astro) -- BaselineFilter doesn't need to know SearchBox
+    // exists. No effect on Family/Control pages beyond the event firing.
+    window.dispatchEvent(new CustomEvent('baselinefilterchange', { detail: { baseline: next } }));
+  }
+
+  // Once your baseline is chosen the five pills are noise: one quiet line says
+  // what you are seeing and offers the other view.
+  function renderCompact(current: string | null) {
+    const mine = defaultViewBaseline();
+    const compact = document.querySelector<HTMLElement>('[data-filter-compact]');
+    const pills = document.querySelector<HTMLElement>('[data-filter-pills]');
+    if (!compact || !pills) return;
+    compact.hidden = mine === null;
+    pills.hidden = mine !== null;
+    if (mine === null) return;
+    compact.querySelector<HTMLElement>('[data-filter-compact-text]')!.textContent =
+      current === null ? 'Showing all controls ·' : `Showing ${baselineLabel(current)} controls ·`;
+    compact.querySelector<HTMLElement>('[data-filter-compact-toggle]')!.textContent =
+      current === mine ? 'Show all controls' : `Show only ${baselineLabel(mine)} controls`;
   }
 
   function init() {
@@ -143,6 +207,12 @@ const BASELINES: { value: string | null; label: string }[] = [
     markActivePill(baseline);
     applyFilter(baseline);
     updateLinks(baseline);
+    renderCompact(baseline);
+
+    document.querySelector<HTMLButtonElement>('[data-filter-compact-toggle]')?.addEventListener('click', () => {
+      const mine = defaultViewBaseline();
+      setFilter(currentBaseline() === mine ? null : mine);
+    });
 
     document.querySelectorAll<HTMLButtonElement>('.filter-pill').forEach((pill) => {
       pill.addEventListener('click', () => {
@@ -151,14 +221,7 @@ const BASELINES: { value: string | null; label: string }[] = [
         // Clicking "All" (value === null) always clears. Clicking the
         // currently-active specific pill again also clears.
         const next = value === active ? null : value;
-        setUrlState({ search: { baseline: next } });
-        markActivePill(next);
-        applyFilter(next);
-        updateLinks(next);
-        // Decoupled signal for /search's Pagefind-native filtering
-        // (SearchBox.astro) -- BaselineFilter doesn't need to know SearchBox
-        // exists. No effect on Family/Control pages beyond the event firing.
-        window.dispatchEvent(new CustomEvent('baselinefilterchange', { detail: { baseline: next } }));
+        setFilter(next);
       });
     });
   }
