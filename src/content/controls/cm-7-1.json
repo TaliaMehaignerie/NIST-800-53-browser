@@ -46,7 +46,11 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review the system to identify unnecessary and/or non-secure functions, ports, protocols, software, and/or services is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "cm-07.01_odp.02",

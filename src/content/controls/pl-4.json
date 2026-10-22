@@ -54,7 +54,12 @@
       "select": null,
       "guidelines": [
         "frequency for reviewing and updating the rules of behavior is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every 3 years",
+        "moderate": "at least every 3 years",
+        "high": "at least annually"
+      }
     },
     {
       "id": "pl-04_odp.02",
@@ -66,7 +71,12 @@
           "when the rules are revised or updated"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "at least annually and when the rules are revised or changed",
+        "moderate": "at least annually and when the rules are revised or changed",
+        "high": "at least annually and when the rules are revised or changed"
+      }
     },
     {
       "id": "pl-04_odp.03",

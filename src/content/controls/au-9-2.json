@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "the frequency of storing audit records in a repository is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "at least weekly"
+      }
     }
   ],
   "related": [

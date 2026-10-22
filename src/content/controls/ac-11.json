@@ -54,7 +54,11 @@
       "select": null,
       "guidelines": [
         "time period of inactivity after which a device lock is initiated is defined (if selected);"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "fifteen (15) minutes",
+        "high": "fifteen (15) minutes"
+      }
     }
   ],
   "related": [

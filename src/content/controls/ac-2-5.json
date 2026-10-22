@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "the time period of expected inactivity or description of when to log out is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "for privileged users, it is the end of a user's standard work period",
+        "high": "inactivity is anticipated to exceed Fifteen (15) minutes"
+      }
     }
   ],
   "related": [

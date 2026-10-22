@@ -108,7 +108,12 @@
       "id": "ir-8_prm_5",
       "label": "organization-defined incident response personnel (identified by name and/or by role) and organizational elements",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "see additional FedRAMP Requirements and Guidance",
+        "moderate": "see additional FedRAMP Requirements and Guidance",
+        "high": "see additional FedRAMP Requirements and Guidance"
+      }
     },
     {
       "id": "ir-08_odp.01",
@@ -124,7 +129,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review and approve the incident response plan is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "ir-08_odp.03",
@@ -140,7 +150,12 @@
       "select": null,
       "guidelines": [
         "incident response personnel (identified by name and/or by role) to whom copies of the incident response plan are to be distributed is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "see additional FedRAMP Requirements and Guidance",
+        "moderate": "see additional FedRAMP Requirements and Guidance",
+        "high": "see additional FedRAMP Requirements and Guidance"
+      }
     },
     {
       "id": "ir-08_odp.05",

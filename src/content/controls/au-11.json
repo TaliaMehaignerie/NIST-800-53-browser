@@ -33,7 +33,12 @@
       "select": null,
       "guidelines": [
         "a time period to retain audit records that is consistent with the records retention policy is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "a time period in compliance with M-21-31",
+        "moderate": "a time period in compliance with M-21-31",
+        "high": "a time period in compliance with M-21-31"
+      }
     }
   ],
   "related": [

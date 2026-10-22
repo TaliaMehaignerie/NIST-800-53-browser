@@ -30,7 +30,10 @@
       "select": null,
       "guidelines": [
         "physical and environmental hazards that could result in potential damage to system components within the facility are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "physical and environmental hazards identified during threat assessment"
+      }
     }
   ],
   "related": [

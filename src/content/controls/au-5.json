@@ -63,7 +63,12 @@
       "select": null,
       "guidelines": [
         "additional actions to be taken in the event of an audit logging process failure are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "overwrite oldest record",
+        "moderate": "overwrite oldest record",
+        "high": "overwrite oldest record"
+      }
     }
   ],
   "related": [

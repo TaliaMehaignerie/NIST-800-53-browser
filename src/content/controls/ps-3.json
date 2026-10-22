@@ -44,7 +44,12 @@
       "id": "ps-3_prm_1",
       "label": "organization-defined conditions requiring rescreening and, where rescreening is so indicated, the frequency of rescreening",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "for national security clearances; a reinvestigation is required during the fifth (5th) year for top secret security clearance, the tenth (10th) year for secret security clearance, and fifteenth (15th) year for confidential security clearance.\n\nFor moderate risk law enforcement and high impact public trust level, a reinvestigation is required during the fifth (5th) year. There is no reinvestigation for other moderate risk positions or any low risk positions",
+        "moderate": "for national security clearances; a reinvestigation is required during the fifth (5th) year for top secret security clearance, the tenth (10th) year for secret security clearance, and fifteenth (15th) year for confidential security clearance.\n\nFor moderate risk law enforcement and high impact public trust level, a reinvestigation is required during the fifth (5th) year. There is no reinvestigation for other moderate risk positions or any low risk positions",
+        "high": "for national security clearances; a reinvestigation is required during the fifth (5th) year for top secret security clearance, the tenth (10th) year for secret security clearance, and fifteenth (15th) year for confidential security clearance.\n\nFor moderate risk law enforcement and high impact public trust level, a reinvestigation is required during the fifth (5th) year. There is no reinvestigation for other moderate risk positions or any low risk positions"
+      }
     },
     {
       "id": "ps-03_odp.01",

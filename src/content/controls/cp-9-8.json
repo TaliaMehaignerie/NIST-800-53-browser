@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "backup information to protect against unauthorized disclosure and modification is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all backup files",
+        "high": "all backup files"
+      }
     }
   ],
   "related": [

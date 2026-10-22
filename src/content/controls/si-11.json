@@ -40,7 +40,11 @@
       "select": null,
       "guidelines": [
         "personnel or roles to whom error messages are to be revealed is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "to include the ISSO and/or similar role within the organization",
+        "high": "to include the ISSO and/or similar role within the organization"
+      }
     }
   ],
   "related": [

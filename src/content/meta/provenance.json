@@ -14,5 +14,34 @@
     "moderate": 287,
     "high": 370,
     "privacy": 96
+  },
+  "fedramp": {
+    "note": "FedRAMP Rev 5 baseline values as published before Notice 0013; reference only.",
+    "baselines": {
+      "low": {
+        "capturedAt": "2025-04-21",
+        "archiveUrl": "https://web.archive.org/web/20250421092955/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_LOW-baseline_profile.json",
+        "profileVersion": "fedramp2.1.0-oscal1.0.4",
+        "lastModified": "2024-09-24T02:24:00Z",
+        "assigned": 156,
+        "shown": 153
+      },
+      "moderate": {
+        "capturedAt": "2025-06-18",
+        "archiveUrl": "https://web.archive.org/web/20250618020019/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_MODERATE-baseline_profile.json",
+        "profileVersion": "fedramp2.1.0-oscal1.0.4",
+        "lastModified": "2024-09-24T02:24:00Z",
+        "assigned": 236,
+        "shown": 217
+      },
+      "high": {
+        "capturedAt": "2025-04-21",
+        "archiveUrl": "https://web.archive.org/web/20250421103202/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline_profile.json",
+        "profileVersion": "fedramp2.1.0-oscal1.0.4",
+        "lastModified": "2024-09-24T02:24:00Z",
+        "assigned": 276,
+        "shown": 256
+      }
+    }
   }
 }

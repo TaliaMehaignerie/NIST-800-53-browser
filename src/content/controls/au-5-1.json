@@ -44,7 +44,10 @@
       "select": null,
       "guidelines": [
         "percentage of repository maximum audit log storage capacity is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "75%, or one month before expected negative impact"
+      }
     }
   ],
   "related": [],

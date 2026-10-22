@@ -84,7 +84,12 @@
       "id": "pe-3_prm_9",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually or earlier as required by a security relevant event.",
+        "high": "at least annually or earlier as required by a security relevant event."
+      }
     },
     {
       "id": "pe-03_odp.01",
@@ -104,7 +109,12 @@
           "guards"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "CSP defined physical access control systems/devices AND guards",
+        "moderate": "CSP defined physical access control systems/devices AND guards",
+        "high": "CSP defined physical access control systems/devices AND guards"
+      }
     },
     {
       "id": "pe-03_odp.03",
@@ -136,7 +146,12 @@
       "select": null,
       "guidelines": [
         "circumstances requiring visitor escorts and control of visitor activity are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "in all circumstances within restricted access area where the information system resides",
+        "moderate": "in all circumstances within restricted access area where the information system resides",
+        "high": "in all circumstances within restricted access area where the information system resides"
+      }
     },
     {
       "id": "pe-03_odp.07",
@@ -144,7 +159,10 @@
       "select": null,
       "guidelines": [
         "physical access devices to be inventoried are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually"
+      }
     },
     {
       "id": "pe-03_odp.08",
@@ -152,7 +170,11 @@
       "select": null,
       "guidelines": [
         "frequency at which to inventory physical access devices is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "pe-03_odp.09",

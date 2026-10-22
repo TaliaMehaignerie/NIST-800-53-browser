@@ -45,7 +45,12 @@
       "select": null,
       "guidelines": [
         "types of denial-of-service events to be protected against or limited are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at a minimum: ICMP (ping) flood, SYN flood, slowloris, buffer overflow attack, and volume attack",
+        "moderate": "at a minimum: ICMP (ping) flood, SYN flood, slowloris, buffer overflow attack, and volume attack",
+        "high": "at a minimum: ICMP (ping) flood, SYN flood, slowloris, buffer overflow attack, and volume attack"
+      }
     },
     {
       "id": "sc-05_odp.02",
@@ -57,7 +62,12 @@
           "limit"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "Protect against",
+        "moderate": "Protect against",
+        "high": "Protect against"
+      }
     },
     {
       "id": "sc-05_odp.03",

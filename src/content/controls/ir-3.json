@@ -34,7 +34,11 @@
       "select": null,
       "guidelines": [
         "frequency at which to test the effectiveness of the incident response capability for the system is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "functional, at least annually",
+        "high": "at least every six (6) months, including functional at least annually"
+      }
     },
     {
       "id": "ir-03_odp.02",

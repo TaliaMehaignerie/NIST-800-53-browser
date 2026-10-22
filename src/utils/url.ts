@@ -58,6 +58,14 @@ export function odpDiscussionUrl(): string {
   return `${BASE}/odp-discussion.json`;
 }
 
+export function fedrampReferenceUrl(): string {
+  return `${BASE}/fedramp-reference.json`;
+}
+
+export function sampleDataUrl(): string {
+  return `${BASE}/sample-data.json`;
+}
+
 export function odpMetaUrl(): string {
   return `${BASE}/odp-meta.json`;
 }

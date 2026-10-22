@@ -31,7 +31,11 @@
       "select": null,
       "guidelines": [
         "the frequency at which to assess and review the supply chain-related risks associated with suppliers or contractors and the systems, system components, or system services they provide is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

@@ -93,6 +93,16 @@ const BASELINES = [
   },
 ];
 
+/**
+ * FedRAMP's Rev 5 baseline profiles from before Notice 0013 withdrew most of the
+ * values they assign. Reference material only (story 23): ingested per
+ * baseline, never into a decision. `data/raw/fedramp/SOURCE.json` records where
+ * each file came from.
+ */
+const FEDRAMP_DIR = join(RAW_DIR, 'fedramp');
+const FEDRAMP_SOURCE_FILE = join(FEDRAMP_DIR, 'SOURCE.json');
+const FEDRAMP_BASELINES = ['low', 'moderate', 'high'];
+
 const OUT_DIRS = {
   controls: join(CONTENT_DIR, 'controls'),
   families: join(CONTENT_DIR, 'families'),
@@ -178,15 +188,24 @@ function partsNamed(node, name) {
   return (node.parts ?? []).filter((p) => p.name === name);
 }
 
-function ingestParams(node) {
-  return (node.params ?? []).map((p) => ({
-    id: p.id,
-    label: p.label ?? null,
-    select: p.select
-      ? { howMany: p.select['how-many'] ?? null, choice: p.select.choice ?? [] }
-      : null,
-    guidelines: (p.guidelines ?? []).map((g) => g.prose ?? ''),
-  }));
+/**
+ * `fedrampFor(paramId)` returns the former FedRAMP value per baseline this
+ * entry belongs to, or null. The key is omitted, not emptied, when FedRAMP
+ * assigned nothing, so most params are byte-identical to before.
+ */
+function ingestParams(node, fedrampFor) {
+  return (node.params ?? []).map((p) => {
+    const fedramp = fedrampFor(p.id);
+    return {
+      id: p.id,
+      label: p.label ?? null,
+      select: p.select
+        ? { howMany: p.select['how-many'] ?? null, choice: p.select.choice ?? [] }
+        : null,
+      guidelines: (p.guidelines ?? []).map((g) => g.prose ?? ''),
+      ...(fedramp ? { fedramp } : {}),
+    };
+  });
 }
 
 /** Every `{{ insert: param, ... }}` id referenced by this entry's own prose. */
@@ -219,6 +238,7 @@ function buildEntry(
   { kind, familyCode, parentSlug, enhancementSlugs },
   baselineSets,
   crosswalkData,
+  fedramp,
   warn,
 ) {
   const statement = partsNamed(node, 'statement').map(statementNode);
@@ -227,7 +247,22 @@ function buildEntry(
   const sortId = propValue(node, 'sort-id');
   if (!sortId) throw new Error(`No sort-id prop on "${node.id}"`);
 
-  const params = ingestParams(node);
+  // Only for baselines NIST puts this entry in: FedRAMP's profiles add a few
+  // items NIST's baselines lack, and the workspace never shows those.
+  const entryBaselines = BASELINES.filter(({ key }) => baselineSets.get(key).has(node.id)).map((b) => b.key);
+  const params = ingestParams(node, (paramId) => {
+    const values = {};
+    for (const key of FEDRAMP_BASELINES) {
+      const value = fedramp.values.get(key).get(paramId);
+      if (value === undefined) continue;
+      fedramp.seen.add(`${key}:${paramId}`);
+      if (entryBaselines.includes(key)) {
+        values[key] = value;
+        fedramp.stored.add(`${key}:${paramId}`);
+      }
+    }
+    return Object.keys(values).length > 0 ? values : null;
+  });
   const ownParamIds = new Set(params.map((p) => p.id));
   for (const referenced of referencedParamIds(statement, guidance)) {
     if (!ownParamIds.has(referenced)) {
@@ -256,7 +291,7 @@ function buildEntry(
     sortId,
     withdrawn,
     incorporatedInto,
-    baselines: BASELINES.filter(({ key }) => baselineSets.get(key).has(node.id)).map((b) => b.key),
+    baselines: entryBaselines,
     statement,
     guidance,
     params,
@@ -314,11 +349,54 @@ function readCrosswalk(file) {
 }
 
 /**
+ * Read FedRAMP's baseline profiles: `param-id -> constraint text`, verbatim bar
+ * surrounding whitespace (AD-5). Each assignment carries exactly one
+ * constraint; anything else means the source changed shape, so fail rather
+ * than guess which to show.
+ */
+function readFedramp() {
+  const source = readJson(FEDRAMP_SOURCE_FILE);
+  const values = new Map();
+  const files = {};
+  for (const key of FEDRAMP_BASELINES) {
+    const entry = source.files?.[key];
+    if (!entry) throw new Error(`${FEDRAMP_SOURCE_FILE} has no entry for "${key}"`);
+    const profile = readJson(join(FEDRAMP_DIR, entry.file)).profile;
+    if (!profile?.modify?.['set-parameters']) {
+      throw new Error(`${entry.file} has no profile.modify.set-parameters -- is this a FedRAMP baseline profile?`);
+    }
+    const byParam = new Map();
+    for (const sp of profile.modify['set-parameters']) {
+      const constraints = sp.constraints ?? [];
+      if (constraints.length !== 1 || typeof constraints[0].description !== 'string') {
+        throw new Error(`${entry.file}: "${sp['param-id']}" does not carry exactly one constraint description`);
+      }
+      const text = constraints[0].description.trim();
+      if (byParam.has(sp['param-id'])) throw new Error(`${entry.file}: duplicate "${sp['param-id']}"`);
+      if (text) byParam.set(sp['param-id'], text);
+    }
+    values.set(key, byParam);
+    files[key] = {
+      capturedAt: entry.capturedAt,
+      archiveUrl: entry.archiveUrl,
+      profileVersion: profile.metadata?.version ?? null,
+      lastModified: profile.metadata?.['last-modified'] ?? null,
+      assigned: byParam.size,
+    };
+  }
+  return { values, files, seen: new Set(), stored: new Set() };
+}
+
+/**
  * Fail loudly, naming the file, before anything is written. A partial ingest
  * would leave the committed collection (AD-2's source of truth) inconsistent.
  */
 function assertInputsPresent() {
-  const missing = [MASTER_FILE, ...BASELINES.map((b) => join(RAW_DIR, b.file))].filter(
+  const missing = [
+    MASTER_FILE,
+    ...BASELINES.map((b) => join(RAW_DIR, b.file)),
+    FEDRAMP_SOURCE_FILE,
+  ].filter(
     (file) => !existsSync(file),
   );
   if (missing.length > 0) {
@@ -363,6 +441,8 @@ function ingest({ warn }) {
   // ingestion reads its clause codes as-is, no reshaping.
   const crosswalkData = readCrosswalk(CROSSWALK_FILE);
 
+  const fedramp = readFedramp();
+
   const controls = [];
   const enhancements = [];
   const families = [];
@@ -392,6 +472,7 @@ function ingest({ warn }) {
           },
           baselineSets,
           crosswalkData,
+          fedramp,
           warn,
         ),
       );
@@ -408,6 +489,7 @@ function ingest({ warn }) {
             { kind: 'enhancement', familyCode, parentSlug: controlSlug, enhancementSlugs: [] },
             baselineSets,
             crosswalkData,
+            fedramp,
             warn,
           ),
         );
@@ -437,6 +519,19 @@ function ingest({ warn }) {
     }
   }
 
+  // A FedRAMP assignment for a param the catalog does not have is a stale or
+  // mismatched snapshot -- fail loudly rather than let it vanish.
+  const realParamIds = new Set([...controls, ...enhancements].flatMap((e) => e.params.map((p) => p.id)));
+  const unmatchedFedramp = [];
+  for (const key of FEDRAMP_BASELINES) {
+    for (const paramId of fedramp.values.get(key).keys()) {
+      if (!realParamIds.has(paramId)) unmatchedFedramp.push(`${key}:${paramId}`);
+    }
+  }
+  if (unmatchedFedramp.length > 0) {
+    throw new Error(`FedRAMP snapshot names params absent from the catalog: ${unmatchedFedramp.slice(0, 5).join(', ')}`);
+  }
+
   const meta = {
     catalogTitle: catalog.metadata.title,
     catalogVersion: catalog.metadata.version,
@@ -450,9 +545,21 @@ function ingest({ warn }) {
       enhancements: enhancements.length,
     },
     baselineCounts: Object.fromEntries(BASELINES.map((b) => [b.key, baselineSets.get(b.key).size])),
+    fedramp: {
+      note: 'FedRAMP Rev 5 baseline values as published before Notice 0013; reference only.',
+      baselines: Object.fromEntries(
+        FEDRAMP_BASELINES.map((key) => [
+          key,
+          {
+            ...fedramp.files[key],
+            shown: [...fedramp.stored].filter((k) => k.startsWith(`${key}:`)).length,
+          },
+        ]),
+      ),
+    },
   };
 
-  return { controls, enhancements, families, meta, baselineSets };
+  return { controls, enhancements, families, meta, baselineSets, fedramp };
 }
 
 // ---------------------------------------------------------------------------
@@ -624,6 +731,33 @@ function verify(result, warnings) {
       (e) => e.baselines.length === 0 && (bySlug.get(e.parentSlug)?.baselines.length ?? 0) > 0,
     ),
   );
+
+  console.log('FedRAMP reference values (story 23)');
+  {
+    const { fedramp } = result;
+    const orphan = [];
+    for (const key of FEDRAMP_BASELINES) {
+      const known = new Set(entries.flatMap((e) => e.params.map((p) => p.id)));
+      for (const id of fedramp.values.get(key).keys()) if (!known.has(id)) orphan.push(`${key}:${id}`);
+    }
+    eq('every FedRAMP param id exists in the catalog', orphan, []);
+    for (const key of FEDRAMP_BASELINES) {
+      const assigned = fedramp.values.get(key).size;
+      const shown = entries.reduce((n, e) => n + e.params.filter((p) => p.fedramp?.[key] !== undefined).length, 0);
+      const outside = assigned - shown;
+      console.log(`  info  ${key}: ${assigned} assigned, ${shown} on entries in NIST's ${key} baseline, ${outside} on entries outside it (not stored)`);
+      eq(`${key}: shown matches provenance`, shown, meta.fedramp.baselines[key].shown);
+    }
+    const wrongBaseline = entries.filter((e) =>
+      e.params.some((p) => Object.keys(p.fedramp ?? {}).some((k) => !e.baselines.includes(k))),
+    );
+    eq('no FedRAMP value sits on an entry outside that baseline', wrongBaseline.map((e) => e.slug), []);
+    eq('ac-1 moderate policy-review frequency', fixture('ac-1').params.find((p) => p.id === 'ac-01_odp.05')?.fedramp?.moderate, 'at least every 3 years');
+    check(
+      'privacy never carries a FedRAMP value',
+      entries.every((e) => e.params.every((p) => !p.fedramp || !('privacy' in p.fedramp))),
+    );
+  }
 
   console.log('Withdrawn handling');
   eq('ac-2.10 withdrawn', fixture('ac-2.10').withdrawn, true);

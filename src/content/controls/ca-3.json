@@ -79,7 +79,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review and update agreements is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually and on input from JAB/AO",
+        "moderate": "at least annually and on input from JAB/AO",
+        "high": "at least annually and on input from JAB/AO"
+      }
     }
   ],
   "related": [

@@ -62,7 +62,12 @@
       "select": null,
       "guidelines": [
         "a time period within which incident response training is to be provided to system users assuming an incident response role or responsibility is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "ten (10) days for privileged users, thirty (30) days for Incident Response roles",
+        "moderate": "ten (10) days for privileged users, thirty (30) days for Incident Response roles",
+        "high": "ten (10) days for privileged users, thirty (30) days for Incident Response roles"
+      }
     },
     {
       "id": "ir-02_odp.02",
@@ -70,7 +75,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to provide incident response training to users is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "ir-02_odp.03",
@@ -78,7 +88,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to review and update incident response training content is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "ir-02_odp.04",

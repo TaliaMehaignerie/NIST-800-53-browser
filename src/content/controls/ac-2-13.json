@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "time period within which to disable accounts of individuals who are discovered to pose significant risk is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "one (1) hour",
+        "high": "one (1) hour"
+      }
     },
     {
       "id": "ac-02.13_odp.02",

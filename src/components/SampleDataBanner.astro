@@ -1,0 +1,150 @@
+---
+// Story 22: while the bundled sample data is loaded, every page says so, with
+// a way out. Clearing is explicit and complete: it asks first, says what goes
+// (including the visitor's own edits to the sample, if there are any) and
+// offers a backup download. Hidden unless the sample flag is set.
+---
+
+<div class="sample-banner" role="status" data-sample-banner hidden>
+  <p class="sample-banner__text">
+    You're looking at sample data. Anything you change is mixed into it.
+    <button type="button" class="sample-banner__link" data-sample-clear>Clear sample data</button>
+  </p>
+  <div class="sample-banner__confirm" role="alertdialog" aria-labelledby="sample-confirm-title" tabindex="-1" data-sample-confirm hidden>
+    <p id="sample-confirm-title" data-sample-confirm-text></p>
+    <div class="sample-banner__actions">
+      <button type="button" data-sample-download hidden>Download a backup first</button>
+      <button type="button" data-sample-confirm-btn>Clear sample data</button>
+      <button type="button" data-sample-cancel>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sample-banner {
+    font-family: var(--font-meta);
+    font-size: 13px;
+    margin: 0 0 12px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-status-progress);
+    background: var(--color-surface-raised);
+    color: var(--color-ink-primary);
+  }
+
+  .sample-banner[hidden],
+  .sample-banner [hidden] {
+    display: none;
+  }
+
+  .sample-banner p {
+    margin: 0;
+  }
+
+  .sample-banner__link {
+    font: inherit;
+    margin-left: 6px;
+    padding: 0;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .sample-banner__confirm {
+    margin-top: 8px;
+  }
+
+  .sample-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .sample-banner button {
+    font: inherit;
+  }
+
+  .sample-banner__actions button {
+    padding: 4px 12px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    background: var(--color-surface-overlay);
+    color: var(--color-ink-primary);
+    cursor: pointer;
+  }
+
+  .sample-banner button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  import { downloadBackup } from '../utils/backup';
+  import { clearWorkbench } from '../utils/workbenchData';
+  import { SAMPLE_FLAG_KEY, isSampleData, sampleDataEdited } from '../utils/sampleFlag';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+  import { homeUrl } from '../utils/url';
+
+  const banner = document.querySelector<HTMLElement>('[data-sample-banner]');
+
+  if (banner) {
+    const confirmEl = banner.querySelector<HTMLElement>('[data-sample-confirm]')!;
+    const confirmText = banner.querySelector<HTMLElement>('[data-sample-confirm-text]')!;
+    const download = banner.querySelector<HTMLButtonElement>('[data-sample-download]')!;
+    const clearButton = banner.querySelector<HTMLButtonElement>('[data-sample-clear]')!;
+
+    function render(): void {
+      const sample = isSampleData();
+      banner!.hidden = !sample;
+      if (!sample) confirmEl.hidden = true;
+    }
+
+    function closeConfirm(): void {
+      confirmEl.hidden = true;
+      clearButton.focus();
+    }
+
+    clearButton.addEventListener('click', () => {
+      const edited = sampleDataEdited();
+      confirmText.textContent = edited
+        ? 'This removes all the sample data and your changes to it, and returns this browser to a fresh start. This cannot be undone.'
+        : 'This removes all the sample data and returns this browser to a fresh start.';
+      download.hidden = !edited;
+      confirmEl.hidden = false;
+      confirmEl.focus();
+    });
+
+    download.addEventListener('click', () => {
+      downloadBackup();
+    });
+
+    banner.querySelector('[data-sample-cancel]')!.addEventListener('click', closeConfirm);
+    confirmEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeConfirm();
+    });
+
+    banner.querySelector('[data-sample-confirm-btn]')!.addEventListener('click', () => {
+      const result = clearWorkbench();
+      if (!result.ok) {
+        confirmText.textContent = result.message;
+        return;
+      }
+      // Back to the first-visit home page, from any page the sample was cleared on.
+      window.location.assign(homeUrl());
+    });
+
+    window.addEventListener(WORKBENCH_DATA_EVENT, render);
+    window.addEventListener('odpdecisionschanged', render);
+    window.addEventListener('storage', (e) => {
+      if (e.key === null || e.key === SAMPLE_FLAG_KEY) render();
+    });
+    onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
+    window.addEventListener('pageshow', (e) => {
+      if ((e as PageTransitionEvent).persisted) render();
+    });
+    render();
+  }
+</script>

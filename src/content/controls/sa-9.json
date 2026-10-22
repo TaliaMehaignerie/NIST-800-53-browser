@@ -56,7 +56,12 @@
       "select": null,
       "guidelines": [
         "controls to be employed by external system service providers are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "Appropriate FedRAMP Security Controls Baseline (s) if Federal information is processed or stored within the external system",
+        "moderate": "Appropriate FedRAMP Security Controls Baseline (s) if Federal information is processed or stored within the external system",
+        "high": "Appropriate FedRAMP Security Controls Baseline (s) if Federal information is processed or stored within the external system"
+      }
     },
     {
       "id": "sa-09_odp.02",
@@ -64,7 +69,12 @@
       "select": null,
       "guidelines": [
         "processes, methods, and techniques employed to monitor control compliance by external service providers are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "Federal/FedRAMP Continuous Monitoring requirements must be met for external systems where Federal information is processed or stored",
+        "moderate": "Federal/FedRAMP Continuous Monitoring requirements must be met for external systems where Federal information is processed or stored",
+        "high": "Federal/FedRAMP Continuous Monitoring requirements must be met for external systems where Federal information is processed or stored"
+      }
     }
   ],
   "related": [

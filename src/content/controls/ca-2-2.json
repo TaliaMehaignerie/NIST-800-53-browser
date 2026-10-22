@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "frequency at which to include specialized assessments as part of the control assessment is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "at least annually"
+      }
     },
     {
       "id": "ca-02.02_odp.02",

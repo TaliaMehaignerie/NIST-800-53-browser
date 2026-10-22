@@ -86,7 +86,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to provide role-based security and privacy training to assigned personnel after initial training is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "at-03_odp.04",
@@ -94,7 +99,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to update role-based training content is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "at-03_odp.05",

@@ -77,7 +77,12 @@
           "non-signature-based"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "signature based and non-signature based",
+        "moderate": "signature based and non-signature based",
+        "high": "signature based and non-signature based"
+      }
     },
     {
       "id": "si-03_odp.02",
@@ -85,7 +90,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which malicious code protection mechanisms perform scans is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least weekly",
+        "moderate": "at least weekly",
+        "high": "at least weekly"
+      }
     },
     {
       "id": "si-03_odp.03",
@@ -97,7 +107,12 @@
           "network entry and exit points"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "to include endpoints and network entry and exit points",
+        "moderate": "to include endpoints and network entry and exit points",
+        "high": "to include endpoints and network entry and exit points"
+      }
     },
     {
       "id": "si-03_odp.04",
@@ -110,7 +125,12 @@
           "take {{ insert: param, si-03_odp.05 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "to include blocking and quarantining malicious code",
+        "moderate": "to include blocking and quarantining malicious code",
+        "high": "to include blocking and quarantining malicious code"
+      }
     },
     {
       "id": "si-03_odp.05",
@@ -126,7 +146,12 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be alerted when malicious code is detected is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "administrator or defined security personnel near-realtime",
+        "moderate": "administrator or defined security personnel near-realtime",
+        "high": "administrator or defined security personnel near-realtime"
+      }
     }
   ],
   "related": [

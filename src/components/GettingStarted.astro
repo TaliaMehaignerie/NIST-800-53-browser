@@ -1,0 +1,300 @@
+---
+// Story 21: the four-step path through the workbench. Each card links to the
+// place its step is done and, once the script has read the stores, shows the
+// visitor's real state; the first unfinished step is the current one.
+// Counts come from `reviewItems.ts` and `complianceCount.ts` (AD-15) over the
+// item list embedded here at build time; stores are read only through their
+// own modules (AD-10, AD-13, AD-14). State lines stay empty until then, so
+// they never flash "0 of 0". With JS off the cards show without state.
+import { itemPayloadJson } from '../utils/itemPayload';
+import { dashboardUrl, dataUrl, reviewUrl } from '../utils/url';
+
+const payload = await itemPayloadJson();
+
+const STEPS = [
+  {
+    title: 'Choose your baseline',
+    text: 'Low, Moderate or High, from your system’s impact level. You’re asked once.',
+    action: 'Choose baseline',
+    href: reviewUrl(),
+  },
+  {
+    title: 'Decide the parameters',
+    text: 'Fill in each blank: confirm NIST’s wording or enter your organization’s value, with a reason for any change.',
+    action: 'Review parameters',
+    href: reviewUrl(),
+  },
+  {
+    title: 'Record status and evidence',
+    text: 'Mark each control incomplete, in progress, compliant or not applicable, with an owner and where the proof lives.',
+    action: 'Record status',
+    href: reviewUrl(),
+  },
+  {
+    title: 'Track progress and export',
+    text: 'See completion by family and what’s blocking you, then export your decisions as an OSCAL profile.',
+    action: 'View progress',
+    href: dashboardUrl(),
+  },
+];
+---
+
+<section class="steps" aria-labelledby="steps-heading" data-steps data-pagefind-ignore>
+  <h2 id="steps-heading">How it works</h2>
+  <ol class="steps__list">
+    {
+      STEPS.map((step, i) => (
+        <li class="step" data-step={i + 1}>
+          <span class="step__number" aria-hidden="true">{i + 1}</span>
+          <div class="step__body">
+            <h3 class="step__title">{step.title}</h3>
+            <p class="step__text">{step.text}</p>
+            <p class="step__state" data-step-state></p>
+            <div class="step__actions">
+              <a class="step__button" href={step.href} data-step-button data-chosen-href={i === 0 ? dataUrl() : undefined}>{step.action}</a>
+              {i === 3 && (
+                <a class="step__link" href="#" data-step-export hidden>
+                  Export OSCAL
+                </a>
+              )}
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<script type="application/json" id="steps-items" set:html={payload} is:inline />
+
+<style is:global>
+  .steps {
+    font-family: var(--font-meta);
+    margin: 20px 0 8px;
+  }
+
+  .steps h2 {
+    font-size: 1.2em;
+    margin: 0 0 12px;
+  }
+
+  .steps__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-raised);
+  }
+
+  .step--current {
+    border-color: var(--color-accent);
+  }
+
+  .step--done .step__number {
+    background: var(--color-status-compliant);
+    border-color: var(--color-status-compliant);
+    color: #fff;
+  }
+
+  .step__number {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--rounded-full);
+    border: 1px solid var(--color-ink-secondary);
+    color: var(--color-ink-secondary);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .step--current .step__number {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .step__body {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .step__title {
+    font-size: 1em;
+    margin: 0 0 2px;
+  }
+
+  .step__text {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: var(--color-ink-secondary);
+    line-height: 1.5;
+  }
+
+  .step__state {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .step__state:empty {
+    display: none;
+  }
+
+  .step__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    align-items: center;
+  }
+
+  .step__button {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--color-border-hairline);
+    border-radius: var(--rounded-sm);
+    background: var(--color-surface-overlay);
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .step--current .step__button {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface-base);
+    font-weight: 600;
+  }
+
+  .step__button:focus-visible,
+  .step__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .step__link {
+    font-size: 14px;
+  }
+
+  .step__link[hidden] {
+    display: none;
+  }
+
+  .browse-heading {
+    font-family: var(--font-meta);
+    font-size: 1.2em;
+    margin: 28px 0 4px;
+  }
+
+  .browse-lead {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-secondary);
+    margin: 0 0 8px;
+  }
+</style>
+
+<script>
+  import { baselineLabel, getActiveBaseline, hasChosenBaseline } from '../utils/activeBaseline';
+  import { countCompliance, percentLabel } from '../utils/complianceCount';
+  import { getDecisions } from '../utils/odpStore';
+  import { decidableParams, readItems, reviewProgress } from '../utils/reviewItems';
+  import { getStatuses } from '../utils/statusStore';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+  import { workspaceUrl } from '../utils/url';
+
+  const root = document.querySelector<HTMLElement>('[data-steps]');
+  const items = readItems('steps-items');
+
+  interface StepView {
+    state: string;
+    done: boolean;
+  }
+
+  function compute(): StepView[] {
+    if (!items) return [];
+    if (!hasChosenBaseline()) {
+      return [
+        { state: 'Not chosen yet', done: false },
+        { state: 'After step 1', done: false },
+        { state: 'After step 1', done: false },
+        { state: 'After step 1', done: false },
+      ];
+    }
+    const baseline = getActiveBaseline();
+    const statuses = getStatuses();
+    const progress = reviewProgress(items, baseline, getDecisions(baseline), statuses);
+    const totalParams = progress.reduce((n, p) => n + decidableParams(p.item, baseline).length, 0);
+    const unreviewedParams = progress.reduce((n, p) => n + p.unreviewedParams, 0);
+    const withStatus = progress.filter((p) => p.hasStatus).length;
+    const overall = countCompliance(items, baseline, statuses).overall;
+    return [
+      { state: `${baselineLabel(baseline)} ✓`, done: true },
+      {
+        state: `${totalParams - unreviewedParams} of ${totalParams} parameters reviewed`,
+        done: unreviewedParams === 0,
+      },
+      {
+        state: `${withStatus} of ${progress.length} controls and enhancements have a status`,
+        done: withStatus === progress.length,
+      },
+      { state: `${percentLabel(overall)} compliant`, done: false },
+    ];
+  }
+
+  function render(): void {
+    if (!root || !items) return;
+    const views = compute();
+    // The first unfinished step is the current one; step 4 is where you end up.
+    let current = views.findIndex((v) => !v.done);
+    if (current < 0) current = views.length - 1;
+
+    root.querySelectorAll<HTMLElement>('[data-step]').forEach((li, i) => {
+      const view = views[i];
+      li.classList.toggle('step--done', view.done);
+      li.classList.toggle('step--current', i === current);
+      if (i === current) li.setAttribute('aria-current', 'step');
+      else li.removeAttribute('aria-current');
+      li.querySelector<HTMLElement>('[data-step-state]')!.textContent = view.state;
+    });
+
+    // Once chosen, the baseline is changed on Your data, not Review (AD-13).
+    const baselineButton = root.querySelector<HTMLAnchorElement>('[data-step="1"] [data-step-button]');
+    if (baselineButton) {
+      baselineButton.dataset.initialHref ??= baselineButton.getAttribute('href') ?? '';
+      baselineButton.dataset.initialText ??= baselineButton.textContent ?? '';
+      const chosen = hasChosenBaseline();
+      baselineButton.setAttribute('href', chosen ? baselineButton.dataset.chosenHref ?? '' : baselineButton.dataset.initialHref);
+      baselineButton.textContent = chosen ? 'Change baseline' : baselineButton.dataset.initialText;
+    }
+
+    const exportLink = root.querySelector<HTMLAnchorElement>('[data-step-export]');
+    if (exportLink) {
+      exportLink.hidden = !hasChosenBaseline();
+      exportLink.href = workspaceUrl(getActiveBaseline());
+    }
+  }
+
+  if (root && items) {
+    window.addEventListener(WORKBENCH_DATA_EVENT, render);
+    window.addEventListener('odpdecisionschanged', render);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') render();
+    });
+    window.addEventListener('pageshow', (e) => {
+      if ((e as PageTransitionEvent).persisted) render();
+    });
+    onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
+    render();
+  }
+</script>

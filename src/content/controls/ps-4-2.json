@@ -40,7 +40,10 @@
           "disable access to system resources"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "access control personnel responsible for disabling access to the system"
+      }
     },
     {
       "id": "ps-04.02_odp.03",

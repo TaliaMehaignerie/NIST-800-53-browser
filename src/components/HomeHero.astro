@@ -1,0 +1,203 @@
+---
+// Story 21: the home page's opening. Says what the tool is and why a
+// parameter (ODP) matters, using a real one: AC-2's review frequency. The
+// example sentence is resolved at build time from the Content Collection
+// through the one resolver (AD-5, AD-8), never hand-typed, so it cannot drift
+// from the catalog. Once the visitor has any workbench data the explainer
+// folds behind a disclosure and the hero shrinks (the script below); without
+// JavaScript the full hero shows.
+import { getEntry } from 'astro:content';
+import { resolveParams } from '../utils/resolveParams';
+
+const EXAMPLE_PARAM = 'ac-02_odp.10';
+
+interface StatementNode {
+  label: string | null;
+  prose: string | null;
+  children: StatementNode[];
+}
+
+function findNode(nodes: StatementNode[], paramId: string): StatementNode | undefined {
+  for (const node of nodes) {
+    if (node.prose?.includes(paramId)) return node;
+    const inChild = findNode(node.children, paramId);
+    if (inChild) return inChild;
+  }
+  return undefined;
+}
+
+const control = await getEntry('controls', 'ac-2');
+const node = control ? findNode(control.data.statement as StatementNode[], EXAMPLE_PARAM) : undefined;
+if (!control || !node?.prose) {
+  throw new Error(`HomeHero: ${EXAMPLE_PARAM} was not found in the AC-2 statement; update the example.`);
+}
+const example = resolveParams(node.prose, control.data.params).replace(/;$/, '.');
+---
+
+<section class="hero" data-home-hero data-pagefind-ignore>
+  <h1>NIST SP 800-53 Browser &amp; Compliance Workbench</h1>
+  <p class="hero__lead">
+    Browse NIST SP 800-53 Rev 5 and decide what each control requires of your system.
+  </p>
+  <div class="hero__sample" data-hero-sample hidden>
+    <button type="button" class="hero__sample-button" data-sample-load>See it with sample data</button>
+    <span class="hero__sample-note">
+      Loads an example review of an invented system, so every page has something to show. Clear it any time.
+    </span>
+    <p class="hero__sample-status" role="status" aria-live="polite" data-sample-status hidden></p>
+  </div>
+  <details class="hero__odp" open data-hero-odp>
+    <summary>What's an ODP?</summary>
+    <p>
+      Controls contain blanks called organization-defined parameters (ODPs). In {control.data.label} {control.data.title}:
+    </p>
+    <blockquote class="hero__example">{example}</blockquote>
+    <p>
+      A control can be marked "implemented" while nobody has decided what that frequency is. This tool has you decide
+      every blank and record why, and it won't let a control be marked compliant until you have.
+    </p>
+  </details>
+</section>
+
+<style is:global>
+  .hero {
+    font-family: var(--font-meta);
+    margin: 24px 0 8px;
+  }
+
+  .hero h1 {
+    font-size: 1.6em;
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+
+  .hero__lead {
+    font-size: 1.05em;
+    margin: 0 0 12px;
+  }
+
+  .hero__sample {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    margin: 0 0 12px;
+    font-size: 14px;
+  }
+
+  .hero__sample[hidden],
+  .hero__sample [hidden] {
+    display: none;
+  }
+
+  .hero__sample-button {
+    font: inherit;
+    padding: 6px 14px;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-sm);
+    background: none;
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .hero__sample-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .hero__sample-button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .hero__sample-note {
+    color: var(--color-ink-secondary);
+    flex: 1 1 240px;
+  }
+
+  .hero__sample-status {
+    flex-basis: 100%;
+    margin: 0;
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-raised);
+  }
+
+  .hero__odp {
+    font-size: 14px;
+    color: var(--color-ink-secondary);
+    margin: 0 0 4px;
+  }
+
+  .hero__odp summary {
+    cursor: pointer;
+    color: var(--color-accent);
+    width: fit-content;
+  }
+
+  .hero__odp summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .hero__odp p {
+    margin: 8px 0;
+  }
+
+  .hero__example {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-raised);
+    color: var(--color-ink-primary);
+    border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+  }
+</style>
+
+<script>
+  import { hasChosenBaseline } from '../utils/activeBaseline';
+  import { canLoadSampleData, loadSampleData } from '../utils/sampleData';
+  import { hasWorkbenchData } from '../utils/workbenchData';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+
+  const odp = document.querySelector<HTMLDetailsElement>('[data-hero-odp]');
+  const sample = document.querySelector<HTMLElement>('[data-hero-sample]');
+  const loadButton = document.querySelector<HTMLButtonElement>('[data-sample-load]');
+  const status = document.querySelector<HTMLElement>('[data-sample-status]');
+  // Fold it once, when the visitor first has data; after that it is theirs to open or close.
+  let folded = false;
+
+  function sync(): void {
+    // Offered only to an empty workbench (story 22).
+    if (sample) sample.hidden = !canLoadSampleData();
+    if (!odp || folded || !hasWorkbenchData()) return;
+    folded = true;
+    odp.open = false;
+  }
+
+  if (odp) {
+    // On a phone the explainer would push the first step below the fold, so it starts folded there.
+    if (!hasWorkbenchData() && !hasChosenBaseline() && window.matchMedia('(max-width: 600px)').matches) odp.open = false;
+    sync();
+    window.addEventListener(WORKBENCH_DATA_EVENT, sync);
+    window.addEventListener('odpdecisionschanged', sync);
+    onOdpStorageChange(sync, { baseline: true, decisions: true, status: true });
+  }
+
+  loadButton?.addEventListener('click', async () => {
+    loadButton.disabled = true;
+    if (status) status.hidden = true;
+    const result = await loadSampleData();
+    if (result.ok) {
+      // Every page and the step cards read the stores fresh on load.
+      window.location.reload();
+      return;
+    }
+    loadButton.disabled = false;
+    if (status) {
+      status.textContent = result.message;
+      status.hidden = false;
+    }
+    sync();
+  });
+</script>

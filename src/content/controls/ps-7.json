@@ -56,7 +56,12 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be notified of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges or who have system privileges is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "including access control personnel responsible for the system and/or facilities, as appropriate",
+        "moderate": "including access control personnel responsible for the system and/or facilities, as appropriate",
+        "high": "including access control personnel responsible for the system and/or facilities, as appropriate"
+      }
     },
     {
       "id": "ps-07_odp.02",
@@ -64,7 +69,12 @@
       "select": null,
       "guidelines": [
         "time period within which third-party providers are required to notify organization-defined personnel or roles of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges or who have system privileges is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "within twenty-four (24) hours",
+        "moderate": "within twenty-four (24) hours",
+        "high": "terminations: immediately; transfers: within twenty-four (24) hours"
+      }
     }
   ],
   "related": [

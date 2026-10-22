@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "real-time period requiring alerts when audit failure events (defined in AU-05(02)_ODP[03]) occur is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "real-time"
+      }
     },
     {
       "id": "au-05.02_odp.02",
@@ -36,7 +39,10 @@
       "select": null,
       "guidelines": [
         "personnel, roles, and/or locations to be alerted in real time when audit failure events (defined in AU-05(02)_ODP[03]) occur is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "service provider personnel with authority to address failed audit events"
+      }
     },
     {
       "id": "au-05.02_odp.03",
@@ -44,7 +50,10 @@
       "select": null,
       "guidelines": [
         "audit logging failure events requiring real-time alerts are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "audit failure events requiring real-time alerts, as defined by organization audit policy"
+      }
     }
   ],
   "related": [],

@@ -30,7 +30,12 @@
       "select": null,
       "guidelines": [
         "system components requiring configuration control are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "all",
+        "moderate": "all",
+        "high": "all"
+      }
     }
   ],
   "related": [

@@ -34,7 +34,10 @@
       "select": null,
       "guidelines": [
         "actions to be covered by non-repudiation are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "minimum actions including the addition, modification, deletion, approval, sending, or receiving of data"
+      }
     }
   ],
   "related": [

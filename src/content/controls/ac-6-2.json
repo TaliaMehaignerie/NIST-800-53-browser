@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "security functions or security-relevant information, the access to which requires users to use non-privileged accounts to access non-security functions, are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all security functions",
+        "high": "all security functions"
+      }
     }
   ],
   "related": [

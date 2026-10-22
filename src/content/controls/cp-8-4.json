@@ -42,7 +42,10 @@
       "id": "cp-8.4_prm_1",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "annually"
+      }
     },
     {
       "id": "cp-08.04_odp.01",

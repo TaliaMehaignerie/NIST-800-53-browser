@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "privileged commands to which network access is to be authorized only for compelling operational needs are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "all privileged commands"
+      }
     },
     {
       "id": "ac-06.03_odp.02",

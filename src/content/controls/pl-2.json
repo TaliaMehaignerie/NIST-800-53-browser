@@ -137,7 +137,11 @@
       "select": null,
       "guidelines": [
         "individuals or groups with whom security and privacy-related activities affecting the system that require planning and coordination is/are assigned;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "to include chief privacy and ISSO and/or similar role or designees",
+        "high": "to include chief privacy and ISSO and/or similar role or designees"
+      }
     },
     {
       "id": "pl-02_odp.02",
@@ -145,7 +149,11 @@
       "select": null,
       "guidelines": [
         "personnel or roles to receive distributed copies of the system security and privacy plans is/are assigned;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "to include chief privacy and ISSO and/or similar role",
+        "high": "to include chief privacy and ISSO and/or similar role"
+      }
     },
     {
       "id": "pl-02_odp.03",
@@ -153,7 +161,12 @@
       "select": null,
       "guidelines": [
         "frequency to review system security and privacy plans is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

@@ -46,7 +46,12 @@
       "select": null,
       "guidelines": [
         "exceptions where remote activation is to be allowed are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "no exceptions for computing devices",
+        "moderate": "no exceptions for computing devices",
+        "high": "no exceptions for computing devices"
+      }
     }
   ],
   "related": [

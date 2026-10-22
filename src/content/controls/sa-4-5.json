@@ -39,7 +39,10 @@
       "select": null,
       "guidelines": [
         "security configurations for the system, component, or service are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "The service provider shall use the DoD STIGs to establish configuration settings; Center for Internet Security up to Level 2 (CIS Level 2) guidelines shall be used if STIGs are not available; Custom baselines shall be used if CIS is not available."
+      }
     }
   ],
   "related": [],

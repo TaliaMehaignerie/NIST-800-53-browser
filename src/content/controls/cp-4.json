@@ -50,7 +50,12 @@
       "id": "cp-4_prm_2",
       "label": "organization-defined tests",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "classroom exercise/table top written tests",
+        "moderate": "functional exercises",
+        "high": "functional exercises"
+      }
     },
     {
       "id": "cp-04_odp.01",
@@ -58,7 +63,12 @@
       "select": null,
       "guidelines": [
         "frequency of testing the contingency plan for the system is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every 3 years",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "cp-04_odp.02",

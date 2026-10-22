@@ -33,6 +33,7 @@ import {
   type OdpBlob,
 } from './odpStore';
 import { originUsageChars } from './originStorage';
+import { clearSampleFlag, isSampleData, markSampleData } from './sampleFlag';
 import {
   STATUS_SCHEMA_VERSION,
   STATUS_STORAGE_KEY,
@@ -64,6 +65,13 @@ export interface BackupEnvelope {
    * Optional, so older backups still restore.
    */
   activeBaseline?: Baseline;
+  /**
+   * Story 22: the data is the bundled sample, not the visitor's own work. It
+   * travels with a backup so restoring one brings the sample banner back, and
+   * restoring a backup without it clears the flag. Optional, so older backups
+   * still restore.
+   */
+  sample?: true;
   /**
    * Raw text of stored blobs that could not be read. Kept so a safety download
    * never silently loses them; a restore ignores this field.
@@ -126,6 +134,7 @@ export function buildEnvelope(now: Date = new Date()): { envelope: BackupEnvelop
       odpDecisions,
       controlStatus,
       ...(hasChosenBaseline() ? { activeBaseline: getActiveBaseline() } : {}),
+      ...(isSampleData() ? { sample: true as const } : {}),
       ...(skipped.length > 0 ? { unreadable } : {}),
     },
     skipped,
@@ -138,6 +147,22 @@ export function backupFileName(now: Date = new Date()): string {
 
 export function serializeEnvelope(envelope: BackupEnvelope): string {
   return JSON.stringify(envelope);
+}
+
+/** Starts a browser download of the current data as a backup file (the Your data page and the sample banner share it). */
+export function downloadBackup(): { envelope: BackupEnvelope; skipped: string[] } {
+  const built = buildEnvelope();
+  const blob = new Blob([serializeEnvelope(built.envelope)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = backupFileName();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  // Some browsers start the download asynchronously; revoking right away can cancel it.
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+  return built;
 }
 
 function refuse(message: string): ParseResult {
@@ -212,6 +237,7 @@ export function parseEnvelope(text: string): ParseResult {
       odpDecisions,
       controlStatus,
       ...(baseline !== undefined ? { activeBaseline: baseline } : {}),
+      ...(file.sample === true ? { sample: true as const } : {}),
     },
   };
 }
@@ -236,6 +262,17 @@ export function summarize(envelope: BackupEnvelope): BackupSummary {
   };
 }
 
+/** One-line plain-language summary of what a backup (or the current data) holds. */
+export function describeSummary(s: BackupSummary): string {
+  const parts = Object.entries(s.decisionsByBaseline).map(
+    ([b, n]) => `${baselineLabel(b)}: ${n} decision${n === 1 ? '' : 's'}`,
+  );
+  if (s.statusRecords > 0) {
+    parts.push(`${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'} (${s.evidenceRefs} evidence reference${s.evidenceRefs === 1 ? '' : 's'})`);
+  }
+  return parts.length > 0 ? parts.join(' · ') : 'No data';
+}
+
 export function currentSummary(): BackupSummary {
   const { envelope, skipped } = buildEnvelope();
   return { ...summarize(envelope), unreadable: skipped };
@@ -253,6 +290,9 @@ export function applyEnvelope(envelope: BackupEnvelope): { ok: boolean; message:
   writes.push(writeStatusRaw(envelope.controlStatus ? JSON.stringify(envelope.controlStatus) : null));
 
   if (writes.every(Boolean)) {
+    // Before the baseline event, so anything reacting to it already sees the flag.
+    if (envelope.sample) markSampleData();
+    else clearSampleFlag();
     if (envelope.activeBaseline) setActiveBaseline(envelope.activeBaseline);
     return { ok: true, message: 'Restored. Your data now matches the backup file.' };
   }

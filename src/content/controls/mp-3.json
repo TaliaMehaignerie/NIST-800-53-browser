@@ -40,7 +40,11 @@
       "select": null,
       "guidelines": [
         "types of system media exempt from marking when remaining in controlled areas are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "no removable media types",
+        "high": "no removable media types"
+      }
     },
     {
       "id": "mp-03_odp.02",
@@ -48,7 +52,11 @@
       "select": null,
       "guidelines": [
         "controlled areas where media is exempt from marking are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "organization-defined security safeguards not applicable",
+        "high": "organization-defined security safeguards not applicable"
+      }
     }
   ],
   "related": [

@@ -56,7 +56,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review and update the supply chain risk management plan is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

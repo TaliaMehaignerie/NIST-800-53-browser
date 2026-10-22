@@ -33,7 +33,10 @@
           "role"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "position and role"
+      }
     }
   ],
   "related": [

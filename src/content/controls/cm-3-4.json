@@ -51,7 +51,11 @@
       "select": null,
       "guidelines": [
         "the configuration change control element of which the security and privacy representatives are to be members is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "Configuration control board (CCB) or similar (as defined in CM-3)",
+        "high": "Configuration control board (CCB) or similar (as defined in CM-3)"
+      }
     }
   ],
   "related": [],

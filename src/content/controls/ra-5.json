@@ -87,7 +87,12 @@
       "id": "ra-5_prm_1",
       "label": "organization-defined frequency and/or randomly in accordance with organization-defined process",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "monthly operating system/infrastructure; monthly web applications (including APIs) and databases",
+        "moderate": "monthly operating system/infrastructure; monthly web applications (including APIs) and databases",
+        "high": "monthly operating system/infrastructure; monthly web applications (including APIs) and databases"
+      }
     },
     {
       "id": "ra-05_odp.01",
@@ -111,7 +116,12 @@
       "select": null,
       "guidelines": [
         "response times to remediate legitimate vulnerabilities in accordance with an organizational assessment of risk are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "high-risk vulnerabilities mitigated within thirty (30) days from date of discovery; moderate-risk vulnerabilities mitigated within ninety (90) days from date of discovery; low risk vulnerabilities mitigated within one hundred and eighty (180) days from date of discovery",
+        "moderate": "high-risk vulnerabilities mitigated within thirty (30) days from date of discovery; moderate-risk vulnerabilities mitigated within ninety (90) days from date of discovery; low risk vulnerabilities mitigated within one hundred and eighty (180) days from date of discovery",
+        "high": "high-risk vulnerabilities mitigated within thirty (30) days from date of discovery; moderate-risk vulnerabilities mitigated within ninety (90) days from date of discovery; low risk vulnerabilities mitigated within one hundred and eighty (180) days from date of discovery"
+      }
     },
     {
       "id": "ra-05_odp.04",

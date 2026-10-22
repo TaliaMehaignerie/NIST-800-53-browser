@@ -33,7 +33,11 @@
           "detect changes to information"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "prevent unauthorized disclosure of information AND detect changes to information",
+        "high": "prevent unauthorized disclosure of information AND detect changes to information"
+      }
     }
   ],
   "related": [

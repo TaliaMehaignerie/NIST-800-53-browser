@@ -47,7 +47,10 @@
       "select": null,
       "guidelines": [
         "personnel or roles to report atypical usage is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "at a minimum, the ISSO and/or similar role within the organization"
+      }
     }
   ],
   "related": [

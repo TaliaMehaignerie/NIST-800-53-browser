@@ -44,7 +44,12 @@
       "select": null,
       "guidelines": [
         "granularity of time measurement for audit record timestamps is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "one second granularity of time measurement",
+        "moderate": "one second granularity of time measurement",
+        "high": "one second granularity of time measurement"
+      }
     }
   ],
   "related": [

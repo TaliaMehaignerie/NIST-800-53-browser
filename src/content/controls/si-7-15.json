@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "software or firmware components to be authenticated by cryptographic mechanisms prior to installation are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "to include all software and firmware inside the boundary"
+      }
     }
   ],
   "related": [

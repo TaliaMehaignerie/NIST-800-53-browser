@@ -37,7 +37,11 @@
           "integrity"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "confidentiality AND integrity",
+        "high": "confidentiality AND integrity"
+      }
     },
     {
       "id": "sc-28_odp.02",

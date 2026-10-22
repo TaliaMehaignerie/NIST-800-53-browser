@@ -50,7 +50,12 @@
       "select": null,
       "guidelines": [
         "time period for which to maintain visitor access records for the facility where the system resides is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "for a minimum of one (1) year",
+        "moderate": "for a minimum of one (1) year",
+        "high": "for a minimum of one (1) year"
+      }
     },
     {
       "id": "pe-08_odp.02",
@@ -58,7 +63,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review visitor access records is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least monthly",
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     },
     {
       "id": "pe-08_odp.03",

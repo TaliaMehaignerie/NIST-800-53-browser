@@ -39,7 +39,12 @@
       "id": "pe-16_prm_1",
       "label": "organization-defined types of system components",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "all information system components",
+        "moderate": "all information system components",
+        "high": "all information system components"
+      }
     },
     {
       "id": "pe-16_odp.01",

@@ -65,7 +65,12 @@
       "select": null,
       "guidelines": [
         "the frequency of baseline configuration review and update is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually and when a significant change occurs",
+        "moderate": "at least annually and when a significant change occurs",
+        "high": "at least annually and when a significant change occurs"
+      }
     },
     {
       "id": "cm-02_odp.02",
@@ -73,7 +78,12 @@
       "select": null,
       "guidelines": [
         "the circumstances requiring baseline configuration review and update are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "to include when directed by the JAB",
+        "moderate": "to include when directed by the JAB",
+        "high": "to include when directed by the JAB"
+      }
     }
   ],
   "related": [

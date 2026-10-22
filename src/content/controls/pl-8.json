@@ -70,7 +70,11 @@
       "select": null,
       "guidelines": [
         "frequency for review and update to reflect changes in the enterprise architecture;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually and when a significant change occurs",
+        "high": "at least annually and when a significant change occurs"
+      }
     }
   ],
   "related": [

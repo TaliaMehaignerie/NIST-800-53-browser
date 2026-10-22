@@ -27,7 +27,11 @@
       "id": "cp-9.1_prm_1",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least monthly"
+      }
     },
     {
       "id": "cp-09.01_odp.01",

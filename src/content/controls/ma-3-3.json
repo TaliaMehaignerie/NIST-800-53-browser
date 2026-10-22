@@ -50,7 +50,11 @@
       "select": null,
       "guidelines": [
         "personnel or roles who can authorize removal of equipment from the facility is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "the information owner",
+        "high": "the information owner"
+      }
     }
   ],
   "related": [

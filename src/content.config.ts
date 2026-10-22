@@ -64,6 +64,20 @@ const param = z.object({
     .nullable(),
   /** OSCAL `guidelines` prose for the assignment. */
   guidelines: z.array(z.string()),
+  /**
+   * What FedRAMP assigned this parameter in its Rev 5 baselines BEFORE Notice 0013
+   * withdrew most of the values, per baseline the entry belongs to; omitted when
+   * FedRAMP assigned nothing. Reference only (story 23): shown beside the field,
+   * never a default, never stored in a decision. Verbatim constraint text (AD-5),
+   * which is often a minimum ("at least annually"), not an answer.
+   */
+  fedramp: z
+    .object({
+      low: z.string().optional(),
+      moderate: z.string().optional(),
+      high: z.string().optional(),
+    })
+    .optional(),
 });
 
 /**
@@ -183,6 +197,25 @@ const meta = defineCollection({
       moderate: z.number().int(),
       high: z.number().int(),
       privacy: z.number().int(),
+    }),
+    /** Where the pre-Notice-0013 FedRAMP values came from (story 23). */
+    fedramp: z.object({
+      note: z.string(),
+      baselines: z.record(
+        z.enum(['low', 'moderate', 'high']),
+        z.object({
+          /** Date of the Internet Archive capture the profile was taken from. */
+          capturedAt: z.string(),
+          archiveUrl: z.string(),
+          /** The profile's own `metadata.version`, e.g. `fedramp2.1.0-oscal1.0.4`. */
+          profileVersion: z.string().nullable(),
+          lastModified: z.string().nullable(),
+          /** Values the profile assigns, including items outside NIST's baseline. */
+          assigned: z.number().int(),
+          /** Values kept: those on entries NIST's baseline contains. */
+          shown: z.number().int(),
+        }),
+      ),
     }),
   }),
 });

@@ -38,7 +38,11 @@
       "id": "si-4.4_prm_1",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "continuously",
+        "high": "continuously"
+      }
     },
     {
       "id": "si-4.4_prm_2",

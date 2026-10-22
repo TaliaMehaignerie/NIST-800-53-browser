@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "controls provided by cryptographic mechanisms that are to be under configuration management are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "All security safeguards that rely on cryptography"
+      }
     }
   ],
   "related": [

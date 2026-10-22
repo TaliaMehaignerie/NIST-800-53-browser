@@ -47,7 +47,11 @@
       "select": null,
       "guidelines": [
         "frequency at which to review previously approved system maintenance tools is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

@@ -54,7 +54,12 @@
       "select": null,
       "guidelines": [
         "types of cryptography for each specified cryptographic use are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "FIPS-validated or NSA-approved cryptography",
+        "moderate": "FIPS-validated or NSA-approved cryptography",
+        "high": "FIPS-validated or NSA-approved cryptography"
+      }
     }
   ],
   "related": [

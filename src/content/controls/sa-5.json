@@ -97,7 +97,12 @@
       "select": null,
       "guidelines": [
         "personnel or roles to distribute system documentation to is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at a minimum, the ISSO (or similar role within the organization)",
+        "moderate": "at a minimum, the ISSO (or similar role within the organization)",
+        "high": "at a minimum, the ISSO (or similar role within the organization)"
+      }
     }
   ],
   "related": [

@@ -32,7 +32,10 @@
           "essential"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "essential"
+      }
     }
   ],
   "related": [],

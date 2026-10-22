@@ -62,7 +62,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review and update access agreements is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "ps-06_odp.02",
@@ -70,7 +75,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to re-sign access agreements to maintain access to organizational information is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually and any time there is a change to the user's level of access",
+        "moderate": "at least annually and any time there is a change to the user's level of access",
+        "high": "at least annually and any time there is a change to the user's level of access"
+      }
     }
   ],
   "related": [

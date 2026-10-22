@@ -34,7 +34,12 @@
           "{{ insert: param, sr-08_odp.02 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "notification of supply chain compromises and results of assessment or audits",
+        "moderate": "notification of supply chain compromises and results of assessment or audits",
+        "high": "notification of supply chain compromises and results of assessment or audits"
+      }
     },
     {
       "id": "sr-08_odp.02",

@@ -70,7 +70,11 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review exceptions to traffic flow policy is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least every 180 days or whenever there is a change in the threat environment that warrants a review of the exceptions",
+        "high": "at least every ninety (90) days or whenever there is a change in the threat environment that warrants a review of the exceptions"
+      }
     }
   ],
   "related": [

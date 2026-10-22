@@ -55,7 +55,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to review the access list detailing authorized facility access by individuals is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least every ninety (90) days"
+      }
     }
   ],
   "related": [

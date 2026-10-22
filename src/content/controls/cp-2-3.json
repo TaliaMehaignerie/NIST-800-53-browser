@@ -33,7 +33,11 @@
           "essential"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "all",
+        "high": "all"
+      }
     },
     {
       "id": "cp-02.03_odp.02",
@@ -41,7 +45,11 @@
       "select": null,
       "guidelines": [
         "the contingency plan activation time period within which to resume mission and business functions is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "time period defined in service provider and organization SLA",
+        "high": "time period defined in service provider and organization SLA"
+      }
     }
   ],
   "related": [],

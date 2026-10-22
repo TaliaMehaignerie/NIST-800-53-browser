@@ -21,6 +21,7 @@ import BaselineFilter from '../components/BaselineFilter.astro';
 import SearchBox from '../components/SearchBox.astro';
 import { dashboardUrl, dataUrl, homeUrl, reviewUrl } from '../utils/url';
 import StorageWarning from '../components/StorageWarning.astro';
+import SampleDataBanner from '../components/SampleDataBanner.astro';
 
 interface Props {
   title: string;
@@ -50,6 +51,7 @@ const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.ur
       </div>
       <SearchBox value={searchQuery} />
       <StorageWarning />
+      <SampleDataBanner />
       {showBaselineFilter && <BaselineFilter />}
     </header>
     <main data-pagefind-body>
@@ -171,6 +173,44 @@ const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.ur
   .odp-discussion__text:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+  }
+
+  /*
+   * Former FedRAMP value beside a parameter (utils/fedrampReference.ts). Plain
+   * reference text, deliberately NOT styled like a field value or placeholder:
+   * it must never read as an answer already given.
+   */
+  .odp-fedramp {
+    margin: 6px 0 10px;
+    font-family: var(--font-meta);
+    font-size: 13px;
+    color: var(--color-ink-secondary);
+    line-height: 1.5;
+  }
+
+  .odp-fedramp__label {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .odp-fedramp__list {
+    margin: 4px 0 0;
+    padding-left: 20px;
+  }
+
+  .odp-fedramp__note {
+    margin: 6px 0 10px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-border-hairline);
+    font-family: var(--font-meta);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-ink-secondary);
+  }
+
+  .odp-fedramp__note[hidden],
+  .odp-fedramp-slot[hidden] {
+    display: none;
   }
 
   /* In the anchored popover, long text must not push Confirm/Override off-screen. */

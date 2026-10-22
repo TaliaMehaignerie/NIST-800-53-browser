@@ -27,6 +27,9 @@ const BASELINE_SOURCE_FILENAME: Record<Baseline, string> = {
   privacy: 'NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json',
 };
 
+const SAMPLE_REMARK =
+  'Sample data for an invented system, loaded from the bundled example. These are not real compliance decisions.';
+
 interface OscalSetParameter {
   'param-id': string;
   values: string[];
@@ -41,6 +44,8 @@ export interface OscalProfile {
       'last-modified': string;
       version: string;
       'oscal-version': string;
+      /** Story 22: says so when the decisions are the bundled sample data. */
+      remarks?: string;
     };
     imports: { href: string }[];
     modify: {
@@ -53,6 +58,8 @@ interface BuildOscalProfileArgs {
   baseline: Baseline;
   decisions: Record<string, Decision>;
   oscalVersion: string;
+  /** True while the decisions are the bundled sample data (story 22). */
+  sample?: boolean;
 }
 
 /**
@@ -87,7 +94,7 @@ function buildSetParameter(key: string, decision: Decision): OscalSetParameter {
  * guarantees every dash-one cluster member is its own independent decision
  * in the blob, so no cluster-awareness is needed here).
  */
-export function buildOscalProfile({ baseline, decisions, oscalVersion }: BuildOscalProfileArgs): OscalProfile {
+export function buildOscalProfile({ baseline, decisions, oscalVersion, sample = false }: BuildOscalProfileArgs): OscalProfile {
   const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
   const now = new Date().toISOString();
 
@@ -101,6 +108,7 @@ export function buildOscalProfile({ baseline, decisions, oscalVersion }: BuildOs
         'last-modified': now,
         version: '1.0.0',
         'oscal-version': oscalVersion,
+        ...(sample ? { remarks: SAMPLE_REMARK } : {}),
       },
       imports: [{ href: BASELINE_SOURCE_FILENAME[baseline] }],
       modify: {

@@ -59,7 +59,12 @@
       "select": null,
       "guidelines": [
         "a time period within which to disable system access is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "four (4) hours",
+        "moderate": "four (4) hours",
+        "high": "one (1) hour"
+      }
     },
     {
       "id": "ps-04_odp.02",

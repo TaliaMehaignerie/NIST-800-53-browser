@@ -50,7 +50,11 @@
       "select": null,
       "guidelines": [
         "time period within which to disable accounts is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "24 hours for user accounts",
+        "high": "24 hours for user accounts"
+      }
     },
     {
       "id": "ac-02.03_odp.02",
@@ -58,7 +62,11 @@
       "select": null,
       "guidelines": [
         "time period for account inactivity before disabling is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "ninety (90) days (See additional requirements and guidance.)",
+        "high": "thirty-five (35) days (See additional requirements and guidance.)"
+      }
     }
   ],
   "related": [],

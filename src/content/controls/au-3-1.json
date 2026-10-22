@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "additional information to be included in audit records is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "session, connection, transaction, or activity duration; for client-server transactions, the number of bytes received and bytes sent; additional informational messages to diagnose or identify the event; characteristics that describe or identify the object or resource being acted upon; individual identities of group account users; full-text of privileged commands",
+        "high": "session, connection, transaction, or activity duration; for client-server transactions, the number of bytes received and bytes sent; additional informational messages to diagnose or identify the event; characteristics that describe or identify the object or resource being acted upon; individual identities of group account users; full-text of privileged commands"
+      }
     }
   ],
   "related": [],

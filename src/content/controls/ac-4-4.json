@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "information flow control mechanisms that encrypted information is prevented from bypassing are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "intrusion detection mechanisms"
+      }
     },
     {
       "id": "ac-04.04_odp.02",

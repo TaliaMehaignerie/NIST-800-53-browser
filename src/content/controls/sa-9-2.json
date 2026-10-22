@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "external system services that require the identification of functions, ports, protocols, and other services are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all external systems where Federal information is processed or stored",
+        "high": "all external systems where Federal information is processed or stored"
+      }
     }
   ],
   "related": [

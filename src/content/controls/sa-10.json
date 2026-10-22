@@ -70,7 +70,11 @@
           "disposal"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "development, implementation, AND operation",
+        "high": "development, implementation, AND operation"
+      }
     },
     {
       "id": "sa-10_odp.02",

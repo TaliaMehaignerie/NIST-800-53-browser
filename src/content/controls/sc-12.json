@@ -37,7 +37,12 @@
       "select": null,
       "guidelines": [
         "requirements for key generation, distribution, storage, access, and destruction are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "In accordance with Federal requirements",
+        "moderate": "In accordance with Federal requirements",
+        "high": "In accordance with Federal requirements"
+      }
     }
   ],
   "related": [

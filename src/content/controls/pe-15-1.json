@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be alerted when the presence of water is detected near the system is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "service provider building maintenance/physical security personnel"
+      }
     },
     {
       "id": "pe-15.01_odp.02",

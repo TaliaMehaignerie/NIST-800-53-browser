@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "individuals or roles authorized to change the logging on system components are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "service provider-defined individuals or roles with audit configuration responsibilities"
+      }
     },
     {
       "id": "au-12.03_odp.02",
@@ -36,7 +39,10 @@
       "select": null,
       "guidelines": [
         "system components on which logging is to be performed are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "all network, data storage, and computing devices"
+      }
     },
     {
       "id": "au-12.03_odp.03",

@@ -51,7 +51,12 @@
       "select": null,
       "guidelines": [
         "system components that provide an audit record generation capability for the events types (defined in AU-02_ODP[02]) are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "all information system and network components where audit capability is deployed/available",
+        "moderate": "all information system and network components where audit capability is deployed/available",
+        "high": "all information system and network components where audit capability is deployed/available"
+      }
     },
     {
       "id": "au-12_odp.02",

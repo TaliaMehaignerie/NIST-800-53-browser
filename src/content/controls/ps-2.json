@@ -46,7 +46,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review and update position risk designations is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every three years",
+        "moderate": "at least every three years",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

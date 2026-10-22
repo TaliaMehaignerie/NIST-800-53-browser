@@ -41,7 +41,12 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be notified when a formal employee sanctions process is initiated is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at a minimum, the ISSO and/or similar role within the organization",
+        "moderate": "to include the ISSO and/or similar role within the organization",
+        "high": "to include the ISSO and/or similar role within the organization"
+      }
     },
     {
       "id": "ps-08_odp.02",
@@ -49,7 +54,11 @@
       "select": null,
       "guidelines": [
         "the time period within which organization-defined personnel or roles must be notified when a formal employee sanctions process is initiated is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "24 hours",
+        "high": "24 hours"
+      }
     }
   ],
   "related": [

@@ -75,7 +75,10 @@
       "select": null,
       "guidelines": [
         "the time period after which to highlight changes that have not been approved or disapproved is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "organization agreed upon time period"
+      }
     },
     {
       "id": "cm-03.01_odp.04",
@@ -83,7 +86,10 @@
       "select": null,
       "guidelines": [
         "personnel to be notified when approved changes are complete is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "organization defined configuration management approval authorities"
+      }
     }
   ],
   "related": [],

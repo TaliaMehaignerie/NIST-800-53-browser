@@ -1,25 +1,21 @@
 ---
-// Home / FR-1 browse tree root: all 20 Families sorted by catalog order.
+// Home (story 21): a guided start. A hero says what the tool is, a four-step
+// path shows where the visitor is in it, and the family catalog (the FR-1
+// browse tree root, all 20 families in catalog order) sits below it.
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FamilyRow from '../components/FamilyRow.astro';
-import ComplianceDashboard from '../components/ComplianceDashboard.astro';
+import HomeHero from '../components/HomeHero.astro';
+import GettingStarted from '../components/GettingStarted.astro';
 
 const families = (await getCollection('families')).sort((a, b) => a.data.catalogOrder - b.data.catalogOrder);
 ---
 
 <BaseLayout title="NIST 800-53 Browser">
-  {
-    /*
-     * Story 17: the dashboard is promoted above the catalog only once the
-     * visitor has any status or decision data; with none (or without JS) this
-     * page is exactly the family list. It starts hidden in the markup, so the
-     * catalog is what first paints and the dashboard is revealed after the
-     * has-data check, never the reverse.
-     */
-  }
-  <ComplianceDashboard progressive compact title="Compliance progress" />
-  <h1>Control Families</h1>
+  <HomeHero />
+  <GettingStarted />
+  <h2 class="browse-heading">Browse the catalog</h2>
+  <p class="browse-lead">All 20 control families, read-only and verbatim from NIST.</p>
   <div class="family-list">
     {
       families.map((family) => (

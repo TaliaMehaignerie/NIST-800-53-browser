@@ -37,7 +37,11 @@
       "select": null,
       "guidelines": [
         "external networks to which internal communications traffic is to be routed are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "any network outside of organizational control and any network outside the authorization boundary",
+        "high": "any network outside of organizational control and any network outside the authorization boundary"
+      }
     }
   ],
   "related": [

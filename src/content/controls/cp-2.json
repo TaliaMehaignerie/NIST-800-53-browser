@@ -166,7 +166,12 @@
       "select": null,
       "guidelines": [
         "frequency of contingency plan review is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "cp-02_odp.06",

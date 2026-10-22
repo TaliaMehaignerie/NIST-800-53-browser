@@ -60,7 +60,12 @@
       "id": "au-2_prm_2",
       "label": "organization-defined event types (subset of the event types defined in [AU-2a.](#au-2_smt.a)) along with the frequency of (or situation requiring) logging for each identified event type",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "organization-defined subset of the auditable events defined in AU-2a to be audited continually for each identified event.",
+        "moderate": "organization-defined subset of the auditable events defined in AU-2a to be audited continually for each identified event.",
+        "high": "organization-defined subset of the auditable events defined in AU-2a to be audited continually for each identified event."
+      }
     },
     {
       "id": "au-02_odp.01",
@@ -68,7 +73,12 @@
       "select": null,
       "guidelines": [
         "the event types that the system is capable of logging in support of the audit function are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events. For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes",
+        "moderate": "successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events. For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes",
+        "high": "successful and unsuccessful account logon events, account management events, object access, policy change, privilege functions, process tracking, and system events. For Web applications: all administrator activity, authentication checks, authorization checks, data deletions, data access, data changes, and permission changes"
+      }
     },
     {
       "id": "au-02_odp.02",
@@ -92,7 +102,12 @@
       "select": null,
       "guidelines": [
         "the frequency of event types selected for logging are reviewed and updated;"
-      ]
+      ],
+      "fedramp": {
+        "low": "annually and whenever there is a change in the threat environment",
+        "moderate": "annually and whenever there is a change in the threat environment",
+        "high": "annually and whenever there is a change in the threat environment"
+      }
     }
   ],
   "related": [

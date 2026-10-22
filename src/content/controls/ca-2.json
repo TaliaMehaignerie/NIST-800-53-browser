@@ -82,7 +82,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to assess controls in the system and its environment of operation is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "ca-02_odp.02",
@@ -90,7 +95,12 @@
       "select": null,
       "guidelines": [
         "individuals or roles to whom control assessment results are to be provided are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "individuals or roles to include FedRAMP PMO",
+        "moderate": "individuals or roles to include FedRAMP PMO",
+        "high": "individuals or roles to include FedRAMP PMO"
+      }
     }
   ],
   "related": [

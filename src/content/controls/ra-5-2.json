@@ -35,7 +35,12 @@
           "when new vulnerabilities are identified and reported"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "prior to a new scan",
+        "moderate": "within 24 hours prior to running scans",
+        "high": "within 24 hours prior to running scans"
+      }
     },
     {
       "id": "ra-05.02_odp.02",

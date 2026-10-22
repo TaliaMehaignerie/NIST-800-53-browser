@@ -12,6 +12,7 @@ import OdpSlotOverlay from '../../components/OdpSlotOverlay.astro';
 import ReviewCard from '../../components/ReviewCard.astro';
 import { familyUrl, reviewUrl } from '../../utils/url';
 import { clusterPayloadFor } from '../../utils/odpClusterIndex';
+import { fedrampSourceText } from '../../utils/fedrampSource';
 
 export async function getStaticPaths() {
   const allEntries = await getCollection('controls');
@@ -52,9 +53,9 @@ const slotEntry = (e: { data: typeof control.data }) => ({
   controlId: e.data.id,
   title: e.data.title,
   params: Object.fromEntries(
-    e.data.params.map((p: { id: string; label: string | null; select: any; guidelines: string[] }) => [
+    e.data.params.map((p: { id: string; label: string | null; select: any; guidelines: string[]; fedramp?: Record<string, string> }) => [
       p.id,
-      { label: p.label, select: p.select, guidelines: p.guidelines },
+      { label: p.label, select: p.select, guidelines: p.guidelines, ...(p.fedramp ? { fedramp: p.fedramp } : {}) },
     ]),
   ),
 });
@@ -66,7 +67,11 @@ const cluster = await clusterPayloadFor(
   control.data.slug,
   control.data.params.map((p: { id: string }) => p.id),
 );
-const slotPayload = { controls: slotControls, cluster };
+const slotPayload = {
+  controls: slotControls,
+  cluster,
+  fedrampSource: fedrampSourceText((await getEntry('meta', 'provenance'))?.data.fedramp),
+};
 ---
 
 <BaseLayout title={`${label} ${title} — NIST 800-53 Browser`} showBaselineFilter>

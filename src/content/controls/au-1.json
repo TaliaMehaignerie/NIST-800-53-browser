@@ -123,7 +123,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which the current audit and accountability policy is reviewed and updated is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every 3 years",
+        "moderate": "at least every 3 years",
+        "high": "at least annually"
+      }
     },
     {
       "id": "au-01_odp.06",
@@ -139,7 +144,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which the current audit and accountability procedures are reviewed and updated is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "au-01_odp.08",
@@ -147,7 +157,12 @@
       "select": null,
       "guidelines": [
         "events that would require audit and accountability procedures to be reviewed and updated are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "significant changes",
+        "moderate": "significant changes",
+        "high": "significant changes"
+      }
     }
   ],
   "related": [

@@ -40,7 +40,11 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review the privileges assigned to roles or classes of users is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at a minimum, annually",
+        "high": "at a minimum, annually"
+      }
     },
     {
       "id": "ac-06.07_odp.02",
@@ -48,7 +52,11 @@
       "select": null,
       "guidelines": [
         "roles or classes of users to which privileges are assigned are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all users with privileges",
+        "high": "all users with privileges"
+      }
     }
   ],
   "related": [

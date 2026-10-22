@@ -88,7 +88,12 @@
           "{{ insert: param, ra-03_odp.02 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "security assessment report",
+        "moderate": "security assessment report",
+        "high": "security assessment report"
+      }
     },
     {
       "id": "ra-03_odp.02",
@@ -104,7 +109,12 @@
       "select": null,
       "guidelines": [
         "the frequency to review risk assessment results is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every three (3) years and when a significant change occurs",
+        "moderate": "at least every three (3) years and when a significant change occurs",
+        "high": "at least annually and whenever a significant change occurs"
+      }
     },
     {
       "id": "ra-03_odp.04",
@@ -120,7 +130,12 @@
       "select": null,
       "guidelines": [
         "the frequency to update the risk assessment is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every three (3) years",
+        "moderate": "at least every three (3) years",
+        "high": "annually"
+      }
     }
   ],
   "related": [

@@ -83,7 +83,12 @@
       "select": null,
       "guidelines": [
         "system use notification message or banner to be displayed by the system to users before granting access to the system is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "see additional Requirements and Guidance",
+        "moderate": "see additional Requirements and Guidance",
+        "high": "see additional Requirements and Guidance"
+      }
     },
     {
       "id": "ac-08_odp.02",
@@ -91,7 +96,12 @@
       "select": null,
       "guidelines": [
         "conditions for system use to be displayed by the system before granting further access are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "see additional Requirements and Guidance",
+        "moderate": "see additional Requirements and Guidance",
+        "high": "see additional Requirements and Guidance"
+      }
     }
   ],
   "related": [

@@ -19,6 +19,7 @@ export function readSlotPayload(): SlotPayload | null {
     return {
       controls: parsed.controls ?? {},
       cluster: parsed.cluster ?? { lists: [], byParam: {} },
+      fedrampSource: parsed.fedrampSource,
     };
   } catch (err) {
     console.error('slotPayload: could not parse embedded page data', err);

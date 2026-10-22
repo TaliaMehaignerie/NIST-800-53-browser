@@ -21,6 +21,8 @@ Many controls contain organization-defined parameters (ODPs): blanks an organiza
 
 ### Compliance workbench
 
+The home page is a guided start: what the tool is, what an ODP is (shown with a real parameter from AC-2), and four steps whose cards show where you are in them. **See it with sample data** loads a partly finished review of an invented system, so every page has something to show. It is labelled on every page and cleared in one confirmed step.
+
 | RMF step | What the workbench provides |
 | --- | --- |
 | Categorize / Select | Asks once which baseline the system is working toward, then scopes everything to it. Changing baselines previews what the move adds. |

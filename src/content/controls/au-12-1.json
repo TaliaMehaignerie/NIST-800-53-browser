@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "system components from which audit records are to be compiled into a system-wide (logical or physical) audit trail are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "all network, data storage, and computing devices"
+      }
     },
     {
       "id": "au-12.01_odp.02",

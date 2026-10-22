@@ -33,7 +33,11 @@
           "for {{ insert: param, sc-07.05_odp.02 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "any systems",
+        "high": "any systems"
+      }
     },
     {
       "id": "sc-07.05_odp.02",

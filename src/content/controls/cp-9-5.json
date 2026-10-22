@@ -26,7 +26,10 @@
       "id": "cp-9.5_prm_1",
       "label": "organization-defined time period and transfer rate consistent with the recovery time and recovery point objectives",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "time period and transfer rate consistent with the recovery time and recovery point objectives defined in the service provider and organization SLA."
+      }
     },
     {
       "id": "cp-09.05_odp.01",

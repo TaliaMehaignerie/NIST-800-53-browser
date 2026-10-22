@@ -71,7 +71,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to update the authorizations is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "in accordance with OMB A-130 requirements or when a significant change occurs",
+        "moderate": "in accordance with OMB A-130 requirements or when a significant change occurs",
+        "high": "in accordance with OMB A-130 requirements or when a significant change occurs"
+      }
     }
   ],
   "related": [

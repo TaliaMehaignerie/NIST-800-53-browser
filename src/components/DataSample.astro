@@ -1,0 +1,134 @@
+---
+// Story 25: the home hero's "See it with sample data", also here, where people
+// go to manage what is stored. Same sample, same loadSampleData() (story 22):
+// offered only to an empty workbench. Always visible, so when it can't be
+// loaded the section says why and points to Reset. Hidden until the script runs.
+---
+
+<section class="data-sample" data-data-sample data-pagefind-ignore hidden>
+  <h2>Sample data</h2>
+  <p>
+    Loads a partly finished Moderate review of an invented system, so every page has something to show. A banner marks it
+    on every page, and you can clear it at any time.
+  </p>
+  <p class="data-sample__note" data-sample-blocked hidden>
+    Sample data can only be loaded into an empty workbench. To try it, download a backup and use
+    <a href="#reset">Reset all data</a> below.
+  </p>
+  <p class="data-sample__note" data-sample-loaded hidden>
+    Sample data is loaded now. Clear it from the banner at the top of any page, or use <a href="#reset">Reset all data</a>
+    below.
+  </p>
+  <div class="data-sample__actions">
+    <button type="button" data-sample-load-here>See it with sample data</button>
+  </div>
+  <p class="data-sample__status" role="status" aria-live="polite" data-sample-here-status hidden></p>
+</section>
+
+<style is:global>
+  .data-sample {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-primary);
+    margin: 16px 0 32px;
+  }
+
+  .data-sample[hidden],
+  .data-sample [hidden] {
+    display: none;
+  }
+
+  .data-sample h2 {
+    font-size: 1.1em;
+    margin: 28px 0 8px;
+  }
+
+  .data-sample p {
+    margin: 0 0 10px;
+  }
+
+  .data-sample__note {
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+  }
+
+  .data-sample__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .data-sample button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .data-sample button:hover:not(:disabled) {
+    background: var(--color-border-hairline);
+  }
+
+  .data-sample button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .data-sample button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .data-sample__status {
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-overlay);
+  }
+</style>
+
+<script>
+  import { canLoadSampleData, loadSampleData } from '../utils/sampleData';
+  import { isSampleData } from '../utils/sampleFlag';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+
+  const root = document.querySelector<HTMLElement>('[data-data-sample]');
+  if (root) {
+    const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const button = $<HTMLButtonElement>('[data-sample-load-here]');
+    const status = $('[data-sample-here-status]');
+
+    // Three states: sample already loaded, loadable, or blocked by data / a chosen baseline.
+    function render(): void {
+      const loaded = isSampleData();
+      const can = !loaded && canLoadSampleData();
+      button.hidden = loaded;
+      button.disabled = !can;
+      $('[data-sample-loaded]').hidden = !loaded;
+      $('[data-sample-blocked]').hidden = loaded || can;
+    }
+
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      status.hidden = true;
+      const result = await loadSampleData();
+      if (result.ok) {
+        // Every section and the banner read the stores fresh on load.
+        window.location.reload();
+        return;
+      }
+      status.textContent = result.message;
+      status.hidden = false;
+      render();
+    });
+
+    window.addEventListener(WORKBENCH_DATA_EVENT, render);
+    window.addEventListener('odpdecisionschanged', render);
+    onOdpStorageChange(render, { baseline: true, decisions: true, status: true });
+    render();
+    root.hidden = false;
+  }
+</script>

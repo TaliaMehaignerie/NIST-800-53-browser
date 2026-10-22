@@ -49,7 +49,12 @@
       "id": "mp-6_prm_1",
       "label": "organization-defined system media",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "techniques and procedures IAW NIST SP 800-88 Section 4: Reuse and Disposal of Storage Media and Hardware",
+        "moderate": "techniques and procedures IAW NIST SP 800-88 Section 4: Reuse and Disposal of Storage Media and Hardware",
+        "high": "techniques and procedures IAW NIST SP 800-88 Section 4: Reuse and Disposal of Storage Media and Hardware"
+      }
     },
     {
       "id": "mp-6_prm_2",

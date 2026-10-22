@@ -1,0 +1,233 @@
+---
+// Story 24: reset everything and start over. Always confirms, says exactly
+// what goes (the same summary Restore shows), and offers a backup download
+// first. Uses the one shared clearWorkbench() (also behind the sample banner's
+// clear) -- never localStorage.clear(). Hidden until the script runs.
+---
+
+<section class="data-reset" id="reset" data-data-reset data-pagefind-ignore hidden>
+  <h2>Reset all data</h2>
+  <p>
+    Removes every decision, status, evidence reference and your chosen baseline from this browser, and returns it to a
+    fresh start. It cannot be undone without a backup, because this data exists only in this browser.
+  </p>
+  <p class="data-reset__empty" data-reset-empty hidden>There is nothing to reset: no data is stored in this browser.</p>
+  <div class="data-reset__actions">
+    <button type="button" data-reset-open>Reset all data…</button>
+  </div>
+
+  <div class="data-reset__confirm" role="alertdialog" aria-labelledby="reset-confirm-title" tabindex="-1" hidden data-reset-confirm>
+    <h3 id="reset-confirm-title">Delete all your data?</h3>
+    <p><strong>This will be deleted:</strong></p>
+    <p data-reset-summary></p>
+    <p data-reset-sample hidden>This includes the sample data that is loaded.</p>
+    <p class="data-reset__warn" data-reset-unreadable hidden></p>
+    <p>This cannot be undone. Download a backup first if you might want any of it back.</p>
+    <div class="data-reset__actions">
+      <button type="button" data-reset-download>Download my current data first</button>
+      <button type="button" class="data-reset__danger" data-reset-confirm-btn>Delete all my data</button>
+      <button type="button" data-reset-cancel>Cancel</button>
+    </div>
+  </div>
+
+  <p class="data-reset__status" role="status" aria-live="polite" tabindex="-1" data-reset-status hidden></p>
+</section>
+
+<style is:global>
+  .data-reset {
+    font-family: var(--font-meta);
+    font-size: 14px;
+    color: var(--color-ink-primary);
+    margin: 16px 0 32px;
+  }
+
+  .data-reset[hidden],
+  .data-reset [hidden] {
+    display: none;
+  }
+
+  .data-reset h2 {
+    font-size: 1.1em;
+    margin: 28px 0 8px;
+  }
+
+  .data-reset p {
+    margin: 0 0 10px;
+  }
+
+  .data-reset__empty {
+    color: var(--color-ink-secondary);
+    font-size: 13px;
+  }
+
+  .data-reset__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .data-reset button {
+    font: inherit;
+    color: var(--color-ink-primary);
+    background: var(--color-surface-overlay);
+    border: none;
+    border-radius: var(--rounded-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .data-reset button:hover:not(:disabled) {
+    background: var(--color-border-hairline);
+  }
+
+  .data-reset button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .data-reset button:focus-visible,
+  .data-reset__confirm:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .data-reset__danger {
+    border: 1px solid var(--color-accent);
+    font-weight: 600;
+  }
+
+  .data-reset__confirm {
+    border: 1px solid var(--color-accent);
+    border-radius: var(--rounded-md);
+    background: var(--color-surface-raised);
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+
+  .data-reset__confirm h3 {
+    margin: 0 0 8px;
+    font-size: 1em;
+  }
+
+  .data-reset__status,
+  .data-reset__warn {
+    padding: 6px 10px;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface-overlay);
+  }
+
+  .data-reset__warn {
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import { currentSummary, describeSummary, downloadBackup } from '../utils/backup';
+  import { clearWorkbench, hasAnythingToReset } from '../utils/workbenchData';
+  import { isSampleData } from '../utils/sampleFlag';
+  import { onOdpStorageChange, WORKBENCH_DATA_EVENT } from '../utils/storageSync';
+
+  const root = document.querySelector<HTMLElement>('[data-data-reset]');
+  if (root) {
+    const $ = <T extends HTMLElement>(sel: string) => root.querySelector<T>(sel)!;
+    const openBtn = $<HTMLButtonElement>('[data-reset-open]');
+    const confirmEl = $('[data-reset-confirm]');
+    const statusEl = $('[data-reset-status]');
+    let shownSummary = '';
+
+    function say(message: string): void {
+      statusEl.textContent = message;
+      statusEl.hidden = false;
+    }
+
+    // Anything to remove includes stored items too damaged to read: they are in
+    // no summary, but a raw removal erases them, so the dialog must say so.
+    function canReset(): boolean {
+      return hasAnythingToReset() || currentSummary().unreadable.length > 0;
+    }
+
+    function renderAvailability(): void {
+      const can = canReset();
+      openBtn.disabled = !can;
+      $('[data-reset-empty]').hidden = can;
+      if (!can) confirmEl.hidden = true;
+    }
+
+    // What the dialog states must be what confirming would really delete, so it
+    // is recomputed at confirm time and not only when it opens.
+    function showSummary(): string {
+      const current = currentSummary();
+      const text = describeSummary(current);
+      $('[data-reset-summary]').textContent = text;
+      $('[data-reset-sample]').hidden = !isSampleData();
+      const warn = $('[data-reset-unreadable]');
+      warn.hidden = current.unreadable.length === 0;
+      warn.textContent =
+        current.unreadable.length > 0
+          ? `These stored items cannot be read and are in no backup, so they will be erased too: ${current.unreadable.join(', ')}. ` +
+            'Use "Download my current data first" to keep their raw text.'
+          : '';
+      return `${text}|${isSampleData()}|${warn.textContent}`;
+    }
+
+    function closeConfirm(): void {
+      confirmEl.hidden = true;
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', () => {
+      statusEl.hidden = true;
+      shownSummary = showSummary();
+      confirmEl.hidden = false;
+      confirmEl.focus();
+    });
+
+    $('[data-reset-download]').addEventListener('click', () => {
+      const { skipped } = downloadBackup();
+      say(
+        'Downloaded a backup.' +
+          (skipped.length > 0 ? ` Left out because it could not be read: ${skipped.join(', ')}.` : '') +
+          ' Nothing has been deleted yet.',
+      );
+    });
+
+    $('[data-reset-cancel]').addEventListener('click', () => {
+      closeConfirm();
+      say('Reset cancelled. Nothing was changed.');
+    });
+    confirmEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeConfirm();
+        say('Reset cancelled. Nothing was changed.');
+      }
+    });
+
+    $('[data-reset-confirm-btn]').addEventListener('click', () => {
+      if (showSummary() !== shownSummary) {
+        shownSummary = showSummary();
+        say('Your data changed while this dialog was open. Review the updated list, then confirm again.');
+        return;
+      }
+      const result = clearWorkbench();
+      confirmEl.hidden = true;
+      say(
+        result.ok
+          ? 'All data deleted. This browser is back to a fresh start.'
+          : `${result.message} Nothing else was changed.`,
+      );
+      renderAvailability();
+      // Same refresh signals Restore sends, so the storage meter and other
+      // listeners on this page update.
+      window.dispatchEvent(new CustomEvent('odpdecisionschanged'));
+      window.dispatchEvent(new CustomEvent(WORKBENCH_DATA_EVENT));
+      statusEl.focus();
+    });
+
+    window.addEventListener(WORKBENCH_DATA_EVENT, renderAvailability);
+    window.addEventListener('odpdecisionschanged', renderAvailability);
+    onOdpStorageChange(renderAvailability, { baseline: true, decisions: true, status: true });
+    renderAvailability();
+    root.hidden = false;
+  }
+</script>

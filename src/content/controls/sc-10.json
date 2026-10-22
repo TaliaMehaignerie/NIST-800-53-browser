@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "a time period of inactivity after which the system terminates a network connection associated with a communication session is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "no longer than ten (10) minutes for privileged sessions and no longer than fifteen (15) minutes for user sessions",
+        "high": "no longer than ten (10) minutes for privileged sessions and no longer than fifteen (15) minutes for user sessions"
+      }
     }
   ],
   "related": [

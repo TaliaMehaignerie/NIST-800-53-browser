@@ -72,7 +72,12 @@
       "id": "ca-7_prm_4",
       "label": "organization-defined personnel or roles",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "low": "to include JAB/AO",
+        "moderate": "to include JAB/AO",
+        "high": "to include JAB/AO"
+      }
     },
     {
       "id": "ca-7_prm_5",

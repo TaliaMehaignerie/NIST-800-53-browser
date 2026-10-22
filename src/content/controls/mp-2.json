@@ -31,7 +31,11 @@
       "id": "mp-2_prm_1",
       "label": "organization-defined types of digital and/or non-digital media",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "all types of digital and/or non-digital media containing sensitive information",
+        "high": "all types of digital and/or non-digital media containing sensitive information"
+      }
     },
     {
       "id": "mp-2_prm_2",

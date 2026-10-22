@@ -21,12 +21,16 @@ import { valuesMatch } from './odpCluster';
 import { ACTIVE_BASELINE_EVENT, baselineLabel } from './activeBaseline';
 import { proposalsFor, proposalSourceText, proposalValueText } from './odpProposals';
 import { buildDiscussionToggle, discussionFromPage } from './odpContext';
+import { buildExplanation, buildReferenceLine, valueFor, type FedrampValues } from './fedrampReference';
+import { readSlotPayload } from './slotPayload';
 import { workspaceUrl } from './url';
 
 export interface SlotParam {
   label: string | null;
   select: ValueFieldSelect;
   guidelines: string[];
+  /** Story 23: what FedRAMP assigned before Notice 0013, per baseline; reference only. */
+  fedramp?: FedrampValues;
 }
 
 export interface SlotControl {
@@ -46,6 +50,8 @@ export interface ClusterPayload {
 export interface SlotPayload {
   controls: Record<string, SlotControl>;
   cluster: ClusterPayload;
+  /** Where the FedRAMP reference values came from, for the popover's explanation. */
+  fedrampSource?: string;
 }
 
 export interface OpenPopoverArgs {
@@ -126,6 +132,16 @@ export function openSlotPopover(args: OpenPopoverArgs): void {
       list.appendChild(li);
     }
     el.appendChild(list);
+  }
+
+  // Story 23: reference only. Plain text, never a placeholder or prefill, and
+  // the parameter stays unreviewed until the user decides it.
+  const reference = valueFor(param.fedramp, baseline);
+  if (reference !== null) {
+    el.appendChild(buildReferenceLine(baseline, reference));
+    const note = buildExplanation(baseline, readSlotPayload()?.fedrampSource ?? 'archived copy');
+    note.classList.add('odp-popover__meta');
+    el.appendChild(note);
   }
 
   el.appendChild(buildDiscussionToggle(control.controlId.toUpperCase(), uid, () => discussionFromPage(controlSlug)));

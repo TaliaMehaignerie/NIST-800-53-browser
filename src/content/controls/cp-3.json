@@ -60,7 +60,12 @@
       "select": null,
       "guidelines": [
         "the time period within which to provide contingency training after assuming a contingency role or responsibility is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "\\*See Additional Requirements",
+        "moderate": "\\*See Additional Requirements",
+        "high": "\\*See Additional Requirements"
+      }
     },
     {
       "id": "cp-03_odp.02",
@@ -68,7 +73,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to provide training to system users with a contingency role or responsibility is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "cp-03_odp.03",
@@ -76,7 +86,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to review and update contingency training content is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "cp-03_odp.04",

@@ -41,13 +41,21 @@
       "id": "mp-4_prm_1",
       "label": "organization-defined types of digital and/or non-digital media",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "all types of digital and non-digital media with sensitive information",
+        "high": "all types of digital and non-digital media with sensitive information"
+      }
     },
     {
       "id": "mp-4_prm_2",
       "label": "organization-defined controlled areas",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "see additional FedRAMP requirements and guidance",
+        "high": "see additional FedRAMP requirements and guidance"
+      }
     },
     {
       "id": "mp-04_odp.01",

@@ -26,7 +26,10 @@
       "id": "mp-6.2_prm_1",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "at least every six (6) months"
+      }
     },
     {
       "id": "mp-06.02_odp.01",

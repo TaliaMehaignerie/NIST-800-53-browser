@@ -81,7 +81,11 @@
       "select": null,
       "guidelines": [
         "frequency at which to review the development process, standards, tools, tool options, and tool configurations is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "frequency at least annually",
+        "high": "frequency as before first use and annually thereafter"
+      }
     },
     {
       "id": "sa-15_odp.02",
@@ -89,7 +93,11 @@
       "select": null,
       "guidelines": [
         "security requirements to be satisfied by the process, standards, tools, tool options, and tool configurations are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "FedRAMP Security Authorization requirements",
+        "high": "FedRAMP Security Authorization requirements"
+      }
     },
     {
       "id": "sa-15_odp.03",

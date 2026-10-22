@@ -36,7 +36,10 @@
       "select": null,
       "guidelines": [
         "the number of concurrent sessions to be allowed for each account and/or account type is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "three (3) sessions for privileged access and two (2) sessions for non-privileged access"
+      }
     }
   ],
   "related": [

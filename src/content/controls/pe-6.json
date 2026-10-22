@@ -51,7 +51,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review physical access logs is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least monthly",
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     },
     {
       "id": "pe-06_odp.02",

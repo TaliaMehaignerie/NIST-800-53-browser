@@ -1,0 +1,22 @@
+{
+  "note": "FedRAMP Rev 5 baseline profiles as published BEFORE FedRAMP Notice 0013 (June 2026) announced removal of most FedRAMP-assigned parameter values. The upstream repository GSA/fedramp-automation is no longer on GitHub, so these are Internet Archive (Wayback Machine) captures of the repository's raw files. Authored here, not inferred (like CROSSWALK_TRANSCRIBED_AT in scripts/ingest.mjs).",
+  "upstreamPath": "GSA/fedramp-automation @ master: dist/content/rev5/baselines/json/",
+  "retrievedOn": "2026-10-22",
+  "files": {
+    "low": {
+      "file": "FedRAMP_rev5_LOW-baseline_profile.json",
+      "capturedAt": "2025-04-21",
+      "archiveUrl": "https://web.archive.org/web/20250421092955/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_LOW-baseline_profile.json"
+    },
+    "moderate": {
+      "file": "FedRAMP_rev5_MODERATE-baseline_profile.json",
+      "capturedAt": "2025-06-18",
+      "archiveUrl": "https://web.archive.org/web/20250618020019/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_MODERATE-baseline_profile.json"
+    },
+    "high": {
+      "file": "FedRAMP_rev5_HIGH-baseline_profile.json",
+      "capturedAt": "2025-04-21",
+      "archiveUrl": "https://web.archive.org/web/20250421103202/https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline_profile.json"
+    }
+  }
+}

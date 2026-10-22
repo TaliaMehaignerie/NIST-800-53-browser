@@ -5,6 +5,7 @@ created: '2026-09-30'
 status: 'done'
 review_loop_iteration: 0
 baseline_commit: 'b5c8ed2'
+superseded_by: ['21 (in part, 2026-10-21): the home page is no longer catalog-first and no longer shows the compact dashboard; renegotiated by the human after a cold-read test']
 context: ['{project-root}/_bmad-output/specs/spec-compliance-workbench/SPEC.md', '{project-root}/_bmad-output/planning-artifacts/architecture/architecture-BMad-2026-09-21/ARCHITECTURE-SPINE.md']
 ---
 

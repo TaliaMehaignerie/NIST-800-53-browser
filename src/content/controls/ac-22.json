@@ -51,7 +51,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to review the content on the publicly accessible system for non-public information is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least quarterly",
+        "moderate": "at least quarterly",
+        "high": "at least quarterly"
+      }
     }
   ],
   "related": [

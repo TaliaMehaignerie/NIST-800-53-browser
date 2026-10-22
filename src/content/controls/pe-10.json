@@ -55,7 +55,11 @@
       "select": null,
       "guidelines": [
         "location of emergency shutoff switches or devices by system or system component is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "near more than one egress point of the IT area and ensures it is labeled and protected by a cover to prevent accidental shut-off",
+        "high": "near more than one egress point of the IT area and ensures it is labeled and protected by a cover to prevent accidental shut-off"
+      }
     }
   ],
   "related": [

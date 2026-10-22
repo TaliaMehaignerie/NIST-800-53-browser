@@ -44,7 +44,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which to update an existing plan of action and milestones based on the findings from control assessments, independent audits or reviews, and continuous monitoring activities is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least monthly",
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     }
   ],
   "related": [

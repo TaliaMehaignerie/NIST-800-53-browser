@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be notified in the event of a fire is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "service provider building maintenance/physical security personnel",
+        "high": "service provider building maintenance/physical security personnel"
+      }
     },
     {
       "id": "pe-13.01_odp.02",
@@ -37,7 +41,11 @@
       "select": null,
       "guidelines": [
         "emergency responders to be notified in the event of a fire are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "service provider emergency responders with incident response responsibilities",
+        "high": "service provider emergency responders with incident response responsibilities"
+      }
     }
   ],
   "related": [],

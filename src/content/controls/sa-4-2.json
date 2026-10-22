@@ -36,7 +36,11 @@
           "{{ insert: param, sa-04.02_odp.02 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "at a minimum to include security-relevant external system interfaces; high-level design; low-level design; source code or network and data flow diagram;",
+        "high": "at a minimum to include security-relevant external system interfaces; high-level design; low-level design; source code or network and data flow diagram;\n\norganization-defined design/implementation information"
+      }
     },
     {
       "id": "sa-04.02_odp.02",

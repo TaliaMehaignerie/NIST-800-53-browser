@@ -193,7 +193,12 @@
       "select": null,
       "guidelines": [
         "time period within which to notify account managers when accounts are no longer required is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "twenty-four (24) hours",
+        "moderate": "twenty-four (24) hours",
+        "high": "twenty-four (24) hours"
+      }
     },
     {
       "id": "ac-02_odp.07",
@@ -201,7 +206,12 @@
       "select": null,
       "guidelines": [
         "time period within which to notify account managers when users are terminated or transferred is defined; "
-      ]
+      ],
+      "fedramp": {
+        "low": "eight (8) hours",
+        "moderate": "eight (8) hours",
+        "high": "eight (8) hours"
+      }
     },
     {
       "id": "ac-02_odp.08",
@@ -209,7 +219,12 @@
       "select": null,
       "guidelines": [
         "time period within which to notify account managers when system usage or the need to know changes for an individual is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "eight (8) hours",
+        "moderate": "eight (8) hours",
+        "high": "eight (8) hours"
+      }
     },
     {
       "id": "ac-02_odp.09",
@@ -225,7 +240,12 @@
       "select": null,
       "guidelines": [
         "the frequency of account review is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "quarterly for privileged access, annually for non-privileged access",
+        "high": "monthly for privileged accessed, every six (6) months for non-privileged access"
+      }
     }
   ],
   "related": [

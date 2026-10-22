@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "characteristics used to identify individual status is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "contractors; foreign nationals",
+        "high": "contractors; foreign nationals"
+      }
     }
   ],
   "related": [],

@@ -59,7 +59,12 @@
       "select": null,
       "guidelines": [
         "the time period within which transfer or reassignment actions must occur following transfer or reassignment is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "twenty-four (24) hours",
+        "moderate": "twenty-four (24) hours",
+        "high": "twenty-four (24) hours"
+      }
     },
     {
       "id": "ps-05_odp.03",
@@ -67,7 +72,11 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be notified when individuals are reassigned or transferred to other positions within the organization is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "including access control personnel responsible for the system",
+        "high": "including access control personnel responsible for the system"
+      }
     },
     {
       "id": "ps-05_odp.04",
@@ -75,7 +84,12 @@
       "select": null,
       "guidelines": [
         "time period within which to notify organization-defined personnel or roles when individuals are reassigned or transferred to other positions within the organization is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "twenty-four (24) hours",
+        "moderate": "twenty-four (24) hours",
+        "high": "twenty-four (24) hours"
+      }
     }
   ],
   "related": [

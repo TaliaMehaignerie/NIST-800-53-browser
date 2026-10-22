@@ -88,7 +88,10 @@
       "select": null,
       "guidelines": [
         "system transitional states requiring the verification of security and privacy functions are defined; (if selected)"
-      ]
+      ],
+      "fedramp": {
+        "high": "to include upon system startup and/or restart"
+      }
     },
     {
       "id": "si-06_odp.05",
@@ -96,7 +99,10 @@
       "select": null,
       "guidelines": [
         "frequency at which to verify the correct operation of security and privacy functions is defined; (if selected)"
-      ]
+      ],
+      "fedramp": {
+        "high": "at least monthly"
+      }
     },
     {
       "id": "si-06_odp.06",
@@ -104,7 +110,10 @@
       "select": null,
       "guidelines": [
         "personnel or roles to be alerted of failed security and privacy verification tests is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "to include system administrators and security personnel"
+      }
     },
     {
       "id": "si-06_odp.07",

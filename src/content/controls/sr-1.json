@@ -77,7 +77,11 @@
       "id": "sr-1_prm_1",
       "label": "organization-defined personnel or roles",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "to include chief privacy and ISSO and/or similar role or designees",
+        "high": "to include chief privacy and ISSO and/or similar role or designees"
+      }
     },
     {
       "id": "sr-01_odp.01",
@@ -85,7 +89,10 @@
       "select": null,
       "guidelines": [
         "personnel or roles to whom supply chain risk management policy is to be disseminated to is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "to include chief privacy and ISSO and/or similar role or designees"
+      }
     },
     {
       "id": "sr-01_odp.02",
@@ -122,7 +129,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which the current supply chain risk management policy is reviewed and updated is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least every 3 years",
+        "moderate": "at least every 3 years",
+        "high": "at least annually"
+      }
     },
     {
       "id": "sr-01_odp.06",
@@ -138,7 +150,12 @@
       "select": null,
       "guidelines": [
         "the frequency at which the current supply chain risk management procedure is reviewed and updated is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least annually",
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     },
     {
       "id": "sr-01_odp.08",
@@ -146,7 +163,12 @@
       "select": null,
       "guidelines": [
         "events that require the supply chain risk management procedures to be reviewed and updated are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "significant changes",
+        "moderate": "significant changes",
+        "high": "significant changes"
+      }
     }
   ],
   "related": [

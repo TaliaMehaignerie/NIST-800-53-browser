@@ -46,13 +46,21 @@
       "id": "si-7.1_prm_3",
       "label": "organization-defined transitional states or security-relevant events",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "selection to include security relevant event",
+        "high": "selection to include security relevant event"
+      }
     },
     {
       "id": "si-7.1_prm_4",
       "label": "organization-defined frequency",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     },
     {
       "id": "si-07.01_odp.01",

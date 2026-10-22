@@ -37,7 +37,11 @@
       "select": null,
       "guidelines": [
         "the frequency at which to determine if applicable security-relevant software and firmware updates are installed on system components is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     }
   ],
   "related": [

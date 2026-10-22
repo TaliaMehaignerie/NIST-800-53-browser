@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "system components to which privileged access is authorized for selected vulnerability scanning activities are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all components that support authentication",
+        "high": "all components that support authentication"
+      }
     },
     {
       "id": "ra-05.05_odp.02",
@@ -37,7 +41,11 @@
       "select": null,
       "guidelines": [
         "vulnerability scanning activities selected for privileged access authorization to system components are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all scans",
+        "high": "all scans"
+      }
     }
   ],
   "related": [],

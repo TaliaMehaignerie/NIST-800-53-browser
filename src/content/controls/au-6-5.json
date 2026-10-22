@@ -34,7 +34,10 @@
           "{{ insert: param, au-06.05_odp.02 }} "
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "vulnerability scanning information; performance data; information system monitoring information; penetration test data; {{ insert: param, au-06.05_odp.02 }}"
+      }
     },
     {
       "id": "au-06.05_odp.02",

@@ -57,7 +57,12 @@
       "select": null,
       "guidelines": [
         "frequency at which system audit records are reviewed and analyzed is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least weekly",
+        "moderate": "at least weekly",
+        "high": "at least weekly"
+      }
     },
     {
       "id": "au-06_odp.02",

@@ -68,7 +68,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to conduct backups of user-level information consistent with recovery time and recovery point objectives is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "daily incremental; weekly full",
+        "moderate": "daily incremental; weekly full",
+        "high": "daily incremental; weekly full"
+      }
     },
     {
       "id": "cp-09_odp.03",
@@ -76,7 +81,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to conduct backups of system-level information consistent with recovery time and recovery point objectives is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "daily incremental; weekly full",
+        "moderate": "daily incremental; weekly full",
+        "high": "daily incremental; weekly full"
+      }
     },
     {
       "id": "cp-09_odp.04",
@@ -84,7 +94,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to conduct backups of system documentation consistent with recovery time and recovery point objectives is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "daily incremental; weekly full",
+        "moderate": "daily incremental; weekly full",
+        "high": "daily incremental; weekly full"
+      }
     }
   ],
   "related": [

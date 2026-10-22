@@ -38,7 +38,11 @@
       "id": "cm-8.3_prm_1",
       "label": "organization-defined automated mechanisms",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "automated mechanisms with a maximum five-minute delay in detection",
+        "high": "automated mechanisms with a maximum five-minute delay in detection"
+      }
     },
     {
       "id": "cm-08.03_odp.01",
@@ -70,7 +74,11 @@
       "select": null,
       "guidelines": [
         "frequency at which automated mechanisms are used to detect the presence of unauthorized system components within the system is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "continuously",
+        "high": "continuously"
+      }
     },
     {
       "id": "cm-08.03_odp.05",

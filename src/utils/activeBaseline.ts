@@ -57,6 +57,17 @@ export function activeBaselineStorageChars(): number {
   }
 }
 
+/** Forgets the chosen baseline, so the app asks again (used when sample data is cleared). Notifies like `setActiveBaseline`. */
+export function clearActiveBaseline(): void {
+  memoryBaseline = null;
+  try {
+    localStorage.removeItem(ACTIVE_BASELINE_KEY);
+  } catch (err) {
+    console.error('activeBaseline: failed to clear working baseline', err);
+  }
+  window.dispatchEvent(new CustomEvent(ACTIVE_BASELINE_EVENT, { detail: { baseline: null } }));
+}
+
 export function setActiveBaseline(baseline: Baseline): void {
   memoryBaseline = baseline;
   try {

@@ -69,7 +69,11 @@
       "select": null,
       "guidelines": [
         "frequency at which to review the continued need for each internal connection is defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "at least annually",
+        "high": "at least annually"
+      }
     }
   ],
   "related": [

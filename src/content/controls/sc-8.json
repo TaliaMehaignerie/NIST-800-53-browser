@@ -39,7 +39,11 @@
           "integrity"
         ]
       },
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "confidentiality AND integrity",
+        "high": "confidentiality AND integrity"
+      }
     }
   ],
   "related": [

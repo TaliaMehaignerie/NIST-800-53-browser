@@ -38,7 +38,10 @@
       "id": "ac-6.1_prm_2",
       "label": "organization-defined security functions (deployed in hardware, software, and firmware)",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "high": "all functions not publicly accessible"
+      }
     },
     {
       "id": "ac-06.01_odp.01",
@@ -78,7 +81,10 @@
       "select": null,
       "guidelines": [
         "security-relevant information for authorized access is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "all security-relevant information not publicly available"
+      }
     }
   ],
   "related": [

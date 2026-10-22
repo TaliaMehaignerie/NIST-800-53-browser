@@ -85,7 +85,12 @@
       "select": null,
       "guidelines": [
         "frequency at which to review and update the system component inventory is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least monthly",
+        "moderate": "at least monthly",
+        "high": "at least monthly"
+      }
     }
   ],
   "related": [

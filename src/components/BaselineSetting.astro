@@ -104,7 +104,7 @@ const payload = await itemPayloadJson();
 </style>
 
 <script>
-  import { baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../utils/activeBaseline';
+  import { ACTIVE_BASELINE_EVENT, baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../utils/activeBaseline';
   import { getStatuses } from '../utils/statusStore';
   import { getDecisions } from '../utils/odpStore';
   import { baselineDelta } from '../utils/baselineDelta';
@@ -169,6 +169,8 @@ const payload = await itemPayloadJson();
       status.hidden = false;
       render();
     });
+    // Also when the baseline is cleared elsewhere on the page (Reset all data).
+    window.addEventListener(ACTIVE_BASELINE_EVENT, render);
     render();
     root.hidden = false;
   }

@@ -37,7 +37,11 @@
       "select": null,
       "guidelines": [
         "system components or media requiring cryptographic protection is/are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all information system components storing Federal data or system data that must be protected at the High or Moderate impact levels",
+        "high": "all information system components storing Federal data or system data that must be protected at the High or Moderate impact levels"
+      }
     }
   ],
   "related": [

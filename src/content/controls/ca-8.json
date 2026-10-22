@@ -32,7 +32,10 @@
       "select": null,
       "guidelines": [
         "frequency at which to conduct penetration testing on systems or system components is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "at least annually"
+      }
     },
     {
       "id": "ca-08_odp.02",

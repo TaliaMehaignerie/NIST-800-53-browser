@@ -170,18 +170,15 @@
 <script>
   import {
     applyEnvelope,
-    backupFileName,
-    buildEnvelope,
     currentSummary,
+    describeSummary as describe,
+    downloadBackup,
     formatSize,
     parseEnvelope,
-    serializeEnvelope,
     storageUsage,
     summarize,
     type BackupEnvelope,
-    type BackupSummary,
   } from '../utils/backup';
-  import { baselineLabel } from '../utils/activeBaseline';
   import { onOdpStorageChange } from '../utils/storageSync';
 
   const root = document.querySelector<HTMLElement>('[data-data-page]');
@@ -199,28 +196,8 @@
       statusEl.hidden = false;
     }
 
-    function describe(s: BackupSummary): string {
-      const parts = Object.entries(s.decisionsByBaseline).map(
-        ([b, n]) => `${baselineLabel(b)}: ${n} decision${n === 1 ? '' : 's'}`,
-      );
-      if (s.statusRecords > 0) {
-        parts.push(`${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'} (${s.evidenceRefs} evidence reference${s.evidenceRefs === 1 ? '' : 's'})`);
-      }
-      return parts.length > 0 ? parts.join(' · ') : 'No data';
-    }
-
     function download(): void {
-      const { envelope, skipped } = buildEnvelope();
-      const blob = new Blob([serializeEnvelope(envelope)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = backupFileName();
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      // Some browsers start the download asynchronously; revoking right away can cancel it.
-      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      const { envelope, skipped } = downloadBackup();
       const s = summarize(envelope);
       say(
         `Downloaded ${s.totalDecisions} decision${s.totalDecisions === 1 ? '' : 's'} and ${s.statusRecords} status record${s.statusRecords === 1 ? '' : 's'}.` +
@@ -336,6 +313,8 @@
     });
 
     onOdpStorageChange(renderBudget, { baseline: false, status: true });
+    // Same-tab changes (Reset all data, Restore) announce themselves with this event.
+    window.addEventListener('odpdecisionschanged', renderBudget);
     renderBudget();
     root.hidden = false;
   }

@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "restoration time period within which to restore system components to a known, operational state is defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "time period consistent with the restoration time-periods defined in the service provider and organization SLA"
+      }
     }
   ],
   "related": [

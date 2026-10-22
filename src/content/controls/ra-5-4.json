@@ -28,7 +28,10 @@
       "select": null,
       "guidelines": [
         "corrective actions to be taken if information about the system is discoverable are defined;"
-      ]
+      ],
+      "fedramp": {
+        "high": "notify appropriate service provider personnel and follow procedures for organization and service provider-defined corrective actions"
+      }
     }
   ],
   "related": [

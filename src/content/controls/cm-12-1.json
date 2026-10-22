@@ -29,7 +29,11 @@
       "select": null,
       "guidelines": [
         "information to be protected is defined by information type;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "Federal data and system data that must be protected at the High or Moderate impact levels",
+        "high": "Federal data and system data that must be protected at the High or Moderate impact levels"
+      }
     },
     {
       "id": "cm-12.01_odp.02",

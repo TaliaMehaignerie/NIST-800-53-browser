@@ -78,6 +78,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       <input type="checkbox" data-odp-unreviewed-toggle />
       Unreviewed only
     </label>
+    <p class="odp-fedramp__note odp-workspace__fedramp-note" data-odp-fedramp-note hidden></p>
   </div>
 
   <div class="odp-workspace__dashboard" data-odp-dashboard hidden>
@@ -125,6 +126,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       These parameters share one value across every dash-one policy/procedure control. Set it once here — each
       control's own row below still shows and can independently override its own decision.
     </p>
+    <p class="odp-fedramp__note" data-odp-fedramp-note hidden></p>
     <div class="odp-workspace__rows" data-odp-batch-rows></div>
   </div>
 
@@ -230,6 +232,11 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     gap: 16px;
     flex-wrap: wrap;
     margin-top: 12px;
+  }
+
+  .odp-workspace__fedramp-note {
+    flex-basis: 100%;
+    margin: 0;
   }
 
   .odp-workspace__family-field {
@@ -609,12 +616,20 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     type OdpDatasetEntry,
   } from '../../utils/odpCluster';
   import { buildOscalProfile, downloadOscalProfile, type Baseline } from '../../utils/oscalExport';
+  import { isSampleData } from '../../utils/sampleFlag';
   import { setUrlState } from '../../utils/urlState';
   import { baselineLabel, getActiveBaseline, hasChosenBaseline, isBaseline, setActiveBaseline } from '../../utils/activeBaseline';
   import { tallyStatuses, type StatusCounts } from '../../utils/odpCounts';
   import { onOdpStorageChange } from '../../utils/storageSync';
   import { proposalsFor, proposalSourceText, proposalValueText, type Proposal } from '../../utils/odpProposals';
   import { buildDiscussionToggle, discussionFromEndpoint } from '../../utils/odpContext';
+  import {
+    buildClusterReference,
+    buildReferenceLine,
+    buildReferenceSlot,
+    fillExplanation,
+    valueFor,
+  } from '../../utils/fedrampReference';
   import { slugify } from '../../utils/slugify';
 
   // Story 6: three views (Dashboard / Batch entry / Individual parameters)
@@ -713,7 +728,7 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
     const message = document.querySelector<HTMLElement>('[data-odp-export-message]');
     try {
       const decisions = getDecisions(baseline);
-      const profile = buildOscalProfile({ baseline: baseline as Baseline, decisions, oscalVersion });
+      const profile = buildOscalProfile({ baseline: baseline as Baseline, decisions, oscalVersion, sample: isSampleData() });
       downloadOscalProfile(profile, baseline as Baseline);
       if (message) {
         const count = Object.keys(decisions).length;
@@ -1051,6 +1066,14 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       row.appendChild(list);
     }
 
+    // Story 23: reference only, beside the field and never in it.
+    row.appendChild(
+      buildReferenceSlot(baseline, (data) => {
+        const value = valueFor(data.values[entry.controlSlug]?.[entry.paramId], baseline);
+        return value === null ? null : buildReferenceLine(baseline, value);
+      }),
+    );
+
     row.appendChild(
       buildDiscussionToggle(entry.controlId.toUpperCase(), `odp-${entry.controlSlug}-${entry.paramId}`.replace(/[^a-zA-Z0-9_-]/g, '-'), () =>
         discussionFromEndpoint(entry.controlSlug),
@@ -1330,6 +1353,8 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       row.appendChild(list);
     }
 
+    row.appendChild(buildReferenceSlot(baseline, (data) => buildClusterReference(baseline, cluster.members, data.values)));
+
     // Dash-one controls share one purpose (each family's policy and procedures),
     // so the first member's discussion is shown, attributed to that control.
     const discussionSource = cluster.members[0];
@@ -1482,6 +1507,11 @@ const baselineLabel = `${baseline[0].toUpperCase()}${baseline.slice(1)}`;
       baselineNote.append(link, document.createTextNode('.'));
       baselineNote.hidden = false;
     }
+
+    // One explanation per view (story 23), not per row; Privacy shows none.
+    workspace
+      .querySelectorAll<HTMLElement>('[data-odp-fedramp-note]')
+      .forEach((note) => fillExplanation(note, baselineValue));
 
     const loading = workspace.querySelector<HTMLElement>('[data-odp-loading]');
     const empty = workspace.querySelector<HTMLElement>('[data-odp-empty]');

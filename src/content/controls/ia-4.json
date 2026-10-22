@@ -61,7 +61,12 @@
       "select": null,
       "guidelines": [
         "personnel or roles from whom authorization must be received to assign an identifier are defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at a minimum, the ISSO (or similar role within the organization)",
+        "moderate": "at a minimum, the ISSO (or similar role within the organization)",
+        "high": "at a minimum, the ISSO (or similar role within the organization)"
+      }
     },
     {
       "id": "ia-04_odp.02",
@@ -69,7 +74,12 @@
       "select": null,
       "guidelines": [
         "a time period for preventing reuse of identifiers is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "at least two (2) years",
+        "moderate": "at least two (2) years",
+        "high": "at least two (2) years"
+      }
     }
   ],
   "related": [

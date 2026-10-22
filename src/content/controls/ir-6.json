@@ -46,7 +46,12 @@
       "select": null,
       "guidelines": [
         "time period for personnel to report suspected incidents to the organizational incident response capability is defined;"
-      ]
+      ],
+      "fedramp": {
+        "low": "US-CERT incident reporting timelines as specified in NIST Special Publication 800-61 (as amended)",
+        "moderate": "US-CERT incident reporting timelines as specified in NIST Special Publication 800-61 (as amended)",
+        "high": "US-CERT incident reporting timelines as specified in NIST Special Publication 800-61 (as amended)"
+      }
     },
     {
       "id": "ir-06_odp.02",

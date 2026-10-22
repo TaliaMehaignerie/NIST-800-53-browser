@@ -53,7 +53,11 @@
       "id": "mp-5_prm_2",
       "label": "organization-defined controls",
       "select": null,
-      "guidelines": []
+      "guidelines": [],
+      "fedramp": {
+        "moderate": "prior to leaving secure/controlled environment: for digital media, encryption in compliance with Federal requirements and utilizes FIPS validated or NSA approved cryptography (see SC-13.); for non-digital media, secured in locked container",
+        "high": "prior to leaving secure/controlled environment: for digital media, encryption in compliance with Federal requirements and utilizes FIPS validated or NSA approved cryptography (see SC-13.); for non-digital media, secured in locked container"
+      }
     },
     {
       "id": "mp-05_odp.01",
@@ -61,7 +65,11 @@
       "select": null,
       "guidelines": [
         "types of system media to protect and control during transport outside of controlled areas are defined;"
-      ]
+      ],
+      "fedramp": {
+        "moderate": "all media with sensitive information",
+        "high": "all media with sensitive information"
+      }
     },
     {
       "id": "mp-05_odp.02",
